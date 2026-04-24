@@ -1,8 +1,31 @@
 "use client";
 
 import { useState } from "react";
-import type { Question } from "@/types/content";
+import type { Difficulty, Question } from "@/types/content";
 import { MixedText } from "./MixedText";
+
+const difficultyStyle: Record<
+  Difficulty,
+  { label: string; stars: string; className: string }
+> = {
+  1: {
+    label: "基礎",
+    stars: "★☆☆",
+    className:
+      "bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300",
+  },
+  2: {
+    label: "標準",
+    stars: "★★☆",
+    className:
+      "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300",
+  },
+  3: {
+    label: "応用",
+    stars: "★★★",
+    className: "bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300",
+  },
+};
 
 export function Quiz({ questions }: { questions: Question[] }) {
   const [answers, setAnswers] = useState<(number | null)[]>(() =>
@@ -42,8 +65,17 @@ export function Quiz({ questions }: { questions: Question[] }) {
             key={q.id}
             className="border border-gray-200 dark:border-gray-800 rounded-lg p-4"
           >
-            <div className="text-xs text-gray-500 mb-2">
-              問 {qIdx + 1} · {q.category}
+            <div className="text-xs text-gray-500 mb-2 flex items-center gap-2 flex-wrap">
+              <span>問 {qIdx + 1}</span>
+              <span>·</span>
+              <span>{q.category}</span>
+              <span
+                className={`px-1.5 py-0.5 rounded text-[10px] font-bold tracking-wider ${difficultyStyle[q.difficulty].className}`}
+                title={`難易度: ${difficultyStyle[q.difficulty].label}`}
+              >
+                {difficultyStyle[q.difficulty].stars}{" "}
+                {difficultyStyle[q.difficulty].label}
+              </span>
             </div>
             <div className="mb-4 leading-relaxed">
               <MixedText text={q.question} />

@@ -3,6 +3,7 @@ import type { Question } from "@/types/content";
 export const gradeThreeQuestions: Question[] = [
   {
     id: "g3-q1",
+    difficulty: 1,
     category: "記述統計",
     question:
       "次の5個のデータの平均値として最も適切なものを選びなさい: $3,\\ 5,\\ 7,\\ 9,\\ 11$",
@@ -13,6 +14,7 @@ export const gradeThreeQuestions: Question[] = [
   },
   {
     id: "g3-q2",
+    difficulty: 1,
     category: "記述統計",
     question:
       "次の7個のデータの中央値として最も適切なものを選びなさい: $2,\\ 4,\\ 4,\\ 6,\\ 8,\\ 10,\\ 15$",
@@ -23,6 +25,7 @@ export const gradeThreeQuestions: Question[] = [
   },
   {
     id: "g3-q3",
+    difficulty: 2,
     category: "記述統計",
     question:
       "データ $2,\\ 4,\\ 6,\\ 8,\\ 10$ の分散として最も適切なものを選びなさい。",
@@ -33,6 +36,7 @@ export const gradeThreeQuestions: Question[] = [
   },
   {
     id: "g3-q4",
+    difficulty: 2,
     category: "記述統計",
     question:
       "次のデータの四分位範囲 $\\mathrm{IQR}$ として最も適切なものを選びなさい: $1,\\ 3,\\ 5,\\ 7,\\ 9,\\ 11,\\ 13,\\ 15$",
@@ -43,6 +47,7 @@ export const gradeThreeQuestions: Question[] = [
   },
   {
     id: "g3-q5",
+    difficulty: 1,
     category: "2変数データ",
     question:
       "2変数データの相関係数が $r = -0.85$ のとき、散布図の特徴として最も適切なものを選びなさい。",
@@ -58,6 +63,7 @@ export const gradeThreeQuestions: Question[] = [
   },
   {
     id: "g3-q6",
+    difficulty: 1,
     category: "確率",
     question:
       "サイコロを1回投げたとき、偶数の目が出ない確率として最も適切なものを選びなさい。",
@@ -68,6 +74,7 @@ export const gradeThreeQuestions: Question[] = [
   },
   {
     id: "g3-q7",
+    difficulty: 2,
     category: "確率",
     question:
       "袋に赤玉3個、白玉2個が入っている。2個を同時に取り出すとき、2個とも赤玉である確率として最も適切なものを選びなさい。",
@@ -83,6 +90,7 @@ export const gradeThreeQuestions: Question[] = [
   },
   {
     id: "g3-q8",
+    difficulty: 3,
     category: "確率",
     question:
       "ある検査で、病気にかかっている人が陽性と判定される確率は $0.9$、かかっていない人が陽性と判定される確率は $0.05$ である。有病率が $0.01$ のとき、無作為に選んだ人が陽性である確率として最も近いものを選びなさい。",
@@ -93,6 +101,7 @@ export const gradeThreeQuestions: Question[] = [
   },
   {
     id: "g3-q9",
+    difficulty: 2,
     category: "確率変数",
     question:
       "確率変数 $X$ の分布が $P(X=0) = 0.2,\\ P(X=1) = 0.5,\\ P(X=2) = 0.3$ であるとき、$E[X]$ として最も適切なものを選びなさい。",
@@ -103,6 +112,7 @@ export const gradeThreeQuestions: Question[] = [
   },
   {
     id: "g3-q10",
+    difficulty: 2,
     category: "確率変数",
     question:
       "確率変数 $X$ が $E[X] = 10,\\ V[X] = 4$ のとき、$Y = 3X + 2$ の分散 $V[Y]$ として最も適切なものを選びなさい。",
@@ -113,6 +123,7 @@ export const gradeThreeQuestions: Question[] = [
   },
   {
     id: "g3-q11",
+    difficulty: 2,
     category: "確率分布",
     question:
       "公正なコインを5回投げたとき、ちょうど3回表が出る確率として最も適切なものを選びなさい。",
@@ -128,6 +139,7 @@ export const gradeThreeQuestions: Question[] = [
   },
   {
     id: "g3-q12",
+    difficulty: 2,
     category: "確率分布",
     question:
       "$X \\sim B(100,\\, 0.3)$ のとき、$E[X]$ と $V[X]$ の組み合わせとして最も適切なものを選びなさい。",
@@ -143,6 +155,7 @@ export const gradeThreeQuestions: Question[] = [
   },
   {
     id: "g3-q13",
+    difficulty: 2,
     category: "確率分布",
     question:
       "確率変数 $X$ が平均 $50$、標準偏差 $10$ の正規分布に従うとき、$X \\leq 60$ となる確率として最も近いものを選びなさい。",
@@ -153,6 +166,7 @@ export const gradeThreeQuestions: Question[] = [
   },
   {
     id: "g3-q14",
+    difficulty: 2,
     category: "確率分布",
     question:
       "$X \\sim N(100,\\, 15^2)$ のとき、$85 \\leq X \\leq 115$ となる確率として最も近いものを選びなさい。",
@@ -163,6 +177,7 @@ export const gradeThreeQuestions: Question[] = [
   },
   {
     id: "g3-q15",
+    difficulty: 3,
     category: "推定",
     question:
       "母標準偏差 $\\sigma = 20$ の母集団から $n = 100$ の標本をとったところ標本平均が $50$ であった。母平均の $95\\%$ 信頼区間として最も近いものを選びなさい。",

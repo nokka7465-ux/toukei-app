@@ -3,6 +3,7 @@ import type { Question } from "@/types/content";
 export const gradeOneQuestions: Question[] = [
   {
     id: "g1-q1",
+    difficulty: 2,
     category: "分布論",
     question:
       "次のうち指数型分布族に属さないものとして最も適切なものを選びなさい。",
@@ -18,6 +19,7 @@ export const gradeOneQuestions: Question[] = [
   },
   {
     id: "g1-q2",
+    difficulty: 2,
     category: "十分統計量",
     question:
       "正規分布 $N(\\mu, \\sigma^2)$ から独立同分布な標本 $X_1, \\ldots, X_n$ を得るとき、$(\\mu, \\sigma^2)$ の十分統計量として最も適切なものを選びなさい。",
@@ -33,6 +35,7 @@ export const gradeOneQuestions: Question[] = [
   },
   {
     id: "g1-q3",
+    difficulty: 2,
     category: "推定理論",
     question:
       "$X_1, \\ldots, X_n \\stackrel{\\text{iid}}{\\sim} \\mathrm{Po}(\\lambda)$ のとき、$\\hat{\\lambda} = \\bar{X}$ の分散のクラメル・ラオ下限として最も適切なものを選びなさい。",
@@ -48,6 +51,7 @@ export const gradeOneQuestions: Question[] = [
   },
   {
     id: "g1-q4",
+    difficulty: 3,
     category: "漸近理論",
     question:
       "$\\sqrt{n}(\\hat{p} - p) \\xrightarrow{d} N(0, p(1-p))$ のとき、$g(p) = \\log(p/(1-p))$(ロジット)の推定量の漸近分散として最も適切なものを選びなさい。",
@@ -63,6 +67,7 @@ export const gradeOneQuestions: Question[] = [
   },
   {
     id: "g1-q5",
+    difficulty: 1,
     category: "仮説検定",
     question:
       "尤度比 $\\Lambda$ について帰無仮説下で $-2 \\log \\Lambda$ が漸近的に従う分布として最も適切なものを選びなさい。ただし制約の次元を $r$ とする。",
@@ -78,6 +83,7 @@ export const gradeOneQuestions: Question[] = [
   },
   {
     id: "g1-q6",
+    difficulty: 2,
     category: "仮説検定",
     question:
       "ネイマン・ピアソンの補題が保証する性質として最も適切なものを選びなさい。",
@@ -93,6 +99,7 @@ export const gradeOneQuestions: Question[] = [
   },
   {
     id: "g1-q7",
+    difficulty: 2,
     category: "確率過程",
     question:
       "標準ブラウン運動 $B_t$ について $\\mathrm{Cov}(B_s, B_t)\\ (0 \\leq s \\leq t)$ として最も適切なものを選びなさい。",
@@ -103,6 +110,7 @@ export const gradeOneQuestions: Question[] = [
   },
   {
     id: "g1-q8",
+    difficulty: 3,
     category: "確率解析",
     question:
       "幾何ブラウン運動 $dS_t = \\mu S_t\\, dt + \\sigma S_t\\, dB_t$ に対し、$Y_t = \\log S_t$ に伊藤の公式を適用したときのドリフト項として最も適切なものを選びなさい。",
@@ -118,6 +126,7 @@ export const gradeOneQuestions: Question[] = [
   },
   {
     id: "g1-q9",
+    difficulty: 2,
     category: "計算統計",
     question:
       "EM アルゴリズムの性質として最も適切なものを選びなさい。",
@@ -133,6 +142,7 @@ export const gradeOneQuestions: Question[] = [
   },
   {
     id: "g1-q10",
+    difficulty: 1,
     category: "計算統計",
     question:
       "メトロポリス・ヘイスティングスにおける対称な提案分布($q(x \\mid y) = q(y \\mid x)$)のとき、受理確率として最も適切なものを選びなさい。",

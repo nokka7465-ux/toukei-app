@@ -6,9 +6,12 @@ export type Formula = {
   description: string;
 };
 
+export type Difficulty = 1 | 2 | 3;
+
 export type Question = {
   id: string;
   category: string;
+  difficulty: Difficulty;
   question: string;
   choices: string[];
   correctIndex: number;

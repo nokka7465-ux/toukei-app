@@ -1,15 +1,16 @@
 import type { Book } from "@/types/content";
 
-// Amazon アソシエイトプログラムの承認後、ここに自分のアソシエイト ID(例: "yourname-22")を入れる。
-// 空のままだと通常の Amazon 検索リンクとして動作する(アフィリエイト報酬なし)。
-const AMAZON_AFFILIATE_TAG = "";
+// Amazon アソシエイトプログラムのアソシエイト ID。
+// このタグを付けたリンク経由での購入で紹介料が発生する。
+// 空文字列 ("") にすると通常の Amazon 検索リンクとして動作する(アフィリエイト報酬なし)。
+const AMAZON_AFFILIATE_TAG: string = "tamalu-22";
 
 export function amazonSearchUrl(query: string): string {
   const base = `https://www.amazon.co.jp/s?k=${encodeURIComponent(query)}`;
   return AMAZON_AFFILIATE_TAG ? `${base}&tag=${AMAZON_AFFILIATE_TAG}` : base;
 }
 
-export const isAffiliateEnabled = AMAZON_AFFILIATE_TAG !== "";
+export const isAffiliateEnabled: boolean = AMAZON_AFFILIATE_TAG !== "";
 
 export const booksByLevel: Record<string, Book[]> = {
   "grade-4": [

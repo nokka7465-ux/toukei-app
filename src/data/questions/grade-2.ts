@@ -3,6 +3,7 @@ import type { Question } from "@/types/content";
 export const gradeTwoQuestions: Question[] = [
   {
     id: "g2-q1",
+    difficulty: 1,
     category: "記述統計・推定量",
     question:
       "標本 $2,\\ 4,\\ 6,\\ 8,\\ 10$ から求めた不偏分散として最も適切なものを選びなさい。",
@@ -13,6 +14,7 @@ export const gradeTwoQuestions: Question[] = [
   },
   {
     id: "g2-q2",
+    difficulty: 3,
     category: "確率分布",
     question:
       "あるコールセンターに1時間あたり平均 $\\lambda = 3$ 件の電話がかかるとき、1時間に $2$ 件かかってくる確率として最も近いものを選びなさい(ポアソン分布を仮定)。",
@@ -23,6 +25,7 @@ export const gradeTwoQuestions: Question[] = [
   },
   {
     id: "g2-q3",
+    difficulty: 1,
     category: "確率分布",
     question:
       "成功確率 $p = 0.2$ のベルヌーイ試行を繰り返すとき、初めて成功するまでの試行回数 $X$(幾何分布)の期待値として最も適切なものを選びなさい。",
@@ -33,6 +36,7 @@ export const gradeTwoQuestions: Question[] = [
   },
   {
     id: "g2-q4",
+    difficulty: 2,
     category: "確率分布",
     question:
       "指数分布 $f(x) = 2 e^{-2x}$ に従う確率変数 $X$ の期待値として最も適切なものを選びなさい。",
@@ -43,6 +47,7 @@ export const gradeTwoQuestions: Question[] = [
   },
   {
     id: "g2-q5",
+    difficulty: 1,
     category: "標本分布",
     question:
       "独立な標準正規乱数 $Z_1, Z_2, \\ldots, Z_{10}$ について、$\\sum_{i=1}^{10} Z_i^2$ が従う分布として最も適切なものを選びなさい。",
@@ -58,6 +63,7 @@ export const gradeTwoQuestions: Question[] = [
   },
   {
     id: "g2-q6",
+    difficulty: 3,
     category: "推定",
     question:
       "正規母集団から $n = 16$ の標本をとったところ標本平均 $\\bar{x} = 50$、不偏分散 $s^2 = 64$ であった。母平均の $95\\%$ 信頼区間として最も近いものを選びなさい。ただし $t_{0.025}(15) \\approx 2.131$ とする。",
@@ -73,6 +79,7 @@ export const gradeTwoQuestions: Question[] = [
   },
   {
     id: "g2-q7",
+    difficulty: 2,
     category: "仮説検定",
     question:
       "母分散既知($\\sigma^2 = 25$)の母集団から $n = 25$ の標本をとり標本平均 $\\bar{x} = 52$ を得た。$H_0: \\mu = 50$ を有意水準 $5\\%$ の両側検定で検定するときの Z 値として最も適切なものを選びなさい。",
@@ -83,6 +90,7 @@ export const gradeTwoQuestions: Question[] = [
   },
   {
     id: "g2-q8",
+    difficulty: 3,
     category: "仮説検定",
     question:
       "カイ二乗適合度検定で $3$ つのカテゴリに対し観測度数と期待度数から得た統計量が $\\chi^2 = 7.8$ であった。自由度 $2$ の上側 $5\\%$ 点は $5.99$、上側 $1\\%$ 点は $9.21$ である。検定結果として最も適切なものを選びなさい。",
@@ -98,6 +106,7 @@ export const gradeTwoQuestions: Question[] = [
   },
   {
     id: "g2-q9",
+    difficulty: 2,
     category: "仮説検定",
     question:
       "$n = 400$ の標本から比率 $\\hat{p} = 0.55$ を得た。$H_0: p = 0.5$ を検定するときの検定統計量 $Z$ として最も近いものを選びなさい。",
@@ -108,6 +117,7 @@ export const gradeTwoQuestions: Question[] = [
   },
   {
     id: "g2-q10",
+    difficulty: 1,
     category: "仮説検定",
     question:
       "2×2 分割表のカイ二乗独立性検定における自由度として最も適切なものを選びなさい。",
@@ -118,6 +128,7 @@ export const gradeTwoQuestions: Question[] = [
   },
   {
     id: "g2-q11",
+    difficulty: 2,
     category: "回帰分析",
     question:
       "単回帰モデル $y = \\alpha + \\beta x + \\varepsilon$ について、$s_x^2 = 4$, $s_{xy} = 6$ のとき回帰係数 $\\hat{\\beta}$ の値として最も適切なものを選びなさい。",
@@ -128,6 +139,7 @@ export const gradeTwoQuestions: Question[] = [
   },
   {
     id: "g2-q12",
+    difficulty: 1,
     category: "回帰分析",
     question:
       "ある単回帰分析で相関係数が $r = 0.8$ であった。決定係数 $R^2$ として最も適切なものを選びなさい。",
@@ -138,6 +150,7 @@ export const gradeTwoQuestions: Question[] = [
   },
   {
     id: "g2-q13",
+    difficulty: 2,
     category: "標本分布",
     question:
       "平均 $\\mu$、分散 $\\sigma^2$ の母集団からサイズ $n$ の無作為標本を取ったときの標本平均 $\\bar{X}$ の分散として最も適切なものを選びなさい(母集団が有限でない場合)。",
@@ -153,6 +166,7 @@ export const gradeTwoQuestions: Question[] = [
   },
   {
     id: "g2-q14",
+    difficulty: 1,
     category: "仮説検定",
     question:
       "第 1 種の誤り(第一種過誤)の説明として最も適切なものを選びなさい。",
@@ -168,6 +182,7 @@ export const gradeTwoQuestions: Question[] = [
   },
   {
     id: "g2-q15",
+    difficulty: 2,
     category: "推定",
     question:
       "$n = 100$ の標本で標本比率 $\\hat{p} = 0.40$ を得た。母比率 $p$ の $95\\%$ 信頼区間として最も近いものを選びなさい($z_{0.025} \\approx 1.96$)。",
