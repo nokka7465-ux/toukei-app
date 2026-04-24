@@ -168,4 +168,42 @@ export const gradePre1Questions: Question[] = [
     explanation:
       "$D_{\\mathrm{KL}}(P\\|Q) = 0.5 \\log_2(0.5/0.25) + 0.5 \\log_2(0.5/0.75) = 0.5(1) + 0.5 \\log_2(2/3) \\approx 0.5 - 0.292 \\approx 0.208$(ビット)。",
   },
+  {
+    id: "gp1-q13",
+    difficulty: 2,
+    category: "確率分布",
+    question:
+      "ポアソン分布 $\\mathrm{Po}(\\lambda)$ について、平均と分散の関係として最も適切なものを選びなさい。",
+    choices: [
+      "$E[X] = \\lambda,\\ V[X] = \\lambda^2$",
+      "$E[X] = \\lambda,\\ V[X] = \\lambda$",
+      "$E[X] = \\lambda^2,\\ V[X] = \\lambda$",
+      "$E[X] = \\lambda,\\ V[X] = \\sqrt{\\lambda}$",
+    ],
+    correctIndex: 1,
+    explanation:
+      "ポアソン分布の特徴的な性質: 平均と分散がともに $\\lambda$ に等しい。データの分散が平均より顕著に大きい場合は「過分散」、小さい場合は「過小分散」と呼ばれ、ポアソンモデルが適切でない可能性を示唆する。",
+  },
+  {
+    id: "gp1-q14",
+    difficulty: 3,
+    category: "多変量分布",
+    question:
+      "2 変数正規分布 $(X, Y) \\sim N_2(\\boldsymbol{\\mu}, \\Sigma)$ で $X$ と $Y$ の相関係数が $\\rho = 0.5$、$\\sigma_X = 2$、$\\sigma_Y = 4$、$\\mu_X = \\mu_Y = 0$ のとき、$E[Y \\mid X = 4]$ として最も適切なものを選びなさい。",
+    choices: ["$2$", "$4$", "$8$", "$16$"],
+    correctIndex: 1,
+    explanation:
+      "2 変数正規の条件付き期待値の公式 $E[Y \\mid X = x] = \\mu_Y + \\rho (\\sigma_Y/\\sigma_X)(x - \\mu_X)$ より、$E[Y \\mid X=4] = 0 + 0.5 \\times (4/2) \\times (4 - 0) = 0.5 \\times 2 \\times 4 = 4$。",
+  },
+  {
+    id: "gp1-q15",
+    difficulty: 2,
+    category: "確率分布",
+    question:
+      "指数分布 $\\mathrm{Exp}(\\lambda)$ に従う待ち時間 $T$ について、平均待ち時間が $5$ 分のとき、$\\lambda$ として最も適切なものを選びなさい。",
+    choices: ["$0.1$", "$0.2$", "$1$", "$5$"],
+    correctIndex: 1,
+    explanation:
+      "指数分布の期待値は $E[T] = 1/\\lambda$。$E[T] = 5$ なら $\\lambda = 1/5 = 0.2$。1 分あたり平均 $0.2$ 件のペースで起こる現象、と読み解ける。",
+  },
 ];

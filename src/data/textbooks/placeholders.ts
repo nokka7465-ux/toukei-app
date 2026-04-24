@@ -46,12 +46,6 @@ function buildPlaceholder(
   };
 }
 
-export const gradePre1Textbook = buildPlaceholder(
-  "grade-pre1",
-  "準1級 教科書",
-  "多変量解析・ベイズ・時系列など、より発展的な内容を扱う準1級です。",
-);
-
 export const gradeOneTextbook = buildPlaceholder(
   "grade-1",
   "1級 教科書",
