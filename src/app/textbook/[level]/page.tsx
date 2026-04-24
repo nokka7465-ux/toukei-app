@@ -113,40 +113,79 @@ export default async function TextbookPage({
         </ol>
       </section>
 
-      <div className="space-y-16">
-        {book.chapters.map((ch) => (
-          <section key={ch.id}>
-            <header className="mb-6">
-              <div className="chapter-eyebrow mb-1">
-                Chapter {ch.number}
-              </div>
-              <h2 className="text-2xl font-bold tracking-wide">
-                第 {ch.number} 章 · {ch.title}
-              </h2>
-              <hr className="rule-double mt-3" />
-            </header>
-            <div className="space-y-12">
-              {ch.sections.map((sec) => (
-                <section
-                  key={sec.id}
-                  id={sec.id}
-                  className="paper rounded-lg p-8 scroll-mt-20"
-                >
-                  <header className="mb-4">
-                    <div className="chapter-eyebrow mb-1">
-                      §{sec.number}
-                    </div>
-                    <h3 className="text-xl font-bold">
-                      {sec.title}
-                    </h3>
-                  </header>
-                  <TextbookBody blocks={sec.blocks} />
-                </section>
-              ))}
-            </div>
-          </section>
-        ))}
-      </div>
+      {(() => {
+        const flatSections = book.chapters.flatMap((ch) => ch.sections);
+        const indexOf: Record<string, number> = {};
+        flatSections.forEach((sec, i) => {
+          indexOf[sec.id] = i;
+        });
+        return (
+          <div className="space-y-16">
+            {book.chapters.map((ch) => (
+              <section key={ch.id}>
+                <header className="mb-6">
+                  <div className="chapter-eyebrow mb-1">
+                    Chapter {ch.number}
+                  </div>
+                  <h2 className="text-2xl font-bold tracking-wide">
+                    第 {ch.number} 章 · {ch.title}
+                  </h2>
+                  <hr className="rule-double mt-3" />
+                </header>
+                <div className="space-y-12">
+                  {ch.sections.map((sec) => {
+                    const idx = indexOf[sec.id];
+                    const prev = flatSections[idx - 1];
+                    const next = flatSections[idx + 1];
+                    return (
+                      <section
+                        key={sec.id}
+                        id={sec.id}
+                        className="paper rounded-lg p-8 scroll-mt-20"
+                      >
+                        <header className="mb-4">
+                          <div className="chapter-eyebrow mb-1">
+                            §{sec.number}
+                          </div>
+                          <h3 className="text-xl font-bold">{sec.title}</h3>
+                        </header>
+                        <TextbookBody blocks={sec.blocks} />
+                        <nav className="mt-8 pt-4 border-t border-[var(--page-border)] flex justify-between gap-3 text-xs ui-sans">
+                          {prev ? (
+                            <a
+                              href={`#${prev.id}`}
+                              className="text-[var(--link)] hover:underline max-w-[45%]"
+                            >
+                              ← {prev.number} {prev.title}
+                            </a>
+                          ) : (
+                            <span />
+                          )}
+                          {next ? (
+                            <a
+                              href={`#${next.id}`}
+                              className="text-[var(--link)] hover:underline text-right max-w-[45%]"
+                            >
+                              {next.number} {next.title} →
+                            </a>
+                          ) : (
+                            <Link
+                              href={`/quiz/${level}`}
+                              className="text-[var(--link)] hover:underline text-right max-w-[45%]"
+                            >
+                              問題を解いてみる →
+                            </Link>
+                          )}
+                        </nav>
+                      </section>
+                    );
+                  })}
+                </div>
+              </section>
+            ))}
+          </div>
+        );
+      })()}
 
       <RecommendedBooks level={level} levelTitle={meta.title} />
 

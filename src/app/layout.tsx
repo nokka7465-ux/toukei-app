@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Noto_Serif_JP, Noto_Sans_JP } from "next/font/google";
 import { isAffiliateEnabled } from "@/data/books";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { StructuredData } from "@/components/StructuredData";
 import "./globals.css";
 
 const notoSerifJP = Noto_Serif_JP({
@@ -80,18 +81,25 @@ export default function RootLayout({
       className={`${notoSerifJP.variable} ${notoSansJP.variable}`}
     >
       <body className="min-h-screen">
+        <StructuredData />
         <GoogleAnalytics />
         <header className="border-b border-[var(--page-border)] bg-[var(--page)]/70 backdrop-blur-sm sticky top-0 z-10">
           <div className="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
             <Link href="/" className="text-lg font-bold tracking-wide">
               統計検定 学習帳
             </Link>
-            <nav className="flex gap-5 text-sm ui-sans">
+            <nav className="flex gap-4 text-sm ui-sans flex-wrap justify-end">
               <Link href="/" className="hover:underline">
                 ホーム
               </Link>
+              <Link href="/roadmap" className="hover:underline">
+                ロードマップ
+              </Link>
               <Link href="/textbook/grade-4" className="hover:underline">
                 教科書
+              </Link>
+              <Link href="/glossary" className="hover:underline">
+                用語集
               </Link>
               <Link href="/diagnose" className="hover:underline">
                 級診断

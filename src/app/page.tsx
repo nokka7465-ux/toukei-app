@@ -56,8 +56,25 @@ export default function Home() {
         <div className="chapter-eyebrow mb-2">For Beginners</div>
         <h2 className="text-2xl font-bold mb-3">初めての方へ</h2>
         <p className="text-[var(--muted-strong)] leading-loose mb-4">
-          どの級から始めればいいか迷ったら、まず <Link href="/diagnose" className="text-[var(--link)] hover:underline font-bold">3 問の級診断</Link>{" "}
-          をどうぞ。経験・数学への慣れ・学習目的をもとに、最適な級をご提案します。
+          全体像を把握したい方は{" "}
+          <Link
+            href="/roadmap"
+            className="text-[var(--link)] hover:underline font-bold"
+          >
+            学習ロードマップ
+          </Link>
+          、どの級から始めればいいか迷うときは{" "}
+          <Link href="/diagnose" className="text-[var(--link)] hover:underline font-bold">
+            3 問の級診断
+          </Link>{" "}
+          をどうぞ。学習中に用語の意味をすぐ確認したいときは{" "}
+          <Link
+            href="/glossary"
+            className="text-[var(--link)] hover:underline font-bold"
+          >
+            用語集
+          </Link>{" "}
+          が便利です。
         </p>
         <p className="text-[var(--muted-strong)] leading-loose mb-4">
           統計を学び始める方は、まず <strong>4級の教科書</strong>{" "}
