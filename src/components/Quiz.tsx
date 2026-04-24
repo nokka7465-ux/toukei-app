@@ -131,7 +131,7 @@ export function Quiz({ questions }: { questions: Question[] }) {
             type="button"
             onClick={handleSubmit}
             disabled={!allAnswered}
-            className="px-6 py-2 bg-[var(--accent)] text-white rounded hover:bg-[var(--accent-strong)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600 font-bold"
+            className="px-6 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded hover:bg-[var(--accent-strong)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600 font-bold"
           >
             採点する
           </button>

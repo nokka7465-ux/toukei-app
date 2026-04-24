@@ -72,7 +72,7 @@ export default function Home() {
         <div className="flex flex-wrap gap-2 ui-sans text-sm">
           <Link
             href="/textbook/grade-4"
-            className="px-4 py-2 bg-[var(--accent)] text-white rounded font-bold hover:bg-[var(--accent-strong)]"
+            className="px-4 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)]"
           >
             4級の教科書を読む →
           </Link>
@@ -164,7 +164,7 @@ export default function Home() {
                   <div className="flex flex-wrap gap-2 ui-sans text-sm">
                     <Link
                       href={`/textbook/${level.slug}`}
-                      className="px-3 py-1.5 bg-[var(--accent)] text-white rounded hover:bg-[var(--accent-strong)]"
+                      className="px-3 py-1.5 bg-[var(--accent)] text-[var(--accent-fg)] rounded hover:bg-[var(--accent-strong)]"
                     >
                       教科書
                     </Link>

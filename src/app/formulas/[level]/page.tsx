@@ -118,7 +118,7 @@ export default async function FormulaPage({
         </Link>
         <Link
           href={`/quiz/${level}`}
-          className="px-4 py-2 bg-[var(--accent)] text-white rounded hover:bg-[var(--accent-strong)]"
+          className="px-4 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded hover:bg-[var(--accent-strong)]"
         >
           {meta.title} の問題を解く →
         </Link>
