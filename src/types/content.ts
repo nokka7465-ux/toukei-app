@@ -55,3 +55,12 @@ export type Textbook = {
   intro: string;
   chapters: TextbookChapter[];
 };
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  description: string;
+  publishedAt: string;
+  category: string;
+  body: TextbookBlock[];
+};

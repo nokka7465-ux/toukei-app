@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { levels } from "@/data/levels";
 import { externalLinks } from "@/data/external-links";
+import { blogPosts } from "@/data/blog";
 
 const availableLevels = new Set<string>([
   "grade-4",
@@ -110,6 +111,47 @@ export default function Home() {
             4級の問題を解く
           </Link>
         </div>
+      </section>
+
+      <section className="mb-12">
+        <div className="mb-5 flex items-baseline justify-between">
+          <div>
+            <div className="chapter-eyebrow mb-1">Blog</div>
+            <h2 className="text-2xl font-bold">学習ブログ</h2>
+          </div>
+          <Link
+            href="/blog"
+            className="text-xs text-[var(--link)] hover:underline ui-sans"
+          >
+            すべての記事 →
+          </Link>
+        </div>
+        <ul className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {[...blogPosts]
+            .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1))
+            .slice(0, 3)
+            .map((post) => (
+              <li key={post.slug}>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="paper block p-5 rounded-lg hover:-translate-y-0.5 transition group h-full"
+                >
+                  <div className="ui-sans text-[10px] text-[var(--muted)] mb-2 flex items-center gap-2">
+                    <span>{post.publishedAt}</span>
+                    <span className="px-1.5 py-0.5 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold tracking-wider">
+                      {post.category}
+                    </span>
+                  </div>
+                  <div className="font-bold text-sm mb-2 group-hover:text-[var(--link)] leading-snug">
+                    {post.title}
+                  </div>
+                  <div className="text-xs text-[var(--muted-strong)] leading-relaxed line-clamp-3">
+                    {post.description}
+                  </div>
+                </Link>
+              </li>
+            ))}
+        </ul>
       </section>
 
       <section className="mb-12 paper rounded-lg p-7">

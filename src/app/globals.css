@@ -19,8 +19,28 @@
   --section-border: #d6c690;
 }
 
+/* Dark theme variables: applied when data-theme="dark" or
+   (no explicit data-theme + system prefers dark). */
+:root[data-theme="dark"] {
+  --background: #15120b;
+  --foreground: #ebe3ce;
+  --page: #1f1a10;
+  --page-border: #3a3121;
+  --page-border-strong: #55472e;
+  --muted: #a0947a;
+  --muted-strong: #c9bd9f;
+  --accent: #3c4d61;
+  --accent-strong: #6f8294;
+  --accent-fg: #e3e8ee;
+  --link: #8fb8e5;
+  --rule: #55472e;
+  --highlight: #3a2f10;
+  --section-bg: #241e11;
+  --section-border: #4a3e23;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --background: #15120b;
     --foreground: #ebe3ce;
     --page: #1f1a10;
@@ -201,4 +221,76 @@ a {
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.25rem 0;
+}
+
+/* Print: textbook-friendly A4 layout. Hides nav chrome, removes
+   background patterns, tightens spacing. */
+@media print {
+  html,
+  body {
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #1a1a1a !important;
+    font-size: 11pt;
+  }
+
+  header,
+  footer,
+  nav[aria-label="breadcrumb"],
+  .print-hide {
+    display: none !important;
+  }
+
+  main {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .paper {
+    background: #ffffff !important;
+    border: 1px solid #c9b98c !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+
+  .def-box,
+  .example-box {
+    page-break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    page-break-after: avoid;
+    color: #1a1a1a !important;
+  }
+
+  h2 {
+    page-break-before: auto;
+  }
+
+  a {
+    color: #2d6094 !important;
+    text-decoration: none;
+  }
+
+  /* Print external link target after the link text. */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #777;
+  }
+
+  /* But not for inline navigation links */
+  a[href^="#"]::after,
+  a[href^="/"]::after {
+    content: "";
+  }
+
+  @page {
+    size: A4;
+    margin: 18mm 16mm;
+  }
 }

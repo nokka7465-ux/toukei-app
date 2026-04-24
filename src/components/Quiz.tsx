@@ -47,6 +47,12 @@ function formatRelative(ts: number): string {
   return `${Math.floor(month / 12)} 年前`;
 }
 
+function formatDuration(seconds: number): string {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m}:${String(s).padStart(2, "0")}`;
+}
+
 const difficultyStyle: Record<
   Difficulty,
   { label: string; stars: string; className: string }
@@ -86,12 +92,29 @@ export function Quiz({
   );
   const [submitted, setSubmitted] = useState(false);
   const [previous, setPrevious] = useState<PreviousScore | null>(null);
+  const [startedAt, setStartedAt] = useState<number | null>(null);
+  const [elapsed, setElapsed] = useState(0);
 
   useEffect(() => {
     if (quizKey) {
       setPrevious(loadPrevious(quizKey));
     }
   }, [quizKey]);
+
+  useEffect(() => {
+    if (submitted || startedAt === null) return;
+    const id = setInterval(() => {
+      setElapsed(Math.floor((Date.now() - startedAt) / 1000));
+    }, 1000);
+    return () => clearInterval(id);
+  }, [submitted, startedAt]);
+
+  // Start the elapsed timer the first time the user selects any answer.
+  useEffect(() => {
+    if (startedAt === null && answers.some((a) => a !== null)) {
+      setStartedAt(Date.now());
+    }
+  }, [answers, startedAt]);
 
   const handleSelect = (qIdx: number, choiceIdx: number) => {
     if (submitted) return;
@@ -131,6 +154,14 @@ export function Quiz({
 
   return (
     <div className="space-y-6">
+      {(startedAt !== null || submitted) && (
+        <div className="ui-sans text-xs text-[var(--muted)] flex items-center gap-2 sticky top-16 z-10 bg-[var(--background)]/80 backdrop-blur-sm py-1 -mx-2 px-2 rounded">
+          <span aria-hidden="true">⏱</span>
+          <span>
+            経過時間 <span className="font-bold text-[var(--foreground)]">{formatDuration(elapsed)}</span>
+          </span>
+        </div>
+      )}
       {previous && !submitted && (
         <div className="paper rounded-lg p-4 text-sm flex items-center justify-between flex-wrap gap-2 ui-sans">
           <div>
