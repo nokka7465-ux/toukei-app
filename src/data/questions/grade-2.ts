@@ -196,4 +196,42 @@ export const gradeTwoQuestions: Question[] = [
     explanation:
       "標準誤差 $\\sqrt{0.4 \\times 0.6 / 100} \\approx 0.049$。幅 $1.96 \\times 0.049 \\approx 0.096$。区間は $0.40 \\pm 0.096$、約 $[0.304,\\ 0.496]$。",
   },
+  {
+    id: "g2-q16",
+    difficulty: 2,
+    category: "推定理論",
+    question:
+      "標本サイズ $n = 25$ の標本から計算した不偏分散の自由度として最も適切なものを選びなさい。",
+    choices: ["$24$", "$25$", "$26$", "$50$"],
+    correctIndex: 0,
+    explanation:
+      "不偏分散 $\\hat{s}^2 = \\dfrac{1}{n-1}\\sum (X_i - \\bar{X})^2$ の分母 $n - 1$ がそのまま自由度。$n - 1 = 25 - 1 = 24$。",
+  },
+  {
+    id: "g2-q17",
+    difficulty: 3,
+    category: "仮説検定",
+    question:
+      "対立仮説が真であるにもかかわらず、帰無仮説を棄却できない誤りの説明として最も適切なものを選びなさい。",
+    choices: [
+      "第 1 種の誤り(有意水準 $\\alpha$)",
+      "第 2 種の誤り(確率 $\\beta$)",
+      "標本誤差",
+      "データ収集ミス",
+    ],
+    correctIndex: 1,
+    explanation:
+      "対立仮説が真なのに棄却できない = 第 2 種の誤り(確率 $\\beta$)。検出力は $1 - \\beta$。第 1 種の誤りは「$H_0$ が真なのに棄却してしまう」誤り。",
+  },
+  {
+    id: "g2-q18",
+    difficulty: 2,
+    category: "回帰分析",
+    question:
+      "単回帰分析で残差平方和 $\\mathrm{RSS}$ と全平方和 $\\mathrm{TSS}$ について $\\mathrm{RSS}/\\mathrm{TSS} = 0.4$ であった。決定係数 $R^2$ として最も適切なものを選びなさい。",
+    choices: ["$0.40$", "$0.60$", "$0.80$", "$1.40$"],
+    correctIndex: 1,
+    explanation:
+      "決定係数の定義 $R^2 = 1 - \\mathrm{RSS}/\\mathrm{TSS}$ より $R^2 = 1 - 0.4 = 0.6$。応答変数の分散の $60\\%$ を説明できることを示す。",
+  },
 ];

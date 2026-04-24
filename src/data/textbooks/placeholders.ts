@@ -46,12 +46,6 @@ function buildPlaceholder(
   };
 }
 
-export const gradeTwoTextbook = buildPlaceholder(
-  "grade-2",
-  "2級 教科書",
-  "2級は推定・検定・回帰分析など、統計の実務で最も使われる内容を扱う級です。",
-);
-
 export const gradePre1Textbook = buildPlaceholder(
   "grade-pre1",
   "準1級 教科書",
