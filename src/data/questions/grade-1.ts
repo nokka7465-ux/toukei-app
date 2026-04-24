@@ -156,4 +156,52 @@ export const gradeOneQuestions: Question[] = [
     explanation:
       "対称提案のとき $q(x \\mid y)/q(y \\mid x) = 1$ なので、受理確率は目標分布の比 $\\pi(y)/\\pi(x)$ と 1 の小さい方。これが古典的「メトロポリス」。",
   },
+  {
+    id: "g1-q11",
+    difficulty: 2,
+    category: "十分統計量",
+    question:
+      "ラオ・ブラックウェルの定理が保証する性質として最も適切なものを選びなさい。",
+    choices: [
+      "不偏推定量を十分統計量で条件付けると、必ず不偏かつ分散が増加する",
+      "不偏推定量を十分統計量で条件付けると、必ず不偏かつ分散が低下(または同等)する",
+      "最尤推定量は常に不偏である",
+      "完備十分統計量は常に存在する",
+    ],
+    correctIndex: 1,
+    explanation:
+      "ラオ・ブラックウェルの定理: $\\hat{\\theta}$ が不偏、$T$ が十分統計量なら $\\tilde{\\theta} = E[\\hat{\\theta} \\mid T]$ は不偏かつ $V[\\tilde{\\theta}] \\leq V[\\hat{\\theta}]$。完備性を加えるとレーマン・シェッフェより UMVUE が得られる。",
+  },
+  {
+    id: "g1-q12",
+    difficulty: 3,
+    category: "分布論",
+    question:
+      "次のうち指数型分布族の標準形 $f(x;\\theta) = h(x)\\exp(\\eta(\\theta) T(x) - A(\\theta))$ における自然パラメータ $\\eta(\\theta)$ について、$\\mathrm{Bin}(n, p)$($n$ 既知)で正しいものを選びなさい。",
+    choices: [
+      "$\\eta(p) = p$",
+      "$\\eta(p) = \\log p$",
+      "$\\eta(p) = \\log(p/(1 - p))$",
+      "$\\eta(p) = 1 - p$",
+    ],
+    correctIndex: 2,
+    explanation:
+      "二項分布の確率質量を変形すると $P(X = x) = \\binom{n}{x} \\exp(\\log(p/(1-p)) \\cdot x + n\\log(1-p))$。自然パラメータはロジット $\\eta(p) = \\log(p/(1-p))$、十分統計量は $T(x) = x$。",
+  },
+  {
+    id: "g1-q13",
+    difficulty: 3,
+    category: "ベイズ統計",
+    question:
+      "ベイズ推論で、データ量が大きくなったとき事後分布はどのようにふるまうか。最も適切なものを選びなさい。",
+    choices: [
+      "事前分布の影響が強くなり、事前分布の選び方に大きく依存する",
+      "事前分布の影響が小さくなり、最尤推定量近くに集中する",
+      "常に事前分布と一致する",
+      "予測不可能になる",
+    ],
+    correctIndex: 1,
+    explanation:
+      "データ量 $n$ が大きくなると、尤度 $p(D \\mid \\theta)$ が事前分布 $\\pi(\\theta)$ よりも事後に強く効くようになり、事後分布は最尤推定量 $\\hat{\\theta}_{\\mathrm{MLE}}$ のまわりに集中していく(漸近正規性)。事前の選び方への依存性が減る、これがベイズの安心材料。",
+  },
 ];
