@@ -234,4 +234,47 @@ export const gradeThreeQuestions: Question[] = [
     explanation:
       "標準誤差 $\\sqrt{0.2 \\times 0.8 / 400} = \\sqrt{0.0004} = 0.02$。幅 $1.96 \\times 0.02 \\approx 0.04$。区間は $0.20 \\pm 0.04$、約 $[0.16,\\ 0.24]$。",
   },
+  {
+    id: "g3-q19",
+    difficulty: 2,
+    category: "記述統計",
+    question:
+      "あるテストの平均が $60$ 点、標準偏差が $10$ 点であった。$80$ 点をとった人の偏差値として最も適切なものを選びなさい。",
+    choices: ["$60$", "$65$", "$70$", "$75$"],
+    correctIndex: 2,
+    explanation:
+      "z スコア $= (80 - 60)/10 = 2$。偏差値 $T = 50 + 10z = 50 + 20 = 70$。",
+  },
+  {
+    id: "g3-q20",
+    difficulty: 2,
+    category: "確率分布",
+    question:
+      "$X \\sim \\mathrm{Bin}(20, 0.4)$ のとき、$E[X]$ と標準偏差 $\\sigma$ の組として最も近いものを選びなさい。",
+    choices: [
+      "$E[X] = 8,\\ \\sigma \\approx 2.19$",
+      "$E[X] = 8,\\ \\sigma \\approx 4.8$",
+      "$E[X] = 12,\\ \\sigma \\approx 2.19$",
+      "$E[X] = 12,\\ \\sigma \\approx 4.8$",
+    ],
+    correctIndex: 0,
+    explanation:
+      "$E[X] = np = 20 \\times 0.4 = 8$、$V[X] = np(1-p) = 20 \\times 0.4 \\times 0.6 = 4.8$、$\\sigma = \\sqrt{4.8} \\approx 2.19$。",
+  },
+  {
+    id: "g3-q21",
+    difficulty: 2,
+    category: "確率変数",
+    question:
+      "確率変数 $X$ が $E[X] = 5,\\ V[X] = 9$ のとき、$Y = -2X + 10$ について正しい組を選びなさい。",
+    choices: [
+      "$E[Y] = 0,\\ V[Y] = 9$",
+      "$E[Y] = 0,\\ V[Y] = 36$",
+      "$E[Y] = 20,\\ V[Y] = 9$",
+      "$E[Y] = -10,\\ V[Y] = -18$",
+    ],
+    correctIndex: 1,
+    explanation:
+      "線形変換則より $E[Y] = -2 \\times 5 + 10 = 0$、$V[Y] = (-2)^2 \\times 9 = 36$。分散は係数の符号によらず常に正($a^2$ 倍)。",
+  },
 ];

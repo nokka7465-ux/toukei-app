@@ -103,9 +103,60 @@ const ROADMAP = [
   },
 ];
 
+const FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "統計検定はどの級から始めればいいですか?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "統計を初めて学ぶ方は4級から、高校数学が分かる方は3級から、実務でデータ分析を扱う方は2級から始めるのが標準的です。3問の級診断で目安を確認することもできます。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "統計検定2級の合格には何時間くらい必要ですか?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "100〜200時間が目安です。週末2時間+平日30分のペースなら3〜6か月で到達できます。テキスト1周(60時間)、演習(80時間)、過去問(40時間)、復習(20時間)が目安です。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "統計検定は飛び級できますか?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "可能です。受験資格に下位級の合格は不要なので、いきなり2級や準1級から受けても問題ありません。ただし、下位級の範囲(分散・正規分布など)の理解は必須です。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "データサイエンティストには統計検定が必要ですか?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "資格そのものより「資格を取る過程で身につく知識」が実務で重要です。2級レベル(検定・回帰)が業務基礎、準1級レベル(多変量・ベイズ・時系列)があれば応用範囲を完全カバーできます。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "統計検定はいつ受験できますか?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "4級・3級・2級・準1級は CBT 方式で通年受験可能です。1級は年1回(11月)のペーパー試験のみです。",
+      },
+    },
+  ],
+};
+
 export default function RoadmapPage() {
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

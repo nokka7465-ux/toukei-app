@@ -4,6 +4,8 @@ import Link from "next/link";
 import { blogPosts, getPostBySlug } from "@/data/blog";
 import { TextbookBody } from "@/components/TextbookBody";
 
+const SITE_URL = "https://toukei-app-eight.vercel.app";
+
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
 }
@@ -50,8 +52,32 @@ export default async function BlogPostPage({
   const prev = sorted[idx + 1];
   const next = sorted[idx - 1];
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
+    author: {
+      "@type": "Organization",
+      name: "統計検定 学習帳",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "統計検定 学習帳",
+    },
+    mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+    inLanguage: "ja",
+    articleSection: post.category,
+  };
+
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

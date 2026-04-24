@@ -233,4 +233,52 @@ export const gradePre1Questions: Question[] = [
     explanation:
       "AR(1) は $|\\phi| < 1$ のとき(弱)定常。$\\phi = 1$ ではランダムウォーク(非定常)、$|\\phi| > 1$ では発散。",
   },
+  {
+    id: "gp1-q18",
+    difficulty: 2,
+    category: "ベイズ統計",
+    question:
+      "事前分布 $\\theta \\sim \\mathrm{Beta}(1, 1)$(一様分布)を仮定し、$n = 4$ 回のベルヌーイ試行で成功 $3$、失敗 $1$ を観測した。事後分布として最も適切なものを選びなさい。",
+    choices: [
+      "$\\mathrm{Beta}(3, 1)$",
+      "$\\mathrm{Beta}(4, 2)$",
+      "$\\mathrm{Beta}(1, 1)$",
+      "$\\mathrm{Beta}(5, 3)$",
+    ],
+    correctIndex: 1,
+    explanation:
+      "ベータ-二項共役性より、事後分布は $\\mathrm{Beta}(\\alpha + k,\\ \\beta + n - k) = \\mathrm{Beta}(1 + 3,\\ 1 + 1) = \\mathrm{Beta}(4, 2)$。事後の期待値は $4/6 \\approx 0.67$。",
+  },
+  {
+    id: "gp1-q19",
+    difficulty: 3,
+    category: "多変量解析",
+    question:
+      "重回帰モデル $\\mathbf{y} = X\\boldsymbol{\\beta} + \\boldsymbol{\\varepsilon}$ で多重共線性が強いとき、起こる症状として最も適切でないものを選びなさい。",
+    choices: [
+      "係数の標準誤差が極端に大きくなる",
+      "係数推定値が不安定で、データを少し変えるだけで大きく変動する",
+      "決定係数 $R^2$ が必ず低下する",
+      "$X^{\\top}X$ の行列式がほぼゼロに近づく",
+    ],
+    correctIndex: 2,
+    explanation:
+      "多重共線性は係数の推定を不安定にするが、$R^2$ 自体は予測の説明力を測る指標で、多重共線性があっても下がるとは限らない。むしろ高いままで「予測はできるが係数の解釈が困難」という状況が生まれる。診断には VIF を見る。",
+  },
+  {
+    id: "gp1-q20",
+    difficulty: 2,
+    category: "時系列解析",
+    question:
+      "MA(q) モデル $X_t = \\varepsilon_t + \\theta_1 \\varepsilon_{t-1} + \\cdots + \\theta_q \\varepsilon_{t-q}$ について、自己相関関数 ACF の性質として最も適切なものを選びなさい。",
+    choices: [
+      "ラグ $h > q$ で ACF は 0 になる",
+      "ラグ $h$ が大きくなっても ACF は減衰しない",
+      "ACF は周期的に振動する",
+      "ACF は AR モデルと同じ形を持つ",
+    ],
+    correctIndex: 0,
+    explanation:
+      "MA(q) は過去 $q$ 期のノイズしか引きずらないので、ラグ $q$ より先では ACF は 0 になる(打ち切られる)。これがモデル次数 $q$ の判定基準。AR(p) は逆に PACF がラグ $p$ で打ち切られる。",
+  },
 ];
