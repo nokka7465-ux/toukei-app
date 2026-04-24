@@ -38,33 +38,45 @@ export default async function FormulaPage({
   }, {});
 
   return (
-    <div>
-      <div className="mb-6">
-        <Link
-          href="/"
-          className="text-sm text-blue-600 hover:underline"
-        >
-          ← ホーム
+    <article>
+      <nav
+        aria-label="breadcrumb"
+        className="text-xs text-[var(--muted)] ui-sans mb-6"
+      >
+        <Link href="/" className="hover:underline">
+          ホーム
         </Link>
-      </div>
-      <h1 className="text-2xl font-bold mb-1">{meta.title} 公式集</h1>
-      <p className="text-sm text-gray-500 mb-8">{meta.description}</p>
+        <span className="mx-2">›</span>
+        <span>公式集</span>
+        <span className="mx-2">›</span>
+        <span>{meta.title}</span>
+      </nav>
 
-      <div className="space-y-10">
+      <header className="mb-10 pb-6 border-b-2 border-[var(--page-border-strong)]">
+        <div className="chapter-eyebrow mb-2">Formula Reference</div>
+        <h1 className="text-4xl font-bold mb-3 tracking-wider">
+          {meta.title} 公式集
+        </h1>
+        <p className="text-[var(--muted-strong)] leading-loose max-w-3xl">
+          {meta.description}
+        </p>
+      </header>
+
+      <div className="space-y-12">
         {Object.entries(byCategory).map(([category, items]) => (
           <section key={category}>
-            <h2 className="text-lg font-bold mb-3 pb-1 border-b border-gray-200 dark:border-gray-800">
-              {category}
-            </h2>
-            <div className="space-y-3">
+            <header className="mb-4">
+              <div className="chapter-eyebrow mb-1">Category</div>
+              <h2 className="text-xl font-bold pb-2 border-b border-[var(--page-border-strong)]">
+                {category}
+              </h2>
+            </header>
+            <div className="grid grid-cols-1 gap-4">
               {items.map((f) => (
-                <div
-                  key={f.id}
-                  className="p-4 border border-gray-200 dark:border-gray-800 rounded-lg"
-                >
-                  <div className="font-bold mb-2">{f.name}</div>
+                <div key={f.id} className="paper rounded-lg p-5">
+                  <div className="font-bold text-base mb-3">{f.name}</div>
                   <Math tex={f.tex} block />
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">
+                  <p className="text-sm text-[var(--muted-strong)] mt-3 leading-relaxed">
                     {f.description}
                   </p>
                 </div>
@@ -78,32 +90,37 @@ export default async function FormulaPage({
         const books = booksByLevel[level] ?? [];
         if (books.length === 0) return null;
         return (
-          <section className="mt-12 pt-6 border-t border-gray-200 dark:border-gray-800">
-            <h2 className="text-lg font-bold mb-1">{meta.title} のおすすめ参考書</h2>
-            <p className="text-xs text-gray-500 mb-4">
+          <section className="mt-14 pt-6 border-t-2 border-[var(--page-border-strong)]">
+            <div className="chapter-eyebrow mb-1">Recommended</div>
+            <h2 className="text-xl font-bold mb-2">
+              {meta.title} のおすすめ参考書
+            </h2>
+            <p className="text-xs text-[var(--muted)] mb-5 ui-sans leading-relaxed">
               {isAffiliateEnabled
                 ? "当サイトは Amazon.co.jp を宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazon アソシエイト・プログラムの参加者です。"
                 : "以下は学習の参考となる書籍の紹介です。各リンクから Amazon の検索結果に遷移します。"}
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {books.map((b) => (
                 <a
                   key={b.title}
                   href={amazonSearchUrl(b.title)}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
-                  className="block p-4 border border-gray-200 dark:border-gray-800 rounded-lg hover:shadow-md hover:border-blue-400 transition"
+                  className="paper block p-5 rounded-lg hover:-translate-y-0.5 transition"
                 >
                   <div className="font-bold text-sm mb-1">{b.title}</div>
                   {b.publisher && (
-                    <div className="text-xs text-gray-500 mb-2">{b.publisher}</div>
+                    <div className="text-xs text-[var(--muted)] mb-2 ui-sans">
+                      {b.publisher}
+                    </div>
                   )}
                   {b.note && (
-                    <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <p className="text-xs text-[var(--muted-strong)] leading-relaxed">
                       {b.note}
                     </p>
                   )}
-                  <div className="mt-2 text-xs text-blue-600">
+                  <div className="mt-2 text-xs text-[var(--link)] ui-sans">
                     Amazon で見る →
                   </div>
                 </a>
@@ -113,14 +130,20 @@ export default async function FormulaPage({
         );
       })()}
 
-      <div className="mt-10 pt-6 border-t border-gray-200 dark:border-gray-800">
+      <nav className="mt-14 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">
+        <Link
+          href={`/textbook/${level}`}
+          className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
+        >
+          ← {meta.title} の教科書を読む
+        </Link>
         <Link
           href={`/quiz/${level}`}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
+          className="px-4 py-2 bg-[var(--accent)] text-white rounded hover:bg-[var(--accent-strong)]"
         >
           {meta.title} の問題を解く →
         </Link>
-      </div>
-    </div>
+      </nav>
+    </article>
   );
 }

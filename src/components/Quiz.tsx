@@ -61,12 +61,9 @@ export function Quiz({ questions }: { questions: Question[] }) {
         const selected = answers[qIdx];
         const isCorrect = submitted && selected === q.correctIndex;
         return (
-          <div
-            key={q.id}
-            className="border border-gray-200 dark:border-gray-800 rounded-lg p-4"
-          >
-            <div className="text-xs text-gray-500 mb-2 flex items-center gap-2 flex-wrap">
-              <span>問 {qIdx + 1}</span>
+          <div key={q.id} className="paper rounded-lg p-5">
+            <div className="text-xs text-[var(--muted)] mb-3 flex items-center gap-2 flex-wrap ui-sans">
+              <span className="font-bold">問 {qIdx + 1}</span>
               <span>·</span>
               <span>{q.category}</span>
               <span
@@ -80,7 +77,7 @@ export function Quiz({ questions }: { questions: Question[] }) {
             <div className="mb-4 leading-relaxed">
               <MixedText text={q.question} />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 ui-sans">
               {q.choices.map((choice, cIdx) => {
                 const isSelected = selected === cIdx;
                 const isChoiceCorrect = submitted && cIdx === q.correctIndex;
@@ -94,7 +91,7 @@ export function Quiz({ questions }: { questions: Question[] }) {
                     ? "bg-red-50 border-red-500 dark:bg-red-950/40"
                     : isSelected
                       ? "bg-blue-50 border-blue-500 dark:bg-blue-950/40"
-                      : "border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900";
+                      : "border-[var(--page-border-strong)] hover:bg-[var(--background)]";
                 return (
                   <button
                     key={cIdx}
@@ -110,11 +107,11 @@ export function Quiz({ questions }: { questions: Question[] }) {
               })}
             </div>
             {submitted && (
-              <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-900 rounded text-sm">
-                <div className="font-bold mb-2">
-                  {isCorrect ? "正解" : "不正解"}
+              <div className="mt-4 p-4 bg-[var(--background)] border border-[var(--page-border)] rounded text-sm">
+                <div className="font-bold mb-2 ui-sans">
+                  {isCorrect ? "✓ 正解" : "✗ 不正解"}
                   {!isCorrect && (
-                    <span className="ml-2 font-normal text-gray-500">
+                    <span className="ml-2 font-normal text-[var(--muted)]">
                       正解: {circled(q.correctIndex)}
                     </span>
                   )}
@@ -128,13 +125,13 @@ export function Quiz({ questions }: { questions: Question[] }) {
         );
       })}
 
-      <div className="flex items-center gap-4 pt-2">
+      <div className="flex items-center gap-4 pt-2 ui-sans">
         {!submitted ? (
           <button
             type="button"
             onClick={handleSubmit}
             disabled={!allAnswered}
-            className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
+            className="px-6 py-2 bg-[var(--accent)] text-white rounded hover:bg-[var(--accent-strong)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600 font-bold"
           >
             採点する
           </button>
@@ -146,7 +143,7 @@ export function Quiz({ questions }: { questions: Question[] }) {
             <button
               type="button"
               onClick={handleReset}
-              className="px-6 py-2 border border-gray-300 dark:border-gray-700 rounded hover:bg-gray-50 dark:hover:bg-gray-900"
+              className="px-6 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
             >
               もう一度
             </button>

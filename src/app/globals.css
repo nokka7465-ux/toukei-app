@@ -2,14 +2,38 @@
 @import "katex/dist/katex.min.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
+  --background: #faf6ec;
+  --foreground: #2a2416;
+  --page: #fffdf4;
+  --page-border: #e7dbbf;
+  --page-border-strong: #c9b98c;
+  --muted: #857a5f;
+  --muted-strong: #5a5139;
+  --accent: #5a3f13;
+  --accent-strong: #7a5a28;
+  --link: #0f4c81;
+  --rule: #c9b98c;
+  --highlight: #fff4d6;
+  --section-bg: #fbf5e3;
+  --section-border: #d6c690;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #15120b;
+    --foreground: #ebe3ce;
+    --page: #1f1a10;
+    --page-border: #3a3121;
+    --page-border-strong: #55472e;
+    --muted: #a0947a;
+    --muted-strong: #c9bd9f;
+    --accent: #d4b87a;
+    --accent-strong: #e4cd95;
+    --link: #8fb8e5;
+    --rule: #55472e;
+    --highlight: #3a2f10;
+    --section-bg: #241e11;
+    --section-border: #4a3e23;
   }
 }
 
@@ -18,7 +42,161 @@ html {
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image:
+    linear-gradient(to right, rgba(130, 110, 70, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(130, 110, 70, 0.045) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-attachment: fixed;
   color: var(--foreground);
-  font-family: system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Yu Gothic UI", sans-serif;
+  font-family: var(--font-noto-serif-jp), "Hiragino Mincho ProN",
+    "ヒラギノ明朝 ProN", "Yu Mincho", "游明朝", "YuMincho",
+    "MS Mincho", serif;
+  min-height: 100vh;
+  line-height: 1.85;
+  font-feature-settings: "palt" 1;
+  letter-spacing: 0.01em;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-image:
+      linear-gradient(
+        to right,
+        rgba(230, 215, 170, 0.035) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(230, 215, 170, 0.035) 1px,
+        transparent 1px
+      );
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: 0.02em;
+}
+
+/* Buttons and small UI chrome: cleaner sans-serif for affordance */
+button,
+.ui-sans,
+.ui-sans * {
+  font-family: var(--font-noto-sans-jp), "Hiragino Sans", "ヒラギノ角ゴシック",
+    "Yu Gothic", "游ゴシック", "Meiryo", system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  letter-spacing: 0;
+}
+
+a {
+  color: var(--link);
+}
+
+/* "Paper" card surface */
+.paper {
+  background-color: var(--page);
+  border: 1px solid var(--page-border);
+  box-shadow:
+    0 1px 2px rgba(80, 60, 20, 0.04),
+    0 8px 20px -12px rgba(80, 60, 20, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  .paper {
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.35),
+      0 8px 24px -12px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Chapter number small caps label */
+.chapter-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-family: var(--font-noto-sans-jp), system-ui, sans-serif;
+  font-weight: 700;
+}
+
+/* Decorative horizontal rule (textbook-style double line) */
+.rule-double {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  height: 5px;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+/* Definition box */
+.def-box {
+  background: var(--section-bg);
+  border-left: 4px solid var(--section-border);
+  padding: 0.875rem 1.125rem;
+  border-radius: 0 6px 6px 0;
+  margin: 1rem 0;
+}
+
+.def-box-title {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25rem;
+  font-family: var(--font-noto-sans-jp), system-ui, sans-serif;
+}
+
+/* Example box */
+.example-box {
+  border: 1px dashed var(--page-border-strong);
+  padding: 1rem 1.125rem;
+  border-radius: 4px;
+  margin: 1rem 0;
+  background: color-mix(in oklab, var(--page) 94%, var(--background) 6%);
+}
+
+.example-box-title {
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--muted-strong);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-noto-sans-jp), system-ui, sans-serif;
+}
+
+/* Textbook prose */
+.prose-textbook p {
+  margin: 0.85rem 0;
+}
+
+.prose-textbook p + p {
+  text-indent: 1em;
+}
+
+.prose-textbook h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--page-border-strong);
+  padding-bottom: 0.35rem;
+}
+
+.prose-textbook h4 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* KaTeX equations: slightly smaller on narrow screens */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
 }

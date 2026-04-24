@@ -8,15 +8,23 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div>
-      <div className="mb-6">
-        <Link href="/" className="text-sm text-blue-600 hover:underline">
-          ← ホーム
+    <article>
+      <nav
+        aria-label="breadcrumb"
+        className="text-xs text-[var(--muted)] ui-sans mb-6"
+      >
+        <Link href="/" className="hover:underline">
+          ホーム
         </Link>
-      </div>
-      <h1 className="text-2xl font-bold mb-6">プライバシーポリシー</h1>
+        <span className="mx-2">›</span>
+        <span>プライバシーポリシー</span>
+      </nav>
+      <header className="mb-8 pb-4 border-b-2 border-[var(--page-border-strong)]">
+        <div className="chapter-eyebrow mb-2">Privacy Policy</div>
+        <h1 className="text-3xl font-bold tracking-wider">プライバシーポリシー</h1>
+      </header>
 
-      <div className="space-y-8 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+      <div className="paper rounded-lg p-7 space-y-8 text-sm leading-relaxed text-[var(--muted-strong)]">
         <section>
           <h2 className="text-base font-bold mb-2 text-gray-900 dark:text-gray-100">
             基本方針
@@ -99,6 +107,6 @@ export default function PrivacyPage() {
           </p>
         </section>
       </div>
-    </div>
+    </article>
   );
 }

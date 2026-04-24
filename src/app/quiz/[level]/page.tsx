@@ -32,29 +32,47 @@ export default async function QuizPage({
   if (!meta || !questions) notFound();
 
   return (
-    <div>
-      <div className="mb-6">
-        <Link href="/" className="text-sm text-blue-600 hover:underline">
-          ← ホーム
+    <article>
+      <nav
+        aria-label="breadcrumb"
+        className="text-xs text-[var(--muted)] ui-sans mb-6"
+      >
+        <Link href="/" className="hover:underline">
+          ホーム
         </Link>
-      </div>
-      <h1 className="text-2xl font-bold mb-1">
-        {meta.title} 過去問(オリジナル類題)
-      </h1>
-      <p className="text-sm text-gray-500 mb-8">
-        全 {questions.length} 問。すべて選択したら「採点する」を押してください。
-      </p>
+        <span className="mx-2">›</span>
+        <span>問題演習</span>
+        <span className="mx-2">›</span>
+        <span>{meta.title}</span>
+      </nav>
+
+      <header className="mb-10 pb-6 border-b-2 border-[var(--page-border-strong)]">
+        <div className="chapter-eyebrow mb-2">Practice</div>
+        <h1 className="text-4xl font-bold mb-3 tracking-wider">
+          {meta.title} 演習問題
+        </h1>
+        <p className="text-[var(--muted-strong)] leading-loose max-w-3xl">
+          全 {questions.length}{" "}
+          問のオリジナル類題。各問題に ★☆☆ 基礎 / ★★☆ 標準 / ★★★ 応用 の難易度バッジが付いています。すべて選択したら「採点する」を押してください。
+        </p>
+      </header>
 
       <Quiz questions={questions} />
 
-      <div className="mt-10 pt-6 border-t border-gray-200 dark:border-gray-800">
+      <nav className="mt-14 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">
+        <Link
+          href={`/textbook/${level}`}
+          className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
+        >
+          ← {meta.title} の教科書を読む
+        </Link>
         <Link
           href={`/formulas/${level}`}
-          className="text-sm text-blue-600 hover:underline"
+          className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
         >
-          ← {meta.title} の公式集を見る
+          ← {meta.title} の公式集
         </Link>
-      </div>
-    </div>
+      </nav>
+    </article>
   );
 }
