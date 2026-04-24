@@ -1,8 +1,51 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Difficulty, Question } from "@/types/content";
 import { MixedText } from "./MixedText";
+import { ShareButton } from "./ShareButton";
+
+type PreviousScore = {
+  correct: number;
+  total: number;
+  ts: number;
+};
+
+const STORAGE_PREFIX = "toukei-app:quiz:";
+
+function loadPrevious(quizKey: string): PreviousScore | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(STORAGE_PREFIX + quizKey);
+    if (!raw) return null;
+    return JSON.parse(raw) as PreviousScore;
+  } catch {
+    return null;
+  }
+}
+
+function savePrevious(quizKey: string, score: PreviousScore) {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(STORAGE_PREFIX + quizKey, JSON.stringify(score));
+  } catch {
+    /* ignore quota or privacy errors */
+  }
+}
+
+function formatRelative(ts: number): string {
+  const diff = Date.now() - ts;
+  const min = Math.floor(diff / 60000);
+  if (min < 1) return "たった今";
+  if (min < 60) return `${min} 分前`;
+  const hour = Math.floor(min / 60);
+  if (hour < 24) return `${hour} 時間前`;
+  const day = Math.floor(hour / 24);
+  if (day < 30) return `${day} 日前`;
+  const month = Math.floor(day / 30);
+  if (month < 12) return `${month} か月前`;
+  return `${Math.floor(month / 12)} 年前`;
+}
 
 const difficultyStyle: Record<
   Difficulty,
@@ -27,11 +70,28 @@ const difficultyStyle: Record<
   },
 };
 
-export function Quiz({ questions }: { questions: Question[] }) {
+export function Quiz({
+  questions,
+  quizKey,
+  shareUrl,
+  shareLabel,
+}: {
+  questions: Question[];
+  quizKey?: string;
+  shareUrl?: string;
+  shareLabel?: string;
+}) {
   const [answers, setAnswers] = useState<(number | null)[]>(() =>
     Array(questions.length).fill(null),
   );
   const [submitted, setSubmitted] = useState(false);
+  const [previous, setPrevious] = useState<PreviousScore | null>(null);
+
+  useEffect(() => {
+    if (quizKey) {
+      setPrevious(loadPrevious(quizKey));
+    }
+  }, [quizKey]);
 
   const handleSelect = (qIdx: number, choiceIdx: number) => {
     if (submitted) return;
@@ -42,7 +102,21 @@ export function Quiz({ questions }: { questions: Question[] }) {
     });
   };
 
-  const handleSubmit = () => setSubmitted(true);
+  const handleSubmit = () => {
+    const correct = answers.filter(
+      (a, i) => a === questions[i].correctIndex,
+    ).length;
+    if (quizKey) {
+      const score: PreviousScore = {
+        correct,
+        total: questions.length,
+        ts: Date.now(),
+      };
+      savePrevious(quizKey, score);
+      setPrevious(score);
+    }
+    setSubmitted(true);
+  };
   const handleReset = () => {
     setAnswers(Array(questions.length).fill(null));
     setSubmitted(false);
@@ -57,6 +131,22 @@ export function Quiz({ questions }: { questions: Question[] }) {
 
   return (
     <div className="space-y-6">
+      {previous && !submitted && (
+        <div className="paper rounded-lg p-4 text-sm flex items-center justify-between flex-wrap gap-2 ui-sans">
+          <div>
+            <span className="text-[var(--muted)] mr-2">前回の記録:</span>
+            <span className="font-bold">
+              {previous.correct} / {previous.total} 問正解
+            </span>
+            <span className="text-xs text-[var(--muted)] ml-2">
+              ({formatRelative(previous.ts)})
+            </span>
+          </div>
+          <div className="text-xs text-[var(--muted)]">
+            ※ 記録はあなたのブラウザにのみ保存されます
+          </div>
+        </div>
+      )}
       {questions.map((q, qIdx) => {
         const selected = answers[qIdx];
         const isCorrect = submitted && selected === q.correctIndex;
@@ -125,7 +215,7 @@ export function Quiz({ questions }: { questions: Question[] }) {
         );
       })}
 
-      <div className="flex items-center gap-4 pt-2 ui-sans">
+      <div className="flex items-center gap-4 pt-2 ui-sans flex-wrap">
         {!submitted ? (
           <button
             type="button"
@@ -147,6 +237,13 @@ export function Quiz({ questions }: { questions: Question[] }) {
             >
               もう一度
             </button>
+            {shareUrl && (
+              <ShareButton
+                url={shareUrl}
+                text={`${shareLabel ?? "統計検定の演習問題"}を解きました: ${correctCount}/${questions.length} 問正解!`}
+                hashtags={["統計検定", "統計検定学習帳"]}
+              />
+            )}
           </>
         )}
       </div>

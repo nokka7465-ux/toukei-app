@@ -46,12 +46,6 @@ function buildPlaceholder(
   };
 }
 
-export const gradeThreeTextbook = buildPlaceholder(
-  "grade-3",
-  "3級 教科書",
-  "3級は大学基礎レベル。記述統計から確率分布、推定・検定の入口までを扱います。",
-);
-
 export const gradeTwoTextbook = buildPlaceholder(
   "grade-2",
   "2級 教科書",

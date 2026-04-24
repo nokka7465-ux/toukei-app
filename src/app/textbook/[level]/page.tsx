@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { levels } from "@/data/levels";
 import { gradeFourTextbook } from "@/data/textbooks/grade-4";
+import { gradeThreeTextbook } from "@/data/textbooks/grade-3";
 import {
-  gradeThreeTextbook,
   gradeTwoTextbook,
   gradePre1Textbook,
   gradeOneTextbook,

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Noto_Serif_JP, Noto_Sans_JP } from "next/font/google";
 import { isAffiliateEnabled } from "@/data/books";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import "./globals.css";
 
 const notoSerifJP = Noto_Serif_JP({
@@ -79,6 +80,7 @@ export default function RootLayout({
       className={`${notoSerifJP.variable} ${notoSansJP.variable}`}
     >
       <body className="min-h-screen">
+        <GoogleAnalytics />
         <header className="border-b border-[var(--page-border)] bg-[var(--page)]/70 backdrop-blur-sm sticky top-0 z-10">
           <div className="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
             <Link href="/" className="text-lg font-bold tracking-wide">
@@ -90,6 +92,9 @@ export default function RootLayout({
               </Link>
               <Link href="/textbook/grade-4" className="hover:underline">
                 教科書
+              </Link>
+              <Link href="/diagnose" className="hover:underline">
+                級診断
               </Link>
             </nav>
           </div>

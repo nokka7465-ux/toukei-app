@@ -77,7 +77,12 @@ export default async function QuizPage({
         </p>
       </header>
 
-      <Quiz questions={questions} />
+      <Quiz
+        questions={questions}
+        quizKey={level}
+        shareUrl={`https://toukei-app-eight.vercel.app/quiz/${level}`}
+        shareLabel={`統計検定 ${meta.title} の演習問題`}
+      />
 
       <nav className="mt-14 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">
         <Link
