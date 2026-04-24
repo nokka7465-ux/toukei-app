@@ -21,6 +21,7 @@ export type Question = {
 export type Book = {
   title: string;
   publisher?: string;
+  tag?: string;
   note?: string;
 };
 

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { levels } from "@/data/levels";
@@ -6,8 +7,8 @@ import { gradeThreeFormulas } from "@/data/formulas/grade-3";
 import { gradeTwoFormulas } from "@/data/formulas/grade-2";
 import { gradePre1Formulas } from "@/data/formulas/grade-pre1";
 import { gradeOneFormulas } from "@/data/formulas/grade-1";
-import { booksByLevel, amazonSearchUrl, isAffiliateEnabled } from "@/data/books";
 import { Math } from "@/components/Math";
+import { RecommendedBooks } from "@/components/RecommendedBooks";
 import type { Formula } from "@/types/content";
 
 const formulasByLevel: Record<string, Formula[]> = {
@@ -20,6 +21,25 @@ const formulasByLevel: Record<string, Formula[]> = {
 
 export function generateStaticParams() {
   return Object.keys(formulasByLevel).map((level) => ({ level }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ level: string }>;
+}): Promise<Metadata> {
+  const { level } = await params;
+  const meta = levels.find((l) => l.slug === level);
+  const formulas = formulasByLevel[level];
+  if (!meta || !formulas) return {};
+  const title = `${meta.title} 公式集`;
+  const description = `統計検定 ${meta.title} の重要公式 ${formulas.length} 項目をカテゴリ別にまとめた公式集。${meta.description}`;
+  return {
+    title,
+    description,
+    openGraph: { title, description, type: "article" },
+    twitter: { card: "summary_large_image", title, description },
+  };
 }
 
 export default async function FormulaPage({
@@ -86,49 +106,8 @@ export default async function FormulaPage({
         ))}
       </div>
 
-      {(() => {
-        const books = booksByLevel[level] ?? [];
-        if (books.length === 0) return null;
-        return (
-          <section className="mt-14 pt-6 border-t-2 border-[var(--page-border-strong)]">
-            <div className="chapter-eyebrow mb-1">Recommended</div>
-            <h2 className="text-xl font-bold mb-2">
-              {meta.title} のおすすめ参考書
-            </h2>
-            <p className="text-xs text-[var(--muted)] mb-5 ui-sans leading-relaxed">
-              {isAffiliateEnabled
-                ? "当サイトは Amazon.co.jp を宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazon アソシエイト・プログラムの参加者です。"
-                : "以下は学習の参考となる書籍の紹介です。各リンクから Amazon の検索結果に遷移します。"}
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {books.map((b) => (
-                <a
-                  key={b.title}
-                  href={amazonSearchUrl(b.title)}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  className="paper block p-5 rounded-lg hover:-translate-y-0.5 transition"
-                >
-                  <div className="font-bold text-sm mb-1">{b.title}</div>
-                  {b.publisher && (
-                    <div className="text-xs text-[var(--muted)] mb-2 ui-sans">
-                      {b.publisher}
-                    </div>
-                  )}
-                  {b.note && (
-                    <p className="text-xs text-[var(--muted-strong)] leading-relaxed">
-                      {b.note}
-                    </p>
-                  )}
-                  <div className="mt-2 text-xs text-[var(--link)] ui-sans">
-                    Amazon で見る →
-                  </div>
-                </a>
-              ))}
-            </div>
-          </section>
-        );
-      })()}
+      <RecommendedBooks level={level} levelTitle={meta.title} />
+
 
       <nav className="mt-14 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">
         <Link

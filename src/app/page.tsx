@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { levels } from "@/data/levels";
+import { externalLinks } from "@/data/external-links";
 
 const availableLevels = new Set<string>([
   "grade-4",
@@ -62,6 +63,50 @@ export default function Home() {
           >
             4級の問題を解く
           </Link>
+        </div>
+      </section>
+
+      <section className="mb-12 paper rounded-lg p-7">
+        <div className="chapter-eyebrow mb-2">More</div>
+        <h2 className="text-2xl font-bold mb-3">もっと深く学びたい方へ</h2>
+        <p className="text-[var(--muted-strong)] leading-loose mb-4 text-sm">
+          サイト本編に加え、<strong>note</strong> での詳細解説記事、
+          <strong>BOOTH</strong>{" "}
+          での問題集 PDF など、より深く学べる有料・無料コンテンツを順次公開予定です。
+        </p>
+        <div className="flex flex-wrap gap-3 ui-sans text-sm">
+          {externalLinks.note ? (
+            <a
+              href={externalLinks.note}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--background)] flex items-center gap-2"
+            >
+              <span className="font-bold">note</span>
+              <span className="text-xs text-[var(--muted)]">詳細解説記事</span>
+            </a>
+          ) : (
+            <div className="px-4 py-2 border border-dashed border-[var(--page-border)] rounded text-[var(--muted)] flex items-center gap-2">
+              <span className="font-bold">note</span>
+              <span className="text-xs">準備中</span>
+            </div>
+          )}
+          {externalLinks.booth ? (
+            <a
+              href={externalLinks.booth}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--background)] flex items-center gap-2"
+            >
+              <span className="font-bold">BOOTH</span>
+              <span className="text-xs text-[var(--muted)]">問題集 PDF</span>
+            </a>
+          ) : (
+            <div className="px-4 py-2 border border-dashed border-[var(--page-border)] rounded text-[var(--muted)] flex items-center gap-2">
+              <span className="font-bold">BOOTH</span>
+              <span className="text-xs">準備中</span>
+            </div>
+          )}
         </div>
       </section>
 

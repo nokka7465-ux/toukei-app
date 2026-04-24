@@ -18,10 +18,52 @@ const notoSansJP = Noto_Sans_JP({
   display: "swap",
 });
 
+const SITE_URL = "https://toukei-app-eight.vercel.app";
+const SITE_NAME = "統計検定 学習帖";
+const SITE_DESCRIPTION =
+  "統計検定4級〜1級に対応した、教科書仕立ての学習サイト。明朝体の本文で読める教科書本編、重要公式集、難易度バッジ付きの選択式オリジナル類題で、初心者から1級受験者まで級別に学習できます。";
+
 export const metadata: Metadata = {
-  title: "統計検定 学習サイト",
-  description:
-    "統計検定4級〜1級の公式集と過去問(オリジナル類題)で学習できる、教科書仕立ての学習サイト",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: [
+    "統計検定",
+    "統計検定4級",
+    "統計検定3級",
+    "統計検定2級",
+    "統計検定準1級",
+    "統計検定1級",
+    "公式集",
+    "過去問",
+    "学習サイト",
+    "統計学",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "ja_JP",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
 };
 
 export default function RootLayout({

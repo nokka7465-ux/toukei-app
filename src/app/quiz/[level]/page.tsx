@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { levels } from "@/data/levels";
@@ -19,6 +20,25 @@ const questionsByLevel: Record<string, Question[]> = {
 
 export function generateStaticParams() {
   return Object.keys(questionsByLevel).map((level) => ({ level }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ level: string }>;
+}): Promise<Metadata> {
+  const { level } = await params;
+  const meta = levels.find((l) => l.slug === level);
+  const questions = questionsByLevel[level];
+  if (!meta || !questions) return {};
+  const title = `${meta.title} 演習問題`;
+  const description = `統計検定 ${meta.title} のオリジナル類題を ${questions.length} 問収録。各問題に ★☆☆ 基礎 / ★★☆ 標準 / ★★★ 応用 の難易度バッジ付き。自動採点で実力チェックできます。`;
+  return {
+    title,
+    description,
+    openGraph: { title, description, type: "article" },
+    twitter: { card: "summary_large_image", title, description },
+  };
 }
 
 export default async function QuizPage({

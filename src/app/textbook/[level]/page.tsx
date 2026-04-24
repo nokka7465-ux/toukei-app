@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { levels } from "@/data/levels";
@@ -9,6 +10,7 @@ import {
   gradeOneTextbook,
 } from "@/data/textbooks/placeholders";
 import { TextbookBody } from "@/components/TextbookBody";
+import { RecommendedBooks } from "@/components/RecommendedBooks";
 import type { Textbook } from "@/types/content";
 
 const textbookByLevel: Record<string, Textbook> = {
@@ -21,6 +23,33 @@ const textbookByLevel: Record<string, Textbook> = {
 
 export function generateStaticParams() {
   return Object.keys(textbookByLevel).map((level) => ({ level }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ level: string }>;
+}): Promise<Metadata> {
+  const { level } = await params;
+  const meta = levels.find((l) => l.slug === level);
+  const book = textbookByLevel[level];
+  if (!meta || !book) return {};
+  const title = `${meta.title} 教科書`;
+  const description = `統計検定 ${meta.title} の出題範囲を、章立てで読める教科書形式で解説。${book.intro.slice(0, 80)}`;
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
 }
 
 export default async function TextbookPage({
@@ -121,7 +150,9 @@ export default async function TextbookPage({
         ))}
       </div>
 
-      <nav className="mt-16 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">
+      <RecommendedBooks level={level} levelTitle={meta.title} />
+
+      <nav className="mt-14 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">
         <Link
           href={`/formulas/${level}`}
           className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
