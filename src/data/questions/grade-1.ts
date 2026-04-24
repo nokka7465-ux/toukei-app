@@ -204,4 +204,20 @@ export const gradeOneQuestions: Question[] = [
     explanation:
       "データ量 $n$ が大きくなると、尤度 $p(D \\mid \\theta)$ が事前分布 $\\pi(\\theta)$ よりも事後に強く効くようになり、事後分布は最尤推定量 $\\hat{\\theta}_{\\mathrm{MLE}}$ のまわりに集中していく(漸近正規性)。事前の選び方への依存性が減る、これがベイズの安心材料。",
   },
+  {
+    id: "g1-q14",
+    difficulty: 2,
+    category: "推定理論",
+    question:
+      "$X_1, \\ldots, X_n \\stackrel{\\text{iid}}{\\sim} N(\\mu, \\sigma^2)$ のとき、$\\sigma^2$ の最尤推定量(MLE)として最も適切なものを選びなさい。",
+    choices: [
+      "$\\hat{\\sigma}^2 = \\dfrac{1}{n} \\sum_{i=1}^{n} (X_i - \\bar{X})^2$",
+      "$\\hat{\\sigma}^2 = \\dfrac{1}{n-1} \\sum_{i=1}^{n} (X_i - \\bar{X})^2$",
+      "$\\hat{\\sigma}^2 = \\dfrac{1}{n} \\sum_{i=1}^{n} X_i^2$",
+      "$\\hat{\\sigma}^2 = \\bar{X}^2$",
+    ],
+    correctIndex: 0,
+    explanation:
+      "正規分布の対数尤度を $\\sigma^2$ で偏微分してゼロとおくと $\\hat{\\sigma}^2 = \\dfrac{1}{n} \\sum (X_i - \\bar{X})^2$。分母が $n - 1$ ではなく $n$ なので、これは不偏ではない(下方バイアスを持つ)。$n - 1$ で割ると不偏分散になる。",
+  },
 ];

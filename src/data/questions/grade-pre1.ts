@@ -206,4 +206,31 @@ export const gradePre1Questions: Question[] = [
     explanation:
       "指数分布の期待値は $E[T] = 1/\\lambda$。$E[T] = 5$ なら $\\lambda = 1/5 = 0.2$。1 分あたり平均 $0.2$ 件のペースで起こる現象、と読み解ける。",
   },
+  {
+    id: "gp1-q16",
+    difficulty: 2,
+    category: "多変量解析",
+    question:
+      "ロジスティック回帰 $\\log(p/(1-p)) = \\beta_0 + \\beta_1 x$ で $\\hat{\\beta}_1 = 1.0$ と推定されたとき、$x$ が 1 単位増えたときのオッズ比として最も近いものを選びなさい($e \\approx 2.72$)。",
+    choices: ["$1.0$", "$1.72$", "$2.72$", "$10$"],
+    correctIndex: 2,
+    explanation:
+      "オッズ比は $e^{\\hat{\\beta}_1} = e^1 \\approx 2.72$。「$x$ が 1 単位増えるとオッズが約 2.72 倍になる」と解釈する。",
+  },
+  {
+    id: "gp1-q17",
+    difficulty: 2,
+    category: "時系列解析",
+    question:
+      "AR(1) 過程 $X_t = \\phi X_{t-1} + \\varepsilon_t$ が定常になる条件として最も適切なものを選びなさい。",
+    choices: [
+      "$\\phi > 0$",
+      "$\\phi = 1$",
+      "$|\\phi| < 1$",
+      "$\\phi$ の値によらず常に定常",
+    ],
+    correctIndex: 2,
+    explanation:
+      "AR(1) は $|\\phi| < 1$ のとき(弱)定常。$\\phi = 1$ ではランダムウォーク(非定常)、$|\\phi| > 1$ では発散。",
+  },
 ];

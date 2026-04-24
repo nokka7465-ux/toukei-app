@@ -96,10 +96,65 @@ export const gradeOneTextbook: Textbook = {
           number: "1.2",
           title: "最尤推定とフィッシャー情報量",
           blocks: [
-            { type: "h3", text: "執筆中" },
             {
               type: "p",
-              text: "最尤推定量の定義、フィッシャー情報量 $I(\\theta) = E[(\\partial \\log f / \\partial \\theta)^2]$、クラメル・ラオの下限 $V(\\hat{\\theta}) \\geq 1/(n I(\\theta))$ を扱う節です。",
+              text: "前節で「いい不偏推定量(UMVUE)」を作る道具を学びました。本節は実務でも理論でも主役となる別系統の推定法 ─ 最尤推定(MLE) ─ と、その性能の限界を与えるフィッシャー情報量 / クラメル・ラオの下限を扱います。",
+            },
+            { type: "h3", text: "尤度関数と最尤推定量" },
+            {
+              type: "def",
+              title: "定義 ─ 尤度と最尤推定量",
+              body: "観測データ $X_1, \\ldots, X_n \\stackrel{\\text{iid}}{\\sim} f(x; \\theta)$ に対し、$\\theta$ の関数として\n\n$\\;L(\\theta) = \\prod_{i=1}^{n} f(X_i; \\theta)\\;$\n\nを尤度関数という。$L(\\theta)$ を最大にする $\\theta$ を最尤推定量(MLE)と呼び、$\\hat{\\theta}_{\\mathrm{MLE}}$ で表す。実用上は対数尤度 $\\ell(\\theta) = \\log L(\\theta) = \\sum \\log f(X_i; \\theta)$ を最大化する。",
+            },
+            {
+              type: "p",
+              text: "「データを最も『もっともらしく』説明するパラメータを選ぶ」というシンプルな考え方。多くの分布で、$\\partial \\ell / \\partial \\theta = 0$(スコア方程式)を解くだけで $\\hat{\\theta}_{\\mathrm{MLE}}$ が求まります。",
+            },
+            {
+              type: "ex",
+              title: "例題 1.3 ─ 正規分布の MLE",
+              body: "$X_1, \\ldots, X_n \\stackrel{\\text{iid}}{\\sim} N(\\mu, \\sigma^2)$ のとき、$(\\mu, \\sigma^2)$ の MLE を求めよ。\n\n**解** : 対数尤度を $\\mu, \\sigma^2$ で微分してゼロとおくと、$\\hat{\\mu} = \\bar{X}$、$\\hat{\\sigma}^2 = \\dfrac{1}{n}\\sum(X_i - \\bar{X})^2$。$\\hat{\\sigma}^2$ は $n - 1$ ではなく **$n$ で割る**(MLE は不偏ではない例)。",
+            },
+            { type: "h3", text: "スコア関数とフィッシャー情報量" },
+            {
+              type: "def",
+              title: "定義 ─ スコアとフィッシャー情報量",
+              body: "1 観測あたりのスコア関数 $\\;U(\\theta) = \\dfrac{\\partial}{\\partial \\theta} \\log f(X; \\theta)\\;$。\n\nフィッシャー情報量\n\n$\\;I(\\theta) = E\\!\\left[U(\\theta)^2\\right] = -E\\!\\left[\\dfrac{\\partial^2}{\\partial \\theta^2}\\log f(X; \\theta)\\right]\\;$\n\n($n$ 観測なら $nI(\\theta)$、独立なので情報は加法的)。",
+            },
+            {
+              type: "p",
+              text: "フィッシャー情報量は、文字どおり「データが $\\theta$ について持っている情報の量」。情報量が大きいほど $\\theta$ を精密に推定できる、という直感どおりの量です。",
+            },
+            { type: "h3", text: "クラメル・ラオの下限" },
+            {
+              type: "def",
+              title: "定理 ─ クラメル・ラオの下限",
+              body: "正則条件のもとで、任意の不偏推定量 $\\hat{\\theta}$ について\n\n$\\;V[\\hat{\\theta}] \\;\\geq\\; \\dfrac{1}{n\\, I(\\theta)}\\;$\n\nが成り立つ。等号を達成する不偏推定量は有効推定量と呼ばれる。",
+            },
+            {
+              type: "p",
+              text: "つまり、不偏推定量の精度には絶対的な「下限」があり、それより精密な不偏推定量は存在しない、ということ。指数型分布族の十分統計量から作る不偏推定量は、しばしばこの下限を達成します。",
+            },
+            { type: "h3", text: "MLE の性質(規則条件下)" },
+            {
+              type: "def",
+              title: "定理 ─ MLE の漸近性質",
+              body: "1. **一致性**: $\\hat{\\theta}_{\\mathrm{MLE}} \\xrightarrow{p} \\theta_0$($n \\to \\infty$ で真値に確率収束)。\n\n2. **漸近正規性**: $\\;\\sqrt{n}(\\hat{\\theta}_{\\mathrm{MLE}} - \\theta_0) \\xrightarrow{d} N(0,\\, I(\\theta_0)^{-1})\\;$\n\n3. **漸近有効性**: 漸近的にクラメル・ラオの下限を達成する。",
+            },
+            {
+              type: "p",
+              text: "「サンプルが十分大きければ、MLE は『考えうる中で最も精度の良い』不偏推定量に収束していく」 ─ これが MLE の理論的優位性です。実務でも、特に理由がなければまず MLE を試す、というのが定石。",
+            },
+            { type: "h3", text: "最尤法の弱点" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**有限標本では不偏でない**: 例 1.3 の $\\hat{\\sigma}^2$ のように、バイアスを持つことがある。",
+                "**規則条件が必要**: 一様分布 $U(0, \\theta)$ など、台がパラメータに依存する分布(非正則族)では性質が崩れる。",
+                "**閉じた解がない場合がある**: ロジスティック回帰など、数値計算が必要。",
+                "**MAP 推定との関係**: 事前分布が一様なベイズ MAP = MLE。事前分布を入れることで正則化付き MLE になる。",
+              ],
             },
           ],
         },
@@ -108,10 +163,57 @@ export const gradeOneTextbook: Textbook = {
           number: "1.3",
           title: "漸近理論 ─ デルタ法とスラツキー",
           blocks: [
-            { type: "h3", text: "執筆中" },
             {
               type: "p",
-              text: "デルタ法 $\\sqrt{n}(g(\\hat{\\theta}) - g(\\theta)) \\xrightarrow{d} N(0, g'(\\theta)^2 \\sigma^2)$ とスラツキーの定理を扱う節です。",
+              text: "前節で「MLE は漸近的に正規分布」「分散はフィッシャー情報量の逆数」までを学びました。本節では、その漸近正規性を**変換した量**にも持ち越したいときに使う、デルタ法とスラツキーの定理を扱います。1 級でも準1級でも、計算問題で頻出する道具です。",
+            },
+            { type: "h3", text: "確率収束 と 分布収束(復習)" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**$X_n \\xrightarrow{p} c$**(確率収束): 任意の $\\varepsilon > 0$ に対し $P(|X_n - c| > \\varepsilon) \\to 0$。",
+                "**$X_n \\xrightarrow{d} X$**(分布収束): $X_n$ の累積分布関数が $X$ の累積分布関数の連続点で各点収束。",
+              ],
+            },
+            { type: "h3", text: "スラツキーの定理" },
+            {
+              type: "def",
+              title: "定理 ─ スラツキー(Slutsky)",
+              body: "$X_n \\xrightarrow{d} X$、$Y_n \\xrightarrow{p} c$(定数)のとき、\n\n$\\;X_n + Y_n \\xrightarrow{d} X + c,\\quad X_n Y_n \\xrightarrow{d} c\\, X,\\quad X_n / Y_n \\xrightarrow{d} X / c\\;$($c \\neq 0$)。",
+            },
+            {
+              type: "p",
+              text: "「分布収束する量と、確率収束する定数を足したり掛けたりしても、分布収束は保たれる」。$\\sigma$ を $\\hat{\\sigma}$ で置き換えても漸近分布が同じ、と言いたいときに頻出します。",
+            },
+            {
+              type: "ex",
+              title: "応用例 ─ t 統計量の漸近分布",
+              body: "$\\sqrt{n}(\\bar{X} - \\mu)/\\sigma \\xrightarrow{d} N(0, 1)$、$\\hat{\\sigma}/\\sigma \\xrightarrow{p} 1$。スラツキーの定理より、$\\sqrt{n}(\\bar{X} - \\mu)/\\hat{\\sigma} \\xrightarrow{d} N(0, 1)$。「$\\sigma$ を $\\hat{\\sigma}$ で置き換えても漸近分布は変わらない」ことが、これで理論的に正当化される。",
+            },
+            { type: "h3", text: "デルタ法" },
+            {
+              type: "def",
+              title: "定理 ─ デルタ法",
+              body: "$\\sqrt{n}(\\hat{\\theta} - \\theta) \\xrightarrow{d} N(0, \\sigma^2)$、$g$ が $\\theta$ で微分可能で $g'(\\theta) \\neq 0$ のとき、\n\n$\\;\\sqrt{n}(g(\\hat{\\theta}) - g(\\theta)) \\xrightarrow{d} N(0,\\, g'(\\theta)^2\\, \\sigma^2)\\;$",
+            },
+            {
+              type: "p",
+              text: "「推定量を変換しても、漸近正規性は保たれる(分散は微分の 2 乗倍)」というシンプルかつ強力な道具。導出はテイラー展開 $g(\\hat{\\theta}) \\approx g(\\theta) + g'(\\theta)(\\hat{\\theta} - \\theta)$ から一発です。",
+            },
+            {
+              type: "ex",
+              title: "例題 1.4 ─ ロジット変換の漸近分散",
+              body: "$\\sqrt{n}(\\hat{p} - p) \\xrightarrow{d} N(0, p(1 - p))$ のとき、ロジット $g(p) = \\log(p/(1 - p))$ の漸近分散を求めよ。\n\n**解** : $g'(p) = 1/(p(1 - p))$。デルタ法より\n\n$\\;\\sqrt{n}(g(\\hat{p}) - g(p)) \\xrightarrow{d} N\\!\\left(0,\\, \\dfrac{1}{p(1 - p)}\\right)\\;$\n\nしたがって $\\hat{g}$ の分散は約 $\\dfrac{1}{n\\, p(1 - p)}$。",
+            },
+            { type: "h3", text: "応用 ─ 信頼区間の作り直し" },
+            {
+              type: "p",
+              text: "デルタ法のもう一つの大事な使いみち: 元の母数の信頼区間が出ているとき、それを変換した量(オッズ比、寿命の対数、など)の信頼区間を導く ─ ような操作。「$\\theta$ の区間」から「$g(\\theta)$ の区間」に翻訳する、と覚えると応用範囲が見えてきます。",
+            },
+            {
+              type: "p",
+              text: "次章では、これらの漸近理論を仮説検定の文脈で使い、1 級の主役 ─ 尤度比検定・ワルド検定・スコア検定の三者 ─ をまとめて統一的に扱います。",
             },
           ],
         },
