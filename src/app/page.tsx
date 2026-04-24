@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { levels } from "@/data/levels";
 import { externalLinks } from "@/data/external-links";
@@ -10,13 +11,37 @@ const availableLevels = new Set<string>([
   "grade-1",
 ]);
 
+const HOME_TITLE = "統計検定 学習帳 | 4級〜1級対応の無料学習サイト";
+const HOME_DESCRIPTION =
+  "統計検定4級〜1級に対応した無料学習サイト。教科書・公式集・演習問題をすべて無料で学習できます。データサイエンスやPythonと組み合わせた実践的な統計学習にも対応。";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: HOME_TITLE,
+  },
+  description: HOME_DESCRIPTION,
+  openGraph: {
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+  },
+  alternates: {
+    canonical: "/",
+  },
+};
+
 export default function Home() {
   return (
     <div>
       <section className="mb-12 text-center py-8">
         <div className="chapter-eyebrow mb-3">Toukei Study Book</div>
         <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-[0.1em]">
-          統計検定 学習帖
+          統計検定 学習帳
         </h1>
         <hr className="rule-double max-w-xs mx-auto" />
         <p className="text-[var(--muted-strong)] leading-loose max-w-2xl mx-auto mt-4">

@@ -19,9 +19,9 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 const SITE_URL = "https://toukei-app-eight.vercel.app";
-const SITE_NAME = "統計検定 学習帖";
+const SITE_NAME = "統計検定 学習帳";
 const SITE_DESCRIPTION =
-  "統計検定4級〜1級に対応した、教科書仕立ての学習サイト。明朝体の本文で読める教科書本編、重要公式集、難易度バッジ付きの選択式オリジナル類題で、初心者から1級受験者まで級別に学習できます。";
+  "統計検定4級〜1級に対応した無料学習サイト。教科書・公式集・演習問題をすべて無料で学習できます。データサイエンスやPythonと組み合わせた実践的な統計学習にも対応。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -33,15 +33,17 @@ export const metadata: Metadata = {
   applicationName: SITE_NAME,
   keywords: [
     "統計検定",
-    "統計検定4級",
-    "統計検定3級",
-    "統計検定2級",
-    "統計検定準1級",
-    "統計検定1級",
-    "公式集",
-    "過去問",
-    "学習サイト",
     "統計学",
+    "2級",
+    "準1級",
+    "1級",
+    "3級",
+    "4級",
+    "学習",
+    "無料",
+    "問題集",
+    "公式集",
+    "データサイエンス",
   ],
   openGraph: {
     type: "website",
@@ -80,7 +82,7 @@ export default function RootLayout({
         <header className="border-b border-[var(--page-border)] bg-[var(--page)]/70 backdrop-blur-sm sticky top-0 z-10">
           <div className="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
             <Link href="/" className="text-lg font-bold tracking-wide">
-              統計検定 学習帖
+              統計検定 学習帳
             </Link>
             <nav className="flex gap-5 text-sm ui-sans">
               <Link href="/" className="hover:underline">
