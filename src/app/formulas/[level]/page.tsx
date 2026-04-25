@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { levels } from "@/data/levels";
+import { introFormulas } from "@/data/formulas/intro";
 import { gradeFourFormulas } from "@/data/formulas/grade-4";
 import { gradeThreeFormulas } from "@/data/formulas/grade-3";
 import { gradeTwoFormulas } from "@/data/formulas/grade-2";
@@ -12,6 +13,7 @@ import { RecommendedBooks } from "@/components/RecommendedBooks";
 import type { Formula } from "@/types/content";
 
 const formulasByLevel: Record<string, Formula[]> = {
+  intro: introFormulas,
   "grade-4": gradeFourFormulas,
   "grade-3": gradeThreeFormulas,
   "grade-2": gradeTwoFormulas,

@@ -5,6 +5,7 @@ import { externalLinks } from "@/data/external-links";
 import { blogPosts } from "@/data/blog";
 
 const availableLevels = new Set<string>([
+  "intro",
   "grade-4",
   "grade-3",
   "grade-2",
@@ -203,7 +204,7 @@ export default function Home() {
           <div className="chapter-eyebrow mb-1">Contents</div>
           <h2 className="text-2xl font-bold">級別コンテンツ</h2>
           <p className="text-sm text-[var(--muted)] mt-2 leading-relaxed">
-            受験したい級、または自分のレベルに合った級を選んでください。4級が最も基礎的で、1級が最上位です。
+            受験したい級、または自分のレベルに合った級を選んでください。**入門編** はサイト独自の超初心者向け、4級〜1級が公式の統計検定範囲です。
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -250,6 +251,48 @@ export default function Home() {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      <section className="mt-12">
+        <div className="mb-6">
+          <div className="chapter-eyebrow mb-1">Related Certifications</div>
+          <h2 className="text-2xl font-bold">他の統計関連検定</h2>
+          <p className="text-sm text-[var(--muted)] mt-2 leading-relaxed">
+            通常の統計検定(4級〜1級)以外にも、データサイエンスや社会調査に特化した別系統の検定があります。
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <Link
+            href="/certs/ds-basic"
+            className="paper rounded-lg p-6 hover:-translate-y-0.5 transition group block"
+          >
+            <div className="chapter-eyebrow mb-1">DS Base</div>
+            <h3 className="text-xl font-bold mb-2 group-hover:text-[var(--link)]">
+              統計検定 データサイエンス基礎(DS基礎)
+            </h3>
+            <p className="text-sm text-[var(--muted-strong)] leading-relaxed">
+              Excel を使った実データ分析を中心に問う、データリテラシー入口の検定。理論より実務操作を重視。
+            </p>
+            <div className="mt-3 text-xs text-[var(--link)] ui-sans">
+              詳しく見る →
+            </div>
+          </Link>
+          <Link
+            href="/certs/survey"
+            className="paper rounded-lg p-6 hover:-translate-y-0.5 transition group block"
+          >
+            <div className="chapter-eyebrow mb-1">Survey</div>
+            <h3 className="text-xl font-bold mb-2 group-hover:text-[var(--link)]">
+              統計調査士
+            </h3>
+            <p className="text-sm text-[var(--muted-strong)] leading-relaxed">
+              社会調査の設計・実施、公的統計の知識を問う検定。行政・調査会社・公務員に実務直結。上位は専門統計調査士。
+            </p>
+            <div className="mt-3 text-xs text-[var(--link)] ui-sans">
+              詳しく見る →
+            </div>
+          </Link>
         </div>
       </section>
     </div>

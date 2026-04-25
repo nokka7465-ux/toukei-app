@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { levels } from "@/data/levels";
+import { introTextbook } from "@/data/textbooks/intro";
 import { gradeFourTextbook } from "@/data/textbooks/grade-4";
 import { gradeThreeTextbook } from "@/data/textbooks/grade-3";
 import { gradeTwoTextbook } from "@/data/textbooks/grade-2";
@@ -12,6 +13,7 @@ import { RecommendedBooks } from "@/components/RecommendedBooks";
 import type { Textbook } from "@/types/content";
 
 const textbookByLevel: Record<string, Textbook> = {
+  intro: introTextbook,
   "grade-4": gradeFourTextbook,
   "grade-3": gradeThreeTextbook,
   "grade-2": gradeTwoTextbook,

@@ -51,11 +51,18 @@ type Recommendation = {
 
 const RECS: Recommendation[] = [
   {
+    level: "intro",
+    title: "入門編",
+    description: "サイト独自の超初心者向け。グラフ・割合・平均など算数レベル",
+    rationale:
+      "まずは数字とグラフに慣れることから。統計検定 4 級も少し難しく感じる方は、本サイトの入門編から始めるとスムーズです。",
+  },
+  {
     level: "grade-4",
     title: "4級",
     description: "高校基礎レベル。データの基本・確率の初歩",
     rationale:
-      "まずは基本のキ。代表値・確率・場合の数などをやさしい例で身につけ、統計学の地図を描くところから始めましょう。",
+      "代表値・確率・場合の数などをやさしい例で身につけ、統計学の地図を描くところから始めましょう。",
   },
   {
     level: "grade-3",
@@ -81,10 +88,11 @@ const RECS: Recommendation[] = [
 ];
 
 function recommendFromScore(total: number): Recommendation {
-  if (total >= 7) return RECS[0]; // 4級
-  if (total >= 5) return RECS[1]; // 3級
-  if (total >= 2) return RECS[2]; // 2級
-  return RECS[3]; // 準1級
+  if (total >= 8) return RECS[0]; // 入門編
+  if (total >= 6) return RECS[1]; // 4級
+  if (total >= 4) return RECS[2]; // 3級
+  if (total >= 2) return RECS[3]; // 2級
+  return RECS[4]; // 準1級
 }
 
 export function Diagnose() {

@@ -1,5 +1,11 @@
 export const levels = [
   {
+    slug: "intro",
+    title: "入門編",
+    description:
+      "4級にも届かない超初心者の方向け。グラフの読み方・割合・平均など、算数レベルから統計に親しむ独自編。",
+  },
+  {
     slug: "grade-4",
     title: "4級",
     description: "高校基礎レベル。データの基本・確率の初歩。中高生向けの入門コンテンツ。",

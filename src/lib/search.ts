@@ -1,4 +1,5 @@
 import type { TextbookBlock } from "@/types/content";
+import { introTextbook } from "@/data/textbooks/intro";
 import { gradeFourTextbook } from "@/data/textbooks/grade-4";
 import { gradeThreeTextbook } from "@/data/textbooks/grade-3";
 import { gradeTwoTextbook } from "@/data/textbooks/grade-2";
@@ -6,6 +7,7 @@ import { gradePre1Textbook } from "@/data/textbooks/grade-pre1";
 import { gradeOneTextbook } from "@/data/textbooks/grade-1";
 import { glossary } from "@/data/glossary";
 import { blogPosts } from "@/data/blog";
+import { introFormulas } from "@/data/formulas/intro";
 import { gradeFourFormulas } from "@/data/formulas/grade-4";
 import { gradeThreeFormulas } from "@/data/formulas/grade-3";
 import { gradeTwoFormulas } from "@/data/formulas/grade-2";
@@ -60,6 +62,7 @@ export const searchIndex: SearchItem[] = (() => {
 
   // Textbook sections (1 entry per section, body text concatenated)
   const textbooks = [
+    introTextbook,
     gradeFourTextbook,
     gradeThreeTextbook,
     gradeTwoTextbook,
@@ -112,6 +115,7 @@ export const searchIndex: SearchItem[] = (() => {
 
   // Formulas
   const formulaSets: { slug: string; formulas: typeof gradeFourFormulas }[] = [
+    { slug: "intro", formulas: introFormulas },
     { slug: "grade-4", formulas: gradeFourFormulas },
     { slug: "grade-3", formulas: gradeThreeFormulas },
     { slug: "grade-2", formulas: gradeTwoFormulas },

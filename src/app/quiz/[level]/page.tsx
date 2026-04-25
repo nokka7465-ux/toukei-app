@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { levels } from "@/data/levels";
+import { introQuestions } from "@/data/questions/intro";
 import { gradeFourQuestions } from "@/data/questions/grade-4";
 import { gradeThreeQuestions } from "@/data/questions/grade-3";
 import { gradeTwoQuestions } from "@/data/questions/grade-2";
@@ -11,6 +12,7 @@ import { Quiz } from "@/components/Quiz";
 import type { Question } from "@/types/content";
 
 const questionsByLevel: Record<string, Question[]> = {
+  intro: introQuestions,
   "grade-4": gradeFourQuestions,
   "grade-3": gradeThreeQuestions,
   "grade-2": gradeTwoQuestions,
