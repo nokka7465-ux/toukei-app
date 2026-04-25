@@ -102,6 +102,13 @@ export default function RootLayout({
                   教科書
                 </Link>
                 <Link
+                  href="/math"
+                  className="hover:underline"
+                  title="統計のための数学基礎"
+                >
+                  数学基礎
+                </Link>
+                <Link
                   href="/certs/ds-basic"
                   className="hover:underline"
                   title="統計検定の関連検定"

@@ -7,6 +7,7 @@ import { gradePre1Textbook } from "@/data/textbooks/grade-pre1";
 import { gradeOneTextbook } from "@/data/textbooks/grade-1";
 import { dsBasicTextbook } from "@/data/textbooks/ds-basic";
 import { surveyTextbook } from "@/data/textbooks/survey";
+import { mathBasicsTextbook } from "@/data/textbooks/math";
 import { glossary } from "@/data/glossary";
 import { blogPosts } from "@/data/blog";
 import { introFormulas } from "@/data/formulas/intro";
@@ -76,6 +77,7 @@ export const searchIndex: SearchItem[] = (() => {
     { book: gradeOneTextbook, urlBase: "/textbook/grade-1", displayTitle: levelTitle("grade-1") },
     { book: dsBasicTextbook, urlBase: "/certs/ds-basic/textbook", displayTitle: "DS基礎" },
     { book: surveyTextbook, urlBase: "/certs/survey/textbook", displayTitle: "統計調査士" },
+    { book: mathBasicsTextbook, urlBase: "/math/textbook", displayTitle: "数学基礎" },
   ];
   for (const { book, urlBase, displayTitle } of textbookSets) {
     for (const ch of book.chapters) {

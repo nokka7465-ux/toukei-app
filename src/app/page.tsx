@@ -294,6 +294,33 @@ export default function Home() {
             </Link>
           </div>
         </div>
+
+        {/* Math foundations - learning support */}
+        <div className="mt-6 pt-6 border-t border-dashed border-[var(--page-border-strong)]">
+          <div className="chapter-eyebrow mb-3 text-center">
+            ─ 学習サポート ─
+          </div>
+          <p className="text-xs text-[var(--muted)] text-center mb-5 ui-sans">
+            統計学の式が読めない・前提の数学が不安、というときの補助教材。級の学習中に必要な章だけピンポイントで参照できます。
+          </p>
+          <div className="grid grid-cols-1 gap-5">
+            <Link
+              href="/math"
+              className="paper rounded-lg p-5 hover:-translate-y-0.5 transition group block"
+            >
+              <div className="chapter-eyebrow mb-1">Math Foundations</div>
+              <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--link)]">
+                統計のための数学基礎
+              </h3>
+              <p className="text-xs text-[var(--muted-strong)] leading-relaxed">
+                割合・百分率・総和記号 Σ・指数対数・微分積分・線形代数 ─ 統計学を学ぶうえで前提となる数学を、必要なところだけ抜粋した補助教材。
+              </p>
+              <div className="mt-3 text-xs text-[var(--link)] ui-sans">
+                詳しく見る →
+              </div>
+            </Link>
+          </div>
+        </div>
       </section>
     </div>
   );
