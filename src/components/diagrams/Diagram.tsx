@@ -13,6 +13,8 @@ import { TvsNormal } from "./TvsNormal";
 import { TypeIIIErrors } from "./TypeIIIErrors";
 import { BayesUpdate } from "./BayesUpdate";
 import { LearningCurve } from "./LearningCurve";
+import { LikelihoodMle } from "./LikelihoodMle";
+import { PValueArea } from "./PValueArea";
 
 const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   "normal-curve": NormalCurve,
@@ -29,6 +31,8 @@ const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   "type-i-ii-errors": TypeIIIErrors,
   "bayes-update": BayesUpdate,
   "learning-curve": LearningCurve,
+  "likelihood-mle": LikelihoodMle,
+  "p-value-area": PValueArea,
 };
 
 export function Diagram({

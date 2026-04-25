@@ -259,6 +259,11 @@ export default function RootLayout({
                     </Link>
                   </li>
                   <li>
+                    <Link href="/figures" className="hover:underline text-[var(--muted-strong)]">
+                      図解で学ぶ統計
+                    </Link>
+                  </li>
+                  <li>
                     <Link href="/glossary" className="hover:underline text-[var(--muted-strong)]">
                       用語集
                     </Link>

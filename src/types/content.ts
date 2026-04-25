@@ -40,7 +40,9 @@ export type DiagramKind =
   | "t-vs-normal"
   | "type-i-ii-errors"
   | "bayes-update"
-  | "learning-curve";
+  | "learning-curve"
+  | "likelihood-mle"
+  | "p-value-area";
 
 export type TextbookBlock =
   | { type: "p"; text: string }

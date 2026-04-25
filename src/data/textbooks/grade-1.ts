@@ -111,6 +111,17 @@ export const gradeOneTextbook: Textbook = {
               text: "「データを最も『もっともらしく』説明するパラメータを選ぶ」というシンプルな考え方。多くの分布で、$\\partial \\ell / \\partial \\theta = 0$(スコア方程式)を解くだけで $\\hat{\\theta}_{\\mathrm{MLE}}$ が求まります。",
             },
             {
+              type: "figure",
+              kind: "likelihood-mle",
+              caption:
+                "ベルヌーイ尤度 $L(\\theta) \\propto \\theta^k (1-\\theta)^{n-k}$($n=10, k=7$)。MLE は山頂で $\\hat\\theta = 0.7$",
+            },
+            {
+              type: "intuition",
+              title: "尤度の山と推定量の精度",
+              body: "尤度関数の山が「とがっている」ほど、観測データは $\\theta$ について多くの情報を持っています(=フィッシャー情報量が大きい=分散が小さい)。逆に山がなだらかだと、複数の $\\theta$ が同程度にデータを説明でき、推定は不安定になります。MLE が最大化問題で求まる事実と、CRLB の下限が情報量で決まる事実は、この『山の鋭さ』という同一の幾何学から出てくるのです。",
+            },
+            {
               type: "ex",
               title: "例題 1.3 ─ 正規分布の MLE",
               body: "$X_1, \\ldots, X_n \\stackrel{\\text{iid}}{\\sim} N(\\mu, \\sigma^2)$ のとき、$(\\mu, \\sigma^2)$ の MLE を求めよ。\n\n**解** : 対数尤度を $\\mu, \\sigma^2$ で微分してゼロとおくと、$\\hat{\\mu} = \\bar{X}$、$\\hat{\\sigma}^2 = \\dfrac{1}{n}\\sum(X_i - \\bar{X})^2$。$\\hat{\\sigma}^2$ は $n - 1$ ではなく **$n$ で割る**(MLE は不偏ではない例)。",
