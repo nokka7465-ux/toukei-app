@@ -179,6 +179,11 @@ export default function RootLayout({
                     </Link>
                   </li>
                   <li>
+                    <Link href="/exam-info" className="hover:underline text-[var(--muted-strong)]">
+                      受験情報まとめ
+                    </Link>
+                  </li>
+                  <li>
                     <Link href="/search" className="hover:underline text-[var(--muted-strong)]">
                       サイト内検索
                     </Link>

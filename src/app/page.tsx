@@ -100,6 +100,12 @@ export default function Home() {
             級診断を受ける →
           </Link>
           <Link
+            href="/exam-info"
+            className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
+          >
+            受験情報まとめを見る
+          </Link>
+          <Link
             href="/textbook/grade-4"
             className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
           >
