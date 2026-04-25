@@ -316,4 +316,52 @@ export const gradeOneQuestions: Question[] = [
     explanation:
       "MH 法が $\\pi$ にきちんと収束するためには、提案分布 $q$ から構成される連鎖が **既約**(任意の状態から任意の状態に有限ステップで到達可能)で **非周期** である必要がある。対称性は必要ではない(対称ならば受理確率の式が単純化される、というだけ)。",
   },
+  {
+    id: "g1-q21",
+    difficulty: 3,
+    category: "推定理論",
+    question:
+      "正則条件下で、不偏推定量 $\\hat{\\theta}$ の分散が達成できる下限(クラメル・ラオ下限)として最も適切なものを選びなさい($n$ は標本数、$I(\\theta)$ はフィッシャー情報量)。",
+    choices: [
+      "$\\dfrac{1}{I(\\theta)}$",
+      "$\\dfrac{1}{n\\, I(\\theta)}$",
+      "$\\dfrac{n}{I(\\theta)}$",
+      "$n\\, I(\\theta)$",
+    ],
+    correctIndex: 1,
+    explanation:
+      "$n$ 個の独立同分布な標本では情報量が加法的に $n\\, I(\\theta)$ になり、CR 下限は $1/(n\\, I(\\theta))$。MLE はこの下限を漸近的に達成する(漸近有効性)。",
+  },
+  {
+    id: "g1-q22",
+    difficulty: 2,
+    category: "漸近理論",
+    question:
+      "「分布収束する $X_n$ と確率収束する定数 $c$ との和・積も分布収束する」という性質をもつ定理の名称として最も適切なものを選びなさい。",
+    choices: [
+      "ウィルクスの定理",
+      "クラメル・ラオの定理",
+      "スラツキーの定理",
+      "ネイマン・ピアソンの補題",
+    ],
+    correctIndex: 2,
+    explanation:
+      "スラツキーの定理: $X_n \\xrightarrow{d} X,\\ Y_n \\xrightarrow{p} c$ なら $X_n + Y_n \\xrightarrow{d} X + c,\\ X_n Y_n \\xrightarrow{d} cX$。標本標準偏差 $\\hat{\\sigma}$ で $\\sigma$ を置き換えても漸近分布が同じ理由を与える。",
+  },
+  {
+    id: "g1-q23",
+    difficulty: 3,
+    category: "確率解析",
+    question:
+      "幾何ブラウン運動 $dS_t = \\mu S_t dt + \\sigma S_t dB_t$ について、$Y_t = \\log S_t$ の SDE のドリフト項として最も適切なものを選びなさい。",
+    choices: [
+      "$\\mu$",
+      "$\\mu + \\tfrac{1}{2}\\sigma^2$",
+      "$\\mu - \\tfrac{1}{2}\\sigma^2$",
+      "$\\mu \\sigma^2$",
+    ],
+    correctIndex: 2,
+    explanation:
+      "伊藤の公式を $f(S) = \\log S$ に適用すると、$f' = 1/S$、$f'' = -1/S^2$ より $dY_t = (\\mu - \\tfrac{1}{2}\\sigma^2)\\, dt + \\sigma\\, dB_t$。この $-\\tfrac{1}{2}\\sigma^2$ がブラック・ショールズ式での「対数収益率の期待」を決める部分。",
+  },
 ];
