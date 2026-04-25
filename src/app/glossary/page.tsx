@@ -4,13 +4,12 @@ import { glossary, type GlossaryTerm } from "@/data/glossary";
 import { MixedText } from "@/components/MixedText";
 
 export const metadata: Metadata = {
-  title: "統計用語集 ─ 統計検定で頻出の50用語",
-  description:
-    "統計検定 4級〜1級の出題範囲で頻出する統計用語 50 語を、定義・関連教科書節へのリンクとともに解説する用語辞典。",
+  title: `統計用語集 ─ 統計検定 / 機械学習 / 公的統計の頻出 ${glossary.length} 語`,
+  description: `統計検定 4 級〜1 級の出題範囲に加え、機械学習・AI 用語、公的統計の関連用語まで全 ${glossary.length} 語を、定義・関連教科書節へのリンクとともに解説する用語辞典。`,
   openGraph: {
-    title: "統計用語集 ─ 統計検定で頻出の50用語",
+    title: `統計用語集 ─ 全 ${glossary.length} 語`,
     description:
-      "平均・分散・回帰・ベイズ・尤度比検定まで、統計学の重要用語を一覧で確認。",
+      "平均・分散・回帰・ベイズ・尤度比検定・機械学習・公的統計まで、重要用語を一覧で確認。",
     type: "article",
   },
 };
