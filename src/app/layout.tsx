@@ -263,6 +263,11 @@ export default function RootLayout({
                       ブログ
                     </Link>
                   </li>
+                  <li>
+                    <Link href="/cheatsheet" className="hover:underline text-[var(--muted-strong)]">
+                      公式チートシート
+                    </Link>
+                  </li>
                 </ul>
               </div>
               <div>

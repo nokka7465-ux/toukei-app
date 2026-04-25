@@ -42,6 +42,7 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { href: "/math", label: "数学基礎" },
       { href: "/glossary", label: "用語集" },
+      { href: "/cheatsheet", label: "公式チートシート" },
       { href: "/blog", label: "ブログ" },
       { href: "/search", label: "サイト内検索" },
     ],
