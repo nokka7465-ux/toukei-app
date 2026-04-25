@@ -25,7 +25,14 @@ function renderParagraphs(text: string) {
   ));
 }
 
-export function TextbookBody({ blocks }: { blocks: TextbookBlock[] }) {
+export function TextbookBody({
+  blocks,
+  headingIdPrefix,
+}: {
+  blocks: TextbookBlock[];
+  /** When provided, h3/h4 blocks get id="${prefix}-${index}" for in-page anchors. */
+  headingIdPrefix?: string;
+}) {
   return (
     <div className="prose-textbook">
       {blocks.map((block, idx) => {
@@ -70,13 +77,21 @@ export function TextbookBody({ blocks }: { blocks: TextbookBlock[] }) {
           }
           case "h3":
             return (
-              <h3 key={idx} className="text-lg">
+              <h3
+                key={idx}
+                id={headingIdPrefix ? `${headingIdPrefix}-${idx}` : undefined}
+                className="text-lg scroll-mt-20"
+              >
                 {block.text}
               </h3>
             );
           case "h4":
             return (
-              <h4 key={idx} className="text-base">
+              <h4
+                key={idx}
+                id={headingIdPrefix ? `${headingIdPrefix}-${idx}` : undefined}
+                className="text-base scroll-mt-20"
+              >
                 {block.text}
               </h4>
             );

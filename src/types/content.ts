@@ -62,5 +62,7 @@ export type BlogPost = {
   description: string;
   publishedAt: string;
   category: string;
+  /** 3〜5 個の短い要約箇条書き(TL;DR) */
+  tldr?: string[];
   body: TextbookBlock[];
 };
