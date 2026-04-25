@@ -119,4 +119,52 @@ export const dsLiteracyQuestions: Question[] = [
     explanation:
       "データ分析の最大の落とし穴は「**目的不明確のまま分析を始めて、関係ない結論が出る**」こと。CRISP-DM の最初のステップ「ビジネス理解」が強調されるのもこのため。常に「何のための分析か?」を問うクセが大事。",
   },
+  {
+    id: "dsl-q9",
+    category: "機械学習",
+    difficulty: 2,
+    question:
+      "クロスバリデーション(交差検証)の主な目的として最も適切なものを選びなさい。",
+    choices: [
+      "学習を高速化する",
+      "モデルの汎化性能を信頼性高く推定する",
+      "正解率を必ず向上させる",
+      "データ量を増やす",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**交差検証** はデータを K 分割し、K-1 個で学習・1 個で評価を K 回繰り返して平均を取る手法。**過学習を見抜き、未知データへの汎化性能を信頼性高く推定** するのが目的。データ量自体は増やせない。",
+  },
+  {
+    id: "dsl-q10",
+    category: "データエンジニアリング",
+    difficulty: 2,
+    question:
+      "SQL で「テーブル `users` から `age` が 20 以上の人数を数える」式として最も適切なものを選びなさい。",
+    choices: [
+      "$\\mathrm{SELECT}~\\mathrm{COUNT}(*)~\\mathrm{FROM}~\\mathrm{users}~\\mathrm{WHERE}~\\mathrm{age} >= 20$",
+      "$\\mathrm{SELECT}~\\mathrm{age}~\\mathrm{FROM}~\\mathrm{users}~\\mathrm{ORDER~BY}~\\mathrm{age}$",
+      "$\\mathrm{SELECT}~*~\\mathrm{FROM}~\\mathrm{users}~\\mathrm{GROUP~BY}~\\mathrm{age}$",
+      "$\\mathrm{COUNT}(\\mathrm{users}, \\mathrm{age} >= 20)$",
+    ],
+    correctIndex: 0,
+    explanation:
+      "条件付きカウントは「`SELECT COUNT(*) FROM テーブル WHERE 条件`」が基本形。COUNT(*) は行数を数える、WHERE で絞り込み。これを書ける/読めるのは DS の必須リテラシー。",
+  },
+  {
+    id: "dsl-q11",
+    category: "DS の 3 軸",
+    difficulty: 2,
+    question:
+      "次のスキルのうち、DS 協会の「データエンジニアリング力」に分類されるものとして最も適切なものを選びなさい。",
+    choices: [
+      "ヒストグラムから分布形を読み取る",
+      "ビジネス課題を分析の問いに変換する",
+      "SQL でデータベースから必要なデータを抽出する",
+      "ステークホルダーに分析結果をプレゼンする",
+    ],
+    correctIndex: 2,
+    explanation:
+      "SQL によるデータ抽出は典型的な **データエンジニアリング力**。ヒストグラム読み取りは DS 力、課題変換とプレゼンはビジネス力。",
+  },
 ];

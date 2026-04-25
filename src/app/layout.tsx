@@ -5,6 +5,8 @@ import { isAffiliateEnabled } from "@/data/books";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { StructuredData } from "@/components/StructuredData";
 import { ThemeToggle, themeInitScript } from "@/components/ThemeToggle";
+import { MobileNav } from "@/components/MobileNav";
+import { BackToTop } from "@/components/BackToTop";
 import "./globals.css";
 
 const notoSerifJP = Noto_Serif_JP({
@@ -91,7 +93,7 @@ export default function RootLayout({
               統計検定 学習帳
             </Link>
             <div className="flex items-center gap-3">
-              <nav className="flex gap-4 text-sm ui-sans flex-wrap justify-end">
+              <nav className="hidden md:flex gap-4 text-sm ui-sans flex-wrap justify-end">
                 <Link href="/" className="hover:underline">
                   ホーム
                 </Link>
@@ -147,29 +149,148 @@ export default function RootLayout({
                 </svg>
               </Link>
               <ThemeToggle />
+              <MobileNav />
             </div>
           </div>
         </header>
         <main className="mx-auto max-w-5xl px-4 py-10">{children}</main>
-        <footer className="border-t border-[var(--page-border)] mt-16 bg-[var(--page)]/40">
-          <div className="mx-auto max-w-5xl px-4 py-8 text-sm text-[var(--muted)] space-y-3">
-            <div className="ui-sans text-xs">
-              問題はすべてオリジナル類題です。学習の参考用にご利用ください。
-            </div>
-            <nav className="flex gap-4 text-xs ui-sans">
-              <Link href="/privacy" className="hover:underline">
-                プライバシーポリシー
-              </Link>
-              <Link href="/contact" className="hover:underline">
-                お問い合わせ
-              </Link>
-            </nav>
-            {isAffiliateEnabled && (
-              <div className="text-xs leading-relaxed ui-sans">
-                当サイトは Amazon.co.jp を宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazon
-                アソシエイト・プログラムの参加者です。
+        <BackToTop />
+        <footer className="border-t border-[var(--page-border)] mt-16 bg-[var(--page)]/40 print-hide">
+          <div className="mx-auto max-w-5xl px-4 py-10">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-sm">
+              <div>
+                <div className="chapter-eyebrow mb-2">学習開始</div>
+                <ul className="space-y-1.5 ui-sans">
+                  <li>
+                    <Link href="/" className="hover:underline text-[var(--muted-strong)]">
+                      ホーム
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/roadmap" className="hover:underline text-[var(--muted-strong)]">
+                      ロードマップ
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/diagnose" className="hover:underline text-[var(--muted-strong)]">
+                      級診断
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/search" className="hover:underline text-[var(--muted-strong)]">
+                      サイト内検索
+                    </Link>
+                  </li>
+                </ul>
               </div>
-            )}
+              <div>
+                <div className="chapter-eyebrow mb-2">統計検定</div>
+                <ul className="space-y-1.5 ui-sans">
+                  <li>
+                    <Link href="/textbook/intro" className="hover:underline text-[var(--muted-strong)]">
+                      入門編
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/textbook/grade-4" className="hover:underline text-[var(--muted-strong)]">
+                      4 級
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/textbook/grade-3" className="hover:underline text-[var(--muted-strong)]">
+                      3 級
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/textbook/grade-2" className="hover:underline text-[var(--muted-strong)]">
+                      2 級
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/textbook/grade-pre1" className="hover:underline text-[var(--muted-strong)]">
+                      準 1 級
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/textbook/grade-1" className="hover:underline text-[var(--muted-strong)]">
+                      1 級
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <div className="chapter-eyebrow mb-2">関連検定</div>
+                <ul className="space-y-1.5 ui-sans">
+                  <li>
+                    <Link href="/certs/ds-basic" className="hover:underline text-[var(--muted-strong)]">
+                      DS基礎
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/survey" className="hover:underline text-[var(--muted-strong)]">
+                      統計調査士
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/g-test" className="hover:underline text-[var(--muted-strong)]">
+                      G検定
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/ds-literacy" className="hover:underline text-[var(--muted-strong)]">
+                      データサイエンティスト検定
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <div className="chapter-eyebrow mb-2">学習サポート</div>
+                <ul className="space-y-1.5 ui-sans">
+                  <li>
+                    <Link href="/math" className="hover:underline text-[var(--muted-strong)]">
+                      数学基礎
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/glossary" className="hover:underline text-[var(--muted-strong)]">
+                      用語集
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/blog" className="hover:underline text-[var(--muted-strong)]">
+                      ブログ
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <div className="chapter-eyebrow mb-2">サイト情報</div>
+                <ul className="space-y-1.5 ui-sans">
+                  <li>
+                    <Link href="/contact" className="hover:underline text-[var(--muted-strong)]">
+                      お問い合わせ
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/privacy" className="hover:underline text-[var(--muted-strong)]">
+                      プライバシーポリシー
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-8 pt-6 border-t border-[var(--page-border)] text-xs text-[var(--muted)] ui-sans space-y-2">
+              <div>
+                © 統計検定 学習帳. 問題はすべてオリジナル類題です。学習の参考用にご利用ください。
+              </div>
+              {isAffiliateEnabled && (
+                <div className="leading-relaxed">
+                  当サイトは Amazon.co.jp を宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazon
+                  アソシエイト・プログラムの参加者です。
+                </div>
+              )}
+            </div>
           </div>
         </footer>
       </body>

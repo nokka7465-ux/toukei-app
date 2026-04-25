@@ -114,4 +114,52 @@ export const gTestQuestions: Question[] = [
     explanation:
       "プログラム言語の選択は技術的な判断で、倫理問題ではない。AI 倫理の主要論点は **公平性・説明可能性・プライバシー・透明性・責任の所在** など。",
   },
+  {
+    id: "gt-q9",
+    category: "機械学習",
+    difficulty: 2,
+    question:
+      "ディープラーニングが 2010 年代に大きく発展した背景として、最も適切でないものを選びなさい。",
+    choices: [
+      "GPU による計算資源の進化",
+      "ImageNet などの大規模ラベル付きデータの存在",
+      "ReLU・ドロップアウトなどのアルゴリズム改良",
+      "プログラム言語の Java から Python への移行",
+    ],
+    correctIndex: 3,
+    explanation:
+      "DL の発展要因は「**ビッグデータ・計算資源(GPU)・アルゴリズム改良**」の3つが定番。プログラム言語の選択は本質的要因ではない。",
+  },
+  {
+    id: "gt-q10",
+    category: "ディープラーニング",
+    difficulty: 3,
+    question:
+      "「ニューラルネットの学習で勾配が層を遡るほど小さくなり、深い層が学習しない」現象を何というか。",
+    choices: [
+      "過学習(overfitting)",
+      "勾配消失問題",
+      "次元の呪い",
+      "局所最適解",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**勾配消失問題(vanishing gradient problem)**: 多層ネットでは誤差逆伝播の勾配が層を遡るほど 0 に近づき、深い層の重みが更新されない。**ReLU 活性化関数** や **Batch Normalization** などで緩和される。",
+  },
+  {
+    id: "gt-q11",
+    category: "AI 概論",
+    difficulty: 2,
+    question:
+      "「AI が下した判断の根拠を人間に説明できるようにする」研究分野として最も適切なものを選びなさい。",
+    choices: [
+      "XAI(説明可能 AI)",
+      "AGI(汎用人工知能)",
+      "AutoML(自動機械学習)",
+      "RPA(ロボティック・プロセス・オートメーション)",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**XAI(Explainable AI)**: AI の判断根拠を人間が理解できる形で示す研究領域。医療・金融・採用など、説明責任が必要な領域で必須。AGI は汎用 AI(将来的構想)、AutoML はモデル探索の自動化、RPA は業務自動化。",
+  },
 ];
