@@ -324,4 +324,52 @@ export const gradePre1Questions: Question[] = [
     explanation:
       "PCA は分散の大きい変数の方向を優先的に拾う性質があるため、単位が違うと「単位が大きい変数」に引きずられる。標準化で各変数の分散を 1 に揃えてから PCA する、というのが標準作法。",
   },
+  {
+    id: "gp1-q24",
+    difficulty: 3,
+    category: "ベイズ統計",
+    question:
+      "ガンマ-ポアソン共役性について、$\\theta \\sim \\mathrm{Gamma}(\\alpha, \\beta)$ を事前分布とし、$X \\sim \\mathrm{Po}(\\theta)$ から $n$ 個の独立観測 $\\sum X_i = s$ を得たときの事後分布として最も適切なものを選びなさい。",
+    choices: [
+      "$\\mathrm{Gamma}(\\alpha + s,\\ \\beta + n)$",
+      "$\\mathrm{Gamma}(\\alpha,\\ \\beta + n)$",
+      "$\\mathrm{Gamma}(\\alpha + n,\\ \\beta + s)$",
+      "$\\mathrm{Gamma}(\\alpha s,\\ \\beta n)$",
+    ],
+    correctIndex: 0,
+    explanation:
+      "ガンマ-ポアソン共役性: 事後 $\\mathrm{Gamma}(\\alpha + \\sum x_i,\\ \\beta + n)$。事前パラメータに観測の合計と件数を加えるだけ、というシンプルな更新ルール。",
+  },
+  {
+    id: "gp1-q25",
+    difficulty: 2,
+    category: "確率過程",
+    question:
+      "2 状態マルコフ連鎖の遷移行列 $P = \\begin{pmatrix} 0.9 & 0.1 \\\\ 0.5 & 0.5 \\end{pmatrix}$ について、定常分布 $(\\pi_1, \\pi_2)$ として最も近いものを選びなさい。",
+    choices: [
+      "$(0.5, 0.5)$",
+      "$(0.83, 0.17)$",
+      "$(0.9, 0.1)$",
+      "$(0.7, 0.3)$",
+    ],
+    correctIndex: 1,
+    explanation:
+      "$\\pi P = \\pi$ かつ $\\pi_1 + \\pi_2 = 1$ を解く。$0.9\\pi_1 + 0.5\\pi_2 = \\pi_1$ より $0.5\\pi_2 = 0.1\\pi_1$、つまり $\\pi_1 = 5\\pi_2$。$\\pi_2 = 1/6 \\approx 0.167$、$\\pi_1 = 5/6 \\approx 0.833$。",
+  },
+  {
+    id: "gp1-q26",
+    difficulty: 3,
+    category: "時系列解析",
+    question:
+      "ARIMA(0, 1, 1) モデルについて、最も適切な説明を選びなさい。",
+    choices: [
+      "原系列は定常で、AR(1) モデルが当てはまる",
+      "1 階差分を取ると MA(1) モデルが当てはまる",
+      "1 階差分を取ると AR(1) モデルが当てはまる",
+      "2 階差分を取らないと定常にならない",
+    ],
+    correctIndex: 1,
+    explanation:
+      "$\\mathrm{ARIMA}(p, d, q)$ で $d = 1$ は「1 階差分で定常化」、$p = 0,\\ q = 1$ は「差分後は MA(1)」を意味する。SES(指数平滑)とも数学的に等価で、トレンドのある時系列の基本モデル。",
+  },
 ];

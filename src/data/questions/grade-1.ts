@@ -364,4 +364,52 @@ export const gradeOneQuestions: Question[] = [
     explanation:
       "伊藤の公式を $f(S) = \\log S$ に適用すると、$f' = 1/S$、$f'' = -1/S^2$ より $dY_t = (\\mu - \\tfrac{1}{2}\\sigma^2)\\, dt + \\sigma\\, dB_t$。この $-\\tfrac{1}{2}\\sigma^2$ がブラック・ショールズ式での「対数収益率の期待」を決める部分。",
   },
+  {
+    id: "g1-q24",
+    difficulty: 3,
+    category: "十分統計量",
+    question:
+      "完備十分統計量 $T$ に基づく不偏推定量 $\\hat{\\theta}(T)$ について保証される最も適切な性質を選びなさい。",
+    choices: [
+      "それが必ず最尤推定量である",
+      "それが一様最小分散不偏推定量(UMVUE)である",
+      "それが必ずベイズ推定量である",
+      "それが必ず正規分布に従う",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**レーマン・シェッフェの定理**: 完備十分統計量 $T$ に基づく不偏推定量は UMVUE。「完備性」が「同等な不偏推定量が他に存在しない」ことを保証する鍵。",
+  },
+  {
+    id: "g1-q25",
+    difficulty: 2,
+    category: "計算統計",
+    question:
+      "EM アルゴリズムの E ステップで計算する量として最も適切なものを選びなさい。",
+    choices: [
+      "観測データの対数尤度",
+      "完全データ対数尤度の条件付き期待値 $Q(\\theta \\mid \\theta^{(t)}) = E_{\\mathbf{Z} \\mid \\mathbf{X}, \\theta^{(t)}}[\\log L(\\theta; \\mathbf{X}, \\mathbf{Z})]$",
+      "勾配 $\\nabla \\log L$",
+      "ヘッセ行列",
+    ],
+    correctIndex: 1,
+    explanation:
+      "E ステップ: 潜在変数 $\\mathbf{Z}$ について「現在のパラメータ $\\theta^{(t)}$ のもとでの条件付き期待値」を計算 $\\to$ Q 関数。M ステップでこれを最大化して $\\theta^{(t+1)}$ を更新する。",
+  },
+  {
+    id: "g1-q26",
+    difficulty: 3,
+    category: "仮説検定",
+    question:
+      "尤度比検定の漸近分布を保証する定理として最も適切なものを選びなさい。",
+    choices: [
+      "中心極限定理",
+      "ウィルクスの定理",
+      "ネイマン・ピアソンの補題",
+      "コルモゴロフの強大数の法則",
+    ],
+    correctIndex: 1,
+    explanation:
+      "ウィルクスの定理: 正則条件下で $H_0$ のもとで $-2 \\log \\Lambda \\xrightarrow{d} \\chi^2(r)$。$r$ は制約の次元。これが尤度比検定の漸近的根拠。",
+  },
 ];
