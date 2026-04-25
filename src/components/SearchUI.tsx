@@ -2,7 +2,12 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { search, sourceLabel, type SearchSource } from "@/lib/search";
+import {
+  search,
+  sourceLabel,
+  suggestTerms,
+  type SearchSource,
+} from "@/lib/search";
 
 const SOURCE_STYLE: Record<SearchSource, string> = {
   textbook:
@@ -57,6 +62,13 @@ export function SearchUI({ initialQuery = "" }: { initialQuery?: string }) {
     };
   }, [query]);
 
+  // 「もしかして候補」: ヒットしたタイトルと重複しないように除外する
+  const suggestions = useMemo(() => {
+    if (query.trim().length < 1) return [];
+    const hitTitles = new Set(results.map((r) => r.item.title));
+    return suggestTerms(query, 8).filter((s) => !hitTitles.has(s.title));
+  }, [query, results]);
+
   return (
     <div className="space-y-6">
       <div className="paper rounded-lg p-5">
@@ -110,38 +122,86 @@ export function SearchUI({ initialQuery = "" }: { initialQuery?: string }) {
           </p>
         </div>
       ) : results.length === 0 ? (
-        <div className="paper rounded-lg p-7 text-center text-sm text-[var(--muted-strong)]">
-          一致する結果が見つかりませんでした。表記やスペースを変えてお試しください。
+        <div className="space-y-4">
+          <div className="paper rounded-lg p-7 text-center text-sm text-[var(--muted-strong)]">
+            一致する結果が見つかりませんでした。表記やスペースを変えてお試しください。
+          </div>
+          {suggestions.length > 0 && (
+            <SuggestPanel
+              heading="もしかして:"
+              suggestions={suggestions}
+            />
+          )}
         </div>
       ) : (
-        <ul className="space-y-3">
-          {results.map((r) => (
-            <li key={r.item.id}>
-              <Link
-                href={r.item.url}
-                className="paper block p-5 rounded-lg hover:-translate-y-0.5 transition group"
-              >
-                <div className="flex items-baseline gap-2 mb-1 flex-wrap">
-                  <span
-                    className={`px-1.5 py-0.5 rounded text-[10px] font-bold ui-sans ${SOURCE_STYLE[r.item.source]}`}
-                  >
-                    {sourceLabel(r.item.source)}
-                  </span>
-                  <span className="text-xs text-[var(--muted)] ui-sans">
-                    {r.item.context}
-                  </span>
-                </div>
-                <div className="font-bold text-base mb-1 group-hover:text-[var(--link)]">
-                  {r.item.title}
-                </div>
-                <div className="text-xs text-[var(--muted-strong)] leading-relaxed line-clamp-3">
-                  {r.snippet}
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="space-y-4">
+          <ul className="space-y-3">
+            {results.map((r) => (
+              <li key={r.item.id}>
+                <Link
+                  href={r.item.url}
+                  className="paper block p-5 rounded-lg hover:-translate-y-0.5 transition group"
+                >
+                  <div className="flex items-baseline gap-2 mb-1 flex-wrap">
+                    <span
+                      className={`px-1.5 py-0.5 rounded text-[10px] font-bold ui-sans ${SOURCE_STYLE[r.item.source]}`}
+                    >
+                      {sourceLabel(r.item.source)}
+                    </span>
+                    <span className="text-xs text-[var(--muted)] ui-sans">
+                      {r.item.context}
+                    </span>
+                  </div>
+                  <div className="font-bold text-base mb-1 group-hover:text-[var(--link)]">
+                    {r.item.title}
+                  </div>
+                  <div className="text-xs text-[var(--muted-strong)] leading-relaxed line-clamp-3">
+                    {r.snippet}
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          {suggestions.length > 0 && results.length < 5 && (
+            <SuggestPanel
+              heading="関連しそうな項目:"
+              suggestions={suggestions}
+            />
+          )}
+        </div>
       )}
+    </div>
+  );
+}
+
+function SuggestPanel({
+  heading,
+  suggestions,
+}: {
+  heading: string;
+  suggestions: ReturnType<typeof suggestTerms>;
+}) {
+  return (
+    <div className="paper rounded-lg p-5">
+      <div className="chapter-eyebrow mb-3 text-[var(--muted)]">{heading}</div>
+      <ul className="flex flex-wrap gap-2 ui-sans text-xs">
+        {suggestions.map((s) => (
+          <li key={`${s.source}:${s.title}:${s.url}`}>
+            <Link
+              href={s.url}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-[var(--page-border-strong)] hover:bg-[var(--background)] hover:text-[var(--link)] transition"
+              title={s.context}
+            >
+              <span
+                className={`px-1 py-0.5 rounded text-[9px] font-bold ${SOURCE_STYLE[s.source]}`}
+              >
+                {sourceLabel(s.source)}
+              </span>
+              <span>{s.title}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

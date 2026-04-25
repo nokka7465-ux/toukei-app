@@ -191,6 +191,63 @@ function makeSnippet(text: string, query: string, max = 140): string {
   return `${ellipsisStart}${text.slice(start, end)}${ellipsisEnd}`;
 }
 
+export type Suggestion = {
+  title: string;
+  context: string;
+  source: SearchSource;
+  url: string;
+};
+
+/**
+ * 「もしかして候補」用のサジェスト。タイトル先頭一致・部分一致・部分文字一致で
+ * 候補を返す。検索結果がゼロのとき、または入力の途中段階で「これかな?」を
+ * ユーザーに提示するために使う。
+ */
+export function suggestTerms(query: string, max = 6): Suggestion[] {
+  const q = query.trim().toLowerCase();
+  if (q.length === 0) return [];
+
+  const scored: { item: SearchItem; score: number }[] = [];
+  for (const item of searchIndex) {
+    const t = item.title.toLowerCase();
+    let s = 0;
+
+    if (t === q) s += 100;
+    else if (t.startsWith(q)) s += 60;
+    else if (t.includes(q)) s += 30;
+    else if (q.length >= 2 && t.length >= 2 && q.includes(t)) s += 25;
+
+    // タイトル一致しない場合のみ、文字重なりで救済(タイポ・表記ゆれ向け)
+    if (s === 0) {
+      let chars = 0;
+      for (const c of q) if (t.includes(c)) chars++;
+      if (chars >= Math.min(2, q.length)) s += chars;
+    }
+
+    if (s > 0) {
+      // 用語集を上位に
+      if (item.source === "glossary") s += 5;
+      scored.push({ item, score: s });
+    }
+  }
+
+  // タイトル重複は除く(教科書と用語集で同名タイトルがある場合など)
+  const seen = new Set<string>();
+  const out: Suggestion[] = [];
+  for (const s of scored.sort((a, b) => b.score - a.score)) {
+    if (seen.has(s.item.title)) continue;
+    seen.add(s.item.title);
+    out.push({
+      title: s.item.title,
+      context: s.item.context,
+      source: s.item.source,
+      url: s.item.url,
+    });
+    if (out.length >= max) break;
+  }
+  return out;
+}
+
 export function search(query: string, max = 30): SearchResult[] {
   const tokens = tokenize(query);
   if (tokens.length === 0) return [];

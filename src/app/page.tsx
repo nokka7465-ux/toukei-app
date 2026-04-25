@@ -54,6 +54,56 @@ export default function Home() {
         </p>
       </section>
 
+      <section className="mb-12 paper rounded-lg p-6 md:p-7">
+        <div className="chapter-eyebrow mb-2 text-center">Quick Search</div>
+        <h2 className="text-lg font-bold mb-3 text-center">
+          用語・公式・トピックを横断検索
+        </h2>
+        <form
+          action="/search"
+          method="get"
+          className="flex flex-col sm:flex-row gap-2 max-w-2xl mx-auto"
+          role="search"
+        >
+          <label htmlFor="home-search" className="sr-only">
+            サイト内検索
+          </label>
+          <div className="relative flex-1">
+            <svg
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--muted)]"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="M20 20l-3.5-3.5" />
+            </svg>
+            <input
+              id="home-search"
+              type="search"
+              name="q"
+              placeholder="例: 正規分布、p 値、ベイズ、回帰係数 ..."
+              className="w-full pl-9 pr-3 py-2.5 border border-[var(--page-border-strong)] rounded text-sm bg-[var(--page)] focus:outline-none focus:border-[var(--link)]"
+            />
+          </div>
+          <button
+            type="submit"
+            className="px-5 py-2.5 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold text-sm hover:bg-[var(--accent-strong)] ui-sans"
+          >
+            検索
+          </button>
+        </form>
+        <p className="mt-3 text-center text-[11px] text-[var(--muted)] ui-sans">
+          教科書本文 · 用語集(意味の候補も提案) · 公式集 · ブログ を横断検索
+        </p>
+      </section>
+
       <section className="mb-12 paper rounded-lg p-7">
         <div className="chapter-eyebrow mb-2">For Beginners</div>
         <h2 className="text-2xl font-bold mb-3">初めての方へ</h2>
