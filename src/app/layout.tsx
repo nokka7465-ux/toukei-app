@@ -111,6 +111,27 @@ export default function RootLayout({
                   級診断
                 </Link>
               </nav>
+              <Link
+                href="/search"
+                aria-label="サイト内を検索"
+                title="サイト内を検索"
+                className="w-7 h-7 rounded border border-[var(--page-border-strong)] flex items-center justify-center hover:bg-[var(--background)] transition"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="M20 20l-3.5-3.5" />
+                </svg>
+              </Link>
               <ThemeToggle />
             </div>
           </div>
