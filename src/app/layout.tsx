@@ -102,7 +102,7 @@ export default function RootLayout({
                 <Link href="/roadmap" className="hover:underline">
                   ロードマップ
                 </Link>
-                <Link href="/textbook/grade-4" className="hover:underline">
+                <Link href="/textbook" className="hover:underline">
                   教科書
                 </Link>
                 <Link

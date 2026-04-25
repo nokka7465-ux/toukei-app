@@ -15,10 +15,13 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/", label: "ホーム" },
       { href: "/roadmap", label: "学習ロードマップ" },
       { href: "/diagnose", label: "級診断" },
+      { href: "/textbook", label: "教科書 一覧" },
+      { href: "/formulas", label: "公式集 一覧" },
+      { href: "/quiz", label: "演習問題 一覧" },
     ],
   },
   {
-    label: "統計検定",
+    label: "統計検定 教科書(級別)",
     items: [
       { href: "/textbook/intro", label: "入門編" },
       { href: "/textbook/grade-4", label: "4 級" },
