@@ -8,6 +8,8 @@ import { gradeOneTextbook } from "@/data/textbooks/grade-1";
 import { dsBasicTextbook } from "@/data/textbooks/ds-basic";
 import { surveyTextbook } from "@/data/textbooks/survey";
 import { mathBasicsTextbook } from "@/data/textbooks/math";
+import { gTestTextbook } from "@/data/textbooks/g-test";
+import { dsLiteracyTextbook } from "@/data/textbooks/ds-literacy";
 import { glossary } from "@/data/glossary";
 import { blogPosts } from "@/data/blog";
 import { introFormulas } from "@/data/formulas/intro";
@@ -78,6 +80,8 @@ export const searchIndex: SearchItem[] = (() => {
     { book: dsBasicTextbook, urlBase: "/certs/ds-basic/textbook", displayTitle: "DS基礎" },
     { book: surveyTextbook, urlBase: "/certs/survey/textbook", displayTitle: "統計調査士" },
     { book: mathBasicsTextbook, urlBase: "/math/textbook", displayTitle: "数学基礎" },
+    { book: gTestTextbook, urlBase: "/certs/g-test/textbook", displayTitle: "G検定" },
+    { book: dsLiteracyTextbook, urlBase: "/certs/ds-literacy/textbook", displayTitle: "DS検定" },
   ];
   for (const { book, urlBase, displayTitle } of textbookSets) {
     for (const ch of book.chapters) {

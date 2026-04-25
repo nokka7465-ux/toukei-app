@@ -259,7 +259,7 @@ export default function Home() {
             ─ 関連検定(別系統) ─
           </div>
           <p className="text-xs text-[var(--muted)] text-center mb-5 ui-sans">
-            通常の統計検定(4級〜1級)とは別の系統。実務志向(DS基礎)・調査志向(統計調査士)で目的に応じて選べます。
+            データ系資格の 4 つのパス。実務志向・調査志向・AI 概念・データ全方位リテラシーから、目的に応じて選べます。
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <Link
@@ -271,7 +271,7 @@ export default function Home() {
                 統計検定 データサイエンス基礎
               </h3>
               <p className="text-xs text-[var(--muted-strong)] leading-relaxed">
-                Excel を使った実データ分析を中心に問う、データリテラシー入口の検定。理論より実務操作を重視。
+                Excel を使った実データ分析を中心に問う、データリテラシー入口の検定(統計学会主催)。理論より実務操作を重視。
               </p>
               <div className="mt-3 text-xs text-[var(--link)] ui-sans">
                 詳しく見る →
@@ -286,7 +286,37 @@ export default function Home() {
                 統計調査士
               </h3>
               <p className="text-xs text-[var(--muted-strong)] leading-relaxed">
-                社会調査の設計・実施、公的統計の知識を問う検定。行政・調査会社・公務員に実務直結。上位は専門統計調査士。
+                社会調査の設計・実施、公的統計の知識を問う検定(統計学会主催)。行政・調査会社・公務員に実務直結。
+              </p>
+              <div className="mt-3 text-xs text-[var(--link)] ui-sans">
+                詳しく見る →
+              </div>
+            </Link>
+            <Link
+              href="/certs/g-test"
+              className="paper rounded-lg p-5 hover:-translate-y-0.5 transition group block"
+            >
+              <div className="chapter-eyebrow mb-1">G Test</div>
+              <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--link)]">
+                G検定(JDLA)
+              </h3>
+              <p className="text-xs text-[var(--muted-strong)] leading-relaxed">
+                AI / ディープラーニングを事業に活かすための広範な知識を問う検定(日本ディープラーニング協会主催)。
+              </p>
+              <div className="mt-3 text-xs text-[var(--link)] ui-sans">
+                詳しく見る →
+              </div>
+            </Link>
+            <Link
+              href="/certs/ds-literacy"
+              className="paper rounded-lg p-5 hover:-translate-y-0.5 transition group block"
+            >
+              <div className="chapter-eyebrow mb-1">DS Cert</div>
+              <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--link)]">
+                データサイエンティスト検定
+              </h3>
+              <p className="text-xs text-[var(--muted-strong)] leading-relaxed">
+                DS 協会主催。DS 力 / DE 力 / ビジネス力 の 3 軸を測るリテラシーレベル検定。データ職入門に最適。
               </p>
               <div className="mt-3 text-xs text-[var(--link)] ui-sans">
                 詳しく見る →
