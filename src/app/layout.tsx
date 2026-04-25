@@ -7,6 +7,7 @@ import { StructuredData } from "@/components/StructuredData";
 import { ThemeToggle, themeInitScript } from "@/components/ThemeToggle";
 import { MobileNav } from "@/components/MobileNav";
 import { BackToTop } from "@/components/BackToTop";
+import { ReadingProgress } from "@/components/ReadingProgress";
 import "./globals.css";
 
 const notoSerifJP = Noto_Serif_JP({
@@ -87,6 +88,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <StructuredData />
         <GoogleAnalytics />
+        <ReadingProgress />
         <header className="border-b border-[var(--page-border)] bg-[var(--page)]/70 backdrop-blur-sm sticky top-0 z-10">
           <div className="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
             <Link href="/" className="text-lg font-bold tracking-wide">
