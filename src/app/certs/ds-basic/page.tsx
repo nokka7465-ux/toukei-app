@@ -197,7 +197,31 @@ export default function DsBasicPage() {
         </div>
       </section>
 
-      <nav className="mt-12 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">
+      <section className="mt-10 paper rounded-lg p-7">
+        <div className="chapter-eyebrow mb-2">Study Now</div>
+        <h2 className="text-xl font-bold mb-3">
+          DS基礎の学習を始める
+        </h2>
+        <p className="text-[var(--muted-strong)] text-sm leading-relaxed mb-4">
+          本サイトでは DS基礎対策の **教科書本編** と **演習問題** を公開しています。Excel 関数・ピボット・グラフ・回帰機能まで、章立てで読み進められます。
+        </p>
+        <div className="flex flex-wrap gap-2 ui-sans text-sm">
+          <Link
+            href="/certs/ds-basic/textbook"
+            className="px-4 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)]"
+          >
+            教科書を読む →
+          </Link>
+          <Link
+            href="/certs/ds-basic/quiz"
+            className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--background)]"
+          >
+            問題を解く
+          </Link>
+        </div>
+      </section>
+
+      <nav className="mt-10 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">
         <Link
           href="/roadmap"
           className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"

@@ -5,6 +5,8 @@ import { gradeThreeTextbook } from "@/data/textbooks/grade-3";
 import { gradeTwoTextbook } from "@/data/textbooks/grade-2";
 import { gradePre1Textbook } from "@/data/textbooks/grade-pre1";
 import { gradeOneTextbook } from "@/data/textbooks/grade-1";
+import { dsBasicTextbook } from "@/data/textbooks/ds-basic";
+import { surveyTextbook } from "@/data/textbooks/survey";
 import { glossary } from "@/data/glossary";
 import { blogPosts } from "@/data/blog";
 import { introFormulas } from "@/data/formulas/intro";
@@ -61,16 +63,21 @@ export const searchIndex: SearchItem[] = (() => {
   const items: SearchItem[] = [];
 
   // Textbook sections (1 entry per section, body text concatenated)
-  const textbooks = [
-    introTextbook,
-    gradeFourTextbook,
-    gradeThreeTextbook,
-    gradeTwoTextbook,
-    gradePre1Textbook,
-    gradeOneTextbook,
+  const textbookSets: {
+    book: typeof gradeFourTextbook;
+    urlBase: string;
+    displayTitle: string;
+  }[] = [
+    { book: introTextbook, urlBase: "/textbook/intro", displayTitle: levelTitle("intro") },
+    { book: gradeFourTextbook, urlBase: "/textbook/grade-4", displayTitle: levelTitle("grade-4") },
+    { book: gradeThreeTextbook, urlBase: "/textbook/grade-3", displayTitle: levelTitle("grade-3") },
+    { book: gradeTwoTextbook, urlBase: "/textbook/grade-2", displayTitle: levelTitle("grade-2") },
+    { book: gradePre1Textbook, urlBase: "/textbook/grade-pre1", displayTitle: levelTitle("grade-pre1") },
+    { book: gradeOneTextbook, urlBase: "/textbook/grade-1", displayTitle: levelTitle("grade-1") },
+    { book: dsBasicTextbook, urlBase: "/certs/ds-basic/textbook", displayTitle: "DS基礎" },
+    { book: surveyTextbook, urlBase: "/certs/survey/textbook", displayTitle: "統計調査士" },
   ];
-  for (const book of textbooks) {
-    const lvl = levelTitle(book.levelSlug);
+  for (const { book, urlBase, displayTitle } of textbookSets) {
     for (const ch of book.chapters) {
       for (const sec of ch.sections) {
         const text = trimText(sec.blocks.map(blockToText).join(" "));
@@ -78,9 +85,9 @@ export const searchIndex: SearchItem[] = (() => {
           id: `tb-${book.levelSlug}-${sec.id}`,
           source: "textbook",
           title: `${sec.number} ${sec.title}`,
-          context: `${lvl}教科書 · 第${ch.number}章 ${ch.title}`,
+          context: `${displayTitle}教科書 · 第${ch.number}章 ${ch.title}`,
           text,
-          url: `/textbook/${book.levelSlug}#${sec.id}`,
+          url: `${urlBase}#${sec.id}`,
         });
       }
     }

@@ -192,7 +192,31 @@ export default function SurveyPage() {
         </div>
       </section>
 
-      <nav className="mt-12 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">
+      <section className="mt-10 paper rounded-lg p-7">
+        <div className="chapter-eyebrow mb-2">Study Now</div>
+        <h2 className="text-xl font-bold mb-3">
+          統計調査士の学習を始める
+        </h2>
+        <p className="text-[var(--muted-strong)] text-sm leading-relaxed mb-4">
+          本サイトでは統計調査士対策の **教科書本編** と **演習問題** を公開しています。統計法・主要な公的統計・標本抽出法など、頻出範囲を整理して学べます。
+        </p>
+        <div className="flex flex-wrap gap-2 ui-sans text-sm">
+          <Link
+            href="/certs/survey/textbook"
+            className="px-4 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)]"
+          >
+            教科書を読む →
+          </Link>
+          <Link
+            href="/certs/survey/quiz"
+            className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--background)]"
+          >
+            問題を解く
+          </Link>
+        </div>
+      </section>
+
+      <nav className="mt-10 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">
         <Link
           href="/certs/ds-basic"
           className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
