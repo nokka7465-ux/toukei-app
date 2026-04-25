@@ -9,6 +9,10 @@ import { CltConvergence } from "./CltConvergence";
 import { BinomialShape } from "./BinomialShape";
 import { BoxplotAnatomy } from "./BoxplotAnatomy";
 import { ConfidenceInterval } from "./ConfidenceInterval";
+import { TvsNormal } from "./TvsNormal";
+import { TypeIIIErrors } from "./TypeIIIErrors";
+import { BayesUpdate } from "./BayesUpdate";
+import { LearningCurve } from "./LearningCurve";
 
 const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   "normal-curve": NormalCurve,
@@ -21,6 +25,10 @@ const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   "binomial-shape": BinomialShape,
   "boxplot-anatomy": BoxplotAnatomy,
   "confidence-interval": ConfidenceInterval,
+  "t-vs-normal": TvsNormal,
+  "type-i-ii-errors": TypeIIIErrors,
+  "bayes-update": BayesUpdate,
+  "learning-curve": LearningCurve,
 };
 
 export function Diagram({

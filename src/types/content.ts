@@ -36,7 +36,11 @@ export type DiagramKind =
   | "clt-convergence"
   | "binomial-shape"
   | "boxplot-anatomy"
-  | "confidence-interval";
+  | "confidence-interval"
+  | "t-vs-normal"
+  | "type-i-ii-errors"
+  | "bayes-update"
+  | "learning-curve";
 
 export type TextbookBlock =
   | { type: "p"; text: string }
