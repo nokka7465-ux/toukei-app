@@ -1329,4 +1329,782 @@ export const glossary: GlossaryTerm[] = [
     category: "標本抽出",
     link: "/certs/survey/textbook",
   },
+
+  // === 4 級 さらに追加 ===
+  {
+    term: "質的データ",
+    reading: "しつてきでーた",
+    english: "qualitative data",
+    definition:
+      "性別・血液型・好みなど、数値で大小を比較できないカテゴリのデータ。名義尺度・順序尺度に分類される。",
+    level: "4",
+    category: "データ整理",
+    link: "/textbook/grade-4",
+  },
+  {
+    term: "量的データ",
+    reading: "りょうてきでーた",
+    english: "quantitative data",
+    definition:
+      "身長・売上・気温など、数値で大小や差を比較できるデータ。間隔尺度・比例尺度に分類される。",
+    level: "4",
+    category: "データ整理",
+    link: "/textbook/grade-4",
+  },
+  {
+    term: "離散変数と連続変数",
+    reading: "りさんへんすうとれんぞくへんすう",
+    english: "discrete vs. continuous variable",
+    definition:
+      "離散変数は人数・回数のような飛び飛びの値、連続変数は身長・時間のように切れ目なく値を取る変数。扱う確率分布が異なる。",
+    level: "4",
+    category: "データ整理",
+    link: "/textbook/grade-4",
+  },
+  {
+    term: "同様に確からしい",
+    reading: "どうようにたしからしい",
+    english: "equally likely",
+    definition:
+      "ある試行のすべての根元事象が同じ確率で起こる状態。「サイコロ・コイン・くじ」など古典的確率の前提。",
+    level: "4",
+    category: "確率",
+    link: "/textbook/grade-4",
+  },
+  {
+    term: "樹形図",
+    reading: "じゅけいず",
+    english: "tree diagram",
+    definition:
+      "場合の数や確率を漏れなく数えるために、選択を枝分かれで描いた図。条件付き確率の理解にも有効。",
+    level: "4",
+    category: "場合の数",
+    link: "/textbook/grade-4",
+  },
+  {
+    term: "パーセンタイル",
+    reading: "ぱーせんたいる",
+    english: "percentile",
+    definition:
+      "データを小さい順に並べたとき下から $p\\%$ の位置にある値。$50$ パーセンタイルは中央値、$25/75$ は四分位数。",
+    level: "4",
+    category: "ばらつき",
+    link: "/textbook/grade-4",
+  },
+
+  // === 3 級 さらに追加 ===
+  {
+    term: "復元抽出",
+    reading: "ふくげんちゅうしゅつ",
+    english: "sampling with replacement",
+    definition:
+      "抽出した要素を毎回母集団に戻してから次を引く方法。各回の試行が独立になり、二項分布などの前提となる。",
+    level: "3",
+    category: "標本抽出",
+    link: "/textbook/grade-3",
+  },
+  {
+    term: "非復元抽出",
+    reading: "ひふくげんちゅうしゅつ",
+    english: "sampling without replacement",
+    definition:
+      "一度抽出した要素は戻さずに次を引く方法。実際の調査の標準。試行は独立でなく、超幾何分布などで扱う。",
+    level: "3",
+    category: "標本抽出",
+    link: "/textbook/grade-3",
+  },
+  {
+    term: "母平均",
+    reading: "ぼへいきん",
+    english: "population mean",
+    definition:
+      "母集団全体の平均値 $\\mu$。標本平均 $\\bar X$ は母平均の不偏推定量で、推測統計の中心的な対象。",
+    level: "3",
+    category: "推測統計",
+    link: "/textbook/grade-3",
+  },
+  {
+    term: "母分散",
+    reading: "ぼぶんさん",
+    english: "population variance",
+    definition:
+      "母集団全体の分散 $\\sigma^2$。標本分散より不偏分散($n-1$ で割る)の方が母分散の不偏推定量となる。",
+    level: "3",
+    category: "推測統計",
+    link: "/textbook/grade-3",
+  },
+  {
+    term: "母比率",
+    reading: "ぼひりつ",
+    english: "population proportion",
+    definition:
+      "母集団における特定属性を持つ要素の割合 $p$。世論調査や品質管理で「賛成率」「不良率」として推定対象になる。",
+    level: "3",
+    category: "推測統計",
+    link: "/textbook/grade-3",
+  },
+  {
+    term: "標本比率",
+    reading: "ひょうほんひりつ",
+    english: "sample proportion",
+    definition:
+      "標本のうち特定属性を持つ要素の割合 $\\hat p$。大標本では $\\hat p \\sim N(p, p(1-p)/n)$ に近づく(中心極限定理)。",
+    level: "3",
+    category: "推測統計",
+    link: "/textbook/grade-3",
+  },
+  {
+    term: "期待値の線形性",
+    reading: "きたいちのせんけいせい",
+    english: "linearity of expectation",
+    definition:
+      "$E[aX + bY] = aE[X] + bE[Y]$ が独立性に関係なく常に成り立つ性質。確率論で最も使われる便利な道具。",
+    level: "3",
+    category: "確率",
+    link: "/textbook/grade-3",
+  },
+  {
+    term: "同時分布",
+    reading: "どうじぶんぷ",
+    english: "joint distribution",
+    definition:
+      "複数の確率変数 $(X,Y)$ が同時に取る値の確率分布。同時分布から各変数の周辺分布や条件付き分布が得られる。",
+    level: "3",
+    category: "確率",
+    link: "/textbook/grade-3",
+  },
+  {
+    term: "周辺分布",
+    reading: "しゅうへんぶんぷ",
+    english: "marginal distribution",
+    definition:
+      "同時分布から他の変数を確率の足し合わせ(積分)で消去して得られる、1 つの変数の単独分布。",
+    level: "3",
+    category: "確率",
+    link: "/textbook/grade-3",
+  },
+  {
+    term: "二項定理",
+    reading: "にこうていり",
+    english: "binomial theorem",
+    definition:
+      "$(a+b)^n = \\sum_{k=0}^{n} {}_n C_k a^k b^{n-k}$。二項分布の確率関数の正体でもある重要な展開公式。",
+    level: "3",
+    category: "場合の数",
+    link: "/textbook/grade-3",
+  },
+
+  // === 2 級 さらに追加 ===
+  {
+    term: "一様分布",
+    reading: "いちようぶんぷ",
+    english: "uniform distribution",
+    definition:
+      "区間 $[a,b]$ で確率密度が一定の連続分布。乱数生成の基礎で、他分布のシミュレーションの出発点になる。",
+    level: "2",
+    category: "確率分布",
+    link: "/textbook/grade-2",
+  },
+  {
+    term: "幾何分布",
+    reading: "きかぶんぷ",
+    english: "geometric distribution",
+    definition:
+      "成功確率 $p$ のベルヌーイ試行を繰り返したときの初めて成功するまでの試行回数の分布。$E[X] = 1/p$。",
+    level: "2",
+    category: "確率分布",
+    link: "/textbook/grade-2",
+  },
+  {
+    term: "信頼水準",
+    reading: "しんらいすいじゅん",
+    english: "confidence level",
+    definition:
+      "信頼区間が母数を含む確率(例: 95%)。$1 - \\alpha$ の関係。区間幅と引き換えに信頼度を高められる。",
+    level: "2",
+    category: "推定",
+    link: "/textbook/grade-2",
+  },
+  {
+    term: "検出力",
+    reading: "けんしゅつりょく",
+    english: "statistical power",
+    definition:
+      "対立仮説が真のとき正しく帰無仮説を棄却できる確率 $1 - \\beta$。サンプルサイズ設計の基準として使う。",
+    level: "2",
+    category: "検定",
+    link: "/textbook/grade-2",
+  },
+  {
+    term: "効果量",
+    reading: "こうかりょう",
+    english: "effect size",
+    definition:
+      "群間の差の大きさを標準化した指標(Cohen の $d$ など)。p 値だけでは分からない「実質的な大きさ」を示す。",
+    level: "2",
+    category: "検定",
+    link: "/textbook/grade-2",
+  },
+  {
+    term: "ノンパラメトリック検定",
+    reading: "のんぱらめとりっくけんてい",
+    english: "nonparametric test",
+    definition:
+      "正規性などの分布仮定を置かず、順位や符号を用いる検定の総称。サンプルが小さい・分布が歪むときに有用。",
+    level: "2",
+    category: "検定",
+    link: "/textbook/grade-2",
+  },
+  {
+    term: "ウィルコクソンの符号順位検定",
+    reading: "うぃるこくそんのふごうじゅんいけんてい",
+    english: "Wilcoxon signed-rank test",
+    definition:
+      "対応のある 2 群差を、差の符号と順位に基づいて検定するノンパラ手法。対応のある t 検定の正規性を仮定しない代替。",
+    level: "2",
+    category: "検定",
+    link: "/textbook/grade-2",
+  },
+  {
+    term: "マン・ホイットニーの U 検定",
+    reading: "まんほいっとにーのゆーけんてい",
+    english: "Mann–Whitney U test",
+    definition:
+      "独立な 2 群の中央位置差を順位で検定するノンパラ手法。対応のない t 検定の正規性を仮定しない代替。",
+    level: "2",
+    category: "検定",
+    link: "/textbook/grade-2",
+  },
+  {
+    term: "スピアマンの順位相関係数",
+    reading: "すぴあまんのじゅんいそうかんけいすう",
+    english: "Spearman's rank correlation",
+    definition:
+      "2 変数の順位どうしのピアソン相関。単調関係を測り、外れ値や非線形変換に頑健。",
+    level: "2",
+    category: "回帰",
+    link: "/textbook/grade-2",
+  },
+  {
+    term: "自由度調整済み決定係数",
+    reading: "じゆうどちょうせいずみけっていけいすう",
+    english: "adjusted R²",
+    definition:
+      "説明変数を増やすと無闇に上がる $R^2$ を、自由度で罰則化した指標。重回帰のモデル比較の基本ツール。",
+    level: "2",
+    category: "回帰",
+    link: "/textbook/grade-2",
+  },
+  {
+    term: "AIC",
+    reading: "えーあいしー",
+    english: "Akaike information criterion",
+    definition:
+      "$\\mathrm{AIC} = -2\\log L + 2k$。当てはまり($-2\\log L$)とパラメータ数 $k$ の罰則の和。小さいほど良いモデル。",
+    level: "2",
+    category: "回帰",
+    link: "/textbook/grade-2",
+  },
+  {
+    term: "BIC",
+    reading: "びーあいしー",
+    english: "Bayesian information criterion",
+    definition:
+      "$\\mathrm{BIC} = -2\\log L + k\\log n$。AIC よりパラメータ数の罰則が強く、より単純なモデルを選びやすい情報量規準。",
+    level: "2",
+    category: "回帰",
+    link: "/textbook/grade-2",
+  },
+
+  // === 準 1 級 さらに追加 ===
+  {
+    term: "ガンマ分布",
+    reading: "がんまぶんぷ",
+    english: "gamma distribution",
+    definition:
+      "形状パラメータ $\\alpha$ ・尺度 $\\beta$ をもつ正値連続分布。$\\alpha=1$ で指数分布、整数 $\\alpha$ でアーラン分布。待ち時間モデルや事前分布で頻出。",
+    level: "準1",
+    category: "確率分布",
+    link: "/textbook/grade-pre1",
+  },
+  {
+    term: "ベータ分布",
+    reading: "べーたぶんぷ",
+    english: "beta distribution",
+    definition:
+      "区間 $[0,1]$ 上の連続分布 $\\mathrm{Beta}(\\alpha,\\beta)$。二項分布の共役事前分布として、比率のベイズ推定で標準的に使う。",
+    level: "準1",
+    category: "確率分布",
+    link: "/textbook/grade-pre1",
+  },
+  {
+    term: "対数正規分布",
+    reading: "たいすうせいきぶんぷ",
+    english: "log-normal distribution",
+    definition:
+      "$\\log X$ が正規分布に従う右に裾の長い分布。所得・株価・粒径分布など、乗算的に決まる量によく当てはまる。",
+    level: "準1",
+    category: "確率分布",
+    link: "/textbook/grade-pre1",
+  },
+  {
+    term: "多項分布",
+    reading: "たこうぶんぷ",
+    english: "multinomial distribution",
+    definition:
+      "二項分布の多カテゴリ版。$n$ 回の試行で $k$ 個のカテゴリそれぞれに何回入るかの同時分布。",
+    level: "準1",
+    category: "確率分布",
+    link: "/textbook/grade-pre1",
+  },
+  {
+    term: "マルコフ連鎖",
+    reading: "まるこふれんさ",
+    english: "Markov chain",
+    definition:
+      "次の状態が「現在の状態だけ」で決まる(過去に依存しない)確率過程。MCMC・状態空間モデルの基礎。",
+    level: "準1",
+    category: "確率過程",
+    link: "/textbook/grade-pre1",
+  },
+  {
+    term: "移動平均",
+    reading: "いどうへいきん",
+    english: "moving average",
+    definition:
+      "時系列を直近 $k$ 期の平均で平滑化する基本手法。トレンド抽出やノイズ除去に使う。MA モデルとは別概念なので注意。",
+    level: "準1",
+    category: "時系列",
+    link: "/textbook/grade-pre1",
+  },
+  {
+    term: "指数平滑法",
+    reading: "しすうへいかつほう",
+    english: "exponential smoothing",
+    definition:
+      "直近の値ほど重みを大きくする平滑化(重みが幾何的に減衰)。Holt・Holt–Winters でトレンド・季節性に拡張できる。",
+    level: "準1",
+    category: "時系列",
+    link: "/textbook/grade-pre1",
+  },
+  {
+    term: "状態空間モデル",
+    reading: "じょうたいくうかんもでる",
+    english: "state space model",
+    definition:
+      "観測されない状態(state)が時間発展し、それを通じて観測値が得られるという定式化。カルマンフィルタが代表的推定手法。",
+    level: "準1",
+    category: "時系列",
+    link: "/textbook/grade-pre1",
+  },
+  {
+    term: "階層ベイズモデル",
+    reading: "かいそうべいずもでる",
+    english: "hierarchical Bayesian model",
+    definition:
+      "事前分布のパラメータ自身にさらに分布(超事前分布)を仮定する多層モデル。グループ間で情報を共有し、推定を安定させる。",
+    level: "準1",
+    category: "ベイズ",
+    link: "/textbook/grade-pre1",
+  },
+  {
+    term: "ギブスサンプリング",
+    reading: "ぎぶすさんぷりんぐ",
+    english: "Gibbs sampling",
+    definition:
+      "多次元の事後分布から、各変数を「他の変数を固定した条件付き分布」から順番にサンプルする MCMC 手法。",
+    level: "準1",
+    category: "ベイズ",
+    link: "/textbook/grade-pre1",
+  },
+  {
+    term: "メトロポリス・ヘイスティングス法",
+    reading: "めとろぽりすへいすてぃんぐすほう",
+    english: "Metropolis–Hastings algorithm",
+    definition:
+      "提案分布から候補を発生させ、確率 $\\min(1, r)$ で受容することで目標分布からのサンプルを得る MCMC の基本アルゴリズム。",
+    level: "準1",
+    category: "ベイズ",
+    link: "/textbook/grade-pre1",
+  },
+  {
+    term: "多次元尺度法",
+    reading: "たじげんしゃくどほう",
+    english: "multidimensional scaling (MDS)",
+    definition:
+      "対象間の距離(類似度)を保つように、低次元(通常 2 次元)に布置する手法。アンケート分析やブランド地図で使う。",
+    level: "準1",
+    category: "多変量",
+    link: "/textbook/grade-pre1",
+  },
+
+  // === 1 級 さらに追加 ===
+  {
+    term: "完備十分統計量",
+    reading: "かんびじゅうぶんとうけいりょう",
+    english: "complete sufficient statistic",
+    definition:
+      "十分性に加え「期待値が常に 0 ⇒ ほぼ確実に 0」となる(完備性)を満たす統計量。UMVUE 構成の鍵となる概念。",
+    level: "1",
+    category: "推定理論",
+    link: "/textbook/grade-1",
+  },
+  {
+    term: "ラオ・ブラックウェルの定理",
+    reading: "らおぶらっくうぇるのていり",
+    english: "Rao–Blackwell theorem",
+    definition:
+      "推定量を十分統計量で条件付け期待値を取ると、分散が必ず減少する(または不変)という定理。UMVUE 構成の中心ツール。",
+    level: "1",
+    category: "推定理論",
+    link: "/textbook/grade-1",
+  },
+  {
+    term: "M 推定量",
+    reading: "えむすいていりょう",
+    english: "M-estimator",
+    definition:
+      "目的関数 $\\sum \\rho(x_i, \\theta)$ の最小化(または推定方程式の零点)で定義される推定量の総称。最尤・最小二乗・ロバスト推定を含む統一枠組み。",
+    level: "1",
+    category: "推定理論",
+    link: "/textbook/grade-1",
+  },
+  {
+    term: "カーネル密度推定",
+    reading: "かーねるみつどすいてい",
+    english: "kernel density estimation",
+    definition:
+      "観測点に滑らかな核(ガウス核など)を載せて足し合わせ、確率密度を推定するノンパラ手法。バンド幅の選択が肝。",
+    level: "1",
+    category: "ノンパラ",
+    link: "/textbook/grade-1",
+  },
+  {
+    term: "経験分布関数",
+    reading: "けいけんぶんぷかんすう",
+    english: "empirical distribution function",
+    definition:
+      "観測値から作る階段関数 $F_n(x) = \\frac{1}{n}\\sum \\mathbf{1}_{X_i \\le x}$。標本サイズが大きいと真の cdf に一様収束する(グリヴェンコ・カンテリの定理)。",
+    level: "1",
+    category: "ノンパラ",
+    link: "/textbook/grade-1",
+  },
+
+  // === 機械学習 さらに追加 ===
+  {
+    term: "決定木",
+    reading: "けっていぎ",
+    english: "decision tree",
+    definition:
+      "「ある特徴量が閾値以上か」で再帰的にデータを分割していくモデル。解釈しやすいが過学習しやすい。アンサンブルの基礎部品。",
+    level: "準1",
+    category: "機械学習",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "ランダムフォレスト",
+    reading: "らんだむふぉれすと",
+    english: "random forest",
+    definition:
+      "ブートストラップ標本と特徴のランダム選択で多数の決定木を学習し、平均(または多数決)を取る代表的アンサンブル手法。",
+    level: "準1",
+    category: "機械学習",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "勾配ブースティング",
+    reading: "こうばいぶーすてぃんぐ",
+    english: "gradient boosting",
+    definition:
+      "弱学習器(浅い木)を残差にフィットさせ、順次足し合わせる手法。XGBoost・LightGBM など実務分類で最も強力なアプローチの一つ。",
+    level: "準1",
+    category: "機械学習",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "サポートベクターマシン",
+    reading: "さぽーとべくたーましん",
+    english: "support vector machine (SVM)",
+    definition:
+      "クラスを最もマージン広く分離する超平面を求める分類器。カーネルトリックで非線形分類にも拡張できる。",
+    level: "準1",
+    category: "機械学習",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "k 近傍法",
+    reading: "けーきんぼうほう",
+    english: "k-nearest neighbors (kNN)",
+    definition:
+      "新しい点に最も近い $k$ 個の訓練点から多数決(分類)/平均(回帰)で予測する遅延学習。シンプルだが高次元で性能が落ちやすい。",
+    level: "準1",
+    category: "機械学習",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "ナイーブベイズ",
+    reading: "ないーぶべいず",
+    english: "naive Bayes",
+    definition:
+      "特徴間の条件付き独立を仮定し、ベイズの定理で事後確率を計算する分類器。テキスト分類で高速かつ強力。",
+    level: "準1",
+    category: "機械学習",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "アンサンブル学習",
+    reading: "あんさんぶるがくしゅう",
+    english: "ensemble learning",
+    definition:
+      "複数の弱い学習器を組み合わせて性能を上げる枠組み。バギング・ブースティング・スタッキングが三大手法。",
+    level: "準1",
+    category: "機械学習",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "バギング",
+    reading: "ばぎんぐ",
+    english: "bagging",
+    definition:
+      "ブートストラップで作った複数標本で学習器を並列に訓練し、出力を平均/多数決する手法。バリアンスを下げる。ランダムフォレストの基礎。",
+    level: "準1",
+    category: "機械学習",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "ブースティング",
+    reading: "ぶーすてぃんぐ",
+    english: "boosting",
+    definition:
+      "弱学習器を逐次的に学習し、誤りに重みをつけて次に活かす手法。バイアスを下げる。AdaBoost・勾配ブースティングが代表。",
+    level: "準1",
+    category: "機械学習",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "ハイパーパラメータ",
+    reading: "はいぱーぱらめーた",
+    english: "hyperparameter",
+    definition:
+      "学習で最適化されず、事前に設定するパラメータ(学習率・木の深さ・正則化強度など)。グリッド/ランダム/ベイズ最適化で探索する。",
+    level: "準1",
+    category: "機械学習",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "ドロップアウト",
+    reading: "どろっぷあうと",
+    english: "dropout",
+    definition:
+      "学習時に各ニューロンを確率 $p$ でランダムに無効化することで過学習を防ぐ正則化手法。推論時は全ユニットを使い出力をスケール。",
+    level: "準1",
+    category: "機械学習",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "バッチ正規化",
+    reading: "ばっちせいきか",
+    english: "batch normalization",
+    definition:
+      "ミニバッチごとに中間層の出力を平均 0・分散 1 に正規化してから線形変換する手法。学習の高速化と安定化に大きく寄与する。",
+    level: "準1",
+    category: "機械学習",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "アテンション機構",
+    reading: "あてんしょんきこう",
+    english: "attention mechanism",
+    definition:
+      "入力のどの部分にどれだけ注目するかを重み付けで動的に決める仕組み。Transformer の中核で、機械翻訳・LLM の性能を飛躍させた。",
+    level: "準1",
+    category: "機械学習",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "転移学習",
+    reading: "てんいがくしゅう",
+    english: "transfer learning",
+    definition:
+      "大規模データで学習済みのモデル(例: ImageNet/BERT)を、別タスク用に再利用する枠組み。少データで高性能を得る現代の標準。",
+    level: "準1",
+    category: "機械学習",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "ファインチューニング",
+    reading: "ふぁいんちゅーにんぐ",
+    english: "fine-tuning",
+    definition:
+      "事前学習済みモデルの一部または全パラメータを、目的タスクの少量データで追加学習する手法。LLM の業務カスタマイズで主流。",
+    level: "準1",
+    category: "機械学習",
+    link: "/certs/g-test/textbook",
+  },
+
+  // === AI 倫理 / 社会(G 検定) ===
+  {
+    term: "説明可能 AI",
+    reading: "せつめいかのうえーあい",
+    english: "explainable AI (XAI)",
+    definition:
+      "AI モデルの予測根拠を人間が解釈できる形で示す技術や思想。SHAP・LIME・Grad-CAM などが代表。医療・与信などで必須。",
+    level: "準1",
+    category: "AI 倫理",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "差分プライバシー",
+    reading: "さぶんぷらいばしー",
+    english: "differential privacy",
+    definition:
+      "個別レコードの有無で出力分布がほぼ変わらないようノイズを加え、個人特定リスクを定量的に保証するプライバシー保護技術。",
+    level: "準1",
+    category: "AI 倫理",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "AI 倫理",
+    reading: "えーあいりんり",
+    english: "AI ethics",
+    definition:
+      "公平性・透明性・説明責任・プライバシー・安全性など、AI を社会で使う上での原則と実践。各国で AI ガバナンス枠組みが整備中。",
+    level: "準1",
+    category: "AI 倫理",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "データ拡張",
+    reading: "でーたかくちょう",
+    english: "data augmentation",
+    definition:
+      "回転・反転・ノイズ付加などで訓練データを人工的に増やす手法。画像・音声で過学習抑制と汎化向上に大きく寄与する。",
+    level: "準1",
+    category: "機械学習",
+    link: "/certs/g-test/textbook",
+  },
+  {
+    term: "ELSI",
+    reading: "えるしー",
+    english: "ELSI (Ethical, Legal and Social Issues)",
+    definition:
+      "新技術がもたらす倫理的・法的・社会的課題の総称。AI / ゲノム / 自動運転などで研究開発と並行して検討される。",
+    level: "準1",
+    category: "AI 倫理",
+    link: "/certs/g-test/textbook",
+  },
+
+  // === DS 基礎 / データ実務 ===
+  {
+    term: "データクレンジング",
+    reading: "でーたくれんじんぐ",
+    english: "data cleansing",
+    definition:
+      "入力ミス・重複・形式不統一などを発見・修正してデータを分析可能な状態にする工程。実務の分析時間の半分以上を占める。",
+    level: "2",
+    category: "データ工学",
+    link: "/certs/ds-basic/textbook",
+  },
+  {
+    term: "欠損値処理",
+    reading: "けっそんちしょり",
+    english: "missing value imputation",
+    definition:
+      "欠損データを除外/平均補完/回帰補完/多重代入などで処理する手法群。欠損メカニズム(MCAR/MAR/MNAR)で適切な手法が変わる。",
+    level: "2",
+    category: "データ工学",
+    link: "/certs/ds-basic/textbook",
+  },
+  {
+    term: "標準化(スケーリング)",
+    reading: "ひょうじゅんか",
+    english: "feature scaling",
+    definition:
+      "特徴量を平均 0 ・分散 1(標準化)、または $[0,1]$(正規化)に揃える前処理。距離ベース手法・勾配法で必須。",
+    level: "2",
+    category: "データ工学",
+    link: "/certs/ds-basic/textbook",
+  },
+  {
+    term: "A/B テスト",
+    reading: "えーびーてすと",
+    english: "A/B testing",
+    definition:
+      "ユーザーをランダムに 2 群に分け、施策の効果を比較する実験。Web マーケ・プロダクト改善で標準。仮説検定の応用そのもの。",
+    level: "2",
+    category: "実務",
+    link: "/certs/ds-basic/textbook",
+  },
+  {
+    term: "ピボットテーブル",
+    reading: "ぴぼっとてーぶる",
+    english: "pivot table",
+    definition:
+      "Excel・BI ツールで、行/列/値を動的に切り替えてクロス集計を行う仕組み。DS 基礎試験では実技の中核機能。",
+    level: "2",
+    category: "実務",
+    link: "/certs/ds-basic/textbook",
+  },
+  {
+    term: "KPI",
+    reading: "けーぴーあい",
+    english: "Key Performance Indicator",
+    definition:
+      "目標達成度を測る重要業績評価指標。事業の北極星指標(NSM)とともに、データドリブン経営の意思決定基準となる。",
+    level: "2",
+    category: "実務",
+    link: "/certs/ds-literacy/textbook",
+  },
+
+  // === 公的統計 さらに追加 ===
+  {
+    term: "国民経済計算",
+    reading: "こくみんけいざいけいさん",
+    english: "System of National Accounts (SNA)",
+    definition:
+      "国の経済活動を生産・分配・支出の側面から体系的に記録する統計体系。GDP はその主要指標。日本は内閣府が作成。",
+    level: "2",
+    category: "公的統計",
+    link: "/certs/survey/textbook",
+  },
+  {
+    term: "消費者物価指数",
+    reading: "しょうひしゃぶっかしすう",
+    english: "Consumer Price Index (CPI)",
+    definition:
+      "家計が購入する商品・サービスの価格変動を、ある基準時を 100 として表す指数。総務省が作成、日銀の物価目標の対象。",
+    level: "2",
+    category: "公的統計",
+    link: "/certs/survey/textbook",
+  },
+  {
+    term: "ウェイトバック集計",
+    reading: "うぇいとばっくしゅうけい",
+    english: "weighting back",
+    definition:
+      "標本構成と母集団構成のズレを補正するため、各回答に「逆数(または比)」の重みを掛けて集計する手法。",
+    level: "2",
+    category: "公的統計",
+    link: "/certs/survey/textbook",
+  },
+  {
+    term: "統計的開示制御",
+    reading: "とうけいてきかいじせいぎょ",
+    english: "statistical disclosure control",
+    definition:
+      "公的統計データの提供時に、個人や事業所が特定されないよう、頂上値の丸めやセル抑制等で識別リスクを低減する処理。",
+    level: "2",
+    category: "公的統計",
+    link: "/certs/survey/textbook",
+  },
+  {
+    term: "標本設計",
+    reading: "ひょうほんせっけい",
+    english: "sample design",
+    definition:
+      "目標精度・コスト・回収率を踏まえ、抽出方法・標本サイズ・層化変数などを事前に決める計画段階。調査の質を大きく左右する。",
+    level: "2",
+    category: "公的統計",
+    link: "/certs/survey/textbook",
+  },
 ];
