@@ -1,6 +1,7 @@
 import type { TextbookBlock } from "@/types/content";
 import { Math } from "./Math";
 import { MixedText } from "./MixedText";
+import { Diagram } from "./diagrams/Diagram";
 
 function renderInline(text: string) {
   // Split on ** for simple bold, then render each part with MixedText for inline math.
@@ -94,6 +95,36 @@ export function TextbookBody({
               >
                 {block.text}
               </h4>
+            );
+          case "intuition":
+            return (
+              <div key={idx} className="intuition-box">
+                <div className="intuition-box-title">
+                  {block.title ?? "直感的には"}
+                </div>
+                <div className="leading-relaxed">
+                  {renderParagraphs(block.body)}
+                </div>
+              </div>
+            );
+          case "practical":
+            return (
+              <div key={idx} className="practical-box">
+                <div className="practical-box-title">
+                  {block.title ?? "実務での使い方"}
+                </div>
+                <div className="leading-relaxed">
+                  {renderParagraphs(block.body)}
+                </div>
+              </div>
+            );
+          case "figure":
+            return (
+              <Diagram
+                key={idx}
+                kind={block.kind}
+                caption={block.caption}
+              />
             );
         }
       })}

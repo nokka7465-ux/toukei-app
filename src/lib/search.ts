@@ -50,6 +50,12 @@ function blockToText(b: TextbookBlock): string {
     case "h3":
     case "h4":
       return b.text;
+    case "intuition":
+      return `${b.title ?? "直感"} ${b.body}`;
+    case "practical":
+      return `${b.title ?? "実務"} ${b.body}`;
+    case "figure":
+      return b.caption ?? "";
   }
 }
 

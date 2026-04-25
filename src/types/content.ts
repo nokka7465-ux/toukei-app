@@ -25,6 +25,19 @@ export type Book = {
   note?: string;
 };
 
+/** 図解(SVG)の種類 — DiagramRegistry のキーに対応 */
+export type DiagramKind =
+  | "normal-curve"
+  | "normal-rejection-region"
+  | "histogram-vs-bar"
+  | "scatter-regression"
+  | "roc-curve"
+  | "bias-variance"
+  | "clt-convergence"
+  | "binomial-shape"
+  | "boxplot-anatomy"
+  | "confidence-interval";
+
 export type TextbookBlock =
   | { type: "p"; text: string }
   | { type: "math"; tex: string }
@@ -32,7 +45,13 @@ export type TextbookBlock =
   | { type: "ex"; title: string; body: string }
   | { type: "list"; style?: "bullet" | "number"; items: string[] }
   | { type: "h3"; text: string }
-  | { type: "h4"; text: string };
+  | { type: "h4"; text: string }
+  /** 「なぜそうなるか」の直感解説ボックス */
+  | { type: "intuition"; title?: string; body: string }
+  /** 実務での使われ方コラム(マーケ・品質管理など) */
+  | { type: "practical"; title?: string; body: string }
+  /** 図解(SVG)。kind は DiagramRegistry のキー */
+  | { type: "figure"; kind: DiagramKind; caption?: string };
 
 export type TextbookSection = {
   id: string;

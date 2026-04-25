@@ -192,6 +192,68 @@ a {
   font-family: var(--font-noto-sans-jp), system-ui, sans-serif;
 }
 
+/* Intuition box (なぜそうなるか) */
+.intuition-box {
+  background: color-mix(in oklab, #fef3c7 65%, var(--page) 35%);
+  border-left: 4px solid #f59e0b;
+  padding: 0.875rem 1.125rem;
+  border-radius: 0 6px 6px 0;
+  margin: 1rem 0;
+}
+
+:root[data-theme="dark"] .intuition-box {
+  background: color-mix(in oklab, #422006 60%, var(--page) 40%);
+  border-left-color: #d97706;
+}
+
+.intuition-box-title {
+  font-weight: 700;
+  color: #b45309;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25rem;
+  font-family: var(--font-noto-sans-jp), system-ui, sans-serif;
+}
+
+:root[data-theme="dark"] .intuition-box-title {
+  color: #fbbf24;
+}
+
+.intuition-box-title::before {
+  content: "💡 ";
+}
+
+/* Practical box (実務での使い方) */
+.practical-box {
+  background: color-mix(in oklab, #dbeafe 60%, var(--page) 40%);
+  border-left: 4px solid #3b82f6;
+  padding: 0.875rem 1.125rem;
+  border-radius: 0 6px 6px 0;
+  margin: 1rem 0;
+}
+
+:root[data-theme="dark"] .practical-box {
+  background: color-mix(in oklab, #1e3a8a 50%, var(--page) 50%);
+  border-left-color: #60a5fa;
+}
+
+.practical-box-title {
+  font-weight: 700;
+  color: #1e40af;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25rem;
+  font-family: var(--font-noto-sans-jp), system-ui, sans-serif;
+}
+
+:root[data-theme="dark"] .practical-box-title {
+  color: #93c5fd;
+}
+
+.practical-box-title::before {
+  content: "🛠 ";
+}
+
 /* Textbook prose */
 .prose-textbook p {
   margin: 0.85rem 0;
@@ -255,7 +317,9 @@ a {
   }
 
   .def-box,
-  .example-box {
+  .example-box,
+  .intuition-box,
+  .practical-box {
     page-break-inside: avoid;
   }
 

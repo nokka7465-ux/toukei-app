@@ -51,6 +51,11 @@ function blockTextLength(b: TextbookBlock): number {
     case "h3":
     case "h4":
       return b.text.length;
+    case "intuition":
+    case "practical":
+      return (b.title?.length ?? 0) + b.body.length;
+    case "figure":
+      return b.caption?.length ?? 0;
   }
 }
 

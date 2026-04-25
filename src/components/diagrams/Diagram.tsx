@@ -1,0 +1,47 @@
+import type { DiagramKind } from "@/types/content";
+import { NormalCurve } from "./NormalCurve";
+import { NormalRejectionRegion } from "./NormalRejectionRegion";
+import { HistogramVsBar } from "./HistogramVsBar";
+import { ScatterRegression } from "./ScatterRegression";
+import { RocCurve } from "./RocCurve";
+import { BiasVariance } from "./BiasVariance";
+import { CltConvergence } from "./CltConvergence";
+import { BinomialShape } from "./BinomialShape";
+import { BoxplotAnatomy } from "./BoxplotAnatomy";
+import { ConfidenceInterval } from "./ConfidenceInterval";
+
+const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
+  "normal-curve": NormalCurve,
+  "normal-rejection-region": NormalRejectionRegion,
+  "histogram-vs-bar": HistogramVsBar,
+  "scatter-regression": ScatterRegression,
+  "roc-curve": RocCurve,
+  "bias-variance": BiasVariance,
+  "clt-convergence": CltConvergence,
+  "binomial-shape": BinomialShape,
+  "boxplot-anatomy": BoxplotAnatomy,
+  "confidence-interval": ConfidenceInterval,
+};
+
+export function Diagram({
+  kind,
+  caption,
+}: {
+  kind: DiagramKind;
+  caption?: string;
+}) {
+  const Component = REGISTRY[kind];
+  if (!Component) return null;
+  return (
+    <figure className="my-6 paper rounded-lg p-4 not-prose">
+      <div className="flex justify-center">
+        <Component />
+      </div>
+      {caption && (
+        <figcaption className="mt-2 text-xs text-center text-[var(--muted)] ui-sans">
+          図: {caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
