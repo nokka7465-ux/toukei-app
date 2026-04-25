@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Math } from "@/components/Math";
+import { PrintButton } from "@/components/PrintButton";
 import { introFormulas } from "@/data/formulas/intro";
 import { gradeFourFormulas } from "@/data/formulas/grade-4";
 import { gradeThreeFormulas } from "@/data/formulas/grade-3";
@@ -53,15 +54,7 @@ export default function CheatsheetPage() {
           統計検定 入門編〜1 級の重要公式を 1 ページに集約しました。**ブラウザの印刷機能(Ctrl/Cmd + P)** で A4 サイズに最適化された印刷ができます。試験前の最終確認や、学習の振り返りにご利用ください。
         </p>
         <div className="mt-3 flex flex-wrap gap-2 ui-sans text-xs print-hide">
-          <button
-            type="button"
-            onClick={() => {
-              if (typeof window !== "undefined") window.print();
-            }}
-            className="px-3 py-1.5 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)]"
-          >
-            🖨 印刷する
-          </button>
+          <PrintButton />
           <Link
             href="/math/textbook"
             className="px-3 py-1.5 border border-[var(--page-border-strong)] rounded hover:bg-[var(--background)]"
