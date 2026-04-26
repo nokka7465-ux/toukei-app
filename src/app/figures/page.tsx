@@ -4,11 +4,11 @@ import type { DiagramKind } from "@/types/content";
 import { Diagram } from "@/components/diagrams/Diagram";
 
 export const metadata: Metadata = {
-  title: "図解で学ぶ統計 ─ 直感を養う 16 種の SVG 図",
+  title: "図解で学ぶ統計 ─ 直感を養う 24 種の SVG 図",
   description:
-    "正規分布・中心極限定理・回帰直線・ROC 曲線・ベイズ更新・尤度関数まで、統計検定と機械学習で頻出のキー概念を SVG 図解で網羅。明朝体の本文と合わせて『直感』を養えます。",
+    "正規分布・中心極限定理・回帰直線・ROC 曲線・ベイズ更新・尤度関数・時系列・PCA・MCMC・生存解析まで、統計検定と機械学習で頻出のキー概念を SVG 図解で網羅。明朝体の本文と合わせて『直感』を養えます。",
   openGraph: {
-    title: "図解で学ぶ統計 ─ 16 種の SVG 図",
+    title: "図解で学ぶ統計 ─ 24 種の SVG 図",
     description:
       "統計検定 4 級〜1 級と関連検定のキー概念を SVG 図解で。",
     type: "article",
@@ -170,6 +170,78 @@ const FIGURES: FigureEntry[] = [
     link: "/certs/ds-literacy/textbook",
     linkLabel: "DS 検定 教科書を読む",
   },
+  {
+    kind: "anova-f-distribution",
+    title: "F 分布と棄却域",
+    level: "準 1 級",
+    category: "仮説検定",
+    insight: "ANOVA で使う F 分布。F > F* なら $H_0$ 棄却。",
+    link: "/textbook/grade-pre1#ch7-sec1",
+    linkLabel: "準 1 級 教科書を読む",
+  },
+  {
+    kind: "chi-squared-distribution",
+    title: "カイ二乗分布",
+    level: "準 1 級",
+    category: "確率分布",
+    insight: "自由度ごとに形が変わる。独立性検定の基本。",
+    link: "/textbook/grade-pre1#ch8-sec2",
+    linkLabel: "準 1 級 教科書を読む",
+  },
+  {
+    kind: "pca-axes",
+    title: "PCA の主成分軸",
+    level: "準 1 級",
+    category: "多変量",
+    insight: "PC1 = 分散最大方向。データの広がりを保つ次元削減。",
+    link: "/textbook/grade-pre1#ch3-sec3",
+    linkLabel: "準 1 級 教科書を読む",
+  },
+  {
+    kind: "time-series-decomposition",
+    title: "時系列の分解",
+    level: "準 1 級",
+    category: "時系列",
+    insight: "原系列 = トレンド + 季節 + 残差 に分解。",
+    link: "/textbook/grade-pre1#ch4-sec1",
+    linkLabel: "準 1 級 教科書を読む",
+  },
+  {
+    kind: "acf-plot",
+    title: "自己相関(ACF)プロット",
+    level: "準 1 級",
+    category: "時系列",
+    insight: "AR(1) は指数減衰、MA(q) は q 次でストン。",
+    link: "/textbook/grade-pre1#ch4-sec1",
+    linkLabel: "準 1 級 教科書を読む",
+  },
+  {
+    kind: "survival-km",
+    title: "カプラン・マイヤー生存曲線",
+    level: "準 1 級",
+    category: "応用",
+    insight: "打ち切りを考慮した階段状の生存率推定。",
+    link: "/textbook/grade-pre1#ch9-sec2",
+    linkLabel: "準 1 級 教科書を読む",
+  },
+  {
+    kind: "mcmc-trace",
+    title: "MCMC のトレースプロット",
+    level: "1 級",
+    category: "ベイズ",
+    insight: "複数連鎖が同じ分布に収束 → サンプリング成功。",
+    link: "/textbook/grade-1#ch3-sec2",
+    linkLabel: "1 級 教科書を読む",
+  },
+  {
+    kind: "random-walk",
+    title: "ランダムウォーク(ブラウン運動)",
+    level: "1 級",
+    category: "確率過程",
+    insight: "離散ランダムウォークの極限がブラウン運動。",
+    link: "/textbook/grade-1#ch4-sec3",
+    linkLabel: "1 級 教科書を読む",
+  },
 ];
 
 const SECTIONS: { title: string; eyebrow: string; figures: FigureEntry[] }[] = [
@@ -196,10 +268,27 @@ const SECTIONS: { title: string; eyebrow: string; figures: FigureEntry[] }[] = [
     figures: FIGURES.filter((f) => f.category === "回帰"),
   },
   {
+    eyebrow: "Multivariate",
+    title: "多変量解析",
+    figures: FIGURES.filter((f) => f.category === "多変量"),
+  },
+  {
+    eyebrow: "Time Series",
+    title: "時系列解析",
+    figures: FIGURES.filter((f) => f.category === "時系列"),
+  },
+  {
     eyebrow: "Bayesian & Theory",
     title: "ベイズと数理統計",
     figures: FIGURES.filter(
       (f) => f.category === "ベイズ" || f.category === "推定理論",
+    ),
+  },
+  {
+    eyebrow: "Stochastic & Applied",
+    title: "確率過程と応用",
+    figures: FIGURES.filter(
+      (f) => f.category === "確率過程" || f.category === "応用",
     ),
   },
   {

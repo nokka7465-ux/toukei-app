@@ -15,6 +15,14 @@ import { BayesUpdate } from "./BayesUpdate";
 import { LearningCurve } from "./LearningCurve";
 import { LikelihoodMle } from "./LikelihoodMle";
 import { PValueArea } from "./PValueArea";
+import { AcfPlot } from "./AcfPlot";
+import { TimeSeriesDecomposition } from "./TimeSeriesDecomposition";
+import { PcaAxes } from "./PcaAxes";
+import { McmcTrace } from "./McmcTrace";
+import { SurvivalKm } from "./SurvivalKm";
+import { ChiSquaredDistribution } from "./ChiSquaredDistribution";
+import { AnovaFDistribution } from "./AnovaFDistribution";
+import { RandomWalk } from "./RandomWalk";
 
 const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   "normal-curve": NormalCurve,
@@ -33,6 +41,14 @@ const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   "learning-curve": LearningCurve,
   "likelihood-mle": LikelihoodMle,
   "p-value-area": PValueArea,
+  "acf-plot": AcfPlot,
+  "time-series-decomposition": TimeSeriesDecomposition,
+  "pca-axes": PcaAxes,
+  "mcmc-trace": McmcTrace,
+  "survival-km": SurvivalKm,
+  "chi-squared-distribution": ChiSquaredDistribution,
+  "anova-f-distribution": AnovaFDistribution,
+  "random-walk": RandomWalk,
 };
 
 export function Diagram({

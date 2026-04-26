@@ -42,7 +42,15 @@ export type DiagramKind =
   | "bayes-update"
   | "learning-curve"
   | "likelihood-mle"
-  | "p-value-area";
+  | "p-value-area"
+  | "acf-plot"
+  | "time-series-decomposition"
+  | "pca-axes"
+  | "mcmc-trace"
+  | "survival-km"
+  | "chi-squared-distribution"
+  | "anova-f-distribution"
+  | "random-walk";
 
 export type TextbookBlock =
   | { type: "p"; text: string }
