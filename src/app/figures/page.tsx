@@ -4,13 +4,13 @@ import type { DiagramKind } from "@/types/content";
 import { Diagram } from "@/components/diagrams/Diagram";
 
 export const metadata: Metadata = {
-  title: "図解で学ぶ統計 ─ 直感を養う 24 種の SVG 図",
+  title: "図解で学ぶ統計 ─ 直感を養う 29 種の SVG 図",
   description:
-    "正規分布・中心極限定理・回帰直線・ROC 曲線・ベイズ更新・尤度関数・時系列・PCA・MCMC・生存解析まで、統計検定と機械学習で頻出のキー概念を SVG 図解で網羅。明朝体の本文と合わせて『直感』を養えます。",
+    "正規分布・中心極限定理・回帰直線・ROC 曲線・ベイズ更新・尤度関数・時系列・PCA・MCMC・生存解析・活性化関数・CNN アーキテクチャ・管理図・OC 曲線まで、統計検定と機械学習・品質管理で頻出のキー概念を SVG 図解で網羅。",
   openGraph: {
-    title: "図解で学ぶ統計 ─ 24 種の SVG 図",
+    title: "図解で学ぶ統計 ─ 29 種の SVG 図",
     description:
-      "統計検定 4 級〜1 級と関連検定のキー概念を SVG 図解で。",
+      "統計検定 4 級〜1 級・E 資格・G 検定・QC 検定など全関連検定のキー概念を SVG で。",
     type: "article",
   },
 };
@@ -242,6 +242,51 @@ const FIGURES: FigureEntry[] = [
     link: "/textbook/grade-1#ch4-sec3",
     linkLabel: "1 級 教科書を読む",
   },
+  {
+    kind: "activation-functions",
+    title: "活性化関数の比較",
+    level: "E 資格",
+    category: "DL",
+    insight: "Sigmoid・Tanh・ReLU・Leaky ReLU の特徴を一目で。",
+    link: "/certs/e-shikaku/textbook",
+    linkLabel: "E 資格 教科書を読む",
+  },
+  {
+    kind: "gradient-descent-paths",
+    title: "最適化アルゴリズムの収束経路",
+    level: "E 資格",
+    category: "DL",
+    insight: "SGD は振動、Momentum で慣性、Adam は適応的。",
+    link: "/certs/e-shikaku/textbook",
+    linkLabel: "E 資格 教科書を読む",
+  },
+  {
+    kind: "cnn-architecture",
+    title: "CNN アーキテクチャ",
+    level: "E 資格",
+    category: "DL",
+    insight: "Conv → Pool → Conv → Pool → FC → Softmax の標準構成。",
+    link: "/certs/e-shikaku/textbook",
+    linkLabel: "E 資格 教科書を読む",
+  },
+  {
+    kind: "control-chart",
+    title: "Shewhart 管理図",
+    level: "QC 検定",
+    category: "品質管理",
+    insight: "±3σ の管理限界を超えたら工程に異常。",
+    link: "/certs/qc-kentei/textbook",
+    linkLabel: "QC 検定 教科書を読む",
+  },
+  {
+    kind: "oc-curve",
+    title: "OC 曲線(抜取検査)",
+    level: "QC 検定",
+    category: "品質管理",
+    insight: "横軸 = ロット不良率、縦軸 = 合格確率。AQL/LTPD のマーキング。",
+    link: "/certs/qc-kentei/textbook",
+    linkLabel: "QC 検定 教科書を読む",
+  },
 ];
 
 const SECTIONS: { title: string; eyebrow: string; figures: FigureEntry[] }[] = [
@@ -295,6 +340,16 @@ const SECTIONS: { title: string; eyebrow: string; figures: FigureEntry[] }[] = [
     eyebrow: "Machine Learning",
     title: "機械学習",
     figures: FIGURES.filter((f) => f.category === "機械学習"),
+  },
+  {
+    eyebrow: "Deep Learning",
+    title: "ディープラーニング",
+    figures: FIGURES.filter((f) => f.category === "DL"),
+  },
+  {
+    eyebrow: "Quality Control",
+    title: "品質管理",
+    figures: FIGURES.filter((f) => f.category === "品質管理"),
   },
 ];
 

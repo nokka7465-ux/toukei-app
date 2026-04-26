@@ -27,7 +27,7 @@ const notoSansJP = Noto_Sans_JP({
 const SITE_URL = "https://toukei-app-eight.vercel.app";
 const SITE_NAME = "統計検定 学習帳";
 const SITE_DESCRIPTION =
-  "統計検定4級〜1級に対応した無料学習サイト。教科書・公式集・演習問題に加え、スライダーで動かせるインタラクティブ図解、信頼区間/p値/サンプルサイズの計算ツール、Python/Rコード併記まで完備。データサイエンスにも対応。";
+  "統計検定4級〜1級に対応した無料学習サイト。関連検定 7 種(DS基礎・統計調査士・専門統計調査士・G検定・E資格・DS検定・QC検定)も網羅。インタラクティブ図解・統計計算ツール・Python/Rコード併記など、検定対策本にない学習体験を提供。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -50,6 +50,14 @@ export const metadata: Metadata = {
     "問題集",
     "公式集",
     "データサイエンス",
+    "E資格",
+    "G検定",
+    "QC検定",
+    "品質管理検定",
+    "統計調査士",
+    "専門統計調査士",
+    "DS検定",
+    "JDLA",
   ],
   openGraph: {
     type: "website",
