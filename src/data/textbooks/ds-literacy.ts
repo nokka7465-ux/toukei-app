@@ -125,6 +125,26 @@ export const dsLiteracyTextbook: Textbook = {
               title: "実務での使い方:早期終了とハイパーパラメータ調整",
               body: "Keras / PyTorch などの DL ライブラリには、検証誤差が改善しなくなったら自動で学習を止める「Early Stopping」コールバックが標準で備わっています。実務では「学習エポックを多めに設定して Early Stopping に任せる」のが定石。同じ図はモデル複雑度を横軸にしても成り立つので、決定木の深さ・SVM のカーネル幅などのハイパーパラメータ調整にも応用されます。",
             },
+            {
+              type: "code",
+              title: "Python で交差検証 + ROC AUC を計算する",
+              python: `from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import roc_auc_score, roc_curve
+
+model = LogisticRegression(max_iter=1000)
+
+# 5-fold 交差検証で平均精度
+scores = cross_val_score(model, X, y, cv=5, scoring="roc_auc")
+print(f"AUC = {scores.mean():.3f} ± {scores.std():.3f}")
+
+# ROC 曲線を描画
+model.fit(X_train, y_train)
+proba = model.predict_proba(X_test)[:, 1]
+fpr, tpr, _ = roc_curve(y_test, proba)
+print(f"AUC(test) = {roc_auc_score(y_test, proba):.3f}")`,
+              caption: "scikit-learn は分類モデルの評価関数が一通り揃っており、実務でデファクト。",
+            },
             { type: "h3", text: "ビジュアライゼーション" },
             {
               type: "p",

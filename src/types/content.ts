@@ -65,7 +65,15 @@ export type TextbookBlock =
   /** 実務での使われ方コラム(マーケ・品質管理など) */
   | { type: "practical"; title?: string; body: string }
   /** 図解(SVG)。kind は DiagramRegistry のキー */
-  | { type: "figure"; kind: DiagramKind; caption?: string };
+  | { type: "figure"; kind: DiagramKind; caption?: string }
+  /** Python / R のコードスニペット。学習中の概念をコードで再現する */
+  | {
+      type: "code";
+      title?: string;
+      python?: string;
+      r?: string;
+      caption?: string;
+    };
 
 export type TextbookSection = {
   id: string;

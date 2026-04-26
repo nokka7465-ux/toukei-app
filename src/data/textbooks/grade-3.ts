@@ -581,6 +581,30 @@ export const gradeThreeTextbook: Textbook = {
               body: "工場の品質管理では、製品の寸法を毎日測定し $z$ 値を計算します。$|z| > 3$ となるサンプル(=母集団の 0.3% 未満)が出たら「異常」のサインとして警報を出す、というのが管理図(control chart)の基本ロジックです。マーケティング分析でもユーザーの行動指標を $z$ で標準化し、「平均から外れすぎた異常顧客」を発見するのに使われます。",
             },
             {
+              type: "code",
+              title: "Python / R で正規分布の確率を計算する",
+              python: `from scipy import stats
+
+# X ~ N(50, 10²) のとき P(X <= 60) を求める
+mu, sigma = 50, 10
+print(stats.norm.cdf(60, loc=mu, scale=sigma))   # 0.8413...
+
+# z 値で確率を求める(標準正規分布)
+print(stats.norm.cdf(1.0))                       # 0.8413...
+
+# 上側 2.5% 点(95% 信頼区間で使う z 値)
+print(stats.norm.ppf(0.975))                     # 1.9600`,
+              r: `# X ~ N(50, 10²) のとき P(X <= 60) を求める
+pnorm(60, mean = 50, sd = 10)        # 0.8413...
+
+# z 値で確率を求める(標準正規分布)
+pnorm(1.0)                            # 0.8413...
+
+# 上側 2.5% 点(95% 信頼区間で使う z 値)
+qnorm(0.975)                          # 1.9600`,
+              caption: "scipy.stats.norm と R の pnorm/qnorm が標準的な対応物。",
+            },
+            {
               type: "ex",
               title: "例題 3.4 ─ 標準化を使った計算",
               body: "$X \\sim N(50, 10^2)$ のとき $X \\leq 60$ となる確率を求めよ。\n\n**解** : $Z = (60 - 50)/10 = 1$。表より $P(Z \\leq 1) \\approx 0.8413$、つまり約 $84\\%$。",

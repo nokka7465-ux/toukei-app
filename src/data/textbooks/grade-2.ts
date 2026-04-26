@@ -298,6 +298,26 @@ export const gradeTwoTextbook: Textbook = {
               title: "実務での使い方:A/B テスト",
               body: "Web マーケでは「新ボタン色は CV 率を上げるか?」を検証するため、ユーザーをランダムに 2 群に分けて指標を比較します。これは「2 群の比率に差があるか」の仮説検定そのもの。多くの A/B テスト基盤(Optimizely・Google Optimize など)が、内部でこの仕組みを動かしています。「p < 0.05 になったら新案を採用」という意思決定が標準です。",
             },
+            {
+              type: "code",
+              title: "Python / R で 2 標本 t 検定を行う",
+              python: `from scipy import stats
+
+a = [85, 88, 90, 78, 92, 86, 89, 84, 91, 87]
+b = [80, 82, 79, 85, 83, 81, 78, 84, 80, 82]
+
+# 等分散を仮定しないウェルチの t 検定(推奨)
+t, p = stats.ttest_ind(a, b, equal_var=False)
+print(f"t = {t:.3f}, p = {p:.4f}")
+# 有意水準 0.05 で有意なら p < 0.05`,
+              r: `a <- c(85, 88, 90, 78, 92, 86, 89, 84, 91, 87)
+b <- c(80, 82, 79, 85, 83, 81, 78, 84, 80, 82)
+
+# 等分散を仮定しないウェルチの t 検定(R では default)
+t.test(a, b)
+# t, df, p-value, 95 percent confidence interval が出力される`,
+              caption: "scipy.stats.ttest_ind / R の t.test() で 1 行で実行可能。",
+            },
             { type: "h3", text: "第 1 種の誤り・第 2 種の誤り・検出力" },
             {
               type: "def",
@@ -494,6 +514,27 @@ export const gradeTwoTextbook: Textbook = {
               type: "practical",
               title: "実務での使い方:売上予測",
               body: "「気温と冷たい飲み物の売上」「広告費と売上」「Web 広告のクリック数とコンバージョン数」 ─ どれもまず散布図を描き、回帰直線を当てはめて関係を定量化します。傾きが「気温が 1 度上がると売上が ◯ 円増える」という意思決定可能な数字になり、来週の気温予報から来週の売上を予測できる ─ これが企業の在庫管理・人員配置の出発点です。",
+            },
+            {
+              type: "code",
+              title: "Python / R で単回帰を実行する",
+              python: `import numpy as np
+import statsmodels.api as sm
+
+x = np.array([1, 2, 3, 4, 5, 6, 7, 8])
+y = np.array([2.1, 3.9, 6.2, 8.0, 10.1, 11.8, 14.0, 15.9])
+
+# 切片を含めるため定数列を追加
+X = sm.add_constant(x)
+model = sm.OLS(y, X).fit()
+print(model.summary())   # 係数・p値・R² がまとめて表示`,
+              r: `x <- c(1, 2, 3, 4, 5, 6, 7, 8)
+y <- c(2.1, 3.9, 6.2, 8.0, 10.1, 11.8, 14.0, 15.9)
+
+# lm() で 1 行で回帰
+fit <- lm(y ~ x)
+summary(fit)    # 係数・p値・R² がまとめて表示`,
+              caption: "statsmodels.OLS / R の lm() の出力は『Excel データ分析 → 回帰』とほぼ同じ構造。",
             },
             {
               type: "def",

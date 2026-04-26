@@ -2,6 +2,7 @@ import type { TextbookBlock } from "@/types/content";
 import { Math } from "./Math";
 import { MixedText } from "./MixedText";
 import { Diagram } from "./diagrams/Diagram";
+import { CodeBlock } from "./CodeBlock";
 
 function renderInline(text: string) {
   // Split on ** for simple bold, then render each part with MixedText for inline math.
@@ -123,6 +124,16 @@ export function TextbookBody({
               <Diagram
                 key={idx}
                 kind={block.kind}
+                caption={block.caption}
+              />
+            );
+          case "code":
+            return (
+              <CodeBlock
+                key={idx}
+                title={block.title}
+                python={block.python}
+                r={block.r}
                 caption={block.caption}
               />
             );

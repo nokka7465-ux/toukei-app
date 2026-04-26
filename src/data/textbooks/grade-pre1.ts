@@ -441,6 +441,31 @@ export const gradePre1Textbook: Textbook = {
               title: "実務での使い方:顧客セグメンテーション",
               body: "EC サイトで「購買頻度・平均購入額・滞在時間・カテゴリ多様性」など 20 〜 50 の特徴量を持つ顧客データを、PCA で 2 〜 3 次元に圧縮 → クラスタリングで顧客タイプ別に分けるのが定番ワークフロー。圧縮後の散布図で『右上のクラスタが優良顧客、左下が休眠顧客』のような直感的な解釈が可能になります。マーケ施策の対象セグメント定義の出発点として広く使われます。",
             },
+            {
+              type: "code",
+              title: "Python / R で PCA を実行する",
+              python: `from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+import numpy as np
+
+# 適当なデータ(100 行 × 5 列)
+X = np.random.randn(100, 5)
+
+# 標準化してから PCA
+X_scaled = StandardScaler().fit_transform(X)
+pca = PCA(n_components=2)
+Z = pca.fit_transform(X_scaled)
+
+print("寄与率:", pca.explained_variance_ratio_)
+print("累積寄与率:", pca.explained_variance_ratio_.cumsum())`,
+              r: `# あらかじめ data はデータフレーム
+res <- prcomp(data, scale. = TRUE)
+
+summary(res)              # 各主成分の標準偏差・寄与率・累積寄与率
+biplot(res)               # 主成分ベクトルと観測点の同時可視化
+res$x[, 1:2]              # 第 1・第 2 主成分の得点`,
+              caption: "scikit-learn の PCA / R の prcomp() がデファクト。標準化を忘れずに。",
+            },
             { type: "h3", text: "数式での定義" },
             {
               type: "def",
@@ -570,6 +595,36 @@ export const gradePre1Textbook: Textbook = {
               type: "practical",
               title: "実務での使い方:需要予測",
               body: "EC・小売・製造業で『来月の在庫を何個用意するか』を決めるのに ARIMA / SARIMA は今も現役。**Python なら `statsmodels.tsa.arima` や `prophet`、R なら `forecast` パッケージ**で数行で実装できます。重要なのはモデル選びより『どのトレンド・季節を見せるか』のドメイン知識で、純粋な統計だけでは予測できません。新型コロナ・ボーナス時期・天候のような外部要因を**説明変数として加える(ARIMAX)**のが実務の落とし所です。",
+            },
+            {
+              type: "code",
+              title: "Python / R で ARIMA モデルを当てはめる",
+              python: `from statsmodels.tsa.arima.model import ARIMA
+from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
+
+# 月次売上データ(リスト y)
+fit = ARIMA(y, order=(1, 1, 1)).fit()
+print(fit.summary())
+
+# 12 期先まで予測
+forecast = fit.forecast(steps=12)
+
+# モデル次数の判断には ACF/PACF プロット
+plot_acf(y, lags=20)
+plot_pacf(y, lags=20)`,
+              r: `library(forecast)
+
+# auto.arima() が AIC 最小の (p,d,q) を自動選択
+fit <- auto.arima(y)
+summary(fit)
+
+# 12 期先予測 + 区間
+fcst <- forecast(fit, h = 12)
+plot(fcst)
+
+# モデル次数の判断には ACF/PACF
+acf(y);  pacf(y)`,
+              caption: "現代では auto.arima() / pmdarima.auto_arima() で次数選択を自動化するのが主流。",
             },
             { type: "h3", text: "発展トピックへの橋渡し" },
             {

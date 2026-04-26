@@ -27,7 +27,7 @@ const notoSansJP = Noto_Sans_JP({
 const SITE_URL = "https://toukei-app-eight.vercel.app";
 const SITE_NAME = "統計検定 学習帳";
 const SITE_DESCRIPTION =
-  "統計検定4級〜1級に対応した無料学習サイト。教科書・公式集・演習問題をすべて無料で学習できます。データサイエンスやPythonと組み合わせた実践的な統計学習にも対応。";
+  "統計検定4級〜1級に対応した無料学習サイト。教科書・公式集・演習問題に加え、スライダーで動かせるインタラクティブ図解、信頼区間/p値/サンプルサイズの計算ツール、Python/Rコード併記まで完備。データサイエンスにも対応。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -261,6 +261,16 @@ export default function RootLayout({
                   <li>
                     <Link href="/figures" className="hover:underline text-[var(--muted-strong)]">
                       図解で学ぶ統計
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/explore" className="hover:underline text-[var(--muted-strong)]">
+                      動かして学ぶ統計
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/tools" className="hover:underline text-[var(--muted-strong)]">
+                      統計計算ツール
                     </Link>
                   </li>
                   <li>

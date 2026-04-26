@@ -156,6 +156,18 @@ export default function Home() {
             図解で学ぶ統計
           </Link>
           <Link
+            href="/explore"
+            className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
+          >
+            動かして学ぶ統計
+          </Link>
+          <Link
+            href="/tools"
+            className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
+          >
+            統計計算ツール
+          </Link>
+          <Link
             href="/exam-info"
             className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
           >

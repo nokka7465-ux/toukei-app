@@ -56,6 +56,8 @@ function blockToText(b: TextbookBlock): string {
       return `${b.title ?? "実務"} ${b.body}`;
     case "figure":
       return b.caption ?? "";
+    case "code":
+      return `${b.title ?? "コード"} ${b.python ?? ""} ${b.r ?? ""} ${b.caption ?? ""}`;
   }
 }
 

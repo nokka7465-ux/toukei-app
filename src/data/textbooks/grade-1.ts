@@ -507,6 +507,32 @@ export const gradeOneTextbook: Textbook = {
               title: "実務での使い方:機械学習モデルの精度評価",
               body: "「このモデルの精度 78% って、どれくらい信頼できるの?」を答える定番手法がブートストラップです。テストデータからリサンプリングして 1000 回精度を計算 → その分布の 2.5%/97.5% パーセンタイルを取れば、`78% [73%, 82%]` のような信頼区間付きで報告できます。サンプル数が小さい医療系・希少疾患の分析では特に重宝。Python の scikit-learn にも `bootstrap` ユーティリティが組み込まれています。",
             },
+            {
+              type: "code",
+              title: "Python / R でブートストラップ信頼区間を求める",
+              python: `import numpy as np
+
+rng = np.random.default_rng(42)
+data = np.array([4.2, 5.1, 3.8, 6.0, 4.7, 5.5, 4.0, 5.8, 4.4, 5.2])
+
+# 中央値の 95% ブートストラップ信頼区間
+B = 10000
+n = len(data)
+medians = np.array([
+    np.median(rng.choice(data, size=n, replace=True))
+    for _ in range(B)
+])
+lo, hi = np.percentile(medians, [2.5, 97.5])
+print(f"中央値 95% CI: [{lo:.3f}, {hi:.3f}]")`,
+              r: `library(boot)
+
+data <- c(4.2, 5.1, 3.8, 6.0, 4.7, 5.5, 4.0, 5.8, 4.4, 5.2)
+
+# 中央値のブートストラップ
+res <- boot(data, statistic = function(d, i) median(d[i]), R = 10000)
+boot.ci(res, type = c("perc", "bca"))   # 百分位法 + BCa`,
+              caption: "boot パッケージは BCa(バイアス補正)を含む高度な区間も簡単に。",
+            },
             { type: "h3", text: "ブートストラップ信頼区間の作り方" },
             {
               type: "list",

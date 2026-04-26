@@ -56,6 +56,8 @@ function blockTextLength(b: TextbookBlock): number {
       return (b.title?.length ?? 0) + b.body.length;
     case "figure":
       return b.caption?.length ?? 0;
+    case "code":
+      return (b.python?.length ?? 0) + (b.r?.length ?? 0);
   }
 }
 
