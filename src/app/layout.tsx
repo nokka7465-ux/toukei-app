@@ -239,13 +239,28 @@ export default function RootLayout({
                     </Link>
                   </li>
                   <li>
+                    <Link href="/certs/survey-specialist" className="hover:underline text-[var(--muted-strong)]">
+                      専門統計調査士
+                    </Link>
+                  </li>
+                  <li>
                     <Link href="/certs/g-test" className="hover:underline text-[var(--muted-strong)]">
                       G検定
                     </Link>
                   </li>
                   <li>
+                    <Link href="/certs/e-shikaku" className="hover:underline text-[var(--muted-strong)]">
+                      E資格
+                    </Link>
+                  </li>
+                  <li>
                     <Link href="/certs/ds-literacy" className="hover:underline text-[var(--muted-strong)]">
-                      データサイエンティスト検定
+                      DS検定
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/qc-kentei" className="hover:underline text-[var(--muted-strong)]">
+                      QC検定
                     </Link>
                   </li>
                 </ul>

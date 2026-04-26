@@ -2107,4 +2107,350 @@ export const glossary: GlossaryTerm[] = [
     category: "公的統計",
     link: "/certs/survey/textbook",
   },
+
+  // === E 資格 / DL 関連用語 ===
+  {
+    term: "テンソル",
+    reading: "てんそる",
+    english: "tensor",
+    definition:
+      "多次元配列。0 階=スカラー、1 階=ベクトル、2 階=行列、3 階以上=テンソル。DL では画像バッチを (N, C, H, W) の 4 階テンソルで扱うのが標準。",
+    level: "準1",
+    category: "DL 数学",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "特異値分解",
+    reading: "とくいちぶんかい",
+    english: "singular value decomposition (SVD)",
+    definition:
+      "任意の行列 $A$ を $A = U \\Sigma V^\\top$ に分解。$U, V$ は直交、$\\Sigma$ は非負特異値の対角。データ圧縮・PCA の高次元実装・推薦システムなどで使う。",
+    level: "1",
+    category: "DL 数学",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "順伝播",
+    reading: "じゅんでんぱ",
+    english: "forward propagation",
+    definition:
+      "ニューラルネットで、入力から出力に向かって計算を進める過程。各層で線形変換 $W\\mathbf x + \\mathbf b$ + 活性化関数を順次適用する。",
+    level: "準1",
+    category: "DL 基礎",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "誤差逆伝播法",
+    reading: "ごさぎゃくでんぱほう",
+    english: "backpropagation",
+    definition:
+      "損失関数の勾配を、出力層から入力層に向かって連鎖律で逐次的に計算するアルゴリズム。DL の学習を支える中核技術。",
+    level: "準1",
+    category: "DL 基礎",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "ReLU",
+    reading: "れる",
+    english: "ReLU (Rectified Linear Unit)",
+    definition:
+      "活性化関数 $\\max(0, x)$。負の領域で勾配 0、正の領域で勾配 1。DL で勾配消失を緩和して学習を成功させた立役者。",
+    level: "準1",
+    category: "DL 基礎",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "Softmax",
+    reading: "そふとまっくす",
+    english: "softmax",
+    definition:
+      "$\\sigma(z)_i = e^{z_i} / \\sum_j e^{z_j}$。多クラス分類の出力層で確率分布に変換。交差エントロピー損失と組合せて使う。",
+    level: "準1",
+    category: "DL 基礎",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "勾配消失問題",
+    reading: "こうばいしょうしつもんだい",
+    english: "vanishing gradient problem",
+    definition:
+      "深いネットワークで逆伝播時に勾配が指数的に小さくなり、初期層が学習できなくなる現象。ReLU・残差接続・LSTM ゲートで緩和。",
+    level: "準1",
+    category: "DL 基礎",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "残差接続",
+    reading: "ざんさせつぞく",
+    english: "skip connection / residual connection",
+    definition:
+      "$\\mathbf{a}^{(l)} = \\mathbf{a}^{(l-1)} + F(\\mathbf{a}^{(l-1)})$。前層の入力を後層に直接足す経路。ResNet で 100 層以上の深層化を実現。",
+    level: "準1",
+    category: "DL 基礎",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "Adam",
+    reading: "あだむ",
+    english: "Adam optimizer",
+    definition:
+      "Momentum と RMSProp を組合せた最適化アルゴリズム。各パラメータの学習率を適応的に調整。現在 DL の事実上のデフォルト。",
+    level: "準1",
+    category: "DL 基礎",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "CNN",
+    reading: "しーえぬえぬ",
+    english: "Convolutional Neural Network",
+    definition:
+      "畳み込み層 + プーリング層を中心に構成された、画像処理に特化した DL アーキテクチャ。LeNet から ResNet・EfficientNet まで多数の派生。",
+    level: "準1",
+    category: "DL モデル",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "プーリング",
+    reading: "ぷーりんぐ",
+    english: "pooling",
+    definition:
+      "領域ごとに最大値(Max pooling)または平均(Average pooling)を取る操作。ダウンサンプリング + 位置のずれへの頑健性。",
+    level: "準1",
+    category: "DL モデル",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "LSTM",
+    reading: "えるえすてぃーえむ",
+    english: "Long Short-Term Memory",
+    definition:
+      "RNN の一種。忘却・入力・出力の 3 ゲートを持ち、長期依存を学習可能。機械翻訳・音声認識で長らく主役だった。",
+    level: "準1",
+    category: "DL モデル",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "Self-Attention",
+    reading: "せるふあてんしょん",
+    english: "self-attention",
+    definition:
+      "入力系列の各位置が他のすべての位置を参照する仕組み。$\\mathrm{softmax}(QK^\\top/\\sqrt{d_k})V$ で計算。Transformer の中核。",
+    level: "準1",
+    category: "DL モデル",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "BERT",
+    reading: "ばーと",
+    english: "BERT",
+    definition:
+      "Google が 2018 年に発表した Transformer Encoder ベースの事前学習モデル。マスクされた単語の予測(MLM)で学習し、ファインチューニングで様々な NLP タスクに適用。",
+    level: "準1",
+    category: "DL モデル",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "GPT",
+    reading: "じーぴーてぃー",
+    english: "GPT (Generative Pre-trained Transformer)",
+    definition:
+      "OpenAI が 2018 年から発表している Transformer Decoder ベースの自己回帰生成モデル。次の単語予測で学習し、ChatGPT などの LLM の基盤に。",
+    level: "準1",
+    category: "DL モデル",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "VAE",
+    reading: "ぶいえーいー",
+    english: "Variational Autoencoder",
+    definition:
+      "Encoder-Decoder で潜在変数の分布を学習する生成モデル。再構成誤差 + KL ダイバージェンスを最小化(ELBO 最大化)。",
+    level: "準1",
+    category: "DL モデル",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "GAN",
+    reading: "がん",
+    english: "Generative Adversarial Network",
+    definition:
+      "生成器と識別器を競合させる生成モデル。生成器が偽物を作り、識別器が本物 / 偽物を判定。学習が不安定だが、高品質な生成が可能。",
+    level: "準1",
+    category: "DL モデル",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "拡散モデル",
+    reading: "かくさんもでる",
+    english: "diffusion model",
+    definition:
+      "ノイズを段階的に加える順過程の逆を学習する生成モデル。Stable Diffusion・DALL-E 3 など現代の画像生成 AI の中核。",
+    level: "準1",
+    category: "DL モデル",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "RLHF",
+    reading: "あーるえるえいちえふ",
+    english: "Reinforcement Learning from Human Feedback",
+    definition:
+      "人間が比較した嗜好データから報酬モデルを学習し、LLM を強化学習で微調整する手法。ChatGPT・Claude などの『有用で安全な対話エージェント化』の核心技術。",
+    level: "準1",
+    category: "強化学習",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "知識蒸留",
+    reading: "ちしきじょうりゅう",
+    english: "knowledge distillation",
+    definition:
+      "大きい教師モデルの出力(soft target)を学習目標として、小さい生徒モデルを学習させる手法。BERT → DistilBERT が代表例。",
+    level: "準1",
+    category: "DL 実装",
+    link: "/certs/e-shikaku/textbook",
+  },
+  {
+    term: "量子化",
+    reading: "りょうしか",
+    english: "quantization",
+    definition:
+      "DL モデルの重み・活性を float32 から int8 などに変換し、サイズ・推論速度を改善する手法。エッジデバイスでの推論に必須。",
+    level: "準1",
+    category: "DL 実装",
+    link: "/certs/e-shikaku/textbook",
+  },
+
+  // === QC 検定 / 品質管理用語 ===
+  {
+    term: "管理図",
+    reading: "かんりず",
+    english: "control chart",
+    definition:
+      "工程から定期的に取った統計量を時系列で記録し、UCL/LCL を引いて異常を判定する図。Shewhart の X̄-R 管理図、p 管理図、c 管理図など。",
+    level: "2",
+    category: "品質管理",
+    link: "/certs/qc-kentei/textbook",
+  },
+  {
+    term: "工程能力指数",
+    reading: "こうていのうりょくしすう",
+    english: "process capability index (Cp/Cpk)",
+    definition:
+      "規格幅に対する工程のばらつきの大きさを表す指標。$C_p = (USL-LSL)/(6\\sigma)$、中心ずれを考慮した $C_{pk}$ も併用。製造業の目標 $C_{pk} \\geq 1.33$。",
+    level: "2",
+    category: "品質管理",
+    link: "/certs/qc-kentei/textbook",
+  },
+  {
+    term: "シックスシグマ",
+    reading: "しっくすしぐま",
+    english: "Six Sigma",
+    definition:
+      "$\\pm 6\\sigma$ の品質管理を目指す改革運動。100 万個に 3.4 個の不良率(3.4 PPM)。$C_{pk} = 2.0$ に相当。モトローラ・GE が広めた。",
+    level: "2",
+    category: "品質管理",
+    link: "/certs/qc-kentei/textbook",
+  },
+  {
+    term: "OC 曲線",
+    reading: "おーしーきょくせん",
+    english: "Operating Characteristic Curve",
+    definition:
+      "抜取検査の性能を示す曲線。横軸=ロット不良率、縦軸=合格確率。AQL では合格、LTPD では不合格となるのが理想。",
+    level: "2",
+    category: "品質管理",
+    link: "/certs/qc-kentei/textbook",
+  },
+  {
+    term: "AQL",
+    reading: "えーきゅーえる",
+    english: "Acceptable Quality Level",
+    definition:
+      "合格品質水準。検査でほぼ常に合格とすべき不良率の上限。生産者リスク α が 5% 以下になる水準。",
+    level: "2",
+    category: "品質管理",
+    link: "/certs/qc-kentei/textbook",
+  },
+  {
+    term: "LTPD",
+    reading: "えるてぃーぴーでぃー",
+    english: "Lot Tolerance Percent Defective",
+    definition:
+      "ロット許容不良率。検査でほぼ常に不合格とすべき不良率。消費者リスク β が 10% 以下になる水準。",
+    level: "2",
+    category: "品質管理",
+    link: "/certs/qc-kentei/textbook",
+  },
+  {
+    term: "QC 7 つ道具",
+    reading: "きゅーしーななつどうぐ",
+    english: "Seven QC tools",
+    definition:
+      "パレート図・特性要因図・ヒストグラム・散布図・管理図・チェックシート・グラフ(層別)。数値データを使った品質改善の基本ツール。",
+    level: "2",
+    category: "品質管理",
+    link: "/certs/qc-kentei/textbook",
+  },
+  {
+    term: "新 QC 7 つ道具",
+    reading: "しんきゅーしーななつどうぐ",
+    english: "Seven new QC tools",
+    definition:
+      "親和図(KJ 法)・連関図・系統図・マトリクス図・マトリクスデータ解析・PDPC 法・アローダイアグラム。言語データ・概念整理に特化。",
+    level: "2",
+    category: "品質管理",
+    link: "/certs/qc-kentei/textbook",
+  },
+  {
+    term: "TQM",
+    reading: "てぃーきゅーえむ",
+    english: "Total Quality Management",
+    definition:
+      "総合的品質管理。3 本柱は『顧客重視・全員参加・継続的改善(カイゼン)』。日本の製造業の競争力の源泉となった経営手法。",
+    level: "2",
+    category: "品質管理",
+    link: "/certs/qc-kentei/textbook",
+  },
+
+  // === 専門統計調査士用語 ===
+  {
+    term: "デザイン効果",
+    reading: "でざいんこうか",
+    english: "design effect (deff)",
+    definition:
+      "実際の標本設計の分散を、同じ n の単純無作為抽出と比べた比。deff < 1 で精度向上、deff > 1 で精度低下。クラスター抽出は通常 deff > 1。",
+    level: "準1",
+    category: "標本設計",
+    link: "/certs/survey-specialist/textbook",
+  },
+  {
+    term: "ネイマン配分",
+    reading: "ねいまんはいぶん",
+    english: "Neyman allocation",
+    definition:
+      "層化抽出で各層の標本サイズを $n_h \\propto N_h S_h$(層サイズ × 層内標準偏差)で決める最適配分法。精度を最大化する。",
+    level: "準1",
+    category: "標本設計",
+    link: "/certs/survey-specialist/textbook",
+  },
+  {
+    term: "Horvitz-Thompson 推定量",
+    reading: "ほーびっつとんぷそんすいていりょう",
+    english: "Horvitz-Thompson estimator",
+    definition:
+      "サンプリングウエイト $w_i = 1/\\pi_i$(抽出確率の逆数)を使った母集団総計の不偏推定量 $\\hat T = \\sum w_i x_i$。標本調査の理論的中核。",
+    level: "1",
+    category: "標本設計",
+    link: "/certs/survey-specialist/textbook",
+  },
+  {
+    term: "多重代入法",
+    reading: "たじゅうだいにゅうほう",
+    english: "Multiple Imputation (MI)",
+    definition:
+      "欠測値に対して複数のもっともらしい代入値を作り、各セットで推定 → Rubin's rules で統合する手法。代入の不確実性も含めて分散を計算できる。",
+    level: "準1",
+    category: "標本設計",
+    link: "/certs/survey-specialist/textbook",
+  },
 ];

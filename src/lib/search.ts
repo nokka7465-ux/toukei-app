@@ -10,6 +10,9 @@ import { surveyTextbook } from "@/data/textbooks/survey";
 import { mathBasicsTextbook } from "@/data/textbooks/math";
 import { gTestTextbook } from "@/data/textbooks/g-test";
 import { dsLiteracyTextbook } from "@/data/textbooks/ds-literacy";
+import { eShikakuTextbook } from "@/data/textbooks/e-shikaku";
+import { qcKenteiTextbook } from "@/data/textbooks/qc-kentei";
+import { surveySpecialistTextbook } from "@/data/textbooks/survey-specialist";
 import { glossary } from "@/data/glossary";
 import { blogPosts } from "@/data/blog";
 import { introFormulas } from "@/data/formulas/intro";
@@ -90,6 +93,9 @@ export const searchIndex: SearchItem[] = (() => {
     { book: mathBasicsTextbook, urlBase: "/math/textbook", displayTitle: "数学基礎" },
     { book: gTestTextbook, urlBase: "/certs/g-test/textbook", displayTitle: "G検定" },
     { book: dsLiteracyTextbook, urlBase: "/certs/ds-literacy/textbook", displayTitle: "DS検定" },
+    { book: eShikakuTextbook, urlBase: "/certs/e-shikaku/textbook", displayTitle: "E資格" },
+    { book: qcKenteiTextbook, urlBase: "/certs/qc-kentei/textbook", displayTitle: "QC検定" },
+    { book: surveySpecialistTextbook, urlBase: "/certs/survey-specialist/textbook", displayTitle: "専門統計調査士" },
   ];
   for (const { book, urlBase, displayTitle } of textbookSets) {
     for (const ch of book.chapters) {

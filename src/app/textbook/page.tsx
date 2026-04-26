@@ -87,16 +87,37 @@ const CERT_TRACKS: Track[] = [
     audience: "行政・調査会社・公務員",
   },
   {
+    href: "/certs/survey-specialist/textbook",
+    title: "専門統計調査士",
+    description:
+      "統計調査士の上位資格。標本設計の理論・公的統計の高度利用。",
+    audience: "調査会社・公的統計機関",
+  },
+  {
     href: "/certs/g-test/textbook",
     title: "G検定(JDLA)",
     description: "AI / ディープラーニングを事業に活かすための広範な知識。",
     audience: "AI 業界転職・概念把握",
   },
   {
+    href: "/certs/e-shikaku/textbook",
+    title: "E資格(JDLA Engineer)",
+    description:
+      "G 検定の上位。DL の実装に必要な数学・モデル・最適化を網羅。",
+    audience: "ML エンジニア・データサイエンティスト",
+  },
+  {
     href: "/certs/ds-literacy/textbook",
     title: "データサイエンティスト検定",
     description: "DS 力 / DE 力 / ビジネス力の 3 軸を測るリテラシー検定。",
     audience: "データ職入門",
+  },
+  {
+    href: "/certs/qc-kentei/textbook",
+    title: "QC検定(品質管理検定)",
+    description:
+      "品質管理の考え方・管理図・QC 7 つ道具。製造業の必須教養。",
+    audience: "製造業・改善推進",
   },
 ];
 
@@ -191,9 +212,11 @@ export default function TextbookIndexPage() {
       <section>
         <header className="mb-5">
           <div className="chapter-eyebrow mb-1">関連検定(別系統)</div>
-          <h2 className="text-2xl font-bold">DS基礎 / 統計調査士 / G検定 / DS検定</h2>
+          <h2 className="text-2xl font-bold">
+            DS基礎 / 統計調査士 / G検定 / E資格 / DS検定 / QC検定
+          </h2>
           <p className="text-sm text-[var(--muted)] mt-2">
-            統計検定 4〜1 級とは別系統の、データ系資格の教科書。実務志向・調査志向・AI 概念・データ全方位リテラシーから目的に応じて選択。
+            統計検定 4〜1 級とは別系統の、データ・AI・調査・品質管理の各系統の資格。実務志向・調査志向・AI 概念から実装・データ全方位リテラシー・品質工学まで、目的に応じて選択。
           </p>
         </header>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

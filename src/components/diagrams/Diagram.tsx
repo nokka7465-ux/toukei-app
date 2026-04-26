@@ -23,6 +23,11 @@ import { SurvivalKm } from "./SurvivalKm";
 import { ChiSquaredDistribution } from "./ChiSquaredDistribution";
 import { AnovaFDistribution } from "./AnovaFDistribution";
 import { RandomWalk } from "./RandomWalk";
+import { ActivationFunctions } from "./ActivationFunctions";
+import { GradientDescentPaths } from "./GradientDescentPaths";
+import { CnnArchitecture } from "./CnnArchitecture";
+import { ControlChart } from "./ControlChart";
+import { OcCurve } from "./OcCurve";
 
 const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   "normal-curve": NormalCurve,
@@ -49,6 +54,11 @@ const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   "chi-squared-distribution": ChiSquaredDistribution,
   "anova-f-distribution": AnovaFDistribution,
   "random-walk": RandomWalk,
+  "activation-functions": ActivationFunctions,
+  "gradient-descent-paths": GradientDescentPaths,
+  "cnn-architecture": CnnArchitecture,
+  "control-chart": ControlChart,
+  "oc-curve": OcCurve,
 };
 
 export function Diagram({

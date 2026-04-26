@@ -50,7 +50,12 @@ export type DiagramKind =
   | "survival-km"
   | "chi-squared-distribution"
   | "anova-f-distribution"
-  | "random-walk";
+  | "random-walk"
+  | "activation-functions"
+  | "gradient-descent-paths"
+  | "cnn-architecture"
+  | "control-chart"
+  | "oc-curve";
 
 export type TextbookBlock =
   | { type: "p"; text: string }

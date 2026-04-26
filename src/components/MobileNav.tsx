@@ -37,8 +37,11 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { href: "/certs/ds-basic", label: "統計検定 DS基礎" },
       { href: "/certs/survey", label: "統計調査士" },
+      { href: "/certs/survey-specialist", label: "専門統計調査士" },
       { href: "/certs/g-test", label: "G検定" },
-      { href: "/certs/ds-literacy", label: "データサイエンティスト検定" },
+      { href: "/certs/e-shikaku", label: "E資格" },
+      { href: "/certs/ds-literacy", label: "DS検定" },
+      { href: "/certs/qc-kentei", label: "QC検定" },
     ],
   },
   {

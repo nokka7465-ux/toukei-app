@@ -11,6 +11,9 @@ import { dsBasicQuestions } from "@/data/questions/ds-basic";
 import { surveyQuestions } from "@/data/questions/survey";
 import { gTestQuestions } from "@/data/questions/g-test";
 import { dsLiteracyQuestions } from "@/data/questions/ds-literacy";
+import { eShikakuQuestions } from "@/data/questions/e-shikaku";
+import { qcKenteiQuestions } from "@/data/questions/qc-kentei";
+import { surveySpecialistQuestions } from "@/data/questions/survey-specialist";
 
 export const metadata: Metadata = {
   title: "演習問題 一覧 ─ 級・関連検定・数学基礎まで",
@@ -47,8 +50,11 @@ const SUPPORT_TRACKS: Track[] = [
 const CERT_TRACKS: Track[] = [
   { href: "/certs/ds-basic/quiz", title: "統計検定 DS基礎", count: dsBasicQuestions.length, description: "Excel 中心のデータ分析" },
   { href: "/certs/survey/quiz", title: "統計調査士", count: surveyQuestions.length, description: "統計法・公的統計・標本抽出" },
+  { href: "/certs/survey-specialist/quiz", title: "専門統計調査士", count: surveySpecialistQuestions.length, description: "標本設計の理論・公的統計の高度利用" },
   { href: "/certs/g-test/quiz", title: "G検定(JDLA)", count: gTestQuestions.length, description: "AI / DL の概念・倫理" },
+  { href: "/certs/e-shikaku/quiz", title: "E資格(JDLA Engineer)", count: eShikakuQuestions.length, description: "DL 数理・最適化・主要モデル" },
   { href: "/certs/ds-literacy/quiz", title: "データサイエンティスト検定", count: dsLiteracyQuestions.length, description: "DS / DE / ビジネス力 3 軸" },
+  { href: "/certs/qc-kentei/quiz", title: "QC検定(品質管理検定)", count: qcKenteiQuestions.length, description: "管理図・抜取検査・QC 7 つ道具" },
 ];
 
 function TrackCard({ track }: { track: Track }) {

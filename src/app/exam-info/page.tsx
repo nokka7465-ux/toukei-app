@@ -178,6 +178,58 @@ const RELATED_EXAMS: Exam[] = [
     studyLabel: "DS 検定の教科書を見る",
     highlight: "データサイエンス力 / データエンジニアリング力 / ビジネス力の 3 軸。",
   },
+  {
+    id: "e-shikaku",
+    title: "E 資格(JDLA Engineer)",
+    organizer: "日本ディープラーニング協会(JDLA)",
+    format: "CBT 方式(全国の試験会場でパソコン受験)",
+    schedule: "年 2 回(主に 2 月・8 月)",
+    duration: "120 分 / 約 100 問(多肢選択)",
+    fee: "一般 33,000 円 / 学生 22,000 円(税込・参考、認定プログラム費用は別途)",
+    passCriteria: "公式に明示なし。各回ごとに合否判定(参考)",
+    passRate: "おおむね 60〜70%(難関)",
+    takers: "1 回あたり 1,000〜2,000 名規模",
+    officialUrl: "https://www.jdla.org/certificate/engineer/",
+    studyHref: "/certs/e-shikaku",
+    studyLabel: "E資格の教科書を見る",
+    highlight:
+      "DL を実装するエンジニアの認定。受験には JDLA 認定プログラム修了が必須。",
+  },
+  {
+    id: "qc-kentei",
+    title: "QC 検定(品質管理検定)",
+    organizer: "日本科学技術連盟・日本規格協会(JSA)",
+    format: "PBT(マークシート + 一部論述)方式",
+    schedule: "年 2 回(3 月・9 月)",
+    duration: "90 分(2 級・3 級。級により異なる)",
+    fee:
+      "4 級 3,300 円 / 3 級 5,500 円 / 2 級 6,600 円 / 準 1 級 8,800 円 / 1 級 11,000 円(税込・参考)",
+    passCriteria: "総合 70 点以上、各分野 50 点以上(参考)",
+    passRate: "3 級 50% 前後 / 2 級 25% 前後 / 1 級 5〜10%",
+    takers: "年間およそ 10 万人以上(全級合計)",
+    officialUrl: "https://www.jsa.or.jp/kentei/qc/",
+    studyHref: "/certs/qc-kentei",
+    studyLabel: "QC検定の教科書を見る",
+    highlight:
+      "製造業の必須資格。1 〜 4 級の段階で実務経験に応じて取得。",
+  },
+  {
+    id: "survey-specialist",
+    title: "専門統計調査士",
+    organizer: "日本統計学会 / 統計質保証推進協会",
+    format: "CBT 方式",
+    schedule: "通年",
+    duration: "90 分 / 40 問程度",
+    fee: "一般 10,000 円 / 学割 6,000 円(参考)",
+    passCriteria: "100 点満点中 70 点以上で合格(参考)",
+    passRate: "おおむね 30〜40%",
+    takers: "年間およそ 200〜400 名",
+    officialUrl: "https://www.toukei-kentei.jp/exam/senmon-toukei-chosashi/",
+    studyHref: "/certs/survey-specialist",
+    studyLabel: "専門統計調査士の教科書を見る",
+    highlight:
+      "統計調査士の上位資格。標本設計の理論・公的統計の高度利用。",
+  },
 ];
 
 function ExamCard({ exam }: { exam: Exam }) {
