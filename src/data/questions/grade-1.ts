@@ -412,4 +412,90 @@ export const gradeOneQuestions: Question[] = [
     explanation:
       "ウィルクスの定理: 正則条件下で $H_0$ のもとで $-2 \\log \\Lambda \\xrightarrow{d} \\chi^2(r)$。$r$ は制約の次元。これが尤度比検定の漸近的根拠。",
   },
+  {
+    id: "g1-q27",
+    difficulty: 3,
+    category: "確率過程",
+    question:
+      "強度 $\\lambda$ のポアソン過程について、隣接する 2 つの事象の間隔 $T$ が従う分布は次のうちどれか。",
+    choices: [
+      "指数分布 $\\mathrm{Exp}(\\lambda)$",
+      "ポアソン分布 $\\mathrm{Po}(\\lambda)$",
+      "正規分布 $N(0, \\lambda)$",
+      "ガンマ分布 $\\mathrm{Ga}(2, \\lambda)$",
+    ],
+    correctIndex: 0,
+    explanation:
+      "ポアソン過程の事象間隔は指数分布。これは無記憶性の表れ。一方、$n$ 番目の事象までの時間はガンマ分布(Erlang)に従う。",
+  },
+  {
+    id: "g1-q28",
+    difficulty: 3,
+    category: "確率過程",
+    question:
+      "既約・非周期な有限状態マルコフ連鎖について、定常分布に関する正しい記述はどれか。",
+    choices: [
+      "定常分布は存在しないことが多い",
+      "初期分布によって異なる定常分布に収束する",
+      "初期分布によらず一意の定常分布に収束する(エルゴード定理)",
+      "すべての遷移確率が等しいときのみ定常分布が存在する",
+    ],
+    correctIndex: 2,
+    explanation:
+      "既約・非周期な有限マルコフ連鎖はエルゴード定理により、初期分布によらず一意の定常分布に収束する。これは MCMC の理論的基盤になる。",
+  },
+  {
+    id: "g1-q29",
+    difficulty: 3,
+    category: "確率過程",
+    question:
+      "標準ブラウン運動 $W(t)$ について、$W(s)$ と $W(t)$($s < t$)の共分散として正しいものはどれか。",
+    choices: ["$0$", "$s$", "$t$", "$t - s$"],
+    correctIndex: 1,
+    explanation:
+      "$W(s)$ と $W(t)$ は独立増分性より、$W(t) = W(s) + (W(t) - W(s))$ と分解。$\\mathrm{Cov}(W(s), W(t)) = \\mathrm{Var}(W(s)) = s$($s \\leq t$)。",
+  },
+  {
+    id: "g1-q30",
+    difficulty: 3,
+    category: "多変量解析の理論",
+    question:
+      "PCA の最適化問題 $\\max_{\\|\\mathbf{w}\\|=1} \\mathbf{w}^{\\top} \\Sigma \\mathbf{w}$ の解として正しいものはどれか。",
+    choices: [
+      "$\\Sigma$ の最大固有値に対応する固有ベクトル(最大値は最大固有値)",
+      "$\\Sigma$ の最小固有値に対応する固有ベクトル",
+      "$\\Sigma$ の対角成分の最大値",
+      "$\\Sigma$ のトレース",
+    ],
+    correctIndex: 0,
+    explanation:
+      "ラグランジュ未定乗数法より $\\Sigma \\mathbf{w} = \\mu \\mathbf{w}$、つまり $\\mathbf{w}$ は固有ベクトル、$\\mu$ は固有値。最大値は最大固有値 $\\lambda_1$。",
+  },
+  {
+    id: "g1-q31",
+    difficulty: 2,
+    category: "応用統計",
+    question:
+      "Shewhart の $\\bar X$ 管理図において、上下管理限界線(UCL/LCL)を中心からどれくらいの幅に設定するのが標準か。",
+    choices: [
+      "$\\pm 1\\sigma/\\sqrt{n}$",
+      "$\\pm 2\\sigma/\\sqrt{n}$",
+      "$\\pm 3\\sigma/\\sqrt{n}$",
+      "$\\pm 6\\sigma/\\sqrt{n}$",
+    ],
+    correctIndex: 2,
+    explanation:
+      "Shewhart の管理図は中心から ±3σ/√n が標準。正規分布のもとで管理状態にある工程では 0.27% しか外れないため、外れたら『異常』と判断する根拠になる。",
+  },
+  {
+    id: "g1-q32",
+    difficulty: 3,
+    category: "応用統計",
+    question:
+      "工程能力指数 $C_{pk}$ について、製造業で『工程能力が十分』とされる目安として最も一般的な値はどれか。",
+    choices: ["0.5 以上", "1.0 以上", "1.33 以上", "3.0 以上"],
+    correctIndex: 2,
+    explanation:
+      "$C_{pk} \\geq 1.33$ が標準的な目標値。$1.0$ ぎりぎりだと不良率が上がるため、ある程度の余裕を見込む。シックスシグマでは $C_{pk} = 2.0$ が目標。",
+  },
 ];
