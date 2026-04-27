@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { gTestQuestions } from "@/data/questions/g-test";
 import { Quiz } from "@/components/Quiz";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "G検定 演習問題 ─ AI/DL の選択式問題",
+  title: "G検定 演習問題 ─ AI / DL / 倫理の無料選択式問題",
   description:
-    "G検定対策のオリジナル選択式問題。AI の歴史・機械学習・ディープラーニング・倫理など頻出トピックを実戦形式で確認できます。",
+    "G検定対策の無料オリジナル選択式問題。AI の歴史・機械学習・ディープラーニング・倫理など頻出トピックを実戦形式で確認できます。",
+  alternates: { canonical: "/certs/g-test/quiz" },
   openGraph: {
     title: "G検定 演習問題",
     description:
@@ -20,6 +22,14 @@ const SHARE_URL = "https://toukei-app-eight.vercel.app/certs/g-test/quiz";
 export default function GTestQuizPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "関連検定", href: "/textbook" },
+          { name: "G検定", href: "/certs/g-test" },
+          { name: "演習問題", href: "/certs/g-test/quiz" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

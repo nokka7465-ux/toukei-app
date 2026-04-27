@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { blogPosts } from "@/data/blog";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "ブログ ─ 統計検定の勉強法と統計用語の解説",
+  title: "統計検定 学習ブログ ─ 勉強法・級選び・用語解説",
   description:
-    "統計検定の効率的な勉強法、級選びのコツ、紛らわしい統計用語の整理など、独学者に役立つ記事を掲載しています。",
+    "統計検定の効率的な勉強法、級選びのコツ、紛らわしい統計用語の整理など、独学者に役立つ記事を掲載。級別の学習時間目安や試験当日のコツまで。",
+  alternates: { canonical: "/blog" },
   openGraph: {
     title: "ブログ ─ 統計検定の勉強法と統計用語の解説",
     description:
@@ -21,6 +23,12 @@ export default function BlogIndexPage() {
 
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "ブログ", href: "/blog" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { surveySpecialistQuestions } from "@/data/questions/survey-specialist";
 import { Quiz } from "@/components/Quiz";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "専門統計調査士 演習問題 ─ 標本設計・公的統計・現代統計",
+  title: "専門統計調査士 演習問題 ─ 標本設計・公的統計・現代統計の無料問題",
   description:
-    "専門統計調査士対策のオリジナル選択式問題。標本誤差・デザイン効果・層化抽出の精度・サンプリングウエイト・MAR・差分プライバシーなど、上位資格の頻出トピックを実戦形式で確認できます。",
+    "専門統計調査士対策の無料オリジナル選択式問題。標本誤差・デザイン効果・層化抽出の精度・サンプリングウエイト・MAR・差分プライバシーなど、上位資格の頻出トピックを実戦形式で確認できます。",
+  alternates: { canonical: "/certs/survey-specialist/quiz" },
   openGraph: {
     title: "専門統計調査士 演習問題",
     description: "標本設計と公的統計の選択式問題で、専門統計調査士の出題に慣れる。",
@@ -20,6 +22,14 @@ const SHARE_URL =
 export default function SurveySpecialistQuizPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "関連検定", href: "/textbook" },
+          { name: "専門統計調査士", href: "/certs/survey-specialist" },
+          { name: "演習問題", href: "/certs/survey-specialist/quiz" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

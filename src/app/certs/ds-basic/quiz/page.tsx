@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { dsBasicQuestions } from "@/data/questions/ds-basic";
 import { Quiz } from "@/components/Quiz";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "DS基礎 演習問題 ─ Excel・データ分析の選択式問題",
+  title: "DS基礎 演習問題 ─ Excel・データ分析の無料選択式問題",
   description:
-    "統計検定 データサイエンス基礎(DS基礎)対策のオリジナル選択式問題。Excel関数・ピボット・回帰など、DS基礎の頻出トピックを実戦形式で確認できます。",
+    "統計検定 データサイエンス基礎(DS基礎)対策の無料オリジナル選択式問題。Excel関数・ピボット・回帰など、DS基礎の頻出トピックを実戦形式で確認できます。",
+  alternates: { canonical: "/certs/ds-basic/quiz" },
   openGraph: {
     title: "DS基礎 演習問題",
     description:
@@ -20,6 +22,14 @@ const SHARE_URL = "https://toukei-app-eight.vercel.app/certs/ds-basic/quiz";
 export default function DsBasicQuizPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "関連検定", href: "/textbook" },
+          { name: "DS基礎", href: "/certs/ds-basic" },
+          { name: "演習問題", href: "/certs/ds-basic/quiz" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

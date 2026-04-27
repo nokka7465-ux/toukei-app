@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "統計検定 データサイエンス基礎(DS基礎)とは ─ 受験対象・出題範囲・対策",
+  title: "統計検定 DS基礎とは ─ 受験対象・出題範囲・対策まとめ",
   description:
-    "統計検定 データサイエンス基礎(DS基礎)の内容・受験対象・出題範囲・対策方針をまとめた解説ページ。Excel を使った実データ分析が中心で、データリテラシー入門に最適。",
+    "統計検定 データサイエンス基礎(DS基礎)の内容・受験対象・出題範囲・対策方針を完全解説。Excel を使った実データ分析が中心で、データリテラシー入門に最適。無料の教科書・演習問題付き。",
+  alternates: { canonical: "/certs/ds-basic" },
   openGraph: {
     title: "統計検定 データサイエンス基礎(DS基礎)とは",
     description:
@@ -47,6 +49,13 @@ const FAQ_SCHEMA = {
 export default function DsBasicPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "関連検定", href: "/textbook" },
+          { name: "DS基礎", href: "/certs/ds-basic" },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}

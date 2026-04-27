@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "統計検定 学習ロードマップ ─ 4級から1級までの最短ルート",
+  title: "統計検定 学習ロードマップ ─ 4級〜1級の合格までの最短ルート",
   description:
-    "統計検定 4級から1級まで、合格に必要な学習時間・前提知識・推奨の進め方を 1 枚にまとめた完全ロードマップ。「どの級から始める?」「どれくらいの期間が必要?」に答えます。",
+    "統計検定 4 級から 1 級まで、合格に必要な学習時間・前提知識・推奨の進め方を 1 枚にまとめた完全ロードマップ。『どの級から始める?』『どれくらいの期間が必要?』に答えます。",
+  alternates: { canonical: "/roadmap" },
   openGraph: {
     title: "統計検定 学習ロードマップ ─ 4級から1級までの最短ルート",
     description:
@@ -153,6 +155,12 @@ const FAQ_SCHEMA = {
 export default function RoadmapPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "学習ロードマップ", href: "/roadmap" },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}

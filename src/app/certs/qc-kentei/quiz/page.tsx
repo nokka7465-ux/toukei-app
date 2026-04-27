@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { qcKenteiQuestions } from "@/data/questions/qc-kentei";
 import { Quiz } from "@/components/Quiz";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "QC検定 演習問題 ─ 品質管理・管理図・抜取検査・QC 7 つ道具",
+  title: "QC検定 演習問題 ─ 管理図・抜取検査・QC 7 つ道具の無料問題",
   description:
-    "QC 検定(品質管理検定)対策のオリジナル選択式問題。品質管理思想・SPC・管理図・工程能力指数・OC 曲線・QC 7 つ道具など、2-3 級の頻出トピックを実戦形式で確認できます。",
+    "QC 検定(品質管理検定)対策の無料オリジナル選択式問題。品質管理思想・SPC・管理図・工程能力指数・OC 曲線・QC 7 つ道具など、2-3 級の頻出トピックを実戦形式で確認できます。",
+  alternates: { canonical: "/certs/qc-kentei/quiz" },
   openGraph: {
     title: "QC検定 演習問題",
     description: "品質管理の選択式問題で、QC 検定の出題トピックに慣れる。",
@@ -19,6 +21,14 @@ const SHARE_URL = "https://toukei-app-eight.vercel.app/certs/qc-kentei/quiz";
 export default function QcKenteiQuizPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "関連検定", href: "/textbook" },
+          { name: "QC検定", href: "/certs/qc-kentei" },
+          { name: "演習問題", href: "/certs/qc-kentei/quiz" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

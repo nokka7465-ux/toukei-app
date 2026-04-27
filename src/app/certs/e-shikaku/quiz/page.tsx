@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { eShikakuQuestions } from "@/data/questions/e-shikaku";
 import { Quiz } from "@/components/Quiz";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "E資格 演習問題 ─ DL 数理・最適化・主要モデル",
+  title: "E資格 演習問題 ─ DL 数理・最適化・主要モデル(無料)",
   description:
-    "E 資格(JDLA Engineer)対策のオリジナル選択式問題。線形代数・最適化・CNN/RNN/Transformer・GAN/VAE・モデル軽量化・倫理など、E 資格の頻出トピックを実戦形式で確認できます。",
+    "E 資格(JDLA Engineer)対策の無料オリジナル選択式問題。線形代数・最適化・CNN/RNN/Transformer・GAN/VAE・モデル軽量化・倫理など、E 資格の頻出トピックを実戦形式で確認できます。",
+  alternates: { canonical: "/certs/e-shikaku/quiz" },
   openGraph: {
     title: "E資格 演習問題",
     description: "DL の数理・最適化・主要モデル・倫理の選択式問題。",
@@ -19,6 +21,14 @@ const SHARE_URL = "https://toukei-app-eight.vercel.app/certs/e-shikaku/quiz";
 export default function EShikakuQuizPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "関連検定", href: "/textbook" },
+          { name: "E資格", href: "/certs/e-shikaku" },
+          { name: "演習問題", href: "/certs/e-shikaku/quiz" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

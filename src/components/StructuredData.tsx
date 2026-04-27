@@ -14,7 +14,7 @@ const websiteSchema = {
     "@type": "SearchAction",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: `${SITE_URL}/?q={search_term_string}`,
+      urlTemplate: `${SITE_URL}/search?q={search_term_string}`,
     },
     "query-input": "required name=search_term_string",
   },
@@ -45,5 +45,98 @@ export function StructuredData() {
         }}
       />
     </>
+  );
+}
+
+export type BreadcrumbItem = { name: string; href: string };
+
+function absoluteUrl(href: string): string {
+  if (href.startsWith("http")) return href;
+  return `${SITE_URL}${href.startsWith("/") ? href : `/${href}`}`;
+}
+
+export function BreadcrumbJsonLd({ items }: { items: BreadcrumbItem[] }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      item: absoluteUrl(it.href),
+    })),
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export type CourseJsonLdProps = {
+  name: string;
+  description: string;
+  url: string;
+  educationalLevel?: string;
+  about?: string[];
+};
+
+export function CourseJsonLd({
+  name,
+  description,
+  url,
+  educationalLevel,
+  about,
+}: CourseJsonLdProps) {
+  const schema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name,
+    description,
+    url: absoluteUrl(url),
+    provider: {
+      "@type": "EducationalOrganization",
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    inLanguage: "ja",
+    isAccessibleForFree: true,
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "online",
+      inLanguage: "ja",
+    },
+  };
+  if (educationalLevel) schema.educationalLevel = educationalLevel;
+  if (about && about.length > 0) schema.about = about;
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export type FaqEntry = { q: string; a: string };
+
+export function FaqJsonLd({ entries }: { entries: FaqEntry[] }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: entries.map((e) => ({
+      "@type": "Question",
+      name: e.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: e.a,
+      },
+    })),
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
   );
 }

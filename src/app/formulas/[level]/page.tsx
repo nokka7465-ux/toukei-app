@@ -10,6 +10,7 @@ import { gradePre1Formulas } from "@/data/formulas/grade-pre1";
 import { gradeOneFormulas } from "@/data/formulas/grade-1";
 import { Math } from "@/components/Math";
 import { RecommendedBooks } from "@/components/RecommendedBooks";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import type { Formula } from "@/types/content";
 
 const formulasByLevel: Record<string, Formula[]> = {
@@ -34,11 +35,12 @@ export async function generateMetadata({
   const meta = levels.find((l) => l.slug === level);
   const formulas = formulasByLevel[level];
   if (!meta || !formulas) return {};
-  const title = `${meta.title} 公式集`;
-  const description = `統計検定 ${meta.title} の重要公式 ${formulas.length} 項目をカテゴリ別にまとめた公式集。${meta.description}`;
+  const title = `統計検定 ${meta.title} 公式集 ─ ${formulas.length} 項目の無料公式まとめ`;
+  const description = `統計検定 ${meta.title} の重要公式 ${formulas.length} 項目をカテゴリ別にまとめた無料公式集。${meta.description}`;
   return {
     title,
     description,
+    alternates: { canonical: `/formulas/${level}` },
     openGraph: { title, description, type: "article" },
     twitter: { card: "summary_large_image", title, description },
   };
@@ -61,6 +63,13 @@ export default async function FormulaPage({
 
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "公式集", href: "/formulas" },
+          { name: `${meta.title} 公式集`, href: `/formulas/${level}` },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"
@@ -69,7 +78,9 @@ export default async function FormulaPage({
           ホーム
         </Link>
         <span className="mx-2">›</span>
-        <span>公式集</span>
+        <Link href="/formulas" className="hover:underline">
+          公式集
+        </Link>
         <span className="mx-2">›</span>
         <span>{meta.title}</span>
       </nav>

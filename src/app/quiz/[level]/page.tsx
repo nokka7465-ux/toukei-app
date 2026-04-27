@@ -9,6 +9,7 @@ import { gradeTwoQuestions } from "@/data/questions/grade-2";
 import { gradePre1Questions } from "@/data/questions/grade-pre1";
 import { gradeOneQuestions } from "@/data/questions/grade-1";
 import { Quiz } from "@/components/Quiz";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import type { Question } from "@/types/content";
 
 const questionsByLevel: Record<string, Question[]> = {
@@ -33,11 +34,12 @@ export async function generateMetadata({
   const meta = levels.find((l) => l.slug === level);
   const questions = questionsByLevel[level];
   if (!meta || !questions) return {};
-  const title = `${meta.title} 演習問題`;
-  const description = `統計検定 ${meta.title} のオリジナル類題を ${questions.length} 問収録。各問題に ★☆☆ 基礎 / ★★☆ 標準 / ★★★ 応用 の難易度バッジ付き。自動採点で実力チェックできます。`;
+  const title = `統計検定 ${meta.title} 演習問題 ─ ${questions.length} 問の無料類題`;
+  const description = `統計検定 ${meta.title} のオリジナル類題を ${questions.length} 問収録した無料演習問題集。各問題に ★☆☆ 基礎 / ★★☆ 標準 / ★★★ 応用 の難易度バッジ付き。自動採点で実力チェックできます。`;
   return {
     title,
     description,
+    alternates: { canonical: `/quiz/${level}` },
     openGraph: { title, description, type: "article" },
     twitter: { card: "summary_large_image", title, description },
   };
@@ -55,6 +57,13 @@ export default async function QuizPage({
 
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "演習問題", href: "/quiz" },
+          { name: `${meta.title} 演習問題`, href: `/quiz/${level}` },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"
@@ -63,7 +72,9 @@ export default async function QuizPage({
           ホーム
         </Link>
         <span className="mx-2">›</span>
-        <span>問題演習</span>
+        <Link href="/quiz" className="hover:underline">
+          演習問題
+        </Link>
         <span className="mx-2">›</span>
         <span>{meta.title}</span>
       </nav>

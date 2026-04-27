@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
   title: "QC検定(品質管理検定)とは ─ 受験対象・出題範囲・対策",
   description:
-    "QC 検定(品質管理検定)の受験対象・出題範囲・対策方針をまとめた解説ページ。製造業・サービス業の品質管理実務に直結する 4 級〜1 級の資格。",
+    "QC 検定(品質管理検定)の受験対象・出題範囲・対策方針を完全解説。製造業・サービス業の品質管理実務に直結する 4 級〜1 級の資格。無料の対策教科書・演習問題付き。",
+  alternates: { canonical: "/certs/qc-kentei" },
   openGraph: {
     title: "QC検定とは",
     description:
@@ -47,6 +49,13 @@ const FAQ_SCHEMA = {
 export default function QcKenteiPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "関連検定", href: "/textbook" },
+          { name: "QC検定", href: "/certs/qc-kentei" },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}

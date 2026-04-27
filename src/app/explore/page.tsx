@@ -5,11 +5,13 @@ import { InteractiveBinomial } from "@/components/interactive/InteractiveBinomia
 import { InteractiveCLT } from "@/components/interactive/InteractiveCLT";
 import { InteractivePValue } from "@/components/interactive/InteractivePValue";
 import { InteractiveCI } from "@/components/interactive/InteractiveCI";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "動かして学ぶ統計 ─ インタラクティブ図解",
+  title: "動かして学ぶ統計 ─ 正規分布・p値・信頼区間のインタラクティブ図解",
   description:
-    "正規分布・二項分布・中心極限定理・p 値・信頼区間をスライダーで動かして体感できるインタラクティブ図解。式と図と動きの 3 軸で『直感』を養えます。",
+    "正規分布・二項分布・中心極限定理・p 値・信頼区間をスライダーで動かして体感できる無料インタラクティブ図解。式と図と動きの 3 軸で『直感』を養えます。",
+  alternates: { canonical: "/explore" },
   openGraph: {
     title: "動かして学ぶ統計",
     description: "5 つのキー概念をスライダー操作で体感する。",
@@ -20,6 +22,12 @@ export const metadata: Metadata = {
 export default function ExplorePage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "動かして学ぶ統計", href: "/explore" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

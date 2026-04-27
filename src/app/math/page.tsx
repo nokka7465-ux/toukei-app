@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "統計のための数学基礎 ─ 割合・Σ・指数対数・微積分・線形代数",
+  title: "統計のための数学基礎 ─ Σ・指数対数・微積分・線形代数",
   description:
-    "統計学を学ぶうえで前提となる数学の基礎を、必要なところだけ抜粋した補助教材。割合・百分率・総和記号 Σ・指数対数・微積分・線形代数まで、つまずきやすい部分を整理します。",
+    "統計学を学ぶうえで前提となる数学の基礎を、必要なところだけ抜粋した無料補助教材。割合・百分率・総和記号 Σ・指数対数・微積分・線形代数まで、つまずきやすい部分を整理。",
+  alternates: { canonical: "/math" },
   openGraph: {
     title: "統計のための数学基礎",
     description:
@@ -47,6 +49,12 @@ const FAQ_SCHEMA = {
 export default function MathHubPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "数学基礎", href: "/math" },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}

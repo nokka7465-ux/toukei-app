@@ -9,11 +9,13 @@ import { gradeTwoFormulas } from "@/data/formulas/grade-2";
 import { gradePre1Formulas } from "@/data/formulas/grade-pre1";
 import { gradeOneFormulas } from "@/data/formulas/grade-1";
 import type { Formula } from "@/types/content";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "公式チートシート ─ 全級の重要公式を 1 枚に",
+  title: "統計検定 公式チートシート ─ 全級の重要公式を 1 枚で印刷可能",
   description:
-    "統計検定 入門編〜1 級の重要公式 99 項目を 1 ページに集約した、印刷向けチートシート。試験前の最終確認や学習の振り返りにご利用ください。",
+    "統計検定 入門編〜1 級の重要公式 99 項目を 1 ページに集約した、印刷可能な無料チートシート。試験前の最終確認や学習の振り返りに。",
+  alternates: { canonical: "/cheatsheet" },
   openGraph: {
     title: "公式チートシート ─ 全級の重要公式を 1 枚に",
     description:
@@ -34,6 +36,12 @@ const SECTIONS: { title: string; href: string; formulas: Formula[] }[] = [
 export default function CheatsheetPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "公式チートシート", href: "/cheatsheet" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6 print-hide"

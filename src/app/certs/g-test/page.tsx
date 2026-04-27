@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "G検定とは ─ 受験対象・出題範囲・対策(JDLA ジェネラリスト検定)",
+  title: "G検定(JDLA)とは ─ 受験対象・出題範囲・対策まとめ",
   description:
-    "G検定(JDLA ジェネラリスト検定)の受験対象・出題範囲・対策方針をまとめた解説ページ。AI / ディープラーニングを事業に活かす広範な知識を測る検定。",
+    "G検定(JDLA ジェネラリスト検定)の受験対象・出題範囲・対策方針を完全解説。AI / ディープラーニングを事業に活かす広範な知識を測る検定。無料の対策教科書・演習問題付き。",
+  alternates: { canonical: "/certs/g-test" },
   openGraph: {
     title: "G検定とは",
     description:
@@ -47,6 +49,13 @@ const FAQ_SCHEMA = {
 export default function GTestPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "関連検定", href: "/textbook" },
+          { name: "G検定", href: "/certs/g-test" },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}

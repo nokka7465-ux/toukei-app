@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { glossary, type GlossaryTerm } from "@/data/glossary";
 import { MixedText } from "@/components/MixedText";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
   title: `統計用語集 ─ 統計検定 / 機械学習 / 公的統計の頻出 ${glossary.length} 語`,
   description: `統計検定 4 級〜1 級の出題範囲に加え、機械学習・AI 用語、公的統計の関連用語まで全 ${glossary.length} 語を、定義・関連教科書節へのリンクとともに解説する用語辞典。`,
+  alternates: { canonical: "/glossary" },
   openGraph: {
     title: `統計用語集 ─ 全 ${glossary.length} 語`,
     description:
@@ -33,6 +35,12 @@ export default function GlossaryPage() {
 
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "統計用語集", href: "/glossary" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

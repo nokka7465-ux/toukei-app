@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { DiagramKind } from "@/types/content";
 import { Diagram } from "@/components/diagrams/Diagram";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "図解で学ぶ統計 ─ 直感を養う 29 種の SVG 図",
+  title: "図解で学ぶ統計 ─ 正規分布・回帰・ベイズ等 29 種の SVG 図",
   description:
-    "正規分布・中心極限定理・回帰直線・ROC 曲線・ベイズ更新・尤度関数・時系列・PCA・MCMC・生存解析・活性化関数・CNN アーキテクチャ・管理図・OC 曲線まで、統計検定と機械学習・品質管理で頻出のキー概念を SVG 図解で網羅。",
+    "統計検定 4級〜1級・E 資格・G 検定・QC 検定で頻出の正規分布・中心極限定理・回帰直線・ROC 曲線・ベイズ更新・尤度関数・時系列・PCA・MCMC・生存解析・活性化関数・CNN アーキテクチャ・管理図・OC 曲線を SVG 図解で網羅。",
+  alternates: { canonical: "/figures" },
   openGraph: {
     title: "図解で学ぶ統計 ─ 29 種の SVG 図",
     description:
@@ -381,6 +383,12 @@ function FigureCard({ figure }: { figure: FigureEntry }) {
 export default function FiguresPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "図解で学ぶ統計", href: "/figures" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

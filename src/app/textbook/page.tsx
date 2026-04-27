@@ -1,17 +1,38 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "教科書一覧 ─ 級・関連検定・数学基礎まで",
+  title: "統計検定 教科書一覧 ─ 4級〜1級・関連検定・数学基礎",
   description:
-    "統計検定 入門編〜1級、関連検定(DS基礎・統計調査士・G検定・DS検定)、数学基礎の教科書を一覧から選べます。各級の概要・対象者と教科書ページへのリンクをまとめました。",
+    "統計検定の入門編〜1級と、関連検定(DS基礎・統計調査士・G検定・E資格・DS検定・QC検定)、数学基礎まで全教科書を一覧で。すべて無料で読めます。",
+  alternates: { canonical: "/textbook" },
   openGraph: {
-    title: "教科書一覧 ─ 級・関連検定・数学基礎まで",
+    title: "統計検定 教科書一覧 ─ 4級〜1級・関連検定・数学基礎",
     description:
-      "統計検定 入門編〜1級・関連検定・数学基礎の教科書を一覧から選択。",
+      "統計検定 入門編〜1級・関連検定・数学基礎の教科書を一覧から選択。すべて無料。",
     type: "website",
   },
 };
+
+const FAQ: { q: string; a: string }[] = [
+  {
+    q: "統計検定の教科書は、どの級から読み始めればいいですか?",
+    a: "統計をこれから学ぶ方は『入門編』、高校で数学I・Aを学んだ方は『4級』、大学初年度の確率統計を理解したい方は『3級』から始めるのがおすすめです。迷う場合は『3問の級診断』で目安が分かります。",
+  },
+  {
+    q: "教科書はすべて無料ですか?",
+    a: "はい、本サイトに掲載されている教科書・公式集・演習問題はすべて無料でご利用いただけます。会員登録も不要です。",
+  },
+  {
+    q: "関連検定とはどんな試験ですか?",
+    a: "統計検定本体(4級〜1級)とは別系統の、データサイエンス基礎・統計調査士・専門統計調査士・G検定・E資格・DS検定・QC検定など、データ・AI・調査・品質管理関連の資格試験です。各教科書ページから対策を始められます。",
+  },
+  {
+    q: "数学基礎の教科書は誰向けですか?",
+    a: "統計学の式が読めない・前提の数学に不安がある方向けの補助教材です。割合・Σ・指数対数・微分積分・線形代数を、必要なところだけ抜粋して解説しています。",
+  },
+];
 
 type Track = {
   href: string;
@@ -150,6 +171,13 @@ function TrackCard({ track }: { track: Track }) {
 export default function TextbookIndexPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "教科書一覧", href: "/textbook" },
+        ]}
+      />
+      <FaqJsonLd entries={FAQ.map((f) => ({ q: f.q, a: f.a }))} />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

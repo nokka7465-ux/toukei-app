@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { mathBasicsQuestions } from "@/data/questions/math";
 import { Quiz } from "@/components/Quiz";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "数学基礎 演習問題 ─ 割合・Σ・指数対数の選択式問題",
+  title: "統計のための数学基礎 演習問題 ─ Σ・指数対数の練習",
   description:
-    "統計のための数学基礎のオリジナル選択式問題。割合・百分率・科学記法・総和記号 Σ・指数対数の頻出パターンを実戦形式で確認できます。",
+    "統計のための数学基礎の無料オリジナル選択式問題。割合・百分率・科学記法・総和記号 Σ・指数対数の頻出パターンを実戦形式で確認できます。",
+  alternates: { canonical: "/math/quiz" },
   openGraph: {
     title: "数学基礎 演習問題",
     description:
@@ -20,6 +22,13 @@ const SHARE_URL = "https://toukei-app-eight.vercel.app/math/quiz";
 export default function MathQuizPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "数学基礎", href: "/math" },
+          { name: "演習問題", href: "/math/quiz" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { dsLiteracyQuestions } from "@/data/questions/ds-literacy";
 import { Quiz } from "@/components/Quiz";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "データサイエンティスト検定 演習問題 ─ DS の 3 軸選択式問題",
+  title: "DS検定 演習問題 ─ DS 力・DE 力・ビジネス力 3 軸の無料問題",
   description:
-    "DS検定リテラシーレベル対策のオリジナル選択式問題。DS 力 / DE 力 / ビジネス力 の 3 軸頻出ポイントを実戦形式で確認できます。",
+    "DS検定リテラシーレベル対策の無料オリジナル選択式問題。DS 力 / DE 力 / ビジネス力 の 3 軸頻出ポイントを実戦形式で確認できます。",
+  alternates: { canonical: "/certs/ds-literacy/quiz" },
   openGraph: {
     title: "データサイエンティスト検定 演習問題",
     description:
@@ -21,6 +23,14 @@ const SHARE_URL =
 export default function DsLiteracyQuizPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "関連検定", href: "/textbook" },
+          { name: "DS検定", href: "/certs/ds-literacy" },
+          { name: "演習問題", href: "/certs/ds-literacy/quiz" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

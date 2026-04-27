@@ -4,6 +4,7 @@ import Link from "next/link";
 import { blogPosts, getPostBySlug } from "@/data/blog";
 import { TextbookBody } from "@/components/TextbookBody";
 import { MixedText } from "@/components/MixedText";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import type { TextbookBlock, BlogPost } from "@/types/content";
 
 const SITE_URL = "https://toukei-app-eight.vercel.app";
@@ -23,6 +24,7 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.description,
+    alternates: { canonical: `/blog/${slug}` },
     openGraph: {
       title: post.title,
       description: post.description,
@@ -136,6 +138,13 @@ export default async function BlogPostPage({
 
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "ブログ", href: "/blog" },
+          { name: post.title, href: `/blog/${post.slug}` },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}

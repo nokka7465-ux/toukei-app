@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { surveyQuestions } from "@/data/questions/survey";
 import { Quiz } from "@/components/Quiz";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "統計調査士 演習問題 ─ 統計法・公的統計・標本抽出の選択式問題",
+  title: "統計調査士 演習問題 ─ 統計法・公的統計・標本抽出の無料問題",
   description:
-    "統計調査士対策のオリジナル選択式問題。統計法・主要な公的統計・標本抽出法など、頻出トピックを実戦形式で確認できます。",
+    "統計調査士対策の無料オリジナル選択式問題。統計法・主要な公的統計・標本抽出法など、頻出トピックを実戦形式で確認できます。",
+  alternates: { canonical: "/certs/survey/quiz" },
   openGraph: {
     title: "統計調査士 演習問題",
     description:
@@ -20,6 +22,14 @@ const SHARE_URL = "https://toukei-app-eight.vercel.app/certs/survey/quiz";
 export default function SurveyQuizPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "関連検定", href: "/textbook" },
+          { name: "統計調査士", href: "/certs/survey" },
+          { name: "演習問題", href: "/certs/survey/quiz" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

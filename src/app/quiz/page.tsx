@@ -14,11 +14,13 @@ import { dsLiteracyQuestions } from "@/data/questions/ds-literacy";
 import { eShikakuQuestions } from "@/data/questions/e-shikaku";
 import { qcKenteiQuestions } from "@/data/questions/qc-kentei";
 import { surveySpecialistQuestions } from "@/data/questions/survey-specialist";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "演習問題 一覧 ─ 級・関連検定・数学基礎まで",
+  title: "統計検定 演習問題集 ─ 4級〜1級・関連検定の無料問題",
   description:
-    "統計検定 入門編〜1級、関連検定、数学基礎の演習問題を一覧から選べます。1 問 1 答モード・タイマー機能・解説付きで実戦的に学べます。",
+    "統計検定 入門編〜1 級、関連検定(DS基礎・統計調査士・G検定・E資格・DS検定・QC検定)、数学基礎の無料演習問題を一覧から選択。1 問 1 答モード・タイマー機能・解説付き。",
+  alternates: { canonical: "/quiz" },
   openGraph: {
     title: "演習問題 一覧",
     description:
@@ -90,6 +92,12 @@ export default function QuizIndexPage() {
 
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "演習問題", href: "/quiz" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

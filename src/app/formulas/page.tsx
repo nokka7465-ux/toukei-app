@@ -6,11 +6,13 @@ import { gradeThreeFormulas } from "@/data/formulas/grade-3";
 import { gradeTwoFormulas } from "@/data/formulas/grade-2";
 import { gradePre1Formulas } from "@/data/formulas/grade-pre1";
 import { gradeOneFormulas } from "@/data/formulas/grade-1";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "公式集 一覧 ─ 入門編 〜 1 級まで",
+  title: "統計検定 公式集 ─ 4級〜1級の重要公式まとめ",
   description:
-    "統計検定 入門編〜1 級の公式集を一覧から選べます。代表値・分布・推定・検定・回帰・数理統計の重要公式を級別にまとめました。",
+    "統計検定 入門編〜1 級の重要公式を級ごとに一覧。代表値・分布・推定・検定・回帰・数理統計学の主要公式を、無料でまとめて学習できます。",
+  alternates: { canonical: "/formulas" },
   openGraph: {
     title: "公式集 一覧",
     description:
@@ -64,6 +66,12 @@ export default function FormulasIndexPage() {
 
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "公式集", href: "/formulas" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

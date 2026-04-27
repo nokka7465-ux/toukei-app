@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "受験情報まとめ ─ 統計検定 / DS基礎 / G検定 / 統計調査士 / DS検定",
+  title: "統計検定 / G検定 / DS検定 受験情報 ─ 日程・受験料・合格率まとめ",
   description:
-    "統計検定 4 級〜1 級、DS基礎、G検定、統計調査士、データサイエンティスト検定の受験時期・受験料・試験形式・合格率(参考値)・申込先をまとめた一覧ページ。学習計画の参考に。",
+    "統計検定 4 級〜1 級、DS基礎、G検定、E資格、統計調査士、データサイエンティスト検定、QC検定の受験時期・受験料・試験形式・合格率(参考値)・申込先を一覧で。",
+  alternates: { canonical: "/exam-info" },
   openGraph: {
     title: "受験情報まとめ",
     description:
@@ -300,6 +302,12 @@ export default function ExamInfoPage() {
 
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "受験情報まとめ", href: "/exam-info" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

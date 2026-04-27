@@ -3,6 +3,7 @@ import Link from "next/link";
 import { levels } from "@/data/levels";
 import { externalLinks } from "@/data/external-links";
 import { blogPosts } from "@/data/blog";
+import { FaqJsonLd } from "@/components/StructuredData";
 
 const availableLevels = new Set<string>([
   "intro",
@@ -13,9 +14,32 @@ const availableLevels = new Set<string>([
   "grade-1",
 ]);
 
-const HOME_TITLE = "統計検定 学習帳 | 4級〜1級対応の無料学習サイト";
+const HOME_TITLE = "統計検定 学習帳 ─ 4級〜1級・関連検定 7 種の無料学習サイト";
 const HOME_DESCRIPTION =
-  "統計検定4級〜1級に対応した無料学習サイト。教科書・公式集・演習問題をすべて無料で学習できます。データサイエンスやPythonと組み合わせた実践的な統計学習にも対応。";
+  "統計検定 4 級〜1 級に対応した無料学習サイト。教科書・公式集・演習問題に加え、関連検定 7 種(DS基礎・統計調査士・専門統計調査士・G検定・E資格・DS検定・QC検定)も完全無料。インタラクティブ図解・統計計算ツール・Python/R コード併記など、検定対策本にない学習体験を提供。";
+
+const HOME_FAQ = [
+  {
+    q: "統計検定 学習帳は無料で利用できますか?",
+    a: "はい、教科書・公式集・演習問題・統計計算ツール・図解 ─ サイト上のすべてのコンテンツを完全無料でご利用いただけます。会員登録も不要です。",
+  },
+  {
+    q: "統計検定はどの級から始めるのがおすすめですか?",
+    a: "統計学を初めて学ぶ方は『入門編』、高校数学を経験している方は『4級』、大学初年度の確率統計を理解したい方は『3級』、データ分析の実務知識を身につけたい方は『2級』からの開始がおすすめです。3 問の級診断で目安を出せます。",
+  },
+  {
+    q: "関連検定は何が対策できますか?",
+    a: "DS基礎・統計調査士・専門統計調査士・G検定・E資格・DS検定・QC検定の 7 種について、教科書・演習問題・受験情報を提供しています。データ・AI・調査・品質管理の各方向に応じて選択できます。",
+  },
+  {
+    q: "Python や R のコードはありますか?",
+    a: "はい、教科書・図解の各章に Python(NumPy/SciPy/Pandas)と R のコード例を併記しています。理論を式で理解した後、コードで動かして再確認できます。",
+  },
+  {
+    q: "スマートフォンでも使えますか?",
+    a: "はい、レスポンシブ対応済みでスマートフォン・タブレット・PC のいずれからも快適に学習できます。インタラクティブ図解もタッチ操作に対応。",
+  },
+];
 
 export const metadata: Metadata = {
   title: {
@@ -40,6 +64,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div>
+      <FaqJsonLd entries={HOME_FAQ} />
       <section className="mb-12 text-center py-8">
         <div className="chapter-eyebrow mb-3">Toukei Study Book</div>
         <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-[0.1em]">
@@ -423,6 +448,72 @@ export default function Home() {
                 詳しく見る →
               </div>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-16 paper rounded-lg p-6 md:p-7">
+        <div className="chapter-eyebrow mb-2">FAQ</div>
+        <h2 className="text-2xl font-bold mb-5">よくある質問</h2>
+        <dl className="space-y-5">
+          {HOME_FAQ.map((item, i) => (
+            <div key={i} className="border-b border-[var(--page-border)] last:border-0 pb-5 last:pb-0">
+              <dt className="font-bold mb-2 text-[var(--foreground)] flex items-baseline gap-2">
+                <span className="text-[var(--link)] font-mono text-sm">Q.</span>
+                <span>{item.q}</span>
+              </dt>
+              <dd className="text-sm text-[var(--muted-strong)] leading-loose pl-6">
+                {item.a}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section className="mt-12">
+        <div className="mb-5">
+          <div className="chapter-eyebrow mb-1">Quick Navigation</div>
+          <h2 className="text-2xl font-bold">学習目的から探す</h2>
+          <p className="text-sm text-[var(--muted)] mt-2 leading-relaxed">
+            よくある学習目的別に、次に読むページをまとめました。
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ui-sans text-sm">
+          <div className="paper p-5 rounded-lg">
+            <div className="font-bold mb-2 text-[var(--foreground)]">📚 試験合格を目指す</div>
+            <ul className="space-y-1.5 text-xs">
+              <li><Link href="/diagnose" className="text-[var(--link)] hover:underline">3 問の級診断 →</Link></li>
+              <li><Link href="/roadmap" className="text-[var(--link)] hover:underline">学習ロードマップ(時間目安)→</Link></li>
+              <li><Link href="/exam-info" className="text-[var(--link)] hover:underline">受験情報まとめ(日程・受験料)→</Link></li>
+              <li><Link href="/cheatsheet" className="text-[var(--link)] hover:underline">公式チートシート(印刷可)→</Link></li>
+            </ul>
+          </div>
+          <div className="paper p-5 rounded-lg">
+            <div className="font-bold mb-2 text-[var(--foreground)]">🧠 概念を理解したい</div>
+            <ul className="space-y-1.5 text-xs">
+              <li><Link href="/figures" className="text-[var(--link)] hover:underline">図解で学ぶ統計(SVG 29 種)→</Link></li>
+              <li><Link href="/explore" className="text-[var(--link)] hover:underline">動かして学ぶ統計(対話的)→</Link></li>
+              <li><Link href="/glossary" className="text-[var(--link)] hover:underline">統計用語集 →</Link></li>
+              <li><Link href="/math" className="text-[var(--link)] hover:underline">統計のための数学基礎 →</Link></li>
+            </ul>
+          </div>
+          <div className="paper p-5 rounded-lg">
+            <div className="font-bold mb-2 text-[var(--foreground)]">🛠 実務で使いたい</div>
+            <ul className="space-y-1.5 text-xs">
+              <li><Link href="/tools" className="text-[var(--link)] hover:underline">統計計算ツール集(信頼区間・p 値)→</Link></li>
+              <li><Link href="/textbook/grade-2" className="text-[var(--link)] hover:underline">統計検定 2 級 教科書 →</Link></li>
+              <li><Link href="/certs/ds-literacy" className="text-[var(--link)] hover:underline">DS 検定 対策 →</Link></li>
+              <li><Link href="/certs/ds-basic" className="text-[var(--link)] hover:underline">DS 基礎 対策(Excel)→</Link></li>
+            </ul>
+          </div>
+          <div className="paper p-5 rounded-lg">
+            <div className="font-bold mb-2 text-[var(--foreground)]">🤖 AI / DL を学ぶ</div>
+            <ul className="space-y-1.5 text-xs">
+              <li><Link href="/certs/g-test" className="text-[var(--link)] hover:underline">G 検定 対策(JDLA)→</Link></li>
+              <li><Link href="/certs/e-shikaku" className="text-[var(--link)] hover:underline">E 資格 対策(エンジニア向け)→</Link></li>
+              <li><Link href="/textbook/grade-pre1" className="text-[var(--link)] hover:underline">準 1 級 教科書(多変量・ベイズ)→</Link></li>
+              <li><Link href="/blog" className="text-[var(--link)] hover:underline">学習ブログ →</Link></li>
+            </ul>
           </div>
         </div>
       </section>

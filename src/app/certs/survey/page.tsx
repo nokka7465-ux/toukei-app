@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "統計調査士とは ─ 受験対象・出題範囲・対策",
+  title: "統計調査士とは ─ 受験対象・出題範囲・対策まとめ",
   description:
-    "統計調査士の内容・受験対象・出題範囲・対策方針をまとめた解説ページ。社会調査・公的統計の基礎知識を測る、行政・調査実務向けの検定。",
+    "統計調査士の内容・受験対象・出題範囲・対策方針を完全解説。社会調査・公的統計の基礎知識を測る、行政・調査実務向けの検定。無料教科書・演習問題付き。",
+  alternates: { canonical: "/certs/survey" },
   openGraph: {
     title: "統計調査士とは",
     description:
@@ -47,6 +49,13 @@ const FAQ_SCHEMA = {
 export default function SurveyPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "関連検定", href: "/textbook" },
+          { name: "統計調査士", href: "/certs/survey" },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}

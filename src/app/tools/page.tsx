@@ -5,11 +5,13 @@ import { ConfidenceIntervalCalc } from "@/components/tools/ConfidenceIntervalCal
 import { PValueCalc } from "@/components/tools/PValueCalc";
 import { PowerCalc } from "@/components/tools/PowerCalc";
 import { TwoProportionTest } from "@/components/tools/TwoProportionTest";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "統計計算ツール集 ─ 信頼区間 / p 値 / サンプルサイズ計算機",
+  title: "統計計算ツール ─ 信頼区間・p値・サンプルサイズの無料計算機",
   description:
-    "信頼区間・p 値・サンプルサイズ・検出力・A/B テストの 5 つの統計計算機を無料で。学習にも実務にも使える、ブラウザ完結のオンライン計算ツール。",
+    "信頼区間・p 値・サンプルサイズ・検出力・A/B テストの 5 つの統計計算機を無料で。学習にも実務にも使える、ブラウザ完結のオンライン計算ツール。データ送信なし。",
+  alternates: { canonical: "/tools" },
   openGraph: {
     title: "統計計算ツール集",
     description:
@@ -21,6 +23,12 @@ export const metadata: Metadata = {
 export default function ToolsPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "統計計算ツール", href: "/tools" },
+        ]}
+      />
       <nav
         aria-label="breadcrumb"
         className="text-xs text-[var(--muted)] ui-sans mb-6"

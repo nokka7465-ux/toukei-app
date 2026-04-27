@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "E資格(JDLA Engineer)とは ─ 受験対象・出題範囲・対策",
+  title: "E資格(JDLA Engineer)とは ─ 受験対象・出題範囲・対策まとめ",
   description:
-    "E資格(JDLA ディープラーニング・エンジニア検定)の受験対象・出題範囲・対策方針をまとめた解説ページ。G 検定の上位として、ディープラーニングを実装するエンジニア向けの認定資格。",
+    "E資格(JDLA ディープラーニング・エンジニア検定)の受験対象・出題範囲・対策方針を完全解説。G 検定の上位として、ディープラーニングを実装するエンジニア向けの認定資格。無料教科書・演習問題付き。",
+  alternates: { canonical: "/certs/e-shikaku" },
   openGraph: {
     title: "E資格とは",
     description:
@@ -55,6 +57,13 @@ const FAQ_SCHEMA = {
 export default function EShikakuPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "関連検定", href: "/textbook" },
+          { name: "E資格", href: "/certs/e-shikaku" },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}

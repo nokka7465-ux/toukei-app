@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title:
-    "データサイエンティスト検定とは ─ 受験対象・出題範囲・対策(DS検定リテラシー)",
+  title: "DS検定(リテラシー)とは ─ 受験対象・出題範囲・対策まとめ",
   description:
-    "データサイエンティスト検定(DS検定リテラシーレベル)の受験対象・出題範囲・対策方針をまとめた解説ページ。データサイエンティストに必要な 3 軸スキル(DS 力・DE 力・ビジネス力)を測る。",
+    "データサイエンティスト検定(DS検定リテラシーレベル)の受験対象・出題範囲・対策方針を完全解説。DS 力・DE 力・ビジネス力の 3 軸スキルを測る。無料教科書・演習問題付き。",
+  alternates: { canonical: "/certs/ds-literacy" },
   openGraph: {
     title: "データサイエンティスト検定 リテラシーレベルとは",
     description:
@@ -48,6 +49,13 @@ const FAQ_SCHEMA = {
 export default function DsLiteracyPage() {
   return (
     <article>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "ホーム", href: "/" },
+          { name: "関連検定", href: "/textbook" },
+          { name: "DS検定", href: "/certs/ds-literacy" },
+        ]}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}
