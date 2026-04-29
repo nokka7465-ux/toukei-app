@@ -2,6 +2,508 @@ import type { BlogPost } from "@/types/content";
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "data-scientist-career",
+    title: "データサイエンティストのキャリア ─ 年収・職種・転職の現実",
+    description:
+      "データサイエンティスト・MLエンジニア・AIエンジニアの違い、年収レンジ、転職の戦略、ポートフォリオの作り方。実際の求人から見えた 2026 年の市場動向。",
+    publishedAt: "2026-04-30",
+    category: "学習法",
+    tldr: [
+      "データ職は『データアナリスト → DS → ML エンジニア → AI 研究者』のキャリア階段がある。",
+      "年収レンジ: アナリスト 400-700・DS 600-1200・ML エンジニア 700-1500・LLM エンジニア 1000-2500 万円。",
+      "転職は『資格 + Kaggle メダル + GitHub ポートフォリオ + 業務経験』の 4 点セットが王道。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "AI ・ データ系の職種は急速に細分化しています。本記事では『データアナリスト』『データサイエンティスト』『ML エンジニア』『AI / LLM エンジニア』の違いと、各キャリアの年収 ・ 必要スキル ・ 転職戦略を実態ベースで整理します。",
+      },
+      { type: "h3", text: "4 つの職種と役割の違い" },
+      { type: "h4", text: "データアナリスト(年収 400〜700 万円)" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**主業務**: SQL での集計、ダッシュボード作成、ビジネスレポート",
+          "**ツール**: SQL ・ Excel ・ Tableau ・ Looker",
+          "**統計レベル**: 統計検定 3 級 ・ DS 検定リテラシー",
+          "**入門に最適**: 文系出身者でも入りやすい",
+        ],
+      },
+      { type: "h4", text: "データサイエンティスト(年収 600〜1,200 万円)" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**主業務**: 仮説検証 ・ A/B テスト ・ ML モデル設計 ・ ビジネス提案",
+          "**ツール**: Python ・ scikit-learn ・ Pandas ・ SQL ・ クラウド",
+          "**統計レベル**: 統計検定 2 級〜準 1 級 ・ DS 検定",
+          "**強み**: 統計的思考とビジネス感度の両立",
+        ],
+      },
+      { type: "h4", text: "ML エンジニア(年収 700〜1,500 万円)" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**主業務**: モデル実装 ・ MLOps ・ 本番環境運用 ・ パフォーマンス最適化",
+          "**ツール**: PyTorch ・ TensorFlow ・ Docker ・ Kubernetes ・ AWS/GCP",
+          "**統計レベル**: 準 1 級 ・ E 資格",
+          "**特徴**: ソフトウェアエンジニアリング寄り",
+        ],
+      },
+      { type: "h4", text: "AI / LLM エンジニア(年収 1,000〜2,500 万円)" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**主業務**: LLM 活用システム設計 ・ プロンプトエンジニアリング ・ RAG 構築 ・ ファインチューニング",
+          "**ツール**: OpenAI / Anthropic API ・ LangChain ・ ベクトル DB ・ Vercel",
+          "**特徴**: 2024 年以降急増した最新職種、需要過多",
+          "**スキル**: プロダクト感覚 + LLM の挙動理解 + 高速プロトタイピング",
+        ],
+      },
+      { type: "h3", text: "未経験から目指すルート" },
+      {
+        type: "list",
+        style: "number",
+        items: [
+          "**Phase 1〜2**(3〜6 ヶ月): 数学基礎 + 統計検定 3 級 + Python 基礎 → アナリスト or 社内 DS 候補生",
+          "**Phase 3**(6〜12 ヶ月): 統計検定 2 級 + Kaggle + ポートフォリオ → DS / アナリスト中堅",
+          "**Phase 4〜5**(12〜24 ヶ月): E 資格 + MLOps 経験 + 本番開発実績 → ML エンジニア",
+          "**Phase 5+**(2〜3 年〜): LLM プロジェクト経験 + OSS コントリビューション → AI エンジニア",
+        ],
+      },
+      { type: "h3", text: "転職を有利にする 4 点セット" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**資格**: 統計検定 2 級 + E 資格 / G 検定 が定番",
+          "**Kaggle**: 銅メダル 1 個で実力証明、銀以上で大手のスクリーニング通過",
+          "**GitHub ポートフォリオ**: 自作モデル ・ 分析ノート ・ Streamlit デモ",
+          "**業務経験**: 業務委託 ・ ボランティア分析 ・ 社内提案も含めて記述",
+        ],
+      },
+      {
+        type: "p",
+        text: "実装力を見せるには [Streamlit でデモアプリ作成](/blog/streamlit-demo-app) や [Vercel でのデプロイ](/blog/vercel-deployment-for-ai) が手っ取り早く効きます。",
+      },
+      { type: "h3", text: "市場動向(2026 年)" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**LLM エンジニア需要が爆発的**: 経験者の年収 1,500 万円超は珍しくない",
+          "**MLOps 経験者の希少性**: 本番運用できる人材は引く手あまた",
+          "**フルリモート可の求人増加**: 国内外問わず採用",
+          "**生成 AI スタートアップの隆盛**: 株式報酬込みで高待遇",
+          "**ドメイン特化人材**: 医療 / 金融 / 製造業 × AI が単価高い",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[AIエンジニア・ロードマップ](/roadmap)",
+          "[学習プラン計算](/plan)",
+          "[Kaggle 始め方](/blog/kaggle-getting-started)",
+          "[受験情報まとめ](/exam-info)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "openai-api-implementation",
+    title: "OpenAI API 実装入門 ─ Chat / Embeddings / Function Calling",
+    description:
+      "OpenAI API を使ったプロダクション開発の基礎。Chat Completion・Embedding・Function Calling・ストリーミング・コスト管理まで実装パターンを網羅。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "OpenAI API の主要エンドポイントは Chat / Embeddings / Images / Audio / Files / Assistants の 6 系統。",
+      "本番運用は『ストリーミング ・ リトライ ・ コスト管理 ・ レート制限対策』が必須。",
+      "Function Calling と JSON mode で構造化出力を実現するのが現代の定番パターン。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "OpenAI API は LLM プロダクト開発のデファクト。ChatGPT を裏で動かしている API そのものです。本記事では実装で必須のパターンを網羅します。",
+      },
+      { type: "h3", text: "セットアップ" },
+      {
+        type: "code",
+        title: "API キー設定",
+        python: "# uv add openai\nimport os\nfrom openai import OpenAI\n\n# API キーは環境変数で(コードに直書き禁止)\nos.environ['OPENAI_API_KEY'] = '...'  # .env ファイル推奨\nclient = OpenAI()",
+      },
+      { type: "h3", text: "1. Chat Completion(基本)" },
+      {
+        type: "code",
+        title: "シンプルな会話",
+        python: "resp = client.chat.completions.create(\n    model='gpt-4o-mini',  # コスパ最強\n    messages=[\n        {'role': 'system', 'content': 'あなたは統計の専門家です'},\n        {'role': 'user', 'content': 'p 値とは?'},\n    ],\n    temperature=0.7,\n    max_tokens=500,\n)\nprint(resp.choices[0].message.content)\nprint('費用:', resp.usage)  # input/output tokens",
+      },
+      { type: "h3", text: "2. ストリーミング" },
+      {
+        type: "p",
+        text: "ChatGPT のように **1 トークンずつ** 表示するには `stream=True`。UX が劇的に改善。",
+      },
+      {
+        type: "code",
+        title: "ストリーミング応答",
+        python: "stream = client.chat.completions.create(\n    model='gpt-4o-mini',\n    messages=[{'role': 'user', 'content': '統計について 100 字で'}],\n    stream=True,\n)\n\nfor chunk in stream:\n    if chunk.choices[0].delta.content:\n        print(chunk.choices[0].delta.content, end='', flush=True)",
+      },
+      { type: "h3", text: "3. Embeddings(検索 ・ RAG)" },
+      {
+        type: "code",
+        title: "テキストをベクトル化",
+        python: "resp = client.embeddings.create(\n    model='text-embedding-3-small',  # 1536 次元\n    input=['統計検定 2 級', '機械学習']\n)\nvecs = [d.embedding for d in resp.data]\nprint(len(vecs), len(vecs[0]))  # 2, 1536",
+      },
+      {
+        type: "p",
+        text: "詳細は [RAG 入門](/blog/rag-introduction) を参照。",
+      },
+      { type: "h3", text: "4. Function Calling(構造化応答)" },
+      {
+        type: "code",
+        title: "関数呼び出し",
+        python: "tools = [{\n    'type': 'function',\n    'function': {\n        'name': 'get_grade_info',\n        'description': '統計検定の級別情報を取得',\n        'parameters': {\n            'type': 'object',\n            'properties': {\n                'grade': {\n                    'type': 'string',\n                    'enum': ['4', '3', '2', 'pre1', '1']\n                },\n            },\n            'required': ['grade'],\n        },\n    }\n}]\n\nresp = client.chat.completions.create(\n    model='gpt-4o',\n    messages=[{'role': 'user', 'content': '統計検定 2 級の合格率は?'}],\n    tools=tools,\n)\n\nfor call in resp.choices[0].message.tool_calls or []:\n    print(call.function.name, call.function.arguments)\n    # → get_grade_info, {\"grade\": \"2\"}",
+      },
+      { type: "h3", text: "5. JSON Mode" },
+      {
+        type: "p",
+        text: "出力を **必ず JSON** で返すモード。後段処理が安定します。",
+      },
+      {
+        type: "code",
+        title: "JSON 強制",
+        python: "resp = client.chat.completions.create(\n    model='gpt-4o',\n    messages=[\n        {'role': 'system', 'content': 'JSON で返答してください'},\n        {'role': 'user', 'content': '東京の天気を {city, weather, temp} 形式で'}\n    ],\n    response_format={'type': 'json_object'},\n)\nimport json\ndata = json.loads(resp.choices[0].message.content)",
+      },
+      { type: "h3", text: "6. 本番運用 Tips" },
+      { type: "h4", text: "リトライ + 指数バックオフ" },
+      {
+        type: "code",
+        title: "tenacity で簡単リトライ",
+        python: "from tenacity import retry, wait_exponential, stop_after_attempt\n\n@retry(wait=wait_exponential(min=1, max=60), stop=stop_after_attempt(5))\ndef call_openai(messages):\n    return client.chat.completions.create(\n        model='gpt-4o-mini', messages=messages,\n    )",
+      },
+      { type: "h4", text: "コスト管理" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**モデル選定**: gpt-4o-mini は gpt-4o の 1/30 のコスト",
+          "**プロンプトキャッシュ**: 同じ system プロンプトは Anthropic / OpenAI でキャッシュ可能",
+          "**最大トークン**: max_tokens を必ず設定",
+          "**ストリーミング**: 中断可能でムダなコスト削減",
+          "**ログ**: 全 API コールのトークン数を DB に記録",
+        ],
+      },
+      { type: "h4", text: "レート制限対策" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "Tier 1 でも分単位の制限あり ・ 429 エラー時はリトライ",
+          "並列度を `asyncio.Semaphore` で制限",
+          "Tier アップは Usage 増加で自動 or 申請",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[LLM 入門](/blog/llm-introduction)",
+          "[RAG 入門](/blog/rag-introduction)",
+          "[プロンプトエンジニアリング基礎](/blog/prompt-engineering-basics)",
+          "[AI エージェント 入門](/blog/ai-agents-introduction)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "vercel-deployment-for-ai",
+    title: "Vercel で AI アプリをデプロイする ─ Next.js + AI SDK 入門",
+    description:
+      "Vercel にデプロイする最短ルート。Next.js の AI SDK + AI Gateway で OpenAI/Claude を統合し、ストリーミングチャット UI を 1 時間で公開する手順。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "Vercel + Next.js + AI SDK で AI アプリを最短デプロイ。サーバ管理不要。",
+      "AI Gateway を使えば 複数プロバイダ(OpenAI / Claude / Gemini)を 1 行で切替可能。",
+      "ストリーミング ・ 関数呼び出し ・ Edge ランタイムが標準サポート。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**Vercel** は Next.js 開発元が運営する PaaS。AI アプリのデプロイが極めて簡単で、本サイト(統計ロードマップ)も Vercel 上で動いています。",
+      },
+      { type: "h3", text: "なぜ Vercel?" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**ゼロコンフィグデプロイ**: GitHub 連携で push したら自動デプロイ",
+          "**プレビュー URL**: PR ごとに URL 発行、レビューが楽",
+          "**AI SDK 公式統合**: ストリーミング ・ tool calls がネイティブ",
+          "**Edge / Fluid Compute**: 低レイテンシ ・ 低コスト",
+          "**無料枠**: 個人開発なら $0 で運用可能",
+        ],
+      },
+      { type: "h3", text: "セットアップ" },
+      {
+        type: "code",
+        title: "Next.js プロジェクト作成",
+        python: "npx create-next-app@latest my-ai-app\ncd my-ai-app\nnpm install ai @ai-sdk/openai\n\n# Vercel CLI でログイン\nnpm i -g vercel\nvercel login",
+      },
+      { type: "h3", text: "ストリーミングチャット API" },
+      {
+        type: "code",
+        title: "app/api/chat/route.ts",
+        python: "import { streamText } from 'ai';\nimport { openai } from '@ai-sdk/openai';\n\nexport const runtime = 'edge';\n\nexport async function POST(req: Request) {\n  const { messages } = await req.json();\n\n  const result = await streamText({\n    model: openai('gpt-4o-mini'),\n    messages,\n  });\n\n  return result.toDataStreamResponse();\n}",
+      },
+      { type: "h3", text: "フロントエンド" },
+      {
+        type: "code",
+        title: "app/page.tsx(useChat)",
+        python: "'use client';\nimport { useChat } from 'ai/react';\n\nexport default function Chat() {\n  const { messages, input, handleInputChange, handleSubmit } = useChat();\n\n  return (\n    <div>\n      {messages.map(m => (\n        <div key={m.id}>\n          <strong>{m.role}:</strong> {m.content}\n        </div>\n      ))}\n      <form onSubmit={handleSubmit}>\n        <input value={input} onChange={handleInputChange} />\n        <button type='submit'>送信</button>\n      </form>\n    </div>\n  );\n}",
+      },
+      { type: "h3", text: "AI Gateway で複数プロバイダ" },
+      {
+        type: "p",
+        text: "Vercel AI Gateway を使うと OpenAI / Anthropic / Gemini を **同じインターフェース** で切替可能。フォールバック ・ コスト管理にも便利。",
+      },
+      {
+        type: "code",
+        title: "プロバイダ切替",
+        python: "// OpenAI\nmodel: 'openai/gpt-4o-mini'\n\n// Anthropic\nmodel: 'anthropic/claude-sonnet-4-6'\n\n// Google\nmodel: 'google/gemini-2.0-flash'",
+      },
+      { type: "h3", text: "デプロイ" },
+      {
+        type: "code",
+        title: "本番デプロイ",
+        python: "# 環境変数を Vercel に設定(API キー等)\nvercel env add OPENAI_API_KEY\n\n# プレビュー\nvercel\n\n# 本番\nvercel --prod",
+      },
+      {
+        type: "p",
+        text: "GitHub と連携していれば、main ブランチへの push で自動本番デプロイ。",
+      },
+      { type: "h3", text: "本サイトの実例" },
+      {
+        type: "p",
+        text: "統計ロードマップ(本サイト)は **Next.js 15 + Vercel** で運用しています。完全静的(SSG)サイトなので、毎月の運用コストは **約 $0**。詳しくは [Python 環境構築](/blog/python-setup-for-stats) も参照。",
+      },
+      { type: "h3", text: "関連リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[OpenAI API 実装入門](/blog/openai-api-implementation)",
+          "[LLM 入門](/blog/llm-introduction)",
+          "[Streamlit でデモアプリ](/blog/streamlit-demo-app)",
+          "[GitHub Actions で ML CI](/blog/github-actions-ml-ci)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "streamlit-demo-app",
+    title: "Streamlit で 1 時間で ML デモアプリ ─ 転職に効くポートフォリオ",
+    description:
+      "Python だけで動くインタラクティブな ML デモを Streamlit で作る方法。データ可視化・ファイルアップロード・モデル予測 UI までの最小実装。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "Streamlit = Python のスクリプトに数行足すだけで Web アプリになる神ライブラリ。",
+      "DS / ML エンジニアのポートフォリオ作成に最適。Streamlit Community Cloud で無料公開可。",
+      "回帰・分類・データ可視化などの典型 ML タスクを 1 時間でデモ化できる。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**Streamlit** は Python スクリプトを Web アプリに変えるライブラリ。データサイエンティストが React / HTML を学ばずに、**1 時間で UI 付きデモ** を作れます。",
+      },
+      { type: "h3", text: "なぜ Streamlit がポートフォリオに効くか" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**実装力の証明**: Notebook より一段上、本番アプリより手軽",
+          "**インタラクティブ**: 採用担当者がその場で試せる",
+          "**Streamlit Community Cloud**: GitHub 連携で無料公開",
+          "**学習コスト ≈ ゼロ**: Python 知識だけで OK",
+        ],
+      },
+      { type: "h3", text: "Hello World ─ 5 行で動く" },
+      {
+        type: "code",
+        title: "app.py",
+        python: "import streamlit as st\n\nst.title('統計検定 2 級 合格率予測')\nname = st.text_input('お名前')\nstudy_hours = st.slider('週の学習時間', 0, 40, 10)\nst.write(f'{name} さんの予測合格率: {study_hours * 2.5}%')",
+      },
+      {
+        type: "code",
+        title: "実行",
+        python: "streamlit run app.py",
+      },
+      { type: "h3", text: "実用例 ─ ML 予測アプリ" },
+      {
+        type: "code",
+        title: "scikit-learn モデルのデモ",
+        python: "import streamlit as st\nimport pandas as pd\nimport joblib\n\nst.set_page_config(page_title='住宅価格予測', page_icon='🏠')\nst.title('🏠 住宅価格予測アプリ')\n\nmodel = joblib.load('model.pkl')\n\ncol1, col2 = st.columns(2)\nwith col1:\n    rooms = st.number_input('部屋数', 1, 10, 3)\n    age = st.number_input('築年数', 0, 100, 10)\nwith col2:\n    area = st.number_input('面積 (m²)', 20, 200, 70)\n    distance = st.number_input('駅徒歩 (分)', 1, 30, 10)\n\nif st.button('予測', type='primary'):\n    df = pd.DataFrame([[rooms, age, area, distance]],\n                       columns=['rooms', 'age', 'area', 'distance'])\n    pred = model.predict(df)[0]\n    st.metric('予測価格', f'{pred:,.0f} 円')\n    st.balloons()",
+      },
+      { type: "h3", text: "データ可視化アプリ" },
+      {
+        type: "code",
+        title: "CSV アップロード + 可視化",
+        python: "import streamlit as st\nimport pandas as pd\nimport plotly.express as px\n\nst.title('📊 CSV データ分析')\n\nuploaded = st.file_uploader('CSV ファイル', type=['csv'])\nif uploaded:\n    df = pd.read_csv(uploaded)\n    st.dataframe(df.head())\n    st.write('統計量:', df.describe())\n\n    col_x = st.selectbox('X 軸', df.columns)\n    col_y = st.selectbox('Y 軸', df.columns)\n    fig = px.scatter(df, x=col_x, y=col_y)\n    st.plotly_chart(fig)",
+      },
+      { type: "h3", text: "便利なウィジェット" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "`st.text_input` / `st.text_area`: テキスト入力",
+          "`st.number_input` / `st.slider`: 数値",
+          "`st.selectbox` / `st.multiselect`: 選択肢",
+          "`st.file_uploader`: ファイルアップロード",
+          "`st.dataframe` / `st.table`: 表",
+          "`st.plotly_chart` / `st.altair_chart`: グラフ",
+          "`st.metric`: 数値の強調表示",
+          "`st.tabs` / `st.expander`: レイアウト",
+          "`st.cache_data`: 高速化のためのキャッシュ",
+        ],
+      },
+      { type: "h3", text: "デプロイ ─ Streamlit Community Cloud" },
+      {
+        type: "list",
+        style: "number",
+        items: [
+          "GitHub に **public リポジトリ** を作成",
+          "`requirements.txt` をコミット",
+          "[share.streamlit.io](https://share.streamlit.io) で連携",
+          "5 分でデプロイ完了 ・ 無料 URL 発行",
+        ],
+      },
+      {
+        type: "p",
+        text: "URL を **転職時の職務経歴書** や **GitHub README** に貼ると、面接官が即座に試せます。これだけで通過率が大きく変わります。",
+      },
+      { type: "h3", text: "ポートフォリオで作るとよい題材" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**住宅価格予測**: 回帰問題、Boston Housing データ",
+          "**画像分類**: CIFAR-10 で CNN デモ、Streamlit でアップロード → 予測",
+          "**LLM チャット**: OpenAI API + Streamlit で会話 UI",
+          "**異常検知**: 時系列データ + Isolation Forest",
+          "**EDA ダッシュボード**: 任意の CSV を可視化",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[scikit-learn 入門](/blog/sklearn-introduction)",
+          "[Pandas Tips](/blog/pandas-tips-for-ml)",
+          "[Vercel デプロイ](/blog/vercel-deployment-for-ai)",
+          "[キャリアの記事](/blog/data-scientist-career)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "github-actions-ml-ci",
+    title: "GitHub Actions で ML プロジェクトに CI/CD を ─ 30 分入門",
+    description:
+      "テスト ・ Lint ・ モデル学習 ・ 自動デプロイ を GitHub Actions で自動化する手順。Python ML プロジェクトのテンプレートをそのまま流用できる形で。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "GitHub Actions = リポジトリにアクション(YAML)を置くだけで自動実行されるワークフロー基盤。",
+      "Python ML プロジェクトでは『Lint → Test → 学習 → 評価 → デプロイ』のパイプラインを 1 ファイルで書ける。",
+      "シークレットに API キーを保管 → 安全に本番デプロイ。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**GitHub Actions** は GitHub リポジトリに付属する CI/CD 基盤。`.github/workflows/*.yml` を置くだけで自動実行され、Pull Request チェック ・ 自動デプロイ ・ 定期実行など何でもできます。MLOps の入口として最適。",
+      },
+      { type: "h3", text: "Hello World ─ Lint と Test" },
+      {
+        type: "code",
+        title: ".github/workflows/ci.yml",
+        python: "name: CI\n\non:\n  push:\n    branches: [main]\n  pull_request:\n    branches: [main]\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n\n      - name: Setup Python\n        uses: actions/setup-python@v5\n        with:\n          python-version: '3.12'\n          cache: 'pip'\n\n      - name: Install\n        run: pip install -r requirements.txt -r requirements-dev.txt\n\n      - name: Lint\n        run: ruff check .\n\n      - name: Type check\n        run: mypy src\n\n      - name: Test\n        run: pytest -v --cov=src",
+      },
+      {
+        type: "p",
+        text: "コミット push → 自動で Lint ・ 型チェック ・ テストが走る。失敗すれば PR がブロックされる。",
+      },
+      { type: "h3", text: "ML 学習パイプライン" },
+      {
+        type: "code",
+        title: ".github/workflows/train.yml",
+        python: "name: Train Model\n\non:\n  push:\n    paths:\n      - 'data/**'\n      - 'src/train.py'\n\njobs:\n  train:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n\n      - name: Setup Python\n        uses: actions/setup-python@v5\n        with:\n          python-version: '3.12'\n\n      - name: Install\n        run: pip install -r requirements.txt\n\n      - name: Pull data with DVC\n        env:\n          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}\n          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}\n        run: dvc pull\n\n      - name: Train\n        run: python src/train.py\n\n      - name: Evaluate\n        run: |\n          python src/evaluate.py --threshold 0.85\n\n      - name: Upload model\n        uses: actions/upload-artifact@v4\n        with:\n          name: model\n          path: model.pkl",
+      },
+      { type: "h3", text: "シークレット管理" },
+      {
+        type: "p",
+        text: "API キー ・ AWS 認証情報 ・ DB パスワードは **GitHub Secrets** に保管。`Settings → Secrets and variables → Actions` から登録 → `${{ secrets.NAME }}` で参照。",
+      },
+      { type: "h3", text: "定期実行(Cron)" },
+      {
+        type: "code",
+        title: "毎週月曜の朝にモデル再学習",
+        python: "on:\n  schedule:\n    - cron: '0 9 * * 1'  # UTC 9:00 月曜 = 日本 18:00 月曜",
+      },
+      { type: "h3", text: "自動デプロイ ─ Vercel と連携" },
+      {
+        type: "code",
+        title: "Vercel デプロイ",
+        python: "name: Deploy to Vercel\n\non:\n  push:\n    branches: [main]\n\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: amondnet/vercel-action@v25\n        with:\n          vercel-token: ${{ secrets.VERCEL_TOKEN }}\n          vercel-org-id: ${{ secrets.ORG_ID }}\n          vercel-project-id: ${{ secrets.PROJECT_ID }}\n          vercel-args: '--prod'",
+      },
+      {
+        type: "p",
+        text: "Vercel の方が先に GitHub と連携している場合は、push だけで自動デプロイされるので Action は不要です。詳しくは [Vercel デプロイ](/blog/vercel-deployment-for-ai)。",
+      },
+      { type: "h3", text: "PR にモデル評価結果をコメント" },
+      {
+        type: "code",
+        title: "コメント付き PR",
+        python: "      - name: Comment metrics\n        if: github.event_name == 'pull_request'\n        uses: actions/github-script@v7\n        with:\n          script: |\n            const fs = require('fs');\n            const metrics = JSON.parse(fs.readFileSync('metrics.json'));\n            github.rest.issues.createComment({\n              issue_number: context.issue.number,\n              owner: context.repo.owner,\n              repo: context.repo.repo,\n              body: `## 📊 評価結果\\n\\n- Accuracy: ${metrics.accuracy}\\n- F1: ${metrics.f1}`,\n            });",
+      },
+      { type: "h3", text: "Tips" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**キャッシュ活用**: pip ・ npm ・ DVC のキャッシュで高速化",
+          "**Matrix ビルド**: Python 3.10/3.11/3.12 の並列テスト",
+          "**Self-hosted runner**: 大規模学習は GPU マシンを自社運用",
+          "**Concurrency 制御**: 同じブランチの古い実行をキャンセル",
+          "**通知**: Slack ・ Discord 連携で失敗時にアラート",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[MLOps 基礎](/blog/mlops-basics)",
+          "[Vercel デプロイ](/blog/vercel-deployment-for-ai)",
+          "[scikit-learn 入門](/blog/sklearn-introduction)",
+          "[Python 環境構築](/blog/python-setup-for-stats)",
+        ],
+      },
+      { type: "h3", text: "まとめ" },
+      {
+        type: "p",
+        text: "GitHub Actions は **Push したら自動で全部やる** を最小コストで実現する魔法。CI/CD の習得は ML エンジニアの基礎体力です。",
+      },
+    ],
+  },
+  {
     slug: "recommender-systems-introduction",
     title: "推薦システム 入門 ─ 協調フィルタリングからニューラル推薦へ",
     description:
