@@ -116,29 +116,49 @@ export default function Home() {
         <span className="chip-soft mb-3">For Beginners</span>
         <h2 className="text-2xl font-bold mb-3 mt-2">初めての方へ</h2>
         <p className="text-[var(--muted-strong)] leading-loose mb-4">
-          全体像を把握したい方は{" "}
+          このサイトは、<strong>AIエンジニアになるための統計・数学・Python</strong>{" "}
+          を一気通貫で学べるロードマップです。全体像を把握したい方は{" "}
           <Link
             href="/roadmap"
             className="text-[var(--link)] hover:underline font-bold"
           >
-            学習ロードマップ
+            AIエンジニア・ロードマップ
           </Link>
-          、どの級から始めればいいか迷うときは{" "}
-          <Link href="/diagnose" className="text-[var(--link)] hover:underline font-bold">
-            3 問の級診断
-          </Link>{" "}
-          をどうぞ。学習中に用語の意味をすぐ確認したいときは{" "}
+          、自分の現在地を確認したい方は{" "}
           <Link
-            href="/glossary"
+            href="/diagnose"
             className="text-[var(--link)] hover:underline font-bold"
           >
-            用語集
+            3 問の級診断
           </Link>{" "}
-          が便利です。
+          、学習計画を逆算したい方は{" "}
+          <Link
+            href="/plan"
+            className="text-[var(--link)] hover:underline font-bold"
+          >
+            学習プラン計算
+          </Link>{" "}
+          からどうぞ。
         </p>
         <p className="text-[var(--muted-strong)] leading-loose mb-4">
-          統計を学び始める方は、まず <strong>4級の教科書</strong>{" "}
-          からスタートするのがおすすめです。データの代表値・ばらつき・確率・場合の数といった土台を、身近な例とともに明朝体の読み物として読み進められます。各問題に付く難易度バッジ(
+          学習は <strong>5 つのフェーズ</strong>{" "}
+          で積み上げます ─ 数学基礎 → 統計学(基礎) → 統計学(応用) → 機械学習・DL → AI 系検定。数学に不安があれば{" "}
+          <Link href="/math" className="text-[var(--link)] hover:underline font-bold">
+            数学基礎
+          </Link>{" "}
+          から、統計の言葉に慣れたい方は{" "}
+          <Link
+            href="/textbook/grade-3"
+            className="text-[var(--link)] hover:underline font-bold"
+          >
+            統計検定 3 級の教科書
+          </Link>{" "}
+          が入口になります。AI 検定(G 検定 / E 資格 / DS 検定)や統計検定 1 級まで同じサイト内で対策できます。
+        </p>
+        <p className="text-[var(--muted-strong)] leading-loose mb-4">
+          各章には <strong>図解</strong> ・ <strong>Python / R コード</strong>{" "}
+          ・ <strong>演習問題</strong>{" "}
+          が併記されており、理論 → 動かす → 解くのループで定着します。各問題に付く難易度バッジ(
           <span className="inline-block mx-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300 tracking-wider ui-sans">
             ★☆☆ 基礎
           </span>
@@ -148,14 +168,38 @@ export default function Home() {
           <span className="inline-block mx-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300 tracking-wider ui-sans">
             ★★★ 応用
           </span>
-          )を目印に、無理のない順で力をつけていけます。
+          )を目印に、無理のない順で力をつけていけます。会員登録不要 ・ 完全無料 ・ ブラウザ完結。
         </p>
         <div className="flex flex-wrap gap-2 ui-sans text-sm">
           <Link
-            href="/diagnose"
+            href="/roadmap"
             className="px-5 py-2.5 bg-[var(--accent)] text-[var(--accent-fg)] rounded-lg font-bold hover:bg-[var(--accent-strong)]"
           >
-            級診断を受ける →
+            AIエンジニア・ロードマップを見る →
+          </Link>
+          <Link
+            href="/diagnose"
+            className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
+          >
+            3 問の級診断
+          </Link>
+          <Link
+            href="/plan"
+            className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
+          >
+            学習プラン計算
+          </Link>
+          <Link
+            href="/math"
+            className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
+          >
+            Phase 1 数学基礎
+          </Link>
+          <Link
+            href="/textbook/grade-3"
+            className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
+          >
+            Phase 2 統計学(3 級)
           </Link>
           <Link
             href="/figures"
@@ -168,30 +212,6 @@ export default function Home() {
             className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
           >
             動かして学ぶ統計
-          </Link>
-          <Link
-            href="/tools"
-            className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
-          >
-            統計計算ツール
-          </Link>
-          <Link
-            href="/exam-info"
-            className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
-          >
-            受験情報まとめを見る
-          </Link>
-          <Link
-            href="/textbook/grade-4"
-            className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
-          >
-            4級の教科書を読む
-          </Link>
-          <Link
-            href="/quiz/grade-4"
-            className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
-          >
-            4級の問題を解く
           </Link>
         </div>
       </section>
