@@ -10,6 +10,7 @@ import { gradePre1Textbook } from "@/data/textbooks/grade-pre1";
 import { gradeOneTextbook } from "@/data/textbooks/grade-1";
 import { TextbookBody } from "@/components/TextbookBody";
 import { RecommendedBooks } from "@/components/RecommendedBooks";
+import { ReadingTracker } from "@/components/ReadingTracker";
 import { BreadcrumbJsonLd, CourseJsonLd } from "@/components/StructuredData";
 import type { Textbook } from "@/types/content";
 
@@ -208,6 +209,7 @@ export default async function TextbookPage({
         });
         return (
           <div className="space-y-16">
+            <ReadingTracker sectionIds={flatSections.map((s) => s.id)} />
             {book.chapters.map((ch) => (
               <section key={ch.id}>
                 <header className="mb-6">

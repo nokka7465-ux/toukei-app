@@ -25,6 +25,8 @@ export type ProgressData = {
   activeDates?: string[];
   /** Most recent mock-exam attempts (cap to last 50 across all tracks). */
   mockHistory?: MockAttempt[];
+  /** Section ids the user has scrolled through (>= 50% visible). */
+  readSections?: string[];
 };
 
 const empty = (): ProgressData => ({ questions: {} });
@@ -151,6 +153,42 @@ export function getMockHistory(trackKey?: string): MockAttempt[] {
   const all = data.mockHistory ?? [];
   if (!trackKey) return all;
   return all.filter((a) => a.trackKey === trackKey);
+}
+
+export function markSectionRead(sectionId: string): void {
+  const data = read();
+  const set = new Set(data.readSections ?? []);
+  if (set.has(sectionId)) return;
+  set.add(sectionId);
+  data.readSections = [...set];
+  // Bump active day too — reading counts as studying.
+  const today = todayStr();
+  const dates = data.activeDates ?? [];
+  if (!dates.includes(today)) {
+    dates.push(today);
+    dates.sort();
+    data.activeDates = dates;
+  }
+  write(data);
+}
+
+export function getReadSections(): Set<string> {
+  return new Set(read().readSections ?? []);
+}
+
+export function summarizeReading(
+  sectionIds: readonly string[],
+  data?: ProgressData,
+): { total: number; read: number; pct: number } {
+  const d = data ?? read();
+  const set = new Set(d.readSections ?? []);
+  let count = 0;
+  for (const id of sectionIds) {
+    if (set.has(id)) count += 1;
+  }
+  const total = sectionIds.length;
+  const pct = total === 0 ? 0 : Math.round((count / total) * 100);
+  return { total, read: count, pct };
 }
 
 export function getProgress(): ProgressData {

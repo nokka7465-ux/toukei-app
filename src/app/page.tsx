@@ -5,6 +5,8 @@ import { externalLinks } from "@/data/external-links";
 import { blogPosts } from "@/data/blog";
 import { FaqJsonLd } from "@/components/StructuredData";
 import { ProgressDashboard } from "@/components/ProgressDashboard";
+import { DailyProblem } from "@/components/DailyProblem";
+import { AchievementsPanel } from "@/components/AchievementsPanel";
 
 const availableLevels = new Set<string>([
   "intro",
@@ -80,7 +82,11 @@ export default function Home() {
         </p>
       </section>
 
+      <DailyProblem />
+
       <ProgressDashboard />
+
+      <AchievementsPanel />
 
       <section className="mb-12 paper rounded-lg p-6 md:p-7">
         <div className="chapter-eyebrow mb-2 text-center">Quick Search</div>

@@ -228,6 +228,11 @@ export default function RootLayout({
                       模試 一覧
                     </Link>
                   </li>
+                  <li>
+                    <Link href="/practice" className="hover:underline text-[var(--muted-strong)]">
+                      ランダム練習
+                    </Link>
+                  </li>
                 </ul>
               </div>
               <div>
