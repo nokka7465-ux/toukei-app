@@ -12,6 +12,7 @@ const THEMES: Record<string, BlogTheme> = {
   学習法: { grad: "from-amber-500 to-rose-600", emoji: "📝" },
   実装: { grad: "from-cyan-500 to-blue-700", emoji: "⚙️" },
   数学: { grad: "from-emerald-400 to-teal-600", emoji: "📐" },
+  LLM: { grad: "from-fuchsia-500 to-purple-700", emoji: "💬" },
 };
 
 const FALLBACK: BlogTheme = {

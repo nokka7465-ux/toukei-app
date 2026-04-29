@@ -2733,4 +2733,185 @@ export const glossary: GlossaryTerm[] = [
     level: "1",
     category: "ディープラーニング",
   },
+  // === LLM / MLOps / 因果推論 用語(20 語) ===
+  {
+    term: "LLM",
+    reading: "えるえるえむ",
+    english: "Large Language Model",
+    definition:
+      "数百億〜数兆パラメータの大規模言語モデル。次トークン予測の事前学習で汎用言語能力を獲得。GPT・Claude・Gemini が代表。",
+    level: "1",
+    category: "LLM",
+  },
+  {
+    term: "プロンプトエンジニアリング",
+    reading: "ぷろんぷとえんじにありんぐ",
+    english: "Prompt Engineering",
+    definition:
+      "LLM への指示文(プロンプト)を設計し、出力品質を引き出す技術。Few-shot や Chain-of-Thought が代表的手法。",
+    level: "1",
+    category: "LLM",
+  },
+  {
+    term: "RAG",
+    reading: "らぐ",
+    english: "Retrieval Augmented Generation",
+    definition:
+      "ユーザー質問に関連する文書を検索 → LLM プロンプトに含めて生成する手法。幻覚抑制と最新情報対応が両立できる。",
+    level: "1",
+    category: "LLM",
+  },
+  {
+    term: "ハルシネーション",
+    reading: "はるしねーしょん",
+    english: "Hallucination",
+    definition:
+      "LLM が事実と異なる内容を、もっともらしく生成してしまう現象。RAG・温度低下・ファクトチェックで対策。",
+    level: "1",
+    category: "LLM",
+  },
+  {
+    term: "Chain-of-Thought",
+    reading: "ちぇーんおぶそーと",
+    english: "Chain-of-Thought (CoT)",
+    definition:
+      "LLM に推論過程を段階的に出させるプロンプト手法。複雑な数学・論理問題で正答率が向上する。",
+    level: "1",
+    category: "LLM",
+  },
+  {
+    term: "RLHF",
+    reading: "あーるえるえいちえふ",
+    english: "Reinforcement Learning from Human Feedback",
+    definition:
+      "人間の好み比較データから報酬モデルを学習し、PPO で LLM を最適化する手法。ChatGPT の安全性に寄与。",
+    level: "1",
+    category: "LLM",
+  },
+  {
+    term: "ベクトル DB",
+    reading: "べくとるでぃーびー",
+    english: "Vector Database",
+    definition:
+      "Embedding ベクトルを高速類似検索できる DB。Pinecone・Weaviate・pgvector など。RAG の基盤。",
+    level: "1",
+    category: "LLM",
+  },
+  {
+    term: "コンテキストウィンドウ",
+    reading: "こんてきすとうぃんどう",
+    english: "Context Window",
+    definition:
+      "LLM が一度に処理できる入力 + 出力の最大トークン数。GPT-4 = 128K、Claude 4.7 = 1M など年々拡大。",
+    level: "1",
+    category: "LLM",
+  },
+  {
+    term: "MLOps",
+    reading: "えむえるおぷす",
+    english: "Machine Learning Operations",
+    definition:
+      "ML モデルを本番運用するためのプラクティス群。データ・コード・モデルのバージョニング、CI/CD、監視、再学習が中核。",
+    level: "1",
+    category: "MLOps",
+  },
+  {
+    term: "Data Drift",
+    reading: "でーただりふと",
+    english: "Data Drift",
+    definition:
+      "本番運用中に入力データ分布が学習時から変化する現象。モデル精度低下の主因。Evidently 等で監視。",
+    level: "1",
+    category: "MLOps",
+  },
+  {
+    term: "Feature Store",
+    reading: "ふぃーちゃーすとあ",
+    english: "Feature Store",
+    definition:
+      "特徴量を一元管理する基盤。学習と推論で同じ特徴量定義を共有でき、リーク防止と再利用に寄与。",
+    level: "1",
+    category: "MLOps",
+  },
+  {
+    term: "MLflow",
+    reading: "えむえるふろー",
+    english: "MLflow",
+    definition:
+      "実験追跡・モデルレジストリ・サービングを統合した OSS。Tracking UI でハイパラと評価指標を一覧できる。",
+    level: "1",
+    category: "MLOps",
+  },
+  {
+    term: "因果推論",
+    reading: "いんがすいろん",
+    english: "Causal Inference",
+    definition:
+      "観察データから『介入の効果』を推定する統計学。傾向スコア・操作変数・差分の差分・DAG などを駆使。",
+    level: "1",
+    category: "因果推論",
+  },
+  {
+    term: "傾向スコア",
+    reading: "けいこうすこあ",
+    english: "Propensity Score",
+    definition:
+      "介入を受ける確率を共変量から推定したスコア。マッチングや IPW で因果効果を推定する基本道具。",
+    level: "1",
+    category: "因果推論",
+  },
+  {
+    term: "差分の差分",
+    reading: "さぶんのさぶん",
+    english: "Difference-in-Differences (DID)",
+    definition:
+      "処置の前後 × 処置群と対照群 の 2 軸で差を取り、並行トレンド仮定のもとで因果効果を推定する手法。",
+    level: "1",
+    category: "因果推論",
+  },
+  {
+    term: "操作変数法",
+    reading: "そうさへんすうほう",
+    english: "Instrumental Variable (IV)",
+    definition:
+      "処置に影響するが結果には直接影響しない変数を用いて、内生性のある因果効果を推定する手法。",
+    level: "1",
+    category: "因果推論",
+  },
+  {
+    term: "DAG",
+    reading: "だぐ",
+    english: "Directed Acyclic Graph",
+    definition:
+      "変数間の因果関係を有向グラフで表現した図。Judea Pearl の do 計算で識別可能性を判定する基盤。",
+    level: "1",
+    category: "因果推論",
+  },
+  {
+    term: "Kaggle",
+    reading: "かぐる",
+    english: "Kaggle",
+    definition:
+      "世界最大の機械学習コンペプラットフォーム。実データでスキル研鑽・ポートフォリオ作成ができる。",
+    level: "準1",
+    category: "実装",
+  },
+  {
+    term: "Stacking",
+    reading: "すたっきんぐ",
+    english: "Stacking",
+    definition:
+      "複数モデルの予測を入力にメタモデルを学習するアンサンブル手法。Kaggle 上位の常套手段。",
+    level: "1",
+    category: "機械学習",
+  },
+  {
+    term: "Target Encoding",
+    reading: "たーげっとえんこーでぃんぐ",
+    english: "Target Encoding",
+    definition:
+      "カテゴリ変数をそのカテゴリの平均ターゲット値で数値化する手法。リーク対策のため CV 内で計算する必要あり。",
+    level: "1",
+    category: "機械学習",
+  },
 ];

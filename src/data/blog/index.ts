@@ -2,6 +2,736 @@ import type { BlogPost } from "@/types/content";
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "llm-introduction",
+    title: "LLM 入門 ─ ChatGPT は何を計算しているのか",
+    description:
+      "ChatGPT・Claude・Gemini などの大規模言語モデル(LLM)が内部で何をしているかを、Transformer の数式と pre-training/fine-tuning の流れで整理します。",
+    publishedAt: "2026-04-30",
+    category: "LLM",
+    tldr: [
+      "LLM は『次のトークンを予測する』ことだけを延々と学習したモデル。Transformer + 大量テキスト + 巨大計算資源の組み合わせ。",
+      "学習は『事前学習(自己教師あり)→ ファインチューニング → RLHF』の 3 段。",
+      "コンテキスト長 ・ 温度 ・ Top-p などの推論時パラメータが出力を大きく変える。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "ChatGPT・Claude・Gemini が『答えを返してくれる』のはなぜか？ 内部で何が起きているのかを、AI エンジニア視点で要素分解します。",
+      },
+      { type: "h3", text: "LLM の本質は『次の単語予測』" },
+      {
+        type: "p",
+        text: "LLM は **これまでの文脈から次のトークンを確率的に予測** することを延々と学習したモデル。これだけで会話・コード・要約・翻訳などができてしまう ─ 規模を上げると新しい能力が突然現れる(Emergent Ability)のが LLM の不思議。",
+      },
+      {
+        type: "math",
+        tex: "P(x_t \\mid x_1, x_2, \\dots, x_{t-1})",
+      },
+      {
+        type: "intuition",
+        title: "💡 Auto-regressive とは",
+        body: "1 トークン予測 → 出力に追加 → また予測 → … を繰り返す。ChatGPT が文字を 1 つずつ出すのはこの仕組み。",
+      },
+      { type: "h3", text: "アーキテクチャ ─ Decoder-only Transformer" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Transformer** が基本(2017 年提案)",
+          "GPT 系 ・ LLaMA ・ Claude などはほぼ **Decoder-only**",
+          "BERT は Encoder-only(分類向き)",
+          "T5 は Encoder + Decoder(翻訳など)",
+        ],
+      },
+      {
+        type: "p",
+        text: "Self-Attention で長距離依存を処理 ─ 詳細は以下の記事:",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[Transformer の数学](/blog/transformer-math) ─ Self-Attention の式と PyTorch 実装",
+          "[線形代数を AI 視点で](/blog/linear-algebra-for-ai) ─ 内積と行列積の理解",
+        ],
+      },
+      { type: "h3", text: "学習の 3 段階" },
+      { type: "h4", text: "Stage 1: 事前学習(Pre-training)" },
+      {
+        type: "p",
+        text: "Web ・ 書籍 ・ コードなどの **大量テキスト** で次トークン予測を学習。GPT-4 級だと数兆トークン。データセンター規模の計算が数ヶ月かかる。",
+      },
+      { type: "h4", text: "Stage 2: 教師ありファインチューニング(SFT)" },
+      {
+        type: "p",
+        text: "**人間が書いた高品質な指示 ・ 応答ペア** で追加学習。指示に従う動作を獲得。",
+      },
+      { type: "h4", text: "Stage 3: RLHF(人間フィードバック強化学習)" },
+      {
+        type: "p",
+        text: "**好み比較データ** から報酬モデルを学習し、PPO で本体を最適化。Helpful ・ Harmless ・ Honest を促進。",
+      },
+      {
+        type: "list",
+        style: "number",
+        items: [
+          "応答候補 A・B を出して人間が好みを選ぶ",
+          "好み比較から **報酬モデル** を学習",
+          "報酬モデルを使って PPO で LLM を強化学習",
+        ],
+      },
+      { type: "h3", text: "推論時の重要パラメータ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**温度(temperature)**: 高 = ランダム、低 = 決定論的",
+          "**Top-p(nucleus sampling)**: 累積確率 p までの候補から選択",
+          "**Top-k**: 上位 k 候補から選択",
+          "**コンテキスト長**: 一度に扱える入力 + 出力の長さ(GPT-4 = 128K, Claude 4.7 = 1M)",
+          "**max_tokens**: 出力の最大長",
+        ],
+      },
+      {
+        type: "code",
+        title: "OpenAI API の例",
+        python: "from openai import OpenAI\n\nclient = OpenAI()\nresp = client.chat.completions.create(\n    model='gpt-4o',\n    messages=[{'role': 'user', 'content': '統計検定 2 級の合格率は?'}],\n    temperature=0.7,\n    max_tokens=300,\n)\nprint(resp.choices[0].message.content)",
+      },
+      { type: "h3", text: "幻覚(Hallucination)とその対策" },
+      {
+        type: "p",
+        text: "LLM は『もっともらしい嘘』を生成することがある。対策:",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**RAG**(検索拡張生成): 信頼できるドキュメントを参照させる",
+          "**ファクトチェック**: 別 LLM で検証 ・ ツール呼び出し",
+          "**温度を下げる**: 創造性は下がるが安定",
+          "**Chain-of-Thought**: 推論過程を出させる",
+        ],
+      },
+      {
+        type: "p",
+        text: "RAG の詳細は [RAG 入門](/blog/rag-introduction) を参照。",
+      },
+      { type: "h3", text: "次のステップ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[プロンプトエンジニアリング基礎](/blog/prompt-engineering-basics)",
+          "[Transformer の数学](/blog/transformer-math)",
+          "[E 資格 ロードマップ](/certs/e-shikaku/roadmap)",
+          "[AI Engineer Roadmap](/roadmap)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "prompt-engineering-basics",
+    title: "プロンプトエンジニアリング基礎 ─ 出力を 10 倍良くする 7 つのコツ",
+    description:
+      "ChatGPT・Claude を使いこなすためのプロンプト設計の基礎。Few-shot・Chain-of-Thought・Role 指定など、現場で効くテクニックを 7 つ。",
+    publishedAt: "2026-04-30",
+    category: "LLM",
+    tldr: [
+      "プロンプトの良し悪しで出力品質が劇的に変わる ─ AI エンジニア必須スキル。",
+      "明確な指示 + 文脈 + 例示 + 出力形式指定の 4 要素が基本。",
+      "Chain-of-Thought・Few-shot・Self-consistency などの技を使い分ける。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "LLM の力を引き出す **プロンプト設計** は、AI エンジニアにとって新しい必須スキルです。コードの書き方を覚えるように、プロンプトの書き方も体系化されています。本記事では基礎 7 テクニックを紹介。",
+      },
+      { type: "h3", text: "1. 明確な指示(Specificity)" },
+      {
+        type: "p",
+        text: "❌ 『コードを書いて』 → ✅ 『Python で 1〜100 の素数を列挙する関数を書いて。型ヒント付き、docstring 必須。』",
+      },
+      {
+        type: "intuition",
+        title: "💡 良い指示の 4 要素",
+        body: "(1) 何を / (2) どんな入力で / (3) どんな出力形式で / (4) 制約(性能・スタイル)。",
+      },
+      { type: "h3", text: "2. ロール指定(Role Prompting)" },
+      {
+        type: "code",
+        title: "システムロールで人格を設定",
+        python: "messages=[\n    {'role': 'system', 'content':\n     'あなたは統計検定 1 級保持者の数理統計学者です。式変形は厳密に、自然言語の説明は丁寧に。'},\n    {'role': 'user', 'content': '中心極限定理の数学的証明をお願いします'},\n]",
+      },
+      {
+        type: "p",
+        text: "システムロールで **専門性 ・ トーン ・ 制約** を先に固定すると、出力が安定します。",
+      },
+      { type: "h3", text: "3. Few-shot(例示)" },
+      {
+        type: "p",
+        text: "やってほしいタスクの **入出力例を 2〜5 個** 見せる。LLM はその場でパターンを学習します。",
+      },
+      {
+        type: "code",
+        title: "例: 感情分類",
+        python: "prompt = '''次のレビューを Positive / Negative に分類してください。\n\nレビュー: 最高の体験でした\n分類: Positive\n\nレビュー: 期待外れだった\n分類: Negative\n\nレビュー: まあまあかな\n分類:'''",
+      },
+      { type: "h3", text: "4. Chain-of-Thought(段階的推論)" },
+      {
+        type: "p",
+        text: "数学・論理問題で『**ステップバイステップで考えてください**』と指示すると正答率が大きく上がります。",
+      },
+      {
+        type: "code",
+        title: "数学問題の改善",
+        python: "❌ '36 個のリンゴを 4 人で平等に分けると?'\n→ 即答えだけ\n\n✅ '36 個のリンゴを 4 人で平等に分けます。\n   ステップごとに考えてから最終的な答えを述べてください。'\n→ 1) 全体は 36 個\n   2) 4 人で割る → 36 / 4 = 9\n   答え: 9 個ずつ",
+      },
+      { type: "h3", text: "5. 出力形式の指定" },
+      {
+        type: "p",
+        text: "JSON ・ Markdown 表 ・ XML タグなど、**機械が読める形** を指定すると後段処理が楽。",
+      },
+      {
+        type: "code",
+        title: "JSON 出力例",
+        python: "prompt = '''次の文章から人物名と年齢を抽出してください。\n出力は JSON のみ。説明文は不要。\n\n文章: 田中さん(34 歳)と山田さん(28 歳)が会議に参加した。\n\n出力スキーマ: {\"persons\": [{\"name\": str, \"age\": int}]}'''",
+      },
+      { type: "h3", text: "6. Self-Consistency(複数サンプル + 多数決)" },
+      {
+        type: "p",
+        text: "重要な推論問題は temperature を上げて **複数回サンプリング → 多数決**。コストはかかるが精度が大きく上がる。",
+      },
+      { type: "h3", text: "7. プロンプトの構造化" },
+      {
+        type: "code",
+        title: "セクション分けでロバストに",
+        python: "prompt = '''# 役割\nあなたはデータサイエンティストです。\n\n# タスク\n以下のデータから 5 つの示唆を抽出する。\n\n# データ\n```csv\n{csv_content}\n```\n\n# 出力\n- Markdown の箇条書き 5 項目\n- 各項目は 1 文 50 字以内\n- 数値根拠を併記'''",
+      },
+      { type: "h3", text: "やってはいけない 3 つ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**曖昧な指示**: 『良い感じに書いて』は禁物",
+          "**否定形だけ**: 『〜しないで』より『〜してください』が効く",
+          "**長すぎる文脈**: 関係ない情報は削る(精度が落ちる)",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[LLM 入門](/blog/llm-introduction)",
+          "[RAG 入門](/blog/rag-introduction)",
+          "[Transformer の数学](/blog/transformer-math)",
+        ],
+      },
+      {
+        type: "p",
+        text: "プロンプトエンジニアリングは **書いて試す** が一番。本記事のテクニックを ChatGPT / Claude で順番に試してみてください。",
+      },
+    ],
+  },
+  {
+    slug: "rag-introduction",
+    title: "RAG 入門 ─ LLM に外部知識を持たせる仕組み",
+    description:
+      "Retrieval Augmented Generation(RAG)の仕組みを、Embedding・ベクトル DB・検索・生成の 4 要素に分解。社内文書 Bot を作る最短ルートを示します。",
+    publishedAt: "2026-04-30",
+    category: "LLM",
+    tldr: [
+      "RAG = ユーザー質問に関連する文書を検索 → LLM のプロンプトに含めて回答生成。",
+      "幻覚を抑え、最新 ・ 社内固有の情報も扱える(LLM の弱点を補う鉄板パターン)。",
+      "実装は『チャンキング → Embedding → ベクトル DB → 検索 → プロンプト合成』の 5 ステップ。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**RAG(Retrieval Augmented Generation)** は LLM に外部知識を持たせる最も実用的な手法。社内文書 Q&A・カスタマーサポート・コードアシスタントの定番パターンです。",
+      },
+      { type: "h3", text: "なぜ必要か" },
+      {
+        type: "p",
+        text: "LLM 単体の限界:",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**学習時点の情報しか持たない** ─ 最新ニュース ・ 社内文書は知らない",
+          "**幻覚(Hallucination)** ─ もっともらしい嘘を作る",
+          "**根拠を示せない** ─ なぜそう答えたか不明",
+          "**コンテキスト長の限界** ─ 全文書を毎回投げられない",
+        ],
+      },
+      {
+        type: "p",
+        text: "→ RAG で **必要な部分だけ** を毎回取得して LLM に渡す。",
+      },
+      { type: "h3", text: "RAG の流れ(5 ステップ)" },
+      {
+        type: "list",
+        style: "number",
+        items: [
+          "**チャンキング**: ドキュメントを 200〜1000 トークン程度の塊に分割",
+          "**Embedding**: 各塊を密ベクトル(例: 1536 次元)に変換",
+          "**ベクトル DB に保存**: Pinecone ・ Weaviate ・ pgvector など",
+          "**検索**: ユーザー質問を Embedding 化 → 類似ベクトルを Top-k 取得",
+          "**生成**: 取得した塊 + 質問を LLM に渡して回答生成",
+        ],
+      },
+      { type: "h3", text: "Python での最小実装" },
+      {
+        type: "code",
+        title: "OpenAI + ChromaDB",
+        python: "import chromadb\nfrom openai import OpenAI\n\nclient = OpenAI()\ndb = chromadb.Client()\ncoll = db.create_collection('docs')\n\n# Step 1-3: ドキュメント追加\ndocs = [\n    '統計検定 2 級は CBT 形式で 90 分。',\n    '統計検定 2 級の合格率は約 40〜50%。',\n    '受験料は一般 7,000 円・学割 5,000 円。',\n]\nembs = [\n    client.embeddings.create(input=d, model='text-embedding-3-small').data[0].embedding\n    for d in docs\n]\ncoll.add(ids=[f'd{i}' for i in range(len(docs))], documents=docs, embeddings=embs)\n\n# Step 4: 検索\nquery = '統計検定 2 級は何分?'\nq_emb = client.embeddings.create(input=query, model='text-embedding-3-small').data[0].embedding\nresults = coll.query(query_embeddings=[q_emb], n_results=2)\ncontext = '\\n'.join(results['documents'][0])\n\n# Step 5: 生成\nresp = client.chat.completions.create(\n    model='gpt-4o-mini',\n    messages=[\n        {'role': 'system', 'content': '次の文書のみを根拠に答えてください。'},\n        {'role': 'user', 'content': f'文書:\\n{context}\\n\\n質問: {query}'},\n    ],\n)\nprint(resp.choices[0].message.content)",
+      },
+      { type: "h3", text: "重要な設計判断" },
+      { type: "h4", text: "チャンキング戦略" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**固定長**: シンプル、文の途中で切れることも",
+          "**段落単位**: 自然だが長さがバラつく",
+          "**Sliding window**: オーバーラップで文脈をつなぐ",
+          "**LangChain RecursiveCharacterTextSplitter**: 再帰的に区切る",
+        ],
+      },
+      { type: "h4", text: "Embedding モデルの選択" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**OpenAI text-embedding-3-small**: 安価 ・ 多言語",
+          "**OpenAI text-embedding-3-large**: 高精度",
+          "**Voyage / Cohere**: 専門タスクに強い",
+          "**SentenceTransformers**: ローカルで動かせるオープンソース",
+        ],
+      },
+      { type: "h4", text: "ベクトル DB の選択" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Pinecone / Weaviate**: マネージド、スケール大",
+          "**ChromaDB / Faiss**: ローカル / プロトタイプ向き",
+          "**pgvector**: PostgreSQL の拡張、既存 DB と統合",
+          "**Qdrant**: 自前ホスト + 高性能",
+        ],
+      },
+      { type: "h3", text: "高度な RAG パターン" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Hybrid Search**: BM25(キーワード) + ベクトル検索の組合せ",
+          "**Re-ranking**: 一次検索の結果をクロスエンコーダで再順位付け",
+          "**HyDE**: 仮想回答を生成してから検索 → 精度向上",
+          "**Multi-hop**: 複数回検索して推論を組み立てる",
+        ],
+      },
+      { type: "h3", text: "評価指標" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Recall@k**: 関連文書が Top-k に入っているか",
+          "**Faithfulness**: 出力が文書に忠実か",
+          "**Answer Relevance**: 質問への回答度合い",
+          "**Context Precision**: 取得した文書の関連度",
+        ],
+      },
+      { type: "h3", text: "次のステップ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[LLM 入門](/blog/llm-introduction)",
+          "[プロンプトエンジニアリング基礎](/blog/prompt-engineering-basics)",
+          "[ベイズ最適化](/blog/bayesian-optimization)",
+          "[線形代数を AI 視点で](/blog/linear-algebra-for-ai)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "mlops-basics",
+    title: "MLOps 基礎 ─ ML モデルを本番で運用する",
+    description:
+      "実験室の精度から本番運用へ。データバージョニング・モデル監視・CI/CD・特徴量ストアなど、AI エンジニアが押さえるべき MLOps の基礎を 6 領域で解説。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "MLOps = DevOps × ML。再現性 ・ 監視 ・ 自動化が 3 本柱。",
+      "データ ・ コード ・ モデル の 3 つすべてをバージョン管理する。",
+      "本番では精度よりも『安定して回り続けるか』が重要。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "Jupyter で 90% 出した精度も、本番環境で動かなければ価値ゼロ。**MLOps** は ML モデルをプロダクションで安定運用するためのプラクティス群です。",
+      },
+      { type: "h3", text: "MLOps の 6 領域" },
+      {
+        type: "list",
+        style: "number",
+        items: [
+          "**データバージョニング**(DVC ・ LakeFS)",
+          "**実験管理**(MLflow ・ Weights & Biases)",
+          "**モデルレジストリ**(MLflow ・ SageMaker)",
+          "**CI/CD パイプライン**(GitHub Actions ・ Vertex AI)",
+          "**サービング**(FastAPI ・ TorchServe ・ Triton)",
+          "**監視 ・ 再学習**(Evidently ・ Arize)",
+        ],
+      },
+      { type: "h3", text: "1. データバージョニング" },
+      {
+        type: "p",
+        text: "コードを Git で管理するように、データも管理する必要があります。データが変わるとモデル結果も変わるため。",
+      },
+      {
+        type: "code",
+        title: "DVC の例",
+        python: "# データを DVC で追跡\ndvc add data/raw/train.csv\ngit add data/raw/train.csv.dvc .gitignore\ngit commit -m 'Track training data v1'\n\n# データを更新したら\ndvc add data/raw/train.csv  # 自動で hash 更新\ngit commit -am 'Update training data v2'",
+      },
+      { type: "h3", text: "2. 実験管理" },
+      {
+        type: "code",
+        title: "MLflow で実験を追跡",
+        python: "import mlflow\n\nwith mlflow.start_run():\n    mlflow.log_param('lr', 0.01)\n    mlflow.log_param('batch_size', 32)\n\n    # 学習...\n\n    mlflow.log_metric('accuracy', acc)\n    mlflow.log_metric('loss', loss)\n    mlflow.sklearn.log_model(model, 'model')",
+      },
+      {
+        type: "p",
+        text: "全実験のハイパラ ・ 評価指標 ・ モデルファイルが Web UI で一覧できる ─ 数百回の試行でも比較可能。",
+      },
+      { type: "h3", text: "3. モデルレジストリ" },
+      {
+        type: "p",
+        text: "学習済みモデルを **バージョン付き** で保管。本番に出す前に **Staging → Production** のステージング:",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "v1: ベースライン",
+          "v2: A/B テスト中(canary)",
+          "v3: 本番運用中",
+          "ロールバック: v3 で問題が出たら v2 に即戻し",
+        ],
+      },
+      { type: "h3", text: "4. CI/CD" },
+      {
+        type: "p",
+        text: "コード push → 自動テスト → 学習 → 評価 → デプロイ までの自動化。",
+      },
+      {
+        type: "code",
+        title: "GitHub Actions の例",
+        python: "# .github/workflows/ml.yml\nname: ML Pipeline\non: [push]\njobs:\n  train:\n    steps:\n      - uses: actions/checkout@v4\n      - run: pip install -r requirements.txt\n      - run: python train.py\n      - run: python evaluate.py --threshold 0.85\n      - run: python deploy.py  # 評価合格時のみ",
+      },
+      { type: "h3", text: "5. サービング" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**FastAPI**: シンプル ・ 軽量",
+          "**TorchServe**: PyTorch 専用、バッチ処理 ・ A/B 内蔵",
+          "**Triton**: GPU 推論最適化、複数フレームワーク対応",
+          "**Vertex AI / SageMaker**: マネージドで運用負担最小",
+        ],
+      },
+      {
+        type: "code",
+        title: "FastAPI で 5 行サービング",
+        python: "from fastapi import FastAPI\nimport joblib\n\napp = FastAPI()\nmodel = joblib.load('model.pkl')\n\n@app.post('/predict')\ndef predict(features: list[float]):\n    return {'prediction': float(model.predict([features])[0])}",
+      },
+      { type: "h3", text: "6. 監視 ・ 再学習" },
+      {
+        type: "p",
+        text: "本番に出して終わりではなく、**継続的に監視** が必要:",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Data Drift**: 入力データ分布が変わっていないか",
+          "**Prediction Drift**: 予測分布が変わっていないか",
+          "**Performance**: 精度が落ちていないか(ground truth が遅延入手の場合も)",
+          "**レイテンシ ・ エラー率**: 普通の Web サービス監視",
+          "**Drift 検出 → 再学習トリガー**",
+        ],
+      },
+      {
+        type: "practical",
+        title: "🛠 実務で出る課題",
+        body: "コロナでユーザー行動が激変 → モデル精度が落ちた、なんて事例が無数にあります。Drift 監視は必須。",
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[scikit-learn 入門](/blog/sklearn-introduction)",
+          "[Pandas Tips](/blog/pandas-tips-for-ml)",
+          "[Python 環境構築](/blog/python-setup-for-stats)",
+          "[E 資格 ロードマップ](/certs/e-shikaku/roadmap)",
+        ],
+      },
+      { type: "h3", text: "まとめ" },
+      {
+        type: "p",
+        text: "MLOps は『コードを書いて終わり』ではなく『継続して動かす』ことが本質。AI エンジニアの実務時間の **6〜8 割は MLOps 領域** とも言われます。早めに体系を掴んでおくと差がつきます。",
+      },
+    ],
+  },
+  {
+    slug: "kaggle-getting-started",
+    title: "Kaggle 始め方 ─ 最初の銅メダルまでの 30 日",
+    description:
+      "世界最大の機械学習コンペサイト Kaggle で実戦経験を積む方法。アカウント作成からテーブルコンペで銅メダルを取るまでの王道 30 日プランを提示。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "Kaggle = 世界中のデータサイエンティストが競う場。学習 ・ ポートフォリオ ・ 転職に強い。",
+      "30 日プラン: Tutorial → Notebooks 読込 → 自分で submit → ベースライン強化 → アンサンブル。",
+      "テーブルコンペで LightGBM ベースライン → Optuna 調整 → blending で銅メダル圏。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**Kaggle** は ML 実戦経験を積む最強の場。世界中の DS と同じ問題に取り組み、リアルタイムで順位がつきます。本記事では **30 日で初メダル** を取る現実的なプランを提示。",
+      },
+      { type: "h3", text: "なぜ Kaggle が良いか" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**実データ** で手を動かせる(教科書の iris ・ MNIST から脱却)",
+          "**世界の上位の Notebook** が公開されており、学習教材として最高",
+          "**Discord コミュニティ ・ 日本人勢のブログ** が豊富",
+          "**メダル ・ ランクが履歴書** に書ける(Expert ・ Master ・ Grandmaster)",
+        ],
+      },
+      { type: "h3", text: "30 日プラン" },
+      { type: "h4", text: "Day 1〜3: アカウント作成 + Tutorial" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[kaggle.com](https://kaggle.com) でアカウント作成",
+          "**Titanic コンペ**(初心者用)で Submit までの流れを体験",
+          "**Kaggle Learn**(無料コース)で Pandas ・ ML 入門",
+        ],
+      },
+      { type: "h4", text: "Day 4〜10: 公開 Notebook を読む" },
+      {
+        type: "p",
+        text: "現在開催中のテーブルコンペを 1 つ選び、**Most Voted** の Notebook を 5〜10 個読む。コードをコピペして自分の環境で動かす。",
+      },
+      { type: "h4", text: "Day 11〜17: ベースラインを作る" },
+      {
+        type: "code",
+        title: "テーブルコンペの定石コード",
+        python: "import pandas as pd\nimport numpy as np\nfrom sklearn.model_selection import KFold\nimport lightgbm as lgb\n\ntrain = pd.read_csv('train.csv')\ntest = pd.read_csv('test.csv')\nX, y = train.drop('target', axis=1), train['target']\n\noof = np.zeros(len(X))\nsub = np.zeros(len(test))\nkf = KFold(n_splits=5, shuffle=True, random_state=42)\n\nfor fold, (tr_idx, val_idx) in enumerate(kf.split(X)):\n    X_tr, X_val = X.iloc[tr_idx], X.iloc[val_idx]\n    y_tr, y_val = y.iloc[tr_idx], y.iloc[val_idx]\n    model = lgb.LGBMRegressor(n_estimators=2000, learning_rate=0.05)\n    model.fit(X_tr, y_tr, eval_set=[(X_val, y_val)], callbacks=[lgb.early_stopping(100)])\n    oof[val_idx] = model.predict(X_val)\n    sub += model.predict(test) / 5\n\nprint('CV:', np.sqrt(((y - oof) ** 2).mean()))\npd.DataFrame({'id': test['id'], 'target': sub}).to_csv('submission.csv', index=False)",
+      },
+      { type: "h4", text: "Day 18〜23: 特徴量エンジニアリング" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**カテゴリ変数**: Target Encoding",
+          "**集計特徴量**: groupby + agg で cross-feature",
+          "**日付**: weekday ・ 月初/月末 ・ 祝日",
+          "**外部データ**: 公開可能な追加データを統合",
+        ],
+      },
+      {
+        type: "p",
+        text: "詳しくは [Pandas Tips](/blog/pandas-tips-for-ml) も参照。",
+      },
+      { type: "h4", text: "Day 24〜27: ハイパラ調整" },
+      {
+        type: "p",
+        text: "[ベイズ最適化](/blog/bayesian-optimization) で Optuna を使い、num_leaves ・ learning_rate ・ min_child_samples を探索。CV スコアが 0.5〜2% は伸びる。",
+      },
+      { type: "h4", text: "Day 28〜30: アンサンブル + Submit 連発" },
+      {
+        type: "p",
+        text: "**Stacking** や **Blending** で複数モデルの予測を平均化。LightGBM + XGBoost + CatBoost の単純平均でも 1% 上がる。",
+      },
+      {
+        type: "code",
+        title: "シンプル Blending",
+        python: "blend = (lgb_pred + xgb_pred + cat_pred) / 3\n# 加重平均にしたい場合\nblend = 0.4 * lgb_pred + 0.4 * cat_pred + 0.2 * xgb_pred",
+      },
+      { type: "h3", text: "メダル獲得のコツ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Public LB に過剰適合しない**: CV を信じる",
+          "**最終 Submit は 2 つ**: 安全な選択 + チャレンジ選択",
+          "**Discussion を読む**: 他参加者のヒントが宝の山",
+          "**Discord でチームを組む**: 銀以上を狙うなら",
+        ],
+      },
+      { type: "h3", text: "おすすめのコンペタイプ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Tabular Playground Series**: 月次の練習コンペ。短期 ・ メダルあり",
+          "**Getting Started**: Titanic ・ House Prices(常設)",
+          "**Featured(賞金あり)**: 本気の戦い、上位 1% が銅",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[scikit-learn 入門](/blog/sklearn-introduction)",
+          "[Pandas Tips](/blog/pandas-tips-for-ml)",
+          "[ベイズ最適化](/blog/bayesian-optimization)",
+          "[AI Engineer Roadmap](/roadmap)",
+        ],
+      },
+      { type: "h3", text: "まとめ" },
+      {
+        type: "p",
+        text: "Kaggle は **理論を実戦に変える最強の道場**。30 日真剣にやれば、教科書を 6 ヶ月読むより身につきます。最初の銅メダルが転機です。",
+      },
+    ],
+  },
+  {
+    slug: "causal-inference-introduction",
+    title: "因果推論 入門 ─ 相関と因果はどう違うか",
+    description:
+      "「アイスが売れる日は溺れる人が増える ─ アイスが原因？」 ─ 統計の頂点とも言える因果推論を、AI エンジニア視点で実装まで。",
+    publishedAt: "2026-04-30",
+    category: "学習法",
+    tldr: [
+      "相関は誰でも計算できるが、因果は『介入効果』を分離して初めて主張できる。",
+      "ランダム化比較試験(RCT)が最強だが、現実には不可能なことも多い。",
+      "観察データから因果を推論する手法: 傾向スコア ・ 操作変数 ・ 差分の差分(DID)・ 回帰不連続 ・ DAG。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "「**アイスクリームの売上が高い日に水死事故が多い**」 ─ これだけでは『アイスが原因で水死する』とは言えません。第三の要因(暑い日)が両方を引き起こしている可能性が高い。これが **相関と因果の違い** で、ML の予測モデルでは扱えない領域です。",
+      },
+      { type: "h3", text: "相関 ≠ 因果 を前提にする" },
+      {
+        type: "p",
+        text: "ML モデルが学ぶのは **相関構造**。だが、ビジネス意思決定で本当に欲しいのは **介入効果**:",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "『広告を表示すると CV は上がるか?』 ← 介入の効果",
+          "『価格を 10% 下げると売上はどうなる?』 ← 介入の効果",
+          "『この治療を受けると生存率は上がる?』 ← 介入の効果",
+        ],
+      },
+      {
+        type: "intuition",
+        title: "💡 反事実の世界",
+        body: "因果効果 = 『介入した世界』と『しなかった世界』の差。同じ人に両方は起こらないので推論で埋めるしかない。",
+      },
+      { type: "h3", text: "ゴールドスタンダード ─ RCT" },
+      {
+        type: "p",
+        text: "**ランダム化比較試験(Randomized Controlled Trial)** で介入をランダムに割り当てると、交絡要因が均等化されて効果が分離できる。",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**A/B テスト**: Web の標準",
+          "**臨床試験**: 新薬承認の必須条件",
+          "**フィールド実験**: 経済学のノーベル賞(Banerjee, Duflo)",
+        ],
+      },
+      {
+        type: "p",
+        text: "ただし RCT が **倫理的 ・ 経済的 ・ 物理的に不可能** な場合も多い(タバコの害、過去のキャンペーン分析など)。",
+      },
+      { type: "h3", text: "観察データから因果を出す 5 手法" },
+      { type: "h4", text: "1. 傾向スコア(Propensity Score Matching)" },
+      {
+        type: "p",
+        text: "介入を受ける『傾向』をロジスティック回帰で推定 → 似た傾向を持つペアでマッチング → 効果を計算。",
+      },
+      {
+        type: "code",
+        title: "傾向スコアマッチング(scikit-learn + 自前)",
+        python: "from sklearn.linear_model import LogisticRegression\nfrom sklearn.neighbors import NearestNeighbors\n\n# X: 共変量, T: 処置 0/1, Y: アウトカム\nps = LogisticRegression().fit(X, T).predict_proba(X)[:, 1]\n\n# 処置群の各サンプルに最近傍の対照群を割り当て\ntreated = X[T == 1]\nuntreated = X[T == 0]\nnn = NearestNeighbors(n_neighbors=1).fit(ps[T == 0].reshape(-1, 1))\n_, idx = nn.kneighbors(ps[T == 1].reshape(-1, 1))\n\natt = (Y[T == 1].values - Y[T == 0].values[idx.flatten()]).mean()\nprint('ATT:', att)",
+      },
+      { type: "h4", text: "2. 差分の差分(Difference-in-Differences)" },
+      {
+        type: "p",
+        text: "**処置の前後** + **処置群と対照群** の 2 軸で差を取る。並行トレンド仮定が成り立てば因果効果が出せる。",
+      },
+      { type: "h4", text: "3. 操作変数法(Instrumental Variable)" },
+      {
+        type: "p",
+        text: "**処置に影響するが結果には直接影響しない** 変数(IV)を使う。古典例: 兵役くじ → 教育年数の効果。",
+      },
+      { type: "h4", text: "4. 回帰不連続(RDD)" },
+      {
+        type: "p",
+        text: "**閾値で処置が切り替わる**(例: 試験スコア 80 点で奨学金)場面で、閾値前後を比較。",
+      },
+      { type: "h4", text: "5. 因果ダイアグラム(DAG)" },
+      {
+        type: "p",
+        text: "**変数間の因果関係をグラフで明示** → 識別可能性を判定。Judea Pearl の do 計算が理論的基盤。",
+      },
+      { type: "h3", text: "Python ライブラリ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**DoWhy**(Microsoft): DAG ベースで識別 → 推定 → 反証",
+          "**EconML**(Microsoft): 機械学習を使った因果推論(Double ML, Causal Forest)",
+          "**CausalImpact**(Google): 時系列の介入効果分析",
+          "**linearmodels**: IV 推定 ・ パネルデータ",
+        ],
+      },
+      { type: "h3", text: "AI エンジニアの活用シーン" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**A/B テストの結果分析**: 単純比較ではなく傾向スコア調整",
+          "**マーケティング施策の効果**: 過去キャンペーンの ROI 分析",
+          "**プロダクト機能の効果検証**: ロールアウト前後の比較",
+          "**価格弾力性の推定**: 操作変数法で価格効果を分離",
+          "**バイアス除去**: 採用 ・ 与信モデルの差別検出",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[統計検定 2 級 教科書](/textbook/grade-2) ─ 回帰の基礎",
+          "[統計検定 準 1 級 教科書](/textbook/grade-pre1) ─ 多変量解析",
+          "[p 値の誤解 5 選](/blog/p-value-misunderstandings)",
+          "[ベイズ統計と頻度論](/blog/bayes-vs-frequentist)",
+        ],
+      },
+      { type: "h3", text: "まとめ" },
+      {
+        type: "p",
+        text: "因果推論は『**統計の頂点**』 ─ ML エンジニアが上位職を目指すなら必修領域。意思決定の質が桁違いに変わります。",
+      },
+    ],
+  },
+  {
     slug: "sklearn-introduction",
     title: "scikit-learn 入門 ─ 30 分で覚える ML 7 ステップ",
     description:
