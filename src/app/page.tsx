@@ -112,6 +112,90 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="mb-14 md:mb-20 paper rounded-xl p-7 md:p-8">
+        <span className="chip-soft mb-3">For Beginners</span>
+        <h2 className="text-2xl font-bold mb-3 mt-2">初めての方へ</h2>
+        <p className="text-[var(--muted-strong)] leading-loose mb-4">
+          全体像を把握したい方は{" "}
+          <Link
+            href="/roadmap"
+            className="text-[var(--link)] hover:underline font-bold"
+          >
+            学習ロードマップ
+          </Link>
+          、どの級から始めればいいか迷うときは{" "}
+          <Link href="/diagnose" className="text-[var(--link)] hover:underline font-bold">
+            3 問の級診断
+          </Link>{" "}
+          をどうぞ。学習中に用語の意味をすぐ確認したいときは{" "}
+          <Link
+            href="/glossary"
+            className="text-[var(--link)] hover:underline font-bold"
+          >
+            用語集
+          </Link>{" "}
+          が便利です。
+        </p>
+        <p className="text-[var(--muted-strong)] leading-loose mb-4">
+          統計を学び始める方は、まず <strong>4級の教科書</strong>{" "}
+          からスタートするのがおすすめです。データの代表値・ばらつき・確率・場合の数といった土台を、身近な例とともに明朝体の読み物として読み進められます。各問題に付く難易度バッジ(
+          <span className="inline-block mx-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300 tracking-wider ui-sans">
+            ★☆☆ 基礎
+          </span>
+          <span className="inline-block mx-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300 tracking-wider ui-sans">
+            ★★☆ 標準
+          </span>
+          <span className="inline-block mx-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300 tracking-wider ui-sans">
+            ★★★ 応用
+          </span>
+          )を目印に、無理のない順で力をつけていけます。
+        </p>
+        <div className="flex flex-wrap gap-2 ui-sans text-sm">
+          <Link
+            href="/diagnose"
+            className="px-5 py-2.5 bg-[var(--accent)] text-[var(--accent-fg)] rounded-lg font-bold hover:bg-[var(--accent-strong)]"
+          >
+            級診断を受ける →
+          </Link>
+          <Link
+            href="/figures"
+            className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
+          >
+            図解で学ぶ統計
+          </Link>
+          <Link
+            href="/explore"
+            className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
+          >
+            動かして学ぶ統計
+          </Link>
+          <Link
+            href="/tools"
+            className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
+          >
+            統計計算ツール
+          </Link>
+          <Link
+            href="/exam-info"
+            className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
+          >
+            受験情報まとめを見る
+          </Link>
+          <Link
+            href="/textbook/grade-4"
+            className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
+          >
+            4級の教科書を読む
+          </Link>
+          <Link
+            href="/quiz/grade-4"
+            className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
+          >
+            4級の問題を解く
+          </Link>
+        </div>
+      </section>
+
       <section className="mb-14 md:mb-20">
         <header className="mb-5 text-center">
           <span className="chip-soft">Start Here</span>
@@ -241,89 +325,6 @@ export default function Home() {
         </p>
       </section>
 
-      <section className="mb-14 md:mb-20 paper rounded-xl p-7 md:p-8">
-        <div className="chapter-eyebrow mb-2">For Beginners</div>
-        <h2 className="text-2xl font-bold mb-3">初めての方へ</h2>
-        <p className="text-[var(--muted-strong)] leading-loose mb-4">
-          全体像を把握したい方は{" "}
-          <Link
-            href="/roadmap"
-            className="text-[var(--link)] hover:underline font-bold"
-          >
-            学習ロードマップ
-          </Link>
-          、どの級から始めればいいか迷うときは{" "}
-          <Link href="/diagnose" className="text-[var(--link)] hover:underline font-bold">
-            3 問の級診断
-          </Link>{" "}
-          をどうぞ。学習中に用語の意味をすぐ確認したいときは{" "}
-          <Link
-            href="/glossary"
-            className="text-[var(--link)] hover:underline font-bold"
-          >
-            用語集
-          </Link>{" "}
-          が便利です。
-        </p>
-        <p className="text-[var(--muted-strong)] leading-loose mb-4">
-          統計を学び始める方は、まず <strong>4級の教科書</strong>{" "}
-          からスタートするのがおすすめです。データの代表値・ばらつき・確率・場合の数といった土台を、身近な例とともに明朝体の読み物として読み進められます。各問題に付く難易度バッジ(
-          <span className="inline-block mx-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300 tracking-wider ui-sans">
-            ★☆☆ 基礎
-          </span>
-          <span className="inline-block mx-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300 tracking-wider ui-sans">
-            ★★☆ 標準
-          </span>
-          <span className="inline-block mx-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300 tracking-wider ui-sans">
-            ★★★ 応用
-          </span>
-          )を目印に、無理のない順で力をつけていけます。
-        </p>
-        <div className="flex flex-wrap gap-2 ui-sans text-sm">
-          <Link
-            href="/diagnose"
-            className="px-4 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)]"
-          >
-            級診断を受ける →
-          </Link>
-          <Link
-            href="/figures"
-            className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
-          >
-            図解で学ぶ統計
-          </Link>
-          <Link
-            href="/explore"
-            className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
-          >
-            動かして学ぶ統計
-          </Link>
-          <Link
-            href="/tools"
-            className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
-          >
-            統計計算ツール
-          </Link>
-          <Link
-            href="/exam-info"
-            className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
-          >
-            受験情報まとめを見る
-          </Link>
-          <Link
-            href="/textbook/grade-4"
-            className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
-          >
-            4級の教科書を読む
-          </Link>
-          <Link
-            href="/quiz/grade-4"
-            className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
-          >
-            4級の問題を解く
-          </Link>
-        </div>
-      </section>
 
       <section className="mb-14 md:mb-20">
         <div className="mb-5 flex items-baseline justify-between">

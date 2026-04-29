@@ -192,15 +192,15 @@ button.paper:hover {
   font-weight: 700;
 }
 
-/* Chip-style category label (the small rounded blue tag the
-   reference site uses on each card top-left). */
+/* Chip-style category label — soft pastel blue with darker text.
+   Keeps the page airy: chips never compete with primary buttons. */
 .chip {
   display: inline-flex;
   align-items: center;
   padding: 0.2rem 0.6rem;
   border-radius: 0.375rem;
-  background-color: var(--accent);
-  color: var(--accent-fg);
+  background-color: color-mix(in oklab, var(--accent) 22%, var(--page));
+  color: var(--accent-strong);
   font-family: var(--font-noto-sans-jp), system-ui, sans-serif;
   font-size: 0.7rem;
   font-weight: 700;
