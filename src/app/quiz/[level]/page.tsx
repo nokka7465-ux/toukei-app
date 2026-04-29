@@ -93,7 +93,7 @@ export default async function QuizPage({
       <Quiz
         questions={questions}
         quizKey={level}
-        shareUrl={`https://toukei-app-eight.vercel.app/quiz/${level}`}
+        shareUrl={`https://toukei-app.com/quiz/${level}`}
         shareLabel={`統計検定 ${meta.title} の演習問題`}
       />
 

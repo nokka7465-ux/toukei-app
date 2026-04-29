@@ -31,7 +31,7 @@
   統計検定 4級〜1級の無料学習サイト『統計検定 学習帳』
   と『AI 学習帳』を運営。図解・教科書・演習問題を
   毎日更新。E 資格・G 検定対策、LLM 実装も。
-  📝 https://toukei-app-eight.vercel.app/
+  📝 https://toukei-app.com/
 
 固定ツイート:
   「統計検定の図解 1 枚で理解できるシリーズ」など、
@@ -151,7 +151,7 @@
 すべて完全無料 + 会員登録不要。
 
 ぜひ覗いてみてください 🙇‍♂️
-https://toukei-app-eight.vercel.app/
+https://toukei-app.com/
 
 #統計検定
 ```

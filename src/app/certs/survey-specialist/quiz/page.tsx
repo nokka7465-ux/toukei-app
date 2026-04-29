@@ -16,8 +16,7 @@ export const metadata: Metadata = {
   },
 };
 
-const SHARE_URL =
-  "https://toukei-app-eight.vercel.app/certs/survey-specialist/quiz";
+const SHARE_URL = "https://toukei-app.com/certs/survey-specialist/quiz";
 
 export default function SurveySpecialistQuizPage() {
   return (

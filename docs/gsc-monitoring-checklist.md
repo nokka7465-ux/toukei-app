@@ -7,9 +7,9 @@
 サイトごとにブックマークしておく:
 
 ### 統計検定 学習帳
-- GSC: https://search.google.com/search-console?resource_id=https://toukei-app-eight.vercel.app/
+- GSC: https://search.google.com/search-console?resource_id=https://toukei-app.com/
 - GA4: https://analytics.google.com/(プロパティを選択)
-- ライブサイト: https://toukei-app-eight.vercel.app/
+- ライブサイト: https://toukei-app.com/
 - Vercel: https://vercel.com/dashboard
 
 ### AI 学習帳

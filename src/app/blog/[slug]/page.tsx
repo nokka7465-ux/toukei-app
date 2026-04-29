@@ -7,7 +7,7 @@ import { MixedText } from "@/components/MixedText";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import type { TextbookBlock, BlogPost } from "@/types/content";
 
-const SITE_URL = "https://toukei-app-eight.vercel.app";
+const SITE_URL = "https://toukei-app.com";
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));

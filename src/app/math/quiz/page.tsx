@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-const SHARE_URL = "https://toukei-app-eight.vercel.app/math/quiz";
+const SHARE_URL = "https://toukei-app.com/math/quiz";
 
 export default function MathQuizPage() {
   return (

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-const SHARE_URL = "https://toukei-app-eight.vercel.app/certs/g-test/quiz";
+const SHARE_URL = "https://toukei-app.com/certs/g-test/quiz";
 
 export default function GTestQuizPage() {
   return (

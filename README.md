@@ -2,7 +2,7 @@
 
 統計検定 4 級〜1 級と関連検定 7 種を完全網羅した、無料の総合学習サイトです。
 
-🌐 **公開 URL**: https://toukei-app-eight.vercel.app/
+🌐 **公開 URL**: https://toukei-app.com/
 📦 **リポジトリ**: https://github.com/nokka7465-ux/toukei-app
 
 教科書・公式集・演習問題に加え、**インタラクティブ図解**・**統計計算ツール**・**Python/R コード併記**まで完備した、検定対策本にない学習体験を提供します。
@@ -38,7 +38,7 @@
 - sitemap.xml / robots.txt / OG 画像生成 / FAQ 構造化データ
 - Google Analytics 連携(`G-KKXJLJXP1H`)
 - カスタム 404 ページ
-- カスタムドメイン未対応(Vercel デフォルト URL 運用)
+- 独自ドメイン運用(`toukei-app.com`)
 
 ---
 

@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
-const SITE_URL = "https://toukei-app-eight.vercel.app";
+const SITE_URL = "https://toukei-app.com";
 
 const now = new Date().toISOString();
 

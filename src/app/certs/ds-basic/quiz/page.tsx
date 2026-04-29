@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-const SHARE_URL = "https://toukei-app-eight.vercel.app/certs/ds-basic/quiz";
+const SHARE_URL = "https://toukei-app.com/certs/ds-basic/quiz";
 
 export default function DsBasicQuizPage() {
   return (

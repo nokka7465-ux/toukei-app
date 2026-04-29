@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
 };
 
-const SHARE_URL = "https://toukei-app-eight.vercel.app/certs/e-shikaku/quiz";
+const SHARE_URL = "https://toukei-app.com/certs/e-shikaku/quiz";
 
 export default function EShikakuQuizPage() {
   return (

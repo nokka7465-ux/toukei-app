@@ -24,7 +24,7 @@ const notoSansJP = Noto_Sans_JP({
   display: "swap",
 });
 
-const SITE_URL = "https://toukei-app-eight.vercel.app";
+const SITE_URL = "https://toukei-app.com";
 const SITE_NAME = "統計検定 学習帳";
 const SITE_DESCRIPTION =
   "統計検定4級〜1級に対応した無料学習サイト。関連検定 7 種(DS基礎・統計調査士・専門統計調査士・G検定・E資格・DS検定・QC検定)も網羅。インタラクティブ図解・統計計算ツール・Python/Rコード併記など、検定対策本にない学習体験を提供。";

@@ -1,4 +1,4 @@
-const SITE_URL = "https://toukei-app-eight.vercel.app";
+const SITE_URL = "https://toukei-app.com";
 const SITE_NAME = "統計検定 学習帳";
 
 const websiteSchema = {

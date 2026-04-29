@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
 };
 
-const SHARE_URL = "https://toukei-app-eight.vercel.app/certs/qc-kentei/quiz";
+const SHARE_URL = "https://toukei-app.com/certs/qc-kentei/quiz";
 
 export default function QcKenteiQuizPage() {
   return (
