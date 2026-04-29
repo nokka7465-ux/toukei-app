@@ -8,6 +8,7 @@ import { ProgressDashboard } from "@/components/ProgressDashboard";
 import { DailyProblem } from "@/components/DailyProblem";
 import { AchievementsPanel } from "@/components/AchievementsPanel";
 import { AiRoadmap } from "@/components/AiRoadmap";
+import { blogTheme } from "@/lib/blog-theme";
 
 const availableLevels = new Set<string>([
   "intro",
@@ -362,34 +363,10 @@ export default function Home() {
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {[...blogPosts]
             .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1))
-            .slice(0, 3)
+            .slice(0, 6)
             .map((post) => {
               const cat = post.category;
-              const theme =
-                cat === "ロードマップ"
-                  ? {
-                      grad: "from-blue-500 to-indigo-600",
-                      emoji: "🗺",
-                    }
-                  : cat === "Python"
-                    ? {
-                        grad: "from-yellow-400 to-blue-600",
-                        emoji: "🐍",
-                      }
-                    : cat === "級選び"
-                      ? {
-                          grad: "from-emerald-500 to-sky-600",
-                          emoji: "🎯",
-                        }
-                      : cat === "学習法"
-                        ? {
-                            grad: "from-amber-500 to-rose-600",
-                            emoji: "📝",
-                          }
-                        : {
-                            grad: "from-slate-500 to-slate-700",
-                            emoji: "📰",
-                          };
+              const theme = blogTheme(cat);
               return (
                 <li key={post.slug}>
                   <Link

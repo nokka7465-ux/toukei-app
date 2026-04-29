@@ -55,7 +55,11 @@ export type DiagramKind =
   | "gradient-descent-paths"
   | "cnn-architecture"
   | "control-chart"
-  | "oc-curve";
+  | "oc-curve"
+  | "k-means-clusters"
+  | "svm-margin"
+  | "neural-net-forward"
+  | "attention-heatmap";
 
 export type TextbookBlock =
   | { type: "p"; text: string }

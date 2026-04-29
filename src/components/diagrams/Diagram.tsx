@@ -28,6 +28,10 @@ import { GradientDescentPaths } from "./GradientDescentPaths";
 import { CnnArchitecture } from "./CnnArchitecture";
 import { ControlChart } from "./ControlChart";
 import { OcCurve } from "./OcCurve";
+import { KMeansClusters } from "./KMeansClusters";
+import { SvmMargin } from "./SvmMargin";
+import { NeuralNetForward } from "./NeuralNetForward";
+import { AttentionHeatmap } from "./AttentionHeatmap";
 
 const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   "normal-curve": NormalCurve,
@@ -59,6 +63,10 @@ const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   "cnn-architecture": CnnArchitecture,
   "control-chart": ControlChart,
   "oc-curve": OcCurve,
+  "k-means-clusters": KMeansClusters,
+  "svm-margin": SvmMargin,
+  "neural-net-forward": NeuralNetForward,
+  "attention-heatmap": AttentionHeatmap,
 };
 
 export function Diagram({

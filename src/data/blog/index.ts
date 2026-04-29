@@ -2,6 +2,531 @@ import type { BlogPost } from "@/types/content";
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "sklearn-introduction",
+    title: "scikit-learn 入門 ─ 30 分で覚える ML 7 ステップ",
+    description:
+      "Python で機械学習を始めるなら scikit-learn が最短ルート。前処理 → 学習 → 評価 → ハイパラ調整までの 7 ステップを最小コードで一気に体験します。",
+    publishedAt: "2026-04-29",
+    category: "実装",
+    tldr: [
+      "scikit-learn は『データ → fit → predict』が共通インターフェース。1 つのモデルが書ければ全部書ける。",
+      "前処理 → 分割 → 学習 → 評価 → 交差検証 → グリッドサーチ → 永続化 の 7 ステップで一通り。",
+      "教師あり / 教師なし / パイプライン / 特徴量重要度 まで全部このライブラリで完結。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**scikit-learn** は Python の機械学習ライブラリのデファクトスタンダード。一貫した API で 100 種類以上のアルゴリズムが使え、入門から実務まで活躍します。本記事では 7 ステップで全体像を掴みます。",
+      },
+      { type: "h3", text: "Step 1 ─ データ読み込み" },
+      {
+        type: "code",
+        title: "iris データセットで遊ぶ",
+        python: "from sklearn.datasets import load_iris\nimport pandas as pd\n\ndata = load_iris(as_frame=True)\nX, y = data.data, data.target\nprint(X.head())\nprint(y.value_counts())",
+      },
+      { type: "h3", text: "Step 2 ─ 訓練 / テスト分割" },
+      {
+        type: "code",
+        title: "8:2 で分割",
+        python: "from sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42, stratify=y\n)",
+      },
+      { type: "h3", text: "Step 3 ─ 前処理(スケーリング)" },
+      {
+        type: "code",
+        title: "標準化",
+        python: "from sklearn.preprocessing import StandardScaler\n\nscaler = StandardScaler()\nX_train_scaled = scaler.fit_transform(X_train)\nX_test_scaled = scaler.transform(X_test)  # fit せず transform のみ!",
+      },
+      {
+        type: "intuition",
+        title: "💡 fit/transform/fit_transform",
+        body: "fit = 統計量を学習。transform = それで変換。テストデータには fit_transform を使わない(リーク防止)。",
+      },
+      { type: "h3", text: "Step 4 ─ モデル学習" },
+      {
+        type: "code",
+        title: "ロジスティック回帰",
+        python: "from sklearn.linear_model import LogisticRegression\n\nmodel = LogisticRegression(max_iter=1000)\nmodel.fit(X_train_scaled, y_train)",
+      },
+      { type: "h3", text: "Step 5 ─ 評価" },
+      {
+        type: "code",
+        title: "精度・混同行列・分類レポート",
+        python: "from sklearn.metrics import accuracy_score, confusion_matrix, classification_report\n\ny_pred = model.predict(X_test_scaled)\nprint('Accuracy:', accuracy_score(y_test, y_pred))\nprint(confusion_matrix(y_test, y_pred))\nprint(classification_report(y_test, y_pred, target_names=data.target_names))",
+      },
+      { type: "h3", text: "Step 6 ─ 交差検証" },
+      {
+        type: "code",
+        title: "5-fold CV",
+        python: "from sklearn.model_selection import cross_val_score\n\nscores = cross_val_score(model, X_train_scaled, y_train, cv=5, scoring='accuracy')\nprint(f'CV mean: {scores.mean():.3f} ± {scores.std():.3f}')",
+      },
+      { type: "h3", text: "Step 7 ─ ハイパラ最適化(GridSearch)" },
+      {
+        type: "code",
+        title: "C パラメータの探索",
+        python: "from sklearn.model_selection import GridSearchCV\n\nparams = {'C': [0.01, 0.1, 1, 10, 100]}\ngrid = GridSearchCV(LogisticRegression(max_iter=1000), params, cv=5)\ngrid.fit(X_train_scaled, y_train)\nprint('Best C:', grid.best_params_, 'CV:', grid.best_score_)",
+      },
+      { type: "h3", text: "おまけ ─ Pipeline でまとめる" },
+      {
+        type: "code",
+        title: "前処理+学習を 1 つに",
+        python: "from sklearn.pipeline import Pipeline\n\npipe = Pipeline([\n    ('scaler', StandardScaler()),\n    ('clf', LogisticRegression(max_iter=1000)),\n])\npipe.fit(X_train, y_train)\npipe.score(X_test, y_test)",
+      },
+      {
+        type: "practical",
+        title: "🛠 実務での重要性",
+        body: "Pipeline を使うと『前処理を訓練データだけで fit してテストにも適用』が自動化。データリークを防ぎ、再現性も高まります。",
+      },
+      { type: "h3", text: "次のステップ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[統計検定 2 級 教科書](/textbook/grade-2) ─ 線形回帰・ロジスティック回帰の理論",
+          "[E 資格 教科書](/certs/e-shikaku/textbook) ─ DL への発展",
+          "[Python 環境構築](/blog/python-setup-for-stats) ─ 環境がまだの方",
+          "[AIエンジニア統計チートシート](/blog/ai-stats-cheatsheet) ─ 必要な統計知識",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "pandas-tips-for-ml",
+    title: "Pandas 実務 Tips 10 選 ─ AIエンジニアの時短ワザ",
+    description:
+      "データ前処理で何度も書く操作を Pandas でスマートに。groupby・apply・merge・欠損値処理など、ML エンジニアが現場でよく使うテクニックを 10 個。",
+    publishedAt: "2026-04-29",
+    category: "Python",
+    tldr: [
+      "groupby + agg / apply / transform の使い分けができれば、前処理の 8 割は片付く。",
+      "欠損値・カテゴリ・日付・テキストの 4 大データ型ごとに定石がある。",
+      "メモリ削減 + 速度アップで 100 倍速くなる場面も。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "Pandas は AI エンジニアが最も時間を使うライブラリ。よく使う操作を 10 個まとめました。コピペで使える形にしています。",
+      },
+      { type: "h3", text: "1. groupby + agg(複数集計を一発で)" },
+      {
+        type: "code",
+        title: "複数列に複数集計",
+        python: "df.groupby('category').agg(\n    avg_price=('price', 'mean'),\n    max_price=('price', 'max'),\n    n_items=('id', 'count'),\n)",
+      },
+      { type: "h3", text: "2. transform(集計結果を元の行数で返す)" },
+      {
+        type: "code",
+        title: "グループ平均との偏差を作る",
+        python: "df['price_z'] = (df['price'] - df.groupby('cat')['price'].transform('mean')) / df.groupby('cat')['price'].transform('std')",
+      },
+      { type: "h3", text: "3. 欠損値の確認と処理" },
+      {
+        type: "code",
+        title: "欠損率と埋め方",
+        python: "df.isna().mean().sort_values(ascending=False)\n\n# 数値: 中央値で埋める\ndf['age'] = df['age'].fillna(df['age'].median())\n\n# カテゴリ: 最頻値\ndf['city'] = df['city'].fillna(df['city'].mode()[0])\n\n# 完全に欠けてる列を削除\ndf = df.dropna(axis=1, how='all')",
+      },
+      { type: "h3", text: "4. カテゴリ変数を数値化" },
+      {
+        type: "code",
+        title: "One-hot encoding と target encoding",
+        python: "# One-hot\ndf = pd.get_dummies(df, columns=['city', 'gender'], drop_first=True)\n\n# Target encoding(リーク注意)\nmean_target = df.groupby('city')['target'].mean()\ndf['city_te'] = df['city'].map(mean_target)",
+      },
+      { type: "h3", text: "5. 日付列の処理" },
+      {
+        type: "code",
+        title: "datetime と特徴量化",
+        python: "df['date'] = pd.to_datetime(df['date'])\ndf['year'] = df['date'].dt.year\ndf['month'] = df['date'].dt.month\ndf['weekday'] = df['date'].dt.dayofweek\ndf['is_weekend'] = df['weekday'].isin([5, 6])",
+      },
+      { type: "h3", text: "6. merge / join 使い分け" },
+      {
+        type: "code",
+        title: "外部結合とアシマトリック",
+        python: "# 内部結合(共通キーのみ)\nmerged = pd.merge(orders, users, on='user_id', how='inner')\n\n# 左結合(orders を残す)\nmerged = pd.merge(orders, users, on='user_id', how='left')\n\n# 結合状況を確認\nmerged = pd.merge(orders, users, on='user_id', how='left', indicator=True)\nprint(merged['_merge'].value_counts())",
+      },
+      { type: "h3", text: "7. メモリ削減" },
+      {
+        type: "code",
+        title: "型のダウンキャスト",
+        python: "# 整数列を必要最小サイズに\ndf['age'] = pd.to_numeric(df['age'], downcast='integer')\n\n# float64 を float32 に\ndf['price'] = df['price'].astype('float32')\n\n# カテゴリ列を category 型に(文字列より圧倒的に省メモリ)\ndf['city'] = df['city'].astype('category')",
+      },
+      { type: "h3", text: "8. apply の代わりに vectorize" },
+      {
+        type: "code",
+        title: "速度差は 100 倍",
+        python: "# 遅い: apply\ndf['len'] = df['text'].apply(len)\n\n# 速い: ベクトル化(.str アクセサ)\ndf['len'] = df['text'].str.len()\n\n# 数値演算も同じく\ndf['z'] = df['x'] * 2 + df['y']  # apply より圧倒的速い",
+      },
+      { type: "h3", text: "9. ピボット(縦↔横変換)" },
+      {
+        type: "code",
+        title: "long → wide",
+        python: "wide = df.pivot_table(\n    index='user_id', columns='category', values='amount', aggfunc='sum', fill_value=0\n)",
+      },
+      { type: "h3", text: "10. クエリ式で読みやすく" },
+      {
+        type: "code",
+        title: "query()",
+        python: "# 通常\nresult = df[(df['age'] >= 30) & (df['city'] == 'Tokyo')]\n\n# query 式(可読性UP)\nresult = df.query('age >= 30 and city == \"Tokyo\"')",
+      },
+      {
+        type: "practical",
+        title: "🛠 polars もチェック",
+        body: "1GB を超えるデータでは polars(Rust 実装の Pandas 互換)が 5〜30 倍速い。Pandas 知識はそのまま使えます。",
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[scikit-learn 入門](/blog/sklearn-introduction)",
+          "[Python 環境構築](/blog/python-setup-for-stats)",
+          "[AIエンジニア統計チートシート](/blog/ai-stats-cheatsheet)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "linear-algebra-for-ai",
+    title: "AI のための線形代数 ─ 5 つの概念だけで Transformer まで届く",
+    description:
+      "ベクトル・内積・行列積・固有値・特異値分解 ─ 機械学習・DL に必要な線形代数を 5 つに絞り、Python 実装と直感解説で。",
+    publishedAt: "2026-04-29",
+    category: "数学",
+    tldr: [
+      "AI に必要な線形代数は『ベクトル/行列の積・転置・固有値分解・SVD・勾配』の 5 概念。",
+      "Transformer の attention は本質的に『行列積 + softmax』。",
+      "PCA・最小二乗法・推薦システム は SVD で説明できる。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "「AI には線形代数が必要」と言われますが、**実際に必要な範囲は驚くほど狭い**。本記事では 5 つの中核概念だけで、Transformer まで届く道筋を示します。",
+      },
+      { type: "h3", text: "1. ベクトルと内積 ─ 類似度の言葉" },
+      {
+        type: "math",
+        tex: "\\mathbf{a} \\cdot \\mathbf{b} = \\sum_i a_i b_i = \\|\\mathbf{a}\\| \\|\\mathbf{b}\\| \\cos\\theta",
+      },
+      {
+        type: "p",
+        text: "内積は **2 ベクトルがどれくらい同じ方向を向いているか**。コサイン類似度はここから来ます。",
+      },
+      {
+        type: "code",
+        title: "コサイン類似度",
+        python: "import numpy as np\n\ndef cosine(a, b):\n    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))\n\nprint(cosine([1, 0], [1, 1]))  # 0.707",
+      },
+      {
+        type: "practical",
+        title: "🛠 実務での出番",
+        body: "Word2Vec / BERT の単語類似度、推薦システム、検索リランキングはすべて内積。",
+      },
+      { type: "h3", text: "2. 行列積 ─ 線形変換" },
+      {
+        type: "math",
+        tex: "(AB)_{ij} = \\sum_k A_{ik} B_{kj}",
+      },
+      {
+        type: "p",
+        text: "ニューラルネットの **1 層 = 行列積 + 活性化関数**。線形回帰の予測 $\\hat{y} = X\\beta$ も行列積。",
+      },
+      {
+        type: "code",
+        title: "簡易 NN の forward pass",
+        python: "X = np.random.randn(32, 100)        # 32 サンプル, 100 次元\nW1 = np.random.randn(100, 64) * 0.1\nb1 = np.zeros(64)\n\nh = X @ W1 + b1                    # 行列積で全結合\nh = np.maximum(h, 0)                # ReLU",
+      },
+      { type: "h3", text: "3. 転置 ─ 軸を入れ替える" },
+      {
+        type: "p",
+        text: "$A^\\top_{ij} = A_{ji}$。**Transformer の attention** で必須:",
+      },
+      {
+        type: "math",
+        tex: "\\mathrm{Attention}(Q, K, V) = \\mathrm{softmax}\\left(\\frac{QK^\\top}{\\sqrt{d_k}}\\right) V",
+      },
+      {
+        type: "p",
+        text: "Q が問い合わせ ・ K がキー、内積 $QK^\\top$ で『どのトークンに注目するか』が決まります。",
+      },
+      { type: "h3", text: "4. 固有値分解 ─ 主成分分析(PCA)の根" },
+      {
+        type: "math",
+        tex: "A\\mathbf{v} = \\lambda \\mathbf{v}",
+      },
+      {
+        type: "p",
+        text: "$\\mathbf{v}$ が固有ベクトル ・ $\\lambda$ が固有値。**共分散行列の固有ベクトル = データの主軸**。これが PCA。",
+      },
+      {
+        type: "code",
+        title: "PCA を 3 行で",
+        python: "from sklearn.decomposition import PCA\n\npca = PCA(n_components=2)\nX_2d = pca.fit_transform(X)\nprint('説明分散比:', pca.explained_variance_ratio_)",
+      },
+      { type: "h3", text: "5. SVD(特異値分解) ─ 万能ツール" },
+      {
+        type: "math",
+        tex: "A = U \\Sigma V^\\top",
+      },
+      {
+        type: "p",
+        text: "**任意の行列を 3 つに分解** できる魔法。応用例:",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**画像圧縮**: 上位 k 個の特異値だけ残す",
+          "**推薦システム**: 評価行列の低ランク近似",
+          "**LSI(潜在意味解析)**: 単語-文書行列の SVD",
+          "**最小二乗法**: 数値的に安定した解法",
+        ],
+      },
+      { type: "h3", text: "勾配 ─ 学習の方向" },
+      {
+        type: "math",
+        tex: "\\nabla_\\theta L = \\left(\\frac{\\partial L}{\\partial \\theta_1}, \\dots, \\frac{\\partial L}{\\partial \\theta_n}\\right)",
+      },
+      {
+        type: "p",
+        text: "勾配は **損失関数を最も急に増やす方向**。学習はその逆向き(勾配降下)に進みます。",
+      },
+      { type: "h3", text: "学習順" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[Phase 1 数学基礎](/math)(本サイト)",
+          "[ベイズ統計と頻度論](/blog/bayes-vs-frequentist) ─ 行列の分布表現",
+          "[scikit-learn 入門](/blog/sklearn-introduction) ─ 実装で確認",
+          "[E 資格 教科書](/certs/e-shikaku/textbook) ─ Transformer の数式まで",
+        ],
+      },
+      { type: "h3", text: "まとめ" },
+      {
+        type: "p",
+        text: "5 概念で Transformer まで届く ─ つまり **狭く深く** やれば AI に必要な線形代数は十分です。完璧主義に走らずに、実装と数式を行き来して血肉化しましょう。",
+      },
+    ],
+  },
+  {
+    slug: "transformer-math",
+    title: "Transformer の数学 ─ Attention は何を計算しているのか",
+    description:
+      "Transformer の核 Self-Attention を、行列積と softmax だけで読み解く。Q・K・V の意味から multi-head までを段階的に説明します。",
+    publishedAt: "2026-04-29",
+    category: "実装",
+    tldr: [
+      "Self-Attention = QK^⊤ で類似度 → softmax で重み → V を加重平均",
+      "multi-head = 複数視点で並列に attention を実行 → 結合",
+      "PyTorch で 30 行未満で実装できる。E 資格にも頻出。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "Transformer は今や LLM ・ Vision ・ 音声で標準アーキテクチャ。中核の **Self-Attention** を数式と実装で読み解きます。",
+      },
+      { type: "h3", text: "全体像 ─ 1 つの式に集約" },
+      {
+        type: "math",
+        tex: "\\mathrm{Attention}(Q, K, V) = \\mathrm{softmax}\\left(\\frac{QK^\\top}{\\sqrt{d_k}}\\right) V",
+      },
+      {
+        type: "p",
+        text: "Q(query)・K(key)・V(value)は同じ入力 X から $W_Q, W_K, W_V$ を掛けて作る。",
+      },
+      { type: "h3", text: "ステップ 1 ─ Q ・ K ・ V を作る" },
+      {
+        type: "math",
+        tex: "Q = XW_Q, \\quad K = XW_K, \\quad V = XW_V",
+      },
+      {
+        type: "intuition",
+        title: "💡 Q ・ K ・ V の意味",
+        body: "Q = 『質問』、K = 『鍵』、V = 『答え』。各トークンが質問を持ち、他のトークンの鍵と照合して、関連する答えを取り出す。",
+      },
+      { type: "h3", text: "ステップ 2 ─ 類似度行列 QK^⊤" },
+      {
+        type: "p",
+        text: "$QK^\\top$ は **トークン同士の類似度行列**(n × n)。要素 $(i, j)$ は『$i$ 番目のトークンが $j$ 番目をどれだけ気にすべきか』。",
+      },
+      {
+        type: "math",
+        tex: "S = \\frac{QK^\\top}{\\sqrt{d_k}}",
+      },
+      {
+        type: "p",
+        text: "$\\sqrt{d_k}$ で割るのは、次元が大きいと内積が大きくなりすぎて softmax が飽和するのを防ぐため。",
+      },
+      { type: "h3", text: "ステップ 3 ─ softmax で重みに" },
+      {
+        type: "math",
+        tex: "A = \\mathrm{softmax}(S)",
+      },
+      {
+        type: "p",
+        text: "各行が 1 に正規化された **attention 重み**。$A_{ij} = $ トークン $i$ がトークン $j$ に注目する割合。",
+      },
+      { type: "h3", text: "ステップ 4 ─ V の加重平均" },
+      {
+        type: "math",
+        tex: "Z = AV",
+      },
+      {
+        type: "p",
+        text: "重み × value で **文脈に応じたトークン表現** が得られる。これが attention の出力。",
+      },
+      { type: "h3", text: "PyTorch で実装" },
+      {
+        type: "code",
+        title: "Self-Attention の最小実装",
+        python: "import torch\nimport torch.nn as nn\nimport torch.nn.functional as F\n\nclass SelfAttention(nn.Module):\n    def __init__(self, d_model, d_k):\n        super().__init__()\n        self.W_q = nn.Linear(d_model, d_k)\n        self.W_k = nn.Linear(d_model, d_k)\n        self.W_v = nn.Linear(d_model, d_k)\n        self.scale = d_k ** 0.5\n\n    def forward(self, x):\n        Q, K, V = self.W_q(x), self.W_k(x), self.W_v(x)\n        S = (Q @ K.transpose(-2, -1)) / self.scale\n        A = F.softmax(S, dim=-1)\n        return A @ V\n\n# テスト\nattn = SelfAttention(d_model=64, d_k=64)\nx = torch.randn(2, 10, 64)  # batch=2, seq=10, dim=64\nz = attn(x)\nprint(z.shape)  # torch.Size([2, 10, 64])",
+      },
+      { type: "h3", text: "Multi-Head Attention" },
+      {
+        type: "p",
+        text: "1 つの attention だけだと観点が単一。**h 個の attention を並列実行 → 結合** することで、複数視点を同時に獲得します。",
+      },
+      {
+        type: "math",
+        tex: "\\mathrm{MultiHead}(Q, K, V) = [\\mathrm{head}_1; \\dots; \\mathrm{head}_h]W_O",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "各 head は独立した $W_Q, W_K, W_V$ を持つ",
+          "head ごとに $d_k = d_{model} / h$",
+          "GPT-3 や BERT は 12〜96 head",
+        ],
+      },
+      { type: "h3", text: "なぜ Transformer が強いか" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**並列計算**: RNN と違い時系列を一気に処理",
+          "**長距離依存**: どの位置のトークンとも 1 step で関係付け",
+          "**柔軟性**: 言語 ・ 画像 ・ 音声で同じアーキテクチャ",
+        ],
+      },
+      { type: "h3", text: "次のステップ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[線形代数を AI 視点で](/blog/linear-algebra-for-ai)",
+          "[E 資格 教科書](/certs/e-shikaku/textbook) ─ Transformer 関連の問題",
+          "[scikit-learn 入門](/blog/sklearn-introduction)",
+          "[AIエンジニア・ロードマップ](/roadmap)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "bayesian-optimization",
+    title: "ベイズ最適化でハイパーパラメータ探索 ─ Optuna 入門",
+    description:
+      "GridSearch より遥かに効率的なハイパラ探索手法『ベイズ最適化』を、Optuna で実装。少ない試行で最良パラメータを見つける考え方を解説します。",
+    publishedAt: "2026-04-29",
+    category: "実装",
+    tldr: [
+      "GridSearch は次元が増えると爆発する。Random Search より効率的なのがベイズ最適化。",
+      "ベイズ最適化 = 過去の試行から事後分布を更新 → 期待改善を最大化する次の点を選ぶ。",
+      "Optuna なら 10 行で導入可能。実務でほぼデファクト。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "機械学習モデルのハイパラ調整は時間との勝負。**ベイズ最適化(Bayesian Optimization)** は『過去の試行から学んで賢く次を選ぶ』アプローチで、GridSearch より圧倒的に少ない試行で最適解に近づけます。",
+      },
+      { type: "h3", text: "問題設定 ─ なぜ GridSearch ではダメか" },
+      {
+        type: "p",
+        text: "ハイパラが 5 個 ・ 各 10 候補だと **GridSearch は 10^5 = 10 万回試行**。LightGBM なら 1 試行 30 秒として 35 日…現実的でない。",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**GridSearch**: 全組み合わせを試す。次元の呪いに直面",
+          "**Random Search**: ランダムにサンプリング。GridSearch より効率的だが、過去の結果を活かさない",
+          "**ベイズ最適化**: **過去の結果から賢く次の試行点を決める** ← これ",
+        ],
+      },
+      { type: "h3", text: "ベイズ最適化の仕組み" },
+      {
+        type: "list",
+        style: "number",
+        items: [
+          "**サロゲートモデル**(代理関数)を構築 ─ 試行結果から目的関数を推定。通常はガウス過程(GP)",
+          "**獲得関数**(EI: Expected Improvement など)で次の試行点を決める",
+          "新しい試行 → サロゲートを更新 → 繰り返し",
+        ],
+      },
+      {
+        type: "intuition",
+        title: "💡 直感的に",
+        body: "「今までで最高は 0.85。次にどこを試せば 0.85 を超える可能性が最も高い？」を毎回計算して、賢く探索範囲を絞り込んでいきます。",
+      },
+      { type: "h3", text: "Optuna で実装(10 行)" },
+      {
+        type: "code",
+        title: "LightGBM の最適化",
+        python: "import optuna\nimport lightgbm as lgb\nfrom sklearn.model_selection import cross_val_score\n\ndef objective(trial):\n    params = {\n        'num_leaves': trial.suggest_int('num_leaves', 16, 256),\n        'learning_rate': trial.suggest_float('learning_rate', 0.01, 0.3, log=True),\n        'min_child_samples': trial.suggest_int('min_child_samples', 5, 100),\n        'reg_alpha': trial.suggest_float('reg_alpha', 1e-8, 10, log=True),\n    }\n    model = lgb.LGBMClassifier(**params, n_estimators=200)\n    score = cross_val_score(model, X_train, y_train, cv=5, scoring='roc_auc').mean()\n    return score\n\nstudy = optuna.create_study(direction='maximize')\nstudy.optimize(objective, n_trials=100)\n\nprint('Best:', study.best_value)\nprint('Params:', study.best_params)",
+      },
+      { type: "h3", text: "重要な機能" },
+      { type: "h4", text: "Pruning(早期打ち切り)" },
+      {
+        type: "code",
+        title: "勝ち目のない試行を途中で止める",
+        python: "study = optuna.create_study(\n    direction='maximize',\n    pruner=optuna.pruners.MedianPruner(),\n)",
+      },
+      {
+        type: "p",
+        text: "中央値より悪い試行を早期打ち切り。実質 2〜3 倍速くなります。",
+      },
+      { type: "h4", text: "可視化" },
+      {
+        type: "code",
+        title: "結果の分析",
+        python: "import optuna.visualization as vis\n\nvis.plot_optimization_history(study)\nvis.plot_param_importances(study)\nvis.plot_parallel_coordinate(study)",
+      },
+      { type: "h3", text: "実務での使い方" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "GBDT 系(LightGBM ・ XGBoost ・ CatBoost)のハイパラ調整",
+          "DNN の学習率・バッチサイズ・正則化",
+          "scikit-learn の任意のモデル",
+          "強化学習の報酬重み",
+        ],
+      },
+      {
+        type: "practical",
+        title: "🛠 ベイズ最適化が効く場面",
+        body: "1 試行が高コスト(数分〜数時間)で、ハイパラが 5〜30 次元の場合。1 試行が一瞬で済む場合は GridSearch でも OK。",
+      },
+      { type: "h3", text: "理論的背景" },
+      {
+        type: "p",
+        text: "ベイズ最適化はベイズ統計の応用です。**ガウス過程** で関数の事後分布を表現し、**獲得関数** で次の試行点を決定します。詳しくは:",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[ベイズ統計と頻度論](/blog/bayes-vs-frequentist)",
+          "[統計検定 準 1 級 教科書](/textbook/grade-pre1) ─ ベイズの定理",
+          "[E 資格 教科書](/certs/e-shikaku/textbook) ─ ガウス過程の応用",
+        ],
+      },
+      { type: "h3", text: "まとめ" },
+      {
+        type: "p",
+        text: "Optuna 10 行で実務レベルのハイパラ最適化が可能。理論はベイズ統計の集大成、実装は scikit-learn のラッパーレベル ─ AI エンジニアにとって投資対効果が極めて高いツールです。",
+      },
+    ],
+  },
+  {
     slug: "ai-stats-cheatsheet",
     title: "AIエンジニアに必要な統計知識 完全チートシート",
     description:

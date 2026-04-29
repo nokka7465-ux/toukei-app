@@ -289,6 +289,42 @@ const FIGURES: FigureEntry[] = [
     link: "/certs/qc-kentei/textbook",
     linkLabel: "QC 検定 教科書を読む",
   },
+  {
+    kind: "k-means-clusters",
+    title: "k-means クラスタリング",
+    level: "DS / E 資格",
+    category: "機械学習",
+    insight: "k 個のクラスタとそれぞれの重心。教師なし学習の代表。",
+    link: "/blog/sklearn-introduction",
+    linkLabel: "scikit-learn 入門ブログを読む",
+  },
+  {
+    kind: "svm-margin",
+    title: "SVM のマージン最大化",
+    level: "DS / E 資格",
+    category: "機械学習",
+    insight: "決定境界の両側に最大マージンを取る分類器。サポートベクトルが境界を決める。",
+    link: "/certs/e-shikaku/textbook",
+    linkLabel: "E 資格 教科書を読む",
+  },
+  {
+    kind: "neural-net-forward",
+    title: "ニューラルネットの順伝播",
+    level: "E 資格",
+    category: "DL",
+    insight: "入力層 → 隠れ層 → 出力層への信号伝播。各層は線形変換 + 活性化。",
+    link: "/certs/e-shikaku/textbook",
+    linkLabel: "E 資格 教科書を読む",
+  },
+  {
+    kind: "attention-heatmap",
+    title: "Self-Attention の重み",
+    level: "E 資格",
+    category: "DL",
+    insight: "Q×K^⊤ → softmax で得られるトークン間の注目度行列。Transformer の核。",
+    link: "/blog/transformer-math",
+    linkLabel: "Transformer の数学ブログ",
+  },
 ];
 
 const SECTIONS: { title: string; eyebrow: string; figures: FigureEntry[] }[] = [
