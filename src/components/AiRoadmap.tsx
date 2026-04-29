@@ -97,11 +97,10 @@ export function AiRoadmap() {
             >
               {s.emoji}
             </div>
-            <div className="flex items-baseline gap-3 mb-3">
-              <span className="text-[10px] tracking-[0.2em] text-[var(--muted)] ui-sans font-bold">
-                STEP {s.num}
-              </span>
-              <span className="text-xs text-[var(--muted)] ui-sans">
+            <div className="flex items-center gap-2 mb-3 flex-wrap">
+              <span className="chip">STEP {s.num}</span>
+              <span className="chip-soft">{s.subtitle}</span>
+              <span className="text-xs text-[var(--muted)] ui-sans ml-auto">
                 {s.duration}
               </span>
             </div>

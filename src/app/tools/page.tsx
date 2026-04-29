@@ -69,7 +69,7 @@ export default function ToolsPage() {
         </div>
       </header>
 
-      <section className="space-y-8">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         <div id="sample-size" className="scroll-mt-20">
           <SampleSizeCalc />
         </div>
@@ -82,7 +82,7 @@ export default function ToolsPage() {
         <div id="power" className="scroll-mt-20">
           <PowerCalc />
         </div>
-        <div id="ab-test" className="scroll-mt-20">
+        <div id="ab-test" className="scroll-mt-20 lg:col-span-2 xl:col-span-1">
           <TwoProportionTest />
         </div>
       </section>

@@ -112,6 +112,77 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="mb-14 md:mb-20">
+        <header className="mb-5 text-center">
+          <span className="chip-soft">Start Here</span>
+          <h2 className="text-2xl md:text-3xl font-bold mt-3">
+            3 つの始め方から選ぶ
+          </h2>
+          <p className="text-sm text-[var(--muted)] mt-2">
+            読む・解く・試す ─ どこからでも 1 タップで学習開始。
+          </p>
+        </header>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {[
+            {
+              chip: "Read",
+              icon: "📖",
+              title: "教科書から学ぶ",
+              description:
+                "明朝体の読み物として概念から積み上げる。図解 ・ Python/R コード併記。",
+              href: "/textbook",
+              cta: "教科書一覧へ",
+              accent: "bg-emerald-500",
+            },
+            {
+              chip: "Solve",
+              icon: "✏️",
+              title: "演習から始める",
+              description:
+                "全 14 トラック・約 280 問のオリジナル類題。難易度・カテゴリで絞れる。",
+              href: "/quiz",
+              cta: "演習問題を見る",
+              accent: "bg-sky-500",
+            },
+            {
+              chip: "Test",
+              icon: "🎯",
+              title: "模試で力試し",
+              description:
+                "本番形式の時間制限付き模試。合否判定 + 受験履歴をブラウザに記録。",
+              href: "/mock",
+              cta: "模試一覧へ",
+              accent: "bg-violet-500",
+            },
+          ].map((p) => (
+            <Link
+              key={p.title}
+              href={p.href}
+              className="paper rounded-xl overflow-hidden flex flex-col group hover:-translate-y-0.5 transition"
+            >
+              <div className={`h-1.5 w-full ${p.accent}`} aria-hidden="true" />
+              <div className="p-6 flex-1 flex flex-col">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-3xl" aria-hidden="true">
+                    {p.icon}
+                  </span>
+                  <span className="chip-soft text-[10px]">{p.chip}</span>
+                </div>
+                <h3 className="text-xl font-bold mb-2 group-hover:text-[var(--link)]">
+                  {p.title}
+                </h3>
+                <p className="text-sm text-[var(--muted-strong)] leading-relaxed flex-1">
+                  {p.description}
+                </p>
+                <div className="mt-4 text-sm font-bold text-[var(--link)] ui-sans">
+                  {p.cta} →
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <AiRoadmap />
 
       <DailyProblem />
@@ -267,31 +338,72 @@ export default function Home() {
             すべての記事 →
           </Link>
         </div>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {[...blogPosts]
             .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1))
             .slice(0, 3)
-            .map((post) => (
-              <li key={post.slug}>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="paper block p-5 rounded-lg hover:-translate-y-0.5 transition group h-full"
-                >
-                  <div className="ui-sans text-[10px] text-[var(--muted)] mb-2 flex items-center gap-2">
-                    <span>{post.publishedAt}</span>
-                    <span className="px-1.5 py-0.5 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold tracking-wider">
-                      {post.category}
-                    </span>
-                  </div>
-                  <div className="font-bold text-sm mb-2 group-hover:text-[var(--link)] leading-snug">
-                    {post.title}
-                  </div>
-                  <div className="text-xs text-[var(--muted-strong)] leading-relaxed line-clamp-3">
-                    {post.description}
-                  </div>
-                </Link>
-              </li>
-            ))}
+            .map((post) => {
+              const cat = post.category;
+              const theme =
+                cat === "ロードマップ"
+                  ? {
+                      grad: "from-blue-500 to-indigo-600",
+                      emoji: "🗺",
+                    }
+                  : cat === "Python"
+                    ? {
+                        grad: "from-yellow-400 to-blue-600",
+                        emoji: "🐍",
+                      }
+                    : cat === "級選び"
+                      ? {
+                          grad: "from-emerald-500 to-sky-600",
+                          emoji: "🎯",
+                        }
+                      : cat === "学習法"
+                        ? {
+                            grad: "from-amber-500 to-rose-600",
+                            emoji: "📝",
+                          }
+                        : {
+                            grad: "from-slate-500 to-slate-700",
+                            emoji: "📰",
+                          };
+              return (
+                <li key={post.slug}>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="paper block rounded-xl overflow-hidden hover:-translate-y-0.5 transition group h-full flex flex-col"
+                  >
+                    <div
+                      className={`relative aspect-[16/9] bg-gradient-to-br ${theme.grad} flex items-center justify-center overflow-hidden`}
+                    >
+                      <span
+                        className="text-6xl drop-shadow-md"
+                        aria-hidden="true"
+                      >
+                        {theme.emoji}
+                      </span>
+                      <span className="absolute top-3 left-3 chip">{cat}</span>
+                    </div>
+                    <div className="p-5 flex-1 flex flex-col">
+                      <div className="ui-sans text-[10px] text-[var(--muted)] mb-2">
+                        {post.publishedAt}
+                      </div>
+                      <div className="font-bold text-sm mb-2 group-hover:text-[var(--link)] leading-snug">
+                        {post.title}
+                      </div>
+                      <div className="text-xs text-[var(--muted-strong)] leading-relaxed line-clamp-3 flex-1">
+                        {post.description}
+                      </div>
+                      <div className="mt-3 text-xs font-bold text-[var(--link)] ui-sans">
+                        記事を読む →
+                      </div>
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
         </ul>
       </section>
 
@@ -394,74 +506,81 @@ export default function Home() {
         </div>
 
         {/* Related certifications - tightly attached under the level cards */}
-        <div className="mt-6 pt-6 border-t border-dashed border-[var(--page-border-strong)]">
-          <div className="chapter-eyebrow mb-3 text-center">
-            ─ 関連検定(別系統) ─
+        <div className="mt-10 pt-8 border-t border-dashed border-[var(--page-border-strong)]">
+          <div className="text-center mb-6">
+            <span className="chip-soft">Related Certs</span>
+            <h3 className="text-xl font-bold mt-3">関連検定(別系統)</h3>
+            <p className="text-xs text-[var(--muted)] mt-2 ui-sans">
+              データ系資格の 4 つのパス。実務志向・調査志向・AI 概念・データ全方位リテラシーから目的に応じて選べます。
+            </p>
           </div>
-          <p className="text-xs text-[var(--muted)] text-center mb-5 ui-sans">
-            データ系資格の 4 つのパス。実務志向・調査志向・AI 概念・データ全方位リテラシーから、目的に応じて選べます。
-          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            <Link
-              href="/certs/ds-basic"
-              className="paper rounded-lg p-5 hover:-translate-y-0.5 transition group block"
-            >
-              <div className="chapter-eyebrow mb-1">DS Base</div>
-              <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--link)]">
-                統計検定 データサイエンス基礎
-              </h3>
-              <p className="text-xs text-[var(--muted-strong)] leading-relaxed">
-                Excel を使った実データ分析を中心に問う、データリテラシー入口の検定(統計学会主催)。理論より実務操作を重視。
-              </p>
-              <div className="mt-3 text-xs text-[var(--link)] ui-sans">
-                詳しく見る →
-              </div>
-            </Link>
-            <Link
-              href="/certs/survey"
-              className="paper rounded-lg p-5 hover:-translate-y-0.5 transition group block"
-            >
-              <div className="chapter-eyebrow mb-1">Survey</div>
-              <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--link)]">
-                統計調査士
-              </h3>
-              <p className="text-xs text-[var(--muted-strong)] leading-relaxed">
-                社会調査の設計・実施、公的統計の知識を問う検定(統計学会主催)。行政・調査会社・公務員に実務直結。
-              </p>
-              <div className="mt-3 text-xs text-[var(--link)] ui-sans">
-                詳しく見る →
-              </div>
-            </Link>
-            <Link
-              href="/certs/g-test"
-              className="paper rounded-lg p-5 hover:-translate-y-0.5 transition group block"
-            >
-              <div className="chapter-eyebrow mb-1">G Test</div>
-              <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--link)]">
-                G検定(JDLA)
-              </h3>
-              <p className="text-xs text-[var(--muted-strong)] leading-relaxed">
-                AI / ディープラーニングを事業に活かすための広範な知識を問う検定(日本ディープラーニング協会主催)。
-              </p>
-              <div className="mt-3 text-xs text-[var(--link)] ui-sans">
-                詳しく見る →
-              </div>
-            </Link>
-            <Link
-              href="/certs/ds-literacy"
-              className="paper rounded-lg p-5 hover:-translate-y-0.5 transition group block"
-            >
-              <div className="chapter-eyebrow mb-1">DS Cert</div>
-              <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--link)]">
-                データサイエンティスト検定
-              </h3>
-              <p className="text-xs text-[var(--muted-strong)] leading-relaxed">
-                DS 協会主催。DS 力 / DE 力 / ビジネス力 の 3 軸を測るリテラシーレベル検定。データ職入門に最適。
-              </p>
-              <div className="mt-3 text-xs text-[var(--link)] ui-sans">
-                詳しく見る →
-              </div>
-            </Link>
+            {[
+              {
+                href: "/certs/ds-basic",
+                chip: "DS Base",
+                emoji: "📊",
+                accent: "bg-cyan-500",
+                title: "統計検定 DS基礎",
+                description:
+                  "Excel を使った実データ分析を中心に問う、データリテラシー入口の検定(統計学会主催)。理論より実務操作を重視。",
+              },
+              {
+                href: "/certs/survey",
+                chip: "Survey",
+                emoji: "📋",
+                accent: "bg-indigo-500",
+                title: "統計調査士",
+                description:
+                  "社会調査の設計・実施、公的統計の知識を問う検定(統計学会主催)。行政・調査会社・公務員に実務直結。",
+              },
+              {
+                href: "/certs/g-test",
+                chip: "G Test",
+                emoji: "🤖",
+                accent: "bg-blue-500",
+                title: "G検定(JDLA)",
+                description:
+                  "AI / ディープラーニングを事業に活かすための広範な知識を問う検定(日本ディープラーニング協会主催)。",
+              },
+              {
+                href: "/certs/ds-literacy",
+                chip: "DS Cert",
+                emoji: "📈",
+                accent: "bg-purple-500",
+                title: "データサイエンティスト検定",
+                description:
+                  "DS 協会主催。DS 力 / DE 力 / ビジネス力 の 3 軸を測るリテラシーレベル検定。データ職入門に最適。",
+              },
+            ].map((cert) => (
+              <Link
+                key={cert.href}
+                href={cert.href}
+                className="paper rounded-xl overflow-hidden hover:-translate-y-0.5 transition group block flex flex-col"
+              >
+                <div
+                  className={`h-1.5 w-full ${cert.accent}`}
+                  aria-hidden="true"
+                />
+                <div className="p-5 flex-1 flex flex-col">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-2xl" aria-hidden="true">
+                      {cert.emoji}
+                    </span>
+                    <span className="chip-soft text-[10px]">{cert.chip}</span>
+                  </div>
+                  <h3 className="text-base font-bold mb-2 group-hover:text-[var(--link)] leading-snug">
+                    {cert.title}
+                  </h3>
+                  <p className="text-xs text-[var(--muted-strong)] leading-relaxed flex-1">
+                    {cert.description}
+                  </p>
+                  <div className="mt-3 text-xs font-bold text-[var(--link)] ui-sans">
+                    詳しく見る →
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
 
@@ -512,50 +631,95 @@ export default function Home() {
       </section>
 
       <section className="mt-12">
-        <div className="mb-5">
-          <div className="chapter-eyebrow mb-1">Quick Navigation</div>
-          <h2 className="text-2xl font-bold">学習目的から探す</h2>
+        <header className="mb-5">
+          <span className="chip-soft mb-2">Quick Navigation</span>
+          <h2 className="text-2xl font-bold mt-2">学習目的から探す</h2>
           <p className="text-sm text-[var(--muted)] mt-2 leading-relaxed">
             よくある学習目的別に、次に読むページをまとめました。
           </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ui-sans text-sm">
-          <div className="paper p-5 rounded-lg">
-            <div className="font-bold mb-2 text-[var(--foreground)]">📚 試験合格を目指す</div>
-            <ul className="space-y-1.5 text-xs">
-              <li><Link href="/diagnose" className="text-[var(--link)] hover:underline">3 問の級診断 →</Link></li>
-              <li><Link href="/roadmap" className="text-[var(--link)] hover:underline">学習ロードマップ(時間目安)→</Link></li>
-              <li><Link href="/exam-info" className="text-[var(--link)] hover:underline">受験情報まとめ(日程・受験料)→</Link></li>
-              <li><Link href="/cheatsheet" className="text-[var(--link)] hover:underline">公式チートシート(印刷可)→</Link></li>
-            </ul>
-          </div>
-          <div className="paper p-5 rounded-lg">
-            <div className="font-bold mb-2 text-[var(--foreground)]">🧠 概念を理解したい</div>
-            <ul className="space-y-1.5 text-xs">
-              <li><Link href="/figures" className="text-[var(--link)] hover:underline">図解で学ぶ統計(SVG 29 種)→</Link></li>
-              <li><Link href="/explore" className="text-[var(--link)] hover:underline">動かして学ぶ統計(対話的)→</Link></li>
-              <li><Link href="/glossary" className="text-[var(--link)] hover:underline">統計用語集 →</Link></li>
-              <li><Link href="/math" className="text-[var(--link)] hover:underline">統計のための数学基礎 →</Link></li>
-            </ul>
-          </div>
-          <div className="paper p-5 rounded-lg">
-            <div className="font-bold mb-2 text-[var(--foreground)]">🛠 実務で使いたい</div>
-            <ul className="space-y-1.5 text-xs">
-              <li><Link href="/tools" className="text-[var(--link)] hover:underline">統計計算ツール集(信頼区間・p 値)→</Link></li>
-              <li><Link href="/textbook/grade-2" className="text-[var(--link)] hover:underline">統計検定 2 級 教科書 →</Link></li>
-              <li><Link href="/certs/ds-literacy" className="text-[var(--link)] hover:underline">DS 検定 対策 →</Link></li>
-              <li><Link href="/certs/ds-basic" className="text-[var(--link)] hover:underline">DS 基礎 対策(Excel)→</Link></li>
-            </ul>
-          </div>
-          <div className="paper p-5 rounded-lg">
-            <div className="font-bold mb-2 text-[var(--foreground)]">🤖 AI / DL を学ぶ</div>
-            <ul className="space-y-1.5 text-xs">
-              <li><Link href="/certs/g-test" className="text-[var(--link)] hover:underline">G 検定 対策(JDLA)→</Link></li>
-              <li><Link href="/certs/e-shikaku" className="text-[var(--link)] hover:underline">E 資格 対策(エンジニア向け)→</Link></li>
-              <li><Link href="/textbook/grade-pre1" className="text-[var(--link)] hover:underline">準 1 級 教科書(多変量・ベイズ)→</Link></li>
-              <li><Link href="/blog" className="text-[var(--link)] hover:underline">学習ブログ →</Link></li>
-            </ul>
-          </div>
+        </header>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 ui-sans text-sm">
+          {[
+            {
+              chip: "Exam",
+              icon: "📚",
+              title: "試験合格を目指す",
+              accent: "bg-emerald-500",
+              links: [
+                { href: "/diagnose", label: "3 問の級診断" },
+                { href: "/roadmap", label: "学習ロードマップ(時間目安)" },
+                { href: "/exam-info", label: "受験情報まとめ(日程・受験料)" },
+                { href: "/cheatsheet", label: "公式チートシート(印刷可)" },
+              ],
+            },
+            {
+              chip: "Concepts",
+              icon: "🧠",
+              title: "概念を理解したい",
+              accent: "bg-sky-500",
+              links: [
+                { href: "/figures", label: "図解で学ぶ統計(SVG 29 種)" },
+                { href: "/explore", label: "動かして学ぶ統計(対話的)" },
+                { href: "/glossary", label: "統計用語集" },
+                { href: "/math", label: "統計のための数学基礎" },
+              ],
+            },
+            {
+              chip: "Practice",
+              icon: "🛠",
+              title: "実務で使いたい",
+              accent: "bg-violet-500",
+              links: [
+                { href: "/tools", label: "統計計算ツール集(信頼区間・p 値)" },
+                { href: "/textbook/grade-2", label: "統計検定 2 級 教科書" },
+                { href: "/certs/ds-literacy", label: "DS 検定 対策" },
+                { href: "/certs/ds-basic", label: "DS 基礎 対策(Excel)" },
+              ],
+            },
+            {
+              chip: "AI / DL",
+              icon: "🤖",
+              title: "AI / DL を学ぶ",
+              accent: "bg-amber-500",
+              links: [
+                { href: "/certs/g-test", label: "G 検定 対策(JDLA)" },
+                { href: "/certs/e-shikaku", label: "E 資格 対策(エンジニア向け)" },
+                { href: "/textbook/grade-pre1", label: "準 1 級 教科書(多変量・ベイズ)" },
+                { href: "/blog", label: "学習ブログ" },
+              ],
+            },
+          ].map((card) => (
+            <article
+              key={card.title}
+              className="paper rounded-xl overflow-hidden flex flex-col"
+            >
+              <div className={`h-1 w-full ${card.accent}`} aria-hidden="true" />
+              <div className="p-5 flex-1 flex flex-col">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-2xl" aria-hidden="true">
+                    {card.icon}
+                  </span>
+                  <span className="chip-soft text-[10px]">{card.chip}</span>
+                </div>
+                <h3 className="font-bold text-base mb-3 text-[var(--foreground)]">
+                  {card.title}
+                </h3>
+                <ul className="space-y-2 text-xs flex-1">
+                  {card.links.map((l) => (
+                    <li key={l.href}>
+                      <Link
+                        href={l.href}
+                        className="text-[var(--link)] hover:underline inline-flex items-center gap-1"
+                      >
+                        <span aria-hidden="true">→</span>
+                        <span>{l.label}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
     </div>

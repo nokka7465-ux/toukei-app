@@ -39,6 +39,9 @@ type Track = {
   title: string;
   description: string;
   audience?: string;
+  chip: string;
+  emoji: string;
+  accent: string;
 };
 
 const MAIN_TRACKS: Track[] = [
@@ -48,12 +51,18 @@ const MAIN_TRACKS: Track[] = [
     description:
       "サイト独自の超初心者向け教材。割合・グラフ・平均など算数レベルから統計に親しむ。",
     audience: "統計をこれから学ぶ方",
+    chip: "Intro",
+    emoji: "🌱",
+    accent: "bg-emerald-400",
   },
   {
     href: "/textbook/grade-4",
     title: "4 級",
     description: "高校基礎レベル。データの代表値・確率・場合の数。",
     audience: "中高生・大人の入門",
+    chip: "Grade 4",
+    emoji: "🎒",
+    accent: "bg-emerald-500",
   },
   {
     href: "/textbook/grade-3",
@@ -61,6 +70,9 @@ const MAIN_TRACKS: Track[] = [
     description:
       "大学基礎レベル。記述統計・確率分布・推定の基礎。Σ も登場。",
     audience: "大学生・社会人の足腰",
+    chip: "Grade 3",
+    emoji: "📘",
+    accent: "bg-sky-500",
   },
   {
     href: "/textbook/grade-2",
@@ -68,12 +80,18 @@ const MAIN_TRACKS: Track[] = [
     description:
       "推定・検定・回帰など、データ分析実務でいちばんよく使う技法。",
     audience: "データ分析実務・研究志向",
+    chip: "Grade 2",
+    emoji: "📗",
+    accent: "bg-sky-600",
   },
   {
     href: "/textbook/grade-pre1",
     title: "準 1 級",
     description: "多変量解析・ベイズ・時系列など、応用統計の幅広い手法。",
     audience: "データサイエンス・院試",
+    chip: "Pre-1",
+    emoji: "📕",
+    accent: "bg-violet-500",
   },
   {
     href: "/textbook/grade-1",
@@ -81,6 +99,9 @@ const MAIN_TRACKS: Track[] = [
     description:
       "数理統計学の理論。十分統計量・最尤推定・漸近理論・尤度比検定。",
     audience: "研究職・上級分析者",
+    chip: "Grade 1",
+    emoji: "👑",
+    accent: "bg-rose-500",
   },
 ];
 
@@ -91,6 +112,9 @@ const SUPPORT_TRACKS: Track[] = [
     description:
       "統計学に必要な数学(割合・Σ・対数・微積分・線形代数)を最小限で。",
     audience: "数式が苦手な学習者",
+    chip: "Math",
+    emoji: "📐",
+    accent: "bg-teal-500",
   },
 ];
 
@@ -100,12 +124,18 @@ const CERT_TRACKS: Track[] = [
     title: "統計検定 DS基礎",
     description: "Excel を使った実データ分析が中心。統計学会主催。",
     audience: "Excel 派の分析担当",
+    chip: "DS Base",
+    emoji: "📊",
+    accent: "bg-cyan-500",
   },
   {
     href: "/certs/survey/textbook",
     title: "統計調査士",
     description: "社会調査の設計・公的統計の読み方。統計学会主催。",
     audience: "行政・調査会社・公務員",
+    chip: "Survey",
+    emoji: "📋",
+    accent: "bg-indigo-500",
   },
   {
     href: "/certs/survey-specialist/textbook",
@@ -113,12 +143,18 @@ const CERT_TRACKS: Track[] = [
     description:
       "統計調査士の上位資格。標本設計の理論・公的統計の高度利用。",
     audience: "調査会社・公的統計機関",
+    chip: "Survey+",
+    emoji: "🗂",
+    accent: "bg-indigo-600",
   },
   {
     href: "/certs/g-test/textbook",
     title: "G検定(JDLA)",
     description: "AI / ディープラーニングを事業に活かすための広範な知識。",
     audience: "AI 業界転職・概念把握",
+    chip: "G Test",
+    emoji: "🤖",
+    accent: "bg-blue-500",
   },
   {
     href: "/certs/e-shikaku/textbook",
@@ -126,12 +162,18 @@ const CERT_TRACKS: Track[] = [
     description:
       "G 検定の上位。DL の実装に必要な数学・モデル・最適化を網羅。",
     audience: "ML エンジニア・データサイエンティスト",
+    chip: "E 資格",
+    emoji: "⚙️",
+    accent: "bg-blue-700",
   },
   {
     href: "/certs/ds-literacy/textbook",
     title: "データサイエンティスト検定",
     description: "DS 力 / DE 力 / ビジネス力の 3 軸を測るリテラシー検定。",
     audience: "データ職入門",
+    chip: "DS Cert",
+    emoji: "📈",
+    accent: "bg-purple-500",
   },
   {
     href: "/certs/qc-kentei/textbook",
@@ -139,6 +181,9 @@ const CERT_TRACKS: Track[] = [
     description:
       "品質管理の考え方・管理図・QC 7 つ道具。製造業の必須教養。",
     audience: "製造業・改善推進",
+    chip: "QC",
+    emoji: "🏭",
+    accent: "bg-amber-600",
   },
 ];
 
@@ -146,23 +191,30 @@ function TrackCard({ track }: { track: Track }) {
   return (
     <Link
       href={track.href}
-      className="paper rounded-lg p-5 hover:-translate-y-0.5 transition group block h-full"
+      className="paper rounded-xl overflow-hidden hover:-translate-y-0.5 transition group block h-full flex flex-col"
     >
-      <div className="flex items-baseline justify-between gap-2 mb-2 flex-wrap">
-        <h3 className="text-lg font-bold group-hover:text-[var(--link)]">
+      <div className={`h-1 w-full ${track.accent}`} aria-hidden="true" />
+      <div className="p-5 flex-1 flex flex-col">
+        <div className="flex items-center gap-2 mb-3 flex-wrap">
+          <span className="text-2xl" aria-hidden="true">
+            {track.emoji}
+          </span>
+          <span className="chip-soft text-[10px]">{track.chip}</span>
+          {track.audience && (
+            <span className="text-[10px] text-[var(--muted)] ui-sans ml-auto">
+              {track.audience}
+            </span>
+          )}
+        </div>
+        <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--link)]">
           {track.title}
         </h3>
-        {track.audience && (
-          <span className="text-[10px] text-[var(--muted)] ui-sans">
-            {track.audience}
-          </span>
-        )}
-      </div>
-      <p className="text-xs text-[var(--muted-strong)] leading-relaxed">
-        {track.description}
-      </p>
-      <div className="mt-3 text-xs text-[var(--link)] ui-sans">
-        教科書を読む →
+        <p className="text-xs text-[var(--muted-strong)] leading-relaxed flex-1">
+          {track.description}
+        </p>
+        <div className="mt-3 text-xs font-bold text-[var(--link)] ui-sans">
+          教科書を読む →
+        </div>
       </div>
     </Link>
   );
@@ -215,7 +267,7 @@ export default function TextbookIndexPage() {
             日本統計学会が認定する統計検定の各級に対応した教科書。入門編はサイト独自の補助教材。
           </p>
         </header>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {MAIN_TRACKS.map((t) => (
             <TrackCard key={t.href} track={t} />
           ))}
@@ -247,7 +299,7 @@ export default function TextbookIndexPage() {
             統計検定 4〜1 級とは別系統の、データ・AI・調査・品質管理の各系統の資格。実務志向・調査志向・AI 概念から実装・データ全方位リテラシー・品質工学まで、目的に応じて選択。
           </p>
         </header>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {CERT_TRACKS.map((t) => (
             <TrackCard key={t.href} track={t} />
           ))}
