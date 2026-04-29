@@ -34,7 +34,7 @@ const FIGURES: FigureEntry[] = [
     level: "入門・4 級",
     category: "可視化",
     insight: "連続量(隣接)と質的データ(隙間)で形を変える理由。",
-    link: "/textbook/grade-4#ch1-sec2",
+    link: "/textbook/grade-4#ch1-sec3",
     linkLabel: "4 級 教科書を読む",
   },
   {
@@ -70,7 +70,7 @@ const FIGURES: FigureEntry[] = [
     level: "3 級",
     category: "推測統計",
     insight: "もとの分布がいびつでも、標本平均は正規型に。",
-    link: "/textbook/grade-3#ch3-sec3",
+    link: "/textbook/grade-3#ch4-sec1",
     linkLabel: "3 級 教科書を読む",
   },
   {
@@ -79,7 +79,7 @@ const FIGURES: FigureEntry[] = [
     level: "3 級",
     category: "推測統計",
     insight: "繰り返し作った区間の 95% が母平均を含む。",
-    link: "/textbook/grade-3#ch3-sec3",
+    link: "/textbook/grade-3#ch4-sec1",
     linkLabel: "3 級 教科書を読む",
   },
   {
@@ -88,7 +88,7 @@ const FIGURES: FigureEntry[] = [
     level: "2 級",
     category: "確率分布",
     insight: "自由度が小さいほど裾が厚い。",
-    link: "/textbook/grade-2#ch2-sec2",
+    link: "/textbook/grade-2#ch1-sec2",
     linkLabel: "2 級 教科書を読む",
   },
   {
@@ -97,7 +97,7 @@ const FIGURES: FigureEntry[] = [
     level: "2 級",
     category: "仮説検定",
     insight: "$|z| > 1.96$ なら $H_0$ を棄却。",
-    link: "/textbook/grade-2#ch2-sec3",
+    link: "/textbook/grade-2#ch2-sec1",
     linkLabel: "2 級 教科書を読む",
   },
   {
@@ -106,7 +106,7 @@ const FIGURES: FigureEntry[] = [
     level: "2 級",
     category: "仮説検定",
     insight: "観測 z* より外側の面積が p 値。",
-    link: "/textbook/grade-2#ch2-sec3",
+    link: "/textbook/grade-2#ch2-sec1",
     linkLabel: "2 級 教科書を読む",
   },
   {
@@ -115,7 +115,7 @@ const FIGURES: FigureEntry[] = [
     level: "2 級",
     category: "仮説検定",
     insight: "閾値を動かすと α と β はトレードオフ。",
-    link: "/textbook/grade-2#ch2-sec3",
+    link: "/textbook/grade-2#ch2-sec1",
     linkLabel: "2 級 教科書を読む",
   },
   {
