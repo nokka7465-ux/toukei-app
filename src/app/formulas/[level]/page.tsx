@@ -9,6 +9,7 @@ import { gradeTwoFormulas } from "@/data/formulas/grade-2";
 import { gradePre1Formulas } from "@/data/formulas/grade-pre1";
 import { gradeOneFormulas } from "@/data/formulas/grade-1";
 import { Math } from "@/components/Math";
+import { BookmarkButton } from "@/components/BookmarkButton";
 import { RecommendedBooks } from "@/components/RecommendedBooks";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import type { Formula } from "@/types/content";
@@ -106,8 +107,15 @@ export default async function FormulaPage({
             </header>
             <div className="grid grid-cols-1 gap-4">
               {items.map((f) => (
-                <div key={f.id} className="paper rounded-lg p-5">
-                  <div className="font-bold text-base mb-3">{f.name}</div>
+                <div
+                  key={f.id}
+                  id={f.id}
+                  className="paper rounded-lg p-5 scroll-mt-20"
+                >
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <div className="font-bold text-base">{f.name}</div>
+                    <BookmarkButton kind="formula" id={f.id} context={level} />
+                  </div>
                   <Math tex={f.tex} block />
                   <p className="text-sm text-[var(--muted-strong)] mt-3 leading-relaxed">
                     {f.description}

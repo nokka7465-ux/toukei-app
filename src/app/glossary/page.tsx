@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { glossary, type GlossaryTerm } from "@/data/glossary";
 import { MixedText } from "@/components/MixedText";
+import { BookmarkButton } from "@/components/BookmarkButton";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -95,10 +96,15 @@ export default function GlossaryPage() {
                   className="paper rounded-lg p-4 grid md:grid-cols-[200px_1fr] gap-3"
                 >
                   <dt className="border-r border-[var(--page-border)] md:pr-3">
-                    <div className="font-bold text-base">{t.term}</div>
-                    <div className="text-xs text-[var(--muted)] ui-sans mt-0.5">
-                      {t.reading}
-                      {t.english && ` · ${t.english}`}
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <div className="font-bold text-base">{t.term}</div>
+                        <div className="text-xs text-[var(--muted)] ui-sans mt-0.5">
+                          {t.reading}
+                          {t.english && ` · ${t.english}`}
+                        </div>
+                      </div>
+                      <BookmarkButton kind="glossary" id={t.term} />
                     </div>
                     <div className="mt-2 flex flex-wrap items-center gap-1.5">
                       <span

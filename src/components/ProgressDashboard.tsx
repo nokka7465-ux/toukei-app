@@ -11,6 +11,7 @@ import {
   getStreak,
   type ProgressData,
 } from "@/lib/progress";
+import { ProgressBackup } from "./ProgressBackup";
 
 const groupOrder: Array<{
   key: "main" | "math" | "cert";
@@ -208,10 +209,8 @@ export function ProgressDashboard() {
         })}
       </div>
 
-      <div className="mt-5 pt-4 border-t border-[var(--page-border)] flex items-center justify-between gap-3 ui-sans text-xs">
-        <span className="text-[var(--muted)]">
-          進捗データはこのブラウザにのみ保存されます
-        </span>
+      <div className="mt-5 pt-4 border-t border-[var(--page-border)] flex items-start justify-between gap-3 ui-sans text-xs flex-wrap">
+        <ProgressBackup />
         <button
           type="button"
           onClick={() => {

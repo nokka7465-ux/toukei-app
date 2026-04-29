@@ -22,6 +22,7 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/practice", label: "ランダム練習" },
       { href: "/mock", label: "模試 一覧" },
       { href: "/review", label: "苦手問題の復習" },
+      { href: "/bookmarks", label: "ブックマーク" },
     ],
   },
   {

@@ -5,6 +5,7 @@ import type { Difficulty, Question } from "@/types/content";
 import { MixedText } from "./MixedText";
 import { ShareButton } from "./ShareButton";
 import { recordAnswer } from "@/lib/progress";
+import { BookmarkButton } from "./BookmarkButton";
 
 const difficultyStyle: Record<
   Difficulty,
@@ -397,6 +398,12 @@ export function Quiz({
             {difficultyStyle[q.difficulty].stars}{" "}
             {difficultyStyle[q.difficulty].label}
           </span>
+          <BookmarkButton
+            kind="question"
+            id={q.id}
+            context={quizKey}
+            className="ml-auto"
+          />
         </div>
 
         <div className="mb-5 leading-relaxed">

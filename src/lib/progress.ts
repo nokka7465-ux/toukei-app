@@ -191,6 +191,69 @@ export function summarizeReading(
   return { total, read: count, pct };
 }
 
+/** Serialize current progress for backup. */
+export function exportProgress(): string {
+  const data = read();
+  const payload = {
+    schema: "toukei-app:progress:v1",
+    exportedAt: new Date().toISOString(),
+    data,
+  };
+  return JSON.stringify(payload, null, 2);
+}
+
+export type ImportResult =
+  | { ok: true; counts: { questions: number; mocks: number; readSections: number; activeDays: number } }
+  | { ok: false; error: string };
+
+/** Replace current progress with the supplied payload. Validates schema. */
+export function importProgress(jsonText: string): ImportResult {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(jsonText);
+  } catch {
+    return { ok: false, error: "JSON が読み込めません" };
+  }
+  if (!parsed || typeof parsed !== "object") {
+    return { ok: false, error: "形式が無効です" };
+  }
+  const obj = parsed as { schema?: string; data?: ProgressData };
+  if (obj.schema !== "toukei-app:progress:v1") {
+    return { ok: false, error: "対応していないスキーマです" };
+  }
+  const incoming = obj.data;
+  if (
+    !incoming ||
+    typeof incoming !== "object" ||
+    typeof incoming.questions !== "object"
+  ) {
+    return { ok: false, error: "データ本体が見つかりません" };
+  }
+  // Pass-through write — we trust our own export but cap obvious overflow.
+  const cleaned: ProgressData = {
+    questions: incoming.questions ?? {},
+    activeDates: Array.isArray(incoming.activeDates)
+      ? [...new Set(incoming.activeDates)].sort()
+      : undefined,
+    mockHistory: Array.isArray(incoming.mockHistory)
+      ? incoming.mockHistory.slice(0, 50)
+      : undefined,
+    readSections: Array.isArray(incoming.readSections)
+      ? [...new Set(incoming.readSections)]
+      : undefined,
+  };
+  write(cleaned);
+  return {
+    ok: true,
+    counts: {
+      questions: Object.keys(cleaned.questions).length,
+      mocks: cleaned.mockHistory?.length ?? 0,
+      readSections: cleaned.readSections?.length ?? 0,
+      activeDays: cleaned.activeDates?.length ?? 0,
+    },
+  };
+}
+
 export function getProgress(): ProgressData {
   return read();
 }

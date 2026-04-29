@@ -37,12 +37,23 @@ export async function generateMetadata({
   if (!meta || !config) return {};
   const title = `${config.label} ─ 本番形式の無料模試`;
   const description = `統計検定 ${meta.title} の本番形式に近い模試。${config.timeMinutes} 分・${config.questionTarget} 問・合格基準 ${config.passPct}% で時間制限付き採点。受験履歴も記録されます。`;
+  const ogImage = `/og/mock/${level}`;
   return {
     title,
     description,
     alternates: { canonical: `/mock/${level}` },
-    openGraph: { title, description, type: "article" },
-    twitter: { card: "summary_large_image", title, description },
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      images: [{ url: ogImage, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
   };
 }
 
