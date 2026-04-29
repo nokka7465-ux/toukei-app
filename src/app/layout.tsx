@@ -139,6 +139,13 @@ export default function RootLayout({
                 <Link href="/diagnose" className="hover:underline">
                   級診断
                 </Link>
+                <Link
+                  href="/review"
+                  className="hover:underline"
+                  title="間違えた問題だけを集めた復習リスト"
+                >
+                  復習
+                </Link>
               </nav>
               <Link
                 href="/search"
@@ -197,6 +204,11 @@ export default function RootLayout({
                   <li>
                     <Link href="/search" className="hover:underline text-[var(--muted-strong)]">
                       サイト内検索
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/review" className="hover:underline text-[var(--muted-strong)]">
+                      苦手問題の復習
                     </Link>
                   </li>
                 </ul>

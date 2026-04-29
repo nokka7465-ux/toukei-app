@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { Difficulty, Question } from "@/types/content";
 import { MixedText } from "./MixedText";
 import { ShareButton } from "./ShareButton";
+import { recordAnswer } from "@/lib/progress";
 
 const difficultyStyle: Record<
   Difficulty,
@@ -166,12 +167,15 @@ export function Quiz({
   }
 
   function handleReveal(qIdx: number) {
-    if (answers[qIdx] === null) return;
+    const selected = answers[qIdx];
+    if (selected === null) return;
     setRevealed((prev) => {
       const next = [...prev];
       next[qIdx] = true;
       return next;
     });
+    const q = questions[qIdx];
+    recordAnswer(q.id, selected === q.correctIndex);
   }
 
   function handleNext() {
@@ -189,6 +193,12 @@ export function Quiz({
   }
 
   function finishQuiz() {
+    // Record any answered-but-not-yet-revealed questions before final scoring.
+    questions.forEach((q, i) => {
+      if (!revealed[i] && answers[i] !== null) {
+        recordAnswer(q.id, answers[i] === q.correctIndex);
+      }
+    });
     setRevealed(Array(questions.length).fill(true));
     if (quizKey) {
       const c = answers.reduce<number>(

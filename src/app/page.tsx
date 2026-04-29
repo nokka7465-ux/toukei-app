@@ -4,6 +4,7 @@ import { levels } from "@/data/levels";
 import { externalLinks } from "@/data/external-links";
 import { blogPosts } from "@/data/blog";
 import { FaqJsonLd } from "@/components/StructuredData";
+import { ProgressDashboard } from "@/components/ProgressDashboard";
 
 const availableLevels = new Set<string>([
   "intro",
@@ -78,6 +79,8 @@ export default function Home() {
           で知識を整理し、<strong>選択式の演習</strong>で理解を確かめられます。
         </p>
       </section>
+
+      <ProgressDashboard />
 
       <section className="mb-12 paper rounded-lg p-6 md:p-7">
         <div className="chapter-eyebrow mb-2 text-center">Quick Search</div>

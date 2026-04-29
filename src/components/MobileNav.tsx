@@ -19,6 +19,7 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/textbook", label: "教科書 一覧" },
       { href: "/formulas", label: "公式集 一覧" },
       { href: "/quiz", label: "演習問題 一覧" },
+      { href: "/review", label: "苦手問題の復習" },
     ],
   },
   {
