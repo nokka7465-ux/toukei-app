@@ -2914,4 +2914,275 @@ export const glossary: GlossaryTerm[] = [
     level: "1",
     category: "機械学習",
   },
+  // === コンピュータビジョン / 強化学習 / 拡散 / エージェント (30 語) ===
+  {
+    term: "ResNet",
+    reading: "れずねっと",
+    english: "Residual Network",
+    definition:
+      "残差接続(skip connection)を導入した CNN。100 層超えの深いネットワークでも勾配消失せず学習可能。",
+    level: "1",
+    category: "コンピュータビジョン",
+  },
+  {
+    term: "ViT",
+    reading: "びてぃー",
+    english: "Vision Transformer",
+    definition:
+      "画像を 16×16 パッチに分割し、Transformer で処理する画像分類モデル。十分な学習データで CNN を超える。",
+    level: "1",
+    category: "コンピュータビジョン",
+  },
+  {
+    term: "ImageNet",
+    reading: "いめーじねっと",
+    english: "ImageNet",
+    definition:
+      "1000 クラス・約 120 万枚の画像分類ベンチマーク。CV の事前学習データとして長年デファクト。",
+    level: "1",
+    category: "コンピュータビジョン",
+  },
+  {
+    term: "U-Net",
+    reading: "ゆーねっと",
+    english: "U-Net",
+    definition:
+      "エンコーダ・デコーダ構造 + スキップ接続。医用画像セグメンテーションの標準で、拡散モデルにも応用。",
+    level: "1",
+    category: "コンピュータビジョン",
+  },
+  {
+    term: "YOLO",
+    reading: "よろ",
+    english: "You Only Look Once",
+    definition:
+      "画像を 1 回処理してバウンディングボックスを出力する物体検出モデル。リアルタイム検出の代表。",
+    level: "1",
+    category: "コンピュータビジョン",
+  },
+  {
+    term: "IoU",
+    reading: "あいおーゆー",
+    english: "Intersection over Union",
+    definition:
+      "予測と正解のバウンディングボックスの重なり具合。物体検出 ・ セグメンテーションの主要評価指標。",
+    level: "1",
+    category: "コンピュータビジョン",
+  },
+  {
+    term: "NMS",
+    reading: "えぬえむえす",
+    english: "Non-Maximum Suppression",
+    definition:
+      "物体検出で重複する検出ボックスを除去する後処理。IoU 閾値を使って最高スコアの 1 つだけ残す。",
+    level: "1",
+    category: "コンピュータビジョン",
+  },
+  {
+    term: "セグメンテーション",
+    reading: "せぐめんてーしょん",
+    english: "Segmentation",
+    definition:
+      "画像をピクセル単位で分類するタスク。Semantic / Instance / Panoptic の 3 種類がある。",
+    level: "1",
+    category: "コンピュータビジョン",
+  },
+  {
+    term: "アンカーボックス",
+    reading: "あんかーぼっくす",
+    english: "Anchor Box",
+    definition:
+      "物体検出で各位置に予め用意するバウンディングボックスのテンプレート。事前形状を提供して学習を安定化。",
+    level: "1",
+    category: "コンピュータビジョン",
+  },
+  {
+    term: "MDP",
+    reading: "えむでぃーぴー",
+    english: "Markov Decision Process",
+    definition:
+      "強化学習の数学的枠組み。(S, A, P, R, γ) で状態 ・ 行動 ・ 遷移 ・ 報酬 ・ 割引率を定義。",
+    level: "1",
+    category: "強化学習",
+  },
+  {
+    term: "Q-learning",
+    reading: "きゅーらーにんぐ",
+    english: "Q-learning",
+    definition:
+      "状態行動価値 Q(s, a) を学習し、最大 Q を選ぶ方策に従う強化学習アルゴリズム。Bellman 方程式に基づく。",
+    level: "1",
+    category: "強化学習",
+  },
+  {
+    term: "DQN",
+    reading: "でぃーきゅーえぬ",
+    english: "Deep Q-Network",
+    definition:
+      "Q-learning の Q 関数をニューラルネットで近似 + 経験再生 + ターゲットネットを使った手法。Atari で人を超えた。",
+    level: "1",
+    category: "強化学習",
+  },
+  {
+    term: "Policy Gradient",
+    reading: "ぽりしーぐらでぃえんと",
+    english: "Policy Gradient",
+    definition:
+      "方策 π を直接ニューラルネットでパラメータ化し、勾配上昇で報酬期待値を最大化する手法。",
+    level: "1",
+    category: "強化学習",
+  },
+  {
+    term: "PPO",
+    reading: "ぴーぴーおー",
+    english: "Proximal Policy Optimization",
+    definition:
+      "方策更新を一定範囲(クリップ)に抑える方策勾配法。安定性と性能のバランスが良く、RLHF の標準。",
+    level: "1",
+    category: "強化学習",
+  },
+  {
+    term: "Actor-Critic",
+    reading: "あくたーくりてぃっく",
+    english: "Actor-Critic",
+    definition:
+      "方策(Actor)と価値関数(Critic)を同時に学習する強化学習の枠組み。A2C ・ A3C ・ SAC が代表例。",
+    level: "1",
+    category: "強化学習",
+  },
+  {
+    term: "Bellman 方程式",
+    reading: "べるまんほうていしき",
+    english: "Bellman Equation",
+    definition:
+      "現在の価値 = 即時報酬 + 割引した次状態の価値、という再帰的な等式。動的計画法と強化学習の理論的中核。",
+    level: "1",
+    category: "強化学習",
+  },
+  {
+    term: "報酬関数",
+    reading: "ほうしゅうかんすう",
+    english: "Reward Function",
+    definition:
+      "強化学習で各 (状態, 行動) に対して報酬を返す関数。設計が学習結果を大きく左右する。",
+    level: "1",
+    category: "強化学習",
+  },
+  {
+    term: "割引率",
+    reading: "わりびきりつ",
+    english: "Discount Factor (γ)",
+    definition:
+      "将来の報酬を現在価値に換算する係数(0 ≤ γ < 1)。γ が小さいほど短期志向、大きいほど長期志向。",
+    level: "1",
+    category: "強化学習",
+  },
+  {
+    term: "経験再生",
+    reading: "けいけんさいせい",
+    english: "Experience Replay",
+    definition:
+      "過去の経験(s, a, r, s')をバッファに溜め、ランダムにサンプリングして学習する手法。サンプル効率と相関軽減に寄与。",
+    level: "1",
+    category: "強化学習",
+  },
+  {
+    term: "拡散モデル",
+    reading: "かくさんもでる",
+    english: "Diffusion Model",
+    definition:
+      "画像にノイズを徐々に加える順過程と、それを除去する逆過程を学習する生成モデル。Stable Diffusion・DALL-E の基盤。",
+    level: "1",
+    category: "生成 AI",
+  },
+  {
+    term: "DDPM",
+    reading: "でぃーでぃーぴーえむ",
+    english: "Denoising Diffusion Probabilistic Model",
+    definition:
+      "ノイズ予測タスクとして拡散モデルを定式化した代表論文(Ho et al. 2020)。",
+    level: "1",
+    category: "生成 AI",
+  },
+  {
+    term: "Classifier-Free Guidance",
+    reading: "くらしふぁーふりーがいだんす",
+    english: "Classifier-Free Guidance",
+    definition:
+      "拡散モデルの条件付き生成で、条件あり/なしの予測を線形結合してガイダンス強度を高める手法。",
+    level: "1",
+    category: "生成 AI",
+  },
+  {
+    term: "VAE",
+    reading: "ぶいえーいー",
+    english: "Variational Autoencoder",
+    definition:
+      "潜在変数を事後分布で近似する確率的オートエンコーダ。Stable Diffusion の latent space に応用。",
+    level: "1",
+    category: "生成 AI",
+  },
+  {
+    term: "CLIP",
+    reading: "くりっぷ",
+    english: "Contrastive Language-Image Pre-training",
+    definition:
+      "画像とテキストを同じ埋め込み空間に対応付ける OpenAI のモデル。ゼロショット分類や拡散モデルの条件付けに使用。",
+    level: "1",
+    category: "生成 AI",
+  },
+  {
+    term: "AI エージェント",
+    reading: "えーあいえーじぇんと",
+    english: "AI Agent",
+    definition:
+      "LLM が外部ツールを自律的に呼んでタスクを完遂する仕組み。ReAct ・ Tool Use ・ Multi-Agent が中心概念。",
+    level: "1",
+    category: "AI エージェント",
+  },
+  {
+    term: "ReAct",
+    reading: "りあくと",
+    english: "Reason + Act",
+    definition:
+      "エージェントの基本パターン。推論(Reason)とツール呼び出し(Act)を交互に行うことで複雑タスクを解く。",
+    level: "1",
+    category: "AI エージェント",
+  },
+  {
+    term: "Tool Use",
+    reading: "つーるゆーす",
+    english: "Tool Use / Function Calling",
+    definition:
+      "LLM が宣言された外部関数を引数を埋めて呼び出す機能。OpenAI ・ Anthropic API がネイティブ対応。",
+    level: "1",
+    category: "AI エージェント",
+  },
+  {
+    term: "Multi-Agent",
+    reading: "まるちえーじぇんと",
+    english: "Multi-Agent System",
+    definition:
+      "複数の専門エージェントが協調してタスクを解くアーキテクチャ。プランナー・コーダー・レビュアーなど役割分担。",
+    level: "1",
+    category: "AI エージェント",
+  },
+  {
+    term: "ASR",
+    reading: "えーえすあーる",
+    english: "Automatic Speech Recognition",
+    definition:
+      "音声を文字に変換する技術。OpenAI Whisper が現在の業界標準で、日本語含む多言語対応。",
+    level: "1",
+    category: "音声 AI",
+  },
+  {
+    term: "TTS",
+    reading: "てぃーてぃーえす",
+    english: "Text-to-Speech",
+    definition:
+      "テキストを自然な音声に変換する技術。XTTS-v2 ・ ElevenLabs ・ OpenAI TTS が主要モデル。",
+    level: "1",
+    category: "音声 AI",
+  },
 ];

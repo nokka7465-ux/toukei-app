@@ -2,6 +2,585 @@ import type { BlogPost } from "@/types/content";
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "reinforcement-learning-introduction",
+    title: "強化学習 入門 ─ 報酬で学ぶエージェントの仕組み",
+    description:
+      "AlphaGo・ChatGPT の RLHF・自動運転 ─ 強化学習の基本概念(MDP・Q-learning・Policy Gradient)を、エージェントが迷路を解く例で直感的に。",
+    publishedAt: "2026-04-30",
+    category: "強化学習",
+    tldr: [
+      "強化学習 = 環境との相互作用で『報酬を最大化する行動』を学ぶ枠組み。",
+      "状態 ・ 行動 ・ 報酬 ・ 方策 の 4 要素 + Bellman 方程式が中核。",
+      "Q-learning(価値ベース)と Policy Gradient(方策ベース)の 2 大潮流。PPO・DQN など実用アルゴリズムは派生。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**強化学習(Reinforcement Learning, RL)** は、教師あり学習・教師なし学習に並ぶ第 3 のパラダイム。AlphaGo、ChatGPT の RLHF、自動運転、ロボティクス など、最先端 AI で使われています。",
+      },
+      { type: "h3", text: "強化学習の枠組み" },
+      {
+        type: "p",
+        text: "エージェントが **状態 $s$** を観測 → **行動 $a$** を選択 → 環境が次の **状態 $s'$ と報酬 $r$** を返す ─ これを繰り返して **累積報酬を最大化する方策** を学ぶ。",
+      },
+      {
+        type: "math",
+        tex: "\\max_\\pi \\mathbb{E}\\left[\\sum_{t=0}^\\infty \\gamma^t r_t\\right]",
+      },
+      {
+        type: "intuition",
+        title: "💡 ポイント",
+        body: "教師あり学習は『正解との差』を最小化、強化学習は『将来含む報酬』を最大化。報酬は遅延して得られることが多い(囲碁の勝ち負けは最後だけ)。",
+      },
+      { type: "h3", text: "MDP(マルコフ決定過程)" },
+      {
+        type: "p",
+        text: "RL の数学的枠組み。$(S, A, P, R, \\gamma)$ の 5 要素で定式化:",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "$S$: 状態集合",
+          "$A$: 行動集合",
+          "$P(s' \\mid s, a)$: 遷移確率",
+          "$R(s, a)$: 報酬関数",
+          "$\\gamma \\in [0, 1)$: 割引率(将来の重み)",
+        ],
+      },
+      { type: "h3", text: "Q-learning(価値ベース)" },
+      {
+        type: "p",
+        text: "状態行動価値関数 $Q(s, a)$ を学習し、最大の Q を選ぶ方策に従う。",
+      },
+      {
+        type: "math",
+        tex: "Q(s, a) \\leftarrow Q(s, a) + \\alpha \\left[r + \\gamma \\max_{a'} Q(s', a') - Q(s, a)\\right]",
+      },
+      {
+        type: "code",
+        title: "迷路を解く Q-learning(20 行)",
+        python: "import numpy as np\n\nstates, actions = 16, 4  # 4x4 グリッド, 上下左右\nQ = np.zeros((states, actions))\nalpha, gamma, eps = 0.1, 0.95, 0.2\n\nfor episode in range(1000):\n    s = 0\n    while s != states - 1:  # ゴールまで\n        a = np.random.choice(actions) if np.random.rand() < eps else np.argmax(Q[s])\n        s_next, r = step(s, a)  # 環境関数(別途定義)\n        Q[s, a] += alpha * (r + gamma * Q[s_next].max() - Q[s, a])\n        s = s_next",
+      },
+      { type: "h3", text: "Policy Gradient(方策ベース)" },
+      {
+        type: "p",
+        text: "方策 $\\pi_\\theta(a \\mid s)$ をニューラルネットでパラメータ化し、勾配上昇で報酬期待値を最大化。",
+      },
+      {
+        type: "math",
+        tex: "\\nabla_\\theta J(\\theta) = \\mathbb{E}\\left[\\nabla_\\theta \\log \\pi_\\theta(a \\mid s) \\cdot R\\right]",
+      },
+      { type: "h3", text: "実用アルゴリズム" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**DQN**: Q-learning + ニューラルネット + 経験再生(Atari で有名)",
+          "**A2C / A3C**: Actor-Critic の並列版",
+          "**PPO**: 安定性に優れた方策勾配。RLHF の標準",
+          "**SAC**: 連続制御で強い、エントロピー正則化",
+          "**MuZero**: モデルベース RL、AlphaZero の後継",
+        ],
+      },
+      { type: "h3", text: "AI エンジニアでの使いどころ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**ChatGPT の RLHF**: 人間フィードバックで LLM を最適化",
+          "**推薦システム**: ユーザー反応を報酬として方策学習",
+          "**広告入札**: マルチアームバンディットの応用",
+          "**ロボティクス**: シミュレーション → 実機転送",
+          "**ゲーム AI**: AlphaGo・StarCraft II・Dota 2",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[E 資格 教科書](/certs/e-shikaku/textbook) ─ 強化学習の章",
+          "[ベイズ統計と頻度論](/blog/bayes-vs-frequentist)",
+          "[線形代数を AI 視点で](/blog/linear-algebra-for-ai)",
+          "[AI Engineer Roadmap](/roadmap)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "computer-vision-introduction",
+    title: "コンピュータビジョン 入門 ─ CNN から ViT まで",
+    description:
+      "画像認識・物体検出・セグメンテーションの基礎。CNN・ResNet・YOLO・Vision Transformer の主要アーキテクチャを実装視点で整理します。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "CV のタスクは『分類 ・ 検出 ・ セグメンテーション ・ 生成』の 4 種が基本。",
+      "アーキテクチャは LeNet → AlexNet → VGG → ResNet → ViT と進化。",
+      "今は ViT(画像版 Transformer)と CNN のハイブリッドが標準。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**コンピュータビジョン(CV)** は画像 ・ 動画から情報を抽出する分野。スマホのカメラ ・ 自動運転 ・ 医用画像 ・ 顔認証など応用範囲は広大です。",
+      },
+      { type: "h3", text: "4 つの基本タスク" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**画像分類**(Classification): 1 枚 → 1 ラベル(犬/猫)",
+          "**物体検出**(Detection): 1 枚 → 複数のバウンディングボックス + ラベル",
+          "**セグメンテーション**(Segmentation): ピクセル単位の分類",
+          "**画像生成**(Generation): GAN ・ Diffusion で新しい画像を作る",
+        ],
+      },
+      { type: "h3", text: "歴史 ─ アーキテクチャの進化" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**LeNet(1998)**: 手書き数字認識、CNN の元祖",
+          "**AlexNet(2012)**: ImageNet で衝撃的勝利、DL ブーム到来",
+          "**VGG(2014)**: 3×3 畳み込みの繰り返し、シンプルで強い",
+          "**ResNet(2015)**: 残差接続で 100 層超え、現在も主流",
+          "**ViT(2020)**: Transformer で画像を処理、スケール則が CNN を超える",
+          "**SAM / DINO(2023〜)**: 大規模事前学習による汎用ビジョンモデル",
+        ],
+      },
+      { type: "h3", text: "ResNet の本質 ─ 残差接続" },
+      {
+        type: "p",
+        text: "層を深くするほど勾配消失で学習困難になる問題を、**スキップ接続** $y = f(x) + x$ で解決。100 層・200 層が現実的に。",
+      },
+      {
+        type: "code",
+        title: "ResNet ブロック",
+        python: "import torch.nn as nn\n\nclass ResBlock(nn.Module):\n    def __init__(self, ch):\n        super().__init__()\n        self.conv1 = nn.Conv2d(ch, ch, 3, padding=1)\n        self.conv2 = nn.Conv2d(ch, ch, 3, padding=1)\n        self.bn1 = nn.BatchNorm2d(ch)\n        self.bn2 = nn.BatchNorm2d(ch)\n\n    def forward(self, x):\n        identity = x\n        out = nn.functional.relu(self.bn1(self.conv1(x)))\n        out = self.bn2(self.conv2(out))\n        return nn.functional.relu(out + identity)  # スキップ接続",
+      },
+      { type: "h3", text: "Vision Transformer(ViT)" },
+      {
+        type: "p",
+        text: "画像を **16×16 のパッチ** に分割 → トークン列として Transformer に入れる。スケールしやすく、十分なデータがあれば CNN を上回る。",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**ViT-Base**: 86M parameters",
+          "**ViT-Huge**: 632M parameters",
+          "**事前学習**: JFT-300M(Google 内部、3 億画像)",
+        ],
+      },
+      { type: "h3", text: "物体検出 ─ YOLO" },
+      {
+        type: "p",
+        text: "**YOLO(You Only Look Once)** は画像を 1 回で処理してバウンディングボックスを出力。リアルタイム物体検出の代表。",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "YOLOv1(2016) → YOLOv8(2023)まで進化",
+          "アンカーフリー化で簡略化",
+          "**ultralytics/yolov8** が現在の業界標準",
+        ],
+      },
+      { type: "h3", text: "セグメンテーション ─ U-Net / SAM" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**U-Net**: 医用画像で標準のエンコーダ・デコーダ構造",
+          "**Mask R-CNN**: 検出 + セグメンテーションの両刀",
+          "**SAM(Segment Anything)**: 2023 Meta、ゼロショットでセグメント",
+        ],
+      },
+      { type: "h3", text: "実装の最短路 ─ 転移学習" },
+      {
+        type: "code",
+        title: "PyTorch で 5 行転移学習",
+        python: "from torchvision import models\nimport torch.nn as nn\n\nmodel = models.resnet50(weights='IMAGENET1K_V2')\nmodel.fc = nn.Linear(model.fc.in_features, 10)  # 自分のクラス数に\n# あとは fine-tune するだけ",
+      },
+      {
+        type: "practical",
+        title: "🛠 実務 Tips",
+        body: "ゼロから学習せずに、ImageNet 事前学習済みモデルを fine-tune する方が圧倒的に早く高精度に。データ 1000 枚でも実用レベル。",
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[E 資格 教科書](/certs/e-shikaku/textbook) ─ CNN ・ ViT の章",
+          "[Transformer の数学](/blog/transformer-math) ─ ViT の前提",
+          "[scikit-learn 入門](/blog/sklearn-introduction)",
+          "[線形代数を AI 視点で](/blog/linear-algebra-for-ai)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "audio-ai-introduction",
+    title: "音声 AI 入門 ─ Whisper・TTS・音楽生成の現在地",
+    description:
+      "音声認識(ASR)・音声合成(TTS)・音楽生成。Whisper・XTTS・MusicGen など、音声 AI の主要モデルと使い方を整理します。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "音声 AI = ASR(認識)・TTS(合成)・楽曲生成 の 3 大領域。",
+      "OpenAI Whisper が ASR のオープンスタンダード。日本語含む多言語対応。",
+      "TTS は XTTS / ElevenLabs、楽曲生成は MusicGen / Suno が代表。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**音声 AI** は LLM の次のフロンティア。Whisper(音声認識)・ChatGPT Voice(音声会話)・Suno(楽曲生成)など、急速に実用化が進んでいます。",
+      },
+      { type: "h3", text: "音声 AI の 3 領域" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**ASR**(Automatic Speech Recognition): 音声 → 文字",
+          "**TTS**(Text-to-Speech): 文字 → 音声",
+          "**音楽生成**(Music Generation): プロンプト → 楽曲",
+        ],
+      },
+      { type: "h3", text: "ASR ─ Whisper の革命" },
+      {
+        type: "p",
+        text: "**OpenAI Whisper**(2022)は 68 万時間の多言語データで学習。日本語も精度が極めて高く、現在の業界標準。",
+      },
+      {
+        type: "code",
+        title: "Whisper で音声書き起こし(5 行)",
+        python: "from openai import OpenAI\nclient = OpenAI()\n\nwith open('meeting.mp3', 'rb') as f:\n    result = client.audio.transcriptions.create(model='whisper-1', file=f)\n    print(result.text)",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**whisper-1**(OpenAI API): 商用最強、月数 USD",
+          "**whisper-large-v3**(OSS): ローカル動作、無料",
+          "**faster-whisper**: GPU 最適化版、4 倍速",
+        ],
+      },
+      { type: "h3", text: "TTS ─ 自然な音声合成" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**OpenAI TTS**: 6 種類のボイス、自然で実用",
+          "**ElevenLabs**: 声のクローニング(数秒の音声から)",
+          "**XTTS-v2**(OSS): 多言語 ・ ゼロショット声変換",
+          "**Bark**(OSS): 効果音や非言語表現も生成",
+        ],
+      },
+      {
+        type: "code",
+        title: "OpenAI TTS",
+        python: "from openai import OpenAI\nclient = OpenAI()\n\nresp = client.audio.speech.create(\n    model='tts-1', voice='alloy',\n    input='こんにちは、統計ロードマップへようこそ。'\n)\nresp.stream_to_file('out.mp3')",
+      },
+      { type: "h3", text: "音楽生成" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Suno**: 歌詞 + ジャンル指定で完全な楽曲生成",
+          "**MusicGen**(Meta): プロンプトから楽曲、OSS",
+          "**Udio**: 高品質楽曲生成、商用利用可",
+          "**Stable Audio**: SDXL 系列の音声版",
+        ],
+      },
+      { type: "h3", text: "技術的背景 ─ 音声を扱う 3 表現" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**波形(waveform)**: 時間 × 振幅、生データ",
+          "**スペクトログラム**: 時間 × 周波数、画像として扱える",
+          "**離散トークン**(EnCodec ・ SoundStream): 音声を離散符号化、LLM 風に扱える",
+        ],
+      },
+      {
+        type: "intuition",
+        title: "💡 トークン化の革新",
+        body: "EnCodec で音声を 50ms あたり数十トークンに圧縮 → 言語モデルと同じ Transformer で生成可能に。これが Suno・MusicGen の基礎。",
+      },
+      { type: "h3", text: "実務での応用シーン" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**会議の議事録自動化**: Whisper + GPT で要約",
+          "**カスタマーサポート**: 音声入力 → LLM 応答 → TTS",
+          "**動画字幕生成**: 多言語字幕の自動化",
+          "**アクセシビリティ**: スクリーンリーダー高度化",
+          "**コンテンツ制作**: 音楽 ・ ナレーションの内製化",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[LLM 入門](/blog/llm-introduction)",
+          "[Transformer の数学](/blog/transformer-math)",
+          "[Python 環境構築](/blog/python-setup-for-stats)",
+          "[E 資格 ロードマップ](/certs/e-shikaku/roadmap)",
+        ],
+      },
+      { type: "h3", text: "まとめ" },
+      {
+        type: "p",
+        text: "音声 AI は API レベルでは既にアプリ実装可能なレベル。OSS モデルもどんどん高品質に。**今のうちに使い方を体得しておくと差がつきます**。",
+      },
+    ],
+  },
+  {
+    slug: "diffusion-models-introduction",
+    title: "拡散モデル 入門 ─ Stable Diffusion はなぜ動くのか",
+    description:
+      "DALL-E・Midjourney・Stable Diffusion の基盤『拡散モデル(Diffusion Model)』の仕組みを、ノイズの順拡散と逆拡散プロセスで解説します。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "拡散モデル = 画像にノイズを加える順過程 → ノイズを除去する逆過程を NN で学習。",
+      "GAN より学習が安定し、品質も超えた。Stable Diffusion・DALL-E 3 の基盤。",
+      "条件付け(テキスト → 画像)は CLIP + Cross-Attention で実現。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**拡散モデル(Diffusion Model)** は 2022 年以降の生成 AI の主役。Stable Diffusion・DALL-E・Midjourney・Sora まで、画像 ・ 動画生成のほぼ全てが拡散モデルベースです。",
+      },
+      { type: "h3", text: "順拡散と逆拡散" },
+      { type: "h4", text: "順過程(Forward Process)" },
+      {
+        type: "p",
+        text: "元の画像 $x_0$ に **少しずつガウスノイズを加えていく** プロセス。$T$ 回繰り返すと完全なノイズ $x_T$ になる。",
+      },
+      {
+        type: "math",
+        tex: "q(x_t \\mid x_{t-1}) = \\mathcal{N}(x_t; \\sqrt{1-\\beta_t} x_{t-1}, \\beta_t I)",
+      },
+      { type: "h4", text: "逆過程(Reverse Process)" },
+      {
+        type: "p",
+        text: "ノイズ $x_T$ から **元の画像 $x_0$ を復元** するプロセス。これを NN で学習する。",
+      },
+      {
+        type: "math",
+        tex: "p_\\theta(x_{t-1} \\mid x_t) = \\mathcal{N}(x_{t-1}; \\mu_\\theta(x_t, t), \\Sigma_\\theta(x_t, t))",
+      },
+      {
+        type: "intuition",
+        title: "💡 なぜノイズ除去で生成?",
+        body: "ノイズを足す過程は確定的(数式で計算可)。逆向きを学習する → 純ノイズから画像を作れる、というのがアイデア。",
+      },
+      { type: "h3", text: "学習目標 ─ ノイズ予測" },
+      {
+        type: "p",
+        text: "実装上は **加えたノイズ $\\epsilon$ を予測する** タスクに置き換える(DDPM 論文の貢献)。",
+      },
+      {
+        type: "math",
+        tex: "L = \\mathbb{E}_{x_0, \\epsilon, t} \\left[\\|\\epsilon - \\epsilon_\\theta(x_t, t)\\|^2\\right]",
+      },
+      { type: "h3", text: "U-Net + 時刻埋め込み" },
+      {
+        type: "p",
+        text: "ノイズ予測には **U-Net**(エンコーダ・デコーダ構造)を使用。さらに `t` を sinusoidal embedding で埋め込んで条件付け。",
+      },
+      { type: "h3", text: "テキスト → 画像 の条件付け" },
+      {
+        type: "p",
+        text: "CLIP テキストエンコーダで文字をベクトル化 → U-Net の各層に **Cross-Attention** で注入。これで『テキストに従う画像生成』が可能に。",
+      },
+      {
+        type: "code",
+        title: "Diffusers ライブラリで生成",
+        python: "from diffusers import StableDiffusionPipeline\nimport torch\n\npipe = StableDiffusionPipeline.from_pretrained(\n    'stabilityai/stable-diffusion-2-1',\n    torch_dtype=torch.float16,\n).to('cuda')\n\nimage = pipe(\n    prompt='A serene Japanese tea garden at sunset, oil painting style',\n    num_inference_steps=30,\n    guidance_scale=7.5,\n).images[0]\nimage.save('output.png')",
+      },
+      { type: "h3", text: "推論時の高速化テクニック" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**DDIM**: 元の DDPM(1000 steps)を 50 steps 程度に高速化",
+          "**Classifier-Free Guidance**: 無条件と条件付き予測を線形結合、品質向上",
+          "**LCM(Latent Consistency Model)**: 4 steps で生成可能",
+          "**Distillation**: 教師モデルの軌跡を小モデルに蒸留",
+        ],
+      },
+      { type: "h3", text: "代表的なモデル" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Stable Diffusion**: OSS、自分で動かせる、Civitai でカスタムモデル流通",
+          "**DALL-E 3**: OpenAI、ChatGPT 統合",
+          "**Midjourney**: 商用、芸術性で最強",
+          "**SDXL**: SD の高解像度版",
+          "**Sora**(動画): OpenAI、未公開だが衝撃的品質",
+        ],
+      },
+      { type: "h3", text: "応用と注意点" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**コンテンツ制作**: ゲーム ・ 漫画 ・ 動画素材",
+          "**プロトタイピング**: UI ・ プロダクトデザイン",
+          "**広告**: バナー量産",
+          "**注意**: 著作権 ・ 学習データの問題、ディープフェイク懸念",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[LLM 入門](/blog/llm-introduction)",
+          "[Transformer の数学](/blog/transformer-math)",
+          "[E 資格 教科書](/certs/e-shikaku/textbook)",
+          "[ベイズ統計と頻度論](/blog/bayes-vs-frequentist)",
+        ],
+      },
+      { type: "h3", text: "まとめ" },
+      {
+        type: "p",
+        text: "拡散モデルは『**ノイズに対するスコア関数を学習**』というシンプルな枠組みで、GAN・VAE を圧倒する品質を実現。次は動画 ・ 3D ・ 音声生成へ展開中です。",
+      },
+    ],
+  },
+  {
+    slug: "ai-agents-introduction",
+    title: "AI エージェント 入門 ─ ReAct・Tool Use・Multi-Agent",
+    description:
+      "ChatGPT に外部 API・コード実行・Web 検索を組み合わせる『AI エージェント』。ReAct パターン・ツール呼び出し・マルチエージェント協調を実装視点で解説します。",
+    publishedAt: "2026-04-30",
+    category: "LLM",
+    tldr: [
+      "AI エージェント = LLM が外部ツールを自律的に呼んでタスクを完遂する仕組み。",
+      "ReAct = Reason + Act の交互ループ。最も基本的なパターン。",
+      "Tool Use(Function Calling)・Code Interpreter・Multi-Agent が現在の主要トピック。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "LLM 単体では『答えを返す』だけ。**AI エージェント** は LLM に **計算・検索・コード実行** などのツールを与え、複雑なタスクを自律的に解決させる枠組みです。",
+      },
+      { type: "h3", text: "なぜエージェントが必要か" },
+      {
+        type: "p",
+        text: "LLM は次の問題が解けません:",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**最新情報**: 学習データ以降のニュース",
+          "**正確な計算**: 大きい数の四則演算で間違える",
+          "**実行**: コードを動かしてその結果を反映",
+          "**外部システム連携**: DB ・ API ・ メール送信",
+        ],
+      },
+      {
+        type: "p",
+        text: "→ ツールを呼べばすべて解決。",
+      },
+      { type: "h3", text: "ReAct パターン" },
+      {
+        type: "p",
+        text: "**Reason(推論) + Act(行動)** を交互に繰り返す。Yao et al. 2022 の論文が元祖。",
+      },
+      {
+        type: "code",
+        title: "ReAct の対話例",
+        python: "User: 東京と大阪の人口の差は?\n\nAI: Thought: 東京と大阪の最新の人口を調べる必要がある。\n     Action: search('東京 人口 2024')\n     Observation: 東京都の人口は約 1404 万人。\n\n     Thought: 次に大阪。\n     Action: search('大阪 人口 2024')\n     Observation: 大阪府の人口は約 880 万人。\n\n     Thought: 計算する。\n     Action: calculator(1404 - 880)\n     Observation: 524\n\n     最終回答: 約 524 万人の差です。",
+      },
+      { type: "h3", text: "Tool Use(Function Calling)" },
+      {
+        type: "p",
+        text: "OpenAI ・ Claude API はネイティブで関数呼び出しをサポート。スキーマを宣言するだけで LLM が自動で引数を埋めて呼ぶ。",
+      },
+      {
+        type: "code",
+        title: "OpenAI Function Calling",
+        python: "tools = [{\n    'type': 'function',\n    'function': {\n        'name': 'get_weather',\n        'description': '指定地の天気を取得',\n        'parameters': {\n            'type': 'object',\n            'properties': {\n                'city': {'type': 'string'}\n            },\n            'required': ['city']\n        }\n    }\n}]\n\nresp = client.chat.completions.create(\n    model='gpt-4o',\n    messages=[{'role': 'user', 'content': '東京の天気は?'}],\n    tools=tools,\n)\n\nfor call in resp.choices[0].message.tool_calls:\n    if call.function.name == 'get_weather':\n        args = json.loads(call.function.arguments)\n        result = my_weather_api(args['city'])  # 実行\n        # 結果を LLM に戻して最終応答を得る",
+      },
+      { type: "h3", text: "代表的なフレームワーク" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**LangChain / LangGraph**: 最も普及、状態管理が強い",
+          "**AutoGen**(Microsoft): Multi-Agent の代表",
+          "**CrewAI**: 役割分担型 Multi-Agent",
+          "**Claude Agent SDK / OpenAI Agents SDK**: 公式 SDK",
+        ],
+      },
+      { type: "h3", text: "Multi-Agent ─ 役割分担" },
+      {
+        type: "p",
+        text: "1 つのタスクを **複数の専門エージェント** で分担。",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**プランナー**: 全体計画立案",
+          "**リサーチャー**: 情報収集",
+          "**コーダー**: 実装",
+          "**レビュアー**: 品質チェック",
+          "**マネージャー**: 統括 ・ 調整",
+        ],
+      },
+      { type: "h3", text: "実用例" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**コーディング支援**: Claude Code ・ Cursor ・ Cline",
+          "**カスタマーサポート**: 過去 FAQ + ナレッジ DB を参照",
+          "**データ分析**: SQL 自動生成 + 実行 + 可視化",
+          "**研究補助**: 論文検索 + 要約 + 比較",
+          "**ワークフロー自動化**: メール送信 ・ Slack 投稿 ・ DB 更新",
+        ],
+      },
+      { type: "h3", text: "実装上の注意点" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**エラーハンドリング**: ツール失敗時のリトライ ・ フォールバック",
+          "**コスト管理**: 無限ループ防止、最大ステップ数",
+          "**セキュリティ**: コード実行時のサンドボックス、Vercel Sandbox 等",
+          "**評価**: 完了率 ・ 正答率 ・ コスト効率の測定",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[LLM 入門](/blog/llm-introduction)",
+          "[プロンプトエンジニアリング基礎](/blog/prompt-engineering-basics)",
+          "[RAG 入門](/blog/rag-introduction)",
+          "[MLOps 基礎](/blog/mlops-basics)",
+        ],
+      },
+      { type: "h3", text: "まとめ" },
+      {
+        type: "p",
+        text: "AI エージェントは『LLM の能力を増幅する』アプローチ。2025 年は **エージェント元年** と呼ばれ、業務自動化の主役になりつつあります。",
+      },
+    ],
+  },
+  {
     slug: "llm-introduction",
     title: "LLM 入門 ─ ChatGPT は何を計算しているのか",
     description:
