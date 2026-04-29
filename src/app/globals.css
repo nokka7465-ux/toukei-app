@@ -1,63 +1,63 @@
 @import "tailwindcss";
 @import "katex/dist/katex.min.css";
 
-/* Soft blue palette — keeps the paper textbook feel and uses lighter
-   blues so the page reads quietly. Buttons still pop (saturated enough
-   to be obviously interactive, light enough not to dominate). */
+/* Calm pale blue palette — quiet, soft, paper-textbook friendly.
+   Accent stays just saturated enough for legible white text on buttons,
+   everything else leans toward warm-light grey-blues. */
 :root {
-  --background: #fafbfd;
-  --foreground: #1e293b;
+  --background: #fbfcfe;
+  --foreground: #2a3445;
   --page: #ffffff;
-  --page-border: #e8edf3;
-  --page-border-strong: #b8c4d2;
-  --muted: #4b5b73;
-  --muted-strong: #1e293b;
-  --accent: #4a7bd1;
-  --accent-strong: #3b6ac0;
+  --page-border: #e7ecf3;
+  --page-border-strong: #c0cad8;
+  --muted: #5d6b81;
+  --muted-strong: #2a3445;
+  --accent: #6f93c4;
+  --accent-strong: #587ab0;
   --accent-fg: #ffffff;
-  --link: #2f5fb3;
-  --rule: #c5cdd9;
-  --highlight: #eaf2fc;
+  --link: #4f73a8;
+  --rule: #c8d0dc;
+  --highlight: #eef3fa;
   --section-bg: #f5f8fc;
-  --section-border: #9bb6e0;
+  --section-border: #b9cce4;
 }
 
 /* Dark theme — quiet navy with soft accents. */
 :root[data-theme="dark"] {
-  --background: #0e1626;
-  --foreground: #e2e8f0;
-  --page: #16223a;
-  --page-border: #243352;
-  --page-border-strong: #3a4a6a;
-  --muted: #9aabc4;
-  --muted-strong: #cbd5e1;
-  --accent: #6f9bea;
-  --accent-strong: #557fd0;
-  --accent-fg: #0e1626;
-  --link: #9bbcec;
-  --rule: #3a4a6a;
-  --highlight: #1e2e52;
-  --section-bg: #18243f;
-  --section-border: #4a6db1;
+  --background: #101826;
+  --foreground: #d8dee8;
+  --page: #18223a;
+  --page-border: #263451;
+  --page-border-strong: #3d4d6c;
+  --muted: #a1afc6;
+  --muted-strong: #cdd5e1;
+  --accent: #7fa1d4;
+  --accent-strong: #6789c0;
+  --accent-fg: #101826;
+  --link: #a8c1e2;
+  --rule: #3d4d6c;
+  --highlight: #1d2c4a;
+  --section-bg: #1a253f;
+  --section-border: #5c7eb5;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --background: #0e1626;
-    --foreground: #e2e8f0;
-    --page: #16223a;
-    --page-border: #243352;
-    --page-border-strong: #3a4a6a;
-    --muted: #9aabc4;
-    --muted-strong: #cbd5e1;
-    --accent: #6f9bea;
-    --accent-strong: #557fd0;
-    --accent-fg: #0e1626;
-    --link: #9bbcec;
-    --rule: #3a4a6a;
-    --highlight: #1e2e52;
-    --section-bg: #18243f;
-    --section-border: #4a6db1;
+    --background: #101826;
+    --foreground: #d8dee8;
+    --page: #18223a;
+    --page-border: #263451;
+    --page-border-strong: #3d4d6c;
+    --muted: #a1afc6;
+    --muted-strong: #cdd5e1;
+    --accent: #7fa1d4;
+    --accent-strong: #6789c0;
+    --accent-fg: #101826;
+    --link: #a8c1e2;
+    --rule: #3d4d6c;
+    --highlight: #1d2c4a;
+    --section-bg: #1a253f;
+    --section-border: #5c7eb5;
   }
 }
 
@@ -68,8 +68,8 @@ html {
 body {
   background-color: var(--background);
   background-image:
-    linear-gradient(to right, rgba(110, 140, 190, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(110, 140, 190, 0.025) 1px, transparent 1px);
+    linear-gradient(to right, rgba(150, 170, 200, 0.022) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(150, 170, 200, 0.022) 1px, transparent 1px);
   background-size: 28px 28px;
   background-attachment: fixed;
   color: var(--foreground);
@@ -159,8 +159,8 @@ a {
 a.paper:hover,
 button.paper:hover {
   box-shadow:
-    0 2px 4px rgba(74, 123, 209, 0.08),
-    0 14px 28px -14px rgba(74, 123, 209, 0.18);
+    0 2px 4px rgba(111, 147, 196, 0.08),
+    0 14px 28px -14px rgba(111, 147, 196, 0.16);
 }
 
 @media (prefers-color-scheme: dark) {
