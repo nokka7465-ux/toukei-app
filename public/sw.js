@@ -1,4 +1,4 @@
-/* Service Worker for 統計検定 学習帳.
+/* Service Worker for 統計ロードマップ.
  * Strategy:
  *   - HTML pages: network-first, fall back to cache, then to /offline.
  *   - Static assets (Next.js _next/static): cache-first (immutable hashes).

@@ -92,7 +92,7 @@ export async function GET(
             fontSize: 24,
           }}
         >
-          <div>本番形式の無料模試</div>
+          <div>統計ロードマップ ─ 本番形式の無料模試</div>
           <div style={{ fontSize: 20 }}>toukei-app.com</div>
         </div>
       </div>

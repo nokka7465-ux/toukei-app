@@ -1,14 +1,14 @@
 const SITE_URL = "https://toukei-app.com";
-const SITE_NAME = "統計検定 学習帳";
+const SITE_NAME = "統計ロードマップ";
 
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: SITE_NAME,
-  alternateName: "Toukei Study Book",
+  alternateName: "Toukei Roadmap",
   url: SITE_URL,
   description:
-    "統計検定4級〜1級に対応した無料学習サイト。教科書・公式集・演習問題をすべて無料で学習できます。",
+    "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。統計検定 4 級〜1 級・G 検定・E 資格・DS 検定にも対応。",
   inLanguage: "ja",
   potentialAction: {
     "@type": "SearchAction",

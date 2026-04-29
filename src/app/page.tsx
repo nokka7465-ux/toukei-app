@@ -7,6 +7,7 @@ import { FaqJsonLd } from "@/components/StructuredData";
 import { ProgressDashboard } from "@/components/ProgressDashboard";
 import { DailyProblem } from "@/components/DailyProblem";
 import { AchievementsPanel } from "@/components/AchievementsPanel";
+import { AiRoadmap } from "@/components/AiRoadmap";
 
 const availableLevels = new Set<string>([
   "intro",
@@ -17,30 +18,35 @@ const availableLevels = new Set<string>([
   "grade-1",
 ]);
 
-const HOME_TITLE = "統計検定 学習帳 ─ 4級〜1級・関連検定 7 種の無料学習サイト";
+const HOME_TITLE =
+  "統計ロードマップ ─ AIエンジニアになるための統計・数学・Python";
 const HOME_DESCRIPTION =
-  "統計検定 4 級〜1 級に対応した無料学習サイト。教科書・公式集・演習問題に加え、関連検定 7 種(DS基礎・統計調査士・専門統計調査士・G検定・E資格・DS検定・QC検定)も完全無料。インタラクティブ図解・統計計算ツール・Python/R コード併記など、検定対策本にない学習体験を提供。";
+  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。数学基礎 → 統計学 → 機械学習 → AI 検定対策まで、4 ステップのロードマップで迷わず進めます。統計検定 4 級〜1 級・G 検定・E 資格・DS 検定にも完全対応。";
 
 const HOME_FAQ = [
   {
-    q: "統計検定 学習帳は無料で利用できますか?",
+    q: "統計ロードマップは無料で利用できますか?",
     a: "はい、教科書・公式集・演習問題・統計計算ツール・図解 ─ サイト上のすべてのコンテンツを完全無料でご利用いただけます。会員登録も不要です。",
   },
   {
-    q: "統計検定はどの級から始めるのがおすすめですか?",
-    a: "統計学を初めて学ぶ方は『入門編』、高校数学を経験している方は『4級』、大学初年度の確率統計を理解したい方は『3級』、データ分析の実務知識を身につけたい方は『2級』からの開始がおすすめです。3 問の級診断で目安を出せます。",
+    q: "AIエンジニアを目指すなら、どの順で学ぶのがいいですか?",
+    a: "数学基礎(微分・線形代数・確率) → 統計学(記述・推定・検定) → 機械学習(回帰・分類・DL) → 関連検定(G検定・E資格・DS検定)の 4 ステップが王道です。本サイトの『AIエンジニア・ロードマップ』セクションがそのまま学習順になっています。",
   },
   {
-    q: "関連検定は何が対策できますか?",
-    a: "DS基礎・統計調査士・専門統計調査士・G検定・E資格・DS検定・QC検定の 7 種について、教科書・演習問題・受験情報を提供しています。データ・AI・調査・品質管理の各方向に応じて選択できます。",
+    q: "統計検定はどの級から始めるのがおすすめですか?",
+    a: "統計学を初めて学ぶ方は『入門編』、高校数学を経験している方は『4級』、大学初年度の確率統計を理解したい方は『3級』、AI/機械学習の前提として実務レベルを身につけたい方は『2級』からの開始がおすすめです。3 問の級診断で目安が出せます。",
   },
   {
     q: "Python や R のコードはありますか?",
-    a: "はい、教科書・図解の各章に Python(NumPy/SciPy/Pandas)と R のコード例を併記しています。理論を式で理解した後、コードで動かして再確認できます。",
+    a: "はい、教科書・図解の各章に Python(NumPy/SciPy/Pandas/scikit-learn)と R のコード例を併記しています。理論を式で理解した後、コードで動かして再確認できます。AIエンジニアに必要な実装感覚をそのまま養えます。",
+  },
+  {
+    q: "AI 系の検定(G 検定・E 資格)は対策できますか?",
+    a: "はい、G 検定・E 資格・DS 検定それぞれに教科書・演習問題・受験情報を用意しています。統計の基礎を固めたあとそのまま AI 系検定に進めるカリキュラムです。",
   },
   {
     q: "スマートフォンでも使えますか?",
-    a: "はい、レスポンシブ対応済みでスマートフォン・タブレット・PC のいずれからも快適に学習できます。インタラクティブ図解もタッチ操作に対応。",
+    a: "はい、レスポンシブ対応済みでスマートフォン・タブレット・PC のいずれからも快適に学習できます。インタラクティブ図解もタッチ操作に対応。PWA 対応でホーム画面に追加すればアプリのように使えます。",
   },
 ];
 
@@ -68,19 +74,43 @@ export default function Home() {
   return (
     <div>
       <FaqJsonLd entries={HOME_FAQ} />
-      <section className="mb-12 text-center py-8">
-        <div className="chapter-eyebrow mb-3">Toukei Study Book</div>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-[0.1em]">
-          統計検定 学習帳
+      <section className="mb-14 text-center py-10 md:py-14">
+        <div className="chapter-eyebrow mb-4">Toukei Roadmap</div>
+        <h1 className="text-4xl md:text-6xl font-bold mb-5 tracking-[0.05em] leading-[1.15]">
+          統計ロードマップ
         </h1>
         <hr className="rule-double max-w-xs mx-auto" />
-        <p className="text-[var(--muted-strong)] leading-loose max-w-2xl mx-auto mt-4">
-          統計検定4級〜1級に対応した、読み物としても楽しめる教科書仕立ての学習サイト。
-          <br className="hidden md:block" />
-          各級の<strong>教科書本文</strong>で概念を学び、<strong>公式集</strong>
-          で知識を整理し、<strong>選択式の演習</strong>で理解を確かめられます。
+        <p className="text-base md:text-lg text-[var(--muted-strong)] leading-loose max-w-2xl mx-auto mt-6">
+          <strong className="text-[var(--foreground)]">
+            AIエンジニアになるための
+          </strong>
+          <br className="md:hidden" />
+          <strong className="text-[var(--foreground)]">
+            統計・数学・Python
+          </strong>
+          を、<br className="hidden md:block" />
+          一気通貫で学べる無料サイト。
         </p>
+        <p className="text-sm text-[var(--muted)] leading-loose max-w-xl mx-auto mt-3 ui-sans">
+          数学基礎 → 統計学 → 機械学習 → AI 検定 ─ 4 ステップで迷わず進める学習ロードマップ。
+        </p>
+        <div className="flex flex-wrap gap-3 justify-center mt-7 ui-sans text-sm">
+          <Link
+            href="#roadmap"
+            className="px-5 py-2.5 bg-[var(--accent-strong)] text-white rounded-md font-bold hover:opacity-90 shadow-sm"
+          >
+            ロードマップを見る ↓
+          </Link>
+          <Link
+            href="/diagnose"
+            className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-md hover:bg-[var(--page)]"
+          >
+            まずは級診断 →
+          </Link>
+        </div>
       </section>
+
+      <AiRoadmap />
 
       <DailyProblem />
 

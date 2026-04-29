@@ -28,9 +28,11 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 const SITE_URL = "https://toukei-app.com";
-const SITE_NAME = "統計検定 学習帳";
+const SITE_NAME = "統計ロードマップ";
+const SITE_TAGLINE =
+  "AIエンジニアになるための統計・数学・Python を一気通貫で学ぶ";
 const SITE_DESCRIPTION =
-  "統計検定4級〜1級に対応した無料学習サイト。関連検定 7 種(DS基礎・統計調査士・専門統計調査士・G検定・E資格・DS検定・QC検定)も網羅。インタラクティブ図解・統計計算ツール・Python/Rコード併記など、検定対策本にない学習体験を提供。";
+  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。統計検定 4 級〜1 級・G検定・E資格・DS検定・QC検定など関連検定も網羅。インタラクティブ図解・統計計算ツール・Python/R コード併記で、理論から実装までスムーズに繋がる学習ロードマップを提供。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -41,25 +43,25 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   keywords: [
-    "統計検定",
+    "AIエンジニア",
+    "統計ロードマップ",
+    "機械学習",
+    "ディープラーニング",
+    "Python",
+    "数学",
     "統計学",
+    "統計検定",
     "2級",
     "準1級",
-    "1級",
-    "3級",
-    "4級",
-    "学習",
+    "E資格",
+    "G検定",
+    "DS検定",
+    "データサイエンス",
+    "学習ロードマップ",
     "無料",
     "問題集",
     "公式集",
-    "データサイエンス",
-    "E資格",
-    "G検定",
     "QC検定",
-    "品質管理検定",
-    "統計調査士",
-    "専門統計調査士",
-    "DS検定",
     "JDLA",
   ],
   openGraph: {
@@ -120,8 +122,17 @@ export default function RootLayout({
         <ServiceWorkerRegistration />
         <header className="border-b border-[var(--page-border)] bg-[var(--page)]/70 backdrop-blur-sm sticky top-0 z-10">
           <div className="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
-            <Link href="/" className="text-lg font-bold tracking-wide">
-              統計検定 学習帳
+            <Link
+              href="/"
+              className="leading-tight"
+              aria-label={`${SITE_NAME} ─ ${SITE_TAGLINE}`}
+            >
+              <span className="block text-lg font-bold tracking-wide">
+                統計ロードマップ
+              </span>
+              <span className="hidden sm:block text-[10px] text-[var(--muted)] ui-sans tracking-wide">
+                AIエンジニアへの統計・数学・Python
+              </span>
             </Link>
             <div className="flex items-center gap-3">
               <nav className="hidden md:flex gap-4 text-sm ui-sans flex-wrap justify-end">
@@ -375,7 +386,7 @@ export default function RootLayout({
 
             <div className="mt-8 pt-6 border-t border-[var(--page-border)] text-xs text-[var(--muted)] ui-sans space-y-2">
               <div>
-                © 統計検定 学習帳. 問題はすべてオリジナル類題です。学習の参考用にご利用ください。
+                © 統計ロードマップ. 問題はすべてオリジナル類題です。学習の参考用にご利用ください。
               </div>
               {isAffiliateEnabled && (
                 <div className="leading-relaxed">

@@ -263,7 +263,7 @@ export function Quiz({
             <ShareButton
               url={shareUrl}
               text={`${shareLabel ?? "統計検定の演習問題"}を解きました: ${correctCount}/${questions.length} 問正解!`}
-              hashtags={["統計検定", "統計検定学習帳"]}
+              hashtags={["統計検定", "統計ロードマップ"]}
             />
           )}
         </div>

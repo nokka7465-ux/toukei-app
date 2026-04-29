@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "統計検定 学習帳",
-    short_name: "統計検定",
+    name: "統計ロードマップ",
+    short_name: "統計ロードマップ",
     description:
-      "統計検定 4 級〜1 級と関連検定 7 種を完全網羅した、無料の総合学習サイト。",
+      "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。",
     start_url: "/",
     scope: "/",
     display: "standalone",

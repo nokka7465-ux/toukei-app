@@ -125,11 +125,11 @@ export default async function BlogPostPage({
     dateModified: post.publishedAt,
     author: {
       "@type": "Organization",
-      name: "統計検定 学習帳",
+      name: "統計ロードマップ",
     },
     publisher: {
       "@type": "Organization",
-      name: "統計検定 学習帳",
+      name: "統計ロードマップ",
     },
     mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
     inLanguage: "ja",

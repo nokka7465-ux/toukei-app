@@ -3,16 +3,17 @@
 
 :root {
   --background: #faf6ec;
-  --foreground: #2a2416;
+  --foreground: #1f1a0f;
   --page: #fffdf4;
   --page-border: #e7dbbf;
   --page-border-strong: #c9b98c;
-  --muted: #857a5f;
-  --muted-strong: #5a5139;
-  --accent: #c8d3dd;
-  --accent-strong: #6f8294;
-  --accent-fg: #2c3a48;
-  --link: #2d6094;
+  /* Slightly darkened for better contrast on cream backgrounds (WCAG AA). */
+  --muted: #6e6347;
+  --muted-strong: #463e2a;
+  --accent: #b9c5d2;
+  --accent-strong: #5a7088;
+  --accent-fg: #1f2a36;
+  --link: #1f4a7a;
   --rule: #c9b98c;
   --highlight: #fff4d6;
   --section-bg: #fbf5e3;
@@ -78,6 +79,29 @@ body {
   line-height: 1.85;
   font-feature-settings: "palt" 1;
   letter-spacing: 0.01em;
+  /* Slightly bigger base font on larger screens for legibility */
+  font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 17px;
+  }
+}
+
+/* Make tap targets a bit roomier on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  a {
+    min-height: 36px;
+  }
+}
+
+/* Subtle focus ring everywhere — keyboard accessibility */
+:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -126,6 +150,16 @@ a {
   box-shadow:
     0 1px 2px rgba(80, 60, 20, 0.04),
     0 8px 20px -12px rgba(80, 60, 20, 0.12);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+a.paper:hover,
+button.paper:hover {
+  box-shadow:
+    0 2px 4px rgba(80, 60, 20, 0.08),
+    0 14px 28px -14px rgba(80, 60, 20, 0.18);
 }
 
 @media (prefers-color-scheme: dark) {
