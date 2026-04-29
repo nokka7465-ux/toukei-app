@@ -76,8 +76,8 @@ export default function Home() {
   return (
     <div>
       <FaqJsonLd entries={HOME_FAQ} />
-      <section className="mb-14 text-center py-10 md:py-14">
-        <div className="chapter-eyebrow mb-4">Toukei Roadmap</div>
+      <section className="hero-band mb-16 md:mb-20 text-center px-6 py-14 md:py-20">
+        <span className="chip mb-5">Toukei Roadmap</span>
         <h1 className="text-4xl md:text-6xl font-bold mb-5 tracking-[0.05em] leading-[1.15]">
           統計ロードマップ
         </h1>
@@ -96,16 +96,16 @@ export default function Home() {
         <p className="text-sm text-[var(--muted)] leading-loose max-w-xl mx-auto mt-3 ui-sans">
           数学基礎 → 統計学 → 機械学習 → AI 検定 ─ 4 ステップで迷わず進める学習ロードマップ。
         </p>
-        <div className="flex flex-wrap gap-3 justify-center mt-7 ui-sans text-sm">
+        <div className="flex flex-wrap gap-3 justify-center mt-8 ui-sans text-sm">
           <Link
             href="#roadmap"
-            className="px-5 py-2.5 bg-[var(--accent-strong)] text-white rounded-md font-bold hover:opacity-90 shadow-sm"
+            className="px-7 py-3 bg-[var(--accent)] text-[var(--accent-fg)] rounded-xl font-bold hover:bg-[var(--accent-strong)] shadow-sm transition"
           >
             ロードマップを見る ↓
           </Link>
           <Link
             href="/diagnose"
-            className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-md hover:bg-[var(--page)]"
+            className="px-7 py-3 border-2 border-[var(--accent)] text-[var(--link)] rounded-xl font-bold hover:bg-[var(--highlight)] transition"
           >
             まずは級診断 →
           </Link>
@@ -120,7 +120,7 @@ export default function Home() {
 
       <AchievementsPanel />
 
-      <section className="mb-12 paper rounded-lg p-6 md:p-7">
+      <section className="mb-14 md:mb-20 paper rounded-xl p-6 md:p-8">
         <div className="chapter-eyebrow mb-2 text-center">Quick Search</div>
         <h2 className="text-lg font-bold mb-3 text-center">
           用語・公式・トピックを横断検索
@@ -170,7 +170,7 @@ export default function Home() {
         </p>
       </section>
 
-      <section className="mb-12 paper rounded-lg p-7">
+      <section className="mb-14 md:mb-20 paper rounded-xl p-7 md:p-8">
         <div className="chapter-eyebrow mb-2">For Beginners</div>
         <h2 className="text-2xl font-bold mb-3">初めての方へ</h2>
         <p className="text-[var(--muted-strong)] leading-loose mb-4">
@@ -254,7 +254,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mb-12">
+      <section className="mb-14 md:mb-20">
         <div className="mb-5 flex items-baseline justify-between">
           <div>
             <div className="chapter-eyebrow mb-1">Blog</div>
@@ -295,7 +295,7 @@ export default function Home() {
         </ul>
       </section>
 
-      <section className="mb-12 paper rounded-lg p-7">
+      <section className="mb-14 md:mb-20 paper rounded-xl p-7 md:p-8">
         <div className="chapter-eyebrow mb-2">More</div>
         <h2 className="text-2xl font-bold mb-3">もっと深く学びたい方へ</h2>
         <p className="text-[var(--muted-strong)] leading-loose mb-4 text-sm">

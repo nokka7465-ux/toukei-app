@@ -1,6 +1,17 @@
 @import "tailwindcss";
 @import "katex/dist/katex.min.css";
 
+/* Bump every Tailwind radius up a notch so cards & buttons feel softer
+   site-wide. This affects rounded / rounded-md / rounded-lg / rounded-xl
+   utilities without touching individual components. */
+@theme {
+  --radius-sm: 0.375rem; /* 6px (was 2px) */
+  --radius-md: 0.625rem; /* 10px (was 6px) */
+  --radius-lg: 0.875rem; /* 14px (was 8px) */
+  --radius-xl: 1.125rem; /* 18px (was 12px) */
+  --radius-2xl: 1.375rem; /* 22px */
+}
+
 /* Calm pale blue palette — quiet, soft, paper-textbook friendly.
    Accent stays just saturated enough for legible white text on buttons,
    everything else leans toward warm-light grey-blues. */
@@ -179,6 +190,50 @@ button.paper:hover {
   color: var(--muted);
   font-family: var(--font-noto-sans-jp), system-ui, sans-serif;
   font-weight: 700;
+}
+
+/* Chip-style category label (the small rounded blue tag the
+   reference site uses on each card top-left). */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.375rem;
+  background-color: var(--accent);
+  color: var(--accent-fg);
+  font-family: var(--font-noto-sans-jp), system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+.chip-soft {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.375rem;
+  background-color: var(--highlight);
+  color: var(--accent-strong);
+  border: 1px solid var(--accent);
+  font-family: var(--font-noto-sans-jp), system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+/* Hero band — paper white with a soft top-down blue wash. Use on the
+   home hero so the page opens with a friendly gradient instead of flat. */
+.hero-band {
+  background:
+    radial-gradient(
+      ellipse at 50% -20%,
+      color-mix(in oklab, var(--accent) 22%, transparent),
+      transparent 60%
+    ),
+    linear-gradient(to bottom, var(--page) 0%, var(--background) 100%);
+  border-radius: 1.25rem;
 }
 
 /* Decorative horizontal rule (textbook-style double line) */
