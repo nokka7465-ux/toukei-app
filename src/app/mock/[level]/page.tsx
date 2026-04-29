@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { levels } from "@/data/levels";
+import { mockConfigs } from "@/data/mock-config";
 import { introQuestions } from "@/data/questions/intro";
 import { gradeFourQuestions } from "@/data/questions/grade-4";
 import { gradeThreeQuestions } from "@/data/questions/grade-3";
 import { gradeTwoQuestions } from "@/data/questions/grade-2";
 import { gradePre1Questions } from "@/data/questions/grade-pre1";
 import { gradeOneQuestions } from "@/data/questions/grade-1";
-import { Quiz } from "@/components/Quiz";
+import { MockExam } from "@/components/MockExam";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import type { Question } from "@/types/content";
 
@@ -32,20 +33,20 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { level } = await params;
   const meta = levels.find((l) => l.slug === level);
-  const questions = questionsByLevel[level];
-  if (!meta || !questions) return {};
-  const title = `統計検定 ${meta.title} 演習問題 ─ ${questions.length} 問の無料類題`;
-  const description = `統計検定 ${meta.title} のオリジナル類題を ${questions.length} 問収録した無料演習問題集。各問題に ★☆☆ 基礎 / ★★☆ 標準 / ★★★ 応用 の難易度バッジ付き。自動採点で実力チェックできます。`;
+  const config = mockConfigs[level];
+  if (!meta || !config) return {};
+  const title = `${config.label} ─ 本番形式の無料模試`;
+  const description = `統計検定 ${meta.title} の本番形式に近い模試。${config.timeMinutes} 分・${config.questionTarget} 問・合格基準 ${config.passPct}% で時間制限付き採点。受験履歴も記録されます。`;
   return {
     title,
     description,
-    alternates: { canonical: `/quiz/${level}` },
+    alternates: { canonical: `/mock/${level}` },
     openGraph: { title, description, type: "article" },
     twitter: { card: "summary_large_image", title, description },
   };
 }
 
-export default async function QuizPage({
+export default async function MockExamPage({
   params,
 }: {
   params: Promise<{ level: string }>;
@@ -53,7 +54,8 @@ export default async function QuizPage({
   const { level } = await params;
   const meta = levels.find((l) => l.slug === level);
   const questions = questionsByLevel[level];
-  if (!meta || !questions) notFound();
+  const config = mockConfigs[level];
+  if (!meta || !questions || !config) notFound();
 
   return (
     <article>
@@ -61,7 +63,7 @@ export default async function QuizPage({
         items={[
           { name: "ホーム", href: "/" },
           { name: "演習問題", href: "/quiz" },
-          { name: `${meta.title} 演習問題`, href: `/quiz/${level}` },
+          { name: `${meta.title} 模試`, href: `/mock/${level}` },
         ]}
       />
       <nav
@@ -76,45 +78,41 @@ export default async function QuizPage({
           演習問題
         </Link>
         <span className="mx-2">›</span>
-        <span>{meta.title}</span>
+        <span>{meta.title} 模試</span>
       </nav>
 
-      <header className="mb-10 pb-6 border-b-2 border-[var(--page-border-strong)]">
-        <div className="chapter-eyebrow mb-2">Practice</div>
+      <header className="mb-8 pb-6 border-b-2 border-[var(--page-border-strong)]">
+        <div className="chapter-eyebrow mb-2">Mock Exam</div>
         <h1 className="text-4xl font-bold mb-3 tracking-wider">
-          {meta.title} 演習問題
+          {config.label}
         </h1>
         <p className="text-[var(--muted-strong)] leading-loose max-w-3xl">
-          全 {questions.length}{" "}
-          問のオリジナル類題。各問題に ★☆☆ 基礎 / ★★☆ 標準 / ★★★ 応用 の難易度バッジが付いています。すべて選択したら「採点する」を押してください。
+          {config.note}
         </p>
       </header>
 
-      <Quiz
+      <MockExam
+        trackKey={level}
+        trackLabel={meta.title}
         questions={questions}
-        quizKey={level}
-        shareUrl={`https://toukei-app.com/quiz/${level}`}
-        shareLabel={`統計検定 ${meta.title} の演習問題`}
+        timeMinutes={config.timeMinutes}
+        questionTarget={config.questionTarget}
+        passPct={config.passPct}
+        practiceHref={`/quiz/${level}`}
       />
 
       <nav className="mt-14 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">
         <Link
-          href={`/mock/${level}`}
-          className="px-4 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)]"
+          href={`/quiz/${level}`}
+          className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
         >
-          {meta.title} 模試で力試し →
+          ← {meta.title} 通常演習
         </Link>
         <Link
           href={`/textbook/${level}`}
           className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
         >
-          ← {meta.title} の教科書を読む
-        </Link>
-        <Link
-          href={`/formulas/${level}`}
-          className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
-        >
-          ← {meta.title} の公式集
+          ← {meta.title} 教科書
         </Link>
       </nav>
     </article>

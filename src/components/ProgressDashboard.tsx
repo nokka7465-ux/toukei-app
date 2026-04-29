@@ -8,6 +8,7 @@ import {
   getProgress,
   summarizeTrack,
   clearProgress,
+  getStreak,
   type ProgressData,
 } from "@/lib/progress";
 
@@ -92,6 +93,47 @@ export function ProgressDashboard() {
           </Link>
         )}
       </div>
+
+      {/* Streak / activity */}
+      {(() => {
+        const s = getStreak(data);
+        return (
+          <div className="grid grid-cols-3 gap-3 mb-5 text-center">
+            <div className="paper rounded p-3 border border-[var(--page-border)]">
+              <div className="text-[10px] tracking-[0.15em] uppercase text-[var(--muted)] ui-sans">
+                連続学習
+              </div>
+              <div className="text-2xl font-bold mt-0.5 tabular-nums">
+                {s.current}
+                <span className="text-xs text-[var(--muted)] ml-0.5">日</span>
+                {s.current >= 3 && (
+                  <span aria-hidden="true" className="ml-1">
+                    🔥
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className="paper rounded p-3 border border-[var(--page-border)]">
+              <div className="text-[10px] tracking-[0.15em] uppercase text-[var(--muted)] ui-sans">
+                最長記録
+              </div>
+              <div className="text-2xl font-bold mt-0.5 tabular-nums">
+                {s.best}
+                <span className="text-xs text-[var(--muted)] ml-0.5">日</span>
+              </div>
+            </div>
+            <div className="paper rounded p-3 border border-[var(--page-border)]">
+              <div className="text-[10px] tracking-[0.15em] uppercase text-[var(--muted)] ui-sans">
+                学習日数
+              </div>
+              <div className="text-2xl font-bold mt-0.5 tabular-nums">
+                {s.totalActiveDays}
+                <span className="text-xs text-[var(--muted)] ml-0.5">日</span>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Overall progress */}
       <div className="mb-5">

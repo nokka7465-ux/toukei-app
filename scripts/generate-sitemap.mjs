@@ -13,6 +13,7 @@ const staticUrls = [
   { path: "/textbook", priority: 0.9, changefreq: "weekly" },
   { path: "/formulas", priority: 0.9, changefreq: "monthly" },
   { path: "/quiz", priority: 0.9, changefreq: "weekly" },
+  { path: "/mock", priority: 0.85, changefreq: "monthly" },
   { path: "/roadmap", priority: 0.9, changefreq: "monthly" },
   { path: "/glossary", priority: 0.8, changefreq: "monthly" },
   { path: "/cheatsheet", priority: 0.8, changefreq: "monthly" },
@@ -55,6 +56,7 @@ const levelUrls = levels.flatMap((slug) => [
   { path: `/textbook/${slug}`, priority: 0.9, changefreq: "weekly" },
   { path: `/formulas/${slug}`, priority: 0.8, changefreq: "monthly" },
   { path: `/quiz/${slug}`, priority: 0.8, changefreq: "monthly" },
+  { path: `/mock/${slug}`, priority: 0.75, changefreq: "monthly" },
 ]);
 
 const blogSrc = readFileSync(join(ROOT, "src/data/blog/index.ts"), "utf8");

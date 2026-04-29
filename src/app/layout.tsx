@@ -83,6 +83,18 @@ export const metadata: Metadata = {
   verification: {
     google: "yejvEtQ4WDL7RvEEdi84O_aJlPCz8Z_kvLSO3iW0NB4",
   },
+  appleWebApp: {
+    capable: true,
+    title: SITE_NAME,
+    statusBarStyle: "default",
+  },
+};
+
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fdfcf7" },
+    { media: "(prefers-color-scheme: dark)", color: "#1f2937" },
+  ],
 };
 
 export default function RootLayout({
@@ -209,6 +221,11 @@ export default function RootLayout({
                   <li>
                     <Link href="/review" className="hover:underline text-[var(--muted-strong)]">
                       苦手問題の復習
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/mock" className="hover:underline text-[var(--muted-strong)]">
+                      模試 一覧
                     </Link>
                   </li>
                 </ul>

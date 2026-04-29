@@ -9,11 +9,37 @@ export type QuestionResult = {
   lastAt: number;
 };
 
+export type MockAttempt = {
+  trackKey: string;
+  trackLabel: string;
+  correct: number;
+  total: number;
+  durationSec: number;
+  passed: boolean;
+  ts: number;
+};
+
 export type ProgressData = {
   questions: Record<string, QuestionResult>;
+  /** YYYY-MM-DD strings, sorted ascending. Days the user answered any question. */
+  activeDates?: string[];
+  /** Most recent mock-exam attempts (cap to last 50 across all tracks). */
+  mockHistory?: MockAttempt[];
 };
 
 const empty = (): ProgressData => ({ questions: {} });
+
+function todayStr(): string {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+function shiftDay(date: string, delta: number): string {
+  const [y, m, d] = date.split("-").map(Number);
+  const dt = new Date(y, m - 1, d);
+  dt.setDate(dt.getDate() + delta);
+  return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, "0")}-${String(dt.getDate()).padStart(2, "0")}`;
+}
 
 function read(): ProgressData {
   if (typeof window === "undefined") return empty();
@@ -48,7 +74,83 @@ export function recordAnswer(questionId: string, correct: boolean): void {
     attempts: (existing?.attempts ?? 0) + 1,
     lastAt: Date.now(),
   };
+  // Streak bookkeeping: record today as an active study day.
+  const today = todayStr();
+  const dates = data.activeDates ?? [];
+  if (!dates.includes(today)) {
+    dates.push(today);
+    dates.sort();
+    data.activeDates = dates;
+  }
   write(data);
+}
+
+export function recordMockAttempt(attempt: MockAttempt): void {
+  const data = read();
+  const history = data.mockHistory ?? [];
+  history.unshift(attempt);
+  // Cap history to the most recent 50 attempts to avoid unbounded growth.
+  data.mockHistory = history.slice(0, 50);
+  // Also count this as an active day.
+  const today = todayStr();
+  const dates = data.activeDates ?? [];
+  if (!dates.includes(today)) {
+    dates.push(today);
+    dates.sort();
+    data.activeDates = dates;
+  }
+  write(data);
+}
+
+export type StreakInfo = {
+  current: number;
+  best: number;
+  totalActiveDays: number;
+};
+
+export function getStreak(data?: ProgressData): StreakInfo {
+  const d = data ?? read();
+  const dates = d.activeDates ?? [];
+  if (dates.length === 0) return { current: 0, best: 0, totalActiveDays: 0 };
+
+  const set = new Set(dates);
+  const sorted = [...dates].sort();
+
+  // Best streak across the whole history.
+  let best = 1;
+  let run = 1;
+  for (let i = 1; i < sorted.length; i++) {
+    if (sorted[i] === shiftDay(sorted[i - 1], 1)) {
+      run += 1;
+    } else {
+      best = Math.max(best, run);
+      run = 1;
+    }
+  }
+  best = Math.max(best, run);
+
+  // Current streak: count back consecutively from today (or yesterday if
+  // today is not yet active so the streak isn't broken at midnight).
+  const today = todayStr();
+  const yesterday = shiftDay(today, -1);
+  let cursor: string | null = null;
+  if (set.has(today)) cursor = today;
+  else if (set.has(yesterday)) cursor = yesterday;
+
+  let current = 0;
+  while (cursor && set.has(cursor)) {
+    current += 1;
+    cursor = shiftDay(cursor, -1);
+  }
+
+  return { current, best, totalActiveDays: dates.length };
+}
+
+export function getMockHistory(trackKey?: string): MockAttempt[] {
+  const data = read();
+  const all = data.mockHistory ?? [];
+  if (!trackKey) return all;
+  return all.filter((a) => a.trackKey === trackKey);
 }
 
 export function getProgress(): ProgressData {
