@@ -8,6 +8,7 @@ import {
   suggestTerms,
   type SearchSource,
 } from "@/lib/search";
+import { urlToPhase } from "@/lib/phase-mapping";
 
 const SOURCE_STYLE: Record<SearchSource, string> = {
   textbook:
@@ -148,6 +149,18 @@ export function SearchUI({ initialQuery = "" }: { initialQuery?: string }) {
                     >
                       {sourceLabel(r.item.source)}
                     </span>
+                    {(() => {
+                      const phase = urlToPhase(r.item.url);
+                      if (!phase) return null;
+                      return (
+                        <span
+                          className="px-1.5 py-0.5 rounded text-[10px] font-bold ui-sans border border-[var(--page-border-strong)] text-[var(--muted-strong)]"
+                          title={`AIエンジニア・ロードマップ Phase ${phase.num}`}
+                        >
+                          Phase {phase.num} {phase.emoji} {phase.short}
+                        </span>
+                      );
+                    })()}
                     <span className="text-xs text-[var(--muted)] ui-sans">
                       {r.item.context}
                     </span>

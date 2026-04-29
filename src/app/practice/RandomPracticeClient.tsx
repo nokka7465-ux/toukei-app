@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Quiz } from "@/components/Quiz";
 import { tracks as allTracks } from "@/lib/all-questions";
 import { getProgress } from "@/lib/progress";
-import type { Question } from "@/types/content";
+import type { Difficulty, Question } from "@/types/content";
 
 type TrackInfo = {
   key: string;
@@ -16,6 +16,12 @@ type TrackInfo = {
 type Mode = "all" | "wrong-first" | "selected";
 
 const COUNT_OPTIONS = [5, 10, 20, 30] as const;
+
+const DIFFICULTY_LABELS: Record<Difficulty, { stars: string; label: string }> = {
+  1: { stars: "★☆☆", label: "基礎" },
+  2: { stars: "★★☆", label: "標準" },
+  3: { stars: "★★★", label: "応用" },
+};
 
 function shuffle<T>(arr: T[]): T[] {
   const next = [...arr];
@@ -32,6 +38,12 @@ export function RandomPracticeClient({ tracks }: { tracks: TrackInfo[] }) {
   const [selectedTracks, setSelectedTracks] = useState<Set<string>>(
     () => new Set(tracks.map((t) => t.key)),
   );
+  const [difficulties, setDifficulties] = useState<Set<Difficulty>>(
+    () => new Set<Difficulty>([1, 2, 3]),
+  );
+  const [selectedCategories, setSelectedCategories] = useState<Set<string>>(
+    () => new Set(),
+  );
   const [questions, setQuestions] = useState<Question[] | null>(null);
   const [version, setVersion] = useState(0);
 
@@ -40,14 +52,33 @@ export function RandomPracticeClient({ tracks }: { tracks: TrackInfo[] }) {
     setSelectedTracks(new Set(tracks.map((t) => t.key)));
   }, [tracks]);
 
+  // Categories available within the currently active tracks.
+  const availableCategories = useMemo(() => {
+    const activeKeys =
+      mode === "selected"
+        ? selectedTracks
+        : new Set(allTracks.map((t) => t.key));
+    const set = new Set<string>();
+    for (const t of allTracks) {
+      if (!activeKeys.has(t.key)) continue;
+      for (const q of t.questions) set.add(q.category);
+    }
+    return [...set].sort();
+  }, [mode, selectedTracks]);
+
   function buildPool(): Question[] {
     const activeKeys =
       mode === "selected"
         ? selectedTracks
         : new Set(allTracks.map((t) => t.key));
+    const useCategoryFilter = selectedCategories.size > 0;
     return allTracks
       .filter((t) => activeKeys.has(t.key))
-      .flatMap((t) => t.questions);
+      .flatMap((t) => t.questions)
+      .filter((q) => difficulties.has(q.difficulty))
+      .filter((q) =>
+        useCategoryFilter ? selectedCategories.has(q.category) : true,
+      );
   }
 
   function start() {
@@ -82,6 +113,26 @@ export function RandomPracticeClient({ tracks }: { tracks: TrackInfo[] }) {
       const next = new Set(prev);
       if (next.has(key)) next.delete(key);
       else next.add(key);
+      return next;
+    });
+  }
+
+  function toggleDifficulty(d: Difficulty) {
+    setDifficulties((prev) => {
+      const next = new Set(prev);
+      if (next.has(d)) next.delete(d);
+      else next.add(d);
+      // At least one difficulty must remain selected.
+      if (next.size === 0) return prev;
+      return next;
+    });
+  }
+
+  function toggleCategory(cat: string) {
+    setSelectedCategories((prev) => {
+      const next = new Set(prev);
+      if (next.has(cat)) next.delete(cat);
+      else next.add(cat);
       return next;
     });
   }
@@ -188,6 +239,76 @@ export function RandomPracticeClient({ tracks }: { tracks: TrackInfo[] }) {
             })}
           </div>
         </div>
+      )}
+
+      <div className="paper rounded-lg p-6">
+        <div className="text-sm font-bold mb-3 ui-sans">難易度</div>
+        <div className="flex flex-wrap gap-2 text-sm ui-sans">
+          {([1, 2, 3] as Difficulty[]).map((d) => {
+            const info = DIFFICULTY_LABELS[d];
+            const active = difficulties.has(d);
+            return (
+              <button
+                key={d}
+                type="button"
+                onClick={() => toggleDifficulty(d)}
+                className={`px-3 py-2 rounded border transition ${
+                  active
+                    ? "border-[var(--accent)] bg-[var(--accent)]/10 font-bold"
+                    : "border-[var(--page-border)] opacity-50"
+                }`}
+              >
+                <span className="tracking-wider mr-1">{info.stars}</span>
+                {info.label}
+              </button>
+            );
+          })}
+        </div>
+        <p className="text-[10px] text-[var(--muted)] ui-sans mt-2">
+          複数選択可。少なくとも 1 つは選択してください。
+        </p>
+      </div>
+
+      {availableCategories.length > 0 && (
+        <details className="paper rounded-lg p-5">
+          <summary className="cursor-pointer text-sm font-bold ui-sans flex items-center justify-between">
+            <span>カテゴリで絞り込む(任意)</span>
+            <span className="text-[10px] text-[var(--muted)] font-normal">
+              {selectedCategories.size === 0
+                ? "未指定 = すべて"
+                : `${selectedCategories.size} 個選択中`}
+            </span>
+          </summary>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-xs ui-sans mt-3">
+            {availableCategories.map((cat) => {
+              const active = selectedCategories.has(cat);
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => toggleCategory(cat)}
+                  className={`px-2.5 py-1.5 rounded border text-left transition ${
+                    active
+                      ? "border-[var(--accent)] bg-[var(--accent)]/10 font-bold"
+                      : "border-[var(--page-border)] opacity-70"
+                  }`}
+                >
+                  {active && <span className="mr-1">✓</span>}
+                  {cat}
+                </button>
+              );
+            })}
+            {selectedCategories.size > 0 && (
+              <button
+                type="button"
+                onClick={() => setSelectedCategories(new Set())}
+                className="px-2.5 py-1.5 rounded border border-dashed border-[var(--page-border)] text-[var(--muted)] hover:bg-[var(--background)]"
+              >
+                クリア
+              </button>
+            )}
+          </div>
+        </details>
       )}
 
       <div className="paper rounded-lg p-6">

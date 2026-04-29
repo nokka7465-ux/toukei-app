@@ -169,6 +169,13 @@ export default function RootLayout({
                   級診断
                 </Link>
                 <Link
+                  href="/plan"
+                  className="hover:underline"
+                  title="目標日までの学習プランを逆算"
+                >
+                  学習プラン
+                </Link>
+                <Link
                   href="/review"
                   className="hover:underline"
                   title="間違えた問題だけを集めた復習リスト"

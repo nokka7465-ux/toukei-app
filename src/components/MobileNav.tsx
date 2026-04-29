@@ -13,7 +13,8 @@ const NAV_GROUPS: NavGroup[] = [
     label: "学習を始める",
     items: [
       { href: "/", label: "ホーム" },
-      { href: "/roadmap", label: "学習ロードマップ" },
+      { href: "/roadmap", label: "AIエンジニア・ロードマップ" },
+      { href: "/plan", label: "学習プラン計算" },
       { href: "/diagnose", label: "級診断" },
       { href: "/exam-info", label: "受験情報まとめ" },
       { href: "/textbook", label: "教科書 一覧" },

@@ -2,6 +2,142 @@ import type { BlogPost } from "@/types/content";
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "python-setup-for-stats",
+    title: "AIエンジニア入門 ─ Python 環境構築 完全ガイド(2026 年版)",
+    description:
+      "統計・機械学習を学ぶための Python 環境を、Windows / macOS で迷わず構築。uv ・ Jupyter ・ VS Code ・主要ライブラリを 30 分で揃えます。",
+    publishedAt: "2026-04-29",
+    category: "Python",
+    tldr: [
+      "2026 年現在のおすすめは uv(astral 製) ─ pip + venv より圧倒的に速い。",
+      "最低限必要なライブラリは numpy ・ pandas ・ matplotlib ・ scipy ・ scikit-learn ・ jupyter の 6 つ。",
+      "VS Code + Jupyter 拡張で、ノートブックも .py スクリプトも同じエディタで完結。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "AIエンジニアになるためのロードマップ Phase 1〜2 で必要になる Python 環境を、ゼロから 30 分で構築する手順をまとめました。**3 年前のチュートリアルとは前提が変わっています** ─ Anaconda ・ pipenv ・ poetry はもう第一選択ではありません。",
+      },
+      { type: "h3", text: "結論 ─ 2026 年のおすすめスタック" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Python 本体**: 3.12 系(3.13 / 3.14 もOK だがライブラリ対応待ち)",
+          "**パッケージ管理**: **uv**(Rust 製で爆速、pip + venv の置き換え)",
+          "**エディタ**: VS Code + Python 拡張 + Jupyter 拡張",
+          "**ノートブック**: Jupyter Lab(VS Code 内蔵で十分)",
+          "**主要ライブラリ**: numpy / pandas / matplotlib / scipy / scikit-learn / jupyter",
+        ],
+      },
+      {
+        type: "intuition",
+        title: "💡 なぜ Anaconda ではないのか",
+        body: "Anaconda は便利ですが、**インストール容量が約 5GB**・**起動時間が遅い**・**商用利用に制限**があります。素の Python + uv の方がシンプルで速く、トラブルも少ないです。",
+      },
+      { type: "h3", text: "Step 1 ─ Python のインストール" },
+      { type: "h4", text: "Windows" },
+      {
+        type: "list",
+        style: "number",
+        items: [
+          "[python.org の Downloads](https://www.python.org/downloads/) から **Python 3.12** の Windows installer をダウンロード",
+          "実行 → ⚠️ **『Add python.exe to PATH』にチェック必須**",
+          "『Install Now』をクリック",
+          "ターミナル(PowerShell)で `python --version` を実行 → `Python 3.12.x` が出れば成功",
+        ],
+      },
+      { type: "h4", text: "macOS" },
+      {
+        type: "list",
+        style: "number",
+        items: "Homebrew が入っている前提。なければ [brew.sh](https://brew.sh/) からインストール ・ `brew install python@3.12` ・ `python3 --version` で確認".split(" ・ "),
+      },
+      { type: "h3", text: "Step 2 ─ uv のインストール" },
+      {
+        type: "p",
+        text: "uv は **astral 社製の高速パッケージマネージャ** ─ pip より 10〜100 倍速いです。",
+      },
+      {
+        type: "code",
+        title: "uv のインストール",
+        python: "# Windows (PowerShell)\npowershell -c \"irm https://astral.sh/uv/install.ps1 | iex\"\n\n# macOS / Linux\ncurl -LsSf https://astral.sh/uv/install.sh | sh\n\n# 確認\nuv --version",
+      },
+      { type: "h3", text: "Step 3 ─ プロジェクトを作る" },
+      {
+        type: "code",
+        title: "新規プロジェクトの作成",
+        python: "# プロジェクトフォルダを作成\nmkdir my-stats-study\ncd my-stats-study\n\n# uv でプロジェクト初期化(.venv 自動作成)\nuv init --python 3.12\n\n# 統計・ML 主要ライブラリを一括追加\nuv add numpy pandas matplotlib scipy scikit-learn jupyter\n\n# 仮想環境を有効化\n# Windows:\n.venv\\Scripts\\activate\n# macOS / Linux:\nsource .venv/bin/activate",
+      },
+      { type: "h3", text: "Step 4 ─ VS Code セットアップ" },
+      {
+        type: "list",
+        style: "number",
+        items: [
+          "[code.visualstudio.com](https://code.visualstudio.com/) からダウンロード ・ インストール",
+          "拡張機能タブ(Ctrl/Cmd + Shift + X)で以下を検索 ・ インストール: **Python**(Microsoft 公式) ・ **Jupyter**(Microsoft 公式) ・ **Pylance**(Microsoft 公式)",
+          "プロジェクトフォルダを VS Code で開く(`code .`)",
+          "コマンドパレット(F1)→ **Python: Select Interpreter** → `.venv` を選択",
+        ],
+      },
+      { type: "h3", text: "Step 5 ─ Jupyter Notebook で動作確認" },
+      {
+        type: "code",
+        title: "正規分布のサンプル",
+        python: "import numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy import stats\n\n# 標準正規分布から 1000 サンプル抽出\nsamples = np.random.normal(loc=0, scale=1, size=1000)\n\n# ヒストグラム + 理論曲線\nfig, ax = plt.subplots(figsize=(8, 4))\nax.hist(samples, bins=30, density=True, alpha=0.6, label='samples')\nx = np.linspace(-4, 4, 200)\nax.plot(x, stats.norm.pdf(x), 'r-', label='theoretical N(0,1)')\nax.legend()\nax.set_title('Standard Normal Distribution')\nplt.show()",
+      },
+      {
+        type: "p",
+        text: "VS Code で `.ipynb` ファイルを作成 → 上のコードを貼って Shift+Enter で実行 → ヒストグラムが表示されれば環境構築完了です。",
+      },
+      { type: "h3", text: "推奨追加ライブラリ(Phase 3〜4 で導入)" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**seaborn** ─ matplotlib のラッパー、統計グラフを楽に",
+          "**statsmodels** ─ 古典的な統計モデル(回帰 ・ 時系列 ・ 検定)",
+          "**pymc** ─ ベイズ統計の MCMC",
+          "**torch**(PyTorch)─ ディープラーニング",
+          "**transformers** ─ LLM ・ Hugging Face モデル",
+          "**polars** ─ pandas より速い DataFrame ライブラリ(Rust 製)",
+        ],
+      },
+      {
+        type: "code",
+        title: "追加でインストール",
+        python: "uv add seaborn statsmodels pymc torch transformers polars",
+      },
+      { type: "h3", text: "よくあるトラブル" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**`python` コマンドが見つからない**(Windows) → PATH 設定の取りこぼし。インストーラを再実行して 『Add to PATH』にチェック。",
+          "**numpy のインポートが遅い** → 仮想環境が有効か確認。`which python` / `where python` が `.venv` 内を指していること。",
+          "**Jupyter で日本語が文字化け** → `matplotlib` で `plt.rcParams['font.family'] = 'Yu Gothic'` (Windows) や `'Hiragino Sans'`(macOS)を指定。",
+          "**uv install が遅い・止まる** → 企業ネットワーク内の場合はプロキシ設定。`UV_INDEX_URL` 環境変数で社内 PyPI ミラーを指定。",
+        ],
+      },
+      { type: "h3", text: "次のステップ" },
+      {
+        type: "p",
+        text: "環境が整ったら、本サイトの教科書 ・ 図解にある Python コードをそのままノートブックに貼って動かしてみてください。理論 → コード → 結果 のループが回り始めると、学習スピードが一気に上がります。",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**[/math/textbook](/math/textbook)** ─ 数学基礎の Python コード例",
+          "**[/textbook/grade-3](/textbook/grade-3)** ─ 統計の式を Python で計算",
+          "**[/explore](/explore)** ─ ブラウザ上で動かして学ぶ統計",
+          "**[/figures](/figures)** ─ 図解で学ぶ統計(SVG 29 種)",
+          "**[/roadmap](/roadmap)** ─ AIエンジニア・ロードマップ全体像",
+        ],
+      },
+    ],
+  },
+  {
     slug: "ai-engineer-roadmap",
     title: "AIエンジニアになるためのロードマップ ─ 統計・数学・Python の最短ルート",
     description:

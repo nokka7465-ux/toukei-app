@@ -10,6 +10,11 @@ import {
   recordAnswer,
   type ProgressData,
 } from "@/lib/progress";
+import {
+  PREFS_EVENT,
+  getPreferences,
+  setDailyTrack,
+} from "@/lib/preferences";
 import type { Question } from "@/types/content";
 
 const circled = (i: number) => String.fromCharCode(0x2460 + i);
@@ -29,25 +34,50 @@ function hashString(s: string): number {
 }
 
 /**
- * Pick today's question deterministically. We rotate level by weekday so
- * users see a mix, and fall back to the global pool if a level is empty.
+ * Pick today's question deterministically. If `restrictTo` is set we sample
+ * only from that track; otherwise we use the global pool. The selection is
+ * stable per-day so refreshes don't change the question.
  */
-function pickTodaysQuestion(date: string): {
+function pickTodaysQuestion(
+  date: string,
+  restrictTo: string | null,
+): {
   q: Question;
   trackKey: string;
   trackLabel: string;
   trackHref: string;
 } {
-  const all = tracks.flatMap((t) =>
-    t.questions.map((q) => ({
-      q,
-      trackKey: t.key,
-      trackLabel: t.label,
-      trackHref: t.href,
-    })),
-  );
-  const idx = hashString(date) % all.length;
-  return all[idx];
+  const pool = restrictTo
+    ? tracks
+        .filter((t) => t.key === restrictTo)
+        .flatMap((t) =>
+          t.questions.map((q) => ({
+            q,
+            trackKey: t.key,
+            trackLabel: t.label,
+            trackHref: t.href,
+          })),
+        )
+    : tracks.flatMap((t) =>
+        t.questions.map((q) => ({
+          q,
+          trackKey: t.key,
+          trackLabel: t.label,
+          trackHref: t.href,
+        })),
+      );
+  const list = pool.length > 0
+    ? pool
+    : tracks.flatMap((t) =>
+        t.questions.map((q) => ({
+          q,
+          trackKey: t.key,
+          trackLabel: t.label,
+          trackHref: t.href,
+        })),
+      );
+  const idx = hashString(date) % list.length;
+  return list[idx];
 }
 
 export function DailyProblem() {
@@ -55,17 +85,36 @@ export function DailyProblem() {
   const [data, setData] = useState<ProgressData>({ questions: {} });
   const [selected, setSelected] = useState<number | null>(null);
   const [revealed, setRevealed] = useState(false);
+  const [dailyTrack, setDailyTrackState] = useState<string | null>(null);
+  const [showTrackPicker, setShowTrackPicker] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     setData(getProgress());
-    const handler = () => setData(getProgress());
-    window.addEventListener(PROGRESS_EVENT, handler);
-    return () => window.removeEventListener(PROGRESS_EVENT, handler);
+    setDailyTrackState(getPreferences().dailyTrack ?? null);
+    const dataHandler = () => setData(getProgress());
+    const prefHandler = () =>
+      setDailyTrackState(getPreferences().dailyTrack ?? null);
+    window.addEventListener(PROGRESS_EVENT, dataHandler);
+    window.addEventListener(PREFS_EVENT, prefHandler);
+    return () => {
+      window.removeEventListener(PROGRESS_EVENT, dataHandler);
+      window.removeEventListener(PREFS_EVENT, prefHandler);
+    };
   }, []);
 
   const today = useMemo(() => todayKey(), []);
-  const todays = useMemo(() => pickTodaysQuestion(today), [today]);
+  const todays = useMemo(
+    () => pickTodaysQuestion(today, dailyTrack),
+    [today, dailyTrack],
+  );
+
+  function changeTrack(trackKey: string | null) {
+    setDailyTrack(trackKey);
+    setSelected(null);
+    setRevealed(false);
+    setShowTrackPicker(false);
+  }
 
   if (!mounted) {
     return (
@@ -108,13 +157,58 @@ export function DailyProblem() {
           <div className="chapter-eyebrow mb-1">Daily</div>
           <h2 className="text-2xl font-bold">今日の 1 問</h2>
         </div>
-        <Link
-          href={todays.trackHref}
-          className="text-xs px-2.5 py-1 border border-[var(--page-border-strong)] rounded hover:bg-[var(--background)] ui-sans"
-        >
-          出題: {todays.trackLabel} →
-        </Link>
+        <div className="flex items-center gap-2 flex-wrap">
+          <button
+            type="button"
+            onClick={() => setShowTrackPicker((v) => !v)}
+            className="text-xs px-2.5 py-1 border border-[var(--page-border-strong)] rounded hover:bg-[var(--background)] ui-sans"
+            aria-expanded={showTrackPicker}
+          >
+            出題対象: {dailyTrack ? todays.trackLabel : "ランダム(全範囲)"} ▾
+          </button>
+          <Link
+            href={todays.trackHref}
+            className="text-xs px-2.5 py-1 border border-[var(--page-border-strong)] rounded hover:bg-[var(--background)] ui-sans"
+          >
+            {todays.trackLabel} →
+          </Link>
+        </div>
       </div>
+
+      {showTrackPicker && (
+        <div className="mb-4 paper rounded p-3 ui-sans text-xs">
+          <div className="text-[var(--muted)] mb-2">
+            出題対象を変更すると今日の問題も切り替わります(明日 0 時に再抽選)
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            <button
+              type="button"
+              onClick={() => changeTrack(null)}
+              className={`px-2.5 py-1 rounded border ${
+                dailyTrack === null
+                  ? "border-[var(--accent)] bg-[var(--accent)]/10 font-bold"
+                  : "border-[var(--page-border)] hover:bg-[var(--background)]"
+              }`}
+            >
+              ランダム(全範囲)
+            </button>
+            {tracks.map((t) => (
+              <button
+                key={t.key}
+                type="button"
+                onClick={() => changeTrack(t.key)}
+                className={`px-2.5 py-1 rounded border ${
+                  dailyTrack === t.key
+                    ? "border-[var(--accent)] bg-[var(--accent)]/10 font-bold"
+                    : "border-[var(--page-border)] hover:bg-[var(--background)]"
+                }`}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="text-xs text-[var(--muted)] mb-3 ui-sans">
         {today.replaceAll("-", "/")} · {todays.q.category}
