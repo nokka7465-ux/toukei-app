@@ -35,14 +35,55 @@ export async function GET(
       >
         <div
           style={{
-            fontSize: 24,
-            color: "#9ca3af",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
+            display: "flex",
+            alignItems: "center",
+            gap: 14,
             marginBottom: 12,
           }}
         >
-          Mock Exam
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 56,
+              height: 56,
+              borderRadius: 12,
+              background: "#fdfcf7",
+              color: "#1f1a0f",
+              fontFamily: "serif",
+              fontWeight: 700,
+              fontSize: 32,
+              lineHeight: 1,
+              position: "relative",
+            }}
+          >
+            統
+            <div
+              style={{
+                display: "flex",
+                position: "absolute",
+                bottom: 7,
+                left: 11,
+                right: 11,
+                height: 3,
+                background: "#5a7088",
+                borderRadius: 2,
+              }}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 24,
+              color: "#9ca3af",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+            }}
+          >
+            Mock Exam
+          </div>
         </div>
         <div
           style={{

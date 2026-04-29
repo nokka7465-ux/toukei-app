@@ -29,14 +29,54 @@ export async function GET() {
         <div
           style={{
             display: "flex",
-            fontSize: 22,
-            color: "#94a3b8",
-            letterSpacing: "0.25em",
-            textTransform: "uppercase",
+            alignItems: "center",
+            gap: 14,
             marginBottom: 12,
           }}
         >
-          AI Engineer Roadmap
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 60,
+              height: 60,
+              borderRadius: 12,
+              background: "#fdfcf7",
+              color: "#1f1a0f",
+              fontFamily: "serif",
+              fontWeight: 700,
+              fontSize: 36,
+              lineHeight: 1,
+              position: "relative",
+            }}
+          >
+            統
+            <div
+              style={{
+                display: "flex",
+                position: "absolute",
+                bottom: 8,
+                left: 12,
+                right: 12,
+                height: 3,
+                background: "#5a7088",
+                borderRadius: 2,
+              }}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 22,
+              color: "#94a3b8",
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+            }}
+          >
+            AI Engineer Roadmap
+          </div>
         </div>
         <div
           style={{

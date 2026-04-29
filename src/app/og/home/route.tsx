@@ -21,14 +21,54 @@ export async function GET() {
         <div
           style={{
             display: "flex",
-            fontSize: 22,
-            color: "#cbd5e1",
-            letterSpacing: "0.25em",
-            textTransform: "uppercase",
+            alignItems: "center",
+            gap: 16,
             marginBottom: 16,
           }}
         >
-          Toukei Roadmap
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 72,
+              height: 72,
+              borderRadius: 14,
+              background: "#fdfcf7",
+              color: "#1f1a0f",
+              fontFamily: "serif",
+              fontWeight: 700,
+              fontSize: 44,
+              lineHeight: 1,
+              position: "relative",
+            }}
+          >
+            統
+            <div
+              style={{
+                display: "flex",
+                position: "absolute",
+                bottom: 10,
+                left: 14,
+                right: 14,
+                height: 4,
+                background: "#5a7088",
+                borderRadius: 2,
+              }}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 22,
+              color: "#cbd5e1",
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+            }}
+          >
+            Toukei Roadmap
+          </div>
         </div>
         <div
           style={{

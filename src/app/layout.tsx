@@ -9,6 +9,7 @@ import { MobileNav } from "@/components/MobileNav";
 import { BackToTop } from "@/components/BackToTop";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import { KeyboardShortcuts } from "@/components/KeyboardShortcuts";
+import { Logo } from "@/components/Logo";
 import { GlossaryLookup } from "@/components/GlossaryLookup";
 import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
 import "./globals.css";
@@ -124,14 +125,17 @@ export default function RootLayout({
           <div className="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
             <Link
               href="/"
-              className="leading-tight"
+              className="flex items-center gap-2.5 leading-tight"
               aria-label={`${SITE_NAME} ─ ${SITE_TAGLINE}`}
             >
-              <span className="block text-lg font-bold tracking-wide">
-                統計ロードマップ
-              </span>
-              <span className="hidden sm:block text-[10px] text-[var(--muted)] ui-sans tracking-wide">
-                AIエンジニアへの統計・数学・Python
+              <Logo size={36} className="shrink-0" />
+              <span>
+                <span className="block text-lg font-bold tracking-wide">
+                  統計ロードマップ
+                </span>
+                <span className="hidden sm:block text-[10px] text-[var(--muted)] ui-sans tracking-wide">
+                  AIエンジニアへの統計・数学・Python
+                </span>
               </span>
             </Link>
             <div className="flex items-center gap-3">
