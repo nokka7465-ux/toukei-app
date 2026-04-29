@@ -1,62 +1,61 @@
 @import "tailwindcss";
 @import "katex/dist/katex.min.css";
 
+/* Blue / slate palette — paper-textbook feeling preserved with cool tones. */
 :root {
-  --background: #faf6ec;
-  --foreground: #1f1a0f;
-  --page: #fffdf4;
-  --page-border: #e7dbbf;
-  --page-border-strong: #c9b98c;
-  /* Slightly darkened for better contrast on cream backgrounds (WCAG AA). */
-  --muted: #6e6347;
-  --muted-strong: #463e2a;
-  --accent: #b9c5d2;
-  --accent-strong: #5a7088;
-  --accent-fg: #1f2a36;
-  --link: #1f4a7a;
-  --rule: #c9b98c;
-  --highlight: #fff4d6;
-  --section-bg: #fbf5e3;
-  --section-border: #d6c690;
+  --background: #eef2f8;
+  --foreground: #0f172a;
+  --page: #ffffff;
+  --page-border: #d8e0ec;
+  --page-border-strong: #94a3b8;
+  --muted: #475569;
+  --muted-strong: #1e293b;
+  --accent: #bfdbfe;
+  --accent-strong: #1d4ed8;
+  --accent-fg: #ffffff;
+  --link: #1d4ed8;
+  --rule: #94a3b8;
+  --highlight: #dbeafe;
+  --section-bg: #eff6ff;
+  --section-border: #60a5fa;
 }
 
-/* Dark theme variables: applied when data-theme="dark" or
-   (no explicit data-theme + system prefers dark). */
+/* Dark theme — deep navy with cool accents. */
 :root[data-theme="dark"] {
-  --background: #15120b;
-  --foreground: #ebe3ce;
-  --page: #1f1a10;
-  --page-border: #3a3121;
-  --page-border-strong: #55472e;
-  --muted: #a0947a;
-  --muted-strong: #c9bd9f;
-  --accent: #3c4d61;
-  --accent-strong: #6f8294;
-  --accent-fg: #e3e8ee;
-  --link: #8fb8e5;
-  --rule: #55472e;
-  --highlight: #3a2f10;
-  --section-bg: #241e11;
-  --section-border: #4a3e23;
+  --background: #0b1220;
+  --foreground: #e2e8f0;
+  --page: #111c30;
+  --page-border: #1e2c46;
+  --page-border-strong: #334155;
+  --muted: #94a3b8;
+  --muted-strong: #cbd5e1;
+  --accent: #1e3a8a;
+  --accent-strong: #3b82f6;
+  --accent-fg: #ffffff;
+  --link: #93c5fd;
+  --rule: #334155;
+  --highlight: #1e3a8a;
+  --section-bg: #0f1d39;
+  --section-border: #2563eb;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --background: #15120b;
-    --foreground: #ebe3ce;
-    --page: #1f1a10;
-    --page-border: #3a3121;
-    --page-border-strong: #55472e;
-    --muted: #a0947a;
-    --muted-strong: #c9bd9f;
-    --accent: #3c4d61;
-    --accent-strong: #6f8294;
-    --accent-fg: #e3e8ee;
-    --link: #8fb8e5;
-    --rule: #55472e;
-    --highlight: #3a2f10;
-    --section-bg: #241e11;
-    --section-border: #4a3e23;
+    --background: #0b1220;
+    --foreground: #e2e8f0;
+    --page: #111c30;
+    --page-border: #1e2c46;
+    --page-border-strong: #334155;
+    --muted: #94a3b8;
+    --muted-strong: #cbd5e1;
+    --accent: #1e3a8a;
+    --accent-strong: #3b82f6;
+    --accent-fg: #ffffff;
+    --link: #93c5fd;
+    --rule: #334155;
+    --highlight: #1e3a8a;
+    --section-bg: #0f1d39;
+    --section-border: #2563eb;
   }
 }
 
@@ -67,8 +66,8 @@ html {
 body {
   background-color: var(--background);
   background-image:
-    linear-gradient(to right, rgba(130, 110, 70, 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(130, 110, 70, 0.045) 1px, transparent 1px);
+    linear-gradient(to right, rgba(70, 110, 180, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(70, 110, 180, 0.05) 1px, transparent 1px);
   background-size: 28px 28px;
   background-attachment: fixed;
   color: var(--foreground);
@@ -109,12 +108,12 @@ body {
     background-image:
       linear-gradient(
         to right,
-        rgba(230, 215, 170, 0.035) 1px,
+        rgba(150, 190, 255, 0.04) 1px,
         transparent 1px
       ),
       linear-gradient(
         to bottom,
-        rgba(230, 215, 170, 0.035) 1px,
+        rgba(150, 190, 255, 0.04) 1px,
         transparent 1px
       );
   }
@@ -148,8 +147,8 @@ a {
   background-color: var(--page);
   border: 1px solid var(--page-border);
   box-shadow:
-    0 1px 2px rgba(80, 60, 20, 0.04),
-    0 8px 20px -12px rgba(80, 60, 20, 0.12);
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 8px 20px -12px rgba(15, 23, 42, 0.14);
   transition:
     transform 160ms ease,
     box-shadow 160ms ease;
@@ -158,15 +157,15 @@ a {
 a.paper:hover,
 button.paper:hover {
   box-shadow:
-    0 2px 4px rgba(80, 60, 20, 0.08),
-    0 14px 28px -14px rgba(80, 60, 20, 0.18);
+    0 2px 4px rgba(29, 78, 216, 0.1),
+    0 14px 28px -14px rgba(29, 78, 216, 0.22);
 }
 
 @media (prefers-color-scheme: dark) {
   .paper {
     box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.35),
-      0 8px 24px -12px rgba(0, 0, 0, 0.6);
+      0 1px 2px rgba(0, 0, 0, 0.45),
+      0 8px 24px -12px rgba(0, 0, 0, 0.65);
   }
 }
 
@@ -365,7 +364,7 @@ button.paper:hover {
 
   .paper {
     background: #ffffff !important;
-    border: 1px solid #c9b98c !important;
+    border: 1px solid #94a3b8 !important;
     box-shadow: none !important;
     page-break-inside: avoid;
   }
@@ -397,7 +396,7 @@ button.paper:hover {
   }
 
   a {
-    color: #2d6094 !important;
+    color: #1d4ed8 !important;
     text-decoration: none;
   }
 
@@ -425,8 +424,8 @@ button.paper:hover {
   pre,
   code {
     page-break-inside: avoid;
-    background: #f7f5ee !important;
-    border: 1px solid #ddd !important;
+    background: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
   }
 
   /* Tables: avoid splitting */

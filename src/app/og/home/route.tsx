@@ -12,7 +12,7 @@ export async function GET() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          background: "linear-gradient(135deg, #1f2937 0%, #2c3a48 50%, #5a7088 100%)",
+          background: "linear-gradient(135deg, #0b1220 0%, #1e3a8a 60%, #1d4ed8 100%)",
           color: "#fdfcf7",
           padding: "60px 80px",
           fontFamily: "serif",
@@ -36,7 +36,7 @@ export async function GET() {
               height: 72,
               borderRadius: 14,
               background: "#fdfcf7",
-              color: "#1f1a0f",
+              color: "#0b1220",
               fontFamily: "serif",
               fontWeight: 700,
               fontSize: 44,
@@ -53,7 +53,7 @@ export async function GET() {
                 left: 14,
                 right: 14,
                 height: 4,
-                background: "#5a7088",
+                background: "#3b82f6",
                 borderRadius: 2,
               }}
             />

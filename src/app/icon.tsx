@@ -15,8 +15,8 @@ export default function Icon() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "#1f1a0f",
-          color: "#fffdf4",
+          background: "#0b1220",
+          color: "#ffffff",
           padding: 0,
           position: "relative",
         }}
@@ -52,7 +52,7 @@ export default function Icon() {
               width: 24,
               height: 24,
               borderRadius: 12,
-              background: "#5a7088",
+              background: "#3b82f6",
               marginRight: 8,
             }}
           />
@@ -61,7 +61,7 @@ export default function Icon() {
               display: "flex",
               flex: 1,
               height: 16,
-              background: "#5a7088",
+              background: "#3b82f6",
               borderRadius: 8,
             }}
           />
@@ -72,7 +72,7 @@ export default function Icon() {
               height: 0,
               borderTop: "30px solid transparent",
               borderBottom: "30px solid transparent",
-              borderLeft: "44px solid #5a7088",
+              borderLeft: "44px solid #3b82f6",
               marginLeft: -2,
             }}
           />

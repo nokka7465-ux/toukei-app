@@ -27,7 +27,7 @@ export async function GET(
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          background: "linear-gradient(135deg, #1f2937 0%, #374151 100%)",
+          background: "linear-gradient(135deg, #0b1220 0%, #1e3a8a 60%, #1d4ed8 100%)",
           color: "#fdfcf7",
           padding: "60px 80px",
           fontFamily: "serif",
@@ -51,7 +51,7 @@ export async function GET(
               height: 56,
               borderRadius: 12,
               background: "#fdfcf7",
-              color: "#1f1a0f",
+              color: "#0b1220",
               fontFamily: "serif",
               fontWeight: 700,
               fontSize: 32,
@@ -68,7 +68,7 @@ export async function GET(
                 left: 11,
                 right: 11,
                 height: 3,
-                background: "#5a7088",
+                background: "#3b82f6",
                 borderRadius: 2,
               }}
             />

@@ -14,15 +14,15 @@ type LogoProps = {
 function colors(variant: "light" | "dark") {
   if (variant === "dark") {
     return {
-      ink: "#fdfcf7",
-      paper: "#1f2937",
-      accent: "#8fb8e5",
+      ink: "#ffffff",
+      paper: "#0b1220",
+      accent: "#93c5fd",
     };
   }
   return {
-    ink: "#1f1a0f",
-    paper: "#fffdf4",
-    accent: "#5a7088",
+    ink: "#0b1220",
+    paper: "#ffffff",
+    accent: "#3b82f6",
   };
 }
 

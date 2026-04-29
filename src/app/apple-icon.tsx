@@ -15,8 +15,8 @@ export default function AppleIcon() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "#1f1a0f",
-          color: "#fffdf4",
+          background: "#0b1220",
+          color: "#ffffff",
           position: "relative",
         }}
       >
@@ -49,7 +49,7 @@ export default function AppleIcon() {
               width: 9,
               height: 9,
               borderRadius: 5,
-              background: "#5a7088",
+              background: "#3b82f6",
               marginRight: 4,
             }}
           />
@@ -58,7 +58,7 @@ export default function AppleIcon() {
               display: "flex",
               flex: 1,
               height: 6,
-              background: "#5a7088",
+              background: "#3b82f6",
               borderRadius: 3,
             }}
           />
@@ -69,7 +69,7 @@ export default function AppleIcon() {
               height: 0,
               borderTop: "11px solid transparent",
               borderBottom: "11px solid transparent",
-              borderLeft: "16px solid #5a7088",
+              borderLeft: "16px solid #3b82f6",
               marginLeft: -1,
             }}
           />
