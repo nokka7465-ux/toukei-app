@@ -32,6 +32,11 @@ import { KMeansClusters } from "./KMeansClusters";
 import { SvmMargin } from "./SvmMargin";
 import { NeuralNetForward } from "./NeuralNetForward";
 import { AttentionHeatmap } from "./AttentionHeatmap";
+import { QLearningGrid } from "./QLearningGrid";
+import { VaeArchitecture } from "./VaeArchitecture";
+import { DiffusionProcess } from "./DiffusionProcess";
+import { MultiHeadAttention } from "./MultiHeadAttention";
+import { LossLandscape } from "./LossLandscape";
 
 const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   "normal-curve": NormalCurve,
@@ -67,6 +72,11 @@ const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   "svm-margin": SvmMargin,
   "neural-net-forward": NeuralNetForward,
   "attention-heatmap": AttentionHeatmap,
+  "q-learning-grid": QLearningGrid,
+  "vae-architecture": VaeArchitecture,
+  "diffusion-process": DiffusionProcess,
+  "multi-head-attention": MultiHeadAttention,
+  "loss-landscape": LossLandscape,
 };
 
 export function Diagram({

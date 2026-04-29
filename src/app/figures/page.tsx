@@ -325,6 +325,51 @@ const FIGURES: FigureEntry[] = [
     link: "/blog/transformer-math",
     linkLabel: "Transformer の数学ブログ",
   },
+  {
+    kind: "q-learning-grid",
+    title: "Q-Learning のグリッド",
+    level: "E 資格",
+    category: "強化学習",
+    insight: "4×4 グリッドで各セルの Q 値(上下左右)をヒートマップ表示。報酬最大化の方向。",
+    link: "/blog/reinforcement-learning-introduction",
+    linkLabel: "強化学習 入門ブログ",
+  },
+  {
+    kind: "vae-architecture",
+    title: "VAE アーキテクチャ",
+    level: "E 資格",
+    category: "DL",
+    insight: "Encoder で μ ・ σ → reparameterization で z → Decoder で再構成。",
+    link: "/blog/diffusion-models-introduction",
+    linkLabel: "拡散モデル ・ VAE ブログ",
+  },
+  {
+    kind: "diffusion-process",
+    title: "拡散モデルの順過程と逆過程",
+    level: "E 資格",
+    category: "DL",
+    insight: "ノイズを徐々に加える(順)→ 除去する(逆)。後者を学習するのが拡散モデル。",
+    link: "/blog/diffusion-models-introduction",
+    linkLabel: "拡散モデル ブログ",
+  },
+  {
+    kind: "multi-head-attention",
+    title: "Multi-Head Attention",
+    level: "E 資格",
+    category: "DL",
+    insight: "複数の attention head を並列実行して結合。多視点で関係性を捉える。",
+    link: "/blog/transformer-math",
+    linkLabel: "Transformer の数学ブログ",
+  },
+  {
+    kind: "loss-landscape",
+    title: "損失関数のランドスケープ",
+    level: "E 資格",
+    category: "最適化",
+    insight: "局所最適 ・ 鞍点 ・ 大域最適。勾配降下が辿る経路の難しさ。",
+    link: "/blog/linear-algebra-for-ai",
+    linkLabel: "線形代数を AI 視点で",
+  },
 ];
 
 const SECTIONS: { title: string; eyebrow: string; figures: FigureEntry[] }[] = [
@@ -388,6 +433,16 @@ const SECTIONS: { title: string; eyebrow: string; figures: FigureEntry[] }[] = [
     eyebrow: "Quality Control",
     title: "品質管理",
     figures: FIGURES.filter((f) => f.category === "品質管理"),
+  },
+  {
+    eyebrow: "Reinforcement Learning",
+    title: "強化学習",
+    figures: FIGURES.filter((f) => f.category === "強化学習"),
+  },
+  {
+    eyebrow: "Optimization",
+    title: "最適化",
+    figures: FIGURES.filter((f) => f.category === "最適化"),
   },
 ];
 

@@ -59,7 +59,12 @@ export type DiagramKind =
   | "k-means-clusters"
   | "svm-margin"
   | "neural-net-forward"
-  | "attention-heatmap";
+  | "attention-heatmap"
+  | "q-learning-grid"
+  | "vae-architecture"
+  | "diffusion-process"
+  | "multi-head-attention"
+  | "loss-landscape";
 
 export type TextbookBlock =
   | { type: "p"; text: string }

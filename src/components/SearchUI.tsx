@@ -32,6 +32,7 @@ const FILTERS: { key: SearchSource | "all"; label: string }[] = [
 export function SearchUI({ initialQuery = "" }: { initialQuery?: string }) {
   const [query, setQuery] = useState(initialQuery);
   const [filter, setFilter] = useState<SearchSource | "all">("all");
+  const [phaseFilter, setPhaseFilter] = useState<number | "all">("all");
 
   // Read q param from URL on mount (initialQuery can also be passed via SSR if desired).
   useEffect(() => {
@@ -45,9 +46,15 @@ export function SearchUI({ initialQuery = "" }: { initialQuery?: string }) {
   const results = useMemo(() => {
     if (query.trim().length < 1) return [];
     const all = search(query, 100);
-    if (filter === "all") return all;
-    return all.filter((r) => r.item.source === filter);
-  }, [query, filter]);
+    let filtered = filter === "all" ? all : all.filter((r) => r.item.source === filter);
+    if (phaseFilter !== "all") {
+      filtered = filtered.filter((r) => {
+        const p = urlToPhase(r.item.url);
+        return p?.num === phaseFilter;
+      });
+    }
+    return filtered;
+  }, [query, filter, phaseFilter]);
 
   const counts = useMemo(() => {
     if (query.trim().length < 1) {
@@ -89,27 +96,61 @@ export function SearchUI({ initialQuery = "" }: { initialQuery?: string }) {
           className="w-full px-4 py-3 border border-[var(--page-border-strong)] rounded text-base bg-[var(--page)] focus:outline-none focus:border-[var(--link)]"
         />
         {query.trim().length > 0 && (
-          <div className="mt-4 flex flex-wrap gap-2 ui-sans text-xs">
-            {FILTERS.map((f) => {
-              const count =
-                f.key === "all" ? counts.all : counts[f.key as SearchSource];
-              const isActive = filter === f.key;
-              return (
-                <button
-                  key={f.key}
-                  type="button"
-                  onClick={() => setFilter(f.key)}
-                  className={`px-3 py-1 rounded border transition ${
-                    isActive
-                      ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
-                      : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
-                  }`}
-                >
-                  {f.label} ({count})
-                </button>
-              );
-            })}
-          </div>
+          <>
+            <div className="mt-4 flex flex-wrap gap-2 ui-sans text-xs">
+              {FILTERS.map((f) => {
+                const count =
+                  f.key === "all" ? counts.all : counts[f.key as SearchSource];
+                const isActive = filter === f.key;
+                return (
+                  <button
+                    key={f.key}
+                    type="button"
+                    onClick={() => setFilter(f.key)}
+                    className={`px-3 py-1 rounded border transition ${
+                      isActive
+                        ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                        : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
+                    }`}
+                  >
+                    {f.label} ({count})
+                  </button>
+                );
+              })}
+            </div>
+            <div className="mt-2 flex flex-wrap gap-2 ui-sans text-xs items-center">
+              <span className="text-[var(--muted)]">Phase:</span>
+              <button
+                type="button"
+                onClick={() => setPhaseFilter("all")}
+                className={`px-2.5 py-1 rounded border transition ${
+                  phaseFilter === "all"
+                    ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                    : "border-[var(--page-border)] hover:bg-[var(--background)]"
+                }`}
+              >
+                すべて
+              </button>
+              {[1, 2, 3, 4, 5].map((p) => {
+                const isActive = phaseFilter === p;
+                const labels = ["📐 数学", "📊 統計基礎", "🔬 統計応用", "🤖 ML/DL", "🎓 検定"];
+                return (
+                  <button
+                    key={p}
+                    type="button"
+                    onClick={() => setPhaseFilter(p)}
+                    className={`px-2.5 py-1 rounded border transition ${
+                      isActive
+                        ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                        : "border-[var(--page-border)] hover:bg-[var(--background)]"
+                    }`}
+                  >
+                    Phase {p} {labels[p - 1]}
+                  </button>
+                );
+              })}
+            </div>
+          </>
         )}
       </div>
 
