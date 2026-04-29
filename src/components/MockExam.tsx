@@ -418,7 +418,7 @@ function ExamCard({
               key={cIdx}
               type="button"
               onClick={() => onSelect(cIdx)}
-              className={`w-full text-left px-4 py-2.5 rounded border transition cursor-pointer ${
+              className={`w-full text-left px-4 py-3 md:px-5 md:py-3.5 rounded-md border transition cursor-pointer leading-relaxed ${
                 isSelected
                   ? "bg-blue-50 border-blue-500 dark:bg-blue-950/40"
                   : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"

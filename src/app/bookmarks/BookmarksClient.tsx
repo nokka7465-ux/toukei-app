@@ -127,7 +127,7 @@ export function BookmarksClient({
           <div className="flex items-baseline justify-between mb-3">
             <h2 className="text-xl font-bold">演習問題 ({grouped.question.length})</h2>
           </div>
-          <ul className="space-y-3">
+          <ul className="grid grid-cols-1 lg:grid-cols-2 gap-3">
             {grouped.question.map((b) => {
               const q = questionById.get(b.id);
               if (!q) return null;
@@ -159,7 +159,7 @@ export function BookmarksClient({
           <div className="flex items-baseline justify-between mb-3">
             <h2 className="text-xl font-bold">公式 ({grouped.formula.length})</h2>
           </div>
-          <ul className="space-y-3">
+          <ul className="grid grid-cols-1 lg:grid-cols-2 gap-3">
             {grouped.formula.map((b) => {
               const f = formulaById.get(b.id);
               if (!f) return null;
@@ -197,7 +197,7 @@ export function BookmarksClient({
           <div className="flex items-baseline justify-between mb-3">
             <h2 className="text-xl font-bold">用語 ({grouped.glossary.length})</h2>
           </div>
-          <ul className="space-y-3">
+          <ul className="grid grid-cols-1 lg:grid-cols-2 gap-3">
             {grouped.glossary.map((b) => {
               const t = termByName.get(b.id);
               if (!t) return null;

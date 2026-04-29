@@ -246,7 +246,7 @@ export function PlanCalculator() {
       {/* Per-phase breakdown */}
       <section className="paper rounded-lg p-6">
         <h2 className="text-lg font-bold mb-4">フェーズ別 ・ 完了見込み</h2>
-        <ol className="space-y-3">
+        <ol className="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-3">
           {result.breakdown.map((p, i) => {
             const overdue =
               !feasible &&

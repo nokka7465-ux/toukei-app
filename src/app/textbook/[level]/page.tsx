@@ -212,7 +212,7 @@ export default async function TextbookPage({
             <ReadingTracker sectionIds={flatSections.map((s) => s.id)} />
             {book.chapters.map((ch) => (
               <section key={ch.id}>
-                <header className="mb-6">
+                <header className="mb-6 max-w-4xl mx-auto">
                   <div className="chapter-eyebrow mb-1">
                     Chapter {ch.number}
                   </div>
@@ -230,7 +230,7 @@ export default async function TextbookPage({
                       <section
                         key={sec.id}
                         id={sec.id}
-                        className="paper rounded-lg p-8 scroll-mt-20"
+                        className="paper rounded-lg p-6 md:p-8 scroll-mt-20 max-w-4xl mx-auto"
                       >
                         <header className="mb-4">
                           <div className="chapter-eyebrow mb-1">

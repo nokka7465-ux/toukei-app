@@ -58,12 +58,18 @@ export function Result({
   hint?: string;
 }) {
   return (
-    <div className="paper rounded p-3 mt-4">
-      <div className="text-xs text-[var(--muted-strong)] ui-sans mb-1">
+    <div className="rounded-lg p-5 mt-4 border-2 border-[var(--accent)] bg-[var(--highlight)]">
+      <div className="text-[11px] uppercase tracking-[0.15em] text-[var(--muted)] ui-sans mb-2 font-bold">
         {label}
       </div>
-      <div className="text-xl font-bold tabular-nums">{value}</div>
-      {hint && <div className="text-xs text-[var(--muted)] ui-sans mt-1">{hint}</div>}
+      <div className="text-3xl md:text-4xl font-bold tabular-nums text-[var(--foreground)] break-words leading-tight">
+        {value}
+      </div>
+      {hint && (
+        <div className="text-xs text-[var(--muted-strong)] ui-sans mt-3 leading-relaxed break-words">
+          {hint}
+        </div>
+      )}
     </div>
   );
 }

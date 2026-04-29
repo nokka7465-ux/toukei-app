@@ -417,7 +417,7 @@ export function Quiz({
             const isChoiceWrong =
               isRevealed && isSelected && cIdx !== q.correctIndex;
             const base =
-              "w-full text-left px-4 py-2.5 rounded border transition";
+              "w-full text-left px-4 py-3 md:px-5 md:py-3.5 rounded-md border transition leading-relaxed";
             const state = isChoiceCorrect
               ? "bg-green-50 border-green-500 dark:bg-green-950/40"
               : isChoiceWrong
