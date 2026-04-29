@@ -2,8 +2,9 @@
 @import "katex/dist/katex.min.css";
 
 /* Blue / slate palette — paper-textbook feeling preserved with cool tones.
-   Background is a quiet near-white slate so cards and text stand out;
-   accents and links are saturated blue. */
+   --accent is the saturated primary button colour, --accent-strong its hover
+   shade, --accent-fg the text colour to use on top. Pairing them always
+   yields readable contrast (white on saturated blue). */
 :root {
   --background: #f7f9fc;
   --foreground: #0f172a;
@@ -12,8 +13,8 @@
   --page-border-strong: #94a3b8;
   --muted: #334155;
   --muted-strong: #0f172a;
-  --accent: #bfdbfe;
-  --accent-strong: #1d4ed8;
+  --accent: #1d4ed8;
+  --accent-strong: #1e40af;
   --accent-fg: #ffffff;
   --link: #1d4ed8;
   --rule: #94a3b8;
@@ -31,8 +32,8 @@
   --page-border-strong: #334155;
   --muted: #94a3b8;
   --muted-strong: #cbd5e1;
-  --accent: #1e3a8a;
-  --accent-strong: #3b82f6;
+  --accent: #3b82f6;
+  --accent-strong: #2563eb;
   --accent-fg: #ffffff;
   --link: #93c5fd;
   --rule: #334155;
@@ -50,8 +51,8 @@
     --page-border-strong: #334155;
     --muted: #94a3b8;
     --muted-strong: #cbd5e1;
-    --accent: #1e3a8a;
-    --accent-strong: #3b82f6;
+    --accent: #3b82f6;
+    --accent-strong: #2563eb;
     --accent-fg: #ffffff;
     --link: #93c5fd;
     --rule: #334155;
