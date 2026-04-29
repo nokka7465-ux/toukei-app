@@ -40,8 +40,10 @@ type Phase = {
   deliverables: string[];
   primary: { href: string; label: string };
   secondary: Array<{ href: string; label: string }>;
-  gradient: string;
-  border: string;
+  /** Solid colour used for the top accent stripe + numbered chip. */
+  accent: string;
+  /** Subtle tint applied to the goal callout box. */
+  tint: string;
 };
 
 const PHASES: Phase[] = [
@@ -72,9 +74,8 @@ const PHASES: Phase[] = [
       { href: "/math", label: "数学基礎 概要" },
       { href: "/math/quiz", label: "数学基礎 演習" },
     ],
-    gradient:
-      "from-emerald-50 to-emerald-100/40 dark:from-emerald-950/30 dark:to-emerald-900/10",
-    border: "border-emerald-200 dark:border-emerald-900/40",
+    accent: "bg-emerald-500",
+    tint: "bg-emerald-50 dark:bg-emerald-950/30",
   },
   {
     num: 2,
@@ -106,9 +107,8 @@ const PHASES: Phase[] = [
       { href: "/quiz/grade-3", label: "3 級 演習" },
       { href: "/mock/grade-3", label: "3 級 模試" },
     ],
-    gradient:
-      "from-sky-50 to-sky-100/40 dark:from-sky-950/30 dark:to-sky-900/10",
-    border: "border-sky-200 dark:border-sky-900/40",
+    accent: "bg-sky-500",
+    tint: "bg-sky-50 dark:bg-sky-950/30",
   },
   {
     num: 3,
@@ -140,9 +140,8 @@ const PHASES: Phase[] = [
       { href: "/mock/grade-2", label: "2 級 模試" },
       { href: "/explore", label: "動かして学ぶ統計" },
     ],
-    gradient:
-      "from-violet-50 to-violet-100/40 dark:from-violet-950/30 dark:to-violet-900/10",
-    border: "border-violet-200 dark:border-violet-900/40",
+    accent: "bg-violet-500",
+    tint: "bg-violet-50 dark:bg-violet-950/30",
   },
   {
     num: 4,
@@ -174,9 +173,8 @@ const PHASES: Phase[] = [
       { href: "/explore", label: "動かして学ぶ統計" },
       { href: "/certs/e-shikaku/quiz", label: "E 資格 演習" },
     ],
-    gradient:
-      "from-amber-50 to-amber-100/40 dark:from-amber-950/30 dark:to-amber-900/10",
-    border: "border-amber-200 dark:border-amber-900/40",
+    accent: "bg-amber-500",
+    tint: "bg-amber-50 dark:bg-amber-950/30",
   },
   {
     num: 5,
@@ -208,9 +206,8 @@ const PHASES: Phase[] = [
       { href: "/certs/ds-literacy", label: "DS 検定 対策" },
       { href: "/certs/ds-basic", label: "DS 基礎 対策" },
     ],
-    gradient:
-      "from-rose-50 to-rose-100/40 dark:from-rose-950/30 dark:to-rose-900/10",
-    border: "border-rose-200 dark:border-rose-900/40",
+    accent: "bg-rose-500",
+    tint: "bg-rose-50 dark:bg-rose-950/30",
   },
 ];
 
@@ -371,88 +368,103 @@ export default function RoadmapPage() {
           <li
             key={p.num}
             id={`phase-${p.num}`}
-            className={`paper rounded-xl p-7 md:p-8 bg-gradient-to-br ${p.gradient} ${p.border} scroll-mt-20 relative overflow-hidden`}
+            className="paper rounded-xl scroll-mt-20 relative overflow-hidden"
           >
-            <div
-              aria-hidden="true"
-              className="absolute -right-6 -top-4 text-[160px] leading-none opacity-[0.05] pointer-events-none select-none"
-            >
-              {p.emoji}
-            </div>
+            {/* Top colour stripe to differentiate phases at a glance. */}
+            <div className={`h-1.5 w-full ${p.accent}`} aria-hidden="true" />
 
-            <div className="flex items-baseline justify-between mb-3 flex-wrap gap-2">
-              <div>
-                <div className="chapter-eyebrow mb-1">Phase {p.num}</div>
-                <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
-                  <span aria-hidden="true">{p.emoji}</span>
-                  <span>{p.title}</span>
-                </h2>
-                <div className="text-[10px] tracking-[0.15em] uppercase text-[var(--muted)] ui-sans mt-1">
-                  {p.englishTitle}
-                </div>
-              </div>
-              <div className="text-xs ui-sans text-[var(--muted-strong)] text-right">
-                ⏱ {p.hours}
-                <br />
-                📅 {p.months}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-5">
-              <div>
-                <div className="chapter-eyebrow mb-1">対象</div>
-                <div className="text-[var(--muted-strong)]">{p.audience}</div>
-              </div>
-              <div>
-                <div className="chapter-eyebrow mb-1">前提知識</div>
-                <div className="text-[var(--muted-strong)]">
-                  {p.prerequisites}
-                </div>
-              </div>
-            </div>
-
-            <div className="mb-5 paper rounded p-4 bg-[var(--page)]/60">
-              <div className="chapter-eyebrow mb-1">🎯 このフェーズのゴール</div>
-              <div className="text-sm text-[var(--muted-strong)] leading-relaxed">
-                {p.goal}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-              <div>
-                <div className="chapter-eyebrow mb-2">主要トピック</div>
-                <ul className="list-disc list-outside ml-5 text-sm text-[var(--muted-strong)] leading-relaxed space-y-0.5">
-                  {p.topics.map((t) => (
-                    <li key={t}>{t}</li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <div className="chapter-eyebrow mb-2">到達点(できるようになる)</div>
-                <ul className="list-[square] list-outside ml-5 text-sm text-[var(--muted-strong)] leading-relaxed space-y-0.5">
-                  {p.deliverables.map((d) => (
-                    <li key={d}>{d}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-2 ui-sans text-sm">
-              <Link
-                href={p.primary.href}
-                className="px-4 py-2 bg-[var(--accent-strong)] text-white rounded-md font-bold hover:opacity-90 shadow-sm"
+            <div className="p-7 md:p-8 relative">
+              <div
+                aria-hidden="true"
+                className="absolute -right-4 -top-2 text-[140px] leading-none opacity-[0.06] pointer-events-none select-none"
               >
-                {p.primary.label} →
-              </Link>
-              {p.secondary.map((s) => (
+                {p.emoji}
+              </div>
+
+              <div className="flex items-baseline justify-between mb-3 flex-wrap gap-2">
+                <div className="flex items-baseline gap-3">
+                  <span
+                    className={`inline-flex items-center justify-center w-9 h-9 rounded-full text-white text-sm font-bold ui-sans ${p.accent}`}
+                    aria-hidden="true"
+                  >
+                    {p.num}
+                  </span>
+                  <div>
+                    <div className="chapter-eyebrow mb-0.5">Phase {p.num}</div>
+                    <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
+                      <span aria-hidden="true">{p.emoji}</span>
+                      <span>{p.title}</span>
+                    </h2>
+                    <div className="text-[10px] tracking-[0.15em] uppercase text-[var(--muted)] ui-sans mt-1">
+                      {p.englishTitle}
+                    </div>
+                  </div>
+                </div>
+                <div className="text-xs ui-sans text-[var(--muted-strong)] text-right">
+                  ⏱ {p.hours}
+                  <br />
+                  📅 {p.months}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-5">
+                <div>
+                  <div className="chapter-eyebrow mb-1">対象</div>
+                  <div className="text-[var(--muted-strong)]">{p.audience}</div>
+                </div>
+                <div>
+                  <div className="chapter-eyebrow mb-1">前提知識</div>
+                  <div className="text-[var(--muted-strong)]">
+                    {p.prerequisites}
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className={`mb-5 rounded p-4 border border-[var(--page-border)] ${p.tint}`}
+              >
+                <div className="chapter-eyebrow mb-1">🎯 このフェーズのゴール</div>
+                <div className="text-sm text-[var(--foreground)] leading-relaxed">
+                  {p.goal}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                <div>
+                  <div className="chapter-eyebrow mb-2">主要トピック</div>
+                  <ul className="list-disc list-outside ml-5 text-sm text-[var(--muted-strong)] leading-relaxed space-y-0.5">
+                    {p.topics.map((t) => (
+                      <li key={t}>{t}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <div className="chapter-eyebrow mb-2">到達点(できるようになる)</div>
+                  <ul className="list-[square] list-outside ml-5 text-sm text-[var(--muted-strong)] leading-relaxed space-y-0.5">
+                    {p.deliverables.map((d) => (
+                      <li key={d}>{d}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-2 ui-sans text-sm">
                 <Link
-                  key={s.href}
-                  href={s.href}
-                  className="px-3.5 py-2 border border-[var(--page-border-strong)] rounded-md hover:bg-[var(--page)]/70"
+                  href={p.primary.href}
+                  className="px-4 py-2 bg-[var(--accent-strong)] text-white rounded-md font-bold hover:opacity-90 shadow-sm"
                 >
-                  {s.label}
+                  {p.primary.label} →
                 </Link>
-              ))}
+                {p.secondary.map((s) => (
+                  <Link
+                    key={s.href}
+                    href={s.href}
+                    className="px-3.5 py-2 border border-[var(--page-border-strong)] rounded-md hover:bg-[var(--background)]"
+                  >
+                    {s.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           </li>
         ))}

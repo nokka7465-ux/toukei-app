@@ -1,22 +1,24 @@
 @import "tailwindcss";
 @import "katex/dist/katex.min.css";
 
-/* Blue / slate palette — paper-textbook feeling preserved with cool tones. */
+/* Blue / slate palette — paper-textbook feeling preserved with cool tones.
+   Background is a quiet near-white slate so cards and text stand out;
+   accents and links are saturated blue. */
 :root {
-  --background: #eef2f8;
+  --background: #f7f9fc;
   --foreground: #0f172a;
   --page: #ffffff;
-  --page-border: #d8e0ec;
+  --page-border: #e2e8f0;
   --page-border-strong: #94a3b8;
-  --muted: #475569;
-  --muted-strong: #1e293b;
+  --muted: #334155;
+  --muted-strong: #0f172a;
   --accent: #bfdbfe;
   --accent-strong: #1d4ed8;
   --accent-fg: #ffffff;
   --link: #1d4ed8;
   --rule: #94a3b8;
   --highlight: #dbeafe;
-  --section-bg: #eff6ff;
+  --section-bg: #f8fafc;
   --section-border: #60a5fa;
 }
 
@@ -66,8 +68,8 @@ html {
 body {
   background-color: var(--background);
   background-image:
-    linear-gradient(to right, rgba(70, 110, 180, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(70, 110, 180, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(70, 110, 180, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(70, 110, 180, 0.035) 1px, transparent 1px);
   background-size: 28px 28px;
   background-attachment: fixed;
   color: var(--foreground);
