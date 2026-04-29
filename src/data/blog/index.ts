@@ -2,6 +2,542 @@ import type { BlogPost } from "@/types/content";
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "recommender-systems-introduction",
+    title: "推薦システム 入門 ─ 協調フィルタリングからニューラル推薦へ",
+    description:
+      "Amazon・Netflix・YouTube の中身を支える推薦アルゴリズム。協調フィルタリング・行列分解・Two-Tower・LLM 活用までの主要手法を整理します。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "推薦は『協調フィルタリング(CF)・コンテンツベース・ハイブリッド』の 3 系統が基本。",
+      "本格運用は『候補生成 → 順位付け』の 2 段階(Two-Stage)が主流。",
+      "近年は Two-Tower NN + LLM 風 SequentialRec(BERT4Rec, SASRec)が強い。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**推薦システム** は EC・動画配信・SNS のコア機能。Amazon の売上の 35%、Netflix 視聴の 80% が推薦経由とも言われます。本記事で主要手法を整理。",
+      },
+      { type: "h3", text: "3 系統の推薦アプローチ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**協調フィルタリング(CF)**: ユーザー × アイテム行列の類似度 / 行列分解",
+          "**コンテンツベース**: アイテム特徴量 + ユーザープロファイル",
+          "**ハイブリッド**: CF + コンテンツ + メタデータの統合",
+        ],
+      },
+      { type: "h3", text: "1. 協調フィルタリング ─ 古典の鉄板" },
+      { type: "h4", text: "User-User CF" },
+      {
+        type: "p",
+        text: "似た嗜好を持つユーザーが好きなアイテムを薦める。コサイン類似度や Pearson 相関で計算。",
+      },
+      { type: "h4", text: "Item-Item CF" },
+      {
+        type: "p",
+        text: "アイテム同士の類似度を計算。Amazon の『この商品を買った人は…』はこれ。",
+      },
+      { type: "h4", text: "行列分解(Matrix Factorization)" },
+      {
+        type: "p",
+        text: "評価行列 $R \\approx U V^\\top$ と低ランク近似。$U$ がユーザー埋め込み、$V$ がアイテム埋め込み。Netflix Prize で有名に。",
+      },
+      {
+        type: "math",
+        tex: "\\min_{U, V} \\sum_{(i, j) \\in \\mathcal{O}} (R_{ij} - U_i^\\top V_j)^2 + \\lambda(\\|U\\|^2 + \\|V\\|^2)",
+      },
+      { type: "h3", text: "2. ニューラル推薦 ─ 現代の主流" },
+      { type: "h4", text: "Two-Tower モデル" },
+      {
+        type: "p",
+        text: "ユーザーとアイテムをそれぞれ NN(タワー)で埋め込み、内積で関連度を計算。検索時は ANN(近似最近傍)で高速。",
+      },
+      {
+        type: "code",
+        title: "Two-Tower の最小実装",
+        python: "import torch.nn as nn\n\nclass TwoTower(nn.Module):\n    def __init__(self, user_dim, item_dim, emb_dim=64):\n        super().__init__()\n        self.user_tower = nn.Sequential(\n            nn.Linear(user_dim, 128), nn.ReLU(),\n            nn.Linear(128, emb_dim),\n        )\n        self.item_tower = nn.Sequential(\n            nn.Linear(item_dim, 128), nn.ReLU(),\n            nn.Linear(128, emb_dim),\n        )\n\n    def forward(self, user_feat, item_feat):\n        u = self.user_tower(user_feat)\n        i = self.item_tower(item_feat)\n        return (u * i).sum(dim=-1)  # 内積",
+      },
+      { type: "h4", text: "Sequential Recommendation" },
+      {
+        type: "p",
+        text: "ユーザーの **行動履歴** をシーケンスとして Transformer に入れる。SASRec / BERT4Rec が代表。",
+      },
+      { type: "h3", text: "本番運用 ─ 2 段階アーキテクチャ" },
+      {
+        type: "list",
+        style: "number",
+        items: [
+          "**候補生成**(Retrieval): 数百万アイテムから上位 100〜1000 を高速抽出 ─ Two-Tower + ANN",
+          "**順位付け**(Ranking): 候補の中からスコアリング ─ DLRM・Wide&Deep など重い NN",
+          "**ビジネスルール**: 多様性確保・在庫考慮・スポンサー枠",
+        ],
+      },
+      { type: "h3", text: "評価指標" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Precision@k / Recall@k**: 上位 k 件の精度 ・ 再現率",
+          "**NDCG**: 順位を考慮した正解度",
+          "**MRR**: 最初の正解の逆順位",
+          "**CTR ・ CVR ・ Watch Time**: ビジネス側の指標",
+        ],
+      },
+      { type: "h3", text: "Cold Start 問題" },
+      {
+        type: "p",
+        text: "新ユーザー・新アイテムには履歴がない。対策:",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**コンテンツベース**: メタデータでスタート",
+          "**LLM 活用**: テキスト埋め込みで類似アイテム検索",
+          "**ヒューリスティック**: 人気順・新着順をしばらく",
+          "**Bandit アルゴリズム**: 探索と活用のバランス",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[線形代数を AI 視点で](/blog/linear-algebra-for-ai) ─ 行列分解の基礎",
+          "[Transformer の数学](/blog/transformer-math) ─ Sequential Rec の前提",
+          "[MLOps 基礎](/blog/mlops-basics) ─ 本番運用のための知識",
+          "[E 資格 ロードマップ](/certs/e-shikaku/roadmap)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "graph-neural-networks-introduction",
+    title: "グラフニューラルネット 入門 ─ ソーシャル・分子・地図のための AI",
+    description:
+      "ノードとエッジで表現されるグラフデータに対する深層学習。GCN・GAT・Message Passing の仕組みと、ソーシャル分析・創薬・推薦での応用を解説します。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "GNN = グラフ構造を活かして、隣接ノードから情報を集約しながら学習する NN。",
+      "Message Passing(集約 → 更新)が基本動作。GCN・GAT・GraphSAGE が代表アーキテクチャ。",
+      "ソーシャルネット・分子(創薬)・推薦・地図 などグラフ性のあるドメインで効く。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**グラフニューラルネット(GNN)** はノード(点)とエッジ(辺)からなるグラフデータを扱う深層学習。テーブルデータや画像と違って『**関係性そのもの**』が情報の核となるドメインで威力を発揮します。",
+      },
+      { type: "h3", text: "なぜグラフが必要か" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**ソーシャルネットワーク**: ユーザー間の友達関係",
+          "**分子**: 原子を頂点、結合を辺として表現",
+          "**推薦システム**: ユーザー-アイテムの 2 部グラフ",
+          "**地図 ・ 交通網**: 道路網の最短経路や流量予測",
+          "**知識グラフ**: 概念間の関係",
+        ],
+      },
+      { type: "h3", text: "Message Passing(基本動作)" },
+      {
+        type: "p",
+        text: "各ノードが **隣接ノードからメッセージを受け取り → 集約 → 自分の埋め込みを更新** を繰り返す。",
+      },
+      {
+        type: "math",
+        tex: "h_v^{(l+1)} = \\sigma\\left(W^{(l)} \\cdot \\text{AGG}\\left(\\{h_u^{(l)} : u \\in \\mathcal{N}(v)\\} \\cup \\{h_v^{(l)}\\}\\right)\\right)",
+      },
+      {
+        type: "intuition",
+        title: "💡 1 層 = 1 ホップ",
+        body: "L 層 GNN は L ホップ離れたノードまでの情報を集めます。3 層程度が標準。",
+      },
+      { type: "h3", text: "代表的なアーキテクチャ" },
+      { type: "h4", text: "GCN(Graph Convolutional Network)" },
+      {
+        type: "p",
+        text: "Kipf & Welling 2017。隣接行列の正規化版で集約。理論的にきれい。",
+      },
+      { type: "h4", text: "GAT(Graph Attention Network)" },
+      {
+        type: "p",
+        text: "隣接ノードの重要度を **attention** で動的に決定。一様平均ではなく重み付け。",
+      },
+      { type: "h4", text: "GraphSAGE" },
+      {
+        type: "p",
+        text: "近傍をサンプリングして大規模グラフでもスケール可能。Facebook で実用。",
+      },
+      { type: "h3", text: "PyTorch Geometric で実装" },
+      {
+        type: "code",
+        title: "GCN の最小実装",
+        python: "import torch\nimport torch.nn.functional as F\nfrom torch_geometric.nn import GCNConv\nfrom torch_geometric.datasets import Planetoid\n\ndataset = Planetoid(root='/tmp/Cora', name='Cora')\ndata = dataset[0]\n\nclass GCN(torch.nn.Module):\n    def __init__(self):\n        super().__init__()\n        self.conv1 = GCNConv(dataset.num_features, 16)\n        self.conv2 = GCNConv(16, dataset.num_classes)\n\n    def forward(self, x, edge_index):\n        x = F.relu(self.conv1(x, edge_index))\n        x = F.dropout(x, training=self.training)\n        return self.conv2(x, edge_index)\n\nmodel = GCN()\nopt = torch.optim.Adam(model.parameters(), lr=0.01)\nfor epoch in range(200):\n    model.train()\n    opt.zero_grad()\n    out = model(data.x, data.edge_index)\n    loss = F.cross_entropy(out[data.train_mask], data.y[data.train_mask])\n    loss.backward()\n    opt.step()",
+      },
+      { type: "h3", text: "応用領域" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**ノード分類**: ユーザーがスパマーか、論文のカテゴリは何か",
+          "**リンク予測**: 友達推薦・薬物-標的相互作用予測",
+          "**グラフ分類**: 分子の毒性予測・タンパク質機能予測",
+          "**コミュニティ検出**: ソーシャルグラフのクラスタ",
+          "**最短経路 / 流量**: 強化学習との組み合わせ",
+        ],
+      },
+      { type: "h3", text: "実用例 ─ 創薬・タンパク質" },
+      {
+        type: "p",
+        text: "**AlphaFold**(DeepMind)はタンパク質の立体構造予測で GNN ベースの Transformer を使用。Nobel 賞級のインパクト。",
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[線形代数を AI 視点で](/blog/linear-algebra-for-ai) ─ 隣接行列の理解",
+          "[Transformer の数学](/blog/transformer-math) ─ Attention の前提",
+          "[コンピュータビジョン入門](/blog/computer-vision-introduction) ─ CNN との比較",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "anomaly-detection-introduction",
+    title: "異常検知 入門 ─ 不正・故障・侵入を見つける統計と ML",
+    description:
+      "クレジットカード不正・設備故障・ネットワーク侵入。異常検知のアプローチ(統計 / 距離 / 密度 / 再構成 / 分類)を実例とコードで解説します。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "異常検知 = 『正常から外れたデータ』を見つける問題。教師ありデータが少ない or 全くないことが多い。",
+      "アプローチは 5 系統: 統計 ・ 距離 ・ 密度 ・ 再構成 ・ 分類。問題に応じて使い分け。",
+      "Isolation Forest と Autoencoder が実務で広く使われる定番。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**異常検知(Anomaly Detection)** は、不正検出 ・ 設備保全 ・ サイバーセキュリティ ・ 医療診断などで核となる ML タスク。教師ありの分類問題と違い、**異常ラベルが極端に少ない or 未知** という特殊性があります。",
+      },
+      { type: "h3", text: "5 つのアプローチ" },
+      {
+        type: "list",
+        style: "number",
+        items: [
+          "**統計的手法**: Z-score, Tukey の箱ひげ図",
+          "**距離ベース**: k-NN, LOF",
+          "**密度ベース**: ガウス混合 ・ KDE",
+          "**再構成ベース**: PCA, Autoencoder",
+          "**分類ベース**: Isolation Forest, One-Class SVM",
+        ],
+      },
+      { type: "h3", text: "1. 統計的手法 ─ シンプルで強い" },
+      {
+        type: "code",
+        title: "Z-score 法",
+        python: "import numpy as np\n\ndef z_score_anomaly(x, threshold=3):\n    z = np.abs((x - x.mean()) / x.std())\n    return z > threshold\n\n# データの 0.27% が異常としてフラグ(threshold=3 の場合)",
+      },
+      { type: "h3", text: "2. Isolation Forest ─ 実務の定番" },
+      {
+        type: "p",
+        text: "ランダムに分岐していく木を多数作り、**少ない分割で孤立するデータ点が異常** という直感。高速・高次元データでも動く。",
+      },
+      {
+        type: "code",
+        title: "scikit-learn で Isolation Forest",
+        python: "from sklearn.ensemble import IsolationForest\n\nclf = IsolationForest(contamination=0.01, random_state=42)\nclf.fit(X_train)\n\npred = clf.predict(X_test)  # 1 = 正常, -1 = 異常\nscores = clf.score_samples(X_test)  # 連続スコア",
+      },
+      { type: "h3", text: "3. Autoencoder ─ 再構成誤差で検出" },
+      {
+        type: "p",
+        text: "**正常データだけで訓練** した Autoencoder は、正常を上手く再構成できるが、異常は誤差が大きくなる ─ この差を異常スコアに。",
+      },
+      {
+        type: "code",
+        title: "PyTorch で簡易 Autoencoder",
+        python: "import torch.nn as nn\n\nclass AE(nn.Module):\n    def __init__(self, dim):\n        super().__init__()\n        self.enc = nn.Sequential(nn.Linear(dim, 32), nn.ReLU(), nn.Linear(32, 8))\n        self.dec = nn.Sequential(nn.Linear(8, 32), nn.ReLU(), nn.Linear(32, dim))\n\n    def forward(self, x):\n        return self.dec(self.enc(x))\n\n# 学習: 正常データで MSE 最小化\n# 推論: x と reconstruct の MSE が大きいほど異常",
+      },
+      { type: "h3", text: "4. 時系列の異常検知" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Prophet**: トレンド + 季節性 + 残差で点異常を検出",
+          "**LSTM Autoencoder**: 系列再構成の誤差",
+          "**Matrix Profile**: 部分系列の最近傍距離",
+          "**ARIMA + 残差検定**: 古典統計手法",
+        ],
+      },
+      { type: "h3", text: "評価が難しい" },
+      {
+        type: "p",
+        text: "正常 99.9% ・ 異常 0.1% のような極端な不均衡が普通。**Accuracy は 99.9% でも全部正常と予測すれば達成可能** なので無意味。",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Precision-Recall 曲線 / AUC**: クラス不均衡に強い",
+          "**F1 / F2 スコア**: Recall を重視するなら F2",
+          "**Confusion Matrix**: 偽陽性 ・ 偽陰性のコストを別々に評価",
+        ],
+      },
+      { type: "h3", text: "実務シナリオ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**クレジットカード不正検出**: トランザクションのリアルタイム判定",
+          "**設備保全**: センサー値で故障予兆検知",
+          "**ネットワーク侵入検知**: トラフィックパターンの異常",
+          "**医療診断補助**: X 線・MRI の病変領域検出",
+          "**ログ監視**: SaaS の障害早期発見",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[scikit-learn 入門](/blog/sklearn-introduction)",
+          "[統計検定 2 級 教科書](/textbook/grade-2)",
+          "[MLOps 基礎](/blog/mlops-basics)",
+          "[Pandas Tips](/blog/pandas-tips-for-ml)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "time-series-forecasting-introduction",
+    title: "時系列予測 入門 ─ 古典手法から Prophet・深層学習まで",
+    description:
+      "売上予測・需要予測・株価予測。ARIMA・指数平滑化から、Prophet・LightGBM・Temporal Fusion Transformer までの主要手法を実用視点で。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "時系列予測 = 過去のパターン(トレンド・季節性・自己相関)から未来を推定。",
+      "古典: ARIMA・指数平滑化。実務: Prophet・LightGBM。最先端: TFT・N-BEATS。",
+      "クロスバリデーションは『時系列分割(Walk-Forward)』を必ず使う。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**時系列予測** は売上・需要・在庫・株価・気象など、ほぼあらゆる業界で必要とされる ML タスク。一般的な予測問題と違い、**時間順序を保つ**ことが鉄則です。",
+      },
+      { type: "h3", text: "時系列の 3 要素" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**トレンド**: 長期的な上昇・下降",
+          "**季節性**: 周期的なパターン(年・週・日)",
+          "**残差**: トレンド・季節性で説明できないノイズ",
+        ],
+      },
+      { type: "h3", text: "古典的手法" },
+      { type: "h4", text: "ARIMA" },
+      {
+        type: "p",
+        text: "AR(自己回帰) + I(差分) + MA(移動平均)の組合せ。古いが理論的に整理されており、説明性が高い。",
+      },
+      {
+        type: "code",
+        title: "statsmodels で ARIMA",
+        python: "from statsmodels.tsa.arima.model import ARIMA\n\nmodel = ARIMA(y_train, order=(2, 1, 2))  # (p, d, q)\nfit = model.fit()\nforecast = fit.forecast(steps=30)",
+      },
+      { type: "h4", text: "指数平滑化(Holt-Winters)" },
+      {
+        type: "p",
+        text: "最近のデータほど重み付けして平滑化。トレンド・季節性も扱える。",
+      },
+      { type: "h3", text: "Prophet ─ Facebook 製の万能ツール" },
+      {
+        type: "p",
+        text: "祝日効果・季節性・変化点を **GUI レベルでパラメータ化** できる。ビジネス用途で爆発的に普及。",
+      },
+      {
+        type: "code",
+        title: "Prophet 5 行",
+        python: "from prophet import Prophet\nimport pandas as pd\n\ndf = pd.DataFrame({'ds': dates, 'y': sales})\nm = Prophet(yearly_seasonality=True, weekly_seasonality=True)\nm.fit(df)\nfuture = m.make_future_dataframe(periods=90)\nforecast = m.predict(future)",
+      },
+      { type: "h3", text: "LightGBM ─ Kaggle 王者" },
+      {
+        type: "p",
+        text: "**ラグ特徴量**(過去 N 日)+ **集計特徴量**(過去 7 日平均など)を作って GBDT に渡す。実用最強の選択肢の 1 つ。",
+      },
+      {
+        type: "code",
+        title: "ラグ特徴量の作り方",
+        python: "for lag in [1, 7, 14, 30]:\n    df[f'lag_{lag}'] = df['y'].shift(lag)\n\nfor window in [7, 14, 30]:\n    df[f'roll_mean_{window}'] = df['y'].rolling(window).mean()\n    df[f'roll_std_{window}'] = df['y'].rolling(window).std()",
+      },
+      { type: "h3", text: "深層学習 ─ TFT ・ N-BEATS" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**LSTM / GRU**: 古典的 RNN、長期依存に弱い",
+          "**Temporal Fusion Transformer (TFT)**: 解釈性 + 性能",
+          "**N-BEATS**: トレンド + 季節性を分解する DL",
+          "**Informer / Autoformer**: 長期予測に特化した Transformer 派生",
+          "**TimeGPT**: LLM 風時系列基盤モデル(Nixtla)",
+        ],
+      },
+      { type: "h3", text: "時系列クロスバリデーション" },
+      {
+        type: "p",
+        text: "通常の K-Fold は **未来データで学習 → 過去データで予測** という時間漏れを起こす。代わりに **Walk-Forward**:",
+      },
+      {
+        type: "code",
+        title: "TimeSeriesSplit",
+        python: "from sklearn.model_selection import TimeSeriesSplit\n\ntscv = TimeSeriesSplit(n_splits=5)\nfor train_idx, val_idx in tscv.split(X):\n    X_tr, X_val = X[train_idx], X[val_idx]\n    y_tr, y_val = y[train_idx], y[val_idx]\n    # 学習・評価",
+      },
+      { type: "h3", text: "評価指標" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**MAE / RMSE**: 標準",
+          "**MAPE**: % 表現で経営層に伝えやすい(0 に近い値で破綻)",
+          "**SMAPE**: MAPE の対称版、極端な値に頑健",
+          "**MASE**: 単純予測(Naive)からの改善度",
+          "**Pinball Loss**: 分位点予測の評価",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[統計検定 準 1 級 教科書](/textbook/grade-pre1) ─ 時系列の章",
+          "[scikit-learn 入門](/blog/sklearn-introduction)",
+          "[Pandas Tips](/blog/pandas-tips-for-ml) ─ 日付操作",
+          "[ベイズ最適化](/blog/bayesian-optimization)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "model-interpretability-shap",
+    title: "モデル解釈性 入門 ─ SHAP・LIME・Permutation Importance",
+    description:
+      "ブラックボックス ML モデルの予測理由を説明する 3 大手法を実装と直感で解説。規制業界・社内説明・モデル改善に必須のスキル。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "モデル解釈性 = ML の予測『なぜ』を人間が分かる形で説明すること。",
+      "SHAP(ゲーム理論ベース)・LIME(局所線形近似)・Permutation Importance が実用 3 大手法。",
+      "規制業界(金融 ・ 医療)・社内説明・バイアス検出・モデル改善で必須。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "ML モデルが高精度でも、**『なぜその予測になったか』が説明できない** と実務では使えない場面が増えています。**Explainable AI(XAI)** はその課題に対する手法群。",
+      },
+      { type: "h3", text: "なぜ解釈性が必要か" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**規制対応**: 金融(BIS)・医療(FDA)・EU AI Act",
+          "**社内説明**: 経営層・現場担当・顧客への説明責任",
+          "**バイアス検出**: 性別・人種による不公平な予測の発見",
+          "**モデル改善**: 重要特徴量の特定 → 特徴量エンジニアリング",
+          "**信頼構築**: ユーザーが意思決定に使える",
+        ],
+      },
+      { type: "h3", text: "1. SHAP(SHapley Additive exPlanations)" },
+      {
+        type: "p",
+        text: "ゲーム理論の **Shapley 値** に基づき、各特徴量の予測への貢献度を **公平に分配**。理論的にきれい + 局所/全体の両方で使える。",
+      },
+      {
+        type: "code",
+        title: "SHAP の基本",
+        python: "import shap\nimport lightgbm as lgb\n\nmodel = lgb.LGBMClassifier()\nmodel.fit(X_train, y_train)\n\nexplainer = shap.TreeExplainer(model)\nshap_values = explainer(X_test)\n\n# 1 サンプルの説明\nshap.plots.waterfall(shap_values[0])\n\n# 全体の重要度\nshap.plots.beeswarm(shap_values)\n\n# 依存プロット(部分依存と相互作用)\nshap.plots.scatter(shap_values[:, 'age'])",
+      },
+      {
+        type: "intuition",
+        title: "💡 Shapley 値の直感",
+        body: "あるチームの勝利貢献を、各メンバーが入る・抜けるパターンの平均で計算 ─ これが Shapley 値。ML では『この特徴量がモデルにあるとき/ないときの平均的な予測差』。",
+      },
+      { type: "h3", text: "2. LIME(Local Interpretable Model-agnostic Explanations)" },
+      {
+        type: "p",
+        text: "予測したい点の **近傍** で、予測モデルを **線形モデル** で近似。局所的に解釈可能なモデルで説明。",
+      },
+      {
+        type: "code",
+        title: "LIME の例",
+        python: "import lime\nimport lime.lime_tabular\n\nexplainer = lime.lime_tabular.LimeTabularExplainer(\n    X_train.values, feature_names=X_train.columns,\n    class_names=['no', 'yes'], discretize_continuous=True,\n)\n\nexp = explainer.explain_instance(\n    X_test.iloc[0].values, model.predict_proba, num_features=10\n)\nexp.show_in_notebook()",
+      },
+      { type: "h3", text: "3. Permutation Importance" },
+      {
+        type: "p",
+        text: "ある特徴量の値を **シャッフル** したときに精度がどれだけ下がるか。シンプルだが頑健。",
+      },
+      {
+        type: "code",
+        title: "scikit-learn で",
+        python: "from sklearn.inspection import permutation_importance\n\nresult = permutation_importance(\n    model, X_test, y_test, n_repeats=10, random_state=42\n)\nimportance = pd.DataFrame({\n    'feature': X_test.columns,\n    'importance': result.importances_mean,\n}).sort_values('importance', ascending=False)",
+      },
+      { type: "h3", text: "本質的に解釈可能なモデル" },
+      {
+        type: "p",
+        text: "事後説明より、最初から解釈可能なモデルを使う選択肢:",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**線形 / ロジスティック回帰**: 係数 = 特徴量の重み",
+          "**決定木**: 分岐ルールが直接読める",
+          "**EBM(Explainable Boosting Machine)**: 高精度 + 解釈性",
+          "**ルールベース**: スコアカード方式",
+        ],
+      },
+      { type: "h3", text: "Deep Learning の解釈" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Grad-CAM**: 画像分類で『どこに注目したか』のヒートマップ",
+          "**Attention 可視化**: NLP の Transformer で関連語",
+          "**Integrated Gradients**: 入力勾配を積分",
+          "**Captum**(PyTorch): DL 解釈の総合ライブラリ",
+        ],
+      },
+      { type: "h3", text: "実務での使い方" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**学習時**: SHAP で重要特徴量を確認 → 不要なものを削除",
+          "**評価時**: 偽陽性 ・ 偽陰性ケースを SHAP で深掘り",
+          "**本番運用**: 個別予測の説明をユーザーに表示",
+          "**監査時**: バイアスや漏洩がないかチェック",
+          "**改善時**: 期待と異なる重要度 → モデル or データの問題",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[scikit-learn 入門](/blog/sklearn-introduction)",
+          "[因果推論 入門](/blog/causal-inference-introduction)",
+          "[MLOps 基礎](/blog/mlops-basics)",
+          "[E 資格 ロードマップ](/certs/e-shikaku/roadmap)",
+        ],
+      },
+    ],
+  },
+  {
     slug: "reinforcement-learning-introduction",
     title: "強化学習 入門 ─ 報酬で学ぶエージェントの仕組み",
     description:

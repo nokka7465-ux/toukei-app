@@ -347,6 +347,74 @@ export default function Home() {
       </section>
 
 
+      <section className="mb-14 md:mb-20 paper rounded-xl p-6 md:p-8">
+        <header className="mb-5">
+          <span className="chip-soft">What's New</span>
+          <h2 className="text-2xl font-bold mt-3">最近追加されたコンテンツ</h2>
+          <p className="text-sm text-[var(--muted)] mt-2">
+            ブログ記事 30 本・用語集 約 320 語・図解 33 種・検定別ロードマップ 7 ページが揃っています。直近の追加分は以下から。
+          </p>
+        </header>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm ui-sans">
+          <Link
+            href="/blog"
+            className="paper rounded-lg p-4 hover:-translate-y-0.5 transition group block"
+          >
+            <div className="text-3xl mb-2" aria-hidden="true">
+              📰
+            </div>
+            <div className="font-bold text-[var(--foreground)] group-hover:text-[var(--link)]">
+              新ブログ
+            </div>
+            <div className="text-xs text-[var(--muted)] mt-0.5">
+              全 {blogPosts.length} 本
+            </div>
+          </Link>
+          <Link
+            href="/glossary"
+            className="paper rounded-lg p-4 hover:-translate-y-0.5 transition group block"
+          >
+            <div className="text-3xl mb-2" aria-hidden="true">
+              📚
+            </div>
+            <div className="font-bold text-[var(--foreground)] group-hover:text-[var(--link)]">
+              用語集
+            </div>
+            <div className="text-xs text-[var(--muted)] mt-0.5">
+              約 320 語
+            </div>
+          </Link>
+          <Link
+            href="/figures"
+            className="paper rounded-lg p-4 hover:-translate-y-0.5 transition group block"
+          >
+            <div className="text-3xl mb-2" aria-hidden="true">
+              📊
+            </div>
+            <div className="font-bold text-[var(--foreground)] group-hover:text-[var(--link)]">
+              SVG 図解
+            </div>
+            <div className="text-xs text-[var(--muted)] mt-0.5">
+              33 種
+            </div>
+          </Link>
+          <Link
+            href="/certs/g-test/roadmap"
+            className="paper rounded-lg p-4 hover:-translate-y-0.5 transition group block"
+          >
+            <div className="text-3xl mb-2" aria-hidden="true">
+              🎯
+            </div>
+            <div className="font-bold text-[var(--foreground)] group-hover:text-[var(--link)]">
+              検定別ロードマップ
+            </div>
+            <div className="text-xs text-[var(--muted)] mt-0.5">
+              7 検定
+            </div>
+          </Link>
+        </div>
+      </section>
+
       <section className="mb-14 md:mb-20">
         <div className="mb-5 flex items-baseline justify-between">
           <div>
