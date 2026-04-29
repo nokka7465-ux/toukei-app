@@ -267,7 +267,7 @@ export default function Home() {
             すべての記事 →
           </Link>
         </div>
-        <ul className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[...blogPosts]
             .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1))
             .slice(0, 3)
@@ -347,7 +347,7 @@ export default function Home() {
             受験したい級、または自分のレベルに合った級を選んでください。**入門編** はサイト独自の超初心者向け、4級〜1級が公式の統計検定範囲です。
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {levels.map((level) => {
             const enabled = availableLevels.has(level.slug);
             return (
@@ -401,7 +401,7 @@ export default function Home() {
           <p className="text-xs text-[var(--muted)] text-center mb-5 ui-sans">
             データ系資格の 4 つのパス。実務志向・調査志向・AI 概念・データ全方位リテラシーから、目的に応じて選べます。
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             <Link
               href="/certs/ds-basic"
               className="paper rounded-lg p-5 hover:-translate-y-0.5 transition group block"
@@ -519,7 +519,7 @@ export default function Home() {
             よくある学習目的別に、次に読むページをまとめました。
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ui-sans text-sm">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ui-sans text-sm">
           <div className="paper p-5 rounded-lg">
             <div className="font-bold mb-2 text-[var(--foreground)]">📚 試験合格を目指す</div>
             <ul className="space-y-1.5 text-xs">

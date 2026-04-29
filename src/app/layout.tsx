@@ -122,7 +122,7 @@ export default function RootLayout({
         <GlossaryLookup />
         <ServiceWorkerRegistration />
         <header className="border-b border-[var(--page-border)] bg-[var(--page)]/70 backdrop-blur-sm sticky top-0 z-10">
-          <div className="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
             <Link
               href="/"
               className="flex items-center gap-2.5 leading-tight"
@@ -213,10 +213,10 @@ export default function RootLayout({
             </div>
           </div>
         </header>
-        <main className="mx-auto max-w-5xl px-4 py-10">{children}</main>
+        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">{children}</main>
         <BackToTop />
         <footer className="border-t border-[var(--page-border)] mt-16 bg-[var(--page)]/40 print-hide">
-          <div className="mx-auto max-w-5xl px-4 py-10">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
             <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-sm">
               <div>
                 <div className="chapter-eyebrow mb-2">学習開始</div>
