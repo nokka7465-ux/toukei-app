@@ -37,6 +37,11 @@ import { VaeArchitecture } from "./VaeArchitecture";
 import { DiffusionProcess } from "./DiffusionProcess";
 import { MultiHeadAttention } from "./MultiHeadAttention";
 import { LossLandscape } from "./LossLandscape";
+import { Bootstrap } from "./Bootstrap";
+import { GbdtTree } from "./GbdtTree";
+import { Dropout } from "./Dropout";
+import { Word2Vec } from "./Word2Vec";
+import { Rlhf } from "./Rlhf";
 
 const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   "normal-curve": NormalCurve,
@@ -77,6 +82,11 @@ const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   "diffusion-process": DiffusionProcess,
   "multi-head-attention": MultiHeadAttention,
   "loss-landscape": LossLandscape,
+  bootstrap: Bootstrap,
+  "gbdt-tree": GbdtTree,
+  dropout: Dropout,
+  word2vec: Word2Vec,
+  rlhf: Rlhf,
 };
 
 export function Diagram({

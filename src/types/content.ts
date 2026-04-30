@@ -64,7 +64,12 @@ export type DiagramKind =
   | "vae-architecture"
   | "diffusion-process"
   | "multi-head-attention"
-  | "loss-landscape";
+  | "loss-landscape"
+  | "bootstrap"
+  | "gbdt-tree"
+  | "dropout"
+  | "word2vec"
+  | "rlhf";
 
 export type TextbookBlock =
   | { type: "p"; text: string }

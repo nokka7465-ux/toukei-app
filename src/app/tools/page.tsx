@@ -5,6 +5,9 @@ import { ConfidenceIntervalCalc } from "@/components/tools/ConfidenceIntervalCal
 import { PValueCalc } from "@/components/tools/PValueCalc";
 import { PowerCalc } from "@/components/tools/PowerCalc";
 import { TwoProportionTest } from "@/components/tools/TwoProportionTest";
+import { CorrelationTest } from "@/components/tools/CorrelationTest";
+import { AnovaCalc } from "@/components/tools/AnovaCalc";
+import { ChiSquareTest } from "@/components/tools/ChiSquareTest";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -57,6 +60,9 @@ export default function ToolsPage() {
             { id: "p-value", label: "p 値" },
             { id: "power", label: "検出力" },
             { id: "ab-test", label: "A/B テスト" },
+            { id: "correlation", label: "相関係数検定" },
+            { id: "anova", label: "ANOVA" },
+            { id: "chi-square", label: "χ² 独立性検定" },
           ].map((item) => (
             <a
               key={item.id}
@@ -84,6 +90,15 @@ export default function ToolsPage() {
         </div>
         <div id="ab-test" className="scroll-mt-20 lg:col-span-2 xl:col-span-1">
           <TwoProportionTest />
+        </div>
+        <div id="correlation" className="scroll-mt-20">
+          <CorrelationTest />
+        </div>
+        <div id="anova" className="scroll-mt-20">
+          <AnovaCalc />
+        </div>
+        <div id="chi-square" className="scroll-mt-20">
+          <ChiSquareTest />
         </div>
       </section>
 

@@ -5454,6 +5454,243 @@ blogPosts.push({
   ],
 });
 
+blogPosts.push(
+  {
+    slug: "langchain-vs-llamaindex",
+    title: "LangChain vs LlamaIndex ─ どちらを選ぶべきか",
+    description:
+      "LLM アプリの 2 大フレームワーク LangChain と LlamaIndex の違いを実装視点で比較。エージェント vs RAG、用途別の選び方を解説。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "LangChain は『LLM オーケストレーション』寄り。エージェント・チェーン・ツール呼び出しが豊富。",
+      "LlamaIndex は『データ取り込み + 検索』寄り。RAG・インデキシング・クエリエンジンに強い。",
+      "実務では併用も多い。判断基準は『何を中心に作るか』── 会話/エージェント志向なら LangChain、ナレッジ検索志向なら LlamaIndex。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "LLM アプリ開発のフレームワーク選びで最初に出てくるのが **LangChain** と **LlamaIndex**。両者ともできることは多くオーバーラップしますが、設計思想と得意領域が違います。",
+      },
+      { type: "h3", text: "コア思想の違い" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**LangChain**: LLM をハブに、ツール・記憶・推論ステップを **オーケストレーション** するフレームワーク。LCEL(LangChain Expression Language)で宣言的にチェーンを組む。",
+          "**LlamaIndex**: 外部データ → インデックス → 検索 → LLM への文脈注入という **RAG パイプライン** を最短距離で組む。VectorStore・QueryEngine が中心。",
+        ],
+      },
+      { type: "h3", text: "用途別おすすめ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "🤖 **AI エージェント・対話 Bot** → LangChain(ツール呼び出し、ReAct、LangGraph)",
+          "📚 **社内ドキュメント Q&A・検索** → LlamaIndex(自動チャンク分割、メタデータフィルタ、ハイブリッド検索)",
+          "🔄 **両方やる本格アプリ** → 併用(LlamaIndex で取得 → LangChain で対話制御)",
+        ],
+      },
+      {
+        type: "code",
+        title: "LangChain ─ シンプルな RAG チェーン",
+        python:
+          "from langchain_openai import ChatOpenAI, OpenAIEmbeddings\nfrom langchain_community.vectorstores import FAISS\nfrom langchain_core.prompts import ChatPromptTemplate\nfrom langchain_core.runnables import RunnablePassthrough\n\nvs = FAISS.from_texts(docs, OpenAIEmbeddings())\nretriever = vs.as_retriever(k=3)\nllm = ChatOpenAI(model='gpt-4o-mini')\nprompt = ChatPromptTemplate.from_template('文脈:\\n{ctx}\\n質問: {q}')\nchain = {'ctx': retriever, 'q': RunnablePassthrough()} | prompt | llm\nprint(chain.invoke('統計検定2級は何時間で取れる?').content)",
+      },
+      {
+        type: "code",
+        title: "LlamaIndex ─ 同じことを 5 行で",
+        python:
+          "from llama_index.core import VectorStoreIndex, Document\n\nindex = VectorStoreIndex.from_documents([Document(text=t) for t in docs])\nquery_engine = index.as_query_engine()\nresp = query_engine.query('統計検定2級は何時間で取れる?')\nprint(resp)",
+      },
+      { type: "h3", text: "学習の進め方" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "RAG の基礎は両方で必須 → [RAG 入門](/blog/rag-introduction) を先に読む",
+          "LangChain は LangSmith で実行トレースを可視化できる ─ デバッグが効率的",
+          "LlamaIndex はドキュメント構造を保ったインデックス(Tree, Knowledge Graph)が特徴",
+          "[AI エージェント 入門](/blog/ai-agents-introduction) も合わせて読むと、選択基準が明確に",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "vector-search-fundamentals",
+    title: "ベクトル検索の基礎 ─ 埋め込み・コサイン類似度・ANN まで",
+    description:
+      "RAG・推薦・画像検索の根幹となるベクトル検索を、埋め込みの作り方・距離関数の選び方・近似最近傍探索(ANN)アルゴリズムまでまとめて解説。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "ベクトル検索 = テキスト/画像を埋め込み(ベクトル)に変換 → 距離が近いものを検索。",
+      "距離関数は **コサイン類似度** が正規化済み埋め込みでは標準。",
+      "件数が多いと総当たりは無理 → HNSW・IVF・Faiss などの **ANN(近似最近傍探索)** を使う。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "RAG・推薦システム・画像検索 ── すべての根底にあるのが **ベクトル検索**。本記事では「埋め込みとは何か」「どう距離を測るか」「どう高速化するか」の 3 軸で全体像を整理します。",
+      },
+      { type: "h3", text: "1. 埋め込みベクトルを作る" },
+      {
+        type: "p",
+        text: "テキストを意味の近さが反映された数百〜数千次元のベクトルに変換するのが **埋め込み(embedding)**。OpenAI の text-embedding-3-small なら 1536 次元、Cohere・bge・E5 など多くのモデルが利用できます。",
+      },
+      {
+        type: "code",
+        title: "Python: 埋め込み生成",
+        python:
+          "from openai import OpenAI\nclient = OpenAI()\n\ndocs = ['統計検定2級', 'G検定', 'E資格']\nresp = client.embeddings.create(\n    model='text-embedding-3-small',\n    input=docs,\n)\nvectors = [d.embedding for d in resp.data]\nprint(len(vectors), len(vectors[0]))  # 3 1536",
+      },
+      { type: "h3", text: "2. 距離関数を選ぶ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**コサイン類似度** $\\cos\\theta = \\frac{\\mathbf{a}\\cdot\\mathbf{b}}{\\|\\mathbf{a}\\|\\|\\mathbf{b}\\|}$ ─ 角度のみを見る。最も標準的",
+          "**内積** ─ 正規化済みベクトルではコサインと等価。最速",
+          "**L2(ユークリッド距離)** ─ 大きさも考慮。画像特徴量で時々使う",
+        ],
+      },
+      {
+        type: "intuition",
+        title: "💡 なぜコサイン?",
+        body: "テキスト埋め込みは『方向 = 意味』『大きさ = 単語の出現量』に対応することが多い。意味だけ見たいので方向だけ比べるコサインがフィット。",
+      },
+      { type: "h3", text: "3. ANN ─ 件数が増えても高速に" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**HNSW**(階層的グラフ): 近傍のグラフをマルチレイヤで構築。Pinecone・Qdrant・Weaviate のデフォルト",
+          "**IVF + PQ**: クラスタリング + 量子化で省メモリ。Faiss の主力",
+          "**ScaNN**(Google): IVF を高度化。低レイテンシ重視",
+        ],
+      },
+      {
+        type: "practical",
+        title: "🛠 実務での目安",
+        body: "1 万件以下: 総当たり(NumPy で十分)。10 万〜100 万件: HNSW(Qdrant・Faiss)。1000 万件以上: IVF+PQ・ScaNN・分散環境。",
+      },
+      { type: "h3", text: "4. 落とし穴" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "埋め込みモデルの **次元・学習データ・正規化** が一致していないと類似度が壊れる",
+          "**チャンクサイズ** が大きすぎると意味がぼやけ、小さすぎると文脈不足",
+          "ベクトル検索だけだと固有名詞検索が弱い → **ハイブリッド検索**(BM25 + ベクトル)が定石",
+        ],
+      },
+      { type: "h3", text: "次のステップ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[RAG 入門](/blog/rag-introduction) ─ ベクトル検索を LLM に繋げる",
+          "[LangChain vs LlamaIndex](/blog/langchain-vs-llamaindex) ─ 実装フレームワーク選び",
+          "[LLM 評価指標 完全ガイド](/blog/llm-evaluation-metrics) ─ 検索品質の測り方",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "llm-evaluation-metrics",
+    title: "LLM 評価指標 完全ガイド ─ BLEU から RAGAS まで",
+    description:
+      "LLM アプリの品質を測る評価指標を、生成タスク・要約・RAG・コード・対話の 5 領域でまとめて整理。BLEU・ROUGE・BERTScore・RAGAS・LLM-as-a-Judge を網羅。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "従来指標(BLEU・ROUGE)は機械翻訳・要約には今も有効だが、自由生成では人間評価との相関が低い。",
+      "**BERTScore・BLEURT** など埋め込みベースは意味的近さを捉える。",
+      "**LLM-as-a-Judge**(GPT-4 で採点)が現代の標準。**RAGAS** は RAG 専用の評価フレームワーク。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "LLM アプリで一番難しいのが評価。**正解が一意に決まらない**(同じ意味で別の表現が無数にある)生成タスクの品質をどう測るか ── 本記事では現在使われる主要指標を一気に整理します。",
+      },
+      { type: "h3", text: "1. n-gram ベース ─ 古典指標" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**BLEU**: 生成と参照の n-gram 一致率。機械翻訳の標準。0〜1 で高いほど良い",
+          "**ROUGE-N / ROUGE-L**: 要約タスクの標準。Recall ベース",
+          "**METEOR**: 同義語・語幹を考慮した BLEU の改良版",
+        ],
+      },
+      {
+        type: "intuition",
+        title: "💡 弱点",
+        body: "「美味しいラーメン」と「ラーメンが美味しい」は意味は同じだが BLEU は低くなる。表層一致しか見ないため、自由生成では人間評価とほぼ無相関になることも。",
+      },
+      { type: "h3", text: "2. 埋め込みベース ─ 意味的近さ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**BERTScore**: BERT で文を埋め込み、トークン単位のコサイン類似度を集計",
+          "**BLEURT**: 学習済み回帰モデルで人間スコアを予測",
+          "**MoverScore**: Earth Mover's Distance で最適輸送コストを計算",
+        ],
+      },
+      { type: "h3", text: "3. LLM-as-a-Judge ─ 現代の標準" },
+      {
+        type: "p",
+        text: "**強い LLM(GPT-4 など)に採点させる** 方法。人間評価と高相関で、定性的観点(流暢さ・事実性・有用性)も同時に評価可能。",
+      },
+      {
+        type: "code",
+        title: "Python: GPT-4 で採点",
+        python:
+          "from openai import OpenAI\nclient = OpenAI()\n\nrubric = '''次の応答を 1〜5 で採点してください。\n基準: 事実性・関連性・分かりやすさ。\nJSON で {score: int, reason: str} を返してください。\n質問: {q}\n応答: {a}'''\n\nresp = client.chat.completions.create(\n    model='gpt-4o',\n    messages=[{'role': 'user', 'content': rubric.format(q=q, a=a)}],\n    response_format={'type': 'json_object'},\n)\nprint(resp.choices[0].message.content)",
+      },
+      {
+        type: "practical",
+        title: "🛠 落とし穴",
+        body: "Judge 自身のバイアス(長文を好む・自分のモデル系列を好む)に注意。複数 Judge の平均、または Pairwise(A vs B どちらが良い?)で軽減できる。",
+      },
+      { type: "h3", text: "4. RAG 専用 ─ RAGAS" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Faithfulness**: 応答が検索された文脈に基づいているか(ハルシネーション検出)",
+          "**Answer Relevancy**: 応答が質問に答えているか",
+          "**Context Precision / Recall**: 検索された文脈の質",
+        ],
+      },
+      { type: "h3", text: "5. タスク別の使い分け" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "🌐 **機械翻訳**: BLEU・COMET",
+          "📝 **要約**: ROUGE + BERTScore + LLM-as-a-Judge",
+          "📚 **RAG**: RAGAS + Faithfulness 重視",
+          "💻 **コード**: pass@k(実行して合格率)・HumanEval / MBPP",
+          "💬 **対話**: LLM-as-a-Judge + ユーザー満足度(オフライン A/B)",
+        ],
+      },
+      { type: "h3", text: "関連記事" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[LLM 入門](/blog/llm-introduction)",
+          "[RAG 入門](/blog/rag-introduction)",
+          "[ベクトル検索の基礎](/blog/vector-search-fundamentals)",
+          "[プロンプトエンジニアリング基礎](/blog/prompt-engineering-basics)",
+        ],
+      },
+    ],
+  },
+);
+
 export function getPostBySlug(slug: string): BlogPost | undefined {
   return blogPosts.find((p) => p.slug === slug);
 }

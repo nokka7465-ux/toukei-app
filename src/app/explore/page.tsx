@@ -5,6 +5,9 @@ import { InteractiveBinomial } from "@/components/interactive/InteractiveBinomia
 import { InteractiveCLT } from "@/components/interactive/InteractiveCLT";
 import { InteractivePValue } from "@/components/interactive/InteractivePValue";
 import { InteractiveCI } from "@/components/interactive/InteractiveCI";
+import { InteractiveBayes } from "@/components/interactive/InteractiveBayes";
+import { InteractiveRegression } from "@/components/interactive/InteractiveRegression";
+import { InteractiveChiSquare } from "@/components/interactive/InteractiveChiSquare";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -60,6 +63,9 @@ export default function ExplorePage() {
         <InteractiveCLT />
         <InteractivePValue />
         <InteractiveCI />
+        <InteractiveBayes />
+        <InteractiveRegression />
+        <InteractiveChiSquare />
       </section>
 
       <section className="mt-16 paper rounded-lg p-6">

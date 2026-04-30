@@ -204,6 +204,13 @@ export function chiSqCdf(x: number, df: number): number {
   return gammaP(df / 2, x / 2);
 }
 
+/** F 分布 CDF: P(F ≤ x | d1, d2) = I_{d1·x/(d1·x+d2)}(d1/2, d2/2) */
+export function fCdf(x: number, d1: number, d2: number): number {
+  if (x <= 0) return 0;
+  const t = (d1 * x) / (d1 * x + d2);
+  return incompleteBeta(t, d1 / 2, d2 / 2);
+}
+
 /** Student t CDF(漸化的 Beta 関数を使う簡易実装) */
 export function tCdf(t: number, df: number): number {
   // x = df / (df + t²)
