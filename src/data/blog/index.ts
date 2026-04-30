@@ -5716,6 +5716,288 @@ blogPosts.push(
   },
 );
 
+blogPosts.push(
+  {
+    slug: "ab-test-pitfalls",
+    title: "A/B テストの落とし穴 7 選 ─ 有意でも実装してはいけないとき",
+    description:
+      "Web / プロダクト改善で標準的な A/B テスト。でも『p < 0.05 で有意 → 即実装』では失敗します。実務で踏みやすい 7 つの落とし穴と対策を解説。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "Peeking(早期停止)・p ハッキング・複数比較が代表的なバイアス源。",
+      "サンプルサイズ不足で『有意差なし = 効果なし』と結論するのも危険。",
+      "Sequential testing・ベイズ A/B・MDE 設計で堅牢な意思決定を。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "A/B テストはオンラインビジネスの **意思決定の主軸**。でも『p < 0.05 だから採用』は半分正解、半分間違い。実務で陥りやすい 7 つの罠を整理します。",
+      },
+      { type: "h3", text: "1. Peeking(覗き見)" },
+      {
+        type: "p",
+        text: "テスト中に **何度も中間結果を確認** し、有意になった時点で停止する。これは **第 1 種の誤り(α)を膨らませる** 古典的バイアス。連続的に検定していると、本来 5% のはずが 30% 以上の確率で『偶然有意』が出る。",
+      },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**対策**: テスト前にサンプルサイズと期間を決め、終了まで結果を見ない",
+          "**Sequential testing**(O'Brien-Fleming・GST): 中間解析を許容する手法",
+          "**ベイズ A/B**: 事後確率は何度見ても問題ない",
+        ],
+      },
+      { type: "h3", text: "2. p ハッキング" },
+      {
+        type: "p",
+        text: "**有意になるまで条件を変える**(セグメント・指標・期間)。複数の仮説を試し、たまたま有意だったものだけ報告。**多重比較補正** で対処。",
+      },
+      { type: "h3", text: "3. サンプルサイズ不足" },
+      {
+        type: "p",
+        text: "『有意差なし』は『効果なし』ではなく『**検出できなかった**』。**MDE(Minimum Detectable Effect)** を事前に決めて、必要サンプルサイズを計算する。本サイトの [**サンプルサイズ計算機**](/tools) で簡単に出せます。",
+      },
+      { type: "h3", text: "4. ノベルティ効果(Novelty Effect)" },
+      {
+        type: "p",
+        text: "新機能を出すと **最初は新鮮さで使われ** て効果が大きく見える。長期で見ると元に戻ることも。**最低 1 〜 2 週間は走らせて** 安定後の効果で判断。",
+      },
+      { type: "h3", text: "5. シンプソンのパラドクス" },
+      {
+        type: "p",
+        text: "全体では B が勝つが、セグメント別に見ると全セグメントで A が勝つ ── という不思議な現象。**サンプル分布の偏り** が原因。**ランダム化が破れた** 兆候なので即停止して原因調査。",
+      },
+      { type: "h3", text: "6. SUTVA 違反(干渉)" },
+      {
+        type: "p",
+        text: "**ユーザー間で影響が伝播** する場合、A/B 群が独立でなくなる。SNS の友達紹介・市場全体の価格・口コミ ── これらは **クラスター単位**(都市・コホート)でランダム化する。",
+      },
+      { type: "h3", text: "7. 複数指標の罠" },
+      {
+        type: "p",
+        text: "20 個の指標を見れば、たまたま 1 つは p < 0.05 になる(α=5% の罠)。**主要指標(OKR / 北極星指標)を 1 つだけ事前に決め** 、副次指標は探索的扱いに留める。",
+      },
+      {
+        type: "practical",
+        title: "🛠 実務での意思決定フレームワーク",
+        body: "**1. 事前に**: 仮説 + 主要指標 + MDE + サンプルサイズ + 期間を決める\n**2. テスト中**: 結果を見ない(覗き見しない)\n**3. テスト後**: 主要指標を確認 → 有意かつ実用的なサイズなら採用\n**4. ロールアウト**: 段階的に展開しモニタリング(逆効果なら巻き戻し)",
+      },
+      { type: "h3", text: "関連ツール・記事" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[**A/B テスト計算機**](/tools) ─ 2 比率検定の p 値・信頼区間",
+          "[**サンプルサイズ計算機**](/tools)",
+          "[**p 値の誤解 5 選**](/blog/p-value-misunderstandings)",
+          "[**因果推論ミニ教科書**](/causal-inference) ─ 観測データで因果を推定する",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "vector-db-comparison",
+    title: "ベクトル DB 徹底比較 ─ Pinecone・Qdrant・Weaviate・Milvus・pgvector",
+    description:
+      "RAG の心臓部となるベクトル DB の 5 大選択肢を、性能・運用・コスト・機能で比較。スタートアップから大規模本番まで、用途別の選び方を解説。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "マネージドなら Pinecone(SaaS のみ)。OSS+セルフホストなら Qdrant が筆頭。",
+      "既存 PostgreSQL 資産を活かすなら pgvector が最良 ─ 数百万ベクトルまで実用。",
+      "1 億超の超大規模なら Milvus / Vespa。リッチな GraphQL 必要なら Weaviate。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "RAG の検索精度を決めるのが **ベクトル DB**。選択肢が増えすぎたので、5 大候補を **性能・運用・コスト・機能** の 4 軸で整理します。",
+      },
+      { type: "h3", text: "1. Pinecone(マネージド SaaS)" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**強み**: 完全マネージド、運用負担ゼロ、サーバレス課金",
+          "**弱み**: 自社内に置けない、コストが大きくなりやすい",
+          "**向き**: スタートアップが PoC を最短で作る場合",
+          "**料金**: $70/month〜(Standard)。データ量・QPS で増減",
+        ],
+      },
+      { type: "h3", text: "2. Qdrant(OSS + マネージド)" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**強み**: Rust 製で高速、HNSW + 量子化、フィルタリングが強力",
+          "**弱み**: マネージド版は新興でエコシステム発展途上",
+          "**向き**: OSS でセルフホスト or マネージドどちらも選びたい場合",
+          "**特徴**: Payload(メタデータ)に対する複雑フィルタが書きやすい",
+        ],
+      },
+      { type: "h3", text: "3. Weaviate(OSS + マネージド)" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**強み**: 標準で GraphQL API・モジュール式(text2vec-openai 等)、ハイブリッド検索が組み込み",
+          "**弱み**: 設定が複雑、リソース消費が大",
+          "**向き**: 開発者体験(DX)を重視するチーム、ハイブリッド検索が必要",
+        ],
+      },
+      { type: "h3", text: "4. Milvus / Zilliz(OSS + マネージド)" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**強み**: 1 億〜10 億規模の大規模ベクトル対応、GPU インデキシング",
+          "**弱み**: 運用が複雑(K8s 前提)、学習コスト大",
+          "**向き**: 大規模本番システム(検索エンジン・推薦)",
+        ],
+      },
+      { type: "h3", text: "5. pgvector(PostgreSQL 拡張)" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**強み**: PostgreSQL なのでトランザクション・SQL JOIN が使える、運用ノウハウ流用可",
+          "**弱み**: 数千万件以下が現実的、専用 DB ほど速くない",
+          "**向き**: 既存 RDB 資産を活かしたい、データ規模が中程度(〜1000 万件)",
+          "**HNSW インデックス対応**: pgvector 0.5+ で大幅高速化",
+        ],
+      },
+      { type: "h3", text: "選び方の判断軸" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**規模**: 〜100 万 → pgvector / 100 万〜1 億 → Qdrant・Weaviate / 1 億超 → Milvus・Vespa",
+          "**運用**: マネージド優先 → Pinecone / コスト最適化 → セルフホスト OSS",
+          "**機能**: ハイブリッド検索 → Weaviate・Qdrant / SQL 連携 → pgvector",
+          "**価格透明性**: pgvector(PostgreSQL 価格)→ Qdrant Cloud → Pinecone",
+        ],
+      },
+      {
+        type: "intuition",
+        title: "💡 まず始めるなら",
+        body: "PoC は **pgvector**(Supabase / Neon)で 30 分で動く。本番 RAG は **Qdrant**(セルフホスト or Cloud)が万能の第一候補。**Pinecone** は予算がある or 運用ゼロにしたいときに。",
+      },
+      { type: "h3", text: "関連記事" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[**ベクトル検索の基礎**](/blog/vector-search-fundamentals)",
+          "[**RAG 入門**](/blog/rag-introduction)",
+          "[**LangChain vs LlamaIndex**](/blog/langchain-vs-llamaindex)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "feature-engineering-101",
+    title: "特徴量エンジニアリング 入門 ─ Kaggle 上位の必須スキル",
+    description:
+      "ML モデルの精度の 80% を決める『特徴量エンジニアリング』。カテゴリ・数値・時系列・テキストの代表的な変換手法を実例で整理。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "モデル選びより特徴量設計の方が精度に効くことが多い。",
+      "数値はビン化・対数変換・スケーリング。カテゴリは Target / Frequency Encoding が強力。",
+      "時系列はラグ・差分・季節成分。テキストは TF-IDF や埋め込みで数値化。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "「**より良いモデルより、より良い特徴量**」 ─ Kaggle で何百人もが言うこの格言は本当です。本記事では実務で使う変換テクニックを **データ型ごと** に整理します。",
+      },
+      { type: "h3", text: "1. 数値特徴量の変換" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**対数変換**: 右に裾が長い分布(年収・売上・株価)を対称に",
+          "**ビン化(離散化)**: 連続値を `若年/中年/高齢` のような区分に。決定木以外で有効",
+          "**スケーリング**: 標準化(平均 0、標準偏差 1)・正規化(0〜1)。線形モデル・NN・SVM で必須",
+          "**多項式特徴量**: $x^2, x_1 \\times x_2$ で非線形を線形モデルに導入",
+          "**Box-Cox / Yeo-Johnson 変換**: 非正規分布を正規型に",
+        ],
+      },
+      { type: "h3", text: "2. カテゴリ特徴量のエンコード" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**One-Hot Encoding**: シンプルだがカテゴリが多いと次元爆発",
+          "**Label / Ordinal Encoding**: 順序のあるカテゴリに(`小・中・大` → `0,1,2`)",
+          "**Target Encoding**: カテゴリ → 平均ターゲット値。**強力だがリーク注意**(K-fold 内で計算)",
+          "**Frequency Encoding**: カテゴリの出現頻度で置換。シンプルかつ効くことが多い",
+          "**Hashing Trick**: カテゴリ数が膨大なときの省メモリ手法",
+          "**Embedding**: NN で学習する低次元密ベクトル(リコメンドで定番)",
+        ],
+      },
+      { type: "h3", text: "3. 時系列特徴量" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**ラグ特徴量**: $y_{t-1}, y_{t-7}, y_{t-30}$ など過去の値",
+          "**差分**: $y_t - y_{t-1}$、季節差分 $y_t - y_{t-12}$",
+          "**ローリング統計**: 7 日平均・30 日標準偏差・最大値",
+          "**カレンダー特徴量**: 曜日・月・祝日フラグ・四半期",
+          "**フーリエ特徴量**: 季節性を sin/cos の組合せで",
+          "**EWMA(指数加重移動平均)**: 直近を重く扱う移動平均",
+        ],
+      },
+      { type: "h3", text: "4. テキスト特徴量" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Bag-of-Words / TF-IDF**: 古典だが今も実務で十分実用",
+          "**埋め込みベクトル**(BERT / OpenAI / E5): 意味的類似度を捉える",
+          "**文字数・単語数・大文字比率**: シンプルだが効くことが多い(特にスパム検出)",
+          "**正規表現マッチ**: 電話番号・メール・URL の有無",
+        ],
+      },
+      { type: "h3", text: "5. 特徴量の評価と選択" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Permutation Importance**: 特徴量をシャッフルして精度低下を測定。最も信頼できる",
+          "**SHAP**: 各特徴量の寄与を厳密に算出。可視化も豊富",
+          "**Boruta**: ランダム特徴量より重要なものだけを選択",
+          "**相関フィルタ**: 高相関のペアから片方を除く(多重共線性)",
+        ],
+      },
+      {
+        type: "intuition",
+        title: "💡 ドメイン知識が最強",
+        body: "経験的に **ドメイン専門家との議論で生まれた特徴量** が最も効く。例: 不正検出なら『過去 24 時間内の取引回数』『送金先の新しさ』など。アルゴリズムでは生み出せないこの種の特徴量設計が、**Kaggle 上位と中位を分ける**。",
+      },
+      {
+        type: "code",
+        title: "Pandas で代表的な特徴量を一気に作る",
+        runnable: true,
+        python:
+          "import pandas as pd\nimport numpy as np\n\nrng = np.random.default_rng(0)\ndf = pd.DataFrame({\n    'price': rng.exponential(100, 50).round(0),\n    'category': rng.choice(['A', 'B', 'C', 'D'], 50),\n    'date': pd.date_range('2024-01-01', periods=50),\n})\n\n# 対数変換\ndf['log_price'] = np.log1p(df['price'])\n\n# Frequency Encoding\nfreq = df['category'].value_counts(normalize=True)\ndf['cat_freq'] = df['category'].map(freq)\n\n# 時系列特徴量\ndf['dow'] = df['date'].dt.dayofweek\ndf['month'] = df['date'].dt.month\ndf['price_lag1'] = df['price'].shift(1)\ndf['price_ma7'] = df['price'].rolling(7).mean()\n\nprint(df.head(10).round(2).to_string(index=False))",
+      },
+      { type: "h3", text: "関連記事" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[**scikit-learn 入門**](/blog/sklearn-introduction)",
+          "[**Pandas 実務 Tips**](/blog/pandas-tips-for-ml)",
+          "[**Kaggle 始め方**](/blog/kaggle-getting-started)",
+          "[**プログラミング入門**](/programming) ─ Python・SQL の基礎",
+        ],
+      },
+    ],
+  },
+);
+
 export function getPostBySlug(slug: string): BlogPost | undefined {
   return blogPosts.find((p) => p.slug === slug);
 }

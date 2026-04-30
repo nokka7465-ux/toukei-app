@@ -415,6 +415,42 @@ const FIGURES: FigureEntry[] = [
     link: "/blog/llm-introduction",
     linkLabel: "LLM 入門ブログ",
   },
+  {
+    kind: "batch-norm",
+    title: "Batch Normalization",
+    level: "E 資格",
+    category: "DL",
+    insight: "各層で標準化 + 学習可能なスケール/シフト。深層学習を高速・安定化する基本テク。",
+    link: "/certs/g-test/textbook",
+    linkLabel: "G 検定 教科書を読む",
+  },
+  {
+    kind: "k-fold-cv",
+    title: "K-Fold 交差検証",
+    level: "DS / G 検定",
+    category: "機械学習",
+    insight: "データを K 分割してすべてを test に回し、汎化性能を頑健に推定。",
+    link: "/certs/ds-literacy/textbook",
+    linkLabel: "DS 検定 教科書を読む",
+  },
+  {
+    kind: "confusion-matrix",
+    title: "混同行列",
+    level: "DS / G 検定",
+    category: "機械学習",
+    insight: "TP / FP / FN / TN の 4 マスから Precision・Recall・Accuracy がすべて出る。",
+    link: "/certs/ds-literacy/textbook",
+    linkLabel: "DS 検定 教科書を読む",
+  },
+  {
+    kind: "pr-curve",
+    title: "PR 曲線(Precision-Recall)",
+    level: "DS / G 検定",
+    category: "機械学習",
+    insight: "不均衡データでは ROC より PR 曲線。AP(平均適合率)で総合性能を評価。",
+    link: "/certs/ds-literacy/textbook",
+    linkLabel: "DS 検定 教科書を読む",
+  },
 ];
 
 const SECTIONS: { title: string; eyebrow: string; figures: FigureEntry[] }[] = [

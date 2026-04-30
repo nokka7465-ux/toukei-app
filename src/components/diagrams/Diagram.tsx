@@ -42,6 +42,10 @@ import { GbdtTree } from "./GbdtTree";
 import { Dropout } from "./Dropout";
 import { Word2Vec } from "./Word2Vec";
 import { Rlhf } from "./Rlhf";
+import { BatchNorm } from "./BatchNorm";
+import { KFoldCv } from "./KFoldCv";
+import { ConfusionMatrix } from "./ConfusionMatrix";
+import { PrCurve } from "./PrCurve";
 
 const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   "normal-curve": NormalCurve,
@@ -87,6 +91,10 @@ const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   dropout: Dropout,
   word2vec: Word2Vec,
   rlhf: Rlhf,
+  "batch-norm": BatchNorm,
+  "k-fold-cv": KFoldCv,
+  "confusion-matrix": ConfusionMatrix,
+  "pr-curve": PrCurve,
 };
 
 export function Diagram({

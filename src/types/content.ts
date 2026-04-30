@@ -69,7 +69,11 @@ export type DiagramKind =
   | "gbdt-tree"
   | "dropout"
   | "word2vec"
-  | "rlhf";
+  | "rlhf"
+  | "batch-norm"
+  | "k-fold-cv"
+  | "confusion-matrix"
+  | "pr-curve";
 
 export type TextbookBlock =
   | { type: "p"; text: string }

@@ -386,6 +386,11 @@ export default function RootLayout({
                       因果推論入門
                     </Link>
                   </li>
+                  <li>
+                    <Link href="/time-series" className="hover:underline text-[var(--muted-strong)]">
+                      時系列分析入門
+                    </Link>
+                  </li>
                 </ul>
               </div>
               <div>

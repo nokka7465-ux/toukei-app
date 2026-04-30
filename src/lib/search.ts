@@ -208,6 +208,42 @@ export const searchIndex: SearchItem[] = (() => {
       context: "因果推論ミニ教科書 · 第 6 章",
       text: "RDD 回帰不連続 cutoff Sharp Fuzzy 局所線形回帰 McCrary Lee 現職効果",
     },
+    {
+      url: "/time-series#ch1",
+      title: "時系列データの特徴",
+      context: "時系列分析ミニ教科書 · 第 1 章",
+      text: "時系列 トレンド 季節 周期 残差 定常性 ADF検定 ランダムウォーク ホワイトノイズ",
+    },
+    {
+      url: "/time-series#ch2",
+      title: "自己相関と ACF / PACF",
+      context: "時系列分析ミニ教科書 · 第 2 章",
+      text: "自己相関 ACF PACF AR MA ARMA ラグ オーダー判定",
+    },
+    {
+      url: "/time-series#ch3",
+      title: "AR / MA / ARIMA モデル",
+      context: "時系列分析ミニ教科書 · 第 3 章",
+      text: "AR MA ARIMA SARIMA ARIMAX 自己回帰 移動平均 差分 季節差分",
+    },
+    {
+      url: "/time-series#ch4",
+      title: "Prophet ─ ビジネス向け汎用ツール",
+      context: "時系列分析ミニ教科書 · 第 4 章",
+      text: "Prophet トレンド 季節性 休日効果 changepoint 変化点 Meta",
+    },
+    {
+      url: "/time-series#ch5",
+      title: "状態空間モデルとカルマンフィルタ",
+      context: "時系列分析ミニ教科書 · 第 5 章",
+      text: "状態空間 カルマンフィルタ 局所水準 局所線形トレンド 動的線形 粒子フィルタ",
+    },
+    {
+      url: "/time-series#ch6",
+      title: "予測精度の評価とバックテスト",
+      context: "時系列分析ミニ教科書 · 第 6 章",
+      text: "MAE RMSE MAPE SMAPE MASE TimeSeriesSplit ローリング交差検証 予測区間 バックテスト",
+    },
   ];
   for (const s of standalone) {
     items.push({
