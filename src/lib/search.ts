@@ -244,6 +244,36 @@ export const searchIndex: SearchItem[] = (() => {
       context: "時系列分析ミニ教科書 · 第 6 章",
       text: "MAE RMSE MAPE SMAPE MASE TimeSeriesSplit ローリング交差検証 予測区間 バックテスト",
     },
+    {
+      url: "/deep-learning-basics#ch1",
+      title: "ニューラルネットの仕組み",
+      context: "ディープラーニング基礎ミニ教科書 · 第 1 章",
+      text: "ニューラルネット MLP 活性化関数 ReLU Sigmoid Softmax 順伝播 パーセプトロン",
+    },
+    {
+      url: "/deep-learning-basics#ch2",
+      title: "誤差逆伝播法と最適化",
+      context: "ディープラーニング基礎ミニ教科書 · 第 2 章",
+      text: "誤差逆伝播 backpropagation SGD Adam Momentum RMSprop AdamW 学習率 Warmup Cosine Annealing",
+    },
+    {
+      url: "/deep-learning-basics#ch3",
+      title: "CNN ─ 画像処理の標準",
+      context: "ディープラーニング基礎ミニ教科書 · 第 3 章",
+      text: "CNN 畳み込み プーリング ResNet VGG AlexNet EfficientNet ViT スキップ接続",
+    },
+    {
+      url: "/deep-learning-basics#ch4",
+      title: "RNN・LSTM・Transformer ─ 系列データ",
+      context: "ディープラーニング基礎ミニ教科書 · 第 4 章",
+      text: "RNN LSTM GRU Transformer Self-Attention Multi-Head Attention",
+    },
+    {
+      url: "/deep-learning-basics#ch5",
+      title: "正則化と過学習対策",
+      context: "ディープラーニング基礎ミニ教科書 · 第 5 章",
+      text: "Dropout BatchNorm LayerNorm Weight Decay Data Augmentation Early Stopping LoRA 転移学習 ファインチューニング",
+    },
   ];
   for (const s of standalone) {
     items.push({

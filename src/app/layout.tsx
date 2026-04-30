@@ -391,6 +391,11 @@ export default function RootLayout({
                       時系列分析入門
                     </Link>
                   </li>
+                  <li>
+                    <Link href="/deep-learning-basics" className="hover:underline text-[var(--muted-strong)]">
+                      ディープラーニング基礎
+                    </Link>
+                  </li>
                 </ul>
               </div>
               <div>

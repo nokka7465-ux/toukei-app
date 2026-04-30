@@ -5998,6 +5998,261 @@ blogPosts.push(
   },
 );
 
+blogPosts.push(
+  {
+    slug: "pytorch-introduction",
+    title: "PyTorch 入門 ─ TensorFlow と差別化された使いやすさ",
+    description:
+      "深層学習フレームワーク PyTorch の基本を 30 分で押さえる。Tensor 操作 → 自動微分 → モデル定義 → 学習ループまで、最小コードで体験。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "PyTorch = NumPy ライク + 自動微分 + GPU。研究 / 産業界の双方で実質的なデファクト。",
+      "学習ループは『順伝播 → 損失計算 → 勾配ゼロ化 → backward → optimizer.step』の 5 行。",
+      "PyTorch Lightning や Hugging Face で更にコードを減らせる。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**PyTorch** は Meta が公開し、研究・実装の両面で **深層学習のデファクトスタンダード** となっているフレームワーク。NumPy ライクな API、Pythonic な書き心地、強力な自動微分、GPU 対応 ── これらを 30 分で体験します。",
+      },
+      { type: "h3", text: "Tensor の基本" },
+      {
+        type: "code",
+        title: "Tensor は GPU に乗る NumPy 配列",
+        python:
+          "import torch\n\nx = torch.tensor([[1.0, 2.0], [3.0, 4.0]])\nprint(x)\nprint(x.shape)         # torch.Size([2, 2])\nprint(x.mean())        # 2.5\n\n# GPU に転送(GPU 環境で)\nif torch.cuda.is_available():\n    x = x.to('cuda')",
+      },
+      { type: "h3", text: "自動微分(Autograd)" },
+      {
+        type: "p",
+        text: "**`requires_grad=True`** にすれば、計算グラフが自動で構築され、`.backward()` で勾配が計算されます。これが NN 学習の心臓部。",
+      },
+      {
+        type: "code",
+        title: "自動微分 ─ 勾配を自動計算",
+        python:
+          "x = torch.tensor(2.0, requires_grad=True)\ny = x ** 3 + 2 * x\ny.backward()\nprint(x.grad)  # 3x² + 2 = 14",
+      },
+      { type: "h3", text: "モデル定義 ─ nn.Module" },
+      {
+        type: "code",
+        title: "シンプルな MLP",
+        python:
+          "import torch.nn as nn\n\nclass MLP(nn.Module):\n    def __init__(self):\n        super().__init__()\n        self.fc1 = nn.Linear(784, 128)\n        self.fc2 = nn.Linear(128, 10)\n        self.relu = nn.ReLU()\n\n    def forward(self, x):\n        x = self.relu(self.fc1(x))\n        return self.fc2(x)\n\nmodel = MLP()\nprint(model)",
+      },
+      { type: "h3", text: "学習ループの典型" },
+      {
+        type: "code",
+        title: "毎回出てくる 5 行",
+        python:
+          "import torch.optim as optim\n\nopt = optim.Adam(model.parameters(), lr=1e-3)\nloss_fn = nn.CrossEntropyLoss()\n\nfor x, y in dataloader:\n    pred = model(x)               # 順伝播\n    loss = loss_fn(pred, y)       # 損失\n    opt.zero_grad()               # 勾配ゼロ化\n    loss.backward()               # 逆伝播\n    opt.step()                    # 重み更新",
+      },
+      {
+        type: "intuition",
+        title: "💡 PyTorch の強み",
+        body: "**Define-by-Run**: 計算グラフが実行時に作られるので、Python の if / for で動的なネットワークが書ける。デバッグも普通の Python と同じ感覚。**TensorFlow は Define-and-Run だった** ため初心者の壁になっていたが、TF2 で改善された。",
+      },
+      { type: "h3", text: "より高水準のツール" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**PyTorch Lightning**: 学習ループのボイラープレートを自動化",
+          "**Hugging Face Transformers**: 事前学習済みモデルの即利用",
+          "**TorchVision / TorchAudio**: 画像・音声の標準ローダ + モデル",
+          "**Accelerate**: マルチ GPU・分散学習を 1 行追加で",
+        ],
+      },
+      { type: "h3", text: "次のステップ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[**ディープラーニング基礎ミニ教科書**](/deep-learning-basics)",
+          "[**E 資格 教科書**](/certs/e-shikaku/textbook)",
+          "[**プログラミング入門**](/programming) ─ Python・NumPy・Pandas",
+          "[**Transformer の数学**](/blog/transformer-math)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "shap-explainable-ai",
+    title: "SHAP で AI の判断を説明する ─ XAI 実践入門",
+    description:
+      "ブラックボックスな ML モデルの予測根拠を、ゲーム理論ベースの SHAP で可視化する方法。LIME との比較、実装、ビジネスでの活かし方まで。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "SHAP = Shapley 値で各特徴量の予測への寄与度を厳密に算出。",
+      "LIME はサンプルごとに局所近似、SHAP は理論的に裏付けられた一意の解。",
+      "金融・医療・採用など『説明責任』が重い領域で必須。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**SHAP(SHapley Additive exPlanations)** は、**ゲーム理論の Shapley 値** をベースに、ML モデルの予測に対する各特徴量の寄与を厳密に分解する手法。XGBoost・LightGBM・NN 何にでも使えます。",
+      },
+      { type: "h3", text: "Shapley 値とは" },
+      {
+        type: "def",
+        title: "協力ゲームの公平な利得分配",
+        body: "$N$ 人で協力してゲームに勝ち、賞金 $V$ を獲得した。各人の貢献度はどう分けるべきか?\n\n**Shapley 値**: あらゆる加入順序の組合せで『その人がいる時といない時の差』を平均した値。**唯一の公平な分配** であることが理論的に証明されている(対称性・効率性・線形性・無効プレイヤー)。",
+      },
+      { type: "h3", text: "ML への応用" },
+      {
+        type: "p",
+        text: "『**特徴量を 1 つずつモデルに加えたとき、予測がどう変わるか**』を全順序で平均することで、**各特徴量の貢献値** を算出。これが SHAP 値。",
+      },
+      { type: "math", tex: "\\phi_i = \\sum_{S \\subseteq F \\setminus \\{i\\}} \\frac{|S|! (|F| - |S| - 1)!}{|F|!} \\left[ f(S \\cup \\{i\\}) - f(S) \\right]" },
+      { type: "h3", text: "TreeSHAP ─ 決定木向け高速版" },
+      {
+        type: "p",
+        text: "上記の式は組合せ爆発で計算困難。**TreeSHAP** は決定木構造を利用して **多項式時間で厳密** に計算可能。XGBoost・LightGBM・CatBoost の標準機能。",
+      },
+      {
+        type: "code",
+        title: "Python で SHAP 値を計算",
+        python:
+          "import shap\nimport xgboost as xgb\nfrom sklearn.datasets import fetch_california_housing\n\ndata = fetch_california_housing()\nX, y = data.data, data.target\n\nmodel = xgb.XGBRegressor(n_estimators=100).fit(X, y)\n\n# TreeSHAP で全特徴量の寄与を算出\nexplainer = shap.TreeExplainer(model)\nshap_values = explainer.shap_values(X[:100])\n\n# 寄与度のサマリープロット\nshap.summary_plot(shap_values, X[:100], feature_names=data.feature_names)\n# 個別予測の Force プロット\nshap.force_plot(explainer.expected_value, shap_values[0], X[0], matplotlib=True)",
+      },
+      { type: "h3", text: "SHAP vs LIME" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**SHAP**: 理論的裏付けあり、グローバル/ローカル両対応、決定木で高速",
+          "**LIME**: モデル非依存、特定サンプル周辺を線形近似、画像・テキストでも使える",
+          "両方を組み合わせて使うのが実務の定石",
+        ],
+      },
+      { type: "h3", text: "ビジネスでの活かし方" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**金融**: 与信スコアの根拠を顧客に説明(GDPR の説明権対応)",
+          "**医療**: 診断 AI が『なぜこの病気と判定したか』を医師に提示",
+          "**採用**: 候補者選抜の理由を透明化(差別防止)",
+          "**Kaggle**: 自分の特徴量がどれだけ効いているかを可視化 → 改善",
+        ],
+      },
+      {
+        type: "intuition",
+        title: "💡 SHAP は『局所 + 大域』を統一的に扱える",
+        body: "個別予測の寄与(Force プロット)もモデル全体の傾向(Summary プロット)も同じ枠組みで見られる。LIME は局所だけ、Permutation Importance は大域だけ。**統一的に扱えるのが SHAP の強み**。",
+      },
+      { type: "h3", text: "関連" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[**ブログ: モデル解釈性 入門**](/blog/model-interpretability-shap)",
+          "[**G 検定 教科書**](/certs/g-test/textbook) ─ XAI を概念ベースで",
+          "[**特徴量エンジニアリング**](/blog/feature-engineering-101)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "data-engineering-101",
+    title: "データエンジニアリング基礎 ─ ETL・Data Lake・dbt の世界",
+    description:
+      "ML を本番運用するなら避けて通れないデータエンジニアリング。ETL・データレイク・データウェアハウス・dbt・Airflow など現代スタックの概要。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "ML プロジェクトの 70% 以上の時間はデータパイプラインに使われる。",
+      "ETL → ELT への変化、Data Lake / Lakehouse の登場、dbt によるテスタブル SQL が現代のスタック。",
+      "Airflow / Dagster でジョブをオーケストレーション、Snowflake / BigQuery / Databricks がストレージ層。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "「**ML エンジニアの 7 割の時間はデータエンジニアリング**」 ─ よく聞く言葉ですが本当です。本記事では現代のデータスタックの全体像を整理します。",
+      },
+      { type: "h3", text: "ETL から ELT へ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**従来の ETL**: Extract → **Transform**(変換)→ Load。変換専用サーバが必要、修正が大変",
+          "**現代の ELT**: Extract → Load(まず生のまま)→ Transform。データウェアハウス内で SQL で変換 → 安く速く柔軟",
+          "**理由**: クラウド DWH(Snowflake/BigQuery)の計算が安くなり、生データを残す方が後の柔軟性が高いから",
+        ],
+      },
+      { type: "h3", text: "ストレージ層の選択肢" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Data Warehouse**(BigQuery, Snowflake, Redshift): 構造化データ最適、BI・分析に強い",
+          "**Data Lake**(S3, GCS, ADLS + Parquet/Delta): 大規模・低コスト、非構造化データも",
+          "**Lakehouse**(Databricks, Iceberg): Lake + Warehouse のいいとこ取り、ACID トランザクション付き",
+        ],
+      },
+      { type: "h3", text: "変換層 ─ dbt の革命" },
+      {
+        type: "def",
+        title: "dbt(data build tool)",
+        body: "**SQL ベースの変換フレームワーク**。生データから加工済みテーブル(マート)を作る処理を **テスタブル・バージョン管理可能** な SQL で記述。\n\n**特徴**:\n- `.sql` ファイルとして変換ロジックを管理(Git で履歴を追える)\n- **データテスト**: ユニーク性・null チェック・参照整合性を SQL で\n- **データ系譜(lineage)**: 依存関係を自動図示\n- **ドキュメント自動生成**\n- Snowflake/BigQuery/Databricks など主要 DWH に対応",
+      },
+      { type: "h3", text: "オーケストレーション層" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Apache Airflow**: 老舗。Python DAG。エコシステム大",
+          "**Dagster**: モダン。データ資産(asset)中心の設計",
+          "**Prefect**: 軽量・動的。Pythonic な API",
+          "**Mage**: 新興。UI が良くスタートアップ向け",
+        ],
+      },
+      { type: "h3", text: "ストリーミング処理" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Apache Kafka**: イベントストリーミングの事実上の標準",
+          "**Apache Flink**: 状態を持つストリーム処理",
+          "**Confluent Cloud / Redpanda**: マネージド Kafka",
+          "**Materialize**: ストリーム上の SQL ビュー",
+        ],
+      },
+      { type: "h3", text: "現代の典型スタック例(中規模スタートアップ)" },
+      {
+        type: "list",
+        style: "number",
+        items: [
+          "**取り込み**: Fivetran or Airbyte で SaaS から BigQuery へ",
+          "**ストレージ**: BigQuery(DWH)+ GCS(Data Lake)",
+          "**変換**: dbt Core(or dbt Cloud)で SQL ベース",
+          "**オーケストレーション**: dbt Cloud のスケジューラ or Airflow",
+          "**BI**: Looker / Metabase / Hex でダッシュボード",
+          "**ML**: BigQuery → Vertex AI / SageMaker でモデル学習",
+        ],
+      },
+      {
+        type: "intuition",
+        title: "💡 データエンジニアリングがキャリアの鍵",
+        body: "ML エンジニアの **転職市場で最も差別化できるスキル** が実はデータエンジニアリング。モデリングだけできる人は多いが、**本番運用できるパイプラインを設計できる人は希少**。SQL + dbt + Airflow の 3 点セットを抑えるとキャリアが広がる。",
+      },
+      { type: "h3", text: "関連" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[**SQL 中級**](/blog/sql-intermediate-for-data)",
+          "[**MLOps 基礎**](/blog/mlops-basics)",
+          "[**プログラミング入門 第 4 章 SQL**](/programming#ch4)",
+          "[**Docker 入門**](/blog/docker-for-ml)",
+        ],
+      },
+    ],
+  },
+);
+
 export function getPostBySlug(slug: string): BlogPost | undefined {
   return blogPosts.find((p) => p.slug === slug);
 }

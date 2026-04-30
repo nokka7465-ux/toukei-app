@@ -8,12 +8,15 @@ import { TwoProportionTest } from "@/components/tools/TwoProportionTest";
 import { CorrelationTest } from "@/components/tools/CorrelationTest";
 import { AnovaCalc } from "@/components/tools/AnovaCalc";
 import { ChiSquareTest } from "@/components/tools/ChiSquareTest";
+import { WilcoxonSignedRank } from "@/components/tools/WilcoxonSignedRank";
+import { MannWhitneyU } from "@/components/tools/MannWhitneyU";
+import { McnemarTest } from "@/components/tools/McnemarTest";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
   title: "統計計算ツール ─ 信頼区間・p値・サンプルサイズの無料計算機",
   description:
-    "信頼区間・p 値・サンプルサイズ・検出力・A/B テスト・相関検定・ANOVA・カイ二乗の 8 つの統計計算機を無料で。学習にも実務にも使える、ブラウザ完結のオンライン計算ツール。データ送信なし。",
+    "信頼区間・p 値・サンプルサイズ・検出力・A/B テスト・相関検定・ANOVA・カイ二乗の 11 つの統計計算機を無料で。学習にも実務にも使える、ブラウザ完結のオンライン計算ツール。データ送信なし。",
   alternates: { canonical: "/tools" },
   openGraph: {
     title: "統計計算ツール集",
@@ -49,7 +52,7 @@ export default function ToolsPage() {
           統計計算ツール集
         </h1>
         <p className="text-[var(--muted-strong)] leading-loose max-w-3xl">
-          学習中の確認や実務での意思決定にすぐ使える、8 つの統計計算機。すべて{" "}
+          学習中の確認や実務での意思決定にすぐ使える、11 つの統計計算機。すべて{" "}
           <strong>ブラウザ内で完結</strong>{" "}
           ─ データ送信・ログイン・サーバ計算は一切ありません。
         </p>
@@ -63,6 +66,9 @@ export default function ToolsPage() {
             { id: "correlation", label: "相関係数検定" },
             { id: "anova", label: "ANOVA" },
             { id: "chi-square", label: "χ² 独立性検定" },
+            { id: "wilcoxon", label: "Wilcoxon 符号順位" },
+            { id: "mann-whitney", label: "Mann-Whitney U" },
+            { id: "mcnemar", label: "McNemar 検定" },
           ].map((item) => (
             <a
               key={item.id}
@@ -99,6 +105,15 @@ export default function ToolsPage() {
         </div>
         <div id="chi-square" className="scroll-mt-20">
           <ChiSquareTest />
+        </div>
+        <div id="wilcoxon" className="scroll-mt-20">
+          <WilcoxonSignedRank />
+        </div>
+        <div id="mann-whitney" className="scroll-mt-20">
+          <MannWhitneyU />
+        </div>
+        <div id="mcnemar" className="scroll-mt-20">
+          <McnemarTest />
         </div>
       </section>
 

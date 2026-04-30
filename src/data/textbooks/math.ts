@@ -578,7 +578,229 @@ export const mathBasicsTextbook: Textbook = {
             },
             {
               type: "p",
-              text: "ここまでで「統計のための数学基礎」全 4 章の主要部分が出そろいました。割合・Σ・対数・微分積分・ベクトル・行列 ─ これらが手元にあれば、統計検定の式は怖くなくなります。あとは個々の式と意味を、各級の教科書で深く学んでいきましょう。",
+              text: "ここまでで「統計のための数学基礎」前半 4 章が出そろいました。割合・Σ・対数・微分積分・ベクトル・行列 ─ これらが手元にあれば、統計検定の式は怖くなくなります。続く 2 章は応用的内容です。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch5",
+      number: 5,
+      title: "確率の数学 ─ 確率変数・期待値・分散",
+      overview:
+        "統計学の心臓部となる『確率変数』の扱い方。期待値・分散の計算ルールと、よく使う離散・連続分布の数式を整理。",
+      sections: [
+        {
+          id: "ch5-sec1",
+          number: "5.1",
+          title: "確率変数と確率分布",
+          blocks: [
+            {
+              type: "p",
+              text: "**確率変数(random variable)** は、ランダムな現象の結果に **数値を割り当てる関数**。例: サイコロを振る → 出た目を数字で表す → 確率変数 $X \\in \\{1, 2, 3, 4, 5, 6\\}$。",
+            },
+            { type: "h3", text: "離散と連続" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**離散確率変数**: 取りうる値が飛び飛び(0, 1, 2, ...)。例: コイン投げの表回数",
+                "**連続確率変数**: 取りうる値が実数全体や区間。例: 身長・気温",
+              ],
+            },
+            { type: "h3", text: "確率質量関数(PMF)と確率密度関数(PDF)" },
+            {
+              type: "def",
+              title: "PMF と PDF",
+              body: "**離散**: 確率質量関数 $P(X = x_i) = p_i$。すべての $p_i$ の和は 1。\n\n**連続**: 確率密度関数 $f(x)$。$\\int f(x) dx = 1$。**特定の点での値ではなく区間の積分**で確率を表す。\n\n累積分布関数(CDF): $F(x) = P(X \\leq x)$。離散も連続も統一的に定義可能。",
+            },
+            {
+              type: "intuition",
+              title: "💡 連続変数で『P(X = 5)』はゼロ?",
+              body: "連続変数では特定の 1 点に確率が貯まらない。あくまで $P(4.99 < X < 5.01)$ のような区間で確率が定まる。だから連続では PDF(密度)を使い、面積で確率を表す。",
+            },
+          ],
+        },
+        {
+          id: "ch5-sec2",
+          number: "5.2",
+          title: "期待値と分散の計算",
+          blocks: [
+            {
+              type: "p",
+              text: "確率変数を要約する 2 つの基本量。期待値は『重心』、分散は『散らばり』。",
+            },
+            { type: "h3", text: "期待値の定義" },
+            { type: "math", tex: "E[X] = \\sum_i x_i p_i \\quad \\text{(離散)}, \\qquad E[X] = \\int x f(x) dx \\quad \\text{(連続)}" },
+            {
+              type: "p",
+              text: "「**取りうる値 × その確率の和**」という直感的な式。サイコロの期待値: $1 \\cdot \\frac{1}{6} + 2 \\cdot \\frac{1}{6} + \\dots + 6 \\cdot \\frac{1}{6} = 3.5$",
+            },
+            { type: "h3", text: "期待値の重要な性質" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**線形性**: $E[aX + b] = aE[X] + b$",
+                "**和の期待値**: $E[X + Y] = E[X] + E[Y]$(独立でなくても OK!)",
+                "**独立な積**: $E[XY] = E[X]E[Y]$(独立のときだけ)",
+              ],
+            },
+            { type: "h3", text: "分散の定義" },
+            { type: "math", tex: "V[X] = E[(X - E[X])^2] = E[X^2] - (E[X])^2" },
+            {
+              type: "p",
+              text: "**期待値からのズレを 2 乗した平均**。標準偏差は $\\sigma = \\sqrt{V[X]}$。",
+            },
+            { type: "h3", text: "分散の重要な性質" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "$V[aX + b] = a^2 V[X]$(定数 $b$ は影響しない、$a$ は 2 乗で効く)",
+                "**独立変数の和**: $V[X + Y] = V[X] + V[Y]$(独立のときだけ!)",
+                "**従属変数の和**: $V[X+Y] = V[X] + V[Y] + 2\\mathrm{Cov}(X,Y)$",
+              ],
+            },
+            {
+              type: "code",
+              title: "Python で確認",
+              runnable: true,
+              python:
+                "import numpy as np\n\n# サイコロの確率変数\nx = np.array([1, 2, 3, 4, 5, 6])\np = np.array([1/6] * 6)\n\nE = (x * p).sum()\nV = ((x - E) ** 2 * p).sum()\nprint(f'E[X] = {E:.3f}(理論 3.5)')\nprint(f'V[X] = {V:.3f}(理論 2.917)')\nprint(f'σ    = {np.sqrt(V):.3f}')\n\n# シミュレーションで確認\nrng = np.random.default_rng(0)\nsamples = rng.integers(1, 7, 100000)\nprint(f'\\n10万回サンプル: 平均={samples.mean():.3f}, 分散={samples.var():.3f}')",
+            },
+          ],
+        },
+        {
+          id: "ch5-sec3",
+          number: "5.3",
+          title: "代表的な確率分布の式",
+          blocks: [
+            {
+              type: "p",
+              text: "統計でよく使う分布の **PMF / PDF・期待値・分散** をまとめます。",
+            },
+            { type: "h3", text: "二項分布 Bin(n, p)" },
+            { type: "math", tex: "P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}" },
+            { type: "math", tex: "E[X] = np, \\quad V[X] = np(1-p)" },
+            { type: "h3", text: "ポアソン分布 Po(λ)" },
+            { type: "math", tex: "P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}, \\quad E[X] = V[X] = \\lambda" },
+            { type: "h3", text: "正規分布 N(μ, σ²)" },
+            { type: "math", tex: "f(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^2}} \\exp\\left(-\\frac{(x-\\mu)^2}{2\\sigma^2}\\right)" },
+            { type: "math", tex: "E[X] = \\mu, \\quad V[X] = \\sigma^2" },
+            { type: "h3", text: "指数分布 Exp(λ)" },
+            { type: "math", tex: "f(x) = \\lambda e^{-\\lambda x} \\quad (x \\geq 0), \\quad E[X] = 1/\\lambda, \\quad V[X] = 1/\\lambda^2" },
+            {
+              type: "practical",
+              title: "🛠 各分布の使い所",
+              body: "**二項**: コイン・A/B テスト・成功失敗 / **ポアソン**: 単位時間内の発生件数(電話・地震・スパムメール) / **正規**: 多数の独立要因の和(身長・テスト点数) / **指数**: 待ち時間・寿命",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch6",
+      number: 6,
+      title: "多変数の微分 ─ 偏微分と勾配",
+      overview:
+        "機械学習・深層学習で必須の『偏微分』『勾配ベクトル』『連鎖律』を整理。最適化の数学的背景。",
+      sections: [
+        {
+          id: "ch6-sec1",
+          number: "6.1",
+          title: "偏微分 ─ 1 変数だけ動かす",
+          blocks: [
+            {
+              type: "p",
+              text: "$f(x, y)$ のような **複数変数** の関数の場合、『$x$ について微分』『$y$ について微分』のように **特定の変数だけ動かして** 微分するのが **偏微分(partial derivative)**。",
+            },
+            { type: "h3", text: "記号と計算" },
+            { type: "math", tex: "\\frac{\\partial f}{\\partial x} = \\lim_{h \\to 0} \\frac{f(x+h, y) - f(x, y)}{h}" },
+            {
+              type: "p",
+              text: "例: $f(x, y) = x^2 + 3xy + y^2$ のとき",
+            },
+            { type: "math", tex: "\\frac{\\partial f}{\\partial x} = 2x + 3y, \\quad \\frac{\\partial f}{\\partial y} = 3x + 2y" },
+            {
+              type: "intuition",
+              title: "💡 偏微分の直感",
+              body: "山の地図を考える。**東西方向の傾き**(東に 1 歩進んだら何 m 上がる?)が $\\partial f / \\partial x$、**南北方向の傾き** が $\\partial f / \\partial y$。山頂では両方とも 0(平ら)。",
+            },
+            { type: "h3", text: "勾配ベクトル(Gradient)" },
+            {
+              type: "def",
+              title: "全方向の傾きをまとめたベクトル",
+              body: "$\\nabla f = \\left(\\dfrac{\\partial f}{\\partial x_1}, \\dfrac{\\partial f}{\\partial x_2}, \\dots, \\dfrac{\\partial f}{\\partial x_n}\\right)$\n\n**勾配の方向 = 関数が最も急速に増加する方向**\n\n**勾配の逆向き = 最も急速に減少する方向**(勾配降下法の基礎)",
+            },
+          ],
+        },
+        {
+          id: "ch6-sec2",
+          number: "6.2",
+          title: "連鎖律(Chain Rule)",
+          blocks: [
+            {
+              type: "p",
+              text: "**合成関数の微分**。深層学習の誤差逆伝播法はこれの応用。",
+            },
+            { type: "h3", text: "1 変数の連鎖律" },
+            { type: "math", tex: "\\frac{d}{dx} f(g(x)) = f'(g(x)) \\cdot g'(x)" },
+            {
+              type: "p",
+              text: "例: $h(x) = (3x + 1)^5$ のとき、$f(u) = u^5$, $g(x) = 3x+1$ と分けて、$h'(x) = 5(3x+1)^4 \\cdot 3 = 15(3x+1)^4$",
+            },
+            { type: "h3", text: "多変数の連鎖律" },
+            { type: "math", tex: "\\frac{\\partial}{\\partial x} f(u(x, y), v(x, y)) = \\frac{\\partial f}{\\partial u} \\frac{\\partial u}{\\partial x} + \\frac{\\partial f}{\\partial v} \\frac{\\partial v}{\\partial x}" },
+            {
+              type: "intuition",
+              title: "💡 ニューラルネットの誤差逆伝播",
+              body: "ニューラルネットは『入力 → 線形変換 → 活性化 → 線形変換 → ... → 損失』という **長い合成関数**。各重みに対する勾配は **連鎖律で連鎖的に計算** される。これが backpropagation の数学的本質。",
+            },
+            { type: "h3", text: "ヘッセ行列(Hessian)─ 2 階偏微分の行列" },
+            {
+              type: "def",
+              title: "曲率を表す行列",
+              body: "$H_{ij} = \\dfrac{\\partial^2 f}{\\partial x_i \\partial x_j}$\n\n**用途**:\n- ニュートン法による最適化\n- 損失関数の曲率分析(極小・鞍点の判定)\n- 自然勾配法・第 2 階最適化\n\n大規模 NN では計算コストが高すぎるため、近似(L-BFGS・K-FAC)が使われる。",
+            },
+          ],
+        },
+        {
+          id: "ch6-sec3",
+          number: "6.3",
+          title: "ラグランジュ未定乗数法",
+          blocks: [
+            {
+              type: "p",
+              text: "**制約付き最適化** の道具。「$g(x, y) = 0$ という制約のもとで $f(x, y)$ を最大化(最小化)せよ」というタイプの問題を解く。",
+            },
+            { type: "h3", text: "アイデア" },
+            {
+              type: "p",
+              text: "ラグランジュ関数 $L(x, y, \\lambda) = f(x, y) - \\lambda g(x, y)$ を作り、すべての偏微分を 0 にする方程式を解く。",
+            },
+            { type: "math", tex: "\\frac{\\partial L}{\\partial x} = 0, \\quad \\frac{\\partial L}{\\partial y} = 0, \\quad \\frac{\\partial L}{\\partial \\lambda} = 0" },
+            { type: "h3", text: "応用例" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**SVM**: マージン最大化(制約 = 全データを正しく分類)",
+                "**PCA**: 分散最大化(制約 = ノルム = 1)",
+                "**ポートフォリオ最適化**: リターン最大化(制約 = リスク ≤ X)",
+                "**情報量最大化**: エントロピー最大化(制約 = 確率の和 = 1)",
+              ],
+            },
+            {
+              type: "practical",
+              title: "🛠 KKT 条件",
+              body: "不等式制約($g(x) \\leq 0$)も含む一般化が **KKT 条件**(Karush-Kuhn-Tucker)。SVM・凸最適化・線形計画法の理論基盤。E 資格・専門レベルで重要。",
+            },
+            { type: "h3", text: "まとめ" },
+            {
+              type: "p",
+              text: "確率の数学(Ch5)+ 多変数の微分(Ch6)── これで統計検定 2 級・準 1 級・E 資格までの **数学的下地** がほぼ揃いました。各級の教科書に進む準備完了です。",
             },
           ],
         },

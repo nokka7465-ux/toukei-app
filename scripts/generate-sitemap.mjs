@@ -29,6 +29,7 @@ const staticUrls = [
   { path: "/programming", priority: 0.85, changefreq: "monthly" },
   { path: "/causal-inference", priority: 0.8, changefreq: "monthly" },
   { path: "/time-series", priority: 0.8, changefreq: "monthly" },
+  { path: "/deep-learning-basics", priority: 0.85, changefreq: "monthly" },
   { path: "/certs/ds-basic", priority: 0.7, changefreq: "monthly" },
   { path: "/certs/ds-basic/textbook", priority: 0.7, changefreq: "monthly" },
   { path: "/certs/ds-basic/quiz", priority: 0.7, changefreq: "monthly" },
