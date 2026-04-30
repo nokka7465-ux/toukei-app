@@ -2455,69 +2455,6 @@ export const glossary: GlossaryTerm[] = [
   },
   // === 機械学習 / ディープラーニング 用語(31 語) ===
   {
-    term: "教師あり学習",
-    reading: "きょうしありがくしゅう",
-    english: "Supervised Learning",
-    definition:
-      "正解ラベル付きデータからパターンを学習する手法。分類・回帰が代表例。",
-    level: "準1",
-    category: "機械学習",
-  },
-  {
-    term: "教師なし学習",
-    reading: "きょうしなしがくしゅう",
-    english: "Unsupervised Learning",
-    definition:
-      "ラベルなしデータから構造を発見する手法。クラスタリング・次元削減が代表例。",
-    level: "準1",
-    category: "機械学習",
-  },
-  {
-    term: "強化学習",
-    reading: "きょうかがくしゅう",
-    english: "Reinforcement Learning",
-    definition:
-      "環境との相互作用で報酬最大化を目指す学習パラダイム。AlphaGo や ChatGPT の RLHF で使われる。",
-    level: "準1",
-    category: "機械学習",
-  },
-  {
-    term: "過学習",
-    reading: "かがくしゅう",
-    english: "Overfitting",
-    definition:
-      "訓練データに過度に適合し、新しいデータで性能が落ちる現象。正則化・データ増強・早期終了で対策。",
-    level: "2",
-    category: "機械学習",
-  },
-  {
-    term: "正則化",
-    reading: "せいそくか",
-    english: "Regularization",
-    definition:
-      "モデルの複雑さに罰則を与えて過学習を防ぐ手法。L1(Lasso)は特徴選択、L2(Ridge)は係数の縮小。",
-    level: "2",
-    category: "機械学習",
-  },
-  {
-    term: "交差検証",
-    reading: "こうさけんしょう",
-    english: "Cross-Validation (CV)",
-    definition:
-      "データを k 分割して訓練・検証を繰り返し、モデル性能を頑健に評価する手法。標準は 5-fold CV。",
-    level: "2",
-    category: "機械学習",
-  },
-  {
-    term: "勾配降下法",
-    reading: "こうばいこうかほう",
-    english: "Gradient Descent",
-    definition:
-      "損失関数を最小化するため、勾配の逆方向にパラメータを更新する反復法。SGD・Momentum・Adam などの派生がある。",
-    level: "準1",
-    category: "最適化",
-  },
-  {
     term: "誤差逆伝播",
     reading: "ごさぎゃくでんぱ",
     english: "Backpropagation",
@@ -2545,15 +2482,6 @@ export const glossary: GlossaryTerm[] = [
     category: "ディープラーニング",
   },
   {
-    term: "Transformer",
-    reading: "とらんすふぉーまー",
-    english: "Transformer",
-    definition:
-      "Self-Attention を主軸にしたアーキテクチャ。BERT・GPT・ViT の基盤。長距離依存と並列計算を両立。",
-    level: "1",
-    category: "ディープラーニング",
-  },
-  {
     term: "Attention",
     reading: "あてんしょん",
     english: "Attention Mechanism",
@@ -2570,33 +2498,6 @@ export const glossary: GlossaryTerm[] = [
       "離散的なトークン(単語など)を密ベクトルに変換する表現。Word2Vec・BERT 埋め込みなど。",
     level: "準1",
     category: "ディープラーニング",
-  },
-  {
-    term: "ドロップアウト",
-    reading: "どろっぷあうと",
-    english: "Dropout",
-    definition:
-      "学習中にランダムにニューロンを無効化する正則化手法。過学習を防ぎ、アンサンブル効果も得られる。",
-    level: "準1",
-    category: "ディープラーニング",
-  },
-  {
-    term: "バッチ正規化",
-    reading: "ばっちせいきか",
-    english: "Batch Normalization",
-    definition:
-      "ミニバッチ単位で各層の入力を正規化する手法。学習速度向上と勾配消失の緩和に寄与。",
-    level: "準1",
-    category: "ディープラーニング",
-  },
-  {
-    term: "Adam",
-    reading: "あだむ",
-    english: "Adam Optimizer",
-    definition:
-      "Momentum と RMSProp を組み合わせた適応的学習率の最適化アルゴリズム。多くの DL モデルで標準。",
-    level: "準1",
-    category: "最適化",
   },
   {
     term: "ROC曲線",
@@ -2623,33 +2524,6 @@ export const glossary: GlossaryTerm[] = [
     definition:
       "適合率(Precision)と再現率(Recall)の調和平均。クラス不均衡なデータの分類評価で使われる。",
     level: "2",
-    category: "機械学習",
-  },
-  {
-    term: "決定木",
-    reading: "けっていぎ",
-    english: "Decision Tree",
-    definition:
-      "条件分岐を木構造で表現する解釈性の高いモデル。Random Forest や GBDT の構成要素。",
-    level: "2",
-    category: "機械学習",
-  },
-  {
-    term: "ランダムフォレスト",
-    reading: "らんだむふぉれすと",
-    english: "Random Forest",
-    definition:
-      "多数の決定木をブートストラップサンプルで学習し、多数決(分類)や平均(回帰)で予測するアンサンブル。",
-    level: "準1",
-    category: "機械学習",
-  },
-  {
-    term: "勾配ブースティング",
-    reading: "こうばいぶーすてぃんぐ",
-    english: "Gradient Boosting (GBDT)",
-    definition:
-      "弱学習器の誤差を逐次的に補正していくブースティング手法。XGBoost・LightGBM・CatBoost が実装。",
-    level: "準1",
     category: "機械学習",
   },
   {
@@ -2680,24 +2554,6 @@ export const glossary: GlossaryTerm[] = [
     category: "機械学習",
   },
   {
-    term: "ナイーブベイズ",
-    reading: "ないーぶべいず",
-    english: "Naive Bayes",
-    definition:
-      "特徴量間の独立性を仮定したベイズ分類器。スパムフィルタ・テキスト分類の古典的手法。",
-    level: "準1",
-    category: "機械学習",
-  },
-  {
-    term: "ハイパーパラメータ",
-    reading: "はいぱーぱらめーた",
-    english: "Hyperparameter",
-    definition:
-      "学習の前に人手で設定するパラメータ(学習率・木の深さ・正則化係数など)。GridSearch / ベイズ最適化で探索。",
-    level: "2",
-    category: "機械学習",
-  },
-  {
     term: "特徴量エンジニアリング",
     reading: "とくちょうりょうえんじにありんぐ",
     english: "Feature Engineering",
@@ -2712,24 +2568,6 @@ export const glossary: GlossaryTerm[] = [
     english: "Pre-training",
     definition:
       "大規模な教師なしデータで汎用表現を学習させる段階。BERT・GPT は事前学習 → ファインチューニングの流れ。",
-    level: "1",
-    category: "ディープラーニング",
-  },
-  {
-    term: "ファインチューニング",
-    reading: "ふぁいんちゅーにんぐ",
-    english: "Fine-tuning",
-    definition:
-      "事前学習済みモデルを特定タスク用に追加学習する手法。LoRA など効率的な手法が登場している。",
-    level: "1",
-    category: "ディープラーニング",
-  },
-  {
-    term: "GAN",
-    reading: "じーえーえぬ",
-    english: "Generative Adversarial Network",
-    definition:
-      "Generator と Discriminator の対立で学習する生成モデル。画像生成・データ拡張などに応用。",
     level: "1",
     category: "ディープラーニング",
   },
@@ -2776,15 +2614,6 @@ export const glossary: GlossaryTerm[] = [
     english: "Chain-of-Thought (CoT)",
     definition:
       "LLM に推論過程を段階的に出させるプロンプト手法。複雑な数学・論理問題で正答率が向上する。",
-    level: "1",
-    category: "LLM",
-  },
-  {
-    term: "RLHF",
-    reading: "あーるえるえいちえふ",
-    english: "Reinforcement Learning from Human Feedback",
-    definition:
-      "人間の好み比較データから報酬モデルを学習し、PPO で LLM を最適化する手法。ChatGPT の安全性に寄与。",
     level: "1",
     category: "LLM",
   },
@@ -3087,15 +2916,6 @@ export const glossary: GlossaryTerm[] = [
     category: "強化学習",
   },
   {
-    term: "拡散モデル",
-    reading: "かくさんもでる",
-    english: "Diffusion Model",
-    definition:
-      "画像にノイズを徐々に加える順過程と、それを除去する逆過程を学習する生成モデル。Stable Diffusion・DALL-E の基盤。",
-    level: "1",
-    category: "生成 AI",
-  },
-  {
     term: "DDPM",
     reading: "でぃーでぃーぴーえむ",
     english: "Denoising Diffusion Probabilistic Model",
@@ -3110,15 +2930,6 @@ export const glossary: GlossaryTerm[] = [
     english: "Classifier-Free Guidance",
     definition:
       "拡散モデルの条件付き生成で、条件あり/なしの予測を線形結合してガイダンス強度を高める手法。",
-    level: "1",
-    category: "生成 AI",
-  },
-  {
-    term: "VAE",
-    reading: "ぶいえーいー",
-    english: "Variational Autoencoder",
-    definition:
-      "潜在変数を事後分布で近似する確率的オートエンコーダ。Stable Diffusion の latent space に応用。",
     level: "1",
     category: "生成 AI",
   },
