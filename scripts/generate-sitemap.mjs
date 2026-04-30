@@ -16,6 +16,7 @@ const staticUrls = [
   { path: "/mock", priority: 0.85, changefreq: "monthly" },
   { path: "/practice", priority: 0.85, changefreq: "monthly" },
   { path: "/plan", priority: 0.8, changefreq: "monthly" },
+  { path: "/compare", priority: 0.8, changefreq: "monthly" },
   { path: "/roadmap", priority: 0.9, changefreq: "monthly" },
   { path: "/glossary", priority: 0.8, changefreq: "monthly" },
   { path: "/cheatsheet", priority: 0.8, changefreq: "monthly" },

@@ -2,6 +2,494 @@ import type { BlogPost } from "@/types/content";
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "slack-bot-with-llm",
+    title: "Slack Bot を LLM で作る ─ FastAPI + OpenAI で社内ツール化",
+    description:
+      "Slack の Slash Command と Events API を使い、社内チャンネル内で動く LLM Bot を構築。FastAPI バックエンド + OpenAI で 1 日で完成。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "Slack Bot は Bolt SDK か Events API + FastAPI で実装可能。後者がカスタマイズ自由。",
+      "メンション or Slash Command で起動 → LLM 呼び出し → 結果を投稿。",
+      "デプロイは Vercel(サーバレス) or Cloud Run。署名検証は必須。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**社内チャンネルに LLM Bot を 1 つ置く** だけで、検索・要約・コード生成の効率が劇的に上がります。本記事では FastAPI + OpenAI で最短実装。",
+      },
+      { type: "h3", text: "アーキテクチャ" },
+      {
+        type: "list",
+        style: "number",
+        items: [
+          "ユーザーが Slack で `@ai-bot 統計検定 2 級は?` とメンション",
+          "Slack が Events API でこちらの Webhook を叩く",
+          "FastAPI がリクエスト受信 → 署名検証 → LLM 呼び出し",
+          "結果を Slack API でチャンネルに投稿",
+        ],
+      },
+      { type: "h3", text: "Slack App セットアップ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[api.slack.com/apps](https://api.slack.com/apps) で App 作成",
+          "**Event Subscriptions** で `app_mention` イベント購読",
+          "**Bot Token Scopes**: `chat:write`, `app_mentions:read`",
+          "**Install to Workspace** で `xoxb-*` トークン取得",
+          "**Signing Secret** をコピー(検証用)",
+        ],
+      },
+      { type: "h3", text: "FastAPI 実装" },
+      {
+        type: "code",
+        title: "main.py",
+        python: "import os, hmac, hashlib, time\nfrom fastapi import FastAPI, Request, HTTPException\nfrom openai import OpenAI\nimport httpx\n\napp = FastAPI()\nopenai = OpenAI()\n\nSLACK_TOKEN = os.environ['SLACK_BOT_TOKEN']\nSLACK_SECRET = os.environ['SLACK_SIGNING_SECRET']\n\nasync def verify_slack(req: Request, body: bytes):\n    ts = req.headers.get('X-Slack-Request-Timestamp', '')\n    if abs(time.time() - int(ts)) > 60 * 5:\n        raise HTTPException(403, 'Stale timestamp')\n    sig_basestring = f'v0:{ts}:{body.decode()}'.encode()\n    expected = 'v0=' + hmac.new(SLACK_SECRET.encode(), sig_basestring, hashlib.sha256).hexdigest()\n    if not hmac.compare_digest(expected, req.headers.get('X-Slack-Signature', '')):\n        raise HTTPException(403, 'Bad signature')\n\n@app.post('/slack/events')\nasync def events(req: Request):\n    body = await req.body()\n    await verify_slack(req, body)\n    payload = await req.json()\n\n    # Slack の URL 検証\n    if payload.get('type') == 'url_verification':\n        return {'challenge': payload['challenge']}\n\n    if payload.get('event', {}).get('type') == 'app_mention':\n        text = payload['event']['text']\n        channel = payload['event']['channel']\n\n        # LLM 呼び出し\n        resp = openai.chat.completions.create(\n            model='gpt-4o-mini',\n            messages=[{'role': 'user', 'content': text}],\n        )\n        reply = resp.choices[0].message.content\n\n        # Slack に投稿\n        async with httpx.AsyncClient() as c:\n            await c.post(\n                'https://slack.com/api/chat.postMessage',\n                headers={'Authorization': f'Bearer {SLACK_TOKEN}'},\n                json={'channel': channel, 'text': reply},\n            )\n\n    return {'ok': True}",
+      },
+      { type: "h3", text: "デプロイ ─ Vercel(無料枠)" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "FastAPI を Vercel Functions として動かす",
+          "環境変数 `SLACK_BOT_TOKEN` `SLACK_SIGNING_SECRET` `OPENAI_API_KEY` を設定",
+          "発行された URL を Slack の Event Subscriptions に登録",
+        ],
+      },
+      { type: "h3", text: "発展" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**スレッド対応**: メンション元のスレッドに返信(`thread_ts`)",
+          "**Slash Command**: `/ask 質問` で起動",
+          "**会話履歴**: スレッド全体を context にして文脈考慮",
+          "**RAG**: 社内ドキュメントを参照([RAG 入門](/blog/rag-introduction))",
+          "**ツール呼び出し**: DB / GitHub / Notion を自動で読み書き",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[OpenAI API 実装入門](/blog/openai-api-implementation)",
+          "[FastAPI 入門](/blog/fastapi-introduction)",
+          "[Vercel デプロイ](/blog/vercel-deployment-for-ai)",
+          "[AI エージェント 入門](/blog/ai-agents-introduction)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "fastapi-introduction",
+    title: "FastAPI 入門 ─ ML モデルを 5 分で API にする",
+    description:
+      "Python の高速 Web フレームワーク FastAPI を使って、ML モデルを REST API として公開する最短ルート。型ヒント・自動ドキュメント・非同期対応の 3 拍子。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "FastAPI = Python の型ヒントを最大限に活かす高速 Web フレームワーク。Flask より速く、書きやすい。",
+      "ML モデルのサービングは 5 分で実装可能。/docs に Swagger UI が自動生成される。",
+      "非同期(async)対応で並列リクエストに強い。Pydantic で入出力検証も自動。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**FastAPI** は Python の Web フレームワークの中で最も勢いがあるツール。型ヒントベースの設計で、書きやすく ・ 速く ・ ドキュメント自動生成という 3 拍子が揃っています。",
+      },
+      { type: "h3", text: "Hello World" },
+      {
+        type: "code",
+        title: "main.py",
+        python: "from fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get('/')\ndef root():\n    return {'message': 'Hello, World!'}",
+      },
+      {
+        type: "code",
+        title: "実行",
+        python: "uvicorn main:app --reload",
+      },
+      {
+        type: "p",
+        text: "ブラウザで `http://localhost:8000` → `{\"message\": \"Hello, World!\"}`、`/docs` で Swagger UI が見られます。",
+      },
+      { type: "h3", text: "型ヒントで自動検証" },
+      {
+        type: "code",
+        title: "Pydantic でリクエストモデル",
+        python: "from pydantic import BaseModel\n\nclass Features(BaseModel):\n    age: int\n    income: float\n    is_member: bool\n\n@app.post('/predict')\ndef predict(features: Features):\n    return {'prediction': features.age * 2 + features.income}",
+      },
+      {
+        type: "p",
+        text: "型が違うリクエストは自動的に **422 エラー** で弾かれる。バリデーション不要。",
+      },
+      { type: "h3", text: "ML モデルのサービング" },
+      {
+        type: "code",
+        title: "scikit-learn モデルを API 化",
+        python: "import joblib\nfrom fastapi import FastAPI\nfrom pydantic import BaseModel\n\napp = FastAPI(title='Housing Price API')\nmodel = joblib.load('model.pkl')\n\nclass HousingFeatures(BaseModel):\n    rooms: int\n    age: int\n    area: float\n    distance_to_station: int\n\n@app.post('/predict')\ndef predict(f: HousingFeatures):\n    pred = model.predict([[f.rooms, f.age, f.area, f.distance_to_station]])\n    return {'predicted_price': float(pred[0])}",
+      },
+      { type: "h3", text: "非同期エンドポイント" },
+      {
+        type: "code",
+        title: "OpenAI API のような外部呼び出しは async で",
+        python: "import httpx\n\n@app.post('/llm')\nasync def call_llm(prompt: str):\n    async with httpx.AsyncClient() as client:\n        resp = await client.post(\n            'https://api.openai.com/v1/chat/completions',\n            headers={'Authorization': f'Bearer {API_KEY}'},\n            json={'model': 'gpt-4o-mini', 'messages': [{'role': 'user', 'content': prompt}]},\n        )\n        return resp.json()",
+      },
+      { type: "h3", text: "依存性注入" },
+      {
+        type: "code",
+        title: "認証チェック",
+        python: "from fastapi import Depends, HTTPException, Header\n\ndef verify_token(x_api_key: str = Header()):\n    if x_api_key != 'secret':\n        raise HTTPException(401)\n    return x_api_key\n\n@app.post('/protected', dependencies=[Depends(verify_token)])\ndef protected():\n    return {'ok': True}",
+      },
+      { type: "h3", text: "Streaming Response" },
+      {
+        type: "code",
+        title: "ChatGPT 風ストリーミング",
+        python: "from fastapi.responses import StreamingResponse\n\n@app.post('/stream')\ndef stream(prompt: str):\n    def gen():\n        for chunk in llm_stream(prompt):\n            yield chunk\n    return StreamingResponse(gen(), media_type='text/event-stream')",
+      },
+      { type: "h3", text: "デプロイ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Vercel**: FastAPI を Functions として動かせる(Fluid Compute)",
+          "**Cloud Run**(GCP): Docker + 自動スケール、寿命 60 分",
+          "**Lambda + API Gateway**(AWS): サーバレス王道",
+          "**Render / Fly.io**: 個人開発向け",
+        ],
+      },
+      { type: "h3", text: "Flask との比較" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**速度**: FastAPI は Flask の 2〜3 倍速い(Starlette + Uvicorn)",
+          "**型検証**: FastAPI は型ヒントで自動、Flask は手動",
+          "**ドキュメント**: FastAPI は OpenAPI 自動生成、Flask は別途作成",
+          "**非同期**: FastAPI ネイティブ async、Flask は別途設定",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[scikit-learn 入門](/blog/sklearn-introduction)",
+          "[OpenAI API 実装入門](/blog/openai-api-implementation)",
+          "[Slack Bot を LLM で作る](/blog/slack-bot-with-llm)",
+          "[Docker 入門](/blog/docker-for-ml)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "docker-for-ml",
+    title: "Docker 入門 ─ ML 環境の再現性を担保する",
+    description:
+      "「自分の PC では動く問題」を解決する Docker。ML プロジェクトの Dockerfile・GPU 対応・docker-compose・Multi-Stage Build までを実用視点で。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "Docker = OS レベルの軽量仮想化。同じ環境をどこでも再現できる。",
+      "ML プロジェクトでは『base image → 依存インストール → コードコピー』の 3 段階が定番。",
+      "GPU 利用は nvidia-docker(`--gpus all`)・本番は Multi-Stage Build でサイズ削減。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**Docker** は『**自分の PC では動く問題**』の決定的解決策。同じ環境をチームメンバーや本番サーバで再現でき、MLOps の必須ツールです。",
+      },
+      { type: "h3", text: "なぜ Docker?" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**環境の再現性**: Python ・ ライブラリ ・ OS パッケージのバージョン固定",
+          "**ポータビリティ**: ローカル → クラウド → 別チーム どこでも動く",
+          "**隔離**: ホストの環境を汚さない",
+          "**スケール**: Kubernetes ・ Cloud Run ・ ECS で自動スケール",
+        ],
+      },
+      { type: "h3", text: "Hello Docker" },
+      {
+        type: "code",
+        title: "Dockerfile",
+        python: "FROM python:3.12-slim\n\nWORKDIR /app\n\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\n\nCOPY . .\n\nCMD [\"python\", \"main.py\"]",
+      },
+      {
+        type: "code",
+        title: "ビルドと実行",
+        python: "docker build -t my-ml-app .\ndocker run -p 8000:8000 my-ml-app",
+      },
+      { type: "h3", text: "ML プロジェクトの実用 Dockerfile" },
+      {
+        type: "code",
+        title: "scikit-learn + FastAPI",
+        python: "FROM python:3.12-slim\n\n# OS パッケージ\nRUN apt-get update && apt-get install -y \\\n    build-essential \\\n    && rm -rf /var/lib/apt/lists/*\n\nWORKDIR /app\n\n# 依存だけ先にインストール(レイヤキャッシュ最適化)\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\n\n# モデルファイル + コード\nCOPY model.pkl .\nCOPY src/ ./src/\n\nEXPOSE 8000\nCMD [\"uvicorn\", \"src.main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]",
+      },
+      {
+        type: "intuition",
+        title: "💡 レイヤキャッシュ",
+        body: "requirements.txt → COPY → RUN install を先にすることで、コード変更時にライブラリ再インストールを回避(ビルド時間 30 倍速)。",
+      },
+      { type: "h3", text: "GPU 対応" },
+      {
+        type: "code",
+        title: "PyTorch GPU の Dockerfile",
+        python: "FROM nvidia/cuda:12.1.0-runtime-ubuntu22.04\n\nRUN apt-get update && apt-get install -y python3.12 python3-pip\n\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\n\nCOPY . .\nCMD [\"python\", \"train.py\"]",
+      },
+      {
+        type: "code",
+        title: "GPU 付きで起動",
+        python: "docker run --gpus all -v $(pwd)/data:/app/data my-ml-app",
+      },
+      { type: "h3", text: "docker-compose で複数サービス" },
+      {
+        type: "code",
+        title: "docker-compose.yml",
+        python: "services:\n  api:\n    build: .\n    ports:\n      - \"8000:8000\"\n    environment:\n      - DATABASE_URL=postgresql://postgres:pass@db/mldb\n    depends_on:\n      - db\n\n  db:\n    image: postgres:16\n    environment:\n      POSTGRES_PASSWORD: pass\n      POSTGRES_DB: mldb\n    volumes:\n      - pgdata:/var/lib/postgresql/data\n\n  redis:\n    image: redis:7\n\nvolumes:\n  pgdata:",
+      },
+      { type: "h3", text: "Multi-Stage Build(本番向け)" },
+      {
+        type: "code",
+        title: "サイズを 1/10 に",
+        python: "# Stage 1: build\nFROM python:3.12 AS builder\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install --user -r requirements.txt\n\n# Stage 2: runtime(軽量)\nFROM python:3.12-slim\nWORKDIR /app\nCOPY --from=builder /root/.local /root/.local\nCOPY . .\nENV PATH=/root/.local/bin:$PATH\nCMD [\"python\", \"main.py\"]",
+      },
+      { type: "h3", text: ".dockerignore は必須" },
+      {
+        type: "code",
+        title: ".dockerignore",
+        python: "__pycache__\n*.pyc\n.git\n.venv\nnode_modules\ndata/\n*.csv\n*.parquet\n.env",
+      },
+      { type: "h3", text: "Tips" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**alpine vs slim**: alpine は最軽量だが ML 系で不具合多い → slim 推奨",
+          "**python:3.12-slim** は約 130 MB",
+          "**docker buildx**: Mac ・ Windows でも Linux イメージビルド",
+          "**docker scout**: 脆弱性スキャン",
+          "**pre-built ML イメージ**: PyTorch/TensorFlow 公式を流用",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[FastAPI 入門](/blog/fastapi-introduction)",
+          "[GitHub Actions で ML CI](/blog/github-actions-ml-ci)",
+          "[MLOps 基礎](/blog/mlops-basics)",
+          "[Vercel デプロイ](/blog/vercel-deployment-for-ai)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "sql-intermediate-for-data",
+    title: "SQL 中級 ─ ML エンジニアが書く 7 つの定石パターン",
+    description:
+      "Window 関数・CTE・PIVOT・自己結合など、データ分析で必須の中級 SQL を 7 パターン。BigQuery・Snowflake・PostgreSQL で動く形で。",
+    publishedAt: "2026-04-30",
+    category: "実装",
+    tldr: [
+      "SQL の中級レベル(Window 関数 ・ CTE ・ PIVOT)を抑えるとデータ集計の 9 割が片付く。",
+      "Pandas より SQL の方が速い場面は多い。データ抽出 → 集計はクエリ側で。",
+      "BigQuery / Snowflake / Redshift いずれも標準準拠 SQL でほぼ同じ書ける。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "**SQL 中級** はデータエンジニア・データサイエンティストの基礎体力。Pandas より速く、メモリも食わず、データウェアハウス上で完結します。本記事で 7 つの定石を紹介。",
+      },
+      { type: "h3", text: "1. CTE(WITH 句) ─ 可読性の救世主" },
+      {
+        type: "code",
+        title: "ネストせずに段階的に",
+        python: "WITH active_users AS (\n    SELECT user_id\n    FROM events\n    WHERE event_date >= CURRENT_DATE - INTERVAL '30 days'\n    GROUP BY user_id\n),\nuser_purchases AS (\n    SELECT user_id, SUM(amount) AS total\n    FROM orders\n    WHERE order_date >= CURRENT_DATE - INTERVAL '30 days'\n    GROUP BY user_id\n)\nSELECT a.user_id, COALESCE(p.total, 0) AS spent\nFROM active_users a\nLEFT JOIN user_purchases p USING (user_id);",
+      },
+      { type: "h3", text: "2. ROW_NUMBER() ─ 各グループから上位 N" },
+      {
+        type: "code",
+        title: "ユーザー毎の最新注文",
+        python: "SELECT *\nFROM (\n    SELECT *,\n           ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY order_date DESC) AS rn\n    FROM orders\n) t\nWHERE rn = 1;",
+      },
+      { type: "h3", text: "3. LAG / LEAD ─ 前後の行を参照" },
+      {
+        type: "code",
+        title: "前日比",
+        python: "SELECT date, sales,\n       LAG(sales, 1) OVER (ORDER BY date) AS prev_sales,\n       sales - LAG(sales, 1) OVER (ORDER BY date) AS diff\nFROM daily_sales;",
+      },
+      { type: "h3", text: "4. 累積和 ・ 移動平均" },
+      {
+        type: "code",
+        title: "ROWS BETWEEN を使う",
+        python: "SELECT date, sales,\n       SUM(sales) OVER (ORDER BY date) AS cumulative_sum,\n       AVG(sales) OVER (ORDER BY date ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS ma_7\nFROM daily_sales;",
+      },
+      { type: "h3", text: "5. PIVOT(縦持ち → 横持ち)" },
+      {
+        type: "code",
+        title: "条件付き集計で代用",
+        python: "SELECT user_id,\n       SUM(CASE WHEN category = 'A' THEN amount ELSE 0 END) AS cat_a,\n       SUM(CASE WHEN category = 'B' THEN amount ELSE 0 END) AS cat_b,\n       SUM(CASE WHEN category = 'C' THEN amount ELSE 0 END) AS cat_c\nFROM orders\nGROUP BY user_id;",
+      },
+      { type: "h3", text: "6. 自己結合(コホート分析)" },
+      {
+        type: "code",
+        title: "新規ユーザーのリテンション",
+        python: "WITH first_purchase AS (\n    SELECT user_id, MIN(order_date) AS first_date\n    FROM orders GROUP BY user_id\n),\nretention AS (\n    SELECT f.user_id, f.first_date, o.order_date,\n           EXTRACT(MONTH FROM AGE(o.order_date, f.first_date)) AS months_since\n    FROM first_purchase f\n    JOIN orders o USING (user_id)\n)\nSELECT first_date, months_since, COUNT(DISTINCT user_id) AS users\nFROM retention\nGROUP BY first_date, months_since\nORDER BY first_date, months_since;",
+      },
+      { type: "h3", text: "7. ARRAY と UNNEST(NoSQL 風データ)" },
+      {
+        type: "code",
+        title: "BigQuery の場合",
+        python: "-- ARRAY を行に展開\nSELECT user_id, tag\nFROM users, UNNEST(tags) AS tag\nWHERE tag IN ('python', 'ml');\n\n-- ARRAY を集約\nSELECT user_id, ARRAY_AGG(DISTINCT product_category) AS categories\nFROM orders\nGROUP BY user_id;",
+      },
+      { type: "h3", text: "パフォーマンス Tips" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**インデックスを意識**: WHERE / JOIN 列に",
+          "**EXPLAIN ANALYZE**: 実行計画を確認",
+          "**パーティション**: 日付列でパーティショニング(BigQuery / Snowflake)",
+          "**列指向 DB**: BigQuery / Snowflake は列指向、必要列だけ SELECT",
+          "**LIMIT を先に**: サブクエリで早期に絞り込む",
+        ],
+      },
+      { type: "h3", text: "Pandas vs SQL" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**SQL が速い**: 大量データの集計 ・ ウィンドウ関数",
+          "**Pandas が便利**: 小規模データの探索的分析 ・ ML 前処理",
+          "**併用**: SQL で抽出 → Pandas で前処理 → モデル学習 が王道",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[Pandas Tips](/blog/pandas-tips-for-ml)",
+          "[DS 検定 ロードマップ](/certs/ds-literacy/roadmap)",
+          "[DS 基礎 ロードマップ](/certs/ds-basic/roadmap)",
+          "[scikit-learn 入門](/blog/sklearn-introduction)",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "tableau-vs-python-visualization",
+    title: "Tableau vs Python ─ データ可視化どちらを選ぶか",
+    description:
+      "BI ツール(Tableau)とプログラミング(Python の matplotlib / Plotly / Streamlit)の使い分け。AIエンジニア視点で両者の強みと弱みを比較。",
+    publishedAt: "2026-04-30",
+    category: "学習法",
+    tldr: [
+      "Tableau = ビジネス向け対話的ダッシュボード。学習コスト低・配布が楽・有料。",
+      "Python = 自由度最大・無料・コードでバージョン管理・自動化に強い。",
+      "AIエンジニアは Python が主、社内共有用に Tableau / Looker を補助で使う形が現実的。",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "データ分析の終着点は **可視化と意思決定**。本記事では Tableau と Python の使い分けを AI エンジニア視点で整理します。",
+      },
+      { type: "h3", text: "Tableau の強み" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**ノーコード**: ドラッグ&ドロップで作成",
+          "**対話的ダッシュボード**: ビジネス層が自分で操作",
+          "**美しいデフォルト**: 配色 ・ アニメーションが洗練",
+          "**多様なデータソース連携**: SQL ・ Excel ・ Salesforce など",
+          "**Tableau Public**: 無料で公開可能",
+        ],
+      },
+      { type: "h3", text: "Tableau の弱み" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**有料**: Creator $75/月、Viewer $15/月",
+          "**コード化困難**: バージョン管理 / レビューが厳しい",
+          "**自動化に弱い**: 定期レポート以上のことは難しい",
+          "**ML 連携限定的**: Tableau 内でモデル学習はできない",
+        ],
+      },
+      { type: "h3", text: "Python 可視化の強み" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**無料 ・ OSS**",
+          "**コードでバージョン管理**: Git でレビュー可能",
+          "**ML パイプラインに統合**: モデル評価グラフを CI で自動生成",
+          "**カスタマイズ性無限**: 論文品質まで作り込める",
+          "**ライブラリ豊富**: matplotlib / seaborn / Plotly / Bokeh / Altair",
+        ],
+      },
+      { type: "h3", text: "Python の主要ライブラリ" },
+      { type: "h4", text: "matplotlib(基本)" },
+      {
+        type: "code",
+        title: "matplotlib + seaborn",
+        python: "import matplotlib.pyplot as plt\nimport seaborn as sns\n\nsns.set_style('whitegrid')\nfig, ax = plt.subplots(figsize=(8, 5))\nsns.boxplot(data=df, x='category', y='price', ax=ax)\nax.set_title('カテゴリ別価格分布')\nplt.savefig('boxplot.png', dpi=150)",
+      },
+      { type: "h4", text: "Plotly(対話型)" },
+      {
+        type: "code",
+        title: "Tableau に最も近い",
+        python: "import plotly.express as px\n\nfig = px.scatter(df, x='age', y='income', color='gender',\n                 hover_data=['name'], trendline='ols')\nfig.write_html('chart.html')  # 対話型 HTML 出力",
+      },
+      { type: "h4", text: "Streamlit(Web アプリ)" },
+      {
+        type: "p",
+        text: "詳しくは [Streamlit でデモアプリ](/blog/streamlit-demo-app) を参照。",
+      },
+      { type: "h3", text: "現実的な使い分け" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**社内ビジネスダッシュボード**: Tableau / Looker(または **Streamlit** で代替も可)",
+          "**論文 ・ 分析レポート**: Python(matplotlib / seaborn)",
+          "**ML モデル評価**: Python(scikit-learn の plot_*)",
+          "**A/B テスト分析**: Python + 統計検定",
+          "**経営層へのプレゼン**: Tableau or Plotly",
+          "**ポートフォリオ**: Streamlit + Plotly",
+        ],
+      },
+      { type: "h3", text: "学習順の推奨" },
+      {
+        type: "list",
+        style: "number",
+        items: [
+          "**matplotlib + seaborn**(必須): どこでも使える共通言語",
+          "**Plotly**(中級): 対話型を作りたくなったら",
+          "**Streamlit**(実装): デモアプリ ・ ポートフォリオ",
+          "**Tableau**(任意): 社内で必要になったら",
+          "**Looker / PowerBI**: 業界によって",
+        ],
+      },
+      { type: "h3", text: "学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[Streamlit でデモアプリ](/blog/streamlit-demo-app)",
+          "[Pandas Tips](/blog/pandas-tips-for-ml)",
+          "[scikit-learn 入門](/blog/sklearn-introduction)",
+          "[キャリアの記事](/blog/data-scientist-career)",
+        ],
+      },
+    ],
+  },
+  {
     slug: "data-scientist-career",
     title: "データサイエンティストのキャリア ─ 年収・職種・転職の現実",
     description:
