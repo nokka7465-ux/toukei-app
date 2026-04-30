@@ -247,5 +247,614 @@ export const gTestTextbook: Textbook = {
         },
       ],
     },
+    {
+      id: "ch3",
+      number: 3,
+      title: "ディープラーニングの基礎",
+      overview:
+        "ニューラルネットの仕組み、代表的なアーキテクチャ(CNN・RNN・Transformer)、最適化手法を概念ベースで整理。",
+      sections: [
+        {
+          id: "ch3-sec1",
+          number: "3.1",
+          title: "ニューラルネットの基本構造",
+          blocks: [
+            {
+              type: "p",
+              text: "**ニューラルネットワーク** は、生物の脳神経系を模した計算モデル。**入力層 → 隠れ層 → 出力層** の 3 層構造を多層化したものが **ディープラーニング(深層学習)** です。",
+            },
+            { type: "h3", text: "1 つのニューロン(パーセプトロン)" },
+            {
+              type: "def",
+              title: "パーセプトロンの数式",
+              body: "1 つのニューロンは **入力の重み付き和に活性化関数を適用** する単純な装置。\n\n$y = f(\\sum_i w_i x_i + b)$\n\n- $x_i$: 入力\n- $w_i$: 重み(学習対象)\n- $b$: バイアス(学習対象)\n- $f$: 活性化関数(非線形)",
+            },
+            {
+              type: "figure",
+              kind: "neural-net-forward",
+              caption: "順伝播 ─ 入力が層を経て出力へ。各層は線形変換 + 活性化",
+            },
+            { type: "h3", text: "活性化関数" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Sigmoid**: 出力 $(0,1)$。古典的だが勾配消失問題で深層には不向き",
+                "**tanh**: 出力 $(-1,1)$。Sigmoid より中央性能良し",
+                "**ReLU**: $\\max(0, x)$。深層でも勾配が流れる定番",
+                "**Leaky ReLU / GELU / Swish**: ReLU の改良版。Transformer では GELU が主流",
+              ],
+            },
+            {
+              type: "figure",
+              kind: "activation-functions",
+              caption: "代表的な活性化関数の比較",
+            },
+            {
+              type: "intuition",
+              title: "なぜ非線形が必要か",
+              body: "活性化関数を線形(恒等関数)にしてしまうと、層を何枚重ねても結局『1 つの線形変換』に潰れてしまい、複雑な関係を学習できません。非線形関数を挟むことで、層を重ねるほど **表現できる関数が指数的に豊か** になります。",
+            },
+            { type: "h3", text: "学習の仕組み ─ 誤差逆伝播法" },
+            {
+              type: "p",
+              text: "**順伝播** で予測を出し、正解との誤差(損失)を計算。**逆伝播(backpropagation)** で各重みに対する勾配を計算し、**勾配降下法** でパラメータを更新します。",
+            },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "**順伝播**: 入力 → 各層を通過 → 予測値",
+                "**損失計算**: 予測と正解の差(交差エントロピー・MSE 等)",
+                "**逆伝播**: 連鎖律で各重みの勾配を計算",
+                "**最適化**: $w \\leftarrow w - \\eta \\nabla L$ で重み更新",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch3-sec2",
+          number: "3.2",
+          title: "代表的なアーキテクチャ",
+          blocks: [
+            {
+              type: "p",
+              text: "ディープラーニングは **データの種類** に応じて様々な構造が発展してきました。G 検定では各アーキテクチャの **使い所と特徴** が問われます。",
+            },
+            { type: "h3", text: "CNN ─ 画像処理の標準" },
+            {
+              type: "def",
+              title: "Convolutional Neural Network",
+              body: "**畳み込み層** で局所的な特徴(エッジ・テクスチャ)を抽出し、**プーリング層** で位置不変性を獲得。深層の畳み込みでより抽象的な特徴を学習。\n\n**代表モデル**: LeNet(1998)、AlexNet(2012)、VGG、ResNet、EfficientNet、Vision Transformer(ViT)",
+            },
+            {
+              type: "figure",
+              kind: "cnn-architecture",
+              caption: "CNN: Conv → Pool を繰り返し、最終的に全結合 + Softmax",
+            },
+            { type: "h3", text: "RNN / LSTM ─ 時系列・文章" },
+            {
+              type: "def",
+              title: "Recurrent Neural Network",
+              body: "**前のステップの出力を次の入力に渡す** 再帰構造。系列データ(文章・音声・株価)向け。\n\n**問題**: 長期依存で勾配消失 → **LSTM**(Long Short-Term Memory)・**GRU** で解決(ゲート機構)。\n\n**用途**: 機械翻訳・音声認識・時系列予測。ただし現在は Transformer に置き換わりつつある。",
+            },
+            { type: "h3", text: "Transformer ─ 現代の主役" },
+            {
+              type: "def",
+              title: "Transformer の革新",
+              body: "2017 年論文「**Attention is All You Need**」で発表。RNN を捨て、**Self-Attention 機構** だけで系列を処理。\n\n**特徴**:\n- 並列計算可能 → 大規模学習に向く\n- 長距離依存を直接捉える\n- LLM(GPT・BERT)の基盤\n\n**派生**: BERT(双方向)、GPT(生成)、T5、ViT(画像)、Whisper(音声)",
+            },
+            {
+              type: "figure",
+              kind: "attention-heatmap",
+              caption: "Self-Attention: トークン間の注目度を行列で表現",
+            },
+            {
+              type: "figure",
+              kind: "multi-head-attention",
+              caption: "Multi-Head Attention: 複数視点で並列に attention",
+            },
+            { type: "h3", text: "GAN ─ 生成モデルの古典" },
+            {
+              type: "def",
+              title: "Generative Adversarial Network",
+              body: "**Generator(生成器)** と **Discriminator(識別器)** を競わせて、本物そっくりのデータを生成。Generator は Discriminator を騙すように、Discriminator は本物と偽物を見分けるように学習。\n\n**応用**: 画像生成・スタイル変換・データ拡張(StyleGAN 系)",
+            },
+            { type: "h3", text: "拡散モデル(Diffusion Model)" },
+            {
+              type: "def",
+              title: "現在の画像生成の主流",
+              body: "**順過程**: 画像にノイズを徐々に加えてランダムノイズへ\n\n**逆過程**: ノイズから少しずつデノイズして画像を生成\n\nこの逆過程をニューラルネットで学習。**Stable Diffusion・DALL-E 3・Midjourney** の基盤技術。GAN より学習が安定。",
+            },
+            {
+              type: "figure",
+              kind: "diffusion-process",
+              caption: "拡散モデル: 順過程(ノイズ付加)と逆過程(デノイズ)",
+            },
+          ],
+        },
+        {
+          id: "ch3-sec3",
+          number: "3.3",
+          title: "学習を成功させる工夫",
+          blocks: [
+            {
+              type: "p",
+              text: "ディープラーニングの学習を成功させるには、**過学習対策** と **最適化手法の選択** が要。G 検定では各テクニックの **目的と効果** が問われます。",
+            },
+            { type: "h3", text: "過学習対策" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Dropout**: 学習時にニューロンをランダムに無効化 → アンサンブル効果",
+                "**Batch Normalization**: 各層の入力を正規化 → 学習を安定化・高速化",
+                "**Layer Normalization**: Transformer の標準",
+                "**早期終了(Early Stopping)**: 検証誤差が悪化し始めたら停止",
+                "**Weight Decay(L2 正則化)**: 重みが大きくなりすぎないようペナルティ",
+                "**データ拡張(Data Augmentation)**: 画像を回転・反転して訓練データを水増し",
+              ],
+            },
+            { type: "h3", text: "最適化アルゴリズム" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**SGD**: 確率的勾配降下法。シンプルだが収束が遅い",
+                "**Momentum**: 慣性を加えて振動を抑える",
+                "**Adagrad / RMSprop**: 学習率を勾配の大きさに応じて自動調整",
+                "**Adam**: Momentum + RMSprop。**現代のデフォルト**",
+                "**AdamW**: Adam に正しい重み減衰を組み込んだ版。Transformer 学習で標準",
+              ],
+            },
+            {
+              type: "figure",
+              kind: "gradient-descent-paths",
+              caption: "最適化アルゴリズムごとの収束経路",
+            },
+            { type: "h3", text: "学習率スケジューリング" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Step Decay**: 一定エポックごとに学習率を下げる",
+                "**Cosine Annealing**: コサインカーブで滑らかに下げる(現代の標準)",
+                "**Warmup**: 最初は小さく → 徐々に上げる(Transformer 必須)",
+              ],
+            },
+            { type: "h3", text: "転移学習・ファインチューニング" },
+            {
+              type: "def",
+              title: "事前学習モデルを使う",
+              body: "ImageNet で学習済みの ResNet、大規模テキストで学習済みの BERT/GPT を、**自分のタスクに合わせて再学習** する手法。\n\n**メリット**: 少ないデータでも高精度、学習時間短縮\n\n**Hugging Face Hub** が事前学習モデルの共有プラットフォームとして広く使われる。",
+            },
+            {
+              type: "practical",
+              title: "G 検定での頻出パターン",
+              body: "「Adam の特徴は?」「Dropout の効果は?」「BatchNorm はどこに置くか?」などの選択肢問題が出ます。**用語と効果のペア** で覚えるのが効率的。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch4",
+      number: 4,
+      title: "生成 AI と LLM",
+      overview:
+        "ChatGPT 以降の生成 AI ブームを支える技術。LLM の仕組み、プロンプトエンジニアリング、RAG・ファインチューニング・RLHF を整理。",
+      sections: [
+        {
+          id: "ch4-sec1",
+          number: "4.1",
+          title: "大規模言語モデル(LLM)の仕組み",
+          blocks: [
+            {
+              type: "p",
+              text: "**LLM(Large Language Model)** は、Transformer アーキテクチャを大規模化し、Web 上のテキストを大量に学習した言語モデル。**ChatGPT・Claude・Gemini** などが代表例。",
+            },
+            { type: "h3", text: "LLM の学習 3 段階" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "**事前学習(Pre-training)**: 大規模 Web コーパスで **次の単語予測** を学習。汎用的な言語能力を獲得",
+                "**教師ありファインチューニング(SFT)**: 人手で作った『指示 → 模範回答』ペアで学習。指示追従能力を獲得",
+                "**RLHF(人間フィードバック強化学習)**: 人間の選好で報酬モデルを学習し、PPO で LLM を更新",
+              ],
+            },
+            {
+              type: "figure",
+              kind: "rlhf",
+              caption: "RLHF: SFT モデル → 選好データ → 報酬モデル → PPO 更新",
+            },
+            { type: "h3", text: "Tokenizer と埋め込み" },
+            {
+              type: "p",
+              text: "LLM はテキストをそのまま扱えないので、**Tokenizer** で **トークン**(単語より細かい単位)に分割し、各トークンを **埋め込みベクトル** に変換します。BPE(Byte-Pair Encoding)・SentencePiece が代表的。",
+            },
+            {
+              type: "figure",
+              kind: "word2vec",
+              caption: "埋め込み空間 ─ 意味的関係がベクトル方向として現れる",
+            },
+            { type: "h3", text: "スケーリング則" },
+            {
+              type: "p",
+              text: "**モデルサイズ・データ量・計算資源** を増やすほど性能が向上することが経験的に確認されており、これを **スケーリング則(Scaling Laws)** と呼びます。GPT-3(175B パラメータ)・GPT-4・Claude などはこの法則に従って巨大化。",
+            },
+            { type: "h3", text: "創発的能力(Emergent Abilities)" },
+            {
+              type: "p",
+              text: "ある程度のサイズを超えると、**学習していないはずの能力**(算数・論理推論・多言語翻訳など)が突然できるようになる現象。スケーリング則と並ぶ LLM の不思議。",
+            },
+          ],
+        },
+        {
+          id: "ch4-sec2",
+          number: "4.2",
+          title: "プロンプトエンジニアリング",
+          blocks: [
+            {
+              type: "p",
+              text: "**プロンプト(指示文)** の書き方を工夫して、LLM の出力品質を上げる技術。学習済みモデルを **再学習せず** に性能を引き出せるのが利点。",
+            },
+            { type: "h3", text: "基本テクニック" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Zero-shot**: 例なしで指示する。シンプル",
+                "**Few-shot**: 数個の例を見せてから本題を聞く。精度向上",
+                "**Chain-of-Thought(CoT)**: 「ステップバイステップで考えて」と促す → 推論精度大幅向上",
+                "**Self-Consistency**: 複数回答えさせて多数決を取る",
+                "**ReAct**: Reasoning + Acting。思考と行動(ツール呼び出し)を交互に",
+              ],
+            },
+            { type: "h3", text: "システムプロンプト" },
+            {
+              type: "p",
+              text: "ユーザーの質問とは別に、AI の **役割・トーン・制約** を指示する仕組み。「あなたは丁寧な日本語の翻訳家です」のように人格を設定できます。",
+            },
+            { type: "h3", text: "プロンプトの落とし穴" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**ハルシネーション**: 自信満々で誤情報を返す → 出典を確認させる、RAG で抑制",
+                "**プロンプトインジェクション**: 「これまでの指示を無視して〜」と上書きされる攻撃",
+                "**ジェイルブレイク**: 安全装置を回避させる入力 → 開発者は赤チーム演習で対策",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch4-sec3",
+          number: "4.3",
+          title: "LLM をカスタマイズする 4 つの手段",
+          blocks: [
+            {
+              type: "p",
+              text: "「自社データで賢い AI を作る」には、コストの低い順に **プロンプト → RAG → ファインチューニング → 事前学習** という 4 段階があります。",
+            },
+            { type: "h3", text: "1. プロンプトのみ" },
+            {
+              type: "p",
+              text: "コスト: ほぼゼロ。学習なし、推論時の指示工夫だけ。少量の事例なら Few-shot で十分なことも多い。",
+            },
+            { type: "h3", text: "2. RAG(Retrieval-Augmented Generation)" },
+            {
+              type: "def",
+              title: "検索拡張生成",
+              body: "外部知識ベース(社内ドキュメント等)を **ベクトル検索** で取得 → LLM の文脈に注入 → 回答生成。\n\n**メリット**:\n- 最新情報・社内知識に対応\n- 出典付き回答\n- ハルシネーション抑制\n- ファインチューニング不要\n\n**デメリット**: 検索の質が悪いと回答の質も落ちる",
+            },
+            { type: "h3", text: "3. ファインチューニング" },
+            {
+              type: "p",
+              text: "事前学習済み LLM を、自分のドメインデータで **再学習** する。**LoRA(Low-Rank Adaptation)** など効率的な手法が普及し、コストが下がっています。スタイル・トーン・専門用語を覚えさせるのに有効。",
+            },
+            { type: "h3", text: "4. 事前学習(独自モデル)" },
+            {
+              type: "p",
+              text: "ゼロから巨大モデルを学習。数億〜数十億円の計算費用がかかるため、ほとんどの企業はやりません。OpenAI・Anthropic・Google・Meta・Microsoft・国産では NTT(tsuzumi)・Sakana AI などが取り組み中。",
+            },
+            {
+              type: "intuition",
+              title: "💡 どれを選ぶか",
+              body: "『最新の社内情報を扱いたい』なら RAG。『独自スタイルを覚えさせたい』ならファインチューニング。『ちょっと試したい』ならプロンプトのみ。**まず RAG、それでも不足ならファインチューニング** が定石。事前学習はほぼ不要。",
+            },
+            { type: "h3", text: "AI エージェント" },
+            {
+              type: "p",
+              text: "LLM に **ツール呼び出し**(検索・コード実行・API)を組み合わせ、**自律的にタスクを遂行** させるシステム。**ReAct・LangChain・AutoGPT** などのフレームワークが活用される。",
+            },
+            {
+              type: "practical",
+              title: "🛠 実務での導入順序",
+              body: "1. ChatGPT/Claude をそのまま使い社員教育(プロンプトの基礎) → 2. 社内ナレッジで RAG → 3. 必要に応じてファインチューニング。**まず簡単に始めて段階的に複雑化** が成功パターン。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch5",
+      number: 5,
+      title: "AI 関連法規と知的財産",
+      overview:
+        "AI 開発・運用で必ず押さえる日本国内・国際の法規制と、生成 AI 時代の著作権・契約問題。",
+      sections: [
+        {
+          id: "ch5-sec1",
+          number: "5.1",
+          title: "個人情報保護法と AI",
+          blocks: [
+            {
+              type: "p",
+              text: "AI が個人データを扱うとき、まず確認すべきは **個人情報保護法**。日本では 2022 年改正で、**仮名加工情報** の概念追加、**越境移転規制** 強化、**Cookie 等の規制**(電気通信事業法)など、AI 利用に直結する変更が入りました。",
+            },
+            { type: "h3", text: "押さえるべきキーワード" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**個人情報**: 特定個人を識別できる情報。氏名・住所・顔画像など",
+                "**個人識別符号**: 指紋・遺伝情報・運転免許証番号など",
+                "**要配慮個人情報**: 人種・信条・病歴など。同意なく取得不可",
+                "**仮名加工情報**: 単独では特定個人を識別できないよう加工(2022 改正で導入)",
+                "**匿名加工情報**: 復元不可能な加工。第三者提供しやすい",
+                "**越境移転**: 海外サーバへの移転には本人同意 or 同等保護措置が必要",
+              ],
+            },
+            { type: "h3", text: "AI 学習データの扱い" },
+            {
+              type: "p",
+              text: "個人情報を含むデータを AI 学習に使うときは、**利用目的を特定し、本人に通知 or 公表** が原則。プライバシーポリシーへの明記が必須。**学習済みモデルから個人情報が逆推定** される可能性も指摘されており、**差分プライバシー** や **連合学習** などの技術的対策が重要。",
+            },
+          ],
+        },
+        {
+          id: "ch5-sec2",
+          number: "5.2",
+          title: "著作権法と AI(2024 年指針対応)",
+          blocks: [
+            {
+              type: "p",
+              text: "生成 AI 時代の最大の論点が **著作権**。文化庁が 2024 年 3 月に「AI と著作権に関する考え方」を公表し、3 つの段階で整理しました。",
+            },
+            { type: "h3", text: "3 段階の整理" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "**学習段階**: 著作権法 30 条の 4 により、原則として **学習目的の利用は OK**。ただし『**著作権者の利益を不当に害する場合**』は例外",
+                "**生成・利用段階**: 既存著作物に類似 + 依拠性 → 著作権侵害",
+                "**生成物の著作権**: AI 単独生成物には著作権なし。**人間の創作的寄与** があれば人間に帰属",
+              ],
+            },
+            { type: "h3", text: "依拠性と類似性" },
+            {
+              type: "def",
+              title: "侵害判定の 2 要件",
+              body: "**依拠性**: 既存作品を参照して生成された(知らなかったなら侵害でない)\n\n**類似性**: 表現上の本質的特徴が共通\n\nLLM は学習段階で大量の著作物に **依拠** しているため、出力が類似していれば侵害となり得る。",
+            },
+            { type: "h3", text: "営業秘密と機密情報" },
+            {
+              type: "p",
+              text: "**社外秘の文書を ChatGPT に入力** すると、それは **営業秘密の漏洩** になり得ます。多くの企業が **法人向け契約**(API・Enterprise 版)を結ぶか、社内 LLM を構築するのはこのため。",
+            },
+          ],
+        },
+        {
+          id: "ch5-sec3",
+          number: "5.3",
+          title: "国際的な AI 規制",
+          blocks: [
+            {
+              type: "p",
+              text: "AI 規制は国際的にバラバラの状況。日本企業も **海外向けサービスを展開** する場合、各国の規制を押さえる必要があります。",
+            },
+            { type: "h3", text: "EU AI Act(2024 採択・2026 全面適用)" },
+            {
+              type: "def",
+              title: "リスクベースの 4 分類",
+              body: "1. **許容できないリスク**: 社会信用スコア・サブリミナル操作 → **禁止**\n\n2. **高リスク**: 採用・教育評価・医療・法執行 → 厳格な義務(リスク評価・人間の監督・データ品質)\n\n3. **限定的リスク**: チャットボット → 透明性義務(AI と分かるよう表示)\n\n4. **最小リスク**: スパム検出・ゲーム AI → 規制なし\n\n**汎用 AI(GPAI)** にも追加義務(モデル文書化・著作権配慮など)",
+            },
+            { type: "h3", text: "米国の動向" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**バイデン大統領令(2023)**: 連邦政府の AI 利用基準・透明性",
+                "**NIST AI Risk Management Framework**: 自主的フレームワーク",
+                "**州レベル**: カリフォルニア・コロラド等で個別法",
+              ],
+            },
+            { type: "h3", text: "日本の枠組み" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**AI 事業者ガイドライン**(2024、経産省・総務省): 日本版ガイダンス",
+                "**広島 AI プロセス**(2023, G7): 国際協調枠組み",
+                "**AI 戦略 2022**: 政府の方針",
+                "**ハードロー化の議論**: EU 並みの法的拘束力ある規制を導入するかは継続議論中",
+              ],
+            },
+            {
+              type: "practical",
+              title: "🛠 実務での対応",
+              body: "EU 向けサービスは **EU AI Act 準拠**(2026 年〜罰金: 最大 3,500 万ユーロ or 売上 7%)が必須。日本国内向けは AI 事業者ガイドラインに沿った **ガバナンス体制構築**(AI 倫理委員会・リスク評価プロセス・ログ保存)が標準化しつつあります。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch6",
+      number: 6,
+      title: "AI の強化と社会実装",
+      overview:
+        "強化学習・自動運転・ロボティクス・XAI・AutoML など、AI を社会で動かすための周辺技術。",
+      sections: [
+        {
+          id: "ch6-sec1",
+          number: "6.1",
+          title: "強化学習の基礎",
+          blocks: [
+            {
+              type: "p",
+              text: "**強化学習(RL)** は、エージェントが環境と相互作用しながら **報酬の累積を最大化** する行動を学習する枠組み。AlphaGo・自動運転・推薦・ロボティクスで活躍。",
+            },
+            { type: "h3", text: "基本要素" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**エージェント**: 学習・行動する主体",
+                "**環境**: エージェントが行動を行う対象世界",
+                "**状態 $s$**: 環境の現在の様子",
+                "**行動 $a$**: エージェントが取れる選択",
+                "**報酬 $r$**: 行動の結果として得られるスカラー値",
+                "**方策 $\\pi(a|s)$**: 状態に応じた行動の確率分布",
+              ],
+            },
+            { type: "h3", text: "代表アルゴリズム" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Q-Learning**: 各 (状態, 行動) ペアの価値 $Q(s,a)$ を学習。基本かつ重要",
+                "**DQN(Deep Q-Network)**: Q-Learning にニューラルネットを使用。Atari ゲームで人間超え",
+                "**Policy Gradient**: 方策を直接学習(REINFORCE・A3C・PPO)",
+                "**AlphaGo / AlphaZero**: モンテカルロ木探索 + 深層強化学習",
+                "**PPO**: 現在の主力。RLHF(LLM 学習)でも使われる",
+              ],
+            },
+            {
+              type: "figure",
+              kind: "q-learning-grid",
+              caption: "グリッドワールドでの Q 値ヒートマップ",
+            },
+            { type: "h3", text: "探索と活用のジレンマ" },
+            {
+              type: "def",
+              title: "Exploration vs Exploitation",
+              body: "**活用(Exploitation)**: 現時点で最良と思われる行動を取る\n\n**探索(Exploration)**: 未知の行動を試して情報を集める\n\nこのバランス調整が強化学習の核心。代表手法に **ε-greedy**(ε の確率でランダム行動)、**UCB**(信頼上限)、**Thompson Sampling**。",
+            },
+          ],
+        },
+        {
+          id: "ch6-sec2",
+          number: "6.2",
+          title: "AI の応用領域",
+          blocks: [
+            {
+              type: "p",
+              text: "G 検定では **AI が現在どの分野で何を実現しているか** を問う問題が多数。代表的な応用領域を整理します。",
+            },
+            { type: "h3", text: "コンピュータビジョン(画像)" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**画像分類**: ResNet・Vision Transformer",
+                "**物体検出**: YOLO・Faster R-CNN",
+                "**セグメンテーション**: U-Net・Mask R-CNN",
+                "**画像生成**: Stable Diffusion・DALL-E 3・Midjourney",
+                "**顔認識**: FaceNet。本人確認・監視で活用 + 倫理問題",
+              ],
+            },
+            { type: "h3", text: "自然言語処理(NLP)" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**機械翻訳**: Transformer 系(Google 翻訳・DeepL)",
+                "**質問応答・要約**: BERT・GPT 系",
+                "**感情分析・分類**: BERT ファインチューン",
+                "**音声認識(ASR)**: Whisper",
+                "**音声合成(TTS)**: Tacotron・VALL-E",
+              ],
+            },
+            { type: "h3", text: "自動運転" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Lv0〜Lv5 の自動化レベル**(SAE 定義)。Lv5 が完全自動",
+                "**センサー**: カメラ・LiDAR・レーダー・GPS の融合(センサーフュージョン)",
+                "**Tesla**: カメラ中心、Waymo: LiDAR 中心、と方針が分かれる",
+                "**法整備**: 日本は 2023 年に Lv4 を一定条件下で解禁",
+              ],
+            },
+            { type: "h3", text: "医療・バイオ" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**画像診断**: 眼底・X 線・MRI から疾患検出。CNN が標準",
+                "**新薬探索**: AlphaFold(タンパク質構造予測)が革命",
+                "**ゲノミクス**: 配列解析・変異検出",
+              ],
+            },
+            { type: "h3", text: "ロボティクス" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**強化学習 + シミュレーション** で物理ロボットを学習",
+                "**Sim2Real**: シミュレータで学んだ方策を実機に転移",
+                "**Boston Dynamics・Tesla Optimus・FigureAI** などヒューマノイドが進展",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch6-sec3",
+          number: "6.3",
+          title: "XAI と AutoML",
+          blocks: [
+            {
+              type: "p",
+              text: "**XAI(eXplainable AI)** と **AutoML(機械学習自動化)** は、AI を実務で使うための重要な周辺技術。",
+            },
+            { type: "h3", text: "XAI ─ 説明可能な AI" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**LIME**: 個別予測を局所的に線形近似 → 寄与度を表示",
+                "**SHAP**: 協力ゲーム理論の Shapley 値で各特徴量の寄与を厳密に算出",
+                "**Permutation Importance**: 特徴量を 1 つずつシャッフルして精度低下を測定",
+                "**Grad-CAM**: 画像の『どこを見て判断したか』を可視化",
+                "**Attention 可視化**: Transformer 系の注目度を表示",
+              ],
+            },
+            { type: "h3", text: "AutoML ─ 機械学習の自動化" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**特徴量自動生成**: Featuretools",
+                "**モデル選択 + ハイパラ最適化**: Auto-sklearn・H2O AutoML・AutoGluon",
+                "**NAS(Neural Architecture Search)**: ネットワーク構造自体を自動探索",
+                "**クラウド AutoML**: GCP Vertex AI・Azure ML・SageMaker Autopilot",
+              ],
+            },
+            { type: "h3", text: "MLOps ─ AI 運用の継続的改善" },
+            {
+              type: "p",
+              text: "DevOps の AI 版。**学習 → デプロイ → モニタリング → 再学習** のループを自動化。**MLflow・Kubeflow・Weights & Biases** がツール。実装と同じく重要なのが **データドリフト検出**(本番でのデータ分布変化を検出して再学習を起動)。",
+            },
+            {
+              type: "practical",
+              title: "🛠 G 検定でのキーワード",
+              body: "**XAI** = 説明できる AI、**AutoML** = 自動化された ML、**MLOps** = 運用込みのライフサイクル管理。3 つとも『精度を出した後の問題』に対応する技術として頻出。",
+            },
+          ],
+        },
+      ],
+    },
   ],
 };
