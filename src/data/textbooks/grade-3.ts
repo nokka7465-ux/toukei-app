@@ -583,6 +583,7 @@ export const gradeThreeTextbook: Textbook = {
             {
               type: "code",
               title: "Python / R で正規分布の確率を計算する",
+              runnable: true,
               python: `from scipy import stats
 
 # X ~ N(50, 10²) のとき P(X <= 60) を求める

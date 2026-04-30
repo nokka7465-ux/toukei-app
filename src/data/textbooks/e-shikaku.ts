@@ -59,22 +59,25 @@ export const eShikakuTextbook: Textbook = {
             {
               type: "code",
               title: "NumPy での主要演算",
+              runnable: true,
               python: `import numpy as np
 
 # 内積・行列積
 a = np.array([1, 2, 3]); b = np.array([4, 5, 6])
-print(a @ b)              # 32(内積)
+print('内積:', a @ b)              # 32
 
 W = np.random.randn(3, 4)
 x = np.random.randn(4)
-print(W @ x)              # 行列ベクトル積
+print('行列ベクトル積:', W @ x)
 
 # 固有値分解(対称行列)
 A = np.array([[2, 1], [1, 2]])
 vals, vecs = np.linalg.eig(A)
+print('固有値:', vals)
 
 # 特異値分解 (SVD)
-U, S, Vt = np.linalg.svd(W)`,
+U, S, Vt = np.linalg.svd(W)
+print('特異値:', S)`,
               caption: "PyTorch では同じ操作が torch.matmul / torch.linalg.eig / torch.linalg.svd で書ける。",
             },
           ],

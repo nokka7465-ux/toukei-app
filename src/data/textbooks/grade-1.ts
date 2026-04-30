@@ -510,6 +510,7 @@ export const gradeOneTextbook: Textbook = {
             {
               type: "code",
               title: "Python / R でブートストラップ信頼区間を求める",
+              runnable: true,
               python: `import numpy as np
 
 rng = np.random.default_rng(42)

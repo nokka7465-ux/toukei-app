@@ -2857,6 +2857,7 @@ export const blogPosts: BlogPost[] = [
       {
         type: "code",
         title: "iris データセットで遊ぶ",
+        runnable: true,
         python: "from sklearn.datasets import load_iris\nimport pandas as pd\n\ndata = load_iris(as_frame=True)\nX, y = data.data, data.target\nprint(X.head())\nprint(y.value_counts())",
       },
       { type: "h3", text: "Step 2 ─ 訓練 / テスト分割" },
@@ -2910,6 +2911,18 @@ export const blogPosts: BlogPost[] = [
         type: "practical",
         title: "🛠 実務での重要性",
         body: "Pipeline を使うと『前処理を訓練データだけで fit してテストにも適用』が自動化。データリークを防ぎ、再現性も高まります。",
+      },
+      { type: "h3", text: "全部入りデモ ─ ブラウザで実行" },
+      {
+        type: "p",
+        text: "Step 1〜7 を 1 つにまとめた版です。ブラウザで実際に学習 → 評価まで動かせます。",
+      },
+      {
+        type: "code",
+        title: "iris 分類を end-to-end で",
+        runnable: true,
+        python:
+          "from sklearn.datasets import load_iris\nfrom sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.metrics import classification_report\n\ndata = load_iris(as_frame=True)\nX, y = data.data, data.target\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42, stratify=y\n)\n\npipe = Pipeline([\n    ('scaler', StandardScaler()),\n    ('clf', LogisticRegression(max_iter=1000)),\n])\n\nscores = cross_val_score(pipe, X_train, y_train, cv=5)\nprint(f'CV: {scores.mean():.3f} ± {scores.std():.3f}')\n\ngrid = GridSearchCV(pipe, {'clf__C': [0.01, 0.1, 1, 10]}, cv=5)\ngrid.fit(X_train, y_train)\nprint('Best:', grid.best_params_, '/ CV:', round(grid.best_score_, 3))\n\ny_pred = grid.predict(X_test)\nprint(classification_report(y_test, y_pred, target_names=data.target_names))",
       },
       { type: "h3", text: "次のステップ" },
       {
@@ -3047,7 +3060,8 @@ export const blogPosts: BlogPost[] = [
       {
         type: "code",
         title: "コサイン類似度",
-        python: "import numpy as np\n\ndef cosine(a, b):\n    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))\n\nprint(cosine([1, 0], [1, 1]))  # 0.707",
+        runnable: true,
+        python: "import numpy as np\n\ndef cosine(a, b):\n    a, b = np.array(a), np.array(b)\n    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))\n\nprint(cosine([1, 0], [1, 1]))  # 0.707\nprint(cosine([1, 0], [0, 1]))  # 0(直交)\nprint(cosine([1, 2, 3], [2, 4, 6]))  # 1(平行)",
       },
       {
         type: "practical",

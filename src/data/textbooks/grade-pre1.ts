@@ -444,6 +444,7 @@ export const gradePre1Textbook: Textbook = {
             {
               type: "code",
               title: "Python / R で PCA を実行する",
+              runnable: true,
               python: `from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 import numpy as np

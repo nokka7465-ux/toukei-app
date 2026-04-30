@@ -301,6 +301,7 @@ export const gradeTwoTextbook: Textbook = {
             {
               type: "code",
               title: "Python / R で 2 標本 t 検定を行う",
+              runnable: true,
               python: `from scipy import stats
 
 a = [85, 88, 90, 78, 92, 86, 89, 84, 91, 87]
@@ -518,6 +519,7 @@ t.test(a, b)
             {
               type: "code",
               title: "Python / R で単回帰を実行する",
+              runnable: true,
               python: `import numpy as np
 import statsmodels.api as sm
 

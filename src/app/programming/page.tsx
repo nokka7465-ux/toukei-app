@@ -187,6 +187,70 @@ const CHAPTERS: { id: string; number: string; title: string; blocks: TextbookBlo
       },
     ],
   },
+  {
+    id: "ch5",
+    number: "5",
+    title: "scikit-learn ─ 30 分で機械学習デビュー",
+    blocks: [
+      {
+        type: "p",
+        text: "**scikit-learn** は Python 機械学習のデファクト。`fit() / predict()` の統一インターフェースで、100 種類以上のモデルが同じ書き方で動きます。下のコードはすべて **このページで実行可能**(Pyodide)。",
+      },
+      { type: "h3", text: "5-1. データを読み込む" },
+      {
+        type: "code",
+        title: "iris データセット",
+        runnable: true,
+        python:
+          "from sklearn.datasets import load_iris\n\ndata = load_iris(as_frame=True)\nX, y = data.data, data.target\n\nprint(X.head())\nprint('\\nクラス分布:')\nprint(y.value_counts())\nprint('\\n特徴量:', list(X.columns))",
+      },
+      { type: "h3", text: "5-2. 学習 → 予測 → 評価" },
+      {
+        type: "code",
+        title: "ロジスティック回帰で 3 クラス分類",
+        runnable: true,
+        python:
+          "from sklearn.datasets import load_iris\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.metrics import accuracy_score, confusion_matrix\n\nX, y = load_iris(return_X_y=True)\nX_tr, X_te, y_tr, y_te = train_test_split(\n    X, y, test_size=0.2, random_state=0, stratify=y\n)\n\nscaler = StandardScaler()\nX_tr = scaler.fit_transform(X_tr)\nX_te = scaler.transform(X_te)\n\nmodel = LogisticRegression(max_iter=500).fit(X_tr, y_tr)\ny_pred = model.predict(X_te)\n\nprint(f'Accuracy: {accuracy_score(y_te, y_pred):.3f}')\nprint('混同行列:')\nprint(confusion_matrix(y_te, y_pred))",
+      },
+      {
+        type: "intuition",
+        title: "💡 fit / transform / predict の原則",
+        body: "scaler や model は **訓練データだけで fit**。テストデータには transform / predict のみ。これを守らないとデータリークで評価が水増しされる。",
+      },
+      { type: "h3", text: "5-3. 交差検証 + ハイパラ最適化" },
+      {
+        type: "code",
+        title: "Pipeline + GridSearchCV",
+        runnable: true,
+        python:
+          "from sklearn.datasets import load_iris\nfrom sklearn.model_selection import GridSearchCV, train_test_split\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.pipeline import Pipeline\n\nX, y = load_iris(return_X_y=True)\nX_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=0)\n\npipe = Pipeline([\n    ('scaler', StandardScaler()),\n    ('clf', LogisticRegression(max_iter=500)),\n])\n\nparams = {'clf__C': [0.01, 0.1, 1, 10, 100]}\ngrid = GridSearchCV(pipe, params, cv=5, scoring='accuracy')\ngrid.fit(X_tr, y_tr)\n\nprint(f'Best C: {grid.best_params_}')\nprint(f'Best CV acc: {grid.best_score_:.3f}')\nprint(f'Test acc:    {grid.score(X_te, y_te):.3f}')",
+      },
+      { type: "h3", text: "5-4. 教師なし学習(クラスタリング)" },
+      {
+        type: "code",
+        title: "K-Means で 3 クラスタに分ける",
+        runnable: true,
+        python:
+          "from sklearn.datasets import load_iris\nfrom sklearn.cluster import KMeans\nfrom sklearn.preprocessing import StandardScaler\nfrom collections import Counter\n\nX, y = load_iris(return_X_y=True)\nX = StandardScaler().fit_transform(X)\n\nkm = KMeans(n_clusters=3, random_state=0, n_init=10).fit(X)\n\nprint(f'inertia(クラスタ内分散の総和): {km.inertia_:.2f}')\nprint(f'cluster sizes: {Counter(km.labels_)}')\n# 真ラベルとの混同(教師あり指標で精度確認)\nfor c in range(3):\n    mask = km.labels_ == c\n    print(f'cluster {c}: 真クラス分布 = {Counter(y[mask])}')",
+      },
+      {
+        type: "practical",
+        title: "🛠 実務で次に学ぶこと",
+        body: "RandomForest / GradientBoosting / XGBoost は表データの定番。HuggingFace は NLP・画像・音声の事前学習済みモデル。本格的な深層学習は PyTorch / TensorFlow。共通言語の scikit-learn を抑えると応用が早い。",
+      },
+      { type: "h3", text: "次に進む" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "[scikit-learn 入門ブログ](/blog/sklearn-introduction) ─ 7 ステップ詳細版",
+          "[Kaggle 始め方](/blog/kaggle-getting-started) ─ コンペで腕試し",
+          "[E 資格 教科書](/certs/e-shikaku/textbook) ─ DL 本格実装へ",
+          "[ベイズ最適化(Optuna)](/blog/bayesian-optimization) ─ ハイパラ自動探索",
+        ],
+      },
+    ],
+  },
 ];
 
 export default function ProgrammingPage() {

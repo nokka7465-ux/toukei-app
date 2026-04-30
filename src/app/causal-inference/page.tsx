@@ -152,9 +152,81 @@ const CHAPTERS: { id: string; number: string; title: string; blocks: TextbookBlo
         style: "bullet",
         items: [
           "[相関と因果はどう違うか(ブログ)](/blog/causal-inference-introduction)",
-          "回帰不連続デザイン(RDD)/ Synthetic Control / DML",
+          "次章: 回帰不連続デザイン(RDD)",
+          "Synthetic Control / DML(Double ML)",
           "[ベイズ統計](/textbook/grade-pre1) ─ 因果推論との接続",
         ],
+      },
+    ],
+  },
+  {
+    id: "ch6",
+    number: "6",
+    title: "回帰不連続デザイン(RDD)",
+    blocks: [
+      {
+        type: "p",
+        text: "**しきい値で処置の有無が決まる** 場面で使える手法。例えば「点数 60 点以上で奨学金が出る」「年収 1000 万円以上で増税」のように、**ラニング変数**(running variable, X)が cutoff $c$ を境に処置 $T$ が変わるとき、しきい値の **すぐ近く** で処置群と対照群を比較すると、ほぼ RCT と同等の因果効果が得られます。",
+      },
+      { type: "h3", text: "アイデア" },
+      {
+        type: "p",
+        text: "59 点と 61 点の学生は能力的にほぼ同じ。違いは『奨学金をもらえるかもらえないか』だけ。だから **その近傍での結果の差** が奨学金の因果効果と解釈できます。",
+      },
+      { type: "math", tex: "\\tau_{\\text{RDD}} = \\lim_{x \\downarrow c} \\mathbb{E}[Y \\mid X=x] - \\lim_{x \\uparrow c} \\mathbb{E}[Y \\mid X=x]" },
+      { type: "h3", text: "Sharp RDD と Fuzzy RDD" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Sharp**: cutoff を超えると 100% 処置される(例: 法律で決まったルール)",
+          "**Fuzzy**: cutoff を超えると処置確率が **ジャンプ** するが 100% ではない(IV 的に処理)",
+        ],
+      },
+      { type: "h3", text: "実装(Python)" },
+      {
+        type: "code",
+        title: "RDD のシミュレーション",
+        runnable: true,
+        python:
+          "import numpy as np\n\nrng = np.random.default_rng(0)\nn = 1000\ncutoff = 0\nX = rng.uniform(-1, 1, n)\nT = (X >= cutoff).astype(int)\n# 真の因果効果 = 0.5。Y = 1 + 2X + 0.5T + noise\nY = 1 + 2 * X + 0.5 * T + rng.normal(0, 0.3, n)\n\n# cutoff 近傍だけで平均差を取る(ナイーブ RDD)\nbandwidth = 0.1\nleft  = (X < cutoff) & (X >= cutoff - bandwidth)\nright = (X >= cutoff) & (X < cutoff + bandwidth)\nnaive = Y[right].mean() - Y[left].mean()\nprint(f'近傍平均差: {naive:.3f}(真値 0.5)')\n\n# 局所線形回帰: 各サイドで X に Y を回帰し、cutoff での予測値の差を取る\ndef local_lin(x, y, c, side):\n    mask = (x < c) if side == 'left' else (x >= c)\n    xs, ys = x[mask], y[mask]\n    A = np.column_stack([np.ones_like(xs), xs])\n    beta = np.linalg.lstsq(A, ys, rcond=None)[0]\n    return beta[0] + beta[1] * c\n\ntau = local_lin(X, Y, cutoff, 'right') - local_lin(X, Y, cutoff, 'left')\nprint(f'局所線形 RDD: {tau:.3f}(真値 0.5)')",
+      },
+      {
+        type: "intuition",
+        title: "💡 バンド幅(bandwidth)の選択",
+        body: "狭くすると比較対象が似てくる(バイアス↓)が、サンプルが減る(分散↑)。広くすると逆。Imbens-Kalyanaraman などの最適バンド幅選択アルゴリズムが使われる(rdrobust パッケージ)。",
+      },
+      { type: "h3", text: "RDD が破綻するとき" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**操作可能性**: ラニング変数を被験者が**ねじ曲げられる**(例: 試験で 60 点ぴったりが急増)",
+          "**他の不連続性**: cutoff で他の制度も同時に変わる(混淆)",
+          "**密度のジャンプ**: McCrary 密度検定で cutoff で人数が不自然に増減してないか確認",
+        ],
+      },
+      {
+        type: "practical",
+        title: "🛠 実例(Lee 2008)",
+        body: "米国下院選挙で『現職が次回当選するか』を、現職の前回得票率 50% を cutoff にした RDD で分析。50% を僅かに超えた現職は再選率が急上昇 ── 現職効果(incumbency advantage)を頑健に推定した古典的論文。",
+      },
+      { type: "h3", text: "学んだこと(全 6 章のまとめ)" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Ch1**: 因果は相関ではない(ポテンシャルアウトカム)",
+          "**Ch2**: DAG とバックドア基準で交絡を見抜く",
+          "**Ch3**: 傾向スコアマッチングで似た者同士を比較",
+          "**Ch4**: DID で『時間トレンド』を除去",
+          "**Ch5**: IV で『未観測交絡』に立ち向かう",
+          "**Ch6**: RDD でしきい値ジャンプを使う",
+        ],
+      },
+      {
+        type: "p",
+        text: "因果推論は『どの仮定が現実的か』を問い続ける学問。ドメイン知識と組み合わせて、**仮定 → 識別 → 推定 → 感度分析** の 4 段階を回しましょう。",
       },
     ],
   },
