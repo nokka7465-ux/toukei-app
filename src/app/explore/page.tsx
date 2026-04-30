@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/explore" },
   openGraph: {
     title: "動かして学ぶ統計",
-    description: "5 つのキー概念をスライダー操作で体感する。",
+    description: "8 つのキー概念をスライダー操作で体感する。",
     type: "article",
   },
 };
@@ -87,7 +87,7 @@ export default function ExplorePage() {
               href="/figures"
               className="block py-2 text-[var(--link)] hover:underline"
             >
-              図解で学ぶ統計 → 24 種の SVG 図解一覧
+              図解で学ぶ統計 → 43 種の SVG 図解一覧
             </Link>
           </li>
           <li>

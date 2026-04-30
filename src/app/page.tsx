@@ -724,7 +724,7 @@ export default function Home() {
               title: "概念を理解したい",
               accent: "bg-sky-500",
               links: [
-                { href: "/figures", label: "図解で学ぶ統計(SVG 29 種)" },
+                { href: "/figures", label: "図解で学ぶ統計(SVG 43 種)" },
                 { href: "/explore", label: "動かして学ぶ統計(対話的)" },
                 { href: "/glossary", label: "統計用語集" },
                 { href: "/math", label: "統計のための数学基礎" },

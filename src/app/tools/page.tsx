@@ -13,7 +13,7 @@ import { BreadcrumbJsonLd } from "@/components/StructuredData";
 export const metadata: Metadata = {
   title: "統計計算ツール ─ 信頼区間・p値・サンプルサイズの無料計算機",
   description:
-    "信頼区間・p 値・サンプルサイズ・検出力・A/B テストの 5 つの統計計算機を無料で。学習にも実務にも使える、ブラウザ完結のオンライン計算ツール。データ送信なし。",
+    "信頼区間・p 値・サンプルサイズ・検出力・A/B テスト・相関検定・ANOVA・カイ二乗の 8 つの統計計算機を無料で。学習にも実務にも使える、ブラウザ完結のオンライン計算ツール。データ送信なし。",
   alternates: { canonical: "/tools" },
   openGraph: {
     title: "統計計算ツール集",
@@ -49,7 +49,7 @@ export default function ToolsPage() {
           統計計算ツール集
         </h1>
         <p className="text-[var(--muted-strong)] leading-loose max-w-3xl">
-          学習中の確認や実務での意思決定にすぐ使える、5 つの統計計算機。すべて{" "}
+          学習中の確認や実務での意思決定にすぐ使える、8 つの統計計算機。すべて{" "}
           <strong>ブラウザ内で完結</strong>{" "}
           ─ データ送信・ログイン・サーバ計算は一切ありません。
         </p>
@@ -115,7 +115,7 @@ export default function ToolsPage() {
           </li>
           <li>
             <Link href="/figures" className="text-[var(--link)] hover:underline">
-              図解で学ぶ統計 → 24 種の SVG 図解一覧
+              図解で学ぶ統計 → 43 種の SVG 図解一覧
             </Link>
           </li>
           <li>

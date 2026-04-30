@@ -5,12 +5,12 @@ import { Diagram } from "@/components/diagrams/Diagram";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "図解で学ぶ統計 ─ 正規分布・回帰・ベイズ等 29 種の SVG 図",
+  title: "図解で学ぶ統計 ─ 正規分布・回帰・ベイズ等 43 種の SVG 図",
   description:
     "統計検定 4級〜1級・E 資格・G 検定・QC 検定で頻出の正規分布・中心極限定理・回帰直線・ROC 曲線・ベイズ更新・尤度関数・時系列・PCA・MCMC・生存解析・活性化関数・CNN アーキテクチャ・管理図・OC 曲線を SVG 図解で網羅。",
   alternates: { canonical: "/figures" },
   openGraph: {
-    title: "図解で学ぶ統計 ─ 29 種の SVG 図",
+    title: "図解で学ぶ統計 ─ 43 種の SVG 図",
     description:
       "統計検定 4 級〜1 級・E 資格・G 検定・QC 検定など全関連検定のキー概念を SVG で。",
     type: "article",
