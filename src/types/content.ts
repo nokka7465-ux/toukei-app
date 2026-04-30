@@ -92,6 +92,8 @@ export type TextbookBlock =
       python?: string;
       r?: string;
       caption?: string;
+      /** ブラウザ内 Pyodide で実行可能にする(Python のみ対応) */
+      runnable?: boolean;
     };
 
 export type TextbookSection = {

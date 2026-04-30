@@ -26,6 +26,8 @@ const staticUrls = [
   { path: "/figures", priority: 0.85, changefreq: "monthly" },
   { path: "/explore", priority: 0.9, changefreq: "monthly" },
   { path: "/tools", priority: 0.9, changefreq: "monthly" },
+  { path: "/programming", priority: 0.85, changefreq: "monthly" },
+  { path: "/causal-inference", priority: 0.8, changefreq: "monthly" },
   { path: "/certs/ds-basic", priority: 0.7, changefreq: "monthly" },
   { path: "/certs/ds-basic/textbook", priority: 0.7, changefreq: "monthly" },
   { path: "/certs/ds-basic/quiz", priority: 0.7, changefreq: "monthly" },

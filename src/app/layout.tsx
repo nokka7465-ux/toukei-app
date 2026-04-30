@@ -376,6 +376,16 @@ export default function RootLayout({
                       公式チートシート
                     </Link>
                   </li>
+                  <li>
+                    <Link href="/programming" className="hover:underline text-[var(--muted-strong)]">
+                      プログラミング入門
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/causal-inference" className="hover:underline text-[var(--muted-strong)]">
+                      因果推論入門
+                    </Link>
+                  </li>
                 </ul>
               </div>
               <div>

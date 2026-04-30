@@ -3888,6 +3888,17 @@ export const blogPosts: BlogPost[] = [
         type: "p",
         text: "実行すると、$n=1$ では一様分布のまま真四角、$n=2$ で三角形、$n=5$ で釣り鐘型、$n=30$ で完全に正規分布と一致 ─ 教科書通りの絵が描けます。",
       },
+      {
+        type: "p",
+        text: "プロット無しの **数値だけで CLT を確認** することもできます。下のコードはこのページでそのまま実行可能(Pyodide)。`n` を変えて、標本平均の分布の標準偏差が `1/√(12n)` に近づく様子を観察してみてください。",
+      },
+      {
+        type: "code",
+        title: "プロット無し版 ─ ブラウザで実行",
+        runnable: true,
+        python:
+          "import numpy as np\n\nnp.random.seed(42)\nfor n in [1, 2, 5, 30]:\n    means = np.array([np.random.uniform(0, 1, n).mean() for _ in range(5000)])\n    theoretical_sd = (1 / (12 * n)) ** 0.5\n    print(f'n={n:>3}  平均={means.mean():.4f}  SD={means.std():.4f}  理論SD={theoretical_sd:.4f}')",
+      },
       { type: "h3", text: "実験 2 ─ 偏った分布(指数分布)から" },
       {
         type: "p",

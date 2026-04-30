@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { PythonRunner } from "./PythonRunner";
 
 type Lang = "python" | "r";
 
@@ -9,9 +10,10 @@ type Props = {
   python?: string;
   r?: string;
   caption?: string;
+  runnable?: boolean;
 };
 
-export function CodeBlock({ title, python, r, caption }: Props) {
+export function CodeBlock({ title, python, r, caption, runnable }: Props) {
   const langs: Lang[] = [];
   if (python) langs.push("python");
   if (r) langs.push("r");
@@ -63,9 +65,15 @@ export function CodeBlock({ title, python, r, caption }: Props) {
           コピー
         </button>
       </div>
-      <pre className="rounded-b border border-t-0 border-[var(--page-border-strong)] bg-[var(--page)] p-3 text-[12px] leading-relaxed overflow-x-auto">
-        <code className="font-mono">{code}</code>
-      </pre>
+      {runnable && active === "python" && python ? (
+        <div className="rounded-b border border-t-0 border-[var(--page-border-strong)] bg-[var(--page)] p-3">
+          <PythonRunner code={python} />
+        </div>
+      ) : (
+        <pre className="rounded-b border border-t-0 border-[var(--page-border-strong)] bg-[var(--page)] p-3 text-[12px] leading-relaxed overflow-x-auto">
+          <code className="font-mono">{code}</code>
+        </pre>
+      )}
       {caption && (
         <p className="text-[11px] text-[var(--muted)] ui-sans mt-1 leading-relaxed">
           {caption}

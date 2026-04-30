@@ -135,6 +135,7 @@ export function TextbookBody({
                 python={block.python}
                 r={block.r}
                 caption={block.caption}
+                runnable={block.runnable}
               />
             );
         }
