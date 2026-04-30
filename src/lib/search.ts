@@ -140,6 +140,86 @@ export const searchIndex: SearchItem[] = (() => {
     });
   }
 
+  // Standalone mini-textbooks (programming, causal inference)
+  const standalone: { url: string; title: string; context: string; text: string }[] = [
+    {
+      url: "/programming#ch1",
+      title: "Python 基礎 ─ データ型・関数・制御構造",
+      context: "プログラミング入門 · 第 1 章",
+      text: "Python 変数 リスト 辞書 関数 if for 制御構造 リスト内包表記 print f-string scores grade",
+    },
+    {
+      url: "/programming#ch2",
+      title: "NumPy ─ ベクトル演算で 100 倍速くする",
+      context: "プログラミング入門 · 第 2 章",
+      text: "NumPy ベクトル演算 ブロードキャスト 配列 arange 平均 標準偏差 percentile 正規分布 random",
+    },
+    {
+      url: "/programming#ch3",
+      title: "Pandas ─ 表データ処理のデファクト",
+      context: "プログラミング入門 · 第 3 章",
+      text: "Pandas DataFrame groupby query merge filter sort describe SQL 対応 集計",
+    },
+    {
+      url: "/programming#ch4",
+      title: "SQL ─ データを問い合わせる共通言語",
+      context: "プログラミング入門 · 第 4 章",
+      text: "SQL SELECT WHERE GROUP BY JOIN ORDER BY LIMIT HAVING ウィンドウ関数 RANK PARTITION sqlite3",
+    },
+    {
+      url: "/programming#ch5",
+      title: "scikit-learn ─ 30 分で機械学習デビュー",
+      context: "プログラミング入門 · 第 5 章",
+      text: "scikit-learn fit predict iris LogisticRegression train_test_split StandardScaler GridSearchCV Pipeline KMeans 交差検証 cross_val_score",
+    },
+    {
+      url: "/causal-inference#ch1",
+      title: "相関と因果はどう違うのか",
+      context: "因果推論ミニ教科書 · 第 1 章",
+      text: "ポテンシャルアウトカム ATE 因果効果 交絡 相関 因果 反事実",
+    },
+    {
+      url: "/causal-inference#ch2",
+      title: "DAG とバックドア基準",
+      context: "因果推論ミニ教科書 · 第 2 章",
+      text: "DAG 有向非巡回グラフ バックドア基準 Chain Fork Collider 交絡 Berkson",
+    },
+    {
+      url: "/causal-inference#ch3",
+      title: "傾向スコアマッチング",
+      context: "因果推論ミニ教科書 · 第 3 章",
+      text: "傾向スコア マッチング ATT ロジスティック回帰 NearestNeighbors Propensity Score",
+    },
+    {
+      url: "/causal-inference#ch4",
+      title: "差分の差分(DID)",
+      context: "因果推論ミニ教科書 · 第 4 章",
+      text: "DID 差分の差分 平行トレンド 自然実験 Card Krueger 最低賃金",
+    },
+    {
+      url: "/causal-inference#ch5",
+      title: "操作変数法(IV)",
+      context: "因果推論ミニ教科書 · 第 5 章",
+      text: "操作変数法 IV 2SLS Angrist Krueger 教育年数 賃金 関連性 外生性",
+    },
+    {
+      url: "/causal-inference#ch6",
+      title: "回帰不連続デザイン(RDD)",
+      context: "因果推論ミニ教科書 · 第 6 章",
+      text: "RDD 回帰不連続 cutoff Sharp Fuzzy 局所線形回帰 McCrary Lee 現職効果",
+    },
+  ];
+  for (const s of standalone) {
+    items.push({
+      id: `st-${s.url}`,
+      source: "textbook",
+      title: s.title,
+      context: s.context,
+      text: s.text,
+      url: s.url,
+    });
+  }
+
   // Formulas
   const formulaSets: { slug: string; formulas: typeof gradeFourFormulas }[] = [
     { slug: "intro", formulas: introFormulas },

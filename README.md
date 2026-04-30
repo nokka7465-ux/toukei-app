@@ -20,10 +20,10 @@
 5. [独自の学習体験](#5-独自の学習体験)
 6. [学習機能(進捗 / バッジ / 模試 / 復習 等)](#6-学習機能進捗--バッジ--模試--復習-等)
 7. [全ページ一覧](#7-全ページ一覧)
-8. [ブログ記事一覧 (45 本)](#8-ブログ記事一覧-45-本)
-9. [SVG 図解 一覧 (38 種)](#9-svg-図解-一覧-38-種)
-10. [統計計算ツール (5 種)](#10-統計計算ツール-5-種)
-11. [インタラクティブ図解 (5 種)](#11-インタラクティブ図解-5-種)
+8. [ブログ記事一覧 (48 本)](#8-ブログ記事一覧-45-本)
+9. [SVG 図解 一覧 (43 種)](#9-svg-図解-一覧-43-種)
+10. [統計計算ツール (8 種)](#10-統計計算ツール-8-種)
+11. [インタラクティブ図解 (8 種)](#11-インタラクティブ図解-8-種)
 12. [用語集 (約 320 語)](#12-用語集-約-320-語)
 13. [技術スタック](#13-技術スタック)
 14. [ディレクトリ構成](#14-ディレクトリ構成)
@@ -51,11 +51,11 @@
 
 | カテゴリ | 数値 |
 |---|---:|
-| 📰 ブログ記事 | **45 本** |
+| 📰 ブログ記事 | **48 本** |
 | 📚 用語集 | **約 320 語** |
-| 📊 SVG 図解 | **38 種** |
-| 🎮 インタラクティブ図解 | **5 種** |
-| 🧮 統計計算ツール | **5 種** |
+| 📊 SVG 図解 | **43 種** |
+| 🎮 インタラクティブ図解 | **8 種** |
+| 🧮 統計計算ツール | **8 種** |
 | 📖 教科書トラック | **11**(52 章 ・ 約 1,500 ページ相当) |
 | ✏️ 演習問題 | **約 280** |
 | 🎯 検定別ロードマップ | **7 ページ** |
@@ -115,17 +115,17 @@
 
 ### 5-2. 図解で学ぶ統計
 
-- **38 種の SVG 図解**(後述、`/figures`)
+- **43 種の SVG 図解**(後述、`/figures`)
 - 静的画像ではなく theme-aware・印刷対応・ダークモード追従
 - 各図解は教科書本文中にも埋め込まれ、`/figures` ページから該当節へ直リンク
 
 ### 5-3. 動かして学ぶ統計
 
-[/explore](https://toukei-app.com/explore) のインタラクティブ図解 5 種(後述)。
+[/explore](https://toukei-app.com/explore) のインタラクティブ図解 8 種(後述)。
 
 ### 5-4. 統計計算ツール
 
-[/tools](https://toukei-app.com/tools) で 5 種(信頼区間 / p 値 / サンプルサイズ / 検出力 / A/B テスト)。
+[/tools](https://toukei-app.com/tools) で 8 種(信頼区間 / p 値 / サンプルサイズ / 検出力 / A/B テスト / 相関係数検定 / ANOVA / カイ二乗独立性検定)。
 
 ### 5-5. 横断検索 + Phase フィルター
 
@@ -174,12 +174,14 @@
 - [`/mock`](https://toukei-app.com/mock) 模試一覧(6 級)
 - [`/formulas`](https://toukei-app.com/formulas) 公式集一覧
 - [`/glossary`](https://toukei-app.com/glossary) 用語集(約 320 語)
-- [`/figures`](https://toukei-app.com/figures) 図解で学ぶ統計(38 種)
-- [`/explore`](https://toukei-app.com/explore) 動かして学ぶ統計(5 種)
-- [`/tools`](https://toukei-app.com/tools) 統計計算ツール(5 種)
+- [`/figures`](https://toukei-app.com/figures) 図解で学ぶ統計(43 種)
+- [`/explore`](https://toukei-app.com/explore) 動かして学ぶ統計(8 種)
+- [`/tools`](https://toukei-app.com/tools) 統計計算ツール(8 種)
+- [`/programming`](https://toukei-app.com/programming) プログラミング入門(Python・SQL ブラウザ実行)
+- [`/causal-inference`](https://toukei-app.com/causal-inference) 因果推論ミニ教科書
 - [`/cheatsheet`](https://toukei-app.com/cheatsheet) 公式チートシート(印刷可)
 - [`/search`](https://toukei-app.com/search) サイト内検索
-- [`/blog`](https://toukei-app.com/blog) 学習ブログ(45 本)
+- [`/blog`](https://toukei-app.com/blog) 学習ブログ(48 本)
 - [`/bookmarks`](https://toukei-app.com/bookmarks) ブックマーク(noindex)
 - [`/review`](https://toukei-app.com/review) 苦手問題復習(noindex)
 
@@ -212,7 +214,7 @@
 
 ---
 
-## 8. ブログ記事一覧 (45 本)
+## 8. ブログ記事一覧 (48 本)
 
 カテゴリ別:
 
@@ -274,7 +276,7 @@
 
 ---
 
-## 9. SVG 図解 一覧 (38 種)
+## 9. SVG 図解 一覧 (43 種)
 
 [/figures](https://toukei-app.com/figures) で全種閲覧可。
 
@@ -342,11 +344,24 @@
 37. Shewhart 管理図
 38. OC 曲線(抜取検査)
 
+### 推測統計(追加)
+39. **ブートストラップ法**
+
+### 機械学習(追加)
+40. **GBDT の分割木**
+
+### ディープラーニング(追加)
+41. **Dropout**
+42. **Word2Vec 埋め込み空間**
+
+### 強化学習(追加)
+43. **RLHF 概念図**
+
 (太字は最近追加された ML/DL 関連の図解)
 
 ---
 
-## 10. 統計計算ツール (5 種)
+## 10. 統計計算ツール (8 種)
 
 [/tools](https://toukei-app.com/tools) で利用可。すべてブラウザ完結。
 
@@ -355,10 +370,13 @@
 3. **p 値計算機**(z / t / χ²)
 4. **検出力計算機**
 5. **A/B テスト計算機**(2 比率検定)
+6. **相関係数の有意性検定**(t 検定)
+7. **一元配置 ANOVA**(F 検定)
+8. **カイ二乗 独立性検定**(クロス表)
 
 ---
 
-## 11. インタラクティブ図解 (5 種)
+## 11. インタラクティブ図解 (8 種)
 
 [/explore](https://toukei-app.com/explore) で利用可。
 
@@ -367,6 +385,9 @@
 3. 中心極限定理の収束デモ
 4. p 値と棄却域
 5. 信頼区間の幅
+6. ベイズ更新(事前 × 尤度 = 事後)
+7. 散布図と回帰直線(点ドラッグ)
+8. カイ二乗適合度検定
 
 ---
 
@@ -471,7 +492,7 @@ src/
 │   ├── CodeBlock.tsx                   # Python/R コード併記
 │   ├── AiRoadmap.tsx                   # ホームのロードマップ表示
 │   ├── Logo.tsx, LogoCandidates.tsx    # ロゴ
-│   ├── diagrams/                       # 38 種の SVG 図解コンポーネント
+│   ├── diagrams/                       # 43 種の SVG 図解コンポーネント
 │   ├── interactive/                    # 5 種のインタラクティブ図解
 │   └── tools/                          # 5 種の計算機 + 共通プリミティブ
 ├── data/
@@ -479,7 +500,7 @@ src/
 │   ├── questions/                      # 11 トラックの演習問題
 │   ├── formulas/                       # 6 トラックの公式集
 │   ├── glossary.ts                     # 用語集 約 320 語
-│   ├── blog/                           # ブログ記事 45 本
+│   ├── blog/                           # ブログ記事 48 本
 │   ├── mock-config.ts                  # 模試の級別設定
 │   ├── cert-roadmaps.ts                # 検定別ロードマップデータ
 │   └── levels.ts, books.ts, ...
