@@ -20,11 +20,11 @@
 5. [独自の学習体験](#5-独自の学習体験)
 6. [学習機能(進捗 / バッジ / 模試 / 復習 等)](#6-学習機能進捗--バッジ--模試--復習-等)
 7. [全ページ一覧](#7-全ページ一覧)
-8. [ブログ記事一覧 (48 本)](#8-ブログ記事一覧-45-本)
-9. [SVG 図解 一覧 (43 種)](#9-svg-図解-一覧-43-種)
-10. [統計計算ツール (8 種)](#10-統計計算ツール-8-種)
-11. [インタラクティブ図解 (8 種)](#11-インタラクティブ図解-8-種)
-12. [用語集 (約 320 語)](#12-用語集-約-320-語)
+8. [ブログ記事一覧 (54 本)](#8-ブログ記事一覧-54-本)
+9. [SVG 図解 一覧 (47 種)](#9-svg-図解-一覧-47-種)
+10. [統計計算ツール (11 種)](#10-統計計算ツール-11-種)
+11. [インタラクティブ図解 (10 種)](#11-インタラクティブ図解-10-種)
+12. [用語集 (301 語)](#12-用語集-301-語)
 13. [技術スタック](#13-技術スタック)
 14. [ディレクトリ構成](#14-ディレクトリ構成)
 15. [開発 ・ 運用](#15-開発--運用)
@@ -51,16 +51,18 @@
 
 | カテゴリ | 数値 |
 |---|---:|
-| 📰 ブログ記事 | **48 本** |
-| 📚 用語集 | **約 320 語** |
-| 📊 SVG 図解 | **43 種** |
-| 🎮 インタラクティブ図解 | **8 種** |
-| 🧮 統計計算ツール | **8 種** |
-| 📖 教科書トラック | **11**(52 章 ・ 約 1,500 ページ相当) |
+| 📰 ブログ記事 | **54 本** |
+| 📚 用語集 | **301 語(一意)** |
+| 📊 SVG 図解 | **47 種** |
+| 🎮 インタラクティブ図解 | **10 種** |
+| 🧮 統計計算ツール | **11 種** |
+| 📖 教科書トラック | **14**(統計 6・関連検定 7・数学 1) |
+| 📚 ミニ教科書 | **4**(プログラミング・因果推論・時系列・DL基礎) |
+| 🐍 ブラウザ Python 実行 | **Pyodide** で /programming 等のコードをその場で実行可能 |
 | ✏️ 演習問題 | **約 280** |
-| 🎯 検定別ロードマップ | **7 ページ** |
+| 🎯 検定別ロードマップ | **6 ページ**(g-test, e-shikaku, ds-literacy, ds-basic, survey-specialist, qc-kentei) |
 | 🏆 学習機能 | 進捗 / 模試 / 復習 / バッジ / プラン / ブックマーク |
-| 公開ページ | **約 110** |
+| 公開ページ | **約 130** |
 
 ---
 
@@ -121,11 +123,11 @@
 
 ### 5-3. 動かして学ぶ統計
 
-[/explore](https://toukei-app.com/explore) のインタラクティブ図解 8 種(後述)。
+[/explore](https://toukei-app.com/explore) のインタラクティブ図解 10 種(後述)。
 
 ### 5-4. 統計計算ツール
 
-[/tools](https://toukei-app.com/tools) で 8 種(信頼区間 / p 値 / サンプルサイズ / 検出力 / A/B テスト / 相関係数検定 / ANOVA / カイ二乗独立性検定)。
+[/tools](https://toukei-app.com/tools) で 11 種(信頼区間 / p 値 / サンプルサイズ / 検出力 / A/B テスト / 相関係数検定 / ANOVA / カイ二乗独立性検定 / Wilcoxon 符号順位 / Mann-Whitney U / McNemar)。
 
 ### 5-5. 横断検索 + Phase フィルター
 
@@ -173,15 +175,17 @@
 - [`/practice`](https://toukei-app.com/practice) ランダム練習
 - [`/mock`](https://toukei-app.com/mock) 模試一覧(6 級)
 - [`/formulas`](https://toukei-app.com/formulas) 公式集一覧
-- [`/glossary`](https://toukei-app.com/glossary) 用語集(約 320 語)
+- [`/glossary`](https://toukei-app.com/glossary) 用語集(301 語)
 - [`/figures`](https://toukei-app.com/figures) 図解で学ぶ統計(43 種)
-- [`/explore`](https://toukei-app.com/explore) 動かして学ぶ統計(8 種)
-- [`/tools`](https://toukei-app.com/tools) 統計計算ツール(8 種)
-- [`/programming`](https://toukei-app.com/programming) プログラミング入門(Python・SQL ブラウザ実行)
-- [`/causal-inference`](https://toukei-app.com/causal-inference) 因果推論ミニ教科書
+- [`/explore`](https://toukei-app.com/explore) 動かして学ぶ統計(10 種)
+- [`/tools`](https://toukei-app.com/tools) 統計計算ツール(11 種)
+- [`/programming`](https://toukei-app.com/programming) プログラミング入門ミニ教科書(Python・NumPy・Pandas・SQL・scikit-learn)
+- [`/causal-inference`](https://toukei-app.com/causal-inference) 因果推論ミニ教科書(DAG・傾向スコア・DID・IV・RDD)
+- [`/time-series`](https://toukei-app.com/time-series) 時系列分析ミニ教科書(ARIMA・Prophet・状態空間)
+- [`/deep-learning-basics`](https://toukei-app.com/deep-learning-basics) ディープラーニング基礎ミニ教科書(NN・最適化・CNN・Transformer・正則化)
 - [`/cheatsheet`](https://toukei-app.com/cheatsheet) 公式チートシート(印刷可)
 - [`/search`](https://toukei-app.com/search) サイト内検索
-- [`/blog`](https://toukei-app.com/blog) 学習ブログ(48 本)
+- [`/blog`](https://toukei-app.com/blog) 学習ブログ(54 本)
 - [`/bookmarks`](https://toukei-app.com/bookmarks) ブックマーク(noindex)
 - [`/review`](https://toukei-app.com/review) 苦手問題復習(noindex)
 
@@ -204,7 +208,16 @@
 - `/certs/ds-literacy` — データサイエンティスト検定
 - `/certs/qc-kentei` — QC 検定
 
-### 7-3. メタ ・ 内部
+### 7-3. ミニ教科書(専門領域の集中講座)
+
+統計検定 / AI 検定の枠を超えて、実務で必要な専門領域を 5〜6 章でコンパクトに学べる単発教科書。**Pyodide で Python をブラウザ実行可能** な runnable コードを多数搭載。
+
+- [`/programming`](https://toukei-app.com/programming) **プログラミング入門**(5 章: Python 基礎・NumPy・Pandas・SQL・scikit-learn)
+- [`/causal-inference`](https://toukei-app.com/causal-inference) **因果推論ミニ教科書**(6 章: 相関と因果・DAG・傾向スコア・DID・IV・RDD)
+- [`/time-series`](https://toukei-app.com/time-series) **時系列分析ミニ教科書**(6 章: 定常性・ACF/PACF・ARIMA・Prophet・状態空間・評価)
+- [`/deep-learning-basics`](https://toukei-app.com/deep-learning-basics) **ディープラーニング基礎**(5 章: NN・最適化・CNN・RNN/Transformer・正則化)
+
+### 7-4. メタ ・ 内部
 
 - `/contact` お問い合わせ
 - `/privacy` プライバシーポリシー
@@ -214,7 +227,7 @@
 
 ---
 
-## 8. ブログ記事一覧 (48 本)
+## 8. ブログ記事一覧 (54 本)
 
 カテゴリ別:
 
@@ -271,12 +284,23 @@
 - [Slack Bot を LLM で作る ─ FastAPI + OpenAI で社内ツール化](https://toukei-app.com/blog/slack-bot-with-llm)
 - [FastAPI 入門 ─ ML モデルを 5 分で API にする](https://toukei-app.com/blog/fastapi-introduction)
 - [Docker 入門 ─ ML 環境の再現性を担保する](https://toukei-app.com/blog/docker-for-ml)
+- [PyTorch 入門 ─ TensorFlow と差別化された使いやすさ](https://toukei-app.com/blog/pytorch-introduction)
+- [データエンジニアリング基礎 ─ ETL・Data Lake・dbt の世界](https://toukei-app.com/blog/data-engineering-101)
+
+### 8-8. AI 応用・分析実務(2026 追加)
+- [LangChain vs LlamaIndex ─ どちらを選ぶべきか](https://toukei-app.com/blog/langchain-vs-llamaindex)
+- [ベクトル検索の基礎 ─ 埋め込み・コサイン類似度・ANN](https://toukei-app.com/blog/vector-search-fundamentals)
+- [LLM 評価指標 完全ガイド ─ BLEU から RAGAS まで](https://toukei-app.com/blog/llm-evaluation-metrics)
+- [A/B テストの落とし穴 7 選 ─ 有意でも実装してはいけないとき](https://toukei-app.com/blog/ab-test-pitfalls)
+- [ベクトル DB 徹底比較 ─ Pinecone・Qdrant・Weaviate・Milvus・pgvector](https://toukei-app.com/blog/vector-db-comparison)
+- [特徴量エンジニアリング 入門 ─ Kaggle 上位の必須スキル](https://toukei-app.com/blog/feature-engineering-101)
+- [SHAP で AI の判断を説明する ─ XAI 実践入門](https://toukei-app.com/blog/shap-explainable-ai)
 
 (その他、級選びや勉強法の既存記事も多数収録)
 
 ---
 
-## 9. SVG 図解 一覧 (43 種)
+## 9. SVG 図解 一覧 (47 種)
 
 [/figures](https://toukei-app.com/figures) で全種閲覧可。
 
@@ -357,11 +381,19 @@
 ### 強化学習(追加)
 43. **RLHF 概念図**
 
+### ディープラーニング(追加 2)
+44. **Batch Normalization**
+
+### 機械学習(追加 2)
+45. **K-Fold 交差検証**
+46. **混同行列(Confusion Matrix)**
+47. **PR 曲線(Precision-Recall)**
+
 (太字は最近追加された ML/DL 関連の図解)
 
 ---
 
-## 10. 統計計算ツール (8 種)
+## 10. 統計計算ツール (11 種)
 
 [/tools](https://toukei-app.com/tools) で利用可。すべてブラウザ完結。
 
@@ -373,10 +405,13 @@
 6. **相関係数の有意性検定**(t 検定)
 7. **一元配置 ANOVA**(F 検定)
 8. **カイ二乗 独立性検定**(クロス表)
+9. **Wilcoxon 符号順位検定**(対応のあるノンパラ)
+10. **Mann-Whitney U 検定**(独立 2 群ノンパラ)
+11. **McNemar 検定**(対応のある 2×2 二値)
 
 ---
 
-## 11. インタラクティブ図解 (8 種)
+## 11. インタラクティブ図解 (10 種)
 
 [/explore](https://toukei-app.com/explore) で利用可。
 
@@ -388,10 +423,12 @@
 6. ベイズ更新(事前 × 尤度 = 事後)
 7. 散布図と回帰直線(点ドラッグ)
 8. カイ二乗適合度検定
+9. 医療検査ベイズ(PPV / NPV シミュレーション)
+10. t 分布の自由度(裾の厚さの変化)
 
 ---
 
-## 12. 用語集 (約 320 語)
+## 12. 用語集 (301 語)
 
 [/glossary](https://toukei-app.com/glossary)。
 
@@ -499,8 +536,8 @@ src/
 │   ├── textbooks/                      # 11 トラックの教科書データ
 │   ├── questions/                      # 11 トラックの演習問題
 │   ├── formulas/                       # 6 トラックの公式集
-│   ├── glossary.ts                     # 用語集 約 320 語
-│   ├── blog/                           # ブログ記事 48 本
+│   ├── glossary.ts                     # 用語集 301 語
+│   ├── blog/                           # ブログ記事 54 本
 │   ├── mock-config.ts                  # 模試の級別設定
 │   ├── cert-roadmaps.ts                # 検定別ロードマップデータ
 │   └── levels.ts, books.ts, ...
