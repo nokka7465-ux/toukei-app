@@ -161,4 +161,92 @@ export const gradeTwoFormulas: Formula[] = [
     description:
       "回帰モデルが従属変数の分散をどれだけ説明できたかの指標。$0 \\leq R^2 \\leq 1$、単回帰では $R^2 = r^2$。",
   },
+  {
+    id: "adjusted-r-squared",
+    name: "自由度調整済み決定係数",
+    category: "回帰分析",
+    tex: "\\bar{R}^2 = 1 - \\frac{(1 - R^2)(n - 1)}{n - k - 1}",
+    description:
+      "重回帰で説明変数 $k$ 個を増やしても見かけ上 $R^2$ が上がる問題を補正した指標。意味のない変数を増やすと逆に下がる。",
+  },
+  {
+    id: "variance-test-chisq",
+    name: "母分散の検定統計量",
+    category: "仮説検定",
+    tex: "\\chi_0^2 = \\frac{(n - 1)\\hat{s}^2}{\\sigma_0^2} \\sim \\chi^2_{n - 1}",
+    description:
+      "正規母集団のもとで母分散 $\\sigma_0^2$ を検定するための統計量。自由度 $n - 1$ のカイ二乗分布に従う。両側棄却域は $\\chi^2_{n-1, 1-\\alpha/2}$ と $\\chi^2_{n-1, \\alpha/2}$。",
+  },
+  {
+    id: "variance-confidence-interval",
+    name: "母分散の信頼区間",
+    category: "推定",
+    tex: "\\left[\\frac{(n - 1)\\hat{s}^2}{\\chi^2_{n-1, \\alpha/2}},\\; \\frac{(n - 1)\\hat{s}^2}{\\chi^2_{n-1, 1 - \\alpha/2}}\\right]",
+    description:
+      "正規母集団の母分散 $\\sigma^2$ の $(1 - \\alpha) \\times 100\\%$ 信頼区間。左右で分母の自由度の選び方が逆になる点に注意。",
+  },
+  {
+    id: "welch-t-test",
+    name: "Welch の t 検定統計量",
+    category: "仮説検定",
+    tex: "t_0 = \\frac{\\bar{X} - \\bar{Y}}{\\sqrt{\\hat{s}_X^2/n_X + \\hat{s}_Y^2/n_Y}}",
+    description:
+      "等分散を仮定しない 2 標本の平均差検定。自由度は Welch-Satterthwaite の近似式で求める。Student の t 検定より頑健で実務では既定値に近い。",
+  },
+  {
+    id: "welch-satterthwaite-df",
+    name: "Welch-Satterthwaite の自由度",
+    category: "仮説検定",
+    tex: "\\nu \\approx \\frac{(\\hat{s}_X^2/n_X + \\hat{s}_Y^2/n_Y)^2}{\\dfrac{(\\hat{s}_X^2/n_X)^2}{n_X - 1} + \\dfrac{(\\hat{s}_Y^2/n_Y)^2}{n_Y - 1}}",
+    description:
+      "Welch の t 検定で使う近似自由度。両群の分散と標本サイズが等しいときには $n_X + n_Y - 2$ に一致する。",
+  },
+  {
+    id: "f-test-equal-variance",
+    name: "F 検定(等分散性)",
+    category: "仮説検定",
+    tex: "F_0 = \\frac{\\hat{s}_X^2}{\\hat{s}_Y^2} \\sim F_{n_X - 1,\\; n_Y - 1}",
+    description:
+      "2 標本の等分散性を検定する。慣例として大きい方を分子にする。正規性に弱いため、Levene 検定が代替されることが多い。",
+  },
+  {
+    id: "anova-f-statistic",
+    name: "一元配置 ANOVA の F 統計量",
+    category: "分散分析",
+    tex: "F_0 = \\frac{S_A / (g - 1)}{S_E / (n - g)} \\sim F_{g - 1,\\; n - g}",
+    description:
+      "$g$ 群、合計 $n$ 標本のとき、群間平方和 $S_A$ と誤差平方和 $S_E$ から計算。$F_0 > F_{g-1, n-g, \\alpha}$ で $H_0:$ すべての群平均が等しい、を棄却。",
+  },
+  {
+    id: "anova-sum-of-squares",
+    name: "ANOVA 平方和の分解",
+    category: "分散分析",
+    tex: "S_T = S_A + S_E,\\quad S_T = \\sum_{i,j}(X_{ij} - \\bar{X}_{..})^2",
+    description:
+      "全平方和 $S_T$ は群間 $S_A = \\sum_i n_i (\\bar{X}_{i.} - \\bar{X}_{..})^2$ と群内 $S_E$ に直交分解できる。これが ANOVA の数学的根拠。",
+  },
+  {
+    id: "bonferroni-correction",
+    name: "Bonferroni 補正",
+    category: "多重比較",
+    tex: "\\alpha_{\\text{各}} = \\frac{\\alpha}{m}",
+    description:
+      "$m$ 個の検定を行うとき、各検定の有意水準を $\\alpha/m$ に厳しくすれば、全体の Type I エラー率(FWER)が高々 $\\alpha$ に抑えられる。簡便だが保守的。",
+  },
+  {
+    id: "normal-equation",
+    name: "重回帰の正規方程式",
+    category: "回帰分析",
+    tex: "\\hat{\\beta} = (X^\\top X)^{-1} X^\\top y",
+    description:
+      "重回帰の最小二乗推定量。$X$ はデザイン行列(切片用に 1 列追加)。$X^\\top X$ が逆行列を持たない(完全多重共線性)と推定不能。",
+  },
+  {
+    id: "vif",
+    name: "VIF(分散拡大係数)",
+    category: "回帰分析",
+    tex: "\\mathrm{VIF}_j = \\frac{1}{1 - R_j^2}",
+    description:
+      "他の説明変数で $x_j$ を回帰したときの $R_j^2$ から計算。VIF が 5〜10 を超えると多重共線性の疑いが強い。係数の標準誤差が膨張する。",
+  },
 ];
