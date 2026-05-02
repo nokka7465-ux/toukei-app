@@ -1282,7 +1282,292 @@ acf(y);  pacf(y)`,
             },
             {
               type: "p",
-              text: "これで準1級の主要範囲は終わりです。確率分布の応用、ベイズ統計、多変量解析、時系列解析、GLM、ANOVA、ノンパラ手法、生存時間解析、実験計画法 ─ 統計学の実務応用の主要分野を一通り歩き終えました。1 級では、これらの背景にある **理論的な道具立て** ─ 十分統計量・最尤推定・漸近理論・確率過程 ─ をより精密に扱っていきます。",
+              text: "実験計画法を学んだ後は、データから『理論分布の当てはまりに頼らずに』推定・検定する **リサンプリング法**(第 11 章)、そして観測データから因果効果を推定する **因果推論**(第 12 章)に進みます。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch11",
+      number: 11,
+      title: "ブートストラップとリサンプリング法",
+      overview:
+        "理論分布の仮定なしに信頼区間や検定統計量の分布を「データそのものから」近似する手法群。準1級の出題範囲拡張で重要度が増している分野です。",
+      sections: [
+        {
+          id: "ch11-sec1",
+          number: "11.1",
+          title: "ノンパラメトリック・ブートストラップ",
+          blocks: [
+            {
+              type: "p",
+              text: "「中央値の標準誤差は?」「不偏分散の比の信頼区間は?」 ─ こうした **複雑な統計量の分布** は理論的に導出するのが困難な場合が多くあります。Efron (1979) が提唱した **ブートストラップ法** は、理論計算ではなく『観測データから何度もリサンプリングする』ことで、統計量の分布を近似する革命的な手法です。",
+            },
+            { type: "h3", text: "アルゴリズム" },
+            {
+              type: "def",
+              title: "ノンパラメトリック・ブートストラップ",
+              body: "観測データ $X = (x_1, \\ldots, x_n)$ に対し:\n1. $X$ から **重複を許して** $n$ 個サンプリング(ブートストラップ標本 $X^{*(b)}$)\n2. 興味ある統計量 $\\hat{\\theta}^{*(b)} = T(X^{*(b)})$ を計算\n3. 上記を $B$ 回(典型的には $B = 1000\\sim 10000$)繰り返す\n4. $\\{\\hat{\\theta}^{*(1)}, \\ldots, \\hat{\\theta}^{*(B)}\\}$ の分布を $\\hat{\\theta}$ の標本分布の近似として使う",
+            },
+            { type: "h3", text: "なぜうまくいくのか" },
+            {
+              type: "intuition",
+              title: "経験分布が母集団のスタンドイン",
+              body: "観測データ $X$ そのものが母集団のベストな推定(経験分布 $\\hat{F}_n$)。母集団からの再サンプリングを観測データからの復元抽出で代替するのが基本アイデアです。$n \\to \\infty$ で経験分布は真の分布に収束する(Glivenko-Cantelli の定理)ため、ブートストラップ標本分布も真の標本分布に近づきます。",
+            },
+            { type: "h3", text: "ブートストラップ信頼区間 ─ 3 つの主要な作り方" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**パーセンタイル法**: $\\hat{\\theta}^*$ の $\\alpha/2$ 分位点と $1 - \\alpha/2$ 分位点をそのまま採用。最もシンプル",
+                "**基本(Basic) / 経験法**: $[2\\hat{\\theta} - \\hat{\\theta}^*_{1-\\alpha/2},\\; 2\\hat{\\theta} - \\hat{\\theta}^*_{\\alpha/2}]$。バイアス補正の素朴な形",
+                "**BCa (Bias-Corrected and accelerated)**: バイアスと加速度を補正した最も正確な区間。Efron 推奨",
+              ],
+            },
+            { type: "h3", text: "標準誤差の推定" },
+            {
+              type: "def",
+              title: "ブートストラップ標準誤差",
+              body: "$\\;\\widehat{\\mathrm{SE}}_{\\text{boot}} = \\sqrt{\\dfrac{1}{B - 1}\\sum_{b=1}^{B}(\\hat{\\theta}^{*(b)} - \\bar{\\hat{\\theta}^*})^2}\\;$\n\n複雑な統計量(中央値・四分位範囲・相関係数)の標準誤差を、デルタ法などの理論計算なしで取れるのが強み。",
+            },
+            { type: "h3", text: "バイアス補正" },
+            {
+              type: "p",
+              text: "推定量 $\\hat{\\theta}$ にバイアスがあるとき、ブートストラップで近似的に補正できます:",
+            },
+            {
+              type: "math",
+              tex: "\\widehat{\\mathrm{Bias}} = \\bar{\\hat{\\theta}^*} - \\hat{\\theta},\\quad \\hat{\\theta}_{\\text{corrected}} = 2\\hat{\\theta} - \\bar{\\hat{\\theta}^*}",
+            },
+            { type: "h3", text: "ブートストラップが破綻する場面" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**極値統計量**(最大値・最小値): 経験分布の端は真の分布の端を表現できないため",
+                "**裾の重い分布**: $E[|X|] = \\infty$ のとき分散が定義できない",
+                "**従属データ(時系列)**: ブロック・ブートストラップなどの拡張が必要",
+                "**$n$ が極端に小さい($n < 10$)**: 経験分布の表現力不足",
+              ],
+            },
+            {
+              type: "code",
+              title: "Python でのブートストラップ信頼区間",
+              python: "import numpy as np\nfrom scipy import stats\n\nrng = np.random.default_rng(42)\nx = rng.gamma(2, 3, size=50)  # 観測データ(歪んでいる)\n\nB = 5000\nboot_medians = np.array([\n    np.median(rng.choice(x, size=len(x), replace=True))\n    for _ in range(B)\n])\n\n# パーセンタイル 95% CI\nci_perc = np.percentile(boot_medians, [2.5, 97.5])\nprint(f'中央値の 95% CI(パーセンタイル): {ci_perc}')\n\n# scipy.stats.bootstrap で BCa CI\nres = stats.bootstrap(\n    (x,), np.median, n_resamples=B, method='BCa', random_state=rng\n)\nprint(f'BCa CI: [{res.confidence_interval.low:.3f}, {res.confidence_interval.high:.3f}]')",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec2",
+          number: "11.2",
+          title: "順列検定とジャックナイフ",
+          blocks: [
+            {
+              type: "p",
+              text: "ブートストラップに次ぐ重要なリサンプリング技法が **順列検定(permutation test)** と **ジャックナイフ法**。前者は厳密な p 値を、後者はバイアスと標準誤差の素朴な推定を提供します。",
+            },
+            { type: "h3", text: "順列検定" },
+            {
+              type: "def",
+              title: "順列検定の原理",
+              body: "$H_0:$ 2 群に差がない、を検定するとき:\n1. 全データをプールし、ランダムに 2 群に再分配\n2. 統計量(平均差・順位和など)を計算\n3. これを多数(全順列または十分に多くのランダム順列)行う\n4. 観測した統計量が、ランダム分配での分布のどの位置にあるかで p 値を計算",
+            },
+            {
+              type: "intuition",
+              title: "「ラベルがランダムなら」何が起きるか",
+              body: "順列検定の発想は『$H_0$ が真なら、群 A と群 B のラベルは交換可能』。実際にラベルをかき混ぜて統計量を計算すれば、$H_0$ のもとでの分布が直接得られます。理論分布(t、F)に頼らないため、**裾の重い分布や小標本でも正確** な p 値が出せます。",
+            },
+            { type: "h3", text: "適用例 ─ A/B テストの差の検定" },
+            {
+              type: "code",
+              title: "順列検定で平均差の p 値",
+              python: "import numpy as np\n\nrng = np.random.default_rng(0)\nA = rng.normal(50, 10, 30)\nB = rng.normal(54, 10, 30)\n\nobs_diff = A.mean() - B.mean()\npooled = np.concatenate([A, B])\n\nB_perm = 10000\nperm_diffs = np.zeros(B_perm)\nfor b in range(B_perm):\n    rng.shuffle(pooled)\n    perm_diffs[b] = pooled[:30].mean() - pooled[30:].mean()\n\np = (np.abs(perm_diffs) >= np.abs(obs_diff)).mean()\nprint(f'観測差: {obs_diff:.3f}, 順列 p 値: {p:.4f}')",
+            },
+            { type: "h3", text: "ジャックナイフ法" },
+            {
+              type: "def",
+              title: "ジャックナイフ(leave-one-out)推定",
+              body: "$X = (x_1, \\ldots, x_n)$ から $i$ 番目を除いた標本で統計量 $\\hat{\\theta}_{(-i)}$ を計算する。これを $n$ 回繰り返し:\n\n$\\widehat{\\mathrm{SE}}_{\\text{jack}} = \\sqrt{\\dfrac{n - 1}{n}\\sum_{i=1}^{n}(\\hat{\\theta}_{(-i)} - \\bar{\\hat{\\theta}}_{(\\cdot)})^2}$\n\nブートストラップより計算コストが低い($n$ 回で済む)が、ブートストラップほど正確ではない。",
+            },
+            { type: "h3", text: "Out-of-Bag(OOB)推定" },
+            {
+              type: "p",
+              text: "ランダムフォレストでも内部的にブートストラップが使われています。各決定木は元データからのブートストラップ標本で学習され、**選ばれなかった標本(out-of-bag)** で予測誤差を評価。これにより、別途ホールドアウトせずに汎化性能を見積もれる(交差検証不要)のが OOB 推定の利点。",
+            },
+            { type: "h3", text: "リサンプリング法のまとめ" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**ブートストラップ**: 統計量の分布全体を近似 → 信頼区間・標準誤差・バイアス推定",
+                "**順列検定**: $H_0$ のもとでの厳密な分布 → p 値計算",
+                "**ジャックナイフ**: 計算量を抑えた標準誤差・バイアス推定",
+                "**OOB**: アンサンブル木で汎化性能を内部評価",
+                "共通の哲学: 『理論分布に頼らず、データそのものから不確実性を測る』",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch12",
+      number: 12,
+      title: "因果推論の基礎",
+      overview:
+        "観測データから因果効果を推定するための主要枠組み。準1級の出題範囲拡張で『無作為化できないとき』の方法論として重要度が上がっています。",
+      sections: [
+        {
+          id: "ch12-sec1",
+          number: "12.1",
+          title: "ポテンシャルアウトカムと識別問題",
+          blocks: [
+            {
+              type: "p",
+              text: "「広告キャンペーンが売上を増やしたか?」「奨学金を受けた人は受けなかった人より所得が高いか?」 ─ これらは **因果** の問いです。観測データだけから因果効果を取り出すには、**ポテンシャルアウトカム** という枠組みが現代統計学の標準。",
+            },
+            { type: "h3", text: "因果推論の基本問題" },
+            {
+              type: "def",
+              title: "定義 ─ ポテンシャルアウトカム",
+              body: "個体 $i$ について、処置を受けた場合の結果 $Y_i(1)$ と受けなかった場合の結果 $Y_i(0)$ を考える。個体 $i$ の **因果効果** は\n\n$\\;\\tau_i = Y_i(1) - Y_i(0)\\;$\n\nしかし観測できるのは $Y_i = T_i Y_i(1) + (1 - T_i) Y_i(0)$ の **どちらか一方** だけ。これが Holland (1986) の言う『因果推論の基本問題』。",
+            },
+            {
+              type: "p",
+              text: "個別効果 $\\tau_i$ は推定不能ですが、**集団平均** なら推定可能性があります:",
+            },
+            {
+              type: "math",
+              tex: "\\mathrm{ATE} = \\mathbb{E}[Y_i(1) - Y_i(0)],\\quad \\mathrm{ATT} = \\mathbb{E}[Y_i(1) - Y_i(0) \\mid T_i = 1]",
+            },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**ATE (Average Treatment Effect)**: 集団全体の平均因果効果",
+                "**ATT (ATE on the Treated)**: 処置群に対する平均因果効果",
+                "**ATC (ATE on the Controls)**: 対照群に対する平均因果効果",
+                "**CATE (Conditional ATE)**: 共変量で条件付けた処置効果 $\\tau(x) = \\mathbb{E}[Y(1) - Y(0) \\mid X = x]$",
+              ],
+            },
+            { type: "h3", text: "識別の 3 条件" },
+            {
+              type: "def",
+              title: "因果効果が識別可能となる条件",
+              body: "**観測データから因果効果を一意に推定可能** であるための代表的条件:\n\n1. **SUTVA (Stable Unit Treatment Value Assumption)**: ある個体の処置が他の個体の結果に影響しない(干渉なし)\n2. **無交絡 (unconfoundedness / ignorability)**: $\\{Y(0), Y(1)\\} \\perp T \\mid X$。共変量 $X$ で条件付ければ処置はランダム\n3. **正値性 (positivity / overlap)**: $0 < P(T = 1 \\mid X = x) < 1$ for all $x$。すべての $x$ で処置/非処置の確率が両方 0 でない",
+            },
+            {
+              type: "intuition",
+              title: "RCT は識別を保証する",
+              body: "ランダム化比較試験(RCT)では、ランダム化により $T \\perp \\{Y(0), Y(1)\\}$ が満たされ、$X$ で条件付ける必要すらありません。観測研究では $X$ を慎重に選び、上記 3 条件が成り立つよう **設計** することが因果推論の中心課題です。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec2",
+          number: "12.2",
+          title: "傾向スコア法",
+          blocks: [
+            {
+              type: "p",
+              text: "観測データで処置群と対照群が共変量 $X$ について偏っているとき、$X$ を直接マッチさせるか調整する代わりに、**傾向スコア** $e(x) = P(T = 1 \\mid X = x)$ を経由する方法が便利です(Rosenbaum & Rubin 1983)。",
+            },
+            { type: "h3", text: "傾向スコアの定理" },
+            {
+              type: "def",
+              title: "傾向スコア定理 (Rosenbaum & Rubin 1983)",
+              body: "無交絡性 $\\{Y(0), Y(1)\\} \\perp T \\mid X$ が成り立つなら、$e(X) = P(T = 1 \\mid X)$ で条件付けても無交絡:\n\n$\\;\\{Y(0), Y(1)\\} \\perp T \\mid e(X)\\;$\n\nつまり高次元の $X$ をマッチさせる代わりに、**1 次元のスカラー** $e(X)$ をマッチさせれば足りる。",
+            },
+            { type: "h3", text: "傾向スコアの推定" },
+            {
+              type: "p",
+              text: "$e(x)$ はロジスティック回帰や GBM などで $T$ を $X$ で回帰して推定:",
+            },
+            {
+              type: "math",
+              tex: "\\log\\dfrac{e(x)}{1 - e(x)} = \\beta_0 + \\beta_1 x_1 + \\cdots + \\beta_k x_k",
+            },
+            { type: "h3", text: "4 つの利用方法" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**マッチング**: 処置群の各個体に、$e(x)$ が近い対照群個体をマッチさせて比較",
+                "**層別 (stratification)**: $e(x)$ を 5〜10 階層に分け、各階層内で処置効果を平均",
+                "**逆確率重み付け (IPW)**: $w_i = \\dfrac{T_i}{e(X_i)} + \\dfrac{1 - T_i}{1 - e(X_i)}$ で加重した平均差を ATE 推定とする",
+                "**回帰調整との Doubly Robust 推定**: IPW と outcome モデルを組み合わせ、どちらか片方が正しければ一致推定になる",
+              ],
+            },
+            { type: "h3", text: "Doubly Robust 推定量" },
+            {
+              type: "def",
+              title: "AIPW (Augmented IPW) 推定量",
+              body: "$\\hat{\\tau}_{AIPW} = \\dfrac{1}{n}\\sum_i \\left[\\dfrac{T_i (Y_i - \\mu_1(X_i))}{e(X_i)} - \\dfrac{(1 - T_i)(Y_i - \\mu_0(X_i))}{1 - e(X_i)} + \\mu_1(X_i) - \\mu_0(X_i)\\right]$\n\n$\\mu_1, \\mu_0$ は処置群・対照群の outcome モデル(回帰関数)。$e$ または $\\mu$ のどちらかが正しければ一致推定。これが現代因果推論の主役。",
+            },
+            {
+              type: "practical",
+              title: "傾向スコアの落とし穴",
+              body: "傾向スコアマッチングが流行したものの、King & Nielsen (2019) は『マッチング後のバランスチェックを慎重にしないと逆にバイアスが増える』と警告しました。**Coarsened Exact Matching (CEM)** や **Mahalanobis Matching** など代替手法も検討すべきです。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec3",
+          number: "12.3",
+          title: "操作変数法と差分の差分(DID)",
+          blocks: [
+            {
+              type: "p",
+              text: "傾向スコア法は『観測した共変量 $X$ で交絡を全部捉えられる』という強い仮定に依存します。**未観測の交絡** が残るとき、別の自然実験を使った因果識別戦略が **操作変数法 (IV)** と **差分の差分 (DID)** です。",
+            },
+            { type: "h3", text: "操作変数法 (IV)" },
+            {
+              type: "def",
+              title: "IV 推定が成立する条件",
+              body: "変数 $Z$ が以下を満たすとき、$Z$ は処置 $T$ の **操作変数(instrument)** となる:\n1. **関連性**: $Z$ は $T$ と相関する($\\mathrm{Cov}(Z, T) \\neq 0$)\n2. **排除制約**: $Z$ は $Y$ に直接影響しない、$T$ を経由してのみ影響する\n3. **外生性**: $Z$ は未観測交絡 $U$ と独立",
+            },
+            {
+              type: "p",
+              text: "上記が成り立つとき、2 段階最小二乗(2SLS)で因果効果を推定できます:",
+            },
+            {
+              type: "math",
+              tex: "\\hat{\\beta}_{IV} = \\dfrac{\\mathrm{Cov}(Z, Y)}{\\mathrm{Cov}(Z, T)}",
+            },
+            {
+              type: "intuition",
+              title: "「自然実験」を見つける",
+              body: "IV 探しは、ある種の **自然実験を発見する作業**。Angrist の有名な例: 『出生月によってベトナム戦争の徴兵対象が変わった → 教育年数と所得への因果効果を推定』。徴兵抽選番号は完全にランダム($U$ と無関係)、徴兵経験は教育年数を変える(関連性)、徴兵自体は所得に直接影響しない(排除制約)、という 3 条件をクリア。",
+            },
+            { type: "h3", text: "差分の差分(DID)" },
+            {
+              type: "def",
+              title: "DID 推定量",
+              body: "処置群($T = 1$)と対照群($T = 0$)、処置前(時点 $0$)と処置後(時点 $1$)のパネルデータで:\n\n$\\hat{\\tau}_{DID} = (\\bar{Y}_{T=1, t=1} - \\bar{Y}_{T=1, t=0}) - (\\bar{Y}_{T=0, t=1} - \\bar{Y}_{T=0, t=0})$\n\n仮定: **平行トレンド(parallel trends)** ─ 処置がなければ両群のトレンドは同じだったはず。",
+            },
+            {
+              type: "practical",
+              title: "Card-Krueger 最低賃金研究 (1994)",
+              body: "ニュージャージー州が最低賃金を引き上げ、ペンシルバニア州は据え置き。両州のファーストフード雇用を比較し、『最低賃金引き上げが雇用を **減らさなかった**』という古典的 DID 研究。経済学のミニマル賃金論争を変えた論文として有名。\n\nDID は『処置タイミングが州・時点ごとに異なる場合(staggered DID)』への拡張で 2020 年代に方法論が大きく進化しています(Goodman-Bacon 2021 など)。",
+            },
+            { type: "h3", text: "12 章のまとめ" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**ポテンシャルアウトカム**で因果効果を定義(個体効果は不可、ATE/ATT 系は推定可)",
+                "**識別の 3 条件**(SUTVA・無交絡性・正値性)を満たすよう設計",
+                "**傾向スコア法**: 観測共変量で交絡を捕まえる(IPW・マッチング・AIPW)",
+                "**IV 法**: 未観測交絡があるときの自然実験戦略",
+                "**DID**: 処置タイミングのずれと平行トレンドを利用",
+                "因果推論ミニ教科書(/causal-inference)で更に踏み込んだ手法も学習可",
+              ],
+            },
+            {
+              type: "p",
+              text: "これで準1級の主要範囲は終わりです。確率分布の応用、ベイズ統計、多変量解析、時系列解析、GLM、ANOVA、ノンパラ手法、生存時間解析、実験計画法、リサンプリング法、因果推論 ─ 統計学の実務応用の主要分野を一通り歩き終えました。1 級では、これらの背景にある **理論的な道具立て** ─ 十分統計量・最尤推定・漸近理論・確率過程 ─ をより精密に扱っていきます。",
             },
           ],
         },

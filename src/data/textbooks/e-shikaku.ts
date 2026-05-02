@@ -938,7 +938,237 @@ for epoch in range(epochs):
             },
             {
               type: "p",
-              text: "ここまで E 資格の主要範囲を一通り扱いました。**数学的基礎・機械学習の基礎・DL の理論・主要アーキテクチャ・応用領域・実装と社会実装** ─ DL を実装するエンジニアに必要な道具立てが揃ったはずです。本サイトで概念地図を掴んだあとは、**Coursera Deep Learning Specialization**(Andrew Ng)・**徹底攻略 ディープラーニング E資格 エンジニア問題集**(通称黒本)などで実戦的な問題演習を進めると合格に近づきます。",
+              text: "次の章では、E 資格の最新シラバスで重要度が増した **基盤モデル時代のファインチューニング技術と効率的アーキテクチャ** に踏み込みます。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch7",
+      number: 7,
+      title: "基盤モデルと最新トレンド ─ LoRA・RLHF・MoE・推論モデル",
+      overview:
+        "2024 年以降の E 資格シラバス改訂で大幅に出題比重が増した、基盤モデル・効率的ファインチューニング・人間フィードバック学習・効率的アーキテクチャを 1 章にまとめます。",
+      sections: [
+        {
+          id: "ch7-sec1",
+          number: "7.1",
+          title: "効率的ファインチューニング(PEFT)",
+          blocks: [
+            {
+              type: "p",
+              text: "基盤モデル(GPT・Llama・Stable Diffusion など)の全パラメータを学習し直す **完全ファインチューニング** は、数十 GB の VRAM と長時間の学習を要求します。PEFT (Parameter-Efficient Fine-Tuning) は、元モデルを **凍結** したまま少数のパラメータだけを学習することで、計算資源を桁違いに減らす手法群です。",
+            },
+            { type: "h3", text: "LoRA(Low-Rank Adaptation)" },
+            {
+              type: "def",
+              title: "LoRA の数式 (Hu et al. 2021)",
+              body: "元の重み行列 $W \\in \\mathbb{R}^{d \\times d}$ への更新を低ランク行列の積で近似:\n\n$\\;W \\to W + \\Delta W,\\quad \\Delta W = \\dfrac{\\alpha}{r} B A,\\;\\; A \\in \\mathbb{R}^{r \\times d},\\; B \\in \\mathbb{R}^{d \\times r}\\;$\n\n$r \\ll d$($r$ は通常 8〜64)。$A$ はランダム初期化、$B$ はゼロ初期化(初期 $\\Delta W = 0$ に)。学習対象は $A, B$ のみで、$W$ は凍結。",
+            },
+            {
+              type: "intuition",
+              title: "なぜ低ランクで足りるのか",
+              body: "Aghajanyan et al. (2020) は、事前学習済みモデルの **タスク特化のための更新** が低い「内在次元(intrinsic dimension)」を持つことを実証しました。つまり、巨大な $W$ をフルに動かす必要はなく、少数の方向で十分。LoRA はこの観察を実装に落とし込んだ形です。",
+            },
+            { type: "h3", text: "QLoRA ─ 4-bit 量子化との組み合わせ" },
+            {
+              type: "p",
+              text: "**QLoRA (Dettmers et al. 2023)** は、元モデルを 4-bit 量子化(NF4 形式)してメモリ消費を約 4 倍削減し、その上に LoRA で学習する手法。65B パラメータの Llama を 1 枚の 48GB GPU でファインチューンできるようになり、コミュニティに巨大な影響を与えました。",
+            },
+            { type: "h3", text: "他の PEFT 手法" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Adapter (Houlsby et al. 2019)**: 各層に小さな MLP モジュール(adapter)を挿入。LoRA より歴史が長い手法",
+                "**Prefix Tuning / Prompt Tuning**: 入力に学習可能な仮想トークン列を追加。さらにパラメータが少ない",
+                "**P-Tuning v2**: Prompt Tuning の改良版。各層に prompt を挿入",
+                "**IA³ (Liu et al. 2022)**: 各層の活性化を学習可能スカラーで再スケール。極端に省メモリ",
+                "**DoRA (Liu et al. 2024)**: LoRA を方向と大きさに分解した改良版",
+              ],
+            },
+            { type: "h3", text: "比較表" },
+            {
+              type: "ex",
+              title: "PEFT 手法の比較",
+              body: "| 手法 | 学習パラメータ比 | 推論オーバーヘッド | 主な用途 |\n|---|--:|---|---|\n| Full FT | 100% | なし | 小規模モデル |\n| LoRA | 0.1〜1% | マージで消せる | LLM 特化 |\n| QLoRA | 0.1〜1% | わずか | 巨大 LLM(48GB GPU で 65B) |\n| Adapter | 1〜10% | 小 | 多タスク |\n| Prompt Tuning | < 0.1% | なし | 単タスク |",
+            },
+          ],
+        },
+        {
+          id: "ch7-sec2",
+          number: "7.2",
+          title: "人間フィードバック学習(RLHF)とアライメント",
+          blocks: [
+            {
+              type: "p",
+              text: "事前学習だけの LLM は「もっともらしいが有用とは限らない」テキストを生成します。ChatGPT 以降の対話 AI は **RLHF (Reinforcement Learning from Human Feedback)** で人間の好みに合わせて調整されており、これが現代 LLM の中核技術。",
+            },
+            { type: "h3", text: "RLHF の 3 ステージ" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "**SFT (Supervised Fine-Tuning)**: 高品質な指示・応答ペアでファインチューン。指示追従の基本能力を獲得",
+                "**Reward Model 学習**: 人間が「応答 A と B のどちらが良いか」を比較ラベル付け → Bradley-Terry モデルで $r_\\theta(x, y)$ を学習",
+                "**RL ファインチューン**: PPO で $r_\\theta$ を最大化しつつ、KL 正則化で SFT モデルから離れすぎないよう制御",
+              ],
+            },
+            { type: "h3", text: "目的関数" },
+            {
+              type: "math",
+              tex: "\\mathcal{J}(\\theta) = \\mathbb{E}_{x,y \\sim \\pi_\\theta}\\left[r(x, y)\\right] - \\beta \\, \\mathrm{KL}(\\pi_\\theta \\| \\pi_{\\text{SFT}})",
+            },
+            {
+              type: "p",
+              text: "$\\beta$ は KL 正則化の強さ。大きすぎると SFT から動かない、小さすぎると報酬ハッキング(意味のない高報酬応答)が起きる、というトレードオフ。",
+            },
+            { type: "h3", text: "DPO ─ RL なし RLHF" },
+            {
+              type: "def",
+              title: "DPO (Direct Preference Optimization, Rafailov et al. 2023)",
+              body: "RLHF の RL ステージを **強化学習なしの教師あり学習** に置き換える手法。Reward Model を経由せず、好み比較データから直接 LLM を最適化:\n\n$\\;\\mathcal{L}_{DPO} = -\\log \\sigma\\left(\\beta \\log\\dfrac{\\pi_\\theta(y_w)}{\\pi_{\\text{ref}}(y_w)} - \\beta \\log\\dfrac{\\pi_\\theta(y_l)}{\\pi_{\\text{ref}}(y_l)}\\right)\\;$\n\n$y_w$ が選ばれた応答、$y_l$ が落ちた応答。実装が簡単で、PPO より安定する場合が多く 2023 年以降急速に普及。",
+            },
+            { type: "h3", text: "Constitutional AI" },
+            {
+              type: "p",
+              text: "**Constitutional AI (Anthropic 2022)** は、人間のフィードバックを **AI のフィードバック** で代替する手法。事前定義した「憲法(constitution)」に基づいて AI が自己批判・修正し、その結果を学習する **RLAIF (RL from AI Feedback)** につながります。Claude 系モデルはこの手法で訓練。",
+            },
+            { type: "h3", text: "アライメントの未解決問題" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Reward Hacking**: 報酬モデルの抜け穴を突いた『高報酬だが望ましくない応答』が生成される",
+                "**Sycophancy(おべっか)**: ユーザーに同意するよう過度に最適化される(批判的思考の喪失)",
+                "**Mode Collapse**: 多様性のある応答を生成しなくなる",
+                "**Out-of-Distribution の挙動**: 学習データ分布外で予測不能になる",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch7-sec3",
+          number: "7.3",
+          title: "効率的アーキテクチャ ─ MoE・Mamba・推論モデル",
+          blocks: [
+            {
+              type: "p",
+              text: "Transformer のスケーリングは計算コストの壁にぶつかっています。それを乗り越える **疎化アーキテクチャ・状態空間モデル・推論時計算スケーリング** を学びます。",
+            },
+            { type: "h3", text: "Mixture of Experts(MoE)" },
+            {
+              type: "def",
+              title: "MoE の構造",
+              body: "Transformer の Feed-Forward 層を $N$ 個のエキスパート(エキスパート FFN)に分割し、各トークンに対して **ゲート(router)** が top-$k$ 個($k \\ll N$、通常 1〜2)のエキスパートを選択。トークンごとに **異なるサブセット** のパラメータが活性化される。\n\n例: 8 エキスパート、top-2 ゲートで実行時計算は 1/4 なのに表現容量は 8 倍。Mixtral 8x7B(Mistral)、DeepSeek-V3(671B 総パラ・37B 活性)、Switch Transformer など。",
+            },
+            {
+              type: "intuition",
+              title: "「広いが浅く活性化」",
+              body: "MoE は『総パラメータ数(= モデルの知識容量)を増やしながら、推論時の計算量(= レイテンシ)を抑える』戦略。各エキスパートが自然言語の異なる側面(コード・科学・対話など)を専門化することが観察されています。",
+            },
+            { type: "h3", text: "Mamba と状態空間モデル" },
+            {
+              type: "p",
+              text: "**Mamba (Gu & Dao 2023)** は、Self-Attention の $O(n^2)$ を **線形時間 $O(n)$** に置き換える状態空間モデル(State Space Model, SSM)。長系列で Transformer を凌駕する場合があり、新世代の有力候補。",
+            },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**S4 (Gu et al. 2022)**: 連続時間状態空間を離散化したベースライン",
+                "**Mamba (S6)**: 入力依存の選択的状態空間で、文脈を選択的に記憶",
+                "**Hybrid Models**: Transformer と SSM を組み合わせるハイブリッド(Jamba・Striped Hyena)が登場",
+              ],
+            },
+            { type: "h3", text: "推論時計算スケーリング ─ o1 系モデル" },
+            {
+              type: "p",
+              text: "OpenAI o1 (2024) と続くモデル群は、**推論時に内部で長い『考える時間』を取って思考連鎖を生成** することで難問を解く新パラダイム。学習時計算ではなく **推論時計算** をスケールさせる戦略です。",
+            },
+            {
+              type: "def",
+              title: "推論時 Chain-of-Thought の強化",
+              body: "学習段階で『正しい思考連鎖を出すと報酬』を強化学習で覚え込ませ、推論時には複数の思考枝を試して最適なものを選ぶ。学習時に大量の RL を投資し、推論時は CoT で時間を費やす。AIME 数学・コード生成などで人間のトップ層を超える精度。\n\nテスト時計算スケーリング曲線: 推論時間を 10 倍にすると精度が更に上がる、という新しいスケーリング則。",
+            },
+            { type: "h3", text: "効率的注意機構" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Flash Attention (Dao et al. 2022)**: GPU メモリ階層を意識した実装で 2〜4 倍高速化(数学的に同一)",
+                "**Multi-Query Attention (MQA)**: K, V を全ヘッドで共有 → KV キャッシュ削減",
+                "**Grouped-Query Attention (GQA)**: MQA と Multi-Head の中間。Llama 2 70B で採用",
+                "**Sliding Window Attention**: 局所文脈に絞ることで長系列処理を実現(Longformer・Mistral)",
+                "**Sparse Attention**: 一部の位置だけに注目(Longformer・BigBird)",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch7-sec4",
+          number: "7.4",
+          title: "マルチモーダルと AI エージェント",
+          blocks: [
+            {
+              type: "p",
+              text: "テキストだけでなく **画像・音声・動画** を統合的に扱うマルチモーダルモデル、そして **ツールを使って自律行動する AI エージェント** が 2024 年以降の主流。",
+            },
+            { type: "h3", text: "マルチモーダルモデルのアーキテクチャ" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**CLIP (Radford et al. 2021)**: 画像とテキストを同じ埋め込み空間に投影し、対照学習で訓練。Zero-shot 画像分類が可能",
+                "**LLaVA**: CLIP 視覚エンコーダ + 投影層 + LLM の組み合わせ。画像を見て対話できる",
+                "**GPT-4o / Gemini**: ネイティブマルチモーダル。テキスト・画像・音声を統一トークン空間で処理",
+                "**ViT (Vision Transformer)**: 画像を 16×16 パッチに分割して Transformer に入力。CNN を凌ぐ性能",
+              ],
+            },
+            { type: "h3", text: "拡散モデルの最新動向" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Latent Diffusion (Stable Diffusion)**: 潜在空間で拡散することで計算量を激減",
+                "**ControlNet (Zhang et al. 2023)**: ポーズ・深度・線画などの条件で生成を制御",
+                "**Flow Matching / Rectified Flow**: 拡散の代替。SD3 で採用",
+                "**Sora / Veo**: テキスト→動画の長時間生成。空間時間 Transformer で実現",
+              ],
+            },
+            { type: "h3", text: "AI エージェント" },
+            {
+              type: "def",
+              title: "ReAct パラダイム (Yao et al. 2022)",
+              body: "**Reasoning + Acting** の交互ループ:\n1. LLM が **Thought**(現状の推論)を出す\n2. **Action**(ツール呼び出し: Web 検索・電卓・コード実行)を選ぶ\n3. **Observation**(ツール出力)を受け取り、再び Thought に戻る\n\nこのループを目標達成まで繰り返す。LangChain Agents・OpenAI Function Calling・Claude Tool Use などで広く実装。",
+            },
+            { type: "h3", text: "MCP(Model Context Protocol)" },
+            {
+              type: "p",
+              text: "**MCP (Anthropic 2024)** は AI モデルと外部ツールの接続を標準化するオープンプロトコル。USB-C のように、任意の AI クライアントが任意の MCP サーバ(ツールセット)を使えるようになる。エージェント時代の重要インフラ。",
+            },
+            {
+              type: "practical",
+              title: "🛠 E 資格での出題傾向(2024〜)",
+              body: "「LoRA の数式と利点」「RLHF の 3 ステージ」「DPO と RLHF の違い」「MoE の利点」「Flash Attention の効果」「ViT のパッチ分割」「ControlNet の役割」「ReAct パラダイム」 ─ これらは 2024 年以降のシラバス改訂で重要度が増した出題範囲です。",
+            },
+            { type: "h3", text: "7 章のまとめ" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**PEFT**: LoRA・QLoRA で巨大モデルを少資源でファインチューン",
+                "**RLHF / DPO**: 人間の好みに合わせる現代 LLM の中核技術",
+                "**MoE**: 容量を増やしつつ計算を抑える疎化",
+                "**Mamba**: Transformer の二次計算量を線形に置き換える挑戦",
+                "**推論時計算**: o1 系のテスト時計算スケーリング",
+                "**マルチモーダル+エージェント**: AI のフロンティア",
+              ],
+            },
+            {
+              type: "p",
+              text: "ここまで E 資格の主要範囲を一通り扱いました。**数学的基礎・機械学習の基礎・DL の理論・主要アーキテクチャ・応用領域・実装と社会実装・基盤モデルと最新トレンド** ─ DL を実装するエンジニアに必要な道具立てが揃ったはずです。本サイトで概念地図を掴んだあとは、**Coursera Deep Learning Specialization**(Andrew Ng)・**徹底攻略 ディープラーニング E資格 エンジニア問題集**(通称黒本)などで実戦的な問題演習を進めると合格に近づきます。",
             },
           ],
         },
