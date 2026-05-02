@@ -54,6 +54,14 @@ export default function PracticePage() {
           <strong>弱点集中モード</strong>{" "}
           も利用できます。試験直前の総復習や、毎日のウォームアップに。
         </p>
+        <div className="mt-4 flex flex-wrap gap-2 ui-sans text-xs">
+          <Link
+            href="/practice/adaptive"
+            className="inline-flex items-center gap-1 px-3 py-1.5 rounded border border-[var(--accent)] bg-[var(--accent)]/10 hover:bg-[var(--accent)]/20 font-bold"
+          >
+            ✨ 適応型クイズ(苦手分野・SRS自動選択) →
+          </Link>
+        </div>
       </header>
 
       <RandomPracticeClient tracks={trackInfo} />

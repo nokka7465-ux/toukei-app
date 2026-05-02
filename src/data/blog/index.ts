@@ -6601,6 +6601,137 @@ blogPosts.push({
   ],
 });
 
+blogPosts.push({
+  slug: "bayesian-statistics-intuition",
+  title: "ベイズ統計の直感 ─ 事前分布・尤度・事後分布の関係を1から",
+  description:
+    "頻度主義と対比しながら、ベイズの定理がなぜ強力なのかを段階的に解説。共役分布・MAP推定・MCMCまで、準1級受験者が最初に押さえるべき5つの軸。",
+  publishedAt: "2026-05-02",
+  category: "統計検定対策",
+  tldr: [
+    "ベイズの定理: 事後 ∝ 尤度 × 事前。新しいデータで信念を更新する枠組み",
+    "共役分布なら事後が解析的に求まる(ベータ・正規・ガンマなど)",
+    "MAP 推定は事前分布が一様なら MLE と一致",
+    "現代の実務では MCMC・変分推論で正規化定数を回避",
+  ],
+  body: [
+    {
+      type: "p",
+      text: "頻度主義の検定や信頼区間に慣れていると、ベイズ統計は『別の流派』に見えるかもしれません。しかし両者は対立するというより、**異なる質問に答える道具**。本記事ではベイズの定理を 5 つのステップで直感的に押さえ、準1級受験者が最初にハマる『事後分布が計算できない』壁の越え方まで案内します。",
+    },
+    { type: "h3", text: "ベイズの定理 ─ 1 行で書ける魔法" },
+    { type: "math", tex: "\\pi(\\theta \\mid x) = \\dfrac{p(x \\mid \\theta) \\pi(\\theta)}{p(x)} \\propto p(x \\mid \\theta) \\pi(\\theta)" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "$\\pi(\\theta)$: **事前分布** — データを見る前のパラメータについての信念",
+        "$p(x \\mid \\theta)$: **尤度** — 真値が $\\theta$ ならデータ $x$ が観測される確率",
+        "$\\pi(\\theta \\mid x)$: **事後分布** — データを見た後の更新された信念",
+        "$p(x)$: **正規化定数** — 普通は計算困難",
+      ],
+    },
+    {
+      type: "intuition",
+      title: "「比例」の右側だけ見ればいい",
+      body: "正規化定数は計算困難ですが、$\\theta$ に依存しないので **事後分布の形** には影響しません。MCMC や変分推論はこの性質を利用し、比例関係 $\\pi(\\theta \\mid x) \\propto p(x \\mid \\theta) \\pi(\\theta)$ だけで動作します。",
+    },
+    { type: "h3", text: "頻度主義との違い" },
+    {
+      type: "ex",
+      title: "「コインの表確率」を例に",
+      body: "10 回投げて 8 回表が出た。$\\theta$(表確率)はいくつ?\n\n**頻度主義(MLE)**: $\\hat{\\theta} = 8/10 = 0.8$。点推定。信頼区間は『手続きの性質』として 95% 信頼区間を計算\n\n**ベイズ**: 事前に『コインは公平っぽい』と思っていた → ベータ事前 Beta(2, 2)。観測 → 事後 Beta(10, 4)。\n→ 事後平均 = 10/14 ≈ 0.71、事後 95% 確信区間 [0.45, 0.91]、$P(\\theta > 0.5 \\mid x) = 0.97$ など、**事後確率を直接計算できる**",
+    },
+    { type: "h3", text: "共役分布 ─ 事後が解析的に求まる組み合わせ" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "**ベルヌーイ尤度 + ベータ事前 → ベータ事後**: $\\mathrm{Beta}(\\alpha + s, \\beta + n - s)$",
+        "**ポアソン尤度 + ガンマ事前 → ガンマ事後**: $\\mathrm{Gamma}(\\alpha + \\sum x_i, \\beta + n)$",
+        "**正規(分散既知) + 正規事前 → 正規事後**: 平均は加重平均、分散は精度の和の逆数",
+        "**多項尤度 + ディリクレ事前 → ディリクレ事後**: カテゴリの頻度を加算",
+      ],
+    },
+    { type: "h3", text: "MAP 推定 ─ 事後分布の最頻値" },
+    {
+      type: "p",
+      text: "事後分布 $\\pi(\\theta \\mid x)$ を最大化する $\\theta$ が **MAP 推定値**:",
+    },
+    { type: "math", tex: "\\hat{\\theta}_{\\mathrm{MAP}} = \\arg\\max_\\theta \\, p(x \\mid \\theta) \\, \\pi(\\theta)" },
+    {
+      type: "p",
+      text: "事前分布が一様なら $\\pi(\\theta)$ が定数になり、MAP は MLE と一致します。MAP は **正則化付き最尤推定** と等価で、L2 正則化 ↔ ガウス事前、L1 ↔ ラプラス事前と対応します。",
+    },
+    { type: "h3", text: "事後平均 vs MAP vs 事後中央値" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "**事後平均**: 二乗誤差を最小化する点推定",
+        "**MAP**: 0-1 損失を最小化する点推定(離散的には最頻値)",
+        "**事後中央値**: 絶対誤差を最小化する点推定。歪んだ事後で頑健",
+      ],
+    },
+    { type: "h3", text: "MCMC ─ 事後を計算困難なときの救世主" },
+    {
+      type: "intuition",
+      title: "サンプリングで分布を表現する",
+      body: "事後分布を解析的に書けないとき、**事後からのサンプル** $\\theta^{(1)}, \\theta^{(2)}, \\ldots$ を大量に生成すれば、平均・分位点・確信区間などを近似できます。これが **マルコフ連鎖モンテカルロ(MCMC)** の発想です。代表的アルゴリズム: メトロポリス・ヘイスティングス、Gibbs サンプリング、Hamiltonian Monte Carlo(HMC)、NUTS(Stan の標準)。",
+    },
+    { type: "h3", text: "PyMC で実装してみる" },
+    {
+      type: "code",
+      title: "コインの偏り推定をベイズで",
+      runnable: false,
+      python: "import numpy as np\nimport pymc as pm\n\nobserved_heads = 8\nn_trials = 10\n\nwith pm.Model() as model:\n    theta = pm.Beta('theta', alpha=2, beta=2)  # 事前 Beta(2,2)\n    obs = pm.Binomial('obs', n=n_trials, p=theta, observed=observed_heads)\n    trace = pm.sample(2000, return_inferencedata=True)\n\nimport arviz as az\nprint(az.summary(trace, var_names=['theta']))\n# 出力: 事後平均 ≈ 0.71、94% HDI ≈ [0.46, 0.91]",
+    },
+    { type: "h3", text: "頻度主義 vs ベイズの使い分け" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "**頻度主義が向く**: 大標本・繰り返し可能な実験・規制が要求する場合(医薬品申請の伝統)",
+        "**ベイズが向く**: 小標本・事前知識を活用したい・階層モデル・予測区間を直接欲しい・逐次更新したい場合",
+        "**現代の実務**: 統合的アプローチも。頻度主義の信頼区間 = 一様事前のベイズ信用区間と一致するケースが多い",
+      ],
+    },
+    { type: "h3", text: "準1級でよく出るベイズ問題のパターン" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "ベータ-二項共役性での事後パラメータ計算",
+        "ベイズの定理を使った検査の陽性的中率",
+        "MAP 推定 vs 事後平均 vs MLE の比較",
+        "MCMC の収束判定(Gelman-Rubin 統計量、有効サンプルサイズ)",
+        "事前分布の感度分析",
+      ],
+    },
+    { type: "h3", text: "まとめ" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "ベイズ = 事前 × 尤度 → 事後の枠組み(信念の更新)",
+        "共役分布なら計算簡単、それ以外は MCMC で",
+        "MAP は正則化付き MLE と等価",
+        "事後分布から確信区間・予測分布が直接求まるのが強み",
+      ],
+    },
+    { type: "h3", text: "関連リンク" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "[**準1級教科書 第 2 章 ベイズ統計**](/textbook/grade-pre1#ch2)",
+        "[**動かして学ぶ統計 → ベイズ更新**](/explore)",
+        "[**用語集 → ベイズ統計**](/glossary)",
+      ],
+    },
+  ],
+});
+
 export function getPostBySlug(slug: string): BlogPost | undefined {
   return blogPosts.find((p) => p.slug === slug);
 }

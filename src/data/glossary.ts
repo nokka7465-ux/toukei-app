@@ -3644,4 +3644,218 @@ export const glossary: GlossaryTerm[] = [
     category: "AI エージェント",
     link: "/certs/e-shikaku/textbook#ch7-sec4",
   },
+  // === 多変量解析(準1級) ===
+  {
+    term: "判別分析",
+    reading: "はんべつぶんせき",
+    english: "discriminant analysis",
+    definition:
+      "複数の変数からカテゴリを判別するための古典的多変量手法。Fisher の線形判別(LDA)、二次判別(QDA)が代表。教師あり分類の前身。",
+    level: "準1",
+    category: "多変量解析",
+  },
+  {
+    term: "クラスター分析",
+    reading: "くらすたーぶんせき",
+    english: "cluster analysis",
+    definition:
+      "ラベルなしデータをグループ化する教師なし手法。階層的クラスタリング(ウォード法・最遠隣法)、k-means、DBSCAN などが代表。",
+    level: "準1",
+    category: "多変量解析",
+  },
+  {
+    term: "因子分析",
+    reading: "いんしぶんせき",
+    english: "factor analysis",
+    definition:
+      "観測変数の背後にある潜在因子を推定する手法。心理学・マーケティング(顧客満足要因)で広く使用。PCA とは目的が異なる。",
+    level: "準1",
+    category: "多変量解析",
+  },
+  {
+    term: "主成分分析",
+    reading: "しゅせいぶんぶんせき",
+    english: "principal component analysis",
+    definition:
+      "多変量データの分散を最大化する直交軸を順に取り、低次元表現に圧縮する手法。固有値分解または SVD で計算。",
+    level: "準1",
+    category: "多変量解析",
+    link: "/textbook/grade-pre1#ch3",
+  },
+  {
+    term: "Wardの方法",
+    reading: "うぉーどのほうほう",
+    english: "Ward's method",
+    definition:
+      "階層的クラスタリングの 1 つ。クラスター間距離をクラスター内分散の増加量で定義。コンパクトな球状クラスターを作りやすい。",
+    level: "準1",
+    category: "多変量解析",
+  },
+  {
+    term: "k-means クラスタリング",
+    reading: "けーみーんずくらすたりんぐ",
+    english: "k-means clustering",
+    definition:
+      "$k$ 個のクラスター中心を反復更新で求める非階層クラスタリング。最も広く使われる。$k$ の決定にはエルボー法・シルエット分析を用いる。",
+    level: "準1",
+    category: "多変量解析",
+  },
+  {
+    term: "シルエット係数",
+    reading: "しるえっとけいすう",
+    english: "silhouette coefficient",
+    definition:
+      "クラスタリングの良さを測る指標。各点が自クラスター内でまとまり、他クラスターから離れているほど 1 に近い。-1 〜 1 の範囲。",
+    level: "準1",
+    category: "多変量解析",
+  },
+  {
+    term: "エルボー法",
+    reading: "えるぼーほう",
+    english: "elbow method",
+    definition:
+      "k-means の最適クラスター数決定法の 1 つ。SSE(クラスター内二乗和)を $k$ の関数としてプロットし、減少が緩やかになる『肘』の位置を $k$ に選ぶ。",
+    level: "準1",
+    category: "多変量解析",
+  },
+  // === 品質工学(QC検定) ===
+  {
+    term: "工程能力指数",
+    reading: "こうていのうりょくしすう",
+    english: "process capability index (Cp, Cpk)",
+    definition:
+      "$C_p = (USL - LSL)/(6\\sigma)$ で工程のばらつきが規格内に収まる能力を測る。$C_{pk}$ は中心ずれも考慮。Cp ≥ 1.33 で十分。",
+    level: "準1",
+    category: "品質工学",
+  },
+  {
+    term: "管理図",
+    reading: "かんりず",
+    english: "control chart",
+    definition:
+      "工程の中心値とばらつきを時系列で監視する図。$\\bar{X}$-R 管理図、$p$ 管理図、$np$ 管理図などがある。3σ 管理限界が標準。",
+    level: "準1",
+    category: "品質工学",
+  },
+  {
+    term: "OC 曲線",
+    reading: "おーしーきょくせん",
+    english: "Operating Characteristic curve",
+    definition:
+      "サンプリング検査で『ロット不良率 $p$ が与えられたときに合格となる確率』を描いた曲線。生産者危険(α)・消費者危険(β)が読み取れる。",
+    level: "準1",
+    category: "品質工学",
+  },
+  {
+    term: "田口メソッド",
+    reading: "たぐちめそっど",
+    english: "Taguchi method",
+    definition:
+      "田口玄一の提唱した品質工学。直交配列表 + SN 比で『製品のロバスト性』を最大化する実験計画法。製造業で広く採用。",
+    level: "準1",
+    category: "品質工学",
+  },
+  {
+    term: "SN比",
+    reading: "えすえぬひ",
+    english: "Signal-to-Noise ratio",
+    definition:
+      "田口メソッドで製品の頑健性を測る指標。望大特性・望小特性・望目特性で式が異なる。値が大きいほどばらつきの影響を受けにくい。",
+    level: "準1",
+    category: "品質工学",
+  },
+  {
+    term: "パレート図",
+    reading: "ぱれーとず",
+    english: "Pareto chart",
+    definition:
+      "QC 7 つ道具の 1 つ。不良要因を頻度順に並べた棒グラフ + 累積比率の折れ線。『2:8 法則』で重要な少数要因を特定する。",
+    level: "準1",
+    category: "QC 7 つ道具",
+  },
+  {
+    term: "特性要因図",
+    reading: "とくせいよういんず",
+    english: "fishbone diagram / Ishikawa diagram",
+    definition:
+      "結果に対する要因を 4M(Man, Machine, Material, Method)などで体系化する図。原因分析の出発点として QC で頻用される。",
+    level: "準1",
+    category: "QC 7 つ道具",
+  },
+  // === 生存解析(準1級) ===
+  {
+    term: "ハザード関数",
+    reading: "はざーどかんすう",
+    english: "hazard function",
+    definition:
+      "$h(t) = \\lim_{\\Delta t \\to 0} P(t \\leq T < t+\\Delta t \\mid T \\geq t)/\\Delta t$。時点 $t$ まで生存している人が次の瞬間にイベントを起こす瞬時的確率。",
+    level: "準1",
+    category: "生存解析",
+  },
+  {
+    term: "Kaplan-Meier 推定量",
+    reading: "かぷらん-まいやーすいていりょう",
+    english: "Kaplan-Meier estimator",
+    definition:
+      "右打ち切りデータから生存関数 $S(t) = P(T > t)$ をノンパラメトリックに推定する手法。階段状の推定曲線で打ち切り例も活用する。",
+    level: "準1",
+    category: "生存解析",
+    link: "/textbook/grade-pre1#ch9",
+  },
+  {
+    term: "Cox 比例ハザードモデル",
+    reading: "こっくすひれいはざーどもでる",
+    english: "Cox proportional hazards model",
+    definition:
+      "$h(t \\mid x) = h_0(t) \\exp(\\beta^\\top x)$。ベースラインハザード $h_0(t)$ を特定せずに係数 $\\beta$ を部分尤度で推定するセミパラ手法。",
+    level: "準1",
+    category: "生存解析",
+    link: "/textbook/grade-pre1#ch9",
+  },
+  {
+    term: "ログランク検定",
+    reading: "ろぐらんくけんてい",
+    english: "log-rank test",
+    definition:
+      "2 群以上の生存曲線の差を比較するノンパラ検定。Kaplan-Meier 推定後の標準的検定として臨床試験で広く使用。",
+    level: "準1",
+    category: "生存解析",
+  },
+  // === ベイズ・モデル選択(準1級) ===
+  {
+    term: "MAP 推定",
+    reading: "まっぷすいてい",
+    english: "Maximum A Posteriori estimation",
+    definition:
+      "事後分布 $\\pi(\\theta \\mid x)$ を最大化する $\\theta$。事前分布が一様なら MLE と一致。点推定としてベイズ的に妥当。",
+    level: "準1",
+    category: "ベイズ統計",
+  },
+  {
+    term: "ジェフリーズ事前分布",
+    reading: "じぇふりーずじぜんぶんぷ",
+    english: "Jeffreys prior",
+    definition:
+      "Fisher 情報量の平方根に比例する不変事前分布。パラメータ変換に対して不変であり『無情報事前』として議論される。",
+    level: "準1",
+    category: "ベイズ統計",
+  },
+  {
+    term: "ベイズファクター",
+    reading: "べいずふぁくたー",
+    english: "Bayes factor",
+    definition:
+      "2 つのモデル $M_0, M_1$ の周辺尤度の比。ベイズ的なモデル比較指標。Kass-Raftery の解釈基準では BF > 100 で『決定的』。",
+    level: "準1",
+    category: "ベイズ統計",
+  },
+  {
+    term: "WAIC",
+    reading: "わいっく",
+    english: "Widely Applicable Information Criterion",
+    definition:
+      "渡辺澄夫が提唱した情報量規準。AIC・BIC が階層モデルで破綻するケースでも使え、特異モデルや混合分布で安定動作。",
+    level: "準1",
+    category: "情報量規準",
+  },
 ];
