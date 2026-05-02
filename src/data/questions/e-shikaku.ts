@@ -311,4 +311,164 @@ export const eShikakuQuestions: Question[] = [
     explanation:
       "差分プライバシーは **数学的な保護保証**: 1 人を加える/除いてもクエリ結果の確率分布がほぼ同じ(ε-differential privacy)。米国国勢調査 2020 で採用、現代のプライバシー保護の標準。",
   },
+  {
+    id: "es-q-attn-1",
+    difficulty: 2,
+    category: "Transformer",
+    question:
+      "Self-Attention で計算される $\\mathrm{softmax}(QK^\\top / \\sqrt{d_k}) V$ について、$\\sqrt{d_k}$ で割る目的として最も適切なものはどれか。",
+    choices: [
+      "内積のスケールが大きくなりすぎてソフトマックスの勾配が消失するのを防ぐ",
+      "計算量を削減する",
+      "正則化を強くする",
+      "値を整数に丸める",
+    ],
+    correctIndex: 0,
+    explanation:
+      "$d_k$ が大きいと $QK^\\top$ の値の分散が増え、ソフトマックスが極端に尖って勾配が消える。$\\sqrt{d_k}$ で割って標準化することで安定する(Attention is All You Need 論文で導入)。",
+  },
+  {
+    id: "es-q-mha",
+    difficulty: 2,
+    category: "Transformer",
+    question:
+      "Multi-Head Attention の利点として最も適切な説明はどれか。",
+    choices: [
+      "異なる表現サブ空間で同時に注意を計算でき、文法的関係・意味的関係など多様なパターンを並列で捉えられる",
+      "計算量が単純な Attention より小さくなる",
+      "パラメータ数が削減される",
+      "学習データが少なくて済む",
+    ],
+    correctIndex: 0,
+    explanation:
+      "$h$ 個のヘッドが各 $d/h$ 次元のサブ空間で別々に注意を計算する。文法・意味・指示関係など、異なる側面を並列で捉えられるのが利点。",
+  },
+  {
+    id: "es-q-bn-ln",
+    difficulty: 2,
+    category: "正規化",
+    question:
+      "Batch Normalization と Layer Normalization の主な違いとして最も適切なものはどれか。",
+    choices: [
+      "BN はバッチ内の同じチャネルで正規化、LN は同一サンプルの全特徴量で正規化する。RNN/Transformer では LN が標準",
+      "BN は分類問題のみ、LN は回帰のみで使う",
+      "BN は GPU で動かない",
+      "LN はバッチサイズが大きくないと使えない",
+    ],
+    correctIndex: 0,
+    explanation:
+      "BN はミニバッチ統計量に依存するためバッチサイズが小さい/系列長が可変の RNN/Transformer に向かない。LN はサンプル内で正規化するためバッチサイズに依存せず、Transformer 系の標準。",
+  },
+  {
+    id: "es-q-adam",
+    difficulty: 2,
+    category: "最適化",
+    question:
+      "Adam オプティマイザの主な特徴として最も適切な説明はどれか。",
+    choices: [
+      "1 次モーメント(勾配)と 2 次モーメント(勾配の二乗)の指数移動平均を使い、パラメータごとに適応的な学習率を計算する",
+      "全パラメータに同じ学習率を使う",
+      "学習率を一切持たない",
+      "勾配を使わずに最適化する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "Adam = Adaptive Moment Estimation。$m_t$(1 次モーメント)と $v_t$(2 次モーメント)の指数移動平均を用い、$\\hat{m}_t / (\\sqrt{\\hat{v}_t} + \\epsilon)$ でパラメータ更新。SGD・モメンタム・RMSprop の良いところを統合した万能型。",
+  },
+  {
+    id: "es-q-dropout",
+    difficulty: 2,
+    category: "正則化",
+    question:
+      "Dropout の主な役割として最も適切な説明はどれか。",
+    choices: [
+      "学習時にニューロンを確率 $p$ でゼロにすることで、複数のサブネットワークのアンサンブルとして機能し過学習を抑制",
+      "推論時にメモリを節約する",
+      "勾配消失を防ぐ",
+      "活性化関数を非線形にする",
+    ],
+    correctIndex: 0,
+    explanation:
+      "Dropout (Srivastava et al. 2014) は学習時に各ニューロンをランダムにゼロにする。これは多数のサブネットワークの暗黙的アンサンブルで、強力な正則化効果がある。推論時は全ニューロンを使い、出力をスケール調整する。",
+  },
+  {
+    id: "es-q-lora",
+    difficulty: 3,
+    category: "ファインチューニング",
+    question:
+      "LoRA (Low-Rank Adaptation) で元のモデル重み $W \\in \\mathbb{R}^{d \\times d}$ を更新する方法として最も適切なものはどれか。",
+    choices: [
+      "$W$ を凍結し、$\\Delta W = AB$($A \\in \\mathbb{R}^{d \\times r}, B \\in \\mathbb{R}^{r \\times d}$、$r \\ll d$)を学習対象とする",
+      "$W$ 全体を再学習する",
+      "$W$ をゼロに初期化する",
+      "$W$ をランダム化する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "LoRA は重み更新を低ランク行列の積で近似。学習対象が $2 \\times d \\times r$($r$ は通常 8〜64)に減るため、$d^2$ より遥かに少ない。VRAM とディスクを大幅削減し、QLoRA では消費者 GPU で大規模モデルがファインチューン可能。",
+  },
+  {
+    id: "es-q-rlhf",
+    difficulty: 3,
+    category: "RLHF",
+    question:
+      "RLHF (Reinforcement Learning from Human Feedback) の典型的な手順として最も適切なものはどれか。",
+    choices: [
+      "(1) SFT で指示応答ペアでファインチューン → (2) 人間の好み比較で報酬モデルを学習 → (3) PPO で報酬を最大化するよう LLM を強化学習",
+      "人間がすべての応答を直接ラベル付けする",
+      "勾配降下を一切使わない",
+      "事前学習データだけでファインチューンを行う",
+    ],
+    correctIndex: 0,
+    explanation:
+      "RLHF は 3 段階。(1) SFT で指示追従、(2) 人間が「A と B どちらが良いか」を比較ラベル付けして報酬モデル(RM)を学習、(3) PPO で RM が高い報酬を出す方向に LLM を強化学習。ChatGPT・Claude・Gemini はこの枠組みで訓練。",
+  },
+  {
+    id: "es-q-diff",
+    difficulty: 3,
+    category: "拡散モデル",
+    question:
+      "拡散モデル(DDPM)の Forward 過程と Reverse 過程について最も適切な説明はどれか。",
+    choices: [
+      "Forward は画像にガウスノイズを徐々に加える固定の過程、Reverse はノイズから画像を復元する学習可能な過程",
+      "Forward と Reverse のどちらも学習対象",
+      "Forward は学習対象、Reverse は固定",
+      "両方とも GAN と同じ敵対的学習で訓練",
+    ],
+    correctIndex: 0,
+    explanation:
+      "Forward は数学的に定義されたノイズ追加過程で、学習不要。Reverse はニューラルネットがノイズを予測する学習過程で、$\\mathcal{L} = \\mathbb{E}[\\| \\epsilon - \\epsilon_\\theta(x_t, t) \\|^2]$ を最小化。生成時はランダムノイズから Reverse を逆向きに辿る。",
+  },
+  {
+    id: "es-q-quant",
+    difficulty: 3,
+    category: "量子化",
+    question:
+      "深層学習モデルの量子化(quantization)について、INT8 量子化の利点として最も適切なものはどれか。",
+    choices: [
+      "FP32 と比べて 4 倍のメモリ効率と高速な推論を実現できる(精度低下は通常 1〜2% 程度)",
+      "学習時間が短縮される",
+      "勾配がより安定する",
+      "過学習が抑制される",
+    ],
+    correctIndex: 0,
+    explanation:
+      "FP32 (32 ビット) を INT8 (8 ビット) に量子化するとメモリ・帯域・演算量が 4 倍効率化。Post-Training Quantization (PTQ) と Quantization-Aware Training (QAT) の 2 手法。",
+  },
+  {
+    id: "es-q-foundation",
+    difficulty: 2,
+    category: "基盤モデル",
+    question:
+      "「基盤モデル(Foundation Model)」の特徴として最も適切な説明はどれか。",
+    choices: [
+      "大規模データで自己教師あり事前学習され、ファインチューンや Few-shot で多様な下流タスクに適応できるモデル",
+      "完全に教師あり学習のみで作られたモデル",
+      "1 つのタスクに特化したモデル",
+      "小規模モデルのみを指す",
+    ],
+    correctIndex: 0,
+    explanation:
+      "「Foundation Model」は Stanford の Bommasani et al. (2021) が提唱した用語。大規模データで事前学習し、下流タスクへの転移を主目的とするモデル。GPT・Claude・BERT・Stable Diffusion・SAM などが該当。",
+  },
 ];
