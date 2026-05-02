@@ -292,6 +292,82 @@ const CHAPTERS: { id: string; number: string; title: string; blocks: TextbookBlo
       },
     ],
   },
+  {
+    id: "ch7",
+    number: "7",
+    title: "深層学習による時系列予測",
+    blocks: [
+      {
+        type: "p",
+        text: "ARIMA や状態空間モデルが「線形・正規」を前提にするのに対し、近年は **ニューラルネットによる非線形時系列予測** が標準になりつつあります。複数系列を一度に学習する「グローバルモデル」が主流で、Kaggle 時系列コンペでも上位を占めています。",
+      },
+      { type: "h3", text: "代表アーキテクチャ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**LSTM / GRU**: ゲート機構で長期依存を扱える RNN。10 年代後半まで主流",
+          "**N-BEATS (2020)**: 純粋な MLP ブロックで構成された高精度モデル。M4 コンペで Prophet を圧倒",
+          "**Temporal Fusion Transformer (TFT, 2021)**: 多変量・カテゴリ・静的共変量を統一的に扱える Transformer ベースモデル",
+          "**Informer / Autoformer / FEDformer**: 長期予測向けの効率的 Self-Attention 変種",
+          "**TimesFM / Chronos / Lag-Llama**: 時系列の **Foundation Model**。事前学習済みモデルで Zero-shot 予測が可能(2024〜)",
+        ],
+      },
+      { type: "h3", text: "局所モデル vs グローバルモデル" },
+      {
+        type: "intuition",
+        title: "「1 系列で 1 モデル」の限界",
+        body: "ARIMA は 1 系列ごとに別モデルを fit しますが、実務では「数千店舗の売上」「数万 SKU の需要」のように似た系列が大量にあるケースが多い。これらをまとめて 1 つのニューラルネットで学習する **グローバルモデル** は、データ少量の系列にも知識を転移でき、予測精度が大幅に上がります。",
+      },
+      { type: "h3", text: "実装ライブラリ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**PyTorch Forecasting / Darts**: グローバルモデル + N-BEATS / TFT などをサポート",
+          "**NeuralProphet**: Prophet を PyTorch で再実装、AR を追加",
+          "**Nixtla の StatsForecast / NeuralForecast / MLForecast**: 統計・ニューラル・ML の各パラダイムを統一 API で提供",
+        ],
+      },
+    ],
+  },
+  {
+    id: "ch8",
+    number: "8",
+    title: "因果性のある時系列分析",
+    blocks: [
+      {
+        type: "p",
+        text: "「広告が売上に効いているか?」「金融政策が GDP に効いているか?」── 単なる予測ではなく **介入の効果** を時系列で測りたい場面があります。",
+      },
+      { type: "h3", text: "Granger 因果性" },
+      {
+        type: "def",
+        title: "Granger 因果性 (Granger 1969)",
+        body: "「$X$ の過去が $Y$ の予測に役立つ」とき、$X$ は $Y$ を Granger 因果的に引き起こす、と言う。VAR モデルで $Y$ の式に含まれる $X$ のラグ項が同時にゼロでないかを F 検定で判定する。\n\n注: 厳密な意味の因果ではなく『予測に役立つか』に過ぎない。同時に動く第三因子の影響を排除できないため、解釈には注意。",
+      },
+      { type: "h3", text: "Causal Impact(因果インパクト分析)" },
+      {
+        type: "p",
+        text: "Google が発表したライブラリ **CausalImpact (Brodersen et al. 2015)**。介入前のデータからベイズ構造時系列モデル(BSTS)を学習し、介入が **なかったとした反事実** を予測。介入後の実データとの差を「介入効果」として推定します。",
+      },
+      {
+        type: "code",
+        title: "CausalImpact の概念コード(疑似)",
+        python: "# pip install tfcausalimpact\nfrom causalimpact import CausalImpact\nimport pandas as pd\n\n# data: index=日付、列1=処置系列(売上)、列2..=対照系列\npre_period  = ['2024-01-01', '2024-08-31']  # 介入前\npost_period = ['2024-09-01', '2024-12-31']  # 介入後\n\nci = CausalImpact(data, pre_period, post_period)\nprint(ci.summary())\nci.plot()  # 反事実 vs 実値、点ごとの効果、累積効果",
+      },
+      { type: "h3", text: "ITS(中断時系列分析)" },
+      {
+        type: "p",
+        text: "**Interrupted Time Series (ITS)** は、介入時点の前後でレベル変化(切片ジャンプ)とトレンド変化(傾き変化)を回帰で推定する古典的手法。公衆衛生介入(タバコ規制・シートベルト法)などで広く使われます。",
+      },
+      {
+        type: "practical",
+        title: "🛠 まとめ ─ 因果と時系列",
+        body: "Granger は『予測に役立つか』レベル、CausalImpact は『反事実比較』レベル、ITS は『介入の前後の変化を見る』シンプル手法。目的・データ量・対照系列の有無で使い分け。",
+      },
+    ],
+  },
 ];
 
 export default function TimeSeriesPage() {

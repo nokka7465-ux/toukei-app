@@ -162,4 +162,84 @@ export const gTestQuestions: Question[] = [
     explanation:
       "**XAI(Explainable AI)**: AI の判断根拠を人間が理解できる形で示す研究領域。医療・金融・採用など、説明責任が必要な領域で必須。AGI は汎用 AI(将来的構想)、AutoML はモデル探索の自動化、RPA は業務自動化。",
   },
+  {
+    id: "gt-q21",
+    difficulty: 1,
+    category: "生成 AI",
+    question:
+      "RAG(Retrieval-Augmented Generation)が解決する LLM の主要な課題はどれか。",
+    choices: [
+      "ハルシネーションを抑制し、最新情報や社内情報をプロンプトに取り込めるようにする",
+      "GPU の使用量を半減させる",
+      "学習を高速化する",
+      "モデルのパラメータ数を圧縮する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "RAG は外部知識ベースから関連文書を検索してプロンプトに添付してから LLM に答えさせる手法。学習データの更新がなくても最新情報を活用でき、根拠付きで回答できるためハルシネーションが抑制される。",
+  },
+  {
+    id: "gt-q22",
+    difficulty: 2,
+    category: "生成 AI",
+    question:
+      "Chain-of-Thought (CoT) プロンプティングが特に効果を発揮するタスクとして最も適切なものはどれか。",
+    choices: [
+      "多段階の推論や算術を要する問題",
+      "短い文書要約",
+      "感情分析の二値分類",
+      "翻訳タスク",
+    ],
+    correctIndex: 0,
+    explanation:
+      "CoT は「Let's think step by step」のように推論過程を明示させる手法で、算数・論理推論など多段階思考が必要な問題で精度を大幅に向上させる。",
+  },
+  {
+    id: "gt-q23",
+    difficulty: 2,
+    category: "生成 AI",
+    question:
+      "LoRA(Low-Rank Adaptation)の主な利点として最も適切なものはどれか。",
+    choices: [
+      "元のモデルを凍結したまま小さな低ランク行列だけを学習するため、VRAM とディスク容量を大幅に節約できる",
+      "学習データを自動生成できる",
+      "ハイパーパラメータを自動最適化する",
+      "モデルの推論速度を 10 倍に高速化する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "LoRA は各層の更新を低ランク行列の積で近似する。学習対象パラメータが元の 0.1〜1% 程度に減るため、消費者向け GPU でも大規模モデルをファインチューンできる。QLoRA では 4 bit 量子化と組み合わせて更に省メモリ化。",
+  },
+  {
+    id: "gt-q24",
+    difficulty: 2,
+    category: "AI 規制",
+    question:
+      "EU AI 法(EU AI Act)の特徴として最も適切な説明はどれか。",
+    choices: [
+      "AI システムをリスクに応じて 4 段階(許容不可/高/限定/最小)に分類し、各段階に異なる義務を課す",
+      "AI 開発を完全に禁止する",
+      "中国・日本企業のみが対象",
+      "違反者は無罪",
+    ],
+    correctIndex: 0,
+    explanation:
+      "EU AI 法(2024 採択)は世界初の包括的 AI 規制。リスクベースのアプローチで、信用スコア・採用などの「高リスク」AI には透明性・人的監視・データ品質などの義務が課せられる。違反は最大年間売上の 7% の罰金。",
+  },
+  {
+    id: "gt-q25",
+    difficulty: 2,
+    category: "生成 AI",
+    question:
+      "拡散モデル(Diffusion Model)による画像生成の基本的な仕組みとして最も適切なものはどれか。",
+    choices: [
+      "画像にノイズを徐々に加える順過程と、ノイズを除去する逆過程を学び、ノイズから段階的に画像を生成する",
+      "GAN と同じく生成器と識別器の対戦で生成する",
+      "ピクセルを 1 つずつ自己回帰で生成する",
+      "ベクトル空間内で最近傍検索する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "拡散モデルは「クリーンな画像 → 完全ノイズ」の Forward 過程と「ノイズ → クリーン画像」の Reverse 過程を学習する。生成時はランダムノイズから出発し、段階的にノイズを除いて画像を生成。Stable Diffusion・DALL-E 3・Imagen など主流の画像生成手法。",
+  },
 ];

@@ -230,6 +230,96 @@ const CHAPTERS: { id: string; number: string; title: string; blocks: TextbookBlo
       },
     ],
   },
+  {
+    id: "ch7",
+    number: "7",
+    title: "合成統制法(Synthetic Control)",
+    blocks: [
+      {
+        type: "p",
+        text: "DID は「処置群 1 グループ vs 対照群 1 グループ」で平行トレンドを仮定する手法でしたが、現実には適切な対照群が見つからないことが多くあります。**合成統制法 (Synthetic Control Method, Abadie & Gardeazabal 2003)** は、複数の候補対照群を **重み付け線形結合** して、処置前の処置群とそっくりな「人工対照群」を作り、それと比較する手法です。",
+      },
+      { type: "h3", text: "アイデア" },
+      {
+        type: "p",
+        text: "「カリフォルニア州が 1989 年にタバコ規制を強化したことで、タバコ消費量はどれだけ減ったか?」という問題で、対照群として「他の 38 州」のデータがある。それぞれに重み $w_j \\geq 0$($\\sum w_j = 1$)を付けて、処置前のタバコ消費の推移がカリフォルニアと一致するように $w$ を最適化。処置後はその合成統制と比較すれば、規制の効果が推定できます。",
+      },
+      { type: "h3", text: "数式" },
+      { type: "math", tex: "\\hat{w} = \\arg\\min_w \\| \\mathbf{X}_1 - \\sum_j w_j \\mathbf{X}_j \\|^2,\\quad w_j \\geq 0,\\; \\sum w_j = 1" },
+      {
+        type: "p",
+        text: "$\\mathbf{X}_1$ が処置群の処置前共変量・成果ベクトル、$\\mathbf{X}_j$ が候補対照群 $j$ のもの。重み和 = 1、非負の制約により「過剰外挿」を防ぎます。",
+      },
+      { type: "h3", text: "DID との違い" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "DID は対照群を「全候補の単純平均」と暗黙に仮定。合成統制は「最も似たプロファイル」を作る点が違う",
+          "合成統制は処置群が **1 つしかない** ケースに強い(国・州レベル政策評価)",
+          "推論は「プラセボテスト」で行う ─ 各対照群を仮の処置群として同じ手続きを実行し、本当の処置効果がそれらの分布の極端値にあるかを見る",
+        ],
+      },
+      {
+        type: "practical",
+        title: "🛠 適用例(Abadie et al. 2010)",
+        body: "1990 年カリフォルニア・タバコ規制(Proposition 99)。合成統制を作って実際のカリフォルニアと比較し、規制後 12 年で 1 人当たり消費量が約 25 パック減ったと推定。`Synth` (R) や `pysyncon` (Python) で実装可。",
+      },
+    ],
+  },
+  {
+    id: "ch8",
+    number: "8",
+    title: "因果推論と機械学習の融合",
+    blocks: [
+      {
+        type: "p",
+        text: "近年、機械学習で因果効果を推定する手法が急速に発展しています。「処置効果は人によって違う(異質性)」を捉える **個別処置効果 (CATE: Conditional ATE)** の推定が中心テーマです。",
+      },
+      { type: "h3", text: "Double Machine Learning(DML)" },
+      {
+        type: "def",
+        title: "Double ML (Chernozhukov et al. 2018)",
+        body: "高次元共変量を ML で扱いながら因果効果を一致推定する枠組み。$Y = \\theta T + g(X) + \\varepsilon$、$T = m(X) + \\nu$ で、$g, m$ を任意の ML(ランダムフォレスト・勾配ブースティング)で推定し、残差同士で OLS する2段階法。直交化(Neyman orthogonality)により ML 部分の収束遅さがバイアスに伝わらない。",
+      },
+      { type: "h3", text: "Causal Forest" },
+      {
+        type: "p",
+        text: "**Causal Forest (Wager & Athey 2018)** は、ランダムフォレストを「同じ葉に入った観測同士で処置効果を推定」する形に拡張したアルゴリズム。共変量 $x$ ごとの異質処置効果 $\\tau(x)$ を非パラメトリックに推定でき、医療・マーケでターゲティングに使われます。R の `grf` パッケージが標準。",
+      },
+      { type: "h3", text: "Meta-Learners(S/T/X-Learner)" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**S-Learner**: 処置を共変量の 1 つとして 1 本のモデルで学ぶ",
+          "**T-Learner**: 処置群と対照群で別々のモデルを学び、予測差を取る",
+          "**X-Learner (Künzel et al. 2019)**: T-Learner を改良。サンプル不均衡に強い",
+        ],
+      },
+      { type: "h3", text: "アップリフトモデリング" },
+      {
+        type: "intuition",
+        title: "「説得しやすい人」を狙う",
+        body: "マーケで「クーポンを送る人を選ぶ」とき、効果が大きい人 = 反応しやすい人とは限りません。「クーポンがあれば買うが、なければ買わない人」を見つけるのがアップリフトモデリングの目的。CATE 推定をビジネス意思決定に直結させた応用です。",
+      },
+      {
+        type: "practical",
+        title: "🛠 ツール",
+        body: "**EconML**(Microsoft): DML・Causal Forest・X-Learner を網羅。**CausalML**(Uber): アップリフトモデリング特化。**DoWhy**(Microsoft): 識別 → 推定 → 反証の 3 ステップで因果分析を体系化。Python ベースで研究・実務両方で使える。",
+      },
+      { type: "h3", text: "8 章のまとめ" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Ch7**: 合成統制法 ─ 1 ユニット処置に強い",
+          "**Ch8**: ML × 因果 ─ 高次元・異質性を扱う現代手法",
+          "因果推論は **データ + 仮定** の学問。仮定を明示し、感度分析で頑健性を検証する姿勢が大切",
+        ],
+      },
+    ],
+  },
 ];
 
 export default function CausalInferencePage() {
