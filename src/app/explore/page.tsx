@@ -10,6 +10,9 @@ import { InteractiveRegression } from "@/components/interactive/InteractiveRegre
 import { InteractiveChiSquare } from "@/components/interactive/InteractiveChiSquare";
 import { InteractiveMedicalBayes } from "@/components/interactive/InteractiveMedicalBayes";
 import { InteractiveTDistribution } from "@/components/interactive/InteractiveTDistribution";
+import { InteractivePoisson } from "@/components/interactive/InteractivePoisson";
+import { InteractiveExponential } from "@/components/interactive/InteractiveExponential";
+import { InteractiveCorrelation } from "@/components/interactive/InteractiveCorrelation";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -19,7 +22,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/explore" },
   openGraph: {
     title: "動かして学ぶ統計",
-    description: "8 つのキー概念をスライダー操作で体感する。",
+    description: "13 のキー概念をスライダー操作で体感する。",
     type: "article",
   },
 };
@@ -70,6 +73,9 @@ export default function ExplorePage() {
         <InteractiveChiSquare />
         <InteractiveMedicalBayes />
         <InteractiveTDistribution />
+        <InteractivePoisson />
+        <InteractiveExponential />
+        <InteractiveCorrelation />
       </section>
 
       <section className="mt-16 paper rounded-lg p-6">

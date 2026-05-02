@@ -3,11 +3,17 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
+  highlightSegments,
   search,
   sourceLabel,
   suggestTerms,
   type SearchSource,
 } from "@/lib/search";
+import {
+  addRecentSearch,
+  clearRecentSearches,
+  getRecentSearches,
+} from "@/lib/search-history";
 import { urlToPhase } from "@/lib/phase-mapping";
 
 const SOURCE_STYLE: Record<SearchSource, string> = {
@@ -19,6 +25,8 @@ const SOURCE_STYLE: Record<SearchSource, string> = {
     "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200",
   formula:
     "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200",
+  question:
+    "bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-200",
 };
 
 const FILTERS: { key: SearchSource | "all"; label: string }[] = [
@@ -27,12 +35,35 @@ const FILTERS: { key: SearchSource | "all"; label: string }[] = [
   { key: "glossary", label: "用語集" },
   { key: "blog", label: "ブログ" },
   { key: "formula", label: "公式集" },
+  { key: "question", label: "演習問題" },
 ];
+
+function Highlighted({ text, query }: { text: string; query: string }) {
+  const segs = highlightSegments(text, query);
+  if (segs.length === 0) return <>{text}</>;
+  return (
+    <>
+      {segs.map((s, i) =>
+        s.match ? (
+          <mark
+            key={i}
+            className="bg-yellow-200 dark:bg-yellow-700/60 text-inherit rounded px-0.5"
+          >
+            {s.text}
+          </mark>
+        ) : (
+          <span key={i}>{s.text}</span>
+        ),
+      )}
+    </>
+  );
+}
 
 export function SearchUI({ initialQuery = "" }: { initialQuery?: string }) {
   const [query, setQuery] = useState(initialQuery);
   const [filter, setFilter] = useState<SearchSource | "all">("all");
   const [phaseFilter, setPhaseFilter] = useState<number | "all">("all");
+  const [recent, setRecent] = useState<string[]>([]);
 
   // Read q param from URL on mount (initialQuery can also be passed via SSR if desired).
   useEffect(() => {
@@ -40,8 +71,21 @@ export function SearchUI({ initialQuery = "" }: { initialQuery?: string }) {
     const params = new URLSearchParams(window.location.search);
     const q = params.get("q");
     if (q && q !== query) setQuery(q);
+    setRecent(getRecentSearches());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Record successful searches (>=2 chars and produced a result) into recents,
+  // debounced so we don't spam localStorage on every keystroke.
+  useEffect(() => {
+    const trimmed = query.trim();
+    if (trimmed.length < 2) return;
+    const id = setTimeout(() => {
+      addRecentSearch(trimmed);
+      setRecent(getRecentSearches());
+    }, 800);
+    return () => clearTimeout(id);
+  }, [query]);
 
   const results = useMemo(() => {
     if (query.trim().length < 1) return [];
@@ -58,7 +102,7 @@ export function SearchUI({ initialQuery = "" }: { initialQuery?: string }) {
 
   const counts = useMemo(() => {
     if (query.trim().length < 1) {
-      return { all: 0, textbook: 0, glossary: 0, blog: 0, formula: 0 };
+      return { all: 0, textbook: 0, glossary: 0, blog: 0, formula: 0, question: 0 };
     }
     const all = search(query, 1000);
     return {
@@ -67,6 +111,7 @@ export function SearchUI({ initialQuery = "" }: { initialQuery?: string }) {
       glossary: all.filter((r) => r.item.source === "glossary").length,
       blog: all.filter((r) => r.item.source === "blog").length,
       formula: all.filter((r) => r.item.source === "formula").length,
+      question: all.filter((r) => r.item.source === "question").length,
     };
   }, [query]);
 
@@ -155,13 +200,45 @@ export function SearchUI({ initialQuery = "" }: { initialQuery?: string }) {
       </div>
 
       {query.trim().length === 0 ? (
-        <div className="paper rounded-lg p-7 text-center text-sm text-[var(--muted-strong)] leading-relaxed">
-          <p className="mb-3">
-            知りたいトピックや用語を入力してください。教科書本文・用語集の定義・ブログ記事・公式集を横断で検索します。
-          </p>
-          <p className="text-xs text-[var(--muted)] ui-sans">
-            よく使われる例: 「正規分布」「t 検定」「回帰係数」「ベイズ」「最尤推定」
-          </p>
+        <div className="space-y-4">
+          <div className="paper rounded-lg p-7 text-center text-sm text-[var(--muted-strong)] leading-relaxed">
+            <p className="mb-3">
+              知りたいトピックや用語を入力してください。教科書本文・用語集の定義・ブログ記事・公式集・演習問題を横断で検索します。
+            </p>
+            <p className="text-xs text-[var(--muted)] ui-sans">
+              よく使われる例: 「正規分布」「t 検定」「回帰係数」「ベイズ」「最尤推定」
+            </p>
+          </div>
+          {recent.length > 0 && (
+            <div className="paper rounded-lg p-5">
+              <div className="flex items-baseline justify-between mb-3">
+                <div className="chapter-eyebrow text-[var(--muted)]">最近の検索</div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    clearRecentSearches();
+                    setRecent([]);
+                  }}
+                  className="text-[10px] text-[var(--muted)] hover:text-red-600 dark:hover:text-red-400 ui-sans underline"
+                >
+                  履歴を消去
+                </button>
+              </div>
+              <ul className="flex flex-wrap gap-2 ui-sans text-xs">
+                {recent.map((q) => (
+                  <li key={q}>
+                    <button
+                      type="button"
+                      onClick={() => setQuery(q)}
+                      className="px-3 py-1.5 rounded border border-[var(--page-border-strong)] hover:bg-[var(--background)] hover:text-[var(--link)]"
+                    >
+                      {q}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       ) : results.length === 0 ? (
         <div className="space-y-4">
@@ -207,10 +284,10 @@ export function SearchUI({ initialQuery = "" }: { initialQuery?: string }) {
                     </span>
                   </div>
                   <div className="font-bold text-base mb-1 group-hover:text-[var(--link)]">
-                    {r.item.title}
+                    <Highlighted text={r.item.title} query={query} />
                   </div>
                   <div className="text-xs text-[var(--muted-strong)] leading-relaxed line-clamp-3">
-                    {r.snippet}
+                    <Highlighted text={r.snippet} query={query} />
                   </div>
                 </Link>
               </li>

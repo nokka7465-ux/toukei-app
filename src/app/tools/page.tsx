@@ -11,6 +11,9 @@ import { ChiSquareTest } from "@/components/tools/ChiSquareTest";
 import { WilcoxonSignedRank } from "@/components/tools/WilcoxonSignedRank";
 import { MannWhitneyU } from "@/components/tools/MannWhitneyU";
 import { McnemarTest } from "@/components/tools/McnemarTest";
+import { EffectSizeCalc } from "@/components/tools/EffectSizeCalc";
+import { DescriptiveStats } from "@/components/tools/DescriptiveStats";
+import { OddsRatioCalc } from "@/components/tools/OddsRatioCalc";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -52,7 +55,7 @@ export default function ToolsPage() {
           統計計算ツール集
         </h1>
         <p className="text-[var(--muted-strong)] leading-loose max-w-3xl">
-          学習中の確認や実務での意思決定にすぐ使える、11 つの統計計算機。すべて{" "}
+          学習中の確認や実務での意思決定にすぐ使える、14 つの統計計算機。すべて{" "}
           <strong>ブラウザ内で完結</strong>{" "}
           ─ データ送信・ログイン・サーバ計算は一切ありません。
         </p>
@@ -69,6 +72,9 @@ export default function ToolsPage() {
             { id: "wilcoxon", label: "Wilcoxon 符号順位" },
             { id: "mann-whitney", label: "Mann-Whitney U" },
             { id: "mcnemar", label: "McNemar 検定" },
+            { id: "effect-size", label: "効果量(Cohen's d)" },
+            { id: "descriptive", label: "記述統計まとめ" },
+            { id: "odds-ratio", label: "オッズ比/相対リスク" },
           ].map((item) => (
             <a
               key={item.id}
@@ -114,6 +120,15 @@ export default function ToolsPage() {
         </div>
         <div id="mcnemar" className="scroll-mt-20">
           <McnemarTest />
+        </div>
+        <div id="effect-size" className="scroll-mt-20">
+          <EffectSizeCalc />
+        </div>
+        <div id="descriptive" className="scroll-mt-20 lg:col-span-2 xl:col-span-1">
+          <DescriptiveStats />
+        </div>
+        <div id="odds-ratio" className="scroll-mt-20">
+          <OddsRatioCalc />
         </div>
       </section>
 

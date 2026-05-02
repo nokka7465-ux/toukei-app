@@ -22,12 +22,14 @@ import { gradeTwoFormulas } from "@/data/formulas/grade-2";
 import { gradePre1Formulas } from "@/data/formulas/grade-pre1";
 import { gradeOneFormulas } from "@/data/formulas/grade-1";
 import { levels } from "@/data/levels";
+import { tracks } from "@/lib/all-questions";
 
 export type SearchSource =
   | "textbook"
   | "glossary"
   | "blog"
-  | "formula";
+  | "formula"
+  | "question";
 
 export type SearchItem = {
   id: string;
@@ -309,6 +311,24 @@ export const searchIndex: SearchItem[] = (() => {
     }
   }
 
+  // Practice questions: index question text + explanation so users can find
+  // a quiz item by recalling a phrase.
+  for (const t of tracks) {
+    for (const q of t.questions) {
+      const text = trimText(
+        `${q.question} ${q.category ?? ""} ${(q.choices ?? []).join(" ")} ${q.explanation ?? ""}`,
+      );
+      items.push({
+        id: `qu-${q.id}`,
+        source: "question",
+        title: trimText(q.question, 80),
+        context: `${t.label} 演習 · ${q.category ?? ""}`.trim(),
+        text,
+        url: t.href,
+      });
+    }
+  }
+
   return items;
 })();
 
@@ -317,6 +337,7 @@ const SOURCE_LABEL: Record<SearchSource, string> = {
   glossary: "用語集",
   blog: "ブログ",
   formula: "公式集",
+  question: "演習問題",
 };
 
 export function sourceLabel(src: SearchSource): string {
@@ -405,6 +426,36 @@ export function suggestTerms(query: string, max = 6): Suggestion[] {
     });
     if (out.length >= max) break;
   }
+  return out;
+}
+
+/**
+ * Split a text into segments alternating non-match / match for highlighting.
+ * Matches are case-insensitive and use the exact tokens from the query.
+ */
+export function highlightSegments(
+  text: string,
+  query: string,
+): { text: string; match: boolean }[] {
+  if (!text) return [];
+  const tokens = tokenize(query);
+  if (tokens.length === 0) return [{ text, match: false }];
+
+  // Build a regex of escaped tokens, sorted longest-first to prefer longer matches.
+  const escaped = tokens
+    .map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .sort((a, b) => b.length - a.length)
+    .join("|");
+  const re = new RegExp(`(${escaped})`, "gi");
+  const out: { text: string; match: boolean }[] = [];
+  let last = 0;
+  text.replace(re, (m, _g, offset: number) => {
+    if (offset > last) out.push({ text: text.slice(last, offset), match: false });
+    out.push({ text: m, match: true });
+    last = offset + m.length;
+    return m;
+  });
+  if (last < text.length) out.push({ text: text.slice(last), match: false });
   return out;
 }
 

@@ -52,8 +52,27 @@
   --section-border: #5c7eb5;
 }
 
+/* Sepia theme — warm reading-friendly palette for long study sessions. */
+:root[data-theme="sepia"] {
+  --background: #f4ecd8;
+  --foreground: #4a3a2a;
+  --page: #faf3df;
+  --page-border: #d6c9a3;
+  --page-border-strong: #ad9e75;
+  --muted: #8a7654;
+  --muted-strong: #4a3a2a;
+  --accent: #a86a2c;
+  --accent-strong: #884e1a;
+  --accent-fg: #ffffff;
+  --link: #884e1a;
+  --rule: #c4b18a;
+  --highlight: #ece1c0;
+  --section-bg: #efe2c2;
+  --section-border: #c4ae7a;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root:not([data-theme="light"]):not([data-theme="sepia"]) {
     --background: #101826;
     --foreground: #d8dee8;
     --page: #18223a;
