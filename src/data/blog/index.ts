@@ -6253,6 +6253,354 @@ blogPosts.push(
   },
 );
 
+blogPosts.push({
+  slug: "anova-explained",
+  title: "分散分析(ANOVA)の直感 ─ なぜ t 検定を3回やってはいけないのか",
+  description:
+    "3 群以上の平均比較で多重比較問題を避けるための分散分析。F 統計量の意味、平方和の分解、Tukey HSD まで、2 級受験者向けに直感重視で解説。",
+  publishedAt: "2026-05-02",
+  category: "統計検定対策",
+  tldr: [
+    "3 群以上のペアごとに t 検定を繰り返すと、全体のType I エラー率が膨らむ(多重比較問題)",
+    "ANOVA は F 統計量で「群間ばらつき / 群内ばらつき」を測り、全体差を 1 回で判定",
+    "有意なら Tukey HSD・Bonferroni などで個別ペアを比較",
+  ],
+  body: [
+    {
+      type: "p",
+      text: "「3 つの肥料 A, B, C で収穫量に差があるか?」「4 種類の広告でクリック率は違うか?」 ── このとき、ペアごとに t 検定を繰り返したくなりますが、それは **やってはいけない** 行為です。なぜでしょうか?",
+    },
+    { type: "h3", text: "多重比較問題 ─ 検定を増やすほど「偶然の有意」が出る" },
+    {
+      type: "p",
+      text: "$\\alpha = 0.05$ の検定を 1 回やれば、Type I エラー(本当は差がないのに棄却する)確率は 5% です。では 3 回やったら? 3 回すべて正しく非棄却する確率は $0.95^3 \\approx 0.857$。少なくとも 1 回誤って棄却する確率は $1 - 0.857 \\approx 0.143$、つまり全体のエラー率は **約 14%** に膨らみます。",
+    },
+    { type: "math", tex: "1 - (1 - \\alpha)^m \\approx m\\alpha\\quad (\\alpha \\text{ が小さいとき})" },
+    {
+      type: "intuition",
+      title: "「全体で 5% に抑える」を最初に考える",
+      body: "ANOVA の発想: いきなり個別ペアを見るのではなく、まず「全群が同じか?」を 1 回の検定で判定する。F 検定 1 つだけなら、全体のエラー率が 5% に抑えられる。有意なら次に個別比較に進む、という 2 段構え。",
+    },
+    { type: "h3", text: "F 統計量 ─ 何の比なのか" },
+    {
+      type: "p",
+      text: "ANOVA の F 統計量は「群間ばらつき(処理効果) / 群内ばらつき(誤差)」の比です:",
+    },
+    { type: "math", tex: "F = \\dfrac{S_A / (g - 1)}{S_E / (n - g)}" },
+    {
+      type: "p",
+      text: "$g$ 群、合計 $n$ 標本。**群間ばらつきが群内ばらつきより大きければ大きいほど** $F$ は大きくなります。$H_0:$ 全群平均が等しい、のもとで $F \\sim F_{g-1, n-g}$。",
+    },
+    {
+      type: "intuition",
+      title: "「中の散らばり」と「外の散らばり」",
+      body: "$g$ 個のグループを箱に入れると考えます。各箱の中の散らばり(群内)と、箱同士の中央の散らばり(群間)。全部の箱の中央が揃っていれば、群間ばらつきは群内ばらつきと同程度(F ≈ 1)。逆に箱がバラバラに離れていれば、群間ばらつきが優勢(F が大)。これが ANOVA の核心です。",
+    },
+    { type: "h3", text: "平方和の直交分解" },
+    {
+      type: "p",
+      text: "全データのばらつき $S_T = \\sum (X_{ij} - \\bar{X}_{..})^2$ は、必ず以下のように分解されます:",
+    },
+    { type: "math", tex: "S_T = S_A + S_E" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "$S_A = \\sum_i n_i (\\bar{X}_{i.} - \\bar{X}_{..})^2$ ─ 群間平方和",
+        "$S_E = \\sum_{i,j}(X_{ij} - \\bar{X}_{i.})^2$ ─ 群内平方和(誤差)",
+      ],
+    },
+    {
+      type: "p",
+      text: "「データの全ばらつきを、グループごとの平均の違いで説明できる部分(処理効果)と、そうでない部分(残差)に分ける」── これが直交分解の意味。$F$ はこの 2 つを自由度で正規化した比です。",
+    },
+    { type: "h3", text: "事後検定 ─ どの群とどの群が違う?" },
+    {
+      type: "p",
+      text: "ANOVA で $H_0$ を棄却したら、「では具体的にどのペアか?」は事後検定で調べます:",
+    },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "**Bonferroni**: 各検定の有意水準を $\\alpha/m$ に。簡便だが保守的",
+        "**Tukey HSD**: 全ペア比較の標準。サンプルサイズが揃っているときに効率的",
+        "**Dunnett**: コントロール群と他の群だけを比較したいときに最も検出力が高い",
+        "**Holm**: Bonferroni を順序付きで段階的に。バランス型",
+      ],
+    },
+    { type: "h3", text: "前提と注意点" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "**正規性**: 各群が正規分布。Q-Q プロットで確認",
+        "**等分散性**: 全群で分散が等しい。Levene 検定で確認",
+        "**独立性**: 観測が独立。実験計画から判断",
+        "等分散が崩れたら **Welch ANOVA**、正規性が大きく崩れたら **Kruskal-Wallis**(ノンパラメトリック ANOVA)を検討",
+      ],
+    },
+    { type: "h3", text: "Python で実装" },
+    {
+      type: "code",
+      title: "scipy で 1 元配置 ANOVA",
+      runnable: true,
+      python: "import numpy as np\nfrom scipy import stats\n\nrng = np.random.default_rng(42)\n# 3 群: A, B, C\nA = rng.normal(loc=5.0, scale=1.5, size=30)\nB = rng.normal(loc=5.5, scale=1.5, size=30)\nC = rng.normal(loc=6.5, scale=1.5, size=30)\n\nF, p = stats.f_oneway(A, B, C)\nprint(f'F = {F:.3f}, p = {p:.4f}')\n\nif p < 0.05:\n    print('全体に有意差あり → 事後検定で個別ペアを確認')\n    from scipy.stats import tukey_hsd\n    res = tukey_hsd(A, B, C)\n    print(res)",
+    },
+    { type: "h3", text: "まとめ" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "ペアごとの t 検定を繰り返すと多重比較問題で全体エラー率が膨らむ",
+        "ANOVA は F 統計量で「群間 / 群内」のばらつき比を測り、全体差を 1 回で判定",
+        "有意なら Tukey HSD などで個別ペアを比較",
+        "前提(正規性・等分散・独立性)が崩れたら Welch ANOVA や Kruskal-Wallis へ",
+      ],
+    },
+    { type: "h3", text: "関連リンク" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "[**2 級教科書 第 4 章 分散分析**](/textbook/grade-2#ch4)",
+        "[**統計計算ツール**](/tools)",
+        "[**動かして学ぶ統計**](/explore)",
+      ],
+    },
+  ],
+});
+
+blogPosts.push({
+  slug: "rag-pattern-explained",
+  title: "RAG (検索拡張生成) を1から理解する ─ ハルシネーション対策の本命",
+  description:
+    "ChatGPT 系の課題「もっともらしい嘘」を解決する RAG パターン。ベクトル DB・埋め込みモデル・プロンプト設計の実装フローを G 検定対策と実装の両面で解説。",
+  publishedAt: "2026-05-02",
+  category: "生成 AI",
+  tldr: [
+    "RAG = 関連文書を外部から検索して、プロンプトに添付してから LLM に答えさせる手法",
+    "ハルシネーション抑制・最新情報の活用・社内ナレッジ連携に有効",
+    "実装は (1) 埋め込み (2) ベクトル DB (3) 検索 (4) プロンプト合成の 4 段",
+  ],
+  body: [
+    {
+      type: "p",
+      text: "ChatGPT の登場以来、生成 AI 最大の課題は **ハルシネーション**(もっともらしい嘘の生成)でした。RAG は、これを **外部知識をプロンプトに動的に取り込む** ことで解決する設計パターン。G 検定でも頻出のキーワードであり、企業の生成 AI 導入で最も使われている方式です。",
+    },
+    { type: "h3", text: "なぜ RAG が必要か" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "**学習データの古さ**: GPT-4 系の知識カットオフは 2023〜2024 年で、それ以降のニュースは知らない",
+        "**社内文書の不在**: 公開 LLM は当然、自社の社内ドキュメント・契約書・議事録を学習していない",
+        "**ハルシネーション**: 知らないことを聞かれると LLM は『それっぽい嘘』を作る傾向",
+        "**根拠の不在**: 答えの出典が示せないため、信頼性のある業務利用には不適",
+      ],
+    },
+    { type: "h3", text: "RAG の基本フロー" },
+    {
+      type: "list",
+      style: "number",
+      items: [
+        "**事前準備**: 社内文書を分割(チャンク化)し、埋め込みモデル(text-embedding-3-large など)でベクトル化、ベクトル DB(Pinecone・Weaviate・pgvector・Chroma)に保存",
+        "**ユーザーが質問**: 例「就業規則で在宅勤務日数の上限は?」",
+        "**質問を埋め込み化**: 質問文も同じ埋め込みモデルでベクトル化",
+        "**ベクトル DB で近傍検索**: 質問ベクトルとコサイン類似度が高い文書チャンクを top-k(例: 5)取得",
+        "**プロンプト合成**: 「以下の社内文書を参考に質問に答えてください。文書: ... 質問: ...」",
+        "**LLM が回答**: 関連文書を踏まえた回答を生成。可能なら出典(文書名・ページ)を付与",
+      ],
+    },
+    { type: "h3", text: "シンプル実装(LangChain ベース)" },
+    {
+      type: "code",
+      title: "最小 RAG の構造",
+      python: "# pip install langchain-openai langchain-community chromadb\nfrom langchain_openai import OpenAIEmbeddings, ChatOpenAI\nfrom langchain_community.vectorstores import Chroma\nfrom langchain_text_splitters import RecursiveCharacterTextSplitter\nfrom langchain.chains import RetrievalQA\n\n# 1. 文書を分割\nwith open('handbook.md') as f:\n    text = f.read()\nsplitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)\nchunks = splitter.create_documents([text])\n\n# 2. 埋め込み + ベクトル DB に保存\nembed = OpenAIEmbeddings(model='text-embedding-3-large')\nvecdb = Chroma.from_documents(chunks, embed, persist_directory='./db')\n\n# 3. RAG チェーン\nllm = ChatOpenAI(model='gpt-4o-mini')\nqa = RetrievalQA.from_chain_type(\n    llm=llm,\n    retriever=vecdb.as_retriever(search_kwargs={'k': 5}),\n    return_source_documents=True,\n)\n\n# 4. 質問\nresult = qa.invoke({'query': '在宅勤務日数の上限は?'})\nprint(result['result'])\nfor doc in result['source_documents']:\n    print('出典:', doc.metadata)",
+    },
+    { type: "h3", text: "精度を左右する 3 つのチューニングポイント" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "**チャンクサイズ**: 200〜500 トークンが目安。大きすぎると関連性が薄まり、小さすぎると文脈が切れる",
+        "**埋め込みモデル**: OpenAI の text-embedding-3-large が高精度、Cohere・Voyage AI も日本語に強い。BGE-M3 などオープンモデルも実用的",
+        "**Re-ranking**: 検索 top-k の中から、Cross-Encoder(Cohere Rerank・bge-reranker)で本当に関連度が高いものに並べ替える 2 段検索が効果大",
+      ],
+    },
+    { type: "h3", text: "ハイブリッド検索 ─ ベクトル + キーワード" },
+    {
+      type: "intuition",
+      title: "「意味」だけでは取りこぼす",
+      body: "ベクトル検索は意味的近さを捉えられますが、固有名詞(製品コード・法令名・人名)は文字列一致が重要。BM25 などのキーワード検索とベクトル検索を組み合わせる **ハイブリッド検索** が実務で標準になりつつあります。Elasticsearch・Qdrant・Weaviate などの主要ベクトル DB が標準サポート。",
+    },
+    { type: "h3", text: "RAG の限界と対策" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "**文書間の関係を捉えづらい**: 「A と B の違いは?」のように複数文書をまたぐ質問が苦手 → GraphRAG・Multi-hop RAG で対処",
+        "**最新性のラグ**: ベクトル DB の更新頻度がボトルネック → リアルタイム更新可能な DB を選択",
+        "**評価が難しい**: 質問と理想回答のペアを用意して RAGAS・LangSmith で精度を測定",
+      ],
+    },
+    { type: "h3", text: "G 検定での出題傾向" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "「ハルシネーション対策の代表的な手法は?」 → **RAG**",
+        "「RAG で使うベクトル DB の例は?」 → Pinecone、Weaviate、Chroma、pgvector",
+        "「埋め込みモデルの目的は?」 → 文書をベクトル化して類似度検索可能にする",
+        "「Chain-of-Thought との違いは?」 → CoT は推論手法、RAG は外部知識参照手法",
+      ],
+    },
+    { type: "h3", text: "まとめ" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "RAG = 外部知識を動的にプロンプトに取り込む手法",
+        "ハルシネーション抑制・社内文書活用・最新情報反映に有効",
+        "実装は埋め込み → ベクトル DB → 検索 → プロンプト合成の 4 段",
+        "精度向上には Re-ranking・ハイブリッド検索・適切なチャンクサイズが鍵",
+      ],
+    },
+    { type: "h3", text: "関連リンク" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "[**G 検定教科書 第 7 章 生成 AI**](/certs/g-test/textbook#ch7)",
+        "[**ディープラーニング基礎ミニ教科書**](/deep-learning-basics)",
+      ],
+    },
+  ],
+});
+
+blogPosts.push({
+  slug: "multiple-regression-explained",
+  title: "重回帰分析を1から ─ 偏回帰係数・多重共線性・残差診断のすべて",
+  description:
+    "統計検定 2 級の核心、重回帰分析。単回帰との違い、偏回帰係数の意味、多重共線性の VIF 診断、残差プロットによるモデル妥当性チェックまでを実例付きで。",
+  publishedAt: "2026-05-02",
+  category: "統計検定対策",
+  tldr: [
+    "重回帰の偏回帰係数 = 「他の変数を固定したときの効果」",
+    "変数を増やすと R² は必ず上がる → 自由度調整済み R² で補正",
+    "多重共線性は VIF で診断。残差プロットでモデル妥当性を確認",
+  ],
+  body: [
+    {
+      type: "p",
+      text: "現実のデータで「$y$ に効くのは 1 つの $x$ だけ」ということは、ほぼありません。家賃なら駅徒歩・面積・築年数・階数。営業成績なら経験年数・担当地域・教育レベル。**重回帰分析** は、これら複数の要因を同時にモデル化する道具です。",
+    },
+    { type: "h3", text: "モデル ─ 線形性は同じ、変数の数だけ違う" },
+    { type: "math", tex: "y = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\cdots + \\beta_k x_k + \\varepsilon" },
+    {
+      type: "p",
+      text: "$\\varepsilon \\sim N(0, \\sigma^2)$ を仮定。最小二乗法でパラメータを推定する点は単回帰と同じですが、解の形は **行列で書く** 必要があります。",
+    },
+    { type: "h3", text: "正規方程式 ─ 行列で書くと一発" },
+    { type: "math", tex: "\\hat{\\beta} = (X^\\top X)^{-1} X^\\top y" },
+    {
+      type: "p",
+      text: "$X$ は **デザイン行列**(各行が観測、各列が説明変数。最初の列に切片用の 1 を入れる)。$X^\\top X$ が逆行列を持たない(完全多重共線性 = 列が線形従属)と推定不能。",
+    },
+    { type: "h3", text: "偏回帰係数の正しい意味" },
+    {
+      type: "intuition",
+      title: "「他の変数を固定したとき」の効果",
+      body: "$\\hat{\\beta}_1 = 0.18$(面積)が意味するのは「**他の変数(駅徒歩など)を固定したまま** 面積を 1 m² 増やしたとき、家賃が平均 0.18 万円(1,800 円)上がる」。単回帰の係数(他変数を無視した平均効果)とは別物です。",
+    },
+    { type: "h3", text: "決定係数 R² の落とし穴" },
+    {
+      type: "p",
+      text: "重回帰では「変数を増やせば $R^2$ は **必ず** 上がる」という性質があります。意味のないランダム変数を追加しても、$R^2$ は減りません。これが「変数を増やせば見かけ上のフィットが良くなる」問題。",
+    },
+    { type: "h3", text: "自由度調整済み R²" },
+    { type: "math", tex: "\\bar{R}^2 = 1 - \\dfrac{(1 - R^2)(n - 1)}{n - k - 1}" },
+    {
+      type: "p",
+      text: "$k$ は説明変数の数。意味のない変数を増やすと $\\bar{R}^2$ は **逆に下がる** ので、モデル選択に使えます。",
+    },
+    { type: "h3", text: "多重共線性 ─ VIF で診断" },
+    { type: "math", tex: "\\mathrm{VIF}_j = \\dfrac{1}{1 - R_j^2}" },
+    {
+      type: "p",
+      text: "「他の説明変数で $x_j$ を回帰したときの $R_j^2$」から計算。VIF が 5〜10 を超えると「危険」と扱う慣例があります。多重共線性が強いと:",
+    },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "個々の係数の標準誤差が爆発する",
+        "個別 t 検定では有意でないのに、全体 F 検定では有意になる",
+        "係数の符号が直感と逆になる(suppressor effect)",
+      ],
+    },
+    {
+      type: "intuition",
+      title: "「身長」と「座高」が両方入っているような状態",
+      body: "片方を消せば、もう片方の係数は安定します。多重共線性は **データの問題** ではなく **モデル設計の問題**。意味的に重複する変数があれば 1 つに絞る、PCA で次元削減する、リッジ回帰で正則化する、などの対処法があります。",
+    },
+    { type: "h3", text: "残差診断 ─ 4 つの仮定をチェック" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "**線形性**: 残差 vs 予測値プロットで「ランダム雲」 → OK / 曲線パターン → 線形性違反",
+        "**等分散性**: ラッパ型 → 不均一分散 → $\\log y$ 変換または WLS",
+        "**正規性**: Q-Q プロットで直線 → OK / 両端ズレ → 裾の厚薄",
+        "**独立性**: 時系列データなら Durbin-Watson 統計量 が 2 から離れたら自己相関",
+      ],
+    },
+    { type: "h3", text: "外れ値 vs てこ比 vs Cook の距離" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "**外れ値**: $y$ がモデルから外れる(標準化残差で診断)",
+        "**てこ比**: $x$ が他のデータから離れている($h_{ii}$ で診断)",
+        "**Cook の距離**: 観測 $i$ を抜くと係数がどれだけ動くか(総合指標、$D_i > 1$ で要注意)",
+      ],
+    },
+    {
+      type: "intuition",
+      title: "外れ値を機械的に消さない",
+      body: "外れ値は「捨てるもの」ではなく「説明するもの」。データ入力ミスなら除外、自然な観測なら残してロバスト回帰や変数変換で対応。これが研究の信頼性を保つ鉄則です。",
+    },
+    { type: "h3", text: "Python で実装" },
+    {
+      type: "code",
+      title: "statsmodels で重回帰 + 残差診断",
+      runnable: true,
+      python: "import numpy as np\nimport statsmodels.api as sm\nfrom statsmodels.stats.outliers_influence import variance_inflation_factor\n\nrng = np.random.default_rng(42)\nn = 100\nx1 = rng.normal(50, 10, n)\nx2 = rng.normal(20, 5, n)\ny = 3 + 0.5 * x1 - 0.3 * x2 + rng.normal(0, 2, n)\n\nX = sm.add_constant(np.column_stack([x1, x2]))\nmodel = sm.OLS(y, X).fit()\nprint(model.summary())\n\n# VIF\nfor j in range(1, X.shape[1]):\n    vif = variance_inflation_factor(X, j)\n    print(f'VIF[{j}] = {vif:.2f}')",
+    },
+    { type: "h3", text: "まとめ" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "重回帰の係数は「他の変数を固定したときの効果」",
+        "$R^2$ は変数を増やすと必ず上がる → $\\bar{R}^2$ で補正",
+        "VIF で多重共線性をチェック、5〜10 超えは要注意",
+        "残差プロット・Cook の距離でモデル妥当性を確認",
+      ],
+    },
+    { type: "h3", text: "関連リンク" },
+    {
+      type: "list",
+      style: "bullet",
+      items: [
+        "[**2 級教科書 3.3 重回帰分析**](/textbook/grade-2#ch3-sec3)",
+        "[**3.4 残差診断**](/textbook/grade-2#ch3-sec4)",
+        "[**ブログ: ANOVA**](/blog/anova-explained)",
+      ],
+    },
+  ],
+});
+
 export function getPostBySlug(slug: string): BlogPost | undefined {
   return blogPosts.find((p) => p.slug === slug);
 }

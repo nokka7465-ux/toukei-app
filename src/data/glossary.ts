@@ -2996,4 +2996,364 @@ export const glossary: GlossaryTerm[] = [
     level: "1",
     category: "音声 AI",
   },
+  // === 統計検定2級向け追加用語 ===
+  {
+    term: "Welch の t 検定",
+    reading: "うぇるちのてぃーけんてい",
+    english: "Welch's t-test",
+    definition:
+      "2 標本の平均差を検定する手法のうち、等分散を仮定しないバージョン。Welch-Satterthwaite の近似自由度を用いる。現代の実務では既定値に近い扱い。",
+    level: "2",
+    category: "仮説検定",
+    link: "/textbook/grade-2#ch2-sec5",
+  },
+  {
+    term: "対応のある t 検定",
+    reading: "たいおうのあるてぃーけんてい",
+    english: "paired t-test",
+    definition:
+      "同一個体・同一ペアで観測した 2 値の差について 1 標本 t 検定を行う方法。個人差が相殺されるため対応のないものより検出力が高い。",
+    level: "2",
+    category: "仮説検定",
+    link: "/textbook/grade-2#ch2-sec5",
+  },
+  {
+    term: "母分散の検定",
+    reading: "ぼぶんさんのけんてい",
+    english: "test for population variance",
+    definition:
+      "正規母集団のもとで、不偏分散を $(n-1)\\hat{s}^2/\\sigma_0^2 \\sim \\chi^2_{n-1}$ で検定。製造工程のばらつき管理などに使う。正規性の崩れに敏感。",
+    level: "2",
+    category: "仮説検定",
+    link: "/textbook/grade-2#ch2-sec4",
+  },
+  {
+    term: "一元配置分散分析",
+    reading: "いちげんはいちぶんさんぶんせき",
+    english: "one-way ANOVA",
+    definition:
+      "3 群以上の平均を一度に比較する分散分析。多重比較問題を避けて全体差を判定する。F 統計量で群間平方和と群内平方和の比を取る。",
+    level: "2",
+    category: "分散分析",
+    link: "/textbook/grade-2#ch4-sec1",
+  },
+  {
+    term: "二元配置分散分析",
+    reading: "にげんはいちぶんさんぶんせき",
+    english: "two-way ANOVA",
+    definition:
+      "2 つの因子を同時に扱う分散分析。主効果に加えて交互作用 (interaction) を検出できる。繰り返しがあれば交互作用が分離可能。",
+    level: "2",
+    category: "分散分析",
+    link: "/textbook/grade-2#ch4-sec3",
+  },
+  {
+    term: "交互作用",
+    reading: "こうごさよう",
+    english: "interaction",
+    definition:
+      "2 元配置以上の分散分析で「ある因子の効果が、別の因子の水準で異なる」現象。プロットの折れ線が平行でないとき交互作用がある。",
+    level: "2",
+    category: "分散分析",
+    link: "/textbook/grade-2#ch4-sec3",
+  },
+  {
+    term: "Bonferroni 補正",
+    reading: "ぼんふぇろーにほせい",
+    english: "Bonferroni correction",
+    definition:
+      "$m$ 個の検定で各有意水準を $\\alpha/m$ に厳しくし、全体の Type I エラー率(FWER)を抑える方法。簡便だが保守的。",
+    level: "2",
+    category: "多重比較",
+    link: "/textbook/grade-2#ch4-sec2",
+  },
+  {
+    term: "Tukey の HSD",
+    reading: "てゅーきーのえいちえすでぃー",
+    english: "Tukey's HSD",
+    definition:
+      "ANOVA の事後検定で、全ペア比較を等しい有意水準で行う方法。スチューデント化された範囲分布を使う。Bonferroni より検出力が高い。",
+    level: "2",
+    category: "多重比較",
+  },
+  {
+    term: "重回帰分析",
+    reading: "じゅうかいきぶんせき",
+    english: "multiple regression",
+    definition:
+      "複数の説明変数を持つ線形回帰。各偏回帰係数 $\\beta_j$ は他の変数を固定したときの効果。正規方程式 $\\hat{\\beta} = (X^\\top X)^{-1} X^\\top y$。",
+    level: "2",
+    category: "回帰分析",
+    link: "/textbook/grade-2#ch3-sec3",
+  },
+  {
+    term: "偏回帰係数",
+    reading: "へんかいきけいすう",
+    english: "partial regression coefficient",
+    definition:
+      "重回帰モデルの個別の係数。「他の説明変数を固定したときの $x_j$ の効果」を表す。単純相関とは異なる。",
+    level: "2",
+    category: "回帰分析",
+    link: "/textbook/grade-2#ch3-sec3",
+  },
+  {
+    term: "自由度調整済み決定係数",
+    reading: "じゆうどちょうせいずみけっていけいすう",
+    english: "adjusted R-squared",
+    definition:
+      "重回帰で説明変数を増やすと $R^2$ が必ず上がる問題を補正した指標。意味のない変数を増やすと逆に下がる。",
+    level: "2",
+    category: "回帰分析",
+    link: "/textbook/grade-2#ch3-sec3",
+  },
+  {
+    term: "多重共線性",
+    reading: "たじゅうきょうせんせい",
+    english: "multicollinearity",
+    definition:
+      "説明変数同士が強く相関している状態。係数の標準誤差が膨張し、個別 t 値が小さくなる。VIF で診断。",
+    level: "2",
+    category: "回帰分析",
+    link: "/textbook/grade-2#ch3-sec3",
+  },
+  {
+    term: "VIF",
+    reading: "ぶいあいえふ",
+    english: "Variance Inflation Factor",
+    definition:
+      "多重共線性の診断指標。$\\mathrm{VIF}_j = 1/(1 - R_j^2)$ で計算され、5〜10 を超えると要注意。",
+    level: "2",
+    category: "回帰分析",
+    link: "/textbook/grade-2#ch3-sec3",
+  },
+  {
+    term: "Cook の距離",
+    reading: "くっくのきょり",
+    english: "Cook's distance",
+    definition:
+      "個別観測値が回帰係数に与える影響の総合指標。1 を大きく超える観測点はモデルへの影響が強い。",
+    level: "2",
+    category: "残差診断",
+    link: "/textbook/grade-2#ch3-sec4",
+  },
+  {
+    term: "てこ比",
+    reading: "てこひ",
+    english: "leverage",
+    definition:
+      "説明変数 $x$ が他のデータから離れた観測点ほど大きい値を取る指標。$h_{ii}$ で表す。",
+    level: "2",
+    category: "残差診断",
+    link: "/textbook/grade-2#ch3-sec4",
+  },
+  {
+    term: "ヘテロスケダスティシティ",
+    reading: "へてろすけだすてぃしてぃ",
+    english: "heteroscedasticity",
+    definition:
+      "回帰の残差の分散が一定でない状態(不均一分散)。残差プロットがラッパ型になる。$\\log y$ 変換や WLS で対処。",
+    level: "2",
+    category: "残差診断",
+    link: "/textbook/grade-2#ch3-sec4",
+  },
+  // === 因果推論・最新 AI 用語 ===
+  {
+    term: "合成統制法",
+    reading: "ごうせいとうせいほう",
+    english: "Synthetic Control Method",
+    definition:
+      "複数の対照群を重み付けして処置群とそっくりな「人工対照群」を作り、介入効果を推定する手法 (Abadie & Gardeazabal 2003)。1 ユニット処置に強い。",
+    level: "1",
+    category: "因果推論",
+    link: "/causal-inference#ch7",
+  },
+  {
+    term: "Double ML",
+    reading: "だぶるえむえる",
+    english: "Double Machine Learning",
+    definition:
+      "高次元共変量を機械学習で扱いながら因果効果を一致推定する枠組み (Chernozhukov et al. 2018)。直交化(Neyman orthogonality)が鍵。",
+    level: "1",
+    category: "因果推論",
+    link: "/causal-inference#ch8",
+  },
+  {
+    term: "Causal Forest",
+    reading: "こーざるふぉれすと",
+    english: "Causal Forest",
+    definition:
+      "ランダムフォレストを「同じ葉に入った観測同士で処置効果を推定」する形に拡張した手法 (Wager & Athey 2018)。共変量ごとの異質処置効果 CATE を推定できる。",
+    level: "1",
+    category: "因果推論",
+    link: "/causal-inference#ch8",
+  },
+  {
+    term: "アップリフトモデリング",
+    reading: "あっぷりふともでりんぐ",
+    english: "uplift modeling",
+    definition:
+      "「処置によって行動が変わる人」を特定するモデリング。マーケでは「クーポンを送る価値がある人」を抽出するのに使う。",
+    level: "1",
+    category: "因果推論",
+    link: "/causal-inference#ch8",
+  },
+  {
+    term: "Granger 因果性",
+    reading: "ぐれんじゃーいんがせい",
+    english: "Granger causality",
+    definition:
+      "$X$ の過去が $Y$ の予測に役立つ、という意味の因果性 (Granger 1969)。VAR モデルで F 検定する。厳密な因果ではない点に注意。",
+    level: "準1",
+    category: "時系列",
+    link: "/time-series#ch8",
+  },
+  {
+    term: "CausalImpact",
+    reading: "こーざるいんぱくと",
+    english: "CausalImpact",
+    definition:
+      "Google が公開した因果分析ライブラリ。ベイズ構造時系列モデルで反事実を推定し、介入の効果を測る (Brodersen et al. 2015)。",
+    level: "1",
+    category: "時系列",
+    link: "/time-series#ch8",
+  },
+  {
+    term: "中断時系列分析",
+    reading: "ちゅうだんじけいれつぶんせき",
+    english: "Interrupted Time Series",
+    definition:
+      "介入時点の前後でレベル変化(切片)とトレンド変化(傾き)を回帰で推定する古典的手法。公衆衛生介入の評価で広く使われる。",
+    level: "準1",
+    category: "時系列",
+    link: "/time-series#ch8",
+  },
+  {
+    term: "N-BEATS",
+    reading: "えぬびーつ",
+    english: "Neural Basis Expansion Analysis for Time Series",
+    definition:
+      "純粋な MLP ブロックで構成された時系列予測モデル (2020)。M4 コンペで Prophet を上回る精度を出した。",
+    level: "1",
+    category: "時系列",
+    link: "/time-series#ch7",
+  },
+  {
+    term: "Temporal Fusion Transformer",
+    reading: "てんぽーらるふゅーじょんとらんすふぉーまー",
+    english: "Temporal Fusion Transformer (TFT)",
+    definition:
+      "多変量時系列・カテゴリ・静的共変量を統一的に扱う Transformer ベース予測モデル (2021)。注意機構で重要な時刻を可視化できる。",
+    level: "1",
+    category: "時系列",
+    link: "/time-series#ch7",
+  },
+  {
+    term: "時系列基盤モデル",
+    reading: "じけいれつきばんもでる",
+    english: "Time Series Foundation Model",
+    definition:
+      "大規模時系列で事前学習され、Zero-shot 予測ができるモデル。Chronos・TimesFM・Lag-Llama などが 2024 年に登場。",
+    level: "1",
+    category: "時系列",
+    link: "/time-series#ch7",
+  },
+  {
+    term: "RAG",
+    reading: "らぐ",
+    english: "Retrieval-Augmented Generation",
+    definition:
+      "外部知識ベースから関連文書を検索してプロンプトに添付してから LLM に答えさせる手法。ハルシネーション抑制と最新情報の活用に有効。",
+    level: "1",
+    category: "生成 AI",
+    link: "/certs/g-test/textbook#ch7-sec2",
+  },
+  {
+    term: "Chain-of-Thought",
+    reading: "ちぇーんおぶそーと",
+    english: "Chain-of-Thought (CoT)",
+    definition:
+      "「Let's think step by step」のように推論過程を明示させるプロンプティング手法。算数・推論問題で精度が大幅向上 (Wei et al. 2022)。",
+    level: "1",
+    category: "生成 AI",
+    link: "/certs/g-test/textbook#ch7-sec2",
+  },
+  {
+    term: "ReAct",
+    reading: "りあくと",
+    english: "Reasoning + Acting",
+    definition:
+      "LLM に「考える(推論)」と「行動する(ツール使用)」を交互に行わせるパラダイム。現代の AI エージェントの基本設計。",
+    level: "1",
+    category: "生成 AI",
+    link: "/certs/g-test/textbook#ch7-sec2",
+  },
+  {
+    term: "QLoRA",
+    reading: "きゅーろーら",
+    english: "Quantized Low-Rank Adaptation",
+    definition:
+      "4 bit 量子化と LoRA を組み合わせた省メモリファインチューニング手法。消費者向け GPU で大規模モデルを学習可能にする。",
+    level: "1",
+    category: "生成 AI",
+    link: "/certs/g-test/textbook#ch7-sec3",
+  },
+  {
+    term: "Constitutional AI",
+    reading: "こんすてぃちゅーしょなるえーあい",
+    english: "Constitutional AI",
+    definition:
+      "Anthropic が開発した、人間のフィードバックを AI のフィードバック(AI が AI を批判)で代替するアライメント手法。Claude シリーズに実装。",
+    level: "1",
+    category: "AI 倫理",
+    link: "/certs/g-test/textbook#ch7-sec4",
+  },
+  {
+    term: "EU AI 法",
+    reading: "いーゆーえーあいほう",
+    english: "EU AI Act",
+    definition:
+      "2024 年採択の世界初の包括的 AI 規制。リスクを 4 段階(許容不可/高/限定/最小)に分類し義務を課す。違反は最大年間売上の 7% の罰金。",
+    level: "1",
+    category: "AI 倫理",
+    link: "/certs/g-test/textbook#ch7-sec4",
+  },
+  {
+    term: "ハルシネーション",
+    reading: "はるしねーしょん",
+    english: "hallucination",
+    definition:
+      "LLM がもっともらしい嘘を生成する現象。RAG・出典明示・検証 LLM で抑制する。",
+    level: "1",
+    category: "生成 AI",
+    link: "/certs/g-test/textbook#ch7-sec4",
+  },
+  {
+    term: "プロンプトインジェクション",
+    reading: "ぷろんぷといんじぇくしょん",
+    english: "prompt injection",
+    definition:
+      "悪意あるプロンプトでシステムプロンプトを上書きし、機密漏洩や不正動作を引き起こす攻撃。生成 AI のセキュリティ上の主要リスクの 1 つ。",
+    level: "1",
+    category: "AI セキュリティ",
+    link: "/certs/g-test/textbook#ch7-sec4",
+  },
+  {
+    term: "MoE",
+    reading: "えむおーいー",
+    english: "Mixture of Experts",
+    definition:
+      "複数の「エキスパート」サブネットワークから条件に応じて少数だけを活性化させる Transformer アーキテクチャ。Mixtral・DeepSeek-V3 などで採用。",
+    level: "1",
+    category: "深層学習",
+  },
+  {
+    term: "創発的能力",
+    reading: "そうはつてきのうりょく",
+    english: "emergent abilities",
+    definition:
+      "LLM が一定規模を超えると突然現れる能力(算術・推論・コード生成など)。線形改善ではなく相転移的な現象 (Wei et al. 2022)。",
+    level: "1",
+    category: "深層学習",
+    link: "/certs/g-test/textbook#ch7-sec1",
+  },
 ];
