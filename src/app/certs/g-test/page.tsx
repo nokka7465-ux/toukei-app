@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import { certFaq } from "@/data/cert-faq";
 
 export const metadata: Metadata = {
   title: "G検定(JDLA)とは ─ 受験対象・出題範囲・対策まとめ",
@@ -15,35 +16,15 @@ export const metadata: Metadata = {
   },
 };
 
+const FAQ_ITEMS = certFaq["g-test"] ?? [];
 const FAQ_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "G検定はどんな試験ですか?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "JDLA(日本ディープラーニング協会)主催の検定で、AI / ディープラーニングを事業に活用するための知識を問います。実装力ではなく概念・歴史・倫理を広く浅く押さえる試験です。",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "G検定と統計検定2級、どちらが先?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "目的次第。AI業界に入りたい・AIプロジェクトに関わりたいならG検定、データ分析の理論を体系的に身につけたいなら統計検定2級が向いています。両者は補完的なので、両方取得する人も多いです。",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "G検定の試験形式は?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "自宅PCでのオンライン受験(検索可能)、120分で200問程度(年により変動)。年に複数回開催。詳細は公式サイトをご確認ください。",
-      },
-    },
-  ],
+  mainEntity: FAQ_ITEMS.map((it) => ({
+    "@type": "Question",
+    name: it.q,
+    acceptedAnswer: { "@type": "Answer", text: it.a },
+  })),
 };
 
 export default function GTestPage() {
@@ -193,6 +174,24 @@ export default function GTestPage() {
             </tbody>
           </table>
         </div>
+      </section>
+
+      <section className="mb-10 paper rounded-lg p-6 md:p-7">
+        <div className="chapter-eyebrow mb-2">FAQ</div>
+        <h2 className="text-xl font-bold mb-4">よくある質問</h2>
+        <dl className="space-y-4">
+          {FAQ_ITEMS.map((item) => (
+            <div
+              key={item.q}
+              className="border-b border-[var(--page-border)] pb-3 last:border-b-0"
+            >
+              <dt className="font-bold mb-1.5">Q. {item.q}</dt>
+              <dd className="text-sm text-[var(--muted-strong)] leading-relaxed">
+                A. {item.a}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       <nav className="mt-12 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">

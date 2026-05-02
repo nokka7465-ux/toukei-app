@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import { certFaq } from "@/data/cert-faq";
 
 export const metadata: Metadata = {
   title: "E資格(JDLA Engineer)とは ─ 受験対象・出題範囲・対策まとめ",
@@ -15,43 +16,15 @@ export const metadata: Metadata = {
   },
 };
 
+const FAQ_ITEMS = certFaq["e-shikaku"] ?? [];
 const FAQ_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "E資格はどんな試験ですか?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "JDLA(日本ディープラーニング協会)主催の検定で、ディープラーニングを実装するエンジニアに必要な数学・ML/DL 理論・実装スキルを問います。G 検定が概念中心だったのに対し、E 資格は実装側を扱います。",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "E資格は誰向け?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "AI / ML エンジニア・データサイエンティストを目指す人、現職で DL 実装に携わる人。理工系の数学(線形代数・微分・確率)と Python 実装経験が前提です。",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "E資格を受けるための条件は?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "JDLA 認定プログラム(数十時間〜数百時間の講座)の修了が受験条件。G 検定や他の検定は不要ですが、認定講座の費用が必要です。詳細は公式サイトを確認してください。",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "G検定とE資格、どう違いますか?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "G 検定は『使う側』(企画・マネジメント)、E 資格は『作る側』(エンジニア)。G 検定 → E 資格の順で受ける人が多いです。",
-      },
-    },
-  ],
+  mainEntity: FAQ_ITEMS.map((it) => ({
+    "@type": "Question",
+    name: it.q,
+    acceptedAnswer: { "@type": "Answer", text: it.a },
+  })),
 };
 
 export default function EShikakuPage() {
@@ -232,6 +205,24 @@ export default function EShikakuPage() {
             </tbody>
           </table>
         </div>
+      </section>
+
+      <section className="mb-10 paper rounded-lg p-6 md:p-7">
+        <div className="chapter-eyebrow mb-2">FAQ</div>
+        <h2 className="text-xl font-bold mb-4">よくある質問</h2>
+        <dl className="space-y-4">
+          {FAQ_ITEMS.map((item) => (
+            <div
+              key={item.q}
+              className="border-b border-[var(--page-border)] pb-3 last:border-b-0"
+            >
+              <dt className="font-bold mb-1.5">Q. {item.q}</dt>
+              <dd className="text-sm text-[var(--muted-strong)] leading-relaxed">
+                A. {item.a}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       <nav className="mt-12 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">

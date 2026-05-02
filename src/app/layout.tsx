@@ -186,6 +186,13 @@ export default function RootLayout({
                 >
                   復習
                 </Link>
+                <Link
+                  href="/flashcards"
+                  className="hover:underline"
+                  title="統計用語の暗記カード"
+                >
+                  暗記カード
+                </Link>
               </nav>
               <Link
                 href="/search"
@@ -249,6 +256,11 @@ export default function RootLayout({
                   <li>
                     <Link href="/review" className="hover:underline text-[var(--muted-strong)]">
                       苦手問題の復習
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/flashcards" className="hover:underline text-[var(--muted-strong)]">
+                      暗記カード
                     </Link>
                   </li>
                   <li>
