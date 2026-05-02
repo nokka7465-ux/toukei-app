@@ -3356,4 +3356,292 @@ export const glossary: GlossaryTerm[] = [
     category: "深層学習",
     link: "/certs/g-test/textbook#ch7-sec1",
   },
+  // === 2026 シラバス改訂対応 ===
+  {
+    term: "著作権法 30 条の 4",
+    reading: "ちょさくけんほう30じょうの4",
+    english: "Article 30-4 of Japanese Copyright Act",
+    definition:
+      "著作物に表現された思想・感情の『享受目的でない』利用を許容する規定(2018 年改正)。AI 学習・解析・特徴量抽出が代表例。ただし著作権者の利益を不当に害する場合は除外。",
+    level: "1",
+    category: "AI 法務",
+    link: "/certs/g-test/textbook#ch7-sec5",
+  },
+  {
+    term: "データドリフト",
+    reading: "でーたどりふと",
+    english: "data drift / covariate shift",
+    definition:
+      "本番運用中に入力 P(X) の分布が学習時から変化する現象。季節要因や顧客属性変化が原因。KS 検定や PSI で検出。",
+    level: "1",
+    category: "MLOps",
+    link: "/certs/g-test/textbook#ch7-sec6",
+  },
+  {
+    term: "コンセプトドリフト",
+    reading: "こんせぷとどりふと",
+    english: "concept drift",
+    definition:
+      "入力と出力の関係 P(Y|X) が時間とともに変化する現象。顧客嗜好の変化や不正パターンの進化が代表例。再学習が対策。",
+    level: "1",
+    category: "MLOps",
+    link: "/certs/g-test/textbook#ch7-sec6",
+  },
+  {
+    term: "シャドーデプロイ",
+    reading: "しゃどーでぷろい",
+    english: "shadow deployment",
+    definition:
+      "新モデルを本番トラフィックに対して並列実行し、本番に影響を与えずに新旧モデルの結果を比較する段階リリース手法。問題なければカナリアリリースに進む。",
+    level: "1",
+    category: "MLOps",
+    link: "/certs/g-test/textbook#ch7-sec6",
+  },
+  {
+    term: "PSI",
+    reading: "ぴーえすあい",
+    english: "Population Stability Index",
+    definition:
+      "学習データと運用データの分布変化を測る指標。$\\mathrm{PSI} = \\sum (p_i - q_i) \\log(p_i/q_i)$。0.1 以下なら安定、0.25 以上で大きなドリフト。",
+    level: "1",
+    category: "MLOps",
+    link: "/certs/g-test/textbook#ch7-sec6",
+  },
+  {
+    term: "InfoNCE 損失",
+    reading: "いんふぉえぬしーいーそんしつ",
+    english: "InfoNCE loss",
+    definition:
+      "対照学習で使う損失関数。正例ペアと負例ペアのコサイン類似度から、ソフトマックス交差エントロピー型で表現を学習。SimCLR・MoCo・CLIP などの基盤。",
+    level: "1",
+    category: "自己教師あり学習",
+    link: "/certs/e-shikaku/textbook#ch7-sec5",
+  },
+  {
+    term: "SimCLR",
+    reading: "しむくりあ",
+    english: "SimCLR",
+    definition:
+      "Chen et al. 2020 の対照学習手法。同じ画像の Augment 版を正例、バッチ内の他画像を負例として、シンプルな枠組みで強力な表現を獲得。バッチサイズが大きいほど強い。",
+    level: "1",
+    category: "自己教師あり学習",
+    link: "/certs/e-shikaku/textbook#ch7-sec5",
+  },
+  {
+    term: "MAE",
+    reading: "えむえーいー",
+    english: "Masked Autoencoder",
+    definition:
+      "He et al. 2021。画像の 75% をマスクして残り 25% から再構成する自己教師あり学習。ViT との相性が良く、強い視覚特徴を獲得する。",
+    level: "1",
+    category: "自己教師あり学習",
+    link: "/certs/e-shikaku/textbook#ch7-sec5",
+  },
+  {
+    term: "DINO / DINOv2",
+    reading: "でぃーのー",
+    english: "DINO / DINOv2",
+    definition:
+      "Caron et al. 2021/2023。自己蒸留型 SSL で、教師なしでセグメンテーション特徴を獲得する。基盤視覚モデルの 1 つ。",
+    level: "1",
+    category: "自己教師あり学習",
+    link: "/certs/e-shikaku/textbook#ch7-sec5",
+  },
+  {
+    term: "能動学習",
+    reading: "のうどうがくしゅう",
+    english: "active learning",
+    definition:
+      "ラベル付けが高コストな場面で、最も学習効果の高いサンプルを選んでラベル付与・再学習を繰り返す手法。獲得関数で『情報的な例』を選別する。",
+    level: "1",
+    category: "能動学習",
+    link: "/certs/e-shikaku/textbook#ch7-sec5",
+  },
+  {
+    term: "Uncertainty Sampling",
+    reading: "あんさーてぃんてぃーさんぷりんぐ",
+    english: "uncertainty sampling",
+    definition:
+      "能動学習の代表的獲得関数。モデルが予測に最も自信がない(エントロピー高 / 最大確率小 / margin 小)サンプルを優先してラベル付けする。",
+    level: "1",
+    category: "能動学習",
+    link: "/certs/e-shikaku/textbook#ch7-sec5",
+  },
+  {
+    term: "BALD",
+    reading: "ばるど",
+    english: "Bayesian Active Learning by Disagreement",
+    definition:
+      "ベイズ的な能動学習手法。Dropout や Deep Ensemble でモデルパラメータの不確実性を推定し、予測分散が大きいサンプルを優先する。",
+    level: "1",
+    category: "能動学習",
+  },
+  {
+    term: "連合学習",
+    reading: "れんごうがくしゅう",
+    english: "Federated Learning",
+    definition:
+      "データを中央集約せず、各クライアントでローカル学習したモデル更新だけを共有して中央モデルを改善する分散学習。プライバシー保護と規制対応に有用。",
+    level: "1",
+    category: "連合学習",
+    link: "/certs/e-shikaku/textbook#ch7-sec6",
+  },
+  {
+    term: "FedAvg",
+    reading: "ふぇどあぶ",
+    english: "Federated Averaging",
+    definition:
+      "連合学習の代表的アルゴリズム (McMahan et al. 2017)。各クライアントが数エポック学習した後、サーバがデータ量で重み付け平均でモデルを集約する。",
+    level: "1",
+    category: "連合学習",
+    link: "/certs/e-shikaku/textbook#ch7-sec6",
+  },
+  {
+    term: "クロスデバイス連合学習",
+    reading: "くろすでばいすれんごうがくしゅう",
+    english: "cross-device federated learning",
+    definition:
+      "数百万のスマートフォンや IoT デバイスが参加する連合学習形態。各デバイスのデータは小規模、参加が不安定。Google Gboard などが実例。",
+    level: "1",
+    category: "連合学習",
+    link: "/certs/e-shikaku/textbook#ch7-sec6",
+  },
+  {
+    term: "クロスサイロ連合学習",
+    reading: "くろすさいろれんごうがくしゅう",
+    english: "cross-silo federated learning",
+    definition:
+      "数〜数十の組織(病院・銀行・メーカー)が参加する連合学習形態。各組織のデータは大規模で参加は安定。医療画像診断・金融不正検知などで実用化。",
+    level: "1",
+    category: "連合学習",
+    link: "/certs/e-shikaku/textbook#ch7-sec6",
+  },
+  {
+    term: "FedProx",
+    reading: "ふぇどぷろっくす",
+    english: "FedProx",
+    definition:
+      "Non-IID データ問題に対処する連合学習アルゴリズム。各クライアントの局所更新に近接項を加え、グローバルモデルから離れすぎないよう制御する。",
+    level: "1",
+    category: "連合学習",
+  },
+  {
+    term: "プルーニング",
+    reading: "ぷるーにんぐ",
+    english: "pruning",
+    definition:
+      "ニューラルネットの重みのうち重要でないものを 0 にする(または削除する)モデル軽量化手法。非構造化(個別重み)と構造化(チャネル・ヘッド)に大別。",
+    level: "1",
+    category: "モデル軽量化",
+    link: "/certs/e-shikaku/textbook#ch7-sec7",
+  },
+  {
+    term: "Lottery Ticket Hypothesis",
+    reading: "ろたりーちけっとかせつ",
+    english: "Lottery Ticket Hypothesis",
+    definition:
+      "Frankle & Carbin 2019。大きなネットワーク内には『勝者の宝くじ券』に相当する小さな部分ネットワークが存在し、それを抽出すれば元と同等の性能が出るという仮説。",
+    level: "1",
+    category: "モデル軽量化",
+    link: "/certs/e-shikaku/textbook#ch7-sec7",
+  },
+  {
+    term: "知識蒸留",
+    reading: "ちしきじょうりゅう",
+    english: "knowledge distillation",
+    definition:
+      "Hinton et al. 2015。大きな教師モデルの Soft Target を小さな生徒モデルに学習させる軽量化手法。温度パラメータでソフト化した分布から、クラス間類似度を継承できる。",
+    level: "1",
+    category: "モデル軽量化",
+    link: "/certs/e-shikaku/textbook#ch7-sec7",
+  },
+  {
+    term: "DistilBERT",
+    reading: "でぃすてぃるばーと",
+    english: "DistilBERT",
+    definition:
+      "Sanh et al. 2019。BERT-base を蒸留して 40% 軽量・60% 高速化、性能 97% 維持。蒸留の有名な実例。",
+    level: "1",
+    category: "モデル軽量化",
+    link: "/certs/e-shikaku/textbook#ch7-sec7",
+  },
+  {
+    term: "PTQ",
+    reading: "ぴーてぃーきゅー",
+    english: "Post-Training Quantization",
+    definition:
+      "学習後のモデルにそのまま量子化を適用する手法。代表: GPTQ・AWQ。安価だが精度低下が出やすい。",
+    level: "1",
+    category: "量子化",
+    link: "/certs/e-shikaku/textbook#ch7-sec7",
+  },
+  {
+    term: "QAT",
+    reading: "きゅーえーてぃー",
+    english: "Quantization-Aware Training",
+    definition:
+      "学習中に量子化を模倣し『量子化に強い重み』を学習する手法。学習コストは高いが PTQ より精度低下が少ない。",
+    level: "1",
+    category: "量子化",
+    link: "/certs/e-shikaku/textbook#ch7-sec7",
+  },
+  {
+    term: "NF4",
+    reading: "えぬえふ4",
+    english: "Normal Float 4",
+    definition:
+      "QLoRA で採用される 4 bit 量子化形式 (Dettmers et al. 2023)。事前学習済み重みが正規分布に近い性質を利用して精度低下を抑制する。",
+    level: "1",
+    category: "量子化",
+    link: "/certs/e-shikaku/textbook#ch7-sec7",
+  },
+  {
+    term: "DPO",
+    reading: "でぃーぴーおー",
+    english: "Direct Preference Optimization",
+    definition:
+      "Rafailov et al. 2023。RLHF の RL ステージを強化学習なしの教師あり学習に置き換える手法。実装が簡単で安定し、2023 年以降急速に普及。",
+    level: "1",
+    category: "ファインチューニング",
+    link: "/certs/e-shikaku/textbook#ch7-sec2",
+  },
+  {
+    term: "DoRA",
+    reading: "どーら",
+    english: "Weight-Decomposed Low-Rank Adaptation",
+    definition:
+      "Liu et al. 2024。LoRA を方向と大きさに分解した改良版。LoRA より精度が向上することが報告されている。",
+    level: "1",
+    category: "ファインチューニング",
+  },
+  {
+    term: "Mamba",
+    reading: "まんば",
+    english: "Mamba (S6)",
+    definition:
+      "Gu & Dao 2023。Self-Attention の O(n²) を線形時間 O(n) に置き換える状態空間モデル。長系列で Transformer を凌駕する場合がある。",
+    level: "1",
+    category: "効率的アーキテクチャ",
+    link: "/certs/e-shikaku/textbook#ch7-sec3",
+  },
+  {
+    term: "Flash Attention",
+    reading: "ふらっしゅあてんしょん",
+    english: "Flash Attention",
+    definition:
+      "Dao et al. 2022。GPU メモリ階層を意識した Attention 実装で、数学的に同一のまま 2〜4 倍高速化。現代の LLM 学習・推論で標準採用。",
+    level: "1",
+    category: "効率的アーキテクチャ",
+    link: "/certs/e-shikaku/textbook#ch7-sec3",
+  },
+  {
+    term: "MCP",
+    reading: "えむしーぴー",
+    english: "Model Context Protocol",
+    definition:
+      "Anthropic 2024。AI モデルと外部ツールの接続を標準化するオープンプロトコル。任意の AI クライアントが任意の MCP サーバを使える、エージェント時代のインフラ。",
+    level: "1",
+    category: "AI エージェント",
+    link: "/certs/e-shikaku/textbook#ch7-sec4",
+  },
 ];

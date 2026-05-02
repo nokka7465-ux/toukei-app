@@ -471,4 +471,116 @@ export const eShikakuQuestions: Question[] = [
     explanation:
       "「Foundation Model」は Stanford の Bommasani et al. (2021) が提唱した用語。大規模データで事前学習し、下流タスクへの転移を主目的とするモデル。GPT・Claude・BERT・Stable Diffusion・SAM などが該当。",
   },
+  {
+    id: "es-q-ssl-1",
+    difficulty: 2,
+    category: "自己教師あり学習",
+    question:
+      "Contrastive Learning(対照学習)で使われる InfoNCE 損失の基本的な仕組みとして最も適切な記述はどれか。",
+    choices: [
+      "正例ペアの埋め込みを近づけ、負例ペアの埋め込みを遠ざけるよう、ソフトマックス交差エントロピー型の損失を最適化する",
+      "ピクセル単位の MSE を最小化する",
+      "教師ラベルとの一致を直接最大化する",
+      "ガウス対数尤度を最大化する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "InfoNCE では同じ画像の Augment 版を正例ペア、他画像を負例として、コサイン類似度をソフトマックスに通した分布で交差エントロピーを取る。SimCLR・MoCo などの基盤。温度パラメータ τ で分布の鋭さを制御する。",
+  },
+  {
+    id: "es-q-active-1",
+    difficulty: 2,
+    category: "能動学習",
+    question:
+      "能動学習の獲得関数として『Uncertainty Sampling』が選ぶサンプルとして最も適切な記述はどれか。",
+    choices: [
+      "モデルが予測に最も自信がない(エントロピー高 / 最大確率小)サンプル",
+      "モデルが予測に最も自信があるサンプル",
+      "ランダムに選ばれたサンプル",
+      "入力空間の中心に最も近いサンプル",
+    ],
+    correctIndex: 0,
+    explanation:
+      "Uncertainty Sampling は『分からない例から学ぶ』戦略。最大確率が小さい・エントロピーが大きい・margin(1位と2位の差)が小さいサンプルを優先してラベル付け。BALD は Bayesian な拡張で、パラメータの不確実性も考慮する。",
+  },
+  {
+    id: "es-q-fed-1",
+    difficulty: 2,
+    category: "連合学習",
+    question:
+      "FedAvg(Federated Averaging)の基本動作として最も適切な記述はどれか。",
+    choices: [
+      "各クライアントがローカルで数エポック学習し、サーバが各クライアントの重みをデータ量で重み付け平均する",
+      "全クライアントのデータをサーバに送信して中央集約学習する",
+      "クライアント間で勾配を直接ピア間共有する",
+      "サーバがクライアントの代わりに学習する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "FedAvg は McMahan et al. (2017)。$w_{t+1} = \\sum_k (n_k/n) w_t^k$ で集約。データを動かさずにモデル更新だけを共有することで、医療・金融・モバイルでプライバシー保護学習を実現する。",
+  },
+  {
+    id: "es-q-fed-2",
+    difficulty: 3,
+    category: "連合学習",
+    question:
+      "連合学習の主要課題のうち、Non-IID データ問題への代表的な対策手法はどれか。",
+    choices: [
+      "FedProx・SCAFFOLD・FedNova などのアルゴリズム",
+      "FedAvg の単純な拡張で十分",
+      "クライアントを 1 台に絞る",
+      "学習を中断する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "クライアント間でデータ分布が偏ると FedAvg の収束が悪化する。FedProx は近接項で局所更新を制御、SCAFFOLD はクライアント・サーバ両側でドリフト補正、FedNova はローカルエポック数の不均衡を補正、と各手法が異なる Non-IID 問題に対処する。",
+  },
+  {
+    id: "es-q-pruning",
+    difficulty: 2,
+    category: "モデル軽量化",
+    question:
+      "プルーニングの分類で『構造化プルーニング』が非構造化プルーニングと比較して優れている点として最も適切なものはどれか。",
+    choices: [
+      "チャネル・ヘッド・層単位で削除するため、専用ハードなしでも実推論速度が向上する",
+      "個別重みを削除するため、最大限のスパース化が可能",
+      "学習時間が短縮される",
+      "理論的な圧縮率が常に高い",
+    ],
+    correctIndex: 0,
+    explanation:
+      "非構造化プルーニング(個別重みを 0 にする)は理論的圧縮率は高いが、専用スパース演算ハードがないと実速度が出ない。構造化プルーニング(チャネル・ヘッド単位)は標準 GPU/CPU でそのまま高速化されるため実用性が高い。",
+  },
+  {
+    id: "es-q-distill",
+    difficulty: 2,
+    category: "知識蒸留",
+    question:
+      "知識蒸留で『温度パラメータ T』を 1 より大きくする目的として最も適切な記述はどれか。",
+    choices: [
+      "教師の出力分布をソフト化し、クラス間の類似度構造を生徒に伝える",
+      "推論を高速化する",
+      "教師モデルを軽量化する",
+      "学習データの数を減らす",
+    ],
+    correctIndex: 0,
+    explanation:
+      "温度を上げたソフトマックスはより滑らかな分布になり、Hard label にはない『犬と狼は似ている』のようなクラス間の相対関係(Soft Target の情報)を生徒が学べる。Hinton et al. (2015) の蒸留論文が基礎。",
+  },
+  {
+    id: "es-q-quant-2",
+    difficulty: 3,
+    category: "量子化",
+    question:
+      "QLoRA で採用されている NF4(Normal Float 4)量子化の特徴として最も適切な記述はどれか。",
+    choices: [
+      "正規分布に従う重みを 4 bit で表現するために最適化された量子化形式で、精度低下を抑える",
+      "整数のみを表現できる",
+      "8 bit 量子化と等価",
+      "精度を犠牲にして速度のみを最適化する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "NF4 は事前学習済み LLM の重みが正規分布に近い性質を利用し、その分布に最適化された 4 bit 量子化方式(Dettmers et al. 2023)。標準的な INT4 より精度低下が小さく、QLoRA で 65B モデルを 48GB GPU で扱える理由。",
+  },
 ];
