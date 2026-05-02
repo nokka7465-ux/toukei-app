@@ -8,12 +8,80 @@ import {
 } from "@/lib/glossary-registry";
 import type { GlossaryTerm } from "@/data/glossary";
 
-const STORAGE_KEY = "toukei-app:flashcards:v1";
+const STORAGE_KEY = "toukei-app:flashcards:v2";
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+/**
+ * SM-2-lite spaced repetition scheduling.
+ * - quality 0: didn't know → reset interval to 1 day, drop ease
+ * - quality 1: hesitated → 1 day interval, slight ease drop
+ * - quality 2: knew it well → standard interval × ease
+ */
+type CardState = {
+  /** Number of consecutive successful reviews. */
+  streak: number;
+  /** Days until next review. */
+  interval: number;
+  /** Ease factor (1.3 minimum, 2.5 default, 3.0 cap). */
+  ease: number;
+  /** Next review timestamp (ms). */
+  dueAt: number;
+  /** Last review timestamp (ms). */
+  lastAt: number;
+  /** Box for legacy compatibility (0=未, 1=学習中, ≥3=習得). */
+  box: number;
+};
 
 type State = {
-  /** Per-term spaced-repetition info: 0 = unknown, ↑ to know better */
-  knowledge: Record<string, { box: number; lastAt: number }>;
+  knowledge: Record<string, CardState>;
 };
+
+function nextSm2(prev: CardState | undefined, quality: 0 | 1 | 2): CardState {
+  const prevEase = prev?.ease ?? 2.5;
+  const prevInterval = prev?.interval ?? 0;
+  const prevStreak = prev?.streak ?? 0;
+  const now = Date.now();
+
+  if (quality === 0) {
+    const ease = Math.max(1.3, prevEase - 0.2);
+    return {
+      streak: 0,
+      interval: 1,
+      ease,
+      dueAt: now + DAY_MS,
+      lastAt: now,
+      box: 0,
+    };
+  }
+  if (quality === 1) {
+    const ease = Math.max(1.3, prevEase - 0.05);
+    const interval = 1;
+    return {
+      streak: 0,
+      interval,
+      ease,
+      dueAt: now + interval * DAY_MS,
+      lastAt: now,
+      box: 1,
+    };
+  }
+  // quality === 2: confident
+  const streak = prevStreak + 1;
+  let interval: number;
+  if (streak === 1) interval = 2;
+  else if (streak === 2) interval = 6;
+  else interval = Math.min(180, Math.round((prevInterval || 6) * prevEase));
+  const ease = Math.min(3.0, prevEase + 0.1);
+  return {
+    streak,
+    interval,
+    ease,
+    dueAt: now + interval * DAY_MS,
+    lastAt: now,
+    box: streak >= 3 ? 3 : streak,
+  };
+}
 
 function readState(): State {
   if (typeof window === "undefined") return { knowledge: {} };
@@ -36,7 +104,7 @@ function writeState(s: State) {
 }
 
 type LevelFilter = "all" | GlossaryTerm["level"];
-type ProgressFilter = "all" | "unknown" | "learning" | "known";
+type ProgressFilter = "all" | "due" | "unknown" | "learning" | "known";
 
 const LEVEL_LABEL: Record<GlossaryTerm["level"], string> = {
   "4": "4級",
@@ -89,16 +157,27 @@ export function FlashcardsClient() {
   }, [allTerms, level]);
 
   const filtered = useMemo(() => {
+    const now = Date.now();
     const filteredTerms = allTerms.filter((t) => {
       if (level !== "all" && t.level !== level) return false;
       if (category !== "all" && t.category !== category) return false;
       const k = state.knowledge[t.term];
       const box = k?.box ?? 0;
+      const due = !k || (k.dueAt ?? 0) <= now;
+      if (progressFilter === "due" && !due) return false;
       if (progressFilter === "unknown" && box > 0) return false;
       if (progressFilter === "learning" && (box === 0 || box >= 3)) return false;
       if (progressFilter === "known" && box < 3) return false;
       return true;
     });
+    // For 'due' mode, prioritize most-overdue first; otherwise shuffle.
+    if (progressFilter === "due") {
+      return [...filteredTerms].sort((a, b) => {
+        const da = state.knowledge[a.term]?.dueAt ?? 0;
+        const db = state.knowledge[b.term]?.dueAt ?? 0;
+        return da - db;
+      });
+    }
     return shuffle(filteredTerms);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allTerms, level, category, progressFilter, mounted]);
@@ -116,12 +195,14 @@ export function FlashcardsClient() {
   const total = filtered.length;
   const card = total > 0 ? filtered[Math.min(idx, total - 1)] : null;
 
-  function mark(box: number) {
+  function mark(quality: 0 | 1 | 2) {
     if (!card) return;
+    const prev = state.knowledge[card.term];
+    const updated = nextSm2(prev, quality);
     const next: State = {
       knowledge: {
         ...state.knowledge,
-        [card.term]: { box, lastAt: Date.now() },
+        [card.term]: updated,
       },
     };
     setState(next);
@@ -141,16 +222,20 @@ export function FlashcardsClient() {
 
   // Stats
   const stats = useMemo(() => {
+    const now = Date.now();
     let unknown = 0;
     let learning = 0;
     let known = 0;
+    let due = 0;
     for (const t of allTerms) {
-      const box = state.knowledge[t.term]?.box ?? 0;
+      const k = state.knowledge[t.term];
+      const box = k?.box ?? 0;
       if (box === 0) unknown++;
       else if (box < 3) learning++;
       else known++;
+      if (!k || (k.dueAt ?? 0) <= now) due++;
     }
-    return { unknown, learning, known, total: allTerms.length };
+    return { due, unknown, learning, known, total: allTerms.length };
   }, [allTerms, state]);
 
   return (
@@ -177,6 +262,7 @@ export function FlashcardsClient() {
         <div>
           <span className="text-[var(--muted)] mr-2">習熟度:</span>
           {[
+            { key: "due" as const, label: `今日復習(${stats.due})` },
             { key: "all" as const, label: `すべて(${stats.total})` },
             { key: "unknown" as const, label: `未学習(${stats.unknown})` },
             { key: "learning" as const, label: `学習中(${stats.learning})` },
@@ -286,24 +372,30 @@ export function FlashcardsClient() {
             onClick={() => mark(0)}
             disabled={!showAnswer}
             className="flex-1 px-4 py-3 bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-200 rounded font-bold hover:bg-red-200 dark:hover:bg-red-900/60 disabled:opacity-50 disabled:cursor-not-allowed"
+            title="1日後に再出題"
           >
-            ✗ 知らない
+            ✗ 知らない<span className="text-[10px] opacity-70 ml-1">(明日)</span>
           </button>
           <button
             type="button"
             onClick={() => mark(1)}
             disabled={!showAnswer}
             className="flex-1 px-4 py-3 bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200 rounded font-bold hover:bg-amber-200 dark:hover:bg-amber-900/60 disabled:opacity-50 disabled:cursor-not-allowed"
+            title="1日後に再出題(ストリーク途切れ)"
           >
-            △ 微妙
+            △ 微妙<span className="text-[10px] opacity-70 ml-1">(明日)</span>
           </button>
           <button
             type="button"
-            onClick={() => mark(3)}
+            onClick={() => mark(2)}
             disabled={!showAnswer}
             className="flex-1 px-4 py-3 bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200 rounded font-bold hover:bg-emerald-200 dark:hover:bg-emerald-900/60 disabled:opacity-50 disabled:cursor-not-allowed"
+            title="次回出題日が伸びる(SM-2)"
           >
             ✓ 知ってる
+            <span className="text-[10px] opacity-70 ml-1">
+              ({card && state.knowledge[card.term]?.streak ? `${state.knowledge[card.term].streak === 0 ? "2日後" : state.knowledge[card.term].streak === 1 ? "6日後" : `${Math.round((state.knowledge[card.term].interval || 6) * (state.knowledge[card.term].ease || 2.5))}日後`}` : "2日後"})
+            </span>
           </button>
           <button
             type="button"
@@ -316,7 +408,7 @@ export function FlashcardsClient() {
       )}
 
       <p className="text-[10px] text-[var(--muted)] ui-sans">
-        進捗はお使いのブラウザにのみ保存されます(端末別・サーバ送信なし)。
+        SM-2 アルゴリズムで次回復習日を自動スケジュール ・ 進捗はお使いのブラウザにのみ保存されます。
       </p>
     </div>
   );
