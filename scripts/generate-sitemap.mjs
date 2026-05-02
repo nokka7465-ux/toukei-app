@@ -86,7 +86,40 @@ const blogUrls = slugs.map((slug, i) => ({
   lastmod: new Date(dates[i]).toISOString(),
 }));
 
-const allUrls = [...staticUrls, ...levelUrls, ...blogUrls];
+// Glossary individual term pages — extract terms (deduplicated, first occurrence wins).
+const glossarySrc = readFileSync(join(ROOT, "src/data/glossary.ts"), "utf8");
+const allTerms = [...glossarySrc.matchAll(/term:\s*"([^"]+)"/g)].map((m) => m[1]);
+const uniqueTerms = Array.from(new Set(allTerms));
+const glossaryUrls = uniqueTerms.map((term) => ({
+  path: `/glossary/${encodeURIComponent(term)}`,
+  priority: 0.6,
+  changefreq: "monthly",
+}));
+
+// Tools individual pages — slugs are stable identifiers.
+const toolSlugs = [
+  "sample-size",
+  "confidence-interval",
+  "p-value",
+  "power",
+  "ab-test",
+  "correlation",
+  "anova",
+  "chi-square",
+  "wilcoxon",
+  "mann-whitney",
+  "mcnemar",
+  "effect-size",
+  "descriptive",
+  "odds-ratio",
+];
+const toolUrls = toolSlugs.map((slug) => ({
+  path: `/tools/${slug}`,
+  priority: 0.75,
+  changefreq: "monthly",
+}));
+
+const allUrls = [...staticUrls, ...levelUrls, ...blogUrls, ...glossaryUrls, ...toolUrls];
 
 const xml =
   `<?xml version="1.0" encoding="UTF-8"?>\n` +

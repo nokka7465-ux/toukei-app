@@ -5,6 +5,7 @@ import { MixedText } from "@/components/MixedText";
 import { BookmarkButton } from "@/components/BookmarkButton";
 import { PrintButton } from "@/components/PrintButton";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import { termToSlug } from "@/lib/glossary-registry";
 
 export const metadata: Metadata = {
   title: `統計用語集 ─ 統計検定 / 機械学習 / 公的統計の頻出 ${glossary.length} 語`,
@@ -104,7 +105,12 @@ export default function GlossaryPage() {
                   <dt className="border-r border-[var(--page-border)] md:pr-3">
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <div className="font-bold text-base">{t.term}</div>
+                        <Link
+                          href={`/glossary/${encodeURIComponent(termToSlug(t.term))}`}
+                          className="font-bold text-base hover:text-[var(--link)] hover:underline"
+                        >
+                          {t.term}
+                        </Link>
                         <div className="text-xs text-[var(--muted)] ui-sans mt-0.5">
                           {t.reading}
                           {t.english && ` · ${t.english}`}

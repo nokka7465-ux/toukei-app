@@ -76,13 +76,13 @@ export default function ToolsPage() {
             { id: "descriptive", label: "記述統計まとめ" },
             { id: "odds-ratio", label: "オッズ比/相対リスク" },
           ].map((item) => (
-            <a
+            <Link
               key={item.id}
-              href={`#${item.id}`}
+              href={`/tools/${item.id}`}
               className="text-[var(--link)] hover:underline"
             >
-              ↓ {item.label}
-            </a>
+              → {item.label}
+            </Link>
           ))}
         </div>
       </header>
