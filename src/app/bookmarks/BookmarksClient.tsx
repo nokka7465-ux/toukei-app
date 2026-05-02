@@ -10,6 +10,19 @@ import {
   type BookmarkKind,
   type BookmarkRef,
 } from "@/lib/bookmarks";
+
+function downloadFile(filename: string, text: string, mime = "text/plain") {
+  if (typeof window === "undefined") return;
+  const blob = new Blob([text], { type: `${mime};charset=utf-8` });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
 import { MixedText } from "@/components/MixedText";
 import { Math } from "@/components/Math";
 
@@ -122,8 +135,123 @@ export function BookmarksClient({
   };
   for (const it of items) grouped[it.kind].push(it);
 
+  function buildMarkdown(): string {
+    const lines: string[] = [];
+    lines.push("# 統計ロードマップ ─ ブックマーク エクスポート");
+    lines.push("");
+    lines.push(
+      `エクスポート日時: ${new Date().toISOString().slice(0, 19).replace("T", " ")}`,
+    );
+    lines.push(`合計 ${items.length} 件`);
+    lines.push("");
+
+    if (grouped.question.length > 0) {
+      lines.push(`## 演習問題 (${grouped.question.length} 件)`);
+      lines.push("");
+      for (const b of grouped.question) {
+        const q = questionById.get(b.id);
+        if (!q) continue;
+        lines.push(`### ${q.trackLabel} · ${q.category}`);
+        lines.push(`- ID: \`${q.id}\``);
+        lines.push(`- 問題: ${q.question}`);
+        lines.push(`- リンク: ${q.trackHref}`);
+        if (b.note) {
+          lines.push("- メモ:");
+          for (const ln of b.note.split("\n")) lines.push(`  > ${ln}`);
+        }
+        lines.push("");
+      }
+    }
+
+    if (grouped.formula.length > 0) {
+      lines.push(`## 公式 (${grouped.formula.length} 件)`);
+      lines.push("");
+      for (const b of grouped.formula) {
+        const f = formulaById.get(b.id);
+        if (!f) continue;
+        lines.push(`### ${f.name} (${f.level} ・ ${f.category})`);
+        lines.push("```math");
+        lines.push(f.tex);
+        lines.push("```");
+        lines.push(f.description);
+        if (b.note) {
+          lines.push("- メモ:");
+          for (const ln of b.note.split("\n")) lines.push(`  > ${ln}`);
+        }
+        lines.push("");
+      }
+    }
+
+    if (grouped.glossary.length > 0) {
+      lines.push(`## 用語 (${grouped.glossary.length} 件)`);
+      lines.push("");
+      for (const b of grouped.glossary) {
+        const t = termByName.get(b.id);
+        if (!t) continue;
+        lines.push(`### ${t.term} (${t.reading}) ─ ${t.level}級 ${t.category}`);
+        lines.push(t.definition);
+        if (b.note) {
+          lines.push("- メモ:");
+          for (const ln of b.note.split("\n")) lines.push(`  > ${ln}`);
+        }
+        lines.push("");
+      }
+    }
+
+    return lines.join("\n");
+  }
+
+  function buildJson(): string {
+    const data = {
+      exportedAt: new Date().toISOString(),
+      schema: "toukei-app:bookmarks-export:v1",
+      items: items.map((b) => {
+        if (b.kind === "question") {
+          const q = questionById.get(b.id);
+          return { ...b, resolved: q ? { ...q } : null };
+        }
+        if (b.kind === "formula") {
+          const f = formulaById.get(b.id);
+          return { ...b, resolved: f ? { ...f } : null };
+        }
+        const t = termByName.get(b.id);
+        return { ...b, resolved: t ? { ...t } : null };
+      }),
+    };
+    return JSON.stringify(data, null, 2);
+  }
+
+  function exportMarkdown() {
+    const stamp = new Date().toISOString().slice(0, 10);
+    downloadFile(`bookmarks-${stamp}.md`, buildMarkdown(), "text/markdown");
+  }
+
+  function exportJson() {
+    const stamp = new Date().toISOString().slice(0, 10);
+    downloadFile(`bookmarks-${stamp}.json`, buildJson(), "application/json");
+  }
+
   return (
-    <div className="space-y-10">
+    <div className="space-y-10"><div className="paper rounded-lg p-3 ui-sans text-xs flex flex-wrap gap-2 print-hide">
+        <span className="text-[var(--muted)] mr-1 self-center">エクスポート:</span>
+        <button
+          type="button"
+          onClick={exportMarkdown}
+          className="px-3 py-1.5 rounded border border-[var(--page-border-strong)] hover:bg-[var(--background)] hover:text-[var(--link)]"
+        >
+          📝 Markdown (.md)
+        </button>
+        <button
+          type="button"
+          onClick={exportJson}
+          className="px-3 py-1.5 rounded border border-[var(--page-border-strong)] hover:bg-[var(--background)] hover:text-[var(--link)]"
+        >
+          📦 JSON (.json)
+        </button>
+        <span className="text-[var(--muted)] self-center ml-auto">
+          メモ付きでダウンロードされます
+        </span>
+      </div>
       {grouped.question.length > 0 && (
         <section>
           <div className="flex items-baseline justify-between mb-3">

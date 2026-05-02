@@ -7,6 +7,7 @@ import { FaqJsonLd } from "@/components/StructuredData";
 import { ProgressDashboard } from "@/components/ProgressDashboard";
 import { DailyProblem } from "@/components/DailyProblem";
 import { ExamCountdown } from "@/components/ExamCountdown";
+import { RecommendedQuestions } from "@/components/RecommendedQuestions";
 import { AchievementsPanel } from "@/components/AchievementsPanel";
 import { AiRoadmap } from "@/components/AiRoadmap";
 import { blogTheme } from "@/lib/blog-theme";
@@ -294,6 +295,8 @@ export default function Home() {
       <ExamCountdown />
 
       <DailyProblem />
+
+      <RecommendedQuestions />
 
       <ProgressDashboard />
 

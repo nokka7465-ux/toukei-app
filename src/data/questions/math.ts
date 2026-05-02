@@ -96,4 +96,91 @@ export const mathBasicsQuestions: Question[] = [
     explanation:
       "対数法則の「積 → 和」「商 → 差」「累乗 → 係数」を順に適用: $\\log(x^2/y) = \\log x^2 - \\log y = 2\\log x - \\log y$。",
   },
+  {
+    id: "math-q9",
+    difficulty: 2,
+    category: "微分",
+    question:
+      "$f(x) = e^{x}$ の導関数として最も適切なものはどれか。",
+    choices: ["$e^{x}$", "$x e^{x-1}$", "$\\ln x$", "$1$"],
+    correctIndex: 0,
+    explanation:
+      "指数関数 $e^x$ の導関数はそのもの $e^x$。これが微積分・確率密度関数で頻出する性質。",
+  },
+  {
+    id: "math-q10",
+    difficulty: 2,
+    category: "微分",
+    question:
+      "$f(x) = \\ln x$ の導関数として最も適切なものはどれか($x > 0$)。",
+    choices: ["$\\dfrac{1}{x}$", "$x$", "$e^x$", "$\\ln x$"],
+    correctIndex: 0,
+    explanation:
+      "$\\dfrac{d}{dx}\\ln x = \\dfrac{1}{x}$。最尤推定の対数尤度関数の微分で重要。",
+  },
+  {
+    id: "math-q11",
+    difficulty: 2,
+    category: "積分",
+    question:
+      "$\\displaystyle\\int_0^1 2x \\, dx$ の値はいくつか。",
+    choices: ["$1$", "$2$", "$0.5$", "$0$"],
+    correctIndex: 0,
+    explanation:
+      "$\\int 2x \\, dx = x^2 + C$、定積分 = $1^2 - 0^2 = 1$。",
+  },
+  {
+    id: "math-q12",
+    difficulty: 3,
+    category: "線形代数",
+    question:
+      "対称行列 $A$ の固有値分解 $A = Q\\Lambda Q^\\top$ について、$Q$ が満たす性質として最も適切なものはどれか。",
+    choices: [
+      "直交行列($Q^\\top Q = I$)",
+      "上三角行列",
+      "対角行列",
+      "ベクトル",
+    ],
+    correctIndex: 0,
+    explanation:
+      "対称行列の固有値分解では $Q$ の列が正規直交基底をなすため、$Q^\\top Q = I$ となる(直交行列)。$\\Lambda$ は固有値を対角に並べた対角行列。",
+  },
+  {
+    id: "math-q13",
+    difficulty: 2,
+    category: "確率",
+    question:
+      "事象 $A$ と $B$ が独立のとき、$P(A \\cap B)$ として最も適切な式はどれか。",
+    choices: [
+      "$P(A) P(B)$",
+      "$P(A) + P(B)$",
+      "$P(A) - P(B)$",
+      "$P(A \\mid B)$",
+    ],
+    correctIndex: 0,
+    explanation:
+      "独立とは $P(A \\cap B) = P(A) P(B)$ が成り立つこと。逆にこの等式を独立性の **定義** に取ることもある。",
+  },
+  {
+    id: "math-q14",
+    difficulty: 3,
+    category: "線形代数",
+    question:
+      "ベクトル $\\mathbf{u} = (1, 2)$、$\\mathbf{v} = (3, -1)$ の内積として最も適切なものはどれか。",
+    choices: ["$1$", "$5$", "$-1$", "$7$"],
+    correctIndex: 0,
+    explanation:
+      "$\\mathbf{u} \\cdot \\mathbf{v} = 1 \\times 3 + 2 \\times (-1) = 3 - 2 = 1$。回帰分析の正規方程式や PCA で頻出する基本演算。",
+  },
+  {
+    id: "math-q15",
+    difficulty: 2,
+    category: "数列・極限",
+    question:
+      "$\\displaystyle\\lim_{n \\to \\infty} \\left(1 + \\dfrac{1}{n}\\right)^n$ の値として最も適切なものはどれか。",
+    choices: ["$e \\approx 2.718$", "$1$", "$0$", "$\\infty$"],
+    correctIndex: 0,
+    explanation:
+      "ネイピア数 $e$ の定義式の 1 つ。連続複利計算・指数分布・ポアソン分布など、確率統計の至るところに登場する基本定数。",
+  },
 ];

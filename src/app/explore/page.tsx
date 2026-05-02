@@ -13,6 +13,9 @@ import { InteractiveTDistribution } from "@/components/interactive/InteractiveTD
 import { InteractivePoisson } from "@/components/interactive/InteractivePoisson";
 import { InteractiveExponential } from "@/components/interactive/InteractiveExponential";
 import { InteractiveCorrelation } from "@/components/interactive/InteractiveCorrelation";
+import { InteractiveBootstrap } from "@/components/interactive/InteractiveBootstrap";
+import { InteractiveBivariateNormal } from "@/components/interactive/InteractiveBivariateNormal";
+import { InteractiveSurvival } from "@/components/interactive/InteractiveSurvival";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -22,7 +25,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/explore" },
   openGraph: {
     title: "動かして学ぶ統計",
-    description: "13 のキー概念をスライダー操作で体感する。",
+    description: "16 のキー概念をスライダー操作で体感する。",
     type: "article",
   },
 };
@@ -76,6 +79,9 @@ export default function ExplorePage() {
         <InteractivePoisson />
         <InteractiveExponential />
         <InteractiveCorrelation />
+        <InteractiveBootstrap />
+        <InteractiveBivariateNormal />
+        <InteractiveSurvival />
       </section>
 
       <section className="mt-16 paper rounded-lg p-6">
