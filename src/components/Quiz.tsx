@@ -6,6 +6,7 @@ import { MixedText } from "./MixedText";
 import { ShareButton } from "./ShareButton";
 import { recordAnswer } from "@/lib/progress";
 import { BookmarkButton } from "./BookmarkButton";
+import { ExplainButton } from "./ExplainButton";
 
 const difficultyStyle: Record<
   Difficulty,
@@ -477,6 +478,9 @@ export function Quiz({
             </div>
             <div className="leading-relaxed text-[var(--muted-strong)]">
               <MixedText text={q.explanation} />
+            </div>
+            <div className="mt-3">
+              <ExplainButton questionId={q.id} />
             </div>
           </div>
         )}

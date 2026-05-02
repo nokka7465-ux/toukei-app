@@ -353,4 +353,79 @@ export const gradeThreeQuestions: Question[] = [
     explanation:
       "幅は $z_{\\alpha/2} \\cdot \\sigma/\\sqrt{n}$。信頼度を上げる($\\alpha$ を小さくする)と $z_{\\alpha/2}$ が大きくなり、幅は広がる。$2.576/1.96 \\approx 1.31$ 倍。「より確実にしたい → より広い区間」の感覚。",
   },
+  {
+    id: "g3-q28",
+    difficulty: 1,
+    category: "確率分布",
+    question:
+      "正規分布 $N(\\mu, \\sigma^2)$ のおよそ 68% の値が含まれる範囲として最も適切なものはどれか。",
+    choices: [
+      "$\\mu \\pm \\sigma$",
+      "$\\mu \\pm 2\\sigma$",
+      "$\\mu \\pm 3\\sigma$",
+      "$\\mu \\pm 0.5\\sigma$",
+    ],
+    correctIndex: 0,
+    explanation:
+      "正規分布の 68-95-99.7 ルール。$\\mu \\pm \\sigma$ で 68%、$\\mu \\pm 2\\sigma$ で 95%、$\\mu \\pm 3\\sigma$ で 99.7%。",
+  },
+  {
+    id: "g3-q29",
+    difficulty: 2,
+    category: "標本分布",
+    question:
+      "母分散 $\\sigma^2 = 100$ の母集団から $n = 25$ の標本をとるとき、標本平均 $\\bar{X}$ の標準誤差はいくらか。",
+    choices: ["$2$", "$4$", "$10$", "$20$"],
+    correctIndex: 0,
+    explanation:
+      "$\\mathrm{SE}(\\bar{X}) = \\sigma/\\sqrt{n} = \\sqrt{100}/\\sqrt{25} = 10/5 = 2$。",
+  },
+  {
+    id: "g3-q30",
+    difficulty: 1,
+    category: "確率",
+    question:
+      "事象 $A$ と $B$ が排反のとき、$P(A \\cup B)$ として最も適切なものはどれか。",
+    choices: [
+      "$P(A) + P(B)$",
+      "$P(A) \\times P(B)$",
+      "$P(A) - P(B)$",
+      "$P(A \\mid B)$",
+    ],
+    correctIndex: 0,
+    explanation:
+      "排反 = 同時に起こらない($A \\cap B = \\emptyset$)とき、加法定理より $P(A \\cup B) = P(A) + P(B)$。",
+  },
+  {
+    id: "g3-q31",
+    difficulty: 2,
+    category: "二項分布",
+    question:
+      "$X \\sim B(10, 0.3)$ の期待値と分散として最も適切なものはどれか。",
+    choices: [
+      "$E[X] = 3,\\ V[X] = 2.1$",
+      "$E[X] = 3,\\ V[X] = 3$",
+      "$E[X] = 0.3,\\ V[X] = 0.21$",
+      "$E[X] = 10,\\ V[X] = 7$",
+    ],
+    correctIndex: 0,
+    explanation:
+      "二項分布: $E[X] = np = 10 \\times 0.3 = 3$、$V[X] = np(1-p) = 10 \\times 0.3 \\times 0.7 = 2.1$。",
+  },
+  {
+    id: "g3-q32",
+    difficulty: 2,
+    category: "相関",
+    question:
+      "相関係数 $r$ が $-1 \\leq r \\leq 1$ の範囲を取る理由として最も適切な記述はどれか。",
+    choices: [
+      "コーシー・シュワルツ不等式により共分散の絶対値が標準偏差の積以下に抑えられるため",
+      "経験則で決まったから",
+      "計算の都合でそうなる",
+      "サンプル数に依存する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "$r = \\mathrm{Cov}(X, Y)/(\\sigma_X \\sigma_Y)$。$|\\mathrm{Cov}(X, Y)| \\leq \\sigma_X \\sigma_Y$ がコーシー・シュワルツから直ちに従う。完全線形のとき等号。",
+  },
 ];

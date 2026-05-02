@@ -157,6 +157,49 @@
 | 📅 学習プラン計算 | `/plan` | 目標日 + 週時間 → 各フェーズの完了予定日 |
 | 🧭 級診断 | `/diagnose` | 3 問で適切な級を提案 |
 | 💾 進捗エクスポート/インポート | `ProgressBackup` | JSON で別端末に持ち越し可能 |
+| ✨ AI 解説 (β) | 演習画面解答後 | 「もっと詳しく / 発展 / 類題作成」を OpenAI/Anthropic でストリーミング表示 |
+| 🔁 適応型クイズ | `/practice/adaptive` | 苦手分野・SRS 期限・難易度ミックス・未挑戦のみ から自動抽出 |
+| 📝 ブックマークエクスポート | `/bookmarks` | Markdown / JSON でメモ付きダウンロード |
+
+---
+
+## 6-1. AI 解説機能 (β)
+
+問題を解いた直後に「✨ AI に解説を頼む」ボタンが表示され、3 つのモードが選べます:
+
+| モード | 用途 |
+|---|---|
+| 💡 もっと詳しく | 公式解説をベースに、初学者向けに丁寧に再解説 |
+| 🚀 発展的な内容 | 上位試験の出題パターン・関連定理・実務応用 |
+| ✨ 類題を作る | 同型問題 3 つを生成(数値違い・言い換え・発展) |
+
+### セットアップ
+
+`.env.example` を `.env.local` にコピーし、使う Provider のキーを設定:
+
+```bash
+# OpenAI を使う場合
+AI_PROVIDER=openai
+OPENAI_API_KEY=sk-...
+AI_MODEL=gpt-4o-mini   # 推奨: 月 $1〜2 程度
+```
+
+または Anthropic Claude(`AI_PROVIDER=anthropic` + `ANTHROPIC_API_KEY`)、Google Gemini(`AI_PROVIDER=google` + `GOOGLE_AI_API_KEY`)も切替可。
+
+### 利用上限(レート制限)
+
+- **1 IP あたり 1 日**: `AI_DAILY_USER_LIMIT`(既定 10 回)
+- **サイト全体 1 ヶ月**: `AI_MONTHLY_GLOBAL_LIMIT`(既定 1,000 回)
+
+API キーが未設定なら自動的にデモモードで起動し、モック応答を返すため、開発時にコストは発生しません。
+
+### マネタイズに向けたロードマップ
+
+1. **第 1 段階(現状)**: 登録不要、軽いレート制限のみ。利用データ収集
+2. **第 2 段階**: 無料会員登録(Magic Link)+ 1 日 10 問
+3. **第 3 段階**: フリーミアム化、Pro プランで無制限 + 模試 AI 講評など
+
+実装ポイント: `src/app/api/explain/route.ts`(API)・`src/components/ExplainButton.tsx`(UI)・`src/lib/ai-prompt.ts`(プロンプト)・`src/lib/ai-rate-limit.ts`(レート制限)。
 
 ---
 
