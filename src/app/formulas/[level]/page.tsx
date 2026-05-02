@@ -10,6 +10,7 @@ import { gradePre1Formulas } from "@/data/formulas/grade-pre1";
 import { gradeOneFormulas } from "@/data/formulas/grade-1";
 import { Math } from "@/components/Math";
 import { BookmarkButton } from "@/components/BookmarkButton";
+import { PrintButton } from "@/components/PrintButton";
 import { RecommendedBooks } from "@/components/RecommendedBooks";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import type { Formula } from "@/types/content";
@@ -87,7 +88,12 @@ export default async function FormulaPage({
       </nav>
 
       <header className="mb-10 pb-6 border-b-2 border-[var(--page-border-strong)]">
-        <div className="chapter-eyebrow mb-2">Formula Reference</div>
+        <div className="flex items-baseline justify-between gap-3 flex-wrap mb-2">
+          <div className="chapter-eyebrow">Formula Reference</div>
+          <div className="ui-sans text-xs print-hide">
+            <PrintButton label="🖨 PDF / 印刷" />
+          </div>
+        </div>
         <h1 className="text-4xl font-bold mb-3 tracking-wider">
           {meta.title} 公式集
         </h1>

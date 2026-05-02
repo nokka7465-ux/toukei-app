@@ -7,7 +7,60 @@ export type QuestionResult = {
   correct: boolean;
   attempts: number;
   lastAt: number;
+  /** SM-2-lite ease factor (default 2.5, min 1.3). Optional for backward compat. */
+  srsEase?: number;
+  /** Current scheduled interval in days. */
+  srsInterval?: number;
+  /** Next due timestamp (ms since epoch). */
+  srsDueAt?: number;
+  /** Consecutive correct count (resets to 0 on wrong). */
+  srsStreak?: number;
+  /** Number of times the user got this wrong after having gotten it right. */
+  srsLapses?: number;
 };
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+const SRS_DEFAULT_EASE = 2.5;
+const SRS_MIN_EASE = 1.3;
+const SRS_MAX_INTERVAL_DAYS = 180;
+
+function nextSrsState(
+  prev: QuestionResult | undefined,
+  correct: boolean,
+  now: number,
+): Pick<QuestionResult, "srsEase" | "srsInterval" | "srsDueAt" | "srsStreak" | "srsLapses"> {
+  const prevEase = prev?.srsEase ?? SRS_DEFAULT_EASE;
+  const prevInterval = prev?.srsInterval ?? 0;
+  const prevStreak = prev?.srsStreak ?? 0;
+  const prevLapses = prev?.srsLapses ?? 0;
+
+  if (!correct) {
+    // Lapse: drop ease, reset interval, push to tomorrow.
+    const srsEase = Math.max(SRS_MIN_EASE, prevEase - 0.2);
+    const srsInterval = 1;
+    return {
+      srsEase,
+      srsInterval,
+      srsDueAt: now + srsInterval * DAY_MS,
+      srsStreak: 0,
+      srsLapses: prevStreak > 0 ? prevLapses + 1 : prevLapses,
+    };
+  }
+
+  const srsStreak = prevStreak + 1;
+  let srsInterval: number;
+  if (srsStreak === 1) srsInterval = 1;
+  else if (srsStreak === 2) srsInterval = 3;
+  else srsInterval = Math.min(SRS_MAX_INTERVAL_DAYS, Math.round((prevInterval || 3) * prevEase));
+  const srsEase = Math.min(3.0, prevEase + 0.05);
+  return {
+    srsEase,
+    srsInterval,
+    srsDueAt: now + srsInterval * DAY_MS,
+    srsStreak,
+    srsLapses: prevLapses,
+  };
+}
 
 export type MockAttempt = {
   trackKey: string;
@@ -71,10 +124,13 @@ function write(data: ProgressData) {
 export function recordAnswer(questionId: string, correct: boolean): void {
   const data = read();
   const existing = data.questions[questionId];
+  const now = Date.now();
+  const srs = nextSrsState(existing, correct, now);
   data.questions[questionId] = {
     correct,
     attempts: (existing?.attempts ?? 0) + 1,
-    lastAt: Date.now(),
+    lastAt: now,
+    ...srs,
   };
   // Streak bookkeeping: record today as an active study day.
   const today = todayStr();
@@ -146,6 +202,16 @@ export function getStreak(data?: ProgressData): StreakInfo {
   }
 
   return { current, best, totalActiveDays: dates.length };
+}
+
+export function getActiveDates(data?: ProgressData): string[] {
+  const d = data ?? read();
+  return [...(d.activeDates ?? [])];
+}
+
+export function isActiveToday(data?: ProgressData): boolean {
+  const d = data ?? read();
+  return (d.activeDates ?? []).includes(todayStr());
 }
 
 export function getMockHistory(trackKey?: string): MockAttempt[] {
@@ -274,6 +340,89 @@ export function getWrongQuestionIds(): string[] {
     .filter(([, r]) => !r.correct)
     .sort(([, a], [, b]) => b.lastAt - a.lastAt)
     .map(([id]) => id);
+}
+
+/**
+ * SRS-due question ids: any answered question whose srsDueAt is on or before
+ * the cutoff (defaults to end of today). Items without SRS metadata fall back
+ * to the legacy "wrong = due now" rule so old data still surfaces.
+ *
+ * Sorted by srsDueAt ascending (most-overdue first), with legacy items first.
+ */
+export function getDueQuestionIds(now: number = Date.now()): string[] {
+  const data = read();
+  const endOfToday = (() => {
+    const d = new Date(now);
+    d.setHours(23, 59, 59, 999);
+    return d.getTime();
+  })();
+  type Row = { id: string; due: number; legacy: boolean };
+  const rows: Row[] = [];
+  for (const [id, r] of Object.entries(data.questions)) {
+    if (r.srsDueAt === undefined) {
+      if (!r.correct) rows.push({ id, due: r.lastAt, legacy: true });
+      continue;
+    }
+    if (r.srsDueAt <= endOfToday) {
+      rows.push({ id, due: r.srsDueAt, legacy: false });
+    }
+  }
+  rows.sort((a, b) => {
+    if (a.legacy !== b.legacy) return a.legacy ? -1 : 1;
+    return a.due - b.due;
+  });
+  return rows.map((r) => r.id);
+}
+
+/** All scheduled items, sorted by next due date ascending. */
+export function getScheduledQuestionIds(): { id: string; dueAt: number }[] {
+  const data = read();
+  const out: { id: string; dueAt: number }[] = [];
+  for (const [id, r] of Object.entries(data.questions)) {
+    if (r.srsDueAt !== undefined) out.push({ id, dueAt: r.srsDueAt });
+  }
+  out.sort((a, b) => a.dueAt - b.dueAt);
+  return out;
+}
+
+export type SrsStats = {
+  dueNow: number;
+  dueToday: number;
+  dueTomorrow: number;
+  dueThisWeek: number;
+  scheduled: number;
+  legacyWrong: number;
+};
+
+export function getSrsStats(now: number = Date.now()): SrsStats {
+  const data = read();
+  const startOfToday = (() => {
+    const d = new Date(now);
+    d.setHours(0, 0, 0, 0);
+    return d.getTime();
+  })();
+  const endOfToday = startOfToday + DAY_MS - 1;
+  const endOfTomorrow = endOfToday + DAY_MS;
+  const endOfWeek = startOfToday + 7 * DAY_MS - 1;
+
+  let dueNow = 0;
+  let dueToday = 0;
+  let dueTomorrow = 0;
+  let dueThisWeek = 0;
+  let scheduled = 0;
+  let legacyWrong = 0;
+  for (const r of Object.values(data.questions)) {
+    if (r.srsDueAt === undefined) {
+      if (!r.correct) legacyWrong += 1;
+      continue;
+    }
+    scheduled += 1;
+    if (r.srsDueAt <= now) dueNow += 1;
+    if (r.srsDueAt <= endOfToday) dueToday += 1;
+    else if (r.srsDueAt <= endOfTomorrow) dueTomorrow += 1;
+    if (r.srsDueAt <= endOfWeek) dueThisWeek += 1;
+  }
+  return { dueNow, dueToday, dueTomorrow, dueThisWeek, scheduled, legacyWrong };
 }
 
 export type TrackProgress = {

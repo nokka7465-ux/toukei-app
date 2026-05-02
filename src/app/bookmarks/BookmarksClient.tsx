@@ -5,7 +5,9 @@ import Link from "next/link";
 import {
   BOOKMARK_EVENT,
   listBookmarks,
+  setBookmarkNote,
   toggleBookmark,
+  type BookmarkKind,
   type BookmarkRef,
 } from "@/lib/bookmarks";
 import { MixedText } from "@/components/MixedText";
@@ -147,6 +149,7 @@ export function BookmarksClient({
                     </div>
                     <BookmarkRemove kind="question" id={b.id} />
                   </div>
+                  <NoteEditor kind="question" id={b.id} initialNote={b.note} />
                 </li>
               );
             })}
@@ -185,6 +188,7 @@ export function BookmarksClient({
                     </div>
                     <BookmarkRemove kind="formula" id={b.id} />
                   </div>
+                  <NoteEditor kind="formula" id={b.id} initialNote={b.note} />
                 </li>
               );
             })}
@@ -228,6 +232,7 @@ export function BookmarksClient({
                     </div>
                     <BookmarkRemove kind="glossary" id={b.id} />
                   </div>
+                  <NoteEditor kind="glossary" id={b.id} initialNote={b.note} />
                 </li>
               );
             })}
@@ -255,5 +260,79 @@ function BookmarkRemove({
     >
       ★
     </button>
+  );
+}
+
+export function NoteEditor({
+  kind,
+  id,
+  initialNote,
+}: {
+  kind: BookmarkKind;
+  id: string;
+  initialNote?: string;
+}) {
+  const [open, setOpen] = useState(Boolean(initialNote));
+  const [draft, setDraft] = useState(initialNote ?? "");
+  const [savedNote, setSavedNote] = useState(initialNote ?? "");
+  const [savedAt, setSavedAt] = useState<number | null>(null);
+
+  // Sync external changes (e.g. another tab) when the underlying value changes.
+  useEffect(() => {
+    setDraft(initialNote ?? "");
+    setSavedNote(initialNote ?? "");
+    if (initialNote && !open) setOpen(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialNote]);
+
+  const dirty = draft !== savedNote;
+
+  function handleSave() {
+    setBookmarkNote(kind, id, draft);
+    setSavedNote(draft);
+    setSavedAt(Date.now());
+  }
+
+  if (!open) {
+    return (
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="text-xs text-[var(--link)] hover:underline ui-sans mt-2"
+      >
+        + メモを追加
+      </button>
+    );
+  }
+
+  return (
+    <div className="mt-3 ui-sans">
+      <textarea
+        value={draft}
+        onChange={(e) => setDraft(e.target.value)}
+        placeholder="覚え書き、間違えた理由、次に注意することなど…"
+        rows={3}
+        maxLength={4000}
+        className="w-full text-xs p-2 border border-[var(--page-border-strong)] rounded bg-[var(--background)] resize-y leading-relaxed"
+      />
+      <div className="flex items-center gap-2 mt-1.5 text-[10px] text-[var(--muted)]">
+        <button
+          type="button"
+          onClick={handleSave}
+          disabled={!dirty}
+          className="px-2.5 py-1 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600"
+        >
+          保存
+        </button>
+        {dirty ? (
+          <span className="text-amber-700 dark:text-amber-400">未保存</span>
+        ) : savedAt ? (
+          <span>保存済み</span>
+        ) : savedNote ? (
+          <span>保存済み</span>
+        ) : null}
+        <span className="ml-auto tabular-nums">{draft.length}/4000</span>
+      </div>
+    </div>
   );
 }

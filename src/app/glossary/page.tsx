@@ -3,6 +3,7 @@ import Link from "next/link";
 import { glossary, type GlossaryTerm } from "@/data/glossary";
 import { MixedText } from "@/components/MixedText";
 import { BookmarkButton } from "@/components/BookmarkButton";
+import { PrintButton } from "@/components/PrintButton";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -54,7 +55,12 @@ export default function GlossaryPage() {
       </nav>
 
       <header className="mb-10 pb-6 border-b-2 border-[var(--page-border-strong)]">
-        <div className="chapter-eyebrow mb-2">Glossary</div>
+        <div className="flex items-baseline justify-between gap-3 flex-wrap mb-2">
+          <div className="chapter-eyebrow">Glossary</div>
+          <div className="ui-sans text-xs print-hide">
+            <PrintButton label="🖨 PDF / 印刷" />
+          </div>
+        </div>
         <h1 className="text-4xl font-bold mb-3 tracking-wider">
           統計用語集
         </h1>

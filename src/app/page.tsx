@@ -6,6 +6,7 @@ import { blogPosts } from "@/data/blog";
 import { FaqJsonLd } from "@/components/StructuredData";
 import { ProgressDashboard } from "@/components/ProgressDashboard";
 import { DailyProblem } from "@/components/DailyProblem";
+import { ExamCountdown } from "@/components/ExamCountdown";
 import { AchievementsPanel } from "@/components/AchievementsPanel";
 import { AiRoadmap } from "@/components/AiRoadmap";
 import { blogTheme } from "@/lib/blog-theme";
@@ -289,6 +290,8 @@ export default function Home() {
       </section>
 
       <AiRoadmap />
+
+      <ExamCountdown />
 
       <DailyProblem />
 

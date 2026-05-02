@@ -2,6 +2,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import {
+  CERT_PRESETS,
+  EXAM_TARGET_EVENT,
+  clearExamTarget,
+  getExamTarget,
+  setExamTarget,
+} from "@/lib/exam-target";
 
 type Phase = {
   num: number;
@@ -60,6 +67,8 @@ export function PlanCalculator() {
   const [hoursPerWeek, setHoursPerWeek] = useState<number>(7);
   const [startPhase, setStartPhase] = useState<number>(1);
   const [pace, setPace] = useState<Pace>("mid");
+  const [certKey, setCertKey] = useState<string>("");
+  const [savedNote, setSavedNote] = useState<string | null>(null);
 
   // Initialise after mount so SSR doesn't lock in a stale date.
   useEffect(() => {
@@ -68,9 +77,55 @@ export function PlanCalculator() {
     // Default target = 1 year from today
     const oneYear = new Date(t);
     oneYear.setFullYear(oneYear.getFullYear() + 1);
-    setTargetDate(
-      `${oneYear.getFullYear()}-${String(oneYear.getMonth() + 1).padStart(2, "0")}-${String(oneYear.getDate()).padStart(2, "0")}`,
-    );
+    const fallbackTarget = `${oneYear.getFullYear()}-${String(oneYear.getMonth() + 1).padStart(2, "0")}-${String(oneYear.getDate()).padStart(2, "0")}`;
+    // Hydrate any previously-saved target.
+    const saved = getExamTarget();
+    if (saved) {
+      setTargetDate(saved.date);
+      setHoursPerWeek(saved.hoursPerWeek);
+      setCertKey(saved.certKey);
+    } else {
+      setTargetDate(fallbackTarget);
+    }
+  }, []);
+
+  function handleSaveTarget() {
+    if (!certKey) return;
+    const preset = CERT_PRESETS.find((p) => p.key === certKey);
+    if (!preset) return;
+    setExamTarget({
+      certKey: preset.key,
+      certLabel: preset.label,
+      href: preset.href,
+      date: targetDate,
+      hoursPerWeek,
+      setAt: Date.now(),
+    });
+    setSavedNote("ホーム画面でカウントダウンが表示されます");
+    setTimeout(() => setSavedNote(null), 4000);
+  }
+
+  function handleClearTarget() {
+    clearExamTarget();
+    setCertKey("");
+    setSavedNote("目標を解除しました");
+    setTimeout(() => setSavedNote(null), 3000);
+  }
+
+  // Reflect external updates (e.g. clearing from another tab).
+  useEffect(() => {
+    const handler = () => {
+      const saved = getExamTarget();
+      if (!saved) {
+        setCertKey("");
+        return;
+      }
+      setCertKey(saved.certKey);
+      setTargetDate(saved.date);
+      setHoursPerWeek(saved.hoursPerWeek);
+    };
+    window.addEventListener(EXAM_TARGET_EVENT, handler);
+    return () => window.removeEventListener(EXAM_TARGET_EVENT, handler);
   }, []);
 
   const result = useMemo(() => {
@@ -111,6 +166,54 @@ export function PlanCalculator() {
 
   return (
     <div className="space-y-6">
+      {/* Cert target — saved to localStorage so the home page shows a countdown */}
+      <div className="paper rounded-lg p-6 md:p-7 space-y-4 border-l-4 border-[var(--accent)]">
+        <div>
+          <div className="chapter-eyebrow mb-1">Exam Target</div>
+          <h2 className="text-lg font-bold">受験する検定とカウントダウン</h2>
+          <p className="text-xs text-[var(--muted)] ui-sans mt-1">
+            検定を選んで保存すると、ホーム画面に「あと◯日」のカウントダウンが表示されます。
+          </p>
+        </div>
+        <label className="text-sm ui-sans block">
+          <span className="block font-bold mb-1.5">🎯 受験予定の検定</span>
+          <select
+            value={certKey}
+            onChange={(e) => setCertKey(e.target.value)}
+            className="w-full px-3 py-2 border border-[var(--page-border-strong)] rounded bg-[var(--page)] focus:outline-none focus:border-[var(--link)]"
+          >
+            <option value="">— 選択してください —</option>
+            {CERT_PRESETS.map((p) => (
+              <option key={p.key} value={p.key}>
+                {p.label}(目安 {p.hours} 時間)
+              </option>
+            ))}
+          </select>
+        </label>
+        <div className="flex flex-wrap items-center gap-2 ui-sans text-xs">
+          <button
+            type="button"
+            onClick={handleSaveTarget}
+            disabled={!certKey}
+            className="px-4 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600"
+          >
+            この目標を保存
+          </button>
+          <button
+            type="button"
+            onClick={handleClearTarget}
+            className="px-3 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--background)]"
+          >
+            解除
+          </button>
+          {savedNote && (
+            <span className="text-green-700 dark:text-green-400 font-bold">
+              {savedNote}
+            </span>
+          )}
+        </div>
+      </div>
+
       <div className="paper rounded-lg p-6 md:p-7 space-y-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <label className="text-sm ui-sans">

@@ -11,6 +11,7 @@ import { gradeOneTextbook } from "@/data/textbooks/grade-1";
 import { TextbookBody } from "@/components/TextbookBody";
 import { RecommendedBooks } from "@/components/RecommendedBooks";
 import { ReadingTracker } from "@/components/ReadingTracker";
+import { PrintButton } from "@/components/PrintButton";
 import { BreadcrumbJsonLd, CourseJsonLd } from "@/components/StructuredData";
 import type { Textbook } from "@/types/content";
 
@@ -164,7 +165,12 @@ export default async function TextbookPage({
       </nav>
 
       <header className="mb-10 pb-6 border-b-2 border-[var(--page-border-strong)]">
-        <div className="chapter-eyebrow mb-2">Textbook</div>
+        <div className="flex items-baseline justify-between gap-3 flex-wrap mb-2">
+          <div className="chapter-eyebrow">Textbook</div>
+          <div className="ui-sans text-xs print-hide">
+            <PrintButton label="🖨 PDF / 印刷" />
+          </div>
+        </div>
         <h1 className="text-4xl font-bold mb-3 tracking-wider">{book.title}</h1>
         <p className="text-[var(--muted-strong)] leading-loose max-w-3xl">
           {book.intro}

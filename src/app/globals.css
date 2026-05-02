@@ -386,8 +386,8 @@ button.paper:hover {
     font-size: 11pt;
   }
 
-  header,
-  footer,
+  body > header,
+  body > footer,
   nav[aria-label="breadcrumb"],
   .print-hide,
   /* Interactive UI that has no meaning on paper */
@@ -474,6 +474,17 @@ button.paper:hover {
   svg {
     max-width: 100% !important;
     height: auto !important;
+    page-break-inside: avoid;
+  }
+
+  /* Keep math equations on a single page */
+  .katex,
+  .katex-display {
+    page-break-inside: avoid;
+  }
+
+  /* Keep list items together */
+  li {
     page-break-inside: avoid;
   }
 

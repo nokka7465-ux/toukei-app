@@ -9,9 +9,12 @@ import {
   summarizeTrack,
   clearProgress,
   getStreak,
+  getActiveDates,
+  isActiveToday,
   type ProgressData,
 } from "@/lib/progress";
 import { ProgressBackup } from "./ProgressBackup";
+import { ActivityHeatmap } from "./ActivityHeatmap";
 
 const groupOrder: Array<{
   key: "main" | "math" | "cert";
@@ -57,8 +60,12 @@ export function ProgressDashboard() {
   const overallPct =
     totals.total === 0 ? 0 : Math.round((totals.correct / totals.total) * 100);
   const hasAnyAttempt = totals.correct + totals.wrong > 0;
+  const streak = getStreak(data);
+  const activeDates = getActiveDates(data);
+  const studiedToday = isActiveToday(data);
+  const hasAnyActivity = activeDates.length > 0;
 
-  if (!hasAnyAttempt) {
+  if (!hasAnyAttempt && !hasAnyActivity) {
     return (
       <section className="mb-12 paper rounded-lg p-6 md:p-7">
         <div className="chapter-eyebrow mb-2">Your Progress</div>
@@ -96,66 +103,89 @@ export function ProgressDashboard() {
       </div>
 
       {/* Streak / activity */}
-      {(() => {
-        const s = getStreak(data);
-        return (
-          <div className="grid grid-cols-3 gap-3 mb-5 text-center">
-            <div className="paper rounded p-3 border border-[var(--page-border)]">
-              <div className="text-[10px] tracking-[0.15em] uppercase text-[var(--muted)] ui-sans">
-                連続学習
-              </div>
-              <div className="text-2xl font-bold mt-0.5 tabular-nums">
-                {s.current}
-                <span className="text-xs text-[var(--muted)] ml-0.5">日</span>
-                {s.current >= 3 && (
-                  <span aria-hidden="true" className="ml-1">
-                    🔥
-                  </span>
-                )}
-              </div>
-            </div>
-            <div className="paper rounded p-3 border border-[var(--page-border)]">
-              <div className="text-[10px] tracking-[0.15em] uppercase text-[var(--muted)] ui-sans">
-                最長記録
-              </div>
-              <div className="text-2xl font-bold mt-0.5 tabular-nums">
-                {s.best}
-                <span className="text-xs text-[var(--muted)] ml-0.5">日</span>
-              </div>
-            </div>
-            <div className="paper rounded p-3 border border-[var(--page-border)]">
-              <div className="text-[10px] tracking-[0.15em] uppercase text-[var(--muted)] ui-sans">
-                学習日数
-              </div>
-              <div className="text-2xl font-bold mt-0.5 tabular-nums">
-                {s.totalActiveDays}
-                <span className="text-xs text-[var(--muted)] ml-0.5">日</span>
-              </div>
-            </div>
+      <div className="grid grid-cols-3 gap-3 mb-3 text-center">
+        <div className="paper rounded p-3 border border-[var(--page-border)]">
+          <div className="text-[10px] tracking-[0.15em] uppercase text-[var(--muted)] ui-sans">
+            連続学習
           </div>
-        );
-      })()}
-
-      {/* Overall progress */}
-      <div className="mb-5">
-        <div className="flex items-baseline justify-between text-xs ui-sans mb-1.5">
-          <span className="text-[var(--muted)]">全体</span>
-          <span className="text-[var(--muted-strong)]">
-            <span className="text-base font-bold text-[var(--foreground)]">
-              {totals.correct}
-            </span>
-            <span className="text-[var(--muted)]"> / {totals.total} 問正解</span>
-            <span className="ml-2 text-[var(--muted)]">({overallPct}%)</span>
-          </span>
+          <div className="text-2xl font-bold mt-0.5 tabular-nums">
+            {streak.current}
+            <span className="text-xs text-[var(--muted)] ml-0.5">日</span>
+            {streak.current >= 3 && (
+              <span aria-hidden="true" className="ml-1">
+                🔥
+              </span>
+            )}
+          </div>
         </div>
-        <div className="h-2 rounded-full bg-[var(--background)] border border-[var(--page-border)] overflow-hidden">
-          <div
-            className="h-full bg-[var(--accent)] transition-all"
-            style={{ width: `${overallPct}%` }}
-            aria-label={`全体の正答率 ${overallPct}%`}
-          />
+        <div className="paper rounded p-3 border border-[var(--page-border)]">
+          <div className="text-[10px] tracking-[0.15em] uppercase text-[var(--muted)] ui-sans">
+            最長記録
+          </div>
+          <div className="text-2xl font-bold mt-0.5 tabular-nums">
+            {streak.best}
+            <span className="text-xs text-[var(--muted)] ml-0.5">日</span>
+          </div>
+        </div>
+        <div className="paper rounded p-3 border border-[var(--page-border)]">
+          <div className="text-[10px] tracking-[0.15em] uppercase text-[var(--muted)] ui-sans">
+            学習日数
+          </div>
+          <div className="text-2xl font-bold mt-0.5 tabular-nums">
+            {streak.totalActiveDays}
+            <span className="text-xs text-[var(--muted)] ml-0.5">日</span>
+          </div>
         </div>
       </div>
+
+      {/* Today's status: warn when an active streak hasn't been continued today */}
+      {streak.current > 0 && !studiedToday && (
+        <div className="mb-3 px-3 py-2 rounded border border-amber-300 bg-amber-50 dark:bg-amber-900/20 dark:border-amber-700 text-xs ui-sans flex items-baseline gap-2 flex-wrap">
+          <span aria-hidden="true">⚠️</span>
+          <span className="text-amber-900 dark:text-amber-200">
+            今日はまだ学習していません。{streak.current}
+            日連続を途切れさせないために、1問だけでも解いてみましょう。
+          </span>
+          <Link
+            href="/practice"
+            className="ml-auto px-2.5 py-1 bg-amber-600 text-white rounded font-bold hover:bg-amber-700"
+          >
+            1問チャレンジ →
+          </Link>
+        </div>
+      )}
+      {studiedToday && streak.current >= 1 && (
+        <div className="mb-3 text-xs ui-sans text-[var(--muted-strong)] text-center">
+          今日も学習済み 🎯 連続 {streak.current} 日
+        </div>
+      )}
+
+      <div className="mb-5">
+        <ActivityHeatmap activeDates={activeDates} />
+      </div>
+
+      {/* Overall progress */}
+      {hasAnyAttempt && (
+        <div className="mb-5">
+          <div className="flex items-baseline justify-between text-xs ui-sans mb-1.5">
+            <span className="text-[var(--muted)]">全体</span>
+            <span className="text-[var(--muted-strong)]">
+              <span className="text-base font-bold text-[var(--foreground)]">
+                {totals.correct}
+              </span>
+              <span className="text-[var(--muted)]"> / {totals.total} 問正解</span>
+              <span className="ml-2 text-[var(--muted)]">({overallPct}%)</span>
+            </span>
+          </div>
+          <div className="h-2 rounded-full bg-[var(--background)] border border-[var(--page-border)] overflow-hidden">
+            <div
+              className="h-full bg-[var(--accent)] transition-all"
+              style={{ width: `${overallPct}%` }}
+              aria-label={`全体の正答率 ${overallPct}%`}
+            />
+          </div>
+        </div>
+      )}
 
       {/* Per-track */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 text-sm">
