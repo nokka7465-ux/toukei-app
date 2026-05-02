@@ -2,6 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 
+/**
+ * Feature flag — render nothing unless the flag is explicitly enabled.
+ * Toggle by setting `NEXT_PUBLIC_AI_ENABLED=true` (Vercel env var) and
+ * redeploying. While disabled, the button is completely hidden from users.
+ */
+const AI_ENABLED = process.env.NEXT_PUBLIC_AI_ENABLED === "true";
+
 type ExplainMode = "explain" | "deeper" | "similar";
 
 const MODE_OPTIONS: { key: ExplainMode; label: string; emoji: string }[] = [
@@ -42,6 +49,12 @@ function writeUsage(u: LocalUsage) {
 }
 
 export function ExplainButton({ questionId }: { questionId: string }) {
+  // Hidden until the feature flag is set. Returning null avoids any DOM impact.
+  if (!AI_ENABLED) return null;
+  return <ExplainButtonImpl questionId={questionId} />;
+}
+
+function ExplainButtonImpl({ questionId }: { questionId: string }) {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<ExplainMode>("explain");
   const [running, setRunning] = useState(false);

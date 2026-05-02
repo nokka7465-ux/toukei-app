@@ -174,6 +174,12 @@ async function streamFromAnthropic(
 }
 
 export async function POST(req: NextRequest) {
+  // Feature gate — hide endpoint completely until explicitly enabled.
+  // Set AI_ENABLED=true in Vercel environment variables to turn it on.
+  if (process.env.AI_ENABLED !== "true") {
+    return new Response("Not Found", { status: 404 });
+  }
+
   let body: ExplainBody;
   try {
     body = (await req.json()) as ExplainBody;
