@@ -40,26 +40,41 @@ export function SchoolPicks({
 
 function SchoolCard({ school }: { school: School }) {
   return (
-    <a
-      href={school.url}
-      target="_blank"
-      rel="noopener noreferrer sponsored"
-      className="paper block p-5 rounded-lg hover:-translate-y-0.5 transition group h-full"
-    >
-      {school.badge && (
-        <div className="inline-block px-2 py-0.5 mb-2 text-[10px] font-bold tracking-wider rounded bg-[var(--accent)] text-[var(--accent-fg)] ui-sans">
-          {school.badge}
+    <div className="relative h-full">
+      <a
+        href={school.url}
+        target="_blank"
+        rel="noopener noreferrer sponsored"
+        className="paper block p-5 rounded-lg hover:-translate-y-0.5 transition group h-full"
+      >
+        {school.badge && (
+          <div className="inline-block px-2 py-0.5 mb-2 text-[10px] font-bold tracking-wider rounded bg-[var(--accent)] text-[var(--accent-fg)] ui-sans">
+            {school.badge}
+          </div>
+        )}
+        <div className="font-bold text-sm mb-2 group-hover:text-[var(--accent)] leading-snug">
+          {school.name}
         </div>
+        <p className="text-xs text-[var(--muted-strong)] leading-relaxed">
+          {school.description}
+        </p>
+        <div className="mt-3 text-xs text-[var(--link)] ui-sans">
+          無料で詳細をチェック →
+        </div>
+      </a>
+      {school.trackingPixel && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={school.trackingPixel}
+          width={1}
+          height={1}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          style={{ position: "absolute", top: 0, left: 0, border: 0, opacity: 0, pointerEvents: "none" }}
+        />
       )}
-      <div className="font-bold text-sm mb-2 group-hover:text-[var(--accent)] leading-snug">
-        {school.name}
-      </div>
-      <p className="text-xs text-[var(--muted-strong)] leading-relaxed">
-        {school.description}
-      </p>
-      <div className="mt-3 text-xs text-[var(--link)] ui-sans">
-        無料で詳細をチェック →
-      </div>
-    </a>
+    </div>
   );
 }

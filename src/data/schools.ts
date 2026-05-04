@@ -16,9 +16,32 @@ export type School = {
   // どの検定・分野に推薦するか（blog の category や cert 名と部分一致）
   fitFor: string[];
   url: string;
+  // A8.net などのインプレッション計測ピクセル URL（任意）。
+  // 計測ピクセルが提供されている案件では、ここに設定するとサイト表示時にカウントされる。
+  trackingPixel?: string;
 };
 
 export const SCHOOLS: School[] = [
+  {
+    id: "raks-partners",
+    name: "ラクスパートナーズ（未経験からのエンジニア転職）",
+    description:
+      "未経験から正社員エンジニアへ。研修制度が手厚く、IT 業界未経験者でも安心してキャリアをスタート可能。AI エンジニア・データサイエンティストへの転職にも対応。",
+    badge: "未経験OK",
+    fitFor: ["プログラミング", "AI", "G検定", "E資格", "DS基礎", "DS検定", "数学"],
+    url: "https://px.a8.net/svt/ejp?a8mat=4B1THT+G4HNLE+5SN4+5YJRM",
+    trackingPixel: "https://www17.a8.net/0.gif?a8mat=4B1THT+G4HNLE+5SN4+5YJRM",
+  },
+  {
+    id: "neuro-dive",
+    name: "Neuro Dive（AI・データサイエンスが学べる就労移行支援）",
+    description:
+      "AI・データサイエンスを実践的に学べる IT 特化型の就労移行支援事業所。発達障害・精神障害をお持ちの方の IT・AI 業界への就労を専門スタッフがサポート。",
+    badge: "就労移行支援",
+    fitFor: ["AI", "データサイエンス", "Python", "機械学習"],
+    url: "https://px.a8.net/svt/ejp?a8mat=4B3JAG+CLOCII+47GS+HV7V6",
+    trackingPixel: "https://www12.a8.net/0.gif?a8mat=4B3JAG+CLOCII+47GS+HV7V6",
+  },
   {
     id: "techacademy",
     name: "TechAcademy（データサイエンス / AI コース）",
