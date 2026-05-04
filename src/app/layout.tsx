@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Noto_Serif_JP, Noto_Sans_JP } from "next/font/google";
 import { isAffiliateEnabled } from "@/data/books";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { GoogleAdSense } from "@/components/ads/GoogleAdSense";
 import { StructuredData } from "@/components/StructuredData";
 import { ThemeToggle, themeInitScript } from "@/components/ThemeToggle";
 import { MobileNav } from "@/components/MobileNav";
@@ -117,6 +118,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <StructuredData />
         <GoogleAnalytics />
+        <GoogleAdSense />
         <ReadingProgress />
         <KeyboardShortcuts />
         <GlossaryLookup />
@@ -139,56 +141,56 @@ export default function RootLayout({
               </span>
             </Link>
             <div className="flex items-center gap-3">
-              <nav className="hidden md:flex gap-4 text-sm ui-sans flex-wrap justify-end">
-                <Link href="/" className="hover:underline">
+              <nav className="hidden md:flex gap-0.5 text-sm ui-sans flex-wrap items-center rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]/60 px-1.5 py-1 backdrop-blur-sm shadow-sm">
+                <Link href="/" className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors">
                   ホーム
                 </Link>
-                <Link href="/roadmap" className="hover:underline">
+                <Link href="/roadmap" className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors">
                   ロードマップ
                 </Link>
-                <Link href="/textbook" className="hover:underline">
+                <Link href="/textbook" className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors">
                   教科書
                 </Link>
                 <Link
                   href="/math"
-                  className="hover:underline"
+                  className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors"
                   title="統計のための数学基礎"
                 >
                   数学基礎
                 </Link>
                 <Link
                   href="/certs/ds-basic"
-                  className="hover:underline"
+                  className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors"
                   title="統計検定の関連検定"
                 >
                   関連検定
                 </Link>
-                <Link href="/glossary" className="hover:underline">
+                <Link href="/glossary" className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors">
                   用語集
                 </Link>
-                <Link href="/blog" className="hover:underline">
+                <Link href="/blog" className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors">
                   ブログ
                 </Link>
-                <Link href="/diagnose" className="hover:underline">
+                <Link href="/diagnose" className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors">
                   級診断
                 </Link>
                 <Link
                   href="/plan"
-                  className="hover:underline"
+                  className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors"
                   title="目標日までの学習プランを逆算"
                 >
                   学習プラン
                 </Link>
                 <Link
                   href="/review"
-                  className="hover:underline"
+                  className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors"
                   title="間違えた問題だけを集めた復習リスト"
                 >
                   復習
                 </Link>
                 <Link
                   href="/flashcards"
-                  className="hover:underline"
+                  className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors"
                   title="統計用語の暗記カード"
                 >
                   暗記カード

@@ -5,6 +5,8 @@ import { blogPosts, getPostBySlug } from "@/data/blog";
 import { TextbookBody } from "@/components/TextbookBody";
 import { MixedText } from "@/components/MixedText";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import { AdUnit } from "@/components/ads/AdUnit";
+import { SchoolPicks } from "@/components/SchoolPicks";
 import type { TextbookBlock, BlogPost } from "@/types/content";
 
 const SITE_URL = "https://toukei-app.com";
@@ -195,6 +197,9 @@ export default async function BlogPostPage({
         </aside>
       )}
 
+      <AdUnit slot="6868686868" className="mb-8 block" />
+
+
       {toc.length >= 3 && (
         <aside className="mb-8 paper rounded-lg p-5">
           <div className="chapter-eyebrow mb-2">目次</div>
@@ -219,6 +224,10 @@ export default async function BlogPostPage({
       <div className="paper rounded-lg p-7 md:p-9">
         <TextbookBody blocks={post.body} headingIdPrefix="section" />
       </div>
+
+      <SchoolPicks category={post.category} />
+
+      <AdUnit slot="7979797979" className="mt-12 block" />
 
       {related.length > 0 && (
         <section className="mt-12">
