@@ -48,7 +48,37 @@ export default function PrivacyPage() {
             アクセス解析ツールについて
           </h2>
           <p>
-            本サイトでは、今後サイトの利用状況の把握のために、Google Analytics などのアクセス解析ツールを使用する場合があります。これらのツールはトラフィックデータの収集のために Cookie を使用することがありますが、取得されるデータは匿名であり、個人を特定するものではありません。
+            本サイトでは、サイトの利用状況の把握のために、Google Analytics などのアクセス解析ツールを使用する場合があります。これらのツールはトラフィックデータの収集のために Cookie を使用することがありますが、取得されるデータは匿名であり、個人を特定するものではありません。
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-base font-bold mb-2 text-gray-900 dark:text-gray-100">
+            広告配信について
+          </h2>
+          <p>
+            本サイトでは、第三者配信の広告サービス「Google AdSense」を利用する場合があります。広告配信事業者は、ユーザーの興味に応じた広告を表示するために Cookie を使用することがあります。
+          </p>
+          <p className="mt-2">
+            Cookie の使用を無効にするには、Google の{" "}
+            <a
+              href="https://www.google.com/settings/ads"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              広告設定
+            </a>{" "}
+            ページからオプトアウトできます。また、第三者配信の広告事業者については、Google の{" "}
+            <a
+              href="https://policies.google.com/technologies/partner-sites"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              広告に関するポリシー
+            </a>{" "}
+            をご参照ください。
           </p>
         </section>
 

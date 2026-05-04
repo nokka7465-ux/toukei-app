@@ -416,6 +416,11 @@ export default function RootLayout({
                 <div className="chapter-eyebrow mb-2">サイト情報</div>
                 <ul className="space-y-1.5 ui-sans">
                   <li>
+                    <Link href="/about" className="hover:underline text-[var(--muted-strong)]">
+                      このサイトについて
+                    </Link>
+                  </li>
+                  <li>
                     <Link href="/contact" className="hover:underline text-[var(--muted-strong)]">
                       お問い合わせ
                     </Link>
