@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import { SchoolPicks } from "@/components/SchoolPicks";
 
 export const metadata: Metadata = {
   title:
@@ -514,6 +515,8 @@ export default function RoadmapPage() {
           </Link>
         </div>
       </section>
+
+      <SchoolPicks heading="独学だけだと不安なら ─ 提携スクール" />
     </article>
   );
 }

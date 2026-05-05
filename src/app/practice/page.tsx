@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { tracks } from "@/lib/all-questions";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import { SchoolPicks } from "@/components/SchoolPicks";
 import { RandomPracticeClient } from "./RandomPracticeClient";
 
 export const metadata: Metadata = {
@@ -65,6 +66,8 @@ export default function PracticePage() {
       </header>
 
       <RandomPracticeClient tracks={trackInfo} />
+
+      <SchoolPicks heading="演習で詰まったら ─ 関連スクール" />
     </article>
   );
 }

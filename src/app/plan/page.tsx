@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import { SchoolPicks } from "@/components/SchoolPicks";
 import { PlanCalculator } from "./PlanCalculator";
 
 export const metadata: Metadata = {
@@ -69,6 +70,8 @@ export default function PlanPage() {
           <li>🎓 Phase 5 AI 系検定: 40〜200 時間</li>
         </ul>
       </section>
+
+      <SchoolPicks heading="計画はあるが孤独に感じたら ─ 学習サポート" />
     </article>
   );
 }

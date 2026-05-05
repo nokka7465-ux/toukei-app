@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Diagnose } from "@/components/Diagnose";
 import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/StructuredData";
+import { SchoolPicks } from "@/components/SchoolPicks";
 
 export const metadata: Metadata = {
   title: "統計検定 級診断 ─ どの級から始めるか 3 問で分かる",
@@ -63,6 +64,8 @@ export default function DiagnosePage() {
       </header>
 
       <Diagnose />
+
+      <SchoolPicks heading="独学だけで不安なら ─ 関連スクール" />
     </article>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/StructuredData";
+import { SchoolPicks } from "@/components/SchoolPicks";
 
 export const metadata: Metadata = {
   title: "統計検定 教科書一覧 ─ 4級〜1級・関連検定・数学基礎",
@@ -305,6 +306,8 @@ export default function TextbookIndexPage() {
           ))}
         </div>
       </section>
+
+      <SchoolPicks heading="独学に行き詰まったら ─ 提携スクールでサポート" />
     </article>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { blogPosts } from "@/data/blog";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import { SchoolPicks } from "@/components/SchoolPicks";
 import { blogTheme } from "@/lib/blog-theme";
 
 export const metadata: Metadata = {
@@ -153,6 +154,8 @@ export default function BlogIndexPage() {
           })}
         </ul>
       </section>
+
+      <SchoolPicks heading="本気で学びたい方へ ─ 関連スクール" />
     </article>
   );
 }

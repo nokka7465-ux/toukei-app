@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import { SchoolPicks } from "@/components/SchoolPicks";
 
 export const metadata: Metadata = {
   title: "専門統計調査士とは ─ 受験対象・出題範囲・対策まとめ",
@@ -162,6 +163,11 @@ export default function SurveySpecialistPage() {
           </Link>
         </div>
       </section>
+
+      <SchoolPicks
+        category="専門統計調査士"
+        heading="統計実務を深める関連スクール"
+      />
 
       <nav className="mt-12 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">
         <Link

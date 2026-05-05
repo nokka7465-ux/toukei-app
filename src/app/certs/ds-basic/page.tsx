@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import { SchoolPicks } from "@/components/SchoolPicks";
 
 export const metadata: Metadata = {
   title: "統計検定 DS基礎とは ─ 受験対象・出題範囲・対策まとめ",
@@ -229,6 +230,11 @@ export default function DsBasicPage() {
           </Link>
         </div>
       </section>
+
+      <SchoolPicks
+        category="DS基礎"
+        heading="データサイエンス基礎の次の一歩 ─ 関連スクール"
+      />
 
       <nav className="mt-10 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">
         <Link

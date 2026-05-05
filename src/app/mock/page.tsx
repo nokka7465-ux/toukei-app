@@ -3,6 +3,7 @@ import Link from "next/link";
 import { levels } from "@/data/levels";
 import { mockConfigs, mockLevels } from "@/data/mock-config";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import { SchoolPicks } from "@/components/SchoolPicks";
 
 export const metadata: Metadata = {
   title: "模試 一覧 ─ 本番形式の時間制限付きシミュレーション",
@@ -80,6 +81,8 @@ export default function MockListPage() {
           );
         })}
       </div>
+
+      <SchoolPicks heading="模試で苦戦した方へ ─ 体系的に学べるスクール" />
     </article>
   );
 }

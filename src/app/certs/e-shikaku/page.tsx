@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import { SchoolPicks } from "@/components/SchoolPicks";
 import { certFaq } from "@/data/cert-faq";
 
 export const metadata: Metadata = {
@@ -224,6 +225,11 @@ export default function EShikakuPage() {
           ))}
         </dl>
       </section>
+
+      <SchoolPicks
+        category="E資格"
+        heading="E資格対応の AI / ディープラーニングスクール"
+      />
 
       <nav className="mt-12 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">
         <Link

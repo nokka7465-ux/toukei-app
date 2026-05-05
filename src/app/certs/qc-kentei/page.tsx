@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import { SchoolPicks } from "@/components/SchoolPicks";
 
 export const metadata: Metadata = {
   title: "QC検定(品質管理検定)とは ─ 受験対象・出題範囲・対策",
@@ -176,6 +177,11 @@ export default function QcKenteiPage() {
           </Link>
         </div>
       </section>
+
+      <SchoolPicks
+        category="QC検定"
+        heading="品質管理スキルを高める関連スクール"
+      />
 
       <nav className="mt-12 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">
         <Link
