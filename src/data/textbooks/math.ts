@@ -1010,5 +1010,333 @@ export const mathBasicsTextbook: Textbook = {
         },
       ],
     },
+    {
+      id: "ch8",
+      number: 8,
+      title: "数値計算と数値解析の基礎",
+      overview:
+        "コンピュータで統計計算を行うときの誤差・反復解法・モンテカルロ法。AI / ML の実装で前提となる数値感覚を養います。",
+      sections: [
+        {
+          id: "ch8-sec1",
+          number: "8.1",
+          title: "浮動小数点と数値誤差",
+          blocks: [
+            {
+              type: "p",
+              text: "コンピュータは実数を **浮動小数点** で近似的にしか表せません。$0.1 + 0.2 \\neq 0.3$ になる現象は有名で、統計計算でも同じ問題が現れます。",
+            },
+            {
+              type: "def",
+              title: "用語 ─ 主要な誤差",
+              body: "**丸め誤差**: 有限ビットでの近似による誤差(IEEE 754 64-bit で約 16 桁)\n\n**桁落ち**: 大きさが近い数の差で有効桁が失われる(分散計算の素朴な式が代表例)\n\n**情報落ち**: 大きい数に小さい数を足したとき、小さい数が無視される\n\n**累積誤差**: 反復計算で誤差が蓄積する",
+            },
+            {
+              type: "intuition",
+              title: "分散計算の素朴な式は危険",
+              body: "教科書の式 $V = E[X^2] - (E[X])^2$ をそのまま実装すると、$E[X^2]$ と $(E[X])^2$ が近い値で **桁落ち** が起きやすい。安全な実装は **Welford のオンラインアルゴリズム** で、各サンプルごとに平均と二乗和を逐次更新する。NumPy / pandas / R の `var()` はこちらを使っています。",
+            },
+            { type: "h3", text: "対数空間の計算" },
+            {
+              type: "def",
+              title: "公式 ─ logsumexp トリック",
+              body: "$\\;\\log(\\sum_i e^{x_i}) = m + \\log(\\sum_i e^{x_i - m}), \\quad m = \\max_i x_i\\;$\n\n各 $x_i$ から最大値 $m$ を引いてから指数化することで **オーバーフロー回避**。確率モデル(ベイズ・隠れマルコフ・ニューラルネット softmax)で必須。`scipy.special.logsumexp`、PyTorch の `torch.logsumexp`。",
+            },
+          ],
+        },
+        {
+          id: "ch8-sec2",
+          number: "8.2",
+          title: "反復法 ─ ニュートン法と勾配降下",
+          blocks: [
+            {
+              type: "p",
+              text: "閉形式解が得られない方程式や最適化問題は、**反復で近似解** を求めるしかない。ニュートン法と勾配降下法は、最適化の二大基本アルゴリズムです。",
+            },
+            { type: "h3", text: "ニュートン法" },
+            {
+              type: "def",
+              title: "公式 ─ 1 変数のニュートン法",
+              body: "$\\;x_{n+1} = x_n - \\dfrac{f(x_n)}{f'(x_n)}\\;$\n\n$f(x) = 0$ の解を反復で求める。$f$ が滑らか・初期値が良ければ **二次収束**(誤差が反復毎に二乗で減る)。多変数化は $\\boldsymbol x_{n+1} = \\boldsymbol x_n - H^{-1}\\nabla f$。",
+            },
+            { type: "h3", text: "勾配降下法(Gradient Descent)" },
+            {
+              type: "def",
+              title: "公式 ─ 勾配降下",
+              body: "最小化問題 $\\min_{\\boldsymbol x} f(\\boldsymbol x)$ について:\n\n$\\;\\boldsymbol x_{n+1} = \\boldsymbol x_n - \\eta \\nabla f(\\boldsymbol x_n)\\;$\n\n$\\eta$ は学習率(step size)。**一次収束** だが計算が軽く、ヘッセ行列が不要。深層学習はこの確率版(SGD・Adam)で動く。",
+            },
+            {
+              type: "intuition",
+              title: "ニュートン法 vs 勾配降下",
+              body: "ニュートン法は **収束が速い** が、ヘッセ行列の計算 + 反転が重い($O(n^3)$)。深層学習のように $n$ が数億のスケールでは現実的でない。勾配降下は **遅いが軽い** ため、大規模問題で勝つ。中間的な **準ニュートン法(BFGS / L-BFGS)** が古典最適化の主役。",
+            },
+          ],
+        },
+        {
+          id: "ch8-sec3",
+          number: "8.3",
+          title: "モンテカルロ法",
+          blocks: [
+            {
+              type: "p",
+              text: "**モンテカルロ法(Monte Carlo)** は乱数を使って数値解を得る一群の手法。閉形式の積分が不可能な高次元問題で必須です。",
+            },
+            { type: "h3", text: "基本原理 ─ 大数の法則" },
+            {
+              type: "def",
+              title: "公式 ─ 期待値のモンテカルロ近似",
+              body: "$\\;E[g(X)] = \\int g(x) f(x)\\,dx \\approx \\dfrac{1}{N} \\sum_{i=1}^{N} g(X_i), \\quad X_i \\sim f\\;$\n\n標本平均で期待値を近似。誤差は $O(N^{-1/2})$ で次元によらない ─ これが高次元で他手法に勝る理由。",
+            },
+            { type: "h3", text: "代表的な応用" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**π の近似**: 単位正方形に乱数を打ち、円内に入る割合 × 4(教育的だが π を知る最古典例)",
+                "**金融工学**: オプション価格の経路依存型評価",
+                "**物理**: 統計力学・粒子シミュレーション",
+                "**ベイズ統計**: MCMC で事後分布からサンプリング",
+                "**ML**: モンテカルロ・ドロップアウトで予測の不確実性推定",
+              ],
+            },
+            { type: "h3", text: "MCMC ─ マルコフ連鎖モンテカルロ" },
+            {
+              type: "p",
+              text: "**MCMC** は事後分布の正規化定数が不明でもサンプリングできる手法。Metropolis-Hastings・Gibbs サンプラー・HMC(NUTS)が主要アルゴリズム。Stan / PyMC / brms の中核です。準 1 級〜1 級レベルで深く扱います。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch9",
+      number: 9,
+      title: "情報理論の基礎 ─ エントロピー・KL・相互情報量",
+      overview:
+        "確率と情報を結ぶ理論。機械学習の損失関数・モデル選択・通信の数学的基盤。",
+      sections: [
+        {
+          id: "ch9-sec1",
+          number: "9.1",
+          title: "情報量とエントロピー",
+          blocks: [
+            {
+              type: "p",
+              text: "**情報理論(information theory)** はクロード・シャノンが 1948 年に体系化した、確率と情報を結ぶ理論。機械学習・通信・暗号・統計の中核に組み込まれています。",
+            },
+            { type: "h3", text: "自己情報量" },
+            {
+              type: "def",
+              title: "公式 ─ 自己情報量",
+              body: "事象 $A$ が確率 $p$ で起こるときの情報量:\n\n$\\;I(A) = -\\log_2 p \\quad [\\mathrm{bit}]\\;$\n\n稀な事象($p$ 小)は **情報量が大きい**(ニュースバリュー)、頻繁な事象は情報量が小。$p = 1/2$ で 1 bit、$p = 1/8$ で 3 bit。",
+            },
+            { type: "h3", text: "シャノン エントロピー" },
+            {
+              type: "def",
+              title: "公式 ─ エントロピー",
+              body: "確率分布 $P = (p_1, \\ldots, p_n)$ のエントロピー:\n\n$\\;H(P) = -\\sum_{i=1}^{n} p_i \\log_2 p_i\\;$\n\n**分布の不確かさ・無秩序さ** を測る指標。一様分布で最大、デルタ分布で 0。コインの表確率 0.5 で 1 bit、0 や 1 で 0 bit。",
+            },
+            {
+              type: "intuition",
+              title: "決定木の情報利得",
+              body: "決定木の分割基準 **情報利得**(information gain)は、分割前のエントロピーから分割後の条件付きエントロピーを引いたもの。分割で **不確かさがどれだけ減ったか** を測る。ID3・C4.5 アルゴリズムの基本原理で、CART のジニ不純度の親戚です。",
+            },
+          ],
+        },
+        {
+          id: "ch9-sec2",
+          number: "9.2",
+          title: "KL ダイバージェンスと交差エントロピー",
+          blocks: [
+            {
+              type: "p",
+              text: "2 つの分布の **距離(に近いもの)** を測る情報理論的指標。機械学習の損失関数として中心的役割を果たします。",
+            },
+            { type: "h3", text: "KL ダイバージェンス" },
+            {
+              type: "def",
+              title: "公式 ─ Kullback-Leibler divergence",
+              body: "$\\;\\mathrm{KL}(P \\Vert Q) = \\sum_i p_i \\log \\dfrac{p_i}{q_i}\\;$(連続なら積分)\n\n**真の分布 $P$ を予測分布 $Q$ で近似したときの『情報損失』**。$\\mathrm{KL}(P \\Vert Q) \\geq 0$、等号は $P = Q$。**非対称**($\\mathrm{KL}(P \\Vert Q) \\neq \\mathrm{KL}(Q \\Vert P)$ 一般に)で『距離』ではない。",
+            },
+            { type: "h3", text: "交差エントロピー" },
+            {
+              type: "def",
+              title: "公式 ─ Cross-Entropy",
+              body: "$\\;H(P, Q) = -\\sum_i p_i \\log q_i = H(P) + \\mathrm{KL}(P \\Vert Q)\\;$\n\n分類問題の **損失関数** として頻用。真のラベル分布 $P$ と予測分布 $Q$ の交差エントロピーを最小化 = 最尤推定 = KL 最小化(同値)。",
+            },
+            {
+              type: "intuition",
+              title: "VAE と KL 正則化",
+              body: "**変分オートエンコーダ(VAE)** の損失は **再構成誤差 + KL ダイバージェンス**。KL 項は『潜在変数の事後分布を標準正規に近づける』正則化として働き、学習が滑らかに整う。生成モデルでこの構造は普遍的です。",
+            },
+          ],
+        },
+        {
+          id: "ch9-sec3",
+          number: "9.3",
+          title: "相互情報量とモデル選択",
+          blocks: [
+            {
+              type: "p",
+              text: "**相互情報量(mutual information)** は 2 変数の **依存度** を情報理論的に測る指標。線形依存しか捉えない相関係数を超えて、**任意の依存関係** を捉えます。",
+            },
+            { type: "h3", text: "相互情報量の定義" },
+            {
+              type: "def",
+              title: "公式 ─ 相互情報量",
+              body: "$\\;I(X; Y) = \\sum_{x, y} p(x, y) \\log \\dfrac{p(x, y)}{p(x) p(y)} = H(X) + H(Y) - H(X, Y)\\;$\n\n$X$ と $Y$ が独立 ⇔ $I(X; Y) = 0$。値が大きいほど依存が強い。**線形・非線形を問わない依存度** を測れる。",
+            },
+            { type: "h3", text: "情報量規準と AIC・BIC・WAIC" },
+            {
+              type: "def",
+              title: "公式 ─ 主要な情報量規準",
+              body: "**AIC**(赤池):$\\mathrm{AIC} = -2\\log L + 2k$。予測誤差の漸近的最小化\n\n**BIC**(ベイズ情報量規準):$\\mathrm{BIC} = -2\\log L + k\\log n$。標本サイズ $n$ で罰則強化、真のモデル選択向き\n\n**WAIC**(Watanabe):特異モデル・階層モデルにも対応(渡辺澄夫 2010)\n\nいずれも **対数尤度 - 罰則項** の形で、情報理論を背景に持つ。",
+            },
+            {
+              type: "practical",
+              title: "🛠 ML での応用",
+              body: "**特徴選択**: 相互情報量で『目的変数との依存』を測り、上位を採用(`sklearn.feature_selection.mutual_info_classif`)。**情報ボトルネック**(Tishby): 深層学習の表現学習を情報理論で説明する理論的枠組み。**InfoGAN・InfoVAE**: 情報量を陽に扱った生成モデル。",
+            },
+            { type: "h3", text: "結びに" },
+            {
+              type: "p",
+              text: "情報理論は『**確率の言語で情報を測る**』分野。機械学習の損失関数・モデル選択・表現学習のすべてに食い込んでおり、AI 時代の数学的素養として今後も価値を増していきます。E 資格・準 1 級でより深く扱います。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch10",
+      number: 10,
+      title: "凸最適化と機械学習の最適化",
+      overview:
+        "凸関数・凸集合・KKT 条件・SGD・Adam ─ 機械学習で動くアルゴリズムの数学的根拠。",
+      sections: [
+        {
+          id: "ch10-sec1",
+          number: "10.1",
+          title: "凸性と最適化",
+          blocks: [
+            {
+              type: "p",
+              text: "**凸最適化(convex optimization)** は、目的関数が凸・制約が凸集合の最適化問題。**任意の局所最適解が大域最適解** という強力な性質をもち、機械学習の理論的解析の中心です。",
+            },
+            { type: "h3", text: "凸関数の定義" },
+            {
+              type: "def",
+              title: "用語 ─ 凸関数",
+              body: "関数 $f$ が **凸(convex)** とは、任意の $x, y$ と $t \\in [0, 1]$ について:\n\n$\\;f(tx + (1-t)y) \\leq t f(x) + (1-t) f(y)\\;$\n\nグラフが **下に凸**(谷型)。任意の 2 点を結ぶ線分が、関数の上にある。",
+            },
+            { type: "h3", text: "代表的な凸関数" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**線形関数** $\\boldsymbol c^\\top \\boldsymbol x$(凸かつ凹)",
+                "**二次形式** $\\boldsymbol x^\\top A \\boldsymbol x$($A$ が半正定値なら凸)",
+                "**指数関数** $e^x$、$-\\log x$",
+                "**ノルム** $\\|\\boldsymbol x\\|_p$($p \\geq 1$)",
+                "**最小二乗誤差** $\\|y - X\\beta\\|^2$ ─ 線形回帰の損失",
+                "**交差エントロピー** ─ ロジスティック回帰の損失",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "なぜ凸性が大事か",
+              body: "**凸 = 局所最適 = 大域最適**。勾配降下法は局所最適に落ちますが、**凸問題なら局所 = 大域** なので最適性が保証されます。線形回帰・SVM・ロジスティック回帰は凸 → 解が一意・大域最適。一方 **ニューラルネットは非凸** で、複数の局所最適があり、初期化に依存します。",
+            },
+          ],
+        },
+        {
+          id: "ch10-sec2",
+          number: "10.2",
+          title: "ラグランジュ乗数法と KKT 条件",
+          blocks: [
+            {
+              type: "p",
+              text: "**制約付き最適化** の標準ツール。等式制約はラグランジュ乗数、不等式制約は **KKT 条件** で扱います。",
+            },
+            { type: "h3", text: "ラグランジュ関数" },
+            {
+              type: "def",
+              title: "公式 ─ ラグランジュ関数",
+              body: "等式制約 $g_i(\\boldsymbol x) = 0$ 付きの $\\min f(\\boldsymbol x)$ について:\n\n$\\;L(\\boldsymbol x, \\boldsymbol \\lambda) = f(\\boldsymbol x) + \\sum_i \\lambda_i g_i(\\boldsymbol x)\\;$\n\n極値条件は $\\nabla_{\\boldsymbol x} L = 0$ かつ $g_i = 0$。$\\lambda_i$ は **シャドウ価格**(制約緩和の限界価値)を表す経済学的解釈も。",
+            },
+            { type: "h3", text: "KKT 条件" },
+            {
+              type: "def",
+              title: "公式 ─ KKT(Karush-Kuhn-Tucker)条件",
+              body: "不等式制約 $h_j(\\boldsymbol x) \\leq 0$ も含む一般化:\n\n**1. 停留性**: $\\nabla f + \\sum \\lambda_i \\nabla g_i + \\sum \\mu_j \\nabla h_j = 0$\n**2. 主問題実行可能性**: $g_i = 0$, $h_j \\leq 0$\n**3. 双対実行可能性**: $\\mu_j \\geq 0$\n**4. 相補スラック性**: $\\mu_j h_j = 0$",
+            },
+            {
+              type: "intuition",
+              title: "SVM は KKT そのもの",
+              body: "**サポートベクターマシン(SVM)** の解は KKT 条件から導かれる。マージン上の点(サポートベクター)で $\\mu_j > 0$、それ以外で $\\mu_j = 0$ ─ これが『**サポートベクター以外のデータは予測に寄与しない**』という SVM の特徴を生む。最適化と機械学習の美しい接続点。",
+            },
+          ],
+        },
+        {
+          id: "ch10-sec3",
+          number: "10.3",
+          title: "SGD と現代の最適化アルゴリズム",
+          blocks: [
+            {
+              type: "p",
+              text: "深層学習の心臓部 ─ **確率的勾配降下法(SGD)** とその発展系。データ全体で勾配を計算する古典手法では大規模学習が不可能なため、ミニバッチで近似します。",
+            },
+            { type: "h3", text: "SGD と ミニバッチ" },
+            {
+              type: "def",
+              title: "公式 ─ SGD",
+              body: "$\\;\\boldsymbol \\theta_{t+1} = \\boldsymbol \\theta_t - \\eta \\nabla_{\\boldsymbol \\theta} \\ell(\\boldsymbol \\theta_t; \\boldsymbol x_b, \\boldsymbol y_b)\\;$\n\nミニバッチ $\\boldsymbol x_b$(サイズ 32〜512)で勾配を近似。**バッチ勾配降下より速く、純粋な確率的勾配より安定**。深層学習の標準。",
+            },
+            { type: "h3", text: "Momentum と Adam" },
+            {
+              type: "def",
+              title: "公式 ─ Momentum SGD",
+              body: "$\\;v_{t+1} = \\beta v_t + (1-\\beta) \\nabla \\ell, \\quad \\boldsymbol \\theta_{t+1} = \\boldsymbol \\theta_t - \\eta v_{t+1}\\;$\n\n勾配の **指数移動平均** で慣性を加える。$\\beta = 0.9$ が標準。地形のジグザグを抑え、収束を速める。",
+            },
+            {
+              type: "def",
+              title: "公式 ─ Adam(Adaptive Moment)",
+              body: "1 次モーメント $m_t$(平均)と 2 次モーメント $v_t$(分散)を指数平均で追跡:\n\n$\\;\\boldsymbol \\theta_{t+1} = \\boldsymbol \\theta_t - \\eta \\dfrac{\\hat m_t}{\\sqrt{\\hat v_t} + \\epsilon}\\;$\n\nパラメータごとに適応的な学習率。**深層学習のデファクト標準**(Kingma & Ba 2014)。AdamW(weight decay 改善版)が現代の改良。",
+            },
+            { type: "h3", text: "学習率スケジューラ" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Step decay**: 一定エポックごとに学習率を 1/10 に",
+                "**Exponential decay**: $\\eta_t = \\eta_0 \\gamma^t$ で指数的に",
+                "**Cosine annealing**: コサイン関数で滑らかに下げる(SGDR)",
+                "**Warmup**: 最初の数エポックは学習率を徐々に上げる(Transformer 学習で必須)",
+                "**One-cycle policy**: 一山型で上昇 → 下降(Smith 2018)",
+              ],
+            },
+            {
+              type: "practical",
+              title: "🛠 実務でのガイダンス",
+              body: "**最初の選択は Adam(lr=1e-3)+ Cosine decay**。バッチサイズは GPU メモリと相談(32〜256 が多い)。**LR Range Test**(Smith 2017)で適切な学習率を見つける手法も実用的。困ったら Karpathy の有名 tweet「**Adam の lr=3e-4 はだいたい何でも動く**」が指針になります。",
+            },
+            { type: "h3", text: "結びに ─ 数学基礎の地図完成" },
+            {
+              type: "p",
+              text: "Ch1-10 で **統計のための数学** が一通り揃いました。指数対数・微積分・線形代数(基礎/発展)・確率・多変数微分・数値計算・情報理論・凸最適化 ─ これらは **統計検定 1 級・E 資格・データサイエンティスト** の数学パートで前提となる教養です。",
+            },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "[**統計検定 2 級教科書**](/textbook/grade-2) ─ ここまでの数学の応用",
+                "[**E 資格教科書**](/certs/e-shikaku/textbook) ─ 深層学習の理論と実装",
+                "[**プログラミング教科書**](/programming) ─ Python / R で実装する",
+                "[**統計用語集**](/glossary) ─ 出会った用語をすぐ確認",
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };
