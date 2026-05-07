@@ -800,7 +800,199 @@ export const mathBasicsTextbook: Textbook = {
             { type: "h3", text: "まとめ" },
             {
               type: "p",
-              text: "確率の数学(Ch5)+ 多変数の微分(Ch6)── これで統計検定 2 級・準 1 級・E 資格までの **数学的下地** がほぼ揃いました。各級の教科書に進む準備完了です。",
+              text: "確率の数学(Ch5)+ 多変数の微分(Ch6)── これで統計検定 2 級・準 1 級・E 資格までの **数学的下地** がほぼ揃いました。続く 7 章では、AI/機械学習で必須となる **線形代数の発展(固有値・対角化・SVD)** に進みます。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch7",
+      number: 7,
+      title: "線形代数の発展 ─ 固有値・対角化・SVD",
+      overview:
+        "Ch4 で行列の基本を学んだ後、ここでは固有値分解と特異値分解(SVD)を扱います。これは PCA・推薦システム・ニューラルネットの理解に直結する、AI/ML の中核数学です。",
+      sections: [
+        {
+          id: "ch7-sec1",
+          number: "7.1",
+          title: "固有値と固有ベクトル",
+          blocks: [
+            {
+              type: "p",
+              text: "$n \\times n$ の正方行列 $A$ と非ゼロベクトル $\\boldsymbol v$ について、$A\\boldsymbol v = \\lambda \\boldsymbol v$ となる **スカラー $\\lambda$** が存在するとき、$\\lambda$ を **固有値**、$\\boldsymbol v$ を **固有ベクトル** と呼びます。",
+            },
+            {
+              type: "intuition",
+              title: "固有ベクトルは『方向が変わらない特別なベクトル』",
+              body: "ふつうのベクトル $\\boldsymbol v$ に行列 $A$ をかけると、回転 + 伸縮で別の方向を向きます。しかし **特別な方向のベクトル**(固有ベクトル)に対しては、$A$ の作用は **ただの伸縮(スケーリング)** だけ ─ 方向は変わらない。これが固有ベクトルの直感です。回転を伴う変換の中で、軸として動かない方向を見つけるイメージ。",
+            },
+            { type: "h3", text: "固有値の求め方" },
+            {
+              type: "def",
+              title: "公式 ─ 特性方程式",
+              body: "固有値 $\\lambda$ は **特性方程式**\n\n$\\;\\det(A - \\lambda I) = 0\\;$\n\nの解として求められる($I$ は単位行列)。$n \\times n$ 行列なら $n$ 個の固有値(重複・複素数を含む)。",
+            },
+            {
+              type: "ex",
+              title: "例題 7.1 ─ 2x2 行列の固有値",
+              body: "$A = \\begin{pmatrix} 4 & 1 \\\\ 2 & 3 \\end{pmatrix}$ の固有値を求めよ。\n\n**解**: $\\det(A - \\lambda I) = (4-\\lambda)(3-\\lambda) - 2 = \\lambda^2 - 7\\lambda + 10 = 0$\n\n$(\\lambda - 5)(\\lambda - 2) = 0$ より $\\lambda_1 = 5,\\ \\lambda_2 = 2$\n\n固有ベクトル: $\\lambda_1 = 5$ → $\\boldsymbol v_1 = (1, 1)^\\top$、$\\lambda_2 = 2$ → $\\boldsymbol v_2 = (1, -2)^\\top$ (定数倍を除く)",
+            },
+            { type: "h3", text: "固有値の重要な性質" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**トレース = 固有値の和**: $\\mathrm{tr}(A) = \\sum \\lambda_i$",
+                "**行列式 = 固有値の積**: $\\det(A) = \\prod \\lambda_i$",
+                "$A$ が逆行列をもつ ⇔ すべての固有値が非ゼロ",
+                "**対称行列**($A^\\top = A$)の固有値はすべて **実数**、固有ベクトルは互いに **直交** する",
+                "**正定値行列**(対称かつすべて正の固有値)は二次形式 $\\boldsymbol x^\\top A \\boldsymbol x > 0$ を満たす",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "対称行列の固有値が実数になる理由",
+              body: "対称行列(例: 共分散行列、ヘッセ行列)の固有値はすべて実数で、固有ベクトルは直交する。これは **PCA(主成分分析)** や **2 次形式の最適化** の数学的根拠。一般の行列だと固有値が複素数になり得て扱いが面倒だが、統計・最適化で出てくる行列はほぼ対称なので、実用上はこの『楽園』に住める。",
+            },
+          ],
+        },
+        {
+          id: "ch7-sec2",
+          number: "7.2",
+          title: "対角化と行列のべき乗",
+          blocks: [
+            {
+              type: "p",
+              text: "$n$ 個の固有値・固有ベクトルが揃えば、行列 $A$ は **対角化** できます。これにより行列計算が劇的に簡単になります。",
+            },
+            { type: "h3", text: "対角化の定義" },
+            {
+              type: "def",
+              title: "公式 ─ 対角化",
+              body: "$A$ の固有ベクトル $\\boldsymbol v_1, \\ldots, \\boldsymbol v_n$ を列に並べた行列 $P = [\\boldsymbol v_1 \\cdots \\boldsymbol v_n]$、固有値を対角に並べた行列 $\\Lambda = \\mathrm{diag}(\\lambda_1, \\ldots, \\lambda_n)$ とすると、\n\n$\\;A = P\\Lambda P^{-1}\\;$\n\nと表せる(これを **対角化** と呼ぶ)。$P$ の列が $n$ 個独立であることが必要条件。",
+            },
+            { type: "h3", text: "行列のべき乗" },
+            {
+              type: "def",
+              title: "公式 ─ 対角化を使ったべき乗",
+              body: "$A = P\\Lambda P^{-1}$ なら、\n\n$\\;A^k = P\\Lambda^k P^{-1},\\quad \\Lambda^k = \\mathrm{diag}(\\lambda_1^k, \\ldots, \\lambda_n^k)\\;$\n\n$A^{100}$ も固有値の 100 乗だけで計算でき、実質的にスカラー計算 1 行で終わる。",
+            },
+            {
+              type: "intuition",
+              title: "なぜ対角化で計算が楽になるか",
+              body: "$A^2 = P\\Lambda P^{-1} \\cdot P\\Lambda P^{-1} = P\\Lambda^2 P^{-1}$ ─ $P^{-1}$ と $P$ が打ち消し合う。**行列のかけ算が、固有値というスカラーのかけ算に変換される**。マルコフ連鎖の長期挙動・指数行列 $e^A$・微分方程式の解の表現など、無数の応用で活用されます。",
+            },
+            { type: "h3", text: "直交行列による対角化" },
+            {
+              type: "def",
+              title: "公式 ─ 対称行列のスペクトル分解",
+              body: "対称行列 $A$ では、$P$ を **直交行列**(各列が単位ベクトルかつ互いに直交)に取れる。すなわち $P^\\top P = I$、$P^{-1} = P^\\top$。よって\n\n$\\;A = Q\\Lambda Q^\\top\\;$\n\n($Q$ は直交行列)。これを **スペクトル分解(spectral decomposition)** と呼び、PCA の数学的中核。",
+            },
+            {
+              type: "practical",
+              title: "🛠 PCA との関係",
+              body: "**主成分分析(PCA)** はデータの **共分散行列** $\\Sigma$ をスペクトル分解する手法。固有ベクトルが『主成分』、固有値が『その方向の分散』に対応。固有値の大きい順に主成分を採用 → 次元削減。**E 資格・統計検定 2 級・データサイエンティスト** のすべてで頻出。",
+            },
+          ],
+        },
+        {
+          id: "ch7-sec3",
+          number: "7.3",
+          title: "特異値分解(SVD)",
+          blocks: [
+            {
+              type: "p",
+              text: "**特異値分解(Singular Value Decomposition, SVD)** は、対角化が `n×n` 正方行列に限られるのに対し、**任意の $m \\times n$ 行列** に拡張できる強力な分解。AI/ML の理論で最も重要な行列分解の一つです。",
+            },
+            { type: "h3", text: "SVD の定義" },
+            {
+              type: "def",
+              title: "公式 ─ 特異値分解",
+              body: "任意の実行列 $A \\in \\mathbb{R}^{m \\times n}$ は次の形に一意に分解できる:\n\n$\\;A = U\\Sigma V^\\top\\;$\n\n- $U \\in \\mathbb{R}^{m \\times m}$: 直交行列(左特異ベクトル)\n- $V \\in \\mathbb{R}^{n \\times n}$: 直交行列(右特異ベクトル)\n- $\\Sigma \\in \\mathbb{R}^{m \\times n}$: 対角に **特異値 $\\sigma_1 \\geq \\sigma_2 \\geq \\cdots \\geq 0$** が並ぶ(他は 0)\n\n特異値の数 = $A$ のランク。$\\sigma_i^2$ は $A^\\top A$(または $AA^\\top$)の固有値。",
+            },
+            {
+              type: "intuition",
+              title: "SVD は『一般行列の幾何学』",
+              body: "正方対称行列の固有分解が『軸方向の伸縮』を表すように、**任意の行列の SVD は『回転 → 伸縮 → 回転』** という幾何変換の分解です。$V^\\top$ で入力を回し直し、$\\Sigma$ で各方向に異なる倍率で伸縮し、$U$ で出力を回す ─ どんな線形変換もこの 3 段階で表せる、というのが SVD の主張。",
+            },
+            { type: "h3", text: "低ランク近似" },
+            {
+              type: "def",
+              title: "公式 ─ 切り捨て SVD(rank-k 近似)",
+              body: "上位 $k$ 個の特異値だけ残し、残りを 0 にすると最良の rank-$k$ 近似が得られる:\n\n$\\;A_k = \\sum_{i=1}^{k} \\sigma_i \\boldsymbol u_i \\boldsymbol v_i^\\top\\;$\n\nこれは **Eckart-Young の定理** により、フロベニウスノルム $\\|A - B\\|_F$ を最小化する rank-$k$ 行列。",
+            },
+            {
+              type: "intuition",
+              title: "情報の圧縮としての SVD",
+              body: "$A_k$ は『**$A$ の情報を上位 $k$ 個の方向だけで近似**』した行列。$k$ を小さくすれば情報損失が増えるが、データサイズは劇的に減る。**画像圧縮・推薦システム・自然言語処理**(LSI、word2vec の前身)の中核アイデアで、現代の **トランスフォーマー** の低ランク適応(LoRA)もこの考え方の延長線上にあります。",
+            },
+            { type: "h3", text: "SVD の応用例" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**PCA**: 中心化したデータ行列の SVD = 共分散行列のスペクトル分解",
+                "**画像圧縮**: 写真行列を低ランク近似(可逆 JPEG とは別系統)",
+                "**Latent Semantic Analysis (LSA)**: 文書 × 単語行列を低ランク化 → 意味的類似度",
+                "**Netflix Prize**: ユーザー × 映画の評価行列を低ランク補完(行列分解推薦)",
+                "**LoRA**(Low-Rank Adaptation): 巨大言語モデルの fine-tuning で重み更新を低ランク行列で近似",
+              ],
+            },
+            {
+              type: "practical",
+              title: "🛠 Python での SVD 実行",
+              body: "NumPy: `U, s, Vt = numpy.linalg.svd(A)`、scikit-learn の `TruncatedSVD` で高速近似。データサイエンス実務の必須ツール。手で計算する機会はほぼないが、**結果の読み方(特異値の大きさで情報量を測る)** は習得しておくと診断力が上がります。",
+            },
+          ],
+        },
+        {
+          id: "ch7-sec4",
+          number: "7.4",
+          title: "二次形式と正定値性",
+          blocks: [
+            {
+              type: "p",
+              text: "**二次形式(quadratic form)** $\\boldsymbol x^\\top A \\boldsymbol x$ は、最適化・統計・物理で頻出。正定値・半正定値・不定の分類は固有値で決まります。",
+            },
+            { type: "h3", text: "二次形式の定義" },
+            {
+              type: "def",
+              title: "定義 ─ 二次形式",
+              body: "対称行列 $A \\in \\mathbb{R}^{n \\times n}$ とベクトル $\\boldsymbol x = (x_1, \\ldots, x_n)^\\top$ に対し、\n\n$\\;Q(\\boldsymbol x) = \\boldsymbol x^\\top A \\boldsymbol x = \\sum_{i,j} A_{ij} x_i x_j\\;$\n\n例: 2 次元なら $A_{11}x_1^2 + 2A_{12}x_1 x_2 + A_{22}x_2^2$。**変数の 2 次の項だけからなる関数**。",
+            },
+            { type: "h3", text: "正定値行列とその判定" },
+            {
+              type: "def",
+              title: "定義 ─ 正定値・半正定値",
+              body: "対称行列 $A$ について:\n\n- **正定値(positive definite)**: 任意の非ゼロ $\\boldsymbol x$ で $\\boldsymbol x^\\top A \\boldsymbol x > 0$ ⇔ **すべての固有値 > 0**\n- **半正定値**: $\\boldsymbol x^\\top A \\boldsymbol x \\geq 0$ ⇔ すべての固有値 $\\geq 0$\n- **不定(indefinite)**: 正と負の固有値が混在\n- **負定値**: 全固有値 < 0",
+            },
+            {
+              type: "intuition",
+              title: "正定値性の幾何的意味",
+              body: "二次形式 $Q(\\boldsymbol x) = \\boldsymbol x^\\top A \\boldsymbol x$ のグラフを描くと、**正定値**なら原点が最小点の **谷型(凸関数)**、**負定値**なら最大点の **山型**、**不定**なら **鞍型**。最適化問題で『この点は本当に最小値か?』を判定するのに、ヘッセ行列の固有値を見る ─ これが二階条件です。",
+            },
+            { type: "h3", text: "応用 ─ 統計と最適化" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**共分散行列**: 必ず半正定値。固有値は分散の最大化方向(PCA)",
+                "**ヘッセ行列**: 多変数関数の極値判定に使用。正定値 → 極小、負定値 → 極大、不定 → 鞍点",
+                "**ニュートン法**: 反復に $H^{-1}$ を使うので、正定値性が収束の鍵",
+                "**SVM の双対問題**: 正定値カーネル行列 → 一意解",
+                "**ガウス分布の密度関数** $\\propto \\exp(-\\frac{1}{2}\\boldsymbol x^\\top \\Sigma^{-1} \\boldsymbol x)$ ─ 共分散逆行列が二次形式を作る",
+              ],
+            },
+            { type: "h3", text: "まとめ ─ 線形代数の地図" },
+            {
+              type: "p",
+              text: "Ch4(基礎)→ Ch7(発展)で線形代数の主要道具が揃いました。**ベクトル・行列・行列式 → 固有値・対角化 → SVD → 二次形式・正定値性**。これらは **PCA・回帰・最適化・ニューラルネット・推薦・画像処理** すべての基盤。E 資格・統計検定 2 級〜準 1 級・DS 検定の数学パートで頻出する **AI 時代の必修教養** です。",
+            },
+            {
+              type: "practical",
+              title: "🛠 次のステップ",
+              body: "ここから先は『使う側』の世界。**統計検定 2 級** の回帰分析章で固有値・SVD の応用を、**準 1 級** の多変量解析で PCA・因子分析を、**E 資格** で SVD ベースの次元削減・低ランク近似を学びます。線形代数は『**手で計算するもの**』から『**結果を読む / 設計するもの**』にシフトしていきます。",
             },
           ],
         },

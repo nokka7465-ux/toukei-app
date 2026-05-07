@@ -4030,4 +4030,168 @@ export const glossary: GlossaryTerm[] = [
     category: "信頼性工学",
     link: "/certs/qc-kentei/textbook#ch6-sec3",
   },
+
+  // === 3級 / 仮説検定の基礎(grade-3 Ch5) ===
+  {
+    term: "p値",
+    reading: "ぴーち",
+    english: "p-value",
+    definition:
+      "帰無仮説 H₀ が正しいと仮定したときに、観測された統計量以上に極端な値が得られる確率。$p < \\alpha$ なら H₀ を棄却する。『H₀ が正しい確率』ではないので解釈に注意。",
+    level: "3",
+    category: "仮説検定",
+    link: "/textbook/grade-3#ch5-sec1",
+  },
+  {
+    term: "棄却域",
+    reading: "ききゃくいき",
+    english: "Rejection region",
+    definition:
+      "検定統計量がこの範囲に入ったら帰無仮説を棄却する領域。両側 z 検定で α=5% なら $|Z| \\geq 1.96$、右片側で α=5% なら $Z \\geq 1.645$。検定設計の中心概念。",
+    level: "3",
+    category: "仮説検定",
+    link: "/textbook/grade-3#ch5-sec1",
+  },
+  {
+    term: "第一種の誤り",
+    reading: "だいいっしゅのあやまり",
+    english: "Type I error",
+    definition:
+      "帰無仮説 H₀ が正しいのに棄却してしまう誤り。発生確率 = 有意水準 $\\alpha$。新薬で『効果がないのにある』と判定するなど。",
+    level: "3",
+    category: "仮説検定",
+    link: "/textbook/grade-3#ch5-sec1",
+  },
+  {
+    term: "第二種の誤り",
+    reading: "だいにしゅのあやまり",
+    english: "Type II error",
+    definition:
+      "帰無仮説 H₀ が誤っているのに棄却しない誤り。発生確率 $\\beta$。検出力 = $1-\\beta$。実際の効果を見逃すミス。第一種の誤りとはトレードオフ関係(片方を厳しくすれば他方が緩む)。",
+    level: "3",
+    category: "仮説検定",
+    link: "/textbook/grade-3#ch5-sec1",
+  },
+  {
+    term: "z検定",
+    reading: "ぜっとけんてい",
+    english: "z-test",
+    definition:
+      "検定統計量 $Z = (\\bar X - \\mu_0)/(\\sigma/\\sqrt n)$ が標準正規分布に従うことを利用する検定。母分散既知 or 大標本で母平均・母比率の検定に使う。3 級で扱う最も基本的な検定。",
+    level: "3",
+    category: "仮説検定",
+    link: "/textbook/grade-3#ch5-sec2",
+  },
+  {
+    term: "適合度検定",
+    reading: "てきごうどけんてい",
+    english: "Goodness-of-fit test",
+    definition:
+      "観測度数分布が理論分布に従うかを判定するカイ二乗検定。$\\chi^2 = \\sum (O_i - E_i)^2/E_i$ が自由度 $k-1$ のカイ二乗分布に従う。サイコロの公平性、メンデルの遺伝の法則の検証など。",
+    level: "3",
+    category: "仮説検定",
+    link: "/textbook/grade-3#ch5-sec4",
+  },
+  {
+    term: "片側検定",
+    reading: "かたがわけんてい",
+    english: "One-sided test",
+    definition:
+      "対立仮説 $H_1: \\mu > \\mu_0$ または $\\mu < \\mu_0$ のように方向を指定した検定。両側に比べ棄却域が片側に集中するため、同じ α で検出力が高い。事後に方向を変えるのは『p ハッキング』。",
+    level: "3",
+    category: "仮説検定",
+    link: "/textbook/grade-3#ch5-sec2",
+  },
+  {
+    term: "両側検定",
+    reading: "りょうがわけんてい",
+    english: "Two-sided test",
+    definition:
+      "対立仮説 $H_1: \\mu \\neq \\mu_0$ のように方向を限定しない検定。棄却域が両裾(各 $\\alpha/2$)に分かれる。『変わったか』を見たい標準的な状況で使う。",
+    level: "3",
+    category: "仮説検定",
+    link: "/textbook/grade-3#ch5-sec2",
+  },
+
+  // === math Ch7 / 線形代数の発展 ===
+  {
+    term: "固有値",
+    reading: "こゆうち",
+    english: "Eigenvalue",
+    definition:
+      "正方行列 $A$ について $A\\boldsymbol v = \\lambda \\boldsymbol v$($\\boldsymbol v \\neq \\boldsymbol 0$)を満たすスカラー $\\lambda$。特性方程式 $\\det(A - \\lambda I) = 0$ の解。トレース = 固有値の和、行列式 = 固有値の積。",
+    level: "2",
+    category: "線形代数",
+    link: "/math/textbook#ch7-sec1",
+  },
+  {
+    term: "固有ベクトル",
+    reading: "こゆうべくとる",
+    english: "Eigenvector",
+    definition:
+      "$A\\boldsymbol v = \\lambda \\boldsymbol v$ を満たす非ゼロベクトル $\\boldsymbol v$。$A$ をかけても **方向が変わらない** 特別な向き。対称行列では互いに直交する固有ベクトルが選べる。",
+    level: "2",
+    category: "線形代数",
+    link: "/math/textbook#ch7-sec1",
+  },
+  {
+    term: "対角化",
+    reading: "たいかくか",
+    english: "Diagonalization",
+    definition:
+      "正方行列を $A = P\\Lambda P^{-1}$ の形に分解(P は固有ベクトル行列、Λ は固有値の対角行列)。$A^k = P\\Lambda^k P^{-1}$ より行列のべき乗が容易になる。",
+    level: "2",
+    category: "線形代数",
+    link: "/math/textbook#ch7-sec2",
+  },
+  {
+    term: "スペクトル分解",
+    reading: "すぺくとるぶんかい",
+    english: "Spectral decomposition",
+    definition:
+      "対称行列の対角化 $A = Q\\Lambda Q^\\top$($Q$ は直交行列)。固有ベクトルが直交するため $P^{-1} = P^\\top$ と書ける。PCA は共分散行列のスペクトル分解。",
+    level: "準1",
+    category: "線形代数",
+    link: "/math/textbook#ch7-sec2",
+  },
+  {
+    term: "特異値分解",
+    reading: "とくいちぶんかい",
+    english: "Singular Value Decomposition (SVD)",
+    definition:
+      "任意の $m \\times n$ 行列 $A$ の分解 $A = U\\Sigma V^\\top$。$U,V$ は直交行列、$\\Sigma$ は特異値を対角に並べた行列。$\\sigma_i^2$ は $A^\\top A$ の固有値。低ランク近似・PCA・LoRA の基礎。",
+    level: "準1",
+    category: "線形代数",
+    link: "/math/textbook#ch7-sec3",
+  },
+  {
+    term: "低ランク近似",
+    reading: "ていらんくきんじ",
+    english: "Low-rank approximation",
+    definition:
+      "SVD で上位 $k$ 個の特異値だけ残した行列 $A_k = \\sum_{i=1}^{k} \\sigma_i \\boldsymbol u_i \\boldsymbol v_i^\\top$。Eckart-Young の定理によりフロベニウスノルム最小の rank-$k$ 近似。画像圧縮・推薦・LoRA の基礎。",
+    level: "準1",
+    category: "線形代数",
+    link: "/math/textbook#ch7-sec3",
+  },
+  {
+    term: "正定値行列",
+    reading: "せいていちぎょうれつ",
+    english: "Positive definite matrix",
+    definition:
+      "対称行列 $A$ で、任意の非ゼロ $\\boldsymbol x$ に対し $\\boldsymbol x^\\top A \\boldsymbol x > 0$ が成り立つもの。すべての固有値 > 0 と同値。共分散行列の逆行列・SVM の双対問題のカーネル行列など、最適化で重要。",
+    level: "準1",
+    category: "線形代数",
+    link: "/math/textbook#ch7-sec4",
+  },
+  {
+    term: "二次形式",
+    reading: "にじけいしき",
+    english: "Quadratic form",
+    definition:
+      "対称行列 $A$ とベクトル $\\boldsymbol x$ に対する $Q(\\boldsymbol x) = \\boldsymbol x^\\top A \\boldsymbol x$。2 次の項だけからなる関数で、正定値・半正定値・不定の分類が固有値の符号で決まる。多変量正規分布の指数部にも現れる。",
+    level: "準1",
+    category: "線形代数",
+    link: "/math/textbook#ch7-sec4",
+  },
 ];
