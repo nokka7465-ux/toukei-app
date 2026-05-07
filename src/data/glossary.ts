@@ -3858,4 +3858,176 @@ export const glossary: GlossaryTerm[] = [
     level: "準1",
     category: "情報量規準",
   },
+
+  // === QC検定 / 品質管理・実験計画 ===
+  {
+    term: "工程能力指数",
+    reading: "こうていのうりょくしすう",
+    english: "Process capability index",
+    definition:
+      "規格幅 USL−LSL に対する工程ばらつきの相対指標。$C_p = (\\mathrm{USL} - \\mathrm{LSL})/(6\\sigma)$。中心ずれを考慮した $C_{pk}$、目標値からの逸脱もペナルティ化する $C_{pm}$ を併用する。",
+    level: "2",
+    category: "品質管理",
+    link: "/certs/qc-kentei/textbook#ch2-sec2",
+  },
+  {
+    term: "シックスシグマ",
+    reading: "しっくすしぐま",
+    english: "Six Sigma",
+    definition:
+      "規格幅が ±6σ に収まる工程能力($C_{pk} = 2.0$、不良率 ≒ 3.4 PPM)を目標とする品質改革手法。モトローラ発、GE が 1990 年代に展開。DMAIC サイクルで運用。",
+    level: "2",
+    category: "品質管理",
+    link: "/certs/qc-kentei/textbook#ch2-sec2",
+  },
+  {
+    term: "管理図",
+    reading: "かんりず",
+    english: "Control chart",
+    definition:
+      "工程の測定値を時系列で記録し、中心線・上下管理限界(±3σ)で異常を検出する図。Shewhart が 1924 年に考案。X̄-R / X̄-s / X-Rs(計量値)、p / np / c / u(計数値)に分かれる。",
+    level: "2",
+    category: "品質管理",
+    link: "/certs/qc-kentei/textbook#ch2-sec1",
+  },
+  {
+    term: "OC曲線",
+    reading: "おーしーきょくせん",
+    english: "Operating Characteristic Curve",
+    definition:
+      "抜取検査計画における『ロット不良率 p』と『合格確率 L(p)』の関係を表す曲線。AQL(生産者リスク α=5% 以下)と LTPD(消費者リスク β=10% 以下)で計画の性能を要約する。",
+    level: "2",
+    category: "品質管理",
+    link: "/certs/qc-kentei/textbook#ch3-sec2",
+  },
+  {
+    term: "QC7つ道具",
+    reading: "きゅーしーななつどうぐ",
+    english: "Seven QC tools",
+    definition:
+      "現場の品質改善で使う 7 つの数値分析ツール ─ パレート図・特性要因図(フィッシュボーン)・ヒストグラム・散布図・管理図・チェックシート・グラフ(層別)。",
+    level: "3",
+    category: "品質管理",
+    link: "/certs/qc-kentei/textbook#ch4-sec1",
+  },
+  {
+    term: "新QC7つ道具",
+    reading: "しんきゅーしーななつどうぐ",
+    english: "Seven new QC tools",
+    definition:
+      "言語データ・概念整理向けの 7 つのツール ─ 親和図(KJ 法)・連関図・系統図・マトリクス図・マトリクスデータ解析法・PDPC 法・アローダイアグラム。1979 年提唱。",
+    level: "3",
+    category: "品質管理",
+    link: "/certs/qc-kentei/textbook#ch4-sec2",
+  },
+  {
+    term: "PDCAサイクル",
+    reading: "ぴーでぃーしーえーさいくる",
+    english: "PDCA Cycle",
+    definition:
+      "Plan(計画)→ Do(実行)→ Check(確認)→ Act(処置)を反復する継続改善の枠組み。Deming サイクルとも。仮説検証を回すというサイエンスの基本構造を経営に持ち込んだもの。",
+    level: "3",
+    category: "品質管理",
+    link: "/certs/qc-kentei/textbook#ch1-sec1",
+  },
+  {
+    term: "実験計画法",
+    reading: "じっけんけいかくほう",
+    english: "Design of Experiments (DOE)",
+    definition:
+      "限られた試行で複数因子の効果を効率よく分離する統計手法。Fisher の 3 原則(反復・無作為化・局所管理)を出発点に、一元配置・二元配置・直交表・田口メソッドに発展。",
+    level: "2",
+    category: "実験計画法",
+    link: "/certs/qc-kentei/textbook#ch5-sec1",
+  },
+  {
+    term: "直交表",
+    reading: "ちょっこうひょう",
+    english: "Orthogonal array",
+    definition:
+      "$n$ 行 $k$ 列で、任意の 2 列の水準組合せが同回数現れる表。$L_8(2^7), L_9(3^4), L_{16}(2^{15})$ などが代表的。少ない試行で多因子の主効果を独立に推定できる。",
+    level: "2",
+    category: "実験計画法",
+    link: "/certs/qc-kentei/textbook#ch5-sec3",
+  },
+  {
+    term: "交互作用",
+    reading: "こうごさよう",
+    english: "Interaction effect",
+    definition:
+      "因子の組合せが主効果の単純合算で説明できない現象。二元配置 ANOVA で $S_{A \\times B}$ として検定する。交互作用を見落とすと因子の真の効果を取り違える。",
+    level: "2",
+    category: "実験計画法",
+    link: "/certs/qc-kentei/textbook#ch5-sec2",
+  },
+  {
+    term: "田口メソッド",
+    reading: "たぐちめそっど",
+    english: "Taguchi Method",
+    definition:
+      "田口玄一が体系化した品質工学。誤差因子のもとで応答が安定する制御因子の組合せを SN 比 $\\mathrm{SN} = 10\\log_{10}(\\bar y^2 / s^2)$ の最大化で探す『ロバスト設計』。直交表が主道具。",
+    level: "2",
+    category: "実験計画法",
+    link: "/certs/qc-kentei/textbook#ch5-sec4",
+  },
+  {
+    term: "信頼性関数",
+    reading: "しんらいせいかんすう",
+    english: "Reliability function",
+    definition:
+      "時刻 $t$ までに故障しない確率 $R(t) = P(T > t) = 1 - F(t)$。故障率 $\\lambda(t) = f(t)/R(t)$ から $R(t) = \\exp(-\\int_0^t \\lambda)$ と一意に決まる。生存解析の生存関数と同概念。",
+    level: "2",
+    category: "信頼性工学",
+    link: "/certs/qc-kentei/textbook#ch6-sec1",
+  },
+  {
+    term: "バスタブ曲線",
+    reading: "ばすたぶきょくせん",
+    english: "Bathtub curve",
+    definition:
+      "故障率 $\\lambda(t)$ の典型的な時間変化。初期故障期(減少)→ 偶発故障期(一定)→ 摩耗故障期(増加)の 3 段階。バーンインで初期故障を、予防保守で摩耗故障を制御する。",
+    level: "2",
+    category: "信頼性工学",
+    link: "/certs/qc-kentei/textbook#ch6-sec2",
+  },
+  {
+    term: "ワイブル分布",
+    reading: "わいぶるぶんぷ",
+    english: "Weibull distribution",
+    definition:
+      "形状 $m$ と尺度 $\\eta$ をもつ寿命分布。$R(t)=\\exp(-(t/\\eta)^m)$。$m<1$ で初期故障、$m=1$ で指数分布(偶発故障)、$m>1$ で摩耗故障 ─ バスタブ曲線の各段階を 1 つの族で表せる。",
+    level: "2",
+    category: "信頼性工学",
+    link: "/certs/qc-kentei/textbook#ch6-sec2",
+  },
+  {
+    term: "MTBF",
+    reading: "えむてぃーびーえふ",
+    english: "Mean Time Between Failures",
+    definition:
+      "修理可能系の平均故障間隔(MTTF + MTTR)。$\\mathrm{Availability} = \\mathrm{MTBF}/(\\mathrm{MTBF}+\\mathrm{MTTR})$ で可用性を計算。SLA でファイブナイン(99.999% = 年 5 分以下停止)の根拠数字。",
+    level: "2",
+    category: "信頼性工学",
+    link: "/certs/qc-kentei/textbook#ch6-sec1",
+  },
+  {
+    term: "FMEA",
+    reading: "えふえむいーえー",
+    english: "Failure Mode and Effects Analysis",
+    definition:
+      "部品の故障モードを発生度・影響度・検知容易性で評価し、リスク優先数 RPN = O × S × D を算出するボトムアップの予防分析。FT が結果から原因を辿るのに対し、FMEA は原因から影響を予測。",
+    level: "2",
+    category: "信頼性工学",
+    link: "/certs/qc-kentei/textbook#ch6-sec3",
+  },
+  {
+    term: "FT法",
+    reading: "えふてぃーほう",
+    english: "Fault Tree Analysis",
+    definition:
+      "頂上事象(望まない結果)から AND/OR 論理ゲートで原因を分解するトップダウン安全分析手法。基本事象に確率を付与して頂上事象の発生確率を計算。航空・原発・医療機器の業界標準。",
+    level: "2",
+    category: "信頼性工学",
+    link: "/certs/qc-kentei/textbook#ch6-sec3",
+  },
 ];
