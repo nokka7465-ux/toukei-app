@@ -4,7 +4,7 @@ export const gradeTwoTextbook: Textbook = {
   levelSlug: "grade-2",
   title: "2級 教科書",
   intro:
-    "2級は統計学の「実用パート」です。標本から母集団を推し量る推定、データに基づいて意思決定する仮説検定、変数間の関係を式にする回帰分析 ─ 実務でいちばんよく使われる道具がそろう級。3級までで扱った確率・分布の知識を、いよいよ「現実のデータを動かす」ための武器として組み立て直します。",
+    "2級は統計学の「実用パート」です。標本から母集団を推し量る推定、データに基づいて意思決定する仮説検定、変数間の関係を式にする回帰分析、3 群以上を比べる分散分析、そして頻度データを扱う分割表分析・ロジスティック回帰 ─ 実務でいちばんよく使われる道具が 5 章で揃います。3 級までで扱った確率・分布の知識を、いよいよ「現実のデータを動かす」ための武器として組み立て直します。",
   chapters: [
     {
       id: "ch1",
@@ -1081,6 +1081,173 @@ summary(fit)    # 係数・p値・R² がまとめて表示`,
               type: "practical",
               title: "繰り返しのない二元配置の限界",
               body: "繰り返しがない($r = 1$)場合、交互作用と誤差を分離できません。実務では「交互作用なし」を仮定するか、繰り返しを設けるのが原則。試行錯誤の段階的な実験設計では「直交配列表」「タグチメソッド」など、効率的な実験計画法が役立ちます(QC 検定の主要トピック)。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch5",
+      number: 5,
+      title: "分割表分析とロジスティック回帰",
+      overview:
+        "頻度データ・二値ラベルなどカテゴリデータの分析。独立性検定・オッズ比・マンテル-ヘンツェル法・ロジスティック回帰までを 4 節で扱います。",
+      sections: [
+        {
+          id: "ch5-sec1",
+          number: "5.1",
+          title: "分割表とカイ二乗独立性検定",
+          blocks: [
+            {
+              type: "p",
+              text: "**分割表(クロス集計表, contingency table)** は 2 つ以上のカテゴリ変数の同時度数表。これに対する **独立性検定**(カイ二乗検定の応用)を再整理します。3 級では適合度検定を扱いましたが、ここでは『2 変数の関連』を検定する側面に深く踏み込みます。",
+            },
+            { type: "h3", text: "2x2 分割表と独立性" },
+            {
+              type: "def",
+              title: "公式 ─ 独立性検定の期待度数",
+              body: "$r$ 行 $c$ 列のクロス表で、観測度数 $O_{ij}$、行合計 $R_i$、列合計 $C_j$、総計 $N$ のとき、独立 $H_0$ のもとでの期待度数:\n\n$\\;E_{ij} = \\dfrac{R_i \\cdot C_j}{N}\\;$\n\n検定統計量 $\\chi^2 = \\sum_{i,j}(O_{ij} - E_{ij})^2/E_{ij}$ は自由度 $(r-1)(c-1)$ のカイ二乗分布に従う(大標本)。",
+            },
+            { type: "h3", text: "Cramér's V ─ 関連の強さ" },
+            {
+              type: "def",
+              title: "公式 ─ Cramér's V",
+              body: "$\\;V = \\sqrt{\\dfrac{\\chi^2}{N \\cdot \\min(r-1, c-1)}}\\;$\n\n$0 \\leq V \\leq 1$ で、関連の強さを標準化した指標。**有意性 = 関連の強さ** ではないので、p 値と V を併記する。$V \\approx 0.1$ で弱、$0.3$ で中、$0.5$ で強の目安。",
+            },
+            {
+              type: "intuition",
+              title: "標準化残差で『どこがズレているか』",
+              body: "$\\chi^2$ 検定で『関連あり』と判定されても、**どのセルが期待度数からどれだけ外れているか** は別途見る必要があります。**標準化残差** $r_{ij} = (O_{ij} - E_{ij})/\\sqrt{E_{ij}}$ が **絶対値 2 以上** のセルが寄与の主犯。実務報告では『$\\chi^2$ 全体の有意 + 標準化残差マップ』をセットで提示するのが説得力ある書き方。",
+            },
+            { type: "h3", text: "Fisher の正確検定" },
+            {
+              type: "p",
+              text: "**期待度数 < 5 のセル** が多い小標本では、カイ二乗近似が破綻するので **Fisher の正確検定(Fisher's exact test)** を使います。超幾何分布に基づき、観測表以上に偏った全表の確率を厳密に合計するもの。R では `fisher.test()`、Python では `scipy.stats.fisher_exact()` で 1 行。",
+            },
+          ],
+        },
+        {
+          id: "ch5-sec2",
+          number: "5.2",
+          title: "オッズ比と相対リスク",
+          blocks: [
+            {
+              type: "p",
+              text: "$2 \\times 2$ 分割表で **イベントの発生しやすさを群間で比較** する指標として、オッズ比(OR)・相対リスク(RR)・リスク差(RD)があります。それぞれ意味と使い分けが異なります。",
+            },
+            { type: "h3", text: "3 つの指標" },
+            {
+              type: "def",
+              title: "公式 ─ OR・RR・RD",
+              body: "曝露 +/− × 結果 +/− の $2 \\times 2$ 表(セル $a, b, c, d$):\n\n**オッズ比(Odds Ratio)**: $\\;\\mathrm{OR} = \\dfrac{a/b}{c/d} = \\dfrac{ad}{bc}\\;$\n\n**相対リスク(Relative Risk)**: $\\;\\mathrm{RR} = \\dfrac{a/(a+b)}{c/(c+d)}\\;$\n\n**リスク差(Risk Difference)**: $\\;\\mathrm{RD} = \\dfrac{a}{a+b} - \\dfrac{c}{c+d}\\;$",
+            },
+            { type: "h3", text: "信頼区間 ─ 対数正規近似" },
+            {
+              type: "def",
+              title: "公式 ─ オッズ比の 95% 信頼区間",
+              body: "対数オッズ比は近似的に正規分布: $\\ln \\mathrm{OR} \\sim N(\\ln \\mathrm{OR}, \\mathrm{SE}^2)$\n\n$\\;\\mathrm{SE}(\\ln \\mathrm{OR}) = \\sqrt{\\dfrac{1}{a} + \\dfrac{1}{b} + \\dfrac{1}{c} + \\dfrac{1}{d}}\\;$\n\n95% CI: $\\;\\exp(\\ln \\mathrm{OR} \\pm 1.96 \\cdot \\mathrm{SE})\\;$\n\n対数で正規近似 → 指数で戻すのが定石。CI が 1 をまたぐ ⇔ 5% 有意で OR と 1 に差なし(独立)。",
+            },
+            { type: "h3", text: "ケースコントロール vs コホート" },
+            {
+              type: "intuition",
+              title: "OR と RR の使い分け",
+              body: "**コホート研究**(曝露を起点に追跡):RR が直接計算可能で解釈も自然。\n**ケースコントロール研究**(結果を起点に過去を遡る):RR は計算できない(分母が真の母集団でない)ので **OR を代理として使う**。希少疾患では OR ≈ RR の近似が成り立ち、これがケースコントロール研究で OR が好まれる理由。\n**Web ABテスト**:CVR 比較で実質 RR、ただし慣習で OR 報告も多い。",
+            },
+            { type: "h3", text: "0 セルの問題と Haldane-Anscombe 補正" },
+            {
+              type: "p",
+              text: "セルに 0 が入ると $\\ln 0 = -\\infty$ で計算不能。**全セルに +0.5 を足す**(Haldane-Anscombe 補正)が標準的な対処。/tools/odds-ratio で自動適用しています。",
+            },
+          ],
+        },
+        {
+          id: "ch5-sec3",
+          number: "5.3",
+          title: "層別分析とマンテル-ヘンツェル法",
+          blocks: [
+            {
+              type: "p",
+              text: "シンプソンのパラドックス(入門編 Ch7 で扱った)を回避するために、**第三因子で層別** して分析する手法。**マンテル-ヘンツェル法(Mantel-Haenszel)** は層別された複数の $2 \\times 2$ 表を統合して 1 つのオッズ比を出す古典的手法です。",
+            },
+            { type: "h3", text: "層別の必要性" },
+            {
+              type: "intuition",
+              title: "全体集計のオッズ比は嘘をつくことがある",
+              body: "例: 病院全体での新薬 vs 旧薬の効果が同じに見えても、**重症度で層別** したら新薬が両層で勝っている、ということが起こりうる(Simpson)。これは新薬が重症患者に多く投与され、重症患者の方が回復しにくいから。**交絡因子で層別する**ことで、見かけのバイアスを除去できる。",
+            },
+            { type: "h3", text: "マンテル-ヘンツェル合同オッズ比" },
+            {
+              type: "def",
+              title: "公式 ─ Mantel-Haenszel OR",
+              body: "$K$ 個の層、$k$ 番目の層のセル $a_k, b_k, c_k, d_k$、層合計 $n_k$:\n\n$\\;\\mathrm{OR}_{\\mathrm{MH}} = \\dfrac{\\sum_k a_k d_k / n_k}{\\sum_k b_k c_k / n_k}\\;$\n\n各層のオッズ比を **重み付き調和平均** で統合した形。同質性検定(Breslow-Day)で『各層の OR が共通か』を確認してから使う。",
+            },
+            { type: "h3", text: "Mantel-Haenszel 検定" },
+            {
+              type: "p",
+              text: "層別後の全体としての関連の有無を検定する **Cochran-Mantel-Haenszel(CMH)検定** も併用される。R では `mantelhaen.test()` で 1 行。臨床試験・疫学研究の標準ツール。",
+            },
+            {
+              type: "practical",
+              title: "現代的な代替: ロジスティック回帰",
+              body: "MH 法は古典手法で、**3 値以上の因子・連続的交絡因子** には対応しにくい。現代の研究では次節の **ロジスティック回帰** で交絡を共変量として投入するのが主流です。MH 法は『簡易な層別調整』として今も有用ですが、複雑な研究設計では回帰モデルの方が柔軟。",
+            },
+          ],
+        },
+        {
+          id: "ch5-sec4",
+          number: "5.4",
+          title: "ロジスティック回帰の入口",
+          blocks: [
+            {
+              type: "p",
+              text: "**ロジスティック回帰(logistic regression)** は **二値の結果**(購入する/しない、合格/不合格、生存/死亡)を、**複数の説明変数** から予測・説明するモデル。回帰分析(Ch3)の発展で、医療・マーケ・与信など実務での使用頻度が極めて高い。",
+            },
+            { type: "h3", text: "なぜ線形回帰では駄目か" },
+            {
+              type: "intuition",
+              title: "確率を線形にすると 0/1 を超える",
+              body: "$y = \\beta_0 + \\beta_1 x$ で確率を予測すると、$x$ が極端なときに $y > 1$ や $y < 0$ が出てしまい、確率として意味をなさない。**ロジット関数** で確率を $(-\\infty, \\infty)$ に変換してから線形モデルにフィット ─ これがロジスティック回帰の発想。",
+            },
+            { type: "h3", text: "モデル定義" },
+            {
+              type: "def",
+              title: "公式 ─ ロジスティック回帰モデル",
+              body: "$P(y=1 \\mid \\boldsymbol x) = p$ について:\n\n$\\;\\mathrm{logit}(p) = \\ln \\dfrac{p}{1-p} = \\beta_0 + \\beta_1 x_1 + \\cdots + \\beta_k x_k\\;$\n\n逆に解くと、シグモイド関数:\n\n$\\;p = \\dfrac{1}{1 + \\exp(-(\\beta_0 + \\sum \\beta_i x_i))} = \\sigma(\\boldsymbol x^\\top \\boldsymbol \\beta)\\;$\n\nパラメータ $\\boldsymbol \\beta$ は **最尤推定** で求める(線形回帰の最小二乗の代わり)。",
+            },
+            { type: "h3", text: "係数の解釈" },
+            {
+              type: "def",
+              title: "公式 ─ 係数とオッズ比",
+              body: "ロジスティック回帰では、**係数 $\\beta_i$ は『$x_i$ が 1 単位増えたときの対数オッズ比の変化』**:\n\n$\\;\\exp(\\beta_i) = \\dfrac{\\mathrm{odds}(x_i + 1)}{\\mathrm{odds}(x_i)}\\;$\n\nつまり $\\exp(\\beta_i)$ がそのまま **オッズ比**。$\\exp(\\beta_i) = 1.5$ なら『$x_i$ が 1 増えるとオッズが 1.5 倍』と読む。連続値・離散値を交絡を含めて 1 モデルで扱える ─ これがマンテル-ヘンツェル法を凌駕する理由。",
+            },
+            { type: "h3", text: "適合度評価" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**逸脱度(deviance)**: $-2 \\log L$。線形回帰の RSS に相当",
+                "**疑似 R²(McFadden)**: $1 - \\log L_{\\text{model}} / \\log L_{\\text{null}}$",
+                "**Hosmer-Lemeshow 検定**: 予測確率を 10 分位に分け、観測 vs 予測度数を比較",
+                "**ROC 曲線・AUC**: 識別性能の標準指標(2 級〜準 1 級で出題)",
+                "**混同行列・Precision・Recall・F1**: 分類性能評価",
+              ],
+            },
+            { type: "h3", text: "実装例" },
+            {
+              type: "code",
+              title: "ロジスティック回帰の実装",
+              python:
+                "# Python (scikit-learn)\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.metrics import roc_auc_score\n\nmodel = LogisticRegression()\nmodel.fit(X_train, y_train)\nprob = model.predict_proba(X_test)[:, 1]\n\nprint(f'AUC: {roc_auc_score(y_test, prob):.3f}')\nprint(f'係数: {model.coef_[0]}')\nprint(f'オッズ比: {np.exp(model.coef_[0])}')",
+              r: "# R (glm)\nmodel <- glm(y ~ x1 + x2 + x3, family = binomial, data = df)\nsummary(model)\n\n# オッズ比とその 95% 信頼区間\nexp(cbind(OR = coef(model), confint(model)))\n\n# AUC\nlibrary(pROC)\nprob <- predict(model, df_test, type = 'response')\nroc(df_test$y, prob)",
+            },
+            {
+              type: "practical",
+              title: "🛠 ロジスティック回帰は『DS の万能ツール』",
+              body: "**与信・チャーン予測・薬の有効性・購入予測** ─ 二値分類が必要な場面のほぼ全てでベースラインとして使われ、係数の解釈性が高いため、**ステークホルダーへの説明** にも適する。現代の Random Forest / XGBoost に精度では負けるが、**最初に試すモデル** として今も最強候補。準 1 級では一般化線形モデル(GLM)の枠組みでさらに深く学びます。",
+            },
+            {
+              type: "p",
+              text: "ここまでで 2 級の主要範囲を完備しました。**推定 → 検定 → 回帰 → ANOVA → 分割表/ロジスティック** ─ 実務 DS / 研究者の日常分析の 80% はこの 5 章でカバーできます。次の準 1 級では多変量解析・ベイズ・時系列など、専門領域への扉が開きます。",
             },
           ],
         },
