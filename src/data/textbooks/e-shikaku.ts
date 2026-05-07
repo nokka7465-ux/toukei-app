@@ -1386,7 +1386,362 @@ for epoch in range(epochs):
             },
             {
               type: "p",
-              text: "ここまで E 資格の主要範囲を一通り扱いました。**数学的基礎・機械学習の基礎・DL の理論・主要アーキテクチャ・応用領域・実装と社会実装・基盤モデルと最新トレンド** ─ 2026 シラバス改訂を反映した、DL を実装するエンジニアに必要な道具立てが揃ったはずです。本サイトで概念地図を掴んだあとは、**Coursera Deep Learning Specialization**(Andrew Ng)・**徹底攻略 ディープラーニング E資格 エンジニア問題集**(通称黒本)・**JDLA 公式テキスト** などで実戦的な問題演習を進めると合格に近づきます。",
+              text: "ここまで 7 章で E 資格の主要範囲を扱いました。続く 8-10 章では **強化学習・マルチモーダル AI・MLOps とスケーリング** の最新トピックに踏み込みます。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch8",
+      number: 8,
+      title: "強化学習(RL)の基礎と発展",
+      overview:
+        "MDP・Q 学習・方策勾配・PPO・RLHF まで、強化学習の体系を 3 節で。",
+      sections: [
+        {
+          id: "ch8-sec1",
+          number: "8.1",
+          title: "マルコフ決定過程と価値関数",
+          blocks: [
+            {
+              type: "p",
+              text: "**強化学習(Reinforcement Learning, RL)** は『試行錯誤で最適な行動戦略を学ぶ』機械学習の枠組み。基礎は **マルコフ決定過程(MDP)**。",
+            },
+            { type: "h3", text: "MDP の 5 要素と Bellman 方程式" },
+            {
+              type: "def",
+              title: "用語 ─ MDP",
+              body: "$(S, A, P, R, \\gamma)$: 状態空間・行動空間・状態遷移確率・報酬関数・割引率。エージェントは方策 $\\pi(a|s)$ に従って行動を選び、累積報酬 $\\sum \\gamma^t r_t$ の期待値最大化を目指す。",
+            },
+            {
+              type: "def",
+              title: "公式 ─ Bellman 最適性方程式",
+              body: "**状態価値**: $V^*(s) = \\max_a [R(s, a) + \\gamma \\sum_{s'} P(s'|s,a) V^*(s')]$\n\n**行動価値**: $Q^*(s, a) = R(s, a) + \\gamma \\sum_{s'} P(s'|s,a) \\max_{a'} Q^*(s', a')$\n\nDP・モンテカルロ・TD 法のすべての RL アルゴリズムの中心方程式。",
+            },
+            {
+              type: "intuition",
+              title: "Q 学習と DQN",
+              body: "**Q 学習**(Watkins 1989): $Q$ を逐次更新する古典 TD 法。**DQN**(Mnih et al. 2015): $Q$ をニューラルネットで近似し、Atari 49 ゲームで人間超え。**Experience Replay** と **Target Network** が安定化の鍵。E 資格頻出。",
+            },
+          ],
+        },
+        {
+          id: "ch8-sec2",
+          number: "8.2",
+          title: "方策勾配と PPO・RLHF",
+          blocks: [
+            {
+              type: "p",
+              text: "$Q$ ベースは **離散行動向き**、連続行動空間(ロボティクス・自動運転)には **方策を直接学習する** Policy Gradient が有効。",
+            },
+            { type: "h3", text: "方策勾配定理と Actor-Critic" },
+            {
+              type: "def",
+              title: "公式 ─ Policy Gradient Theorem",
+              body: "$\\;\\nabla_\\theta J(\\pi_\\theta) = E_{\\pi_\\theta}[\\nabla_\\theta \\log \\pi_\\theta(a|s) \\cdot Q^{\\pi_\\theta}(s, a)]\\;$\n\n**REINFORCE**(Williams 1992)はモンテカルロ推定。**Actor**(方策)+ **Critic**(価値関数)で学習を安定化、**A2C / A3C** で並列化。",
+            },
+            {
+              type: "def",
+              title: "公式 ─ PPO の clipped objective",
+              body: "$\\;L^{\\mathrm{CLIP}} = E_t[\\min(r_t \\hat A_t, \\mathrm{clip}(r_t, 1-\\epsilon, 1+\\epsilon) \\hat A_t)]\\;$\n\n$r_t = \\pi_\\theta(a|s)/\\pi_{\\theta_{\\text{old}}}(a|s)$ をクリップして大幅更新を防ぐ。$\\epsilon = 0.2$ が標準。**TRPO**(Schulman 2015)の実装簡略化版。",
+            },
+            { type: "h3", text: "RLHF(人間フィードバックによる強化学習)" },
+            {
+              type: "intuition",
+              title: "ChatGPT 学習の仕組み",
+              body: "**RLHF**: ①教師あり微調整(SFT)→ ②人間の選好データから報酬モデル学習 → ③PPO で生成方策を最適化、の 3 段階。GPT-3.5 / 4・Claude・Gemini などほぼすべての LLM の現代的な仕上げ手法。E 資格 2024-2026 シラバスで必須。最近は **DPO**(Direct Preference Optimization)が PPO を不要にする手法として台頭。",
+            },
+          ],
+        },
+        {
+          id: "ch8-sec3",
+          number: "8.3",
+          title: "オフライン RL とモデルベース RL",
+          blocks: [
+            {
+              type: "p",
+              text: "**オフライン RL** は『**新規探索なしで既存ログから学習**』する設定。実世界で安全な学習が可能になる現代の重要トピック。",
+            },
+            { type: "h3", text: "オフライン RL の課題と手法" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**分布シフト**: 学習方策が訓練データから外れた状態を訪問",
+                "**外挿エラー**: $Q$ 関数が未観測領域で過大評価",
+                "**Conservative Q-Learning(CQL)**: 未観測行動の Q を抑え込む正則化",
+                "**Behavior Regularization**: 学習方策を訓練データの方策に近づける",
+                "**IQL(Implicit Q-Learning)**: 暗黙的に最適 Q を推定",
+              ],
+            },
+            { type: "h3", text: "モデルベース RL" },
+            {
+              type: "p",
+              text: "**環境モデル $\\hat P, \\hat R$ を学習** してから方策最適化。サンプル効率が高い。**MuZero**(DeepMind 2020)は学習した環境モデル + MCTS で囲碁・Atari で SOTA。**Dreamer** 系も発展中。",
+            },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**ロボティクス**: 把持・歩行・操作の方策学習",
+                "**ゲーム AI**: AlphaGo / AlphaZero / AlphaStar",
+                "**広告・推薦**: 多腕バンディット拡張",
+                "**化学・創薬**: 分子設計の方策最適化",
+                "**自動運転**: シミュレータ + 実車両のハイブリッド",
+                "**LLM の生成戦略**: RLHF・DPO・GRPO",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch9",
+      number: 9,
+      title: "マルチモーダル AI と最新生成モデル",
+      overview:
+        "画像 + テキスト + 音声を統合する最新の生成 AI。CLIP・拡散モデル・Vision-Language Model を 3 節で。",
+      sections: [
+        {
+          id: "ch9-sec1",
+          number: "9.1",
+          title: "Vision Transformer と CLIP",
+          blocks: [
+            {
+              type: "p",
+              text: "画像認識は CNN の独壇場でしたが、**Vision Transformer**(ViT, Dosovitskiy et al. 2020)が登場し、**画像をパッチ列としてトランスフォーマーで処理** する手法が標準化されました。",
+            },
+            { type: "h3", text: "ViT のアーキテクチャ" },
+            {
+              type: "def",
+              title: "用語 ─ Vision Transformer",
+              body: "1. 画像を $16 \\times 16$ パッチに分割\n2. 各パッチを線形射影で埋め込み + 位置埋め込み\n3. CLS トークンを追加\n4. **Transformer Encoder** で相互注意\n5. CLS トークンの出力で分類\n\nImageNet 規模の大量データで事前学習すれば、CNN を超える精度を達成。",
+            },
+            { type: "h3", text: "CLIP ─ 画像とテキストの結合学習" },
+            {
+              type: "intuition",
+              title: "対照学習で画像とテキストを揃える",
+              body: "**CLIP(Radford et al. 2021)**: 4 億組の(画像, キャプション)ペアで、**画像エンコーダと言語エンコーダを対照学習** で揃える。同じ意味の画像とテキストは埋め込み空間で近く、違うものは遠く配置。**ゼロショット分類**(訓練なしで任意のクラス分類が可能)を実現。",
+            },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**ゼロショット画像分類**: クラス名を文章にして埋め込み、画像との類似度で分類",
+                "**画像検索**: 自然言語クエリ → 関連画像",
+                "**テキストから画像生成**: DALL-E・Stable Diffusion の条件付け",
+                "**動画理解**: フレーム単位の意味理解",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch9-sec2",
+          number: "9.2",
+          title: "拡散モデルと画像生成",
+          blocks: [
+            {
+              type: "p",
+              text: "**拡散モデル(Diffusion Model)** は、現代の画像生成 AI の主流。GAN を上回る品質と安定性で、**Stable Diffusion・DALL-E 3・Midjourney・Imagen** すべての裏側で動いています。",
+            },
+            { type: "h3", text: "拡散プロセス" },
+            {
+              type: "def",
+              title: "用語 ─ Forward / Reverse Process",
+              body: "**Forward**: 画像 $x_0$ にステップごとにガウスノイズを加える $T$ ステップで $x_T \\approx N(0, I)$\n\n**Reverse**: $x_T$ から逆にノイズを除去する分布 $p_\\theta(x_{t-1} | x_t)$ を学習。$T \\to 0$ で元の画像分布に近い $x_0$ を生成。",
+            },
+            { type: "h3", text: "DDPM の損失関数" },
+            {
+              type: "def",
+              title: "公式 ─ DDPM 損失",
+              body: "Ho et al. (2020)。簡略化された損失:\n\n$\\;L = E_{t, x_0, \\epsilon}[\\|\\epsilon - \\epsilon_\\theta(x_t, t)\\|^2]\\;$\n\n各時刻 $t$ で **加えられたノイズ $\\epsilon$ をニューラルネット $\\epsilon_\\theta$ が予測** する形。実装上は $L_2$ 回帰問題に帰着。",
+            },
+            { type: "h3", text: "Latent Diffusion(Stable Diffusion)" },
+            {
+              type: "p",
+              text: "高解像度画像で拡散を直接行うと計算が重い → **VAE で潜在空間に圧縮してから拡散**(Rombach et al. 2022)。これが **Stable Diffusion** の中核技術で、消費者 GPU で動く生成 AI を実現。",
+            },
+            {
+              type: "intuition",
+              title: "Classifier-Free Guidance",
+              body: "**CFG**: 条件あり予測と条件なし予測の差を増幅 $\\hat\\epsilon = \\epsilon_\\theta(x, c) + s \\cdot (\\epsilon_\\theta(x, c) - \\epsilon_\\theta(x, \\emptyset))$。**$s$ で生成画像のテキスト忠実度を調整**。Stable Diffusion の `guidance_scale` がこのパラメータ。",
+            },
+          ],
+        },
+        {
+          id: "ch9-sec3",
+          number: "9.3",
+          title: "Vision-Language Model と Embodied AI",
+          blocks: [
+            {
+              type: "p",
+              text: "**Vision-Language Model(VLM)** は画像理解と自然言語生成を統合した大規模モデル。**GPT-4V・Gemini・Claude 3.5/3.7 Sonnet** など現代の主要 LLM はすべて VLM。",
+            },
+            { type: "h3", text: "VLM のアーキテクチャ" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Vision Encoder**: ViT / CLIP-ViT で画像を埋め込み",
+                "**Connector**: 画像埋め込みを LLM の入力空間にマッピング",
+                "**LLM**: テキスト + 画像トークンを統合的に処理",
+                "**学習**: 画像 + テキストペアで指示追従学習(visual instruction tuning)",
+              ],
+            },
+            { type: "h3", text: "代表的な VLM" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**LLaVA**(2023): オープンソース VLM のパイオニア",
+                "**GPT-4V / GPT-4o**: 商用最先端、音声も統合",
+                "**Gemini 1.5 / 2.0**: 100 万トークン文脈で長動画も理解",
+                "**Claude 3.5 / 3.7 Sonnet**: コーディング統合に強い",
+                "**Qwen-VL / InternVL**: 中国オープンソース系の発展",
+              ],
+            },
+            { type: "h3", text: "Embodied AI と VLA モデル" },
+            {
+              type: "intuition",
+              title: "VLM + Action = ロボティクス",
+              body: "VLM に **行動出力** を加えた **VLA**(Vision-Language-Action)が、ロボティクスを変えつつあります。**RT-2**(Google DeepMind 2023)・**OpenVLA**(2024)が代表で、『カップを取って』のような自然言語指示でロボットが動く。**LLM の世界知識をロボット動作に直結** させる試みで、E 資格 2026 シラバスで扱われ始めました。",
+            },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**MMMU**: 大学院レベルの画像 + 質問",
+                "**MathVista**: 視覚的数学問題",
+                "**ChartQA / DocVQA**: グラフ・文書理解",
+                "**VLM の課題**: ハルシネーション・物体錯視",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch10",
+      number: 10,
+      title: "MLOps とスケーリング ─ 大規模 AI を動かす",
+      overview:
+        "本番運用での AI モデル管理・分散学習・推論最適化・監視と評価。E 資格の応用と現場直結。",
+      sections: [
+        {
+          id: "ch10-sec1",
+          number: "10.1",
+          title: "MLOps と CI/CD for ML",
+          blocks: [
+            {
+              type: "p",
+              text: "**MLOps** は **DevOps + 機械学習特有の課題** を統合した運用方法論。コードだけでなく **モデル + データ + 環境** を管理する必要があります。",
+            },
+            { type: "h3", text: "MLOps の主要要素" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Experiment Tracking**: MLflow / W&B で学習履歴を管理",
+                "**Model Registry**: 学習済みモデルのバージョン管理",
+                "**Feature Store**: 特徴量の再利用・整合性確保(Feast / Tecton)",
+                "**CI/CD for ML**: コード + データ + モデルのテスト自動化",
+                "**Monitoring**: 本番モデルの性能・データドリフト監視",
+                "**Reproducibility**: シード固定・コンテナ化・データバージョニング(DVC)",
+              ],
+            },
+            { type: "h3", text: "データ・モデルドリフトの監視" },
+            {
+              type: "def",
+              title: "用語 ─ ドリフトの種類",
+              body: "**Data drift**: 入力分布の変化 $P_{\\text{train}}(X) \\neq P_{\\text{prod}}(X)$\n\n**Concept drift**: 入力と出力の関係の変化 $P(Y|X)$\n\n**Label drift**: ラベル分布の変化\n\nKS 検定・PSI(Population Stability Index)・KL ダイバージェンスで検出。",
+            },
+            {
+              type: "intuition",
+              title: "コロナでドリフトが顕在化",
+              body: "2020 年以降、**コロナ前のデータで学習したモデルが急速に劣化** する事例が大量発生。需要予測・与信モデル・医療診断モデルなど。**ドリフト監視 + 自動再学習** が運用 AI の標準装備に。",
+            },
+          ],
+        },
+        {
+          id: "ch10-sec2",
+          number: "10.2",
+          title: "分散学習と大規模化",
+          blocks: [
+            {
+              type: "p",
+              text: "GPT-4 クラスのモデル(数千億〜数兆パラメータ)は、単一 GPU では学習不可能。**分散学習の知識** が現代 AI エンジニアの必須スキル。",
+            },
+            { type: "h3", text: "並列化の 3 軸" },
+            {
+              type: "def",
+              title: "用語 ─ 並列化戦略",
+              body: "**Data Parallelism(DP)**: 同じモデルを複数 GPU に複製、データを分散\n\n**Model / Tensor Parallelism**: モデルを GPU 間で分割。重み行列を複数 GPU に切る\n\n**Pipeline Parallelism**: モデルを層単位で分割、パイプライン実行\n\n3D 並列(DP × MP × PP)で兆パラメータ級モデルを学習。",
+            },
+            { type: "h3", text: "ZeRO と DeepSpeed / FSDP" },
+            {
+              type: "p",
+              text: "**ZeRO(Zero Redundancy Optimizer)** は、Adam の Optimizer State / 勾配 / パラメータを GPU 間で **重複なく分散** することでメモリ消費を 1/N に削減。**DeepSpeed**(Microsoft)・**FSDP**(PyTorch)に実装され、現代の大規模学習で必須。",
+            },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**NVLink**: 同一サーバ内 GPU 間高速接続(900 GB/s 以上)",
+                "**InfiniBand**: サーバ間ネットワーク(400 Gbps)",
+                "**Gradient Checkpointing**: 中間活性化を再計算してメモリ削減",
+                "**Mixed Precision**: FP16 / BF16 で計算量とメモリを半減",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch10-sec3",
+          number: "10.3",
+          title: "推論最適化とエッジ展開",
+          blocks: [
+            {
+              type: "p",
+              text: "学習済みモデルを **本番環境で素早く・安く** 動かす技術。E 資格でもエッジデプロイ・量子化が頻出。",
+            },
+            { type: "h3", text: "量子化とその種類" },
+            {
+              type: "def",
+              title: "用語 ─ 量子化の手法",
+              body: "**Post-Training Quantization(PTQ)**: 学習後にモデルを INT8 / INT4 に変換。簡単・劣化少\n\n**Quantization-Aware Training(QAT)**: 量子化を学習に組み込む。精度を保ちやすい\n\n**GGUF / GPTQ / AWQ**: LLM 向け量子化フォーマット。Llama 3 などを INT4 で 4 倍小型化",
+            },
+            { type: "h3", text: "知識蒸留とプルーニング" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Knowledge Distillation**(Hinton et al. 2015): 大きい教師モデルから小さい生徒モデルへ知識転移",
+                "**Pruning**: 重要度の低い重みを削除(Magnitude pruning / Lottery Ticket Hypothesis)",
+                "**Sparse Attention**: Transformer の注意機構を疎化",
+                "**MoE**: 入力ごとに使うパラメータを動的選択",
+              ],
+            },
+            { type: "h3", text: "推論サーバとエッジ" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Triton Inference Server**(NVIDIA): 異種モデル統合運用",
+                "**vLLM**: LLM 専用、PagedAttention でスループット最大化",
+                "**ONNX Runtime**: 異機種 GPU / CPU / モバイル対応",
+                "**TensorRT-LLM**: NVIDIA GPU で最高速 LLM 推論",
+                "**llama.cpp**: CPU / Apple Silicon でも LLM 動作",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "オンデバイス AI の時代",
+              body: "**Apple Intelligence・Gemini Nano** など、スマホで動く小型 LLM が標準化。プライバシー・遅延・コストの 3 重メリット。E 資格 2026 シラバスでも『**エッジ AI とオンデバイス推論**』が重要トピックに。",
+            },
+            { type: "h3", text: "結びに" },
+            {
+              type: "p",
+              text: "E 資格教科書 10 章を歩き終えました。**数学基礎 → 機械学習 → DL 理論 → アーキテクチャ → 応用 → 実装 → 基盤モデル → 強化学習 → マルチモーダル → MLOps**。2025 年以降の DL エンジニアに必要な道具立てを完備。実戦は **Kaggle・Hugging Face・実プロダクト開発** で磨いてください。",
             },
           ],
         },

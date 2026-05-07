@@ -1178,5 +1178,402 @@ export const gTestTextbook: Textbook = {
         },
       ],
     },
+    {
+      id: "ch8",
+      number: 8,
+      title: "AI エージェントと自律システム",
+      overview:
+        "2025 年以降の主要トピック。エージェント・ツール使用・MCP・マルチエージェント協調を 3 節で。",
+      sections: [
+        {
+          id: "ch8-sec1",
+          number: "8.1",
+          title: "AI エージェントの仕組み",
+          blocks: [
+            {
+              type: "p",
+              text: "**AI エージェント** は LLM に **記憶・計画・ツール使用** の能力を持たせ、**自律的にタスクを完遂** するシステム。2024-2025 年で大きく進化し、ビジネス活用の中心トピックに。",
+            },
+            { type: "h3", text: "エージェントの 4 構成要素" },
+            {
+              type: "def",
+              title: "用語 ─ AI エージェントの 4 要素",
+              body: "**LLM(脳)**: 推論・計画立案の中核\n\n**Tools(手足)**: 検索・コード実行・API 呼び出し・データベース\n\n**Memory(記憶)**: 短期(コンテキスト)・長期(ベクトル DB)\n\n**Planning(計画)**: タスク分解・反省(ReAct・Reflexion)",
+            },
+            {
+              type: "intuition",
+              title: "ReAct パターン",
+              body: "**ReAct**(Yao et al. 2022)は『**Thought**(考える)→ **Action**(ツール実行)→ **Observation**(結果観測)』を反復するパターン。シンプルだが強力で、現代エージェントの大部分で採用。LangChain・LlamaIndex の標準。",
+            },
+            { type: "h3", text: "Function Calling と Tool Use" },
+            {
+              type: "p",
+              text: "OpenAI **Function Calling**(2023)・Anthropic **Tool Use**(2024)で、LLM が **構造化された JSON でツール呼び出し** を出力できるように。これにより、確実なツール連携が可能に。**Function Calling は現代 LLM の基本機能** として定着しました。",
+            },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Web 検索**: SerpAPI / Brave / Google Custom Search",
+                "**コード実行**: Python サンドボックス・E2B・Code Interpreter",
+                "**データベース**: SQL / NoSQL / Vector DB",
+                "**業務システム**: CRM・ERP・チャットツール連携",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch8-sec2",
+          number: "8.2",
+          title: "MCP・LangChain・主要フレームワーク",
+          blocks: [
+            {
+              type: "p",
+              text: "AI エージェント実装は **2023-2025 年で標準化が進行中**。複数のフレームワークと標準が並走しています。",
+            },
+            { type: "h3", text: "MCP(Model Context Protocol)" },
+            {
+              type: "intuition",
+              title: "AI のための『USB-C』",
+              body: "**MCP**(Anthropic 2024)は『**LLM とツール・データソースを接続する標準プロトコル**』。各ツールごとに統合コードを書く代わりに、MCP サーバを 1 つ作れば、Claude Desktop・GitHub Copilot・Cursor など対応クライアントから自動的に使える。**業界標準** として OpenAI・Microsoft・Google も採用、急速に普及中。",
+            },
+            { type: "h3", text: "主要エージェントフレームワーク" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**LangChain / LangGraph**: 最も普及。グラフベースのワークフロー定義",
+                "**LlamaIndex**: RAG・ドキュメント検索特化",
+                "**AutoGen**(Microsoft): マルチエージェント会話の標準",
+                "**CrewAI**: 役割ベースのチーム編成型エージェント",
+                "**Claude Code / Devin**: 自律コーディングエージェント",
+                "**OpenAI Agents SDK**: OpenAI 公式の軽量フレームワーク",
+              ],
+            },
+            { type: "h3", text: "高度なプロンプト戦略" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Plan-and-Execute**: 大計画 → 小タスク分解 → 実行 → 結果評価",
+                "**Reflexion**(Shinn et al. 2023): 失敗から自己反省して次回改善",
+                "**Tree of Thoughts**: 複数の思考分岐を木探索で評価",
+                "**Self-Consistency**: 複数生成から多数決で正解を選ぶ",
+                "**Chain-of-Thought(CoT)**: 段階的に推論を出力 → 精度向上",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch8-sec3",
+          number: "8.3",
+          title: "マルチエージェント協調と AGI 議論",
+          blocks: [
+            {
+              type: "p",
+              text: "1 つの LLM ではなく、**複数の専門エージェントが協調** して問題を解くアーキテクチャが 2024-2025 年で実用化されています。",
+            },
+            { type: "h3", text: "マルチエージェントの設計パターン" },
+            {
+              type: "def",
+              title: "用語 ─ 主要パターン",
+              body: "**Hierarchical**: マネージャー + 専門部下\n\n**Debate**: 複数 LLM の議論で精度向上\n\n**Specialist Pool**: 役割別の専門エージェント(設計者・実装者・テスター)\n\n**Swarm**: 共通環境を変更しながら自己組織化",
+            },
+            { type: "h3", text: "実用例" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Devin**(Cognition Labs): 自律ソフトウェア開発エージェント",
+                "**Claude Code**: Anthropic のコーディングエージェント",
+                "**Manus**: 中国発の汎用 AI エージェント(2025)",
+                "**ChatDev**: ソフトウェア開発を会社の組織で模倣",
+                "**OpenAI Operator**: ブラウザ操作型エージェント",
+              ],
+            },
+            { type: "h3", text: "AGI への道" },
+            {
+              type: "intuition",
+              title: "AGI は近いか",
+              body: "**AGI**(Artificial General Intelligence)は『人間と同等以上の汎用知能』。現在の LLM は強力ですが、**身体性・継続学習・因果推論・長期計画** で人間に劣ります。OpenAI や Anthropic は『**数年以内に AGI が来る可能性**』を公言する一方、Yann LeCun 等は『**現在の LLM の延長では AGI は無理**』との立場。G 検定 2026 で **AGI / ASI(超知能)の議論** が頻出トピックに。",
+            },
+            { type: "h3", text: "ガバナンス上の論点" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**自律エージェントの権限範囲**: どこまで自動実行を許すか",
+                "**アクション監査**: エージェントの全操作のログと監査",
+                "**Human-in-the-Loop**: 重要判断は人間に確認",
+                "**Misalignment リスク**: エージェントが指示を誤解して暴走する懸念",
+                "**EU AI Act**: 自律システムは『ハイリスク AI』に分類",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch9",
+      number: 9,
+      title: "AI と業界別ユースケース",
+      overview:
+        "金融・医療・製造・小売・教育の各業界での AI 活用事例。G 検定実務応用の中心。",
+      sections: [
+        {
+          id: "ch9-sec1",
+          number: "9.1",
+          title: "金融・医療・法務での AI",
+          blocks: [
+            {
+              type: "p",
+              text: "**規制業界**(金融・医療・法務)での AI は、規制適合・説明可能性・監査ログが要件となります。",
+            },
+            { type: "h3", text: "金融 AI の主要ユースケース" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**与信スコアリング**: ロジスティック回帰 → GBM → DL モデル(説明可能性必須)",
+                "**不正検知(AML/Fraud)**: 異常検知・グラフニューラルネット",
+                "**アルゴリズム取引**: HFT・最適執行・ポートフォリオ最適化",
+                "**チャットボット**: コンタクトセンター効率化・FAQ 自動応答",
+                "**ESG スコアリング**: ニュース・SNS・財務情報を NLP で統合評価",
+              ],
+            },
+            { type: "h3", text: "医療 AI の進展" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**画像診断**: 内視鏡・X 線・CT・MRI の AI 補助",
+                "**創薬**: AlphaFold(タンパク質構造)・分子生成",
+                "**電子カルテ NLP**: 症状抽出・診断支援",
+                "**ゲノム解析**: 個別化医療・がん遺伝子変異検出",
+                "**規制**: 日本では PMDA が SaMD として承認",
+              ],
+            },
+            { type: "h3", text: "法務 AI" },
+            {
+              type: "p",
+              text: "**LegalForce / Lawyer AI** などが契約書レビュー・判例検索・法律相談で実用化。**Harvey**(米国弁護士向け)は OpenAI と提携し、グローバル展開。**生成 AI のハルシネーション** が法務では致命的なため、**人間によるレビュー必須**。",
+            },
+          ],
+        },
+        {
+          id: "ch9-sec2",
+          number: "9.2",
+          title: "製造・物流・小売",
+          blocks: [
+            {
+              type: "p",
+              text: "実物の流通・運用に関わる業界では、**予測・最適化・ロボティクス** の AI が中心。",
+            },
+            { type: "h3", text: "製造業" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**外観検査**: ディープラーニングによる欠陥検出(Cognex / Keyence)",
+                "**予知保全**: センサデータから故障予測(QC 教科書 Ch10 参照)",
+                "**最適生産計画**: 需要予測 + 最適化ソルバー",
+                "**ロボット制御**: VLA モデル + 強化学習",
+                "**設計支援**: Generative Design(Autodesk)",
+              ],
+            },
+            { type: "h3", text: "物流・小売" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**需要予測**: 商品 × 店舗 × 日付の階層モデル",
+                "**配送ルート最適化**: 動的経路問題(VRP)+ 強化学習",
+                "**自動倉庫**: Amazon Robotics・Kiva ロボット",
+                "**価格最適化**: 動的プライシング・在庫連動",
+                "**パーソナル推薦**: 協調フィルタリング + 深層学習",
+                "**店舗 AI**: 無人レジ(Amazon Go)・棚卸自動化",
+              ],
+            },
+            { type: "h3", text: "デジタルツインと最適化" },
+            {
+              type: "p",
+              text: "**デジタルツイン** は物理プロセスの仮想複製。AI シミュレーションで『**実物に投入する前に最適化**』が可能。トヨタ・GE・シーメンスが製造業で先行、近年は都市計画(スマートシティ)にも展開。",
+            },
+          ],
+        },
+        {
+          id: "ch9-sec3",
+          number: "9.3",
+          title: "教育・人事・公共分野",
+          blocks: [
+            {
+              type: "p",
+              text: "**人を扱う領域** での AI は、効率化と倫理のバランスが特に重要です。",
+            },
+            { type: "h3", text: "EdTech と AI 教育" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**個別最適化学習**: スタディサプリ・atama+ などの実用例",
+                "**AI チューター**: ChatGPT・Khanmigo(Khan Academy)",
+                "**自動採点**: 記述式回答の AI 採点",
+                "**プロクタリング**: オンライン試験の不正検出",
+                "**学習分析**: 大量の学習ログから個別の弱点を特定",
+              ],
+            },
+            { type: "h3", text: "HR Tech と採用 AI" },
+            {
+              type: "intuition",
+              title: "採用 AI のバイアス問題",
+              body: "Amazon が 2018 年に採用 AI を停止 ─ 過去の採用データが男性偏重で、AI が女性応募を低評価する偏見を学習していた。**訓練データのバイアスが直接モデルに転写される** 古典的事例で、HR 領域では **特に厳しいバイアス監査** が要求されます。",
+            },
+            { type: "h3", text: "公共分野" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**犯罪予測**: COMPAS 論争 ─ 公平性指標の選択が政治的に",
+                "**福祉申請評価**: オランダ・ロッテルダム事件など各国で社会問題化",
+                "**自治体相談チャットボット**: 多言語対応・行政効率化",
+                "**災害予測**: 衛星画像 + AI で被害予測",
+                "**選挙監視**: ディープフェイク対策・SNS 不正アカウント検出",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch10",
+      number: 10,
+      title: "AI の未来と総まとめ",
+      overview:
+        "2025 年以降の展望、生成 AI の経済影響、人間と AI の共存、G 検定総まとめ。",
+      sections: [
+        {
+          id: "ch10-sec1",
+          number: "10.1",
+          title: "AI が変える経済と労働",
+          blocks: [
+            {
+              type: "p",
+              text: "**生成 AI の経済影響** は IMF・OECD・McKinsey 等が定量分析を進めています。",
+            },
+            { type: "h3", text: "影響の規模" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**McKinsey(2023)**: 生成 AI が世界 GDP に **年 2.6-4.4 兆ドル** 寄与",
+                "**Goldman Sachs(2023)**: 全世界の **3 億人雇用** が AI で自動化される可能性",
+                "**OpenAI / Penn(2023)**: 米国の **80% の労働者** が GPT で 10% 以上の業務影響を受ける",
+                "**IMF(2024)**: 先進国の **40% の雇用** が AI に晒される",
+              ],
+            },
+            { type: "h3", text: "影響を受けやすい職種" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**ハイインパクト**: プログラマー・ライター・翻訳者・コンサルタント・経理",
+                "**中程度**: 営業・カスタマーサポート(支援ツール化)",
+                "**低インパクト**: 介護・建設・配管(身体性が必要)",
+                "**新規創出**: AI エンジニア・プロンプトエンジニア・AI 倫理オフィサー",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "労働の補完か代替か",
+              body: "歴史的には **新技術は労働を補完** してきました(計算機 → 経理職員はむしろ増えた)。生成 AI も同じ可能性は高いが、**スピードが過去の技術革新より遥かに速い** ため、再教育(リスキリング)が間に合うかが社会的課題。日本では **DX 人材育成** が国策に。",
+            },
+          ],
+        },
+        {
+          id: "ch10-sec2",
+          number: "10.2",
+          title: "AI 安全性と AGI への議論",
+          blocks: [
+            {
+              type: "p",
+              text: "**AI 安全性(AI Safety)** は、AI が人類に対して有害な影響を及ぼさないよう設計する研究分野。AGI(汎用人工知能)の議論と深く関わります。",
+            },
+            { type: "h3", text: "主要な研究機関" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**OpenAI**: Superalignment チーム(2024 解散)、SSI(Sutskever)",
+                "**Anthropic**: Constitutional AI・Mechanistic Interpretability",
+                "**DeepMind Safety**: Reward Hacking 研究",
+                "**MIRI**: AGI 安全性の理論",
+                "**AISI**(AI Safety Institute): 英国・米国・日本などで設立",
+              ],
+            },
+            { type: "h3", text: "Alignment の主要課題" },
+            {
+              type: "def",
+              title: "用語 ─ AI Alignment の論点",
+              body: "**Reward Hacking**: 報酬関数の抜け穴で意図しない行動を学習\n\n**Goal Misalignment**: 訓練目標と本来の目的のズレ\n\n**Sycophancy**: 人間の好みに過剰適応(お世辞 AI)\n\n**Deception**: 訓練中だけ良い振る舞いをする戦略的欺瞞",
+            },
+            { type: "h3", text: "解釈可能性研究" },
+            {
+              type: "p",
+              text: "**Mechanistic Interpretability** は、ニューラルネット内部で **どのような計算が行われているか** をリバースエンジニアリングする研究。Anthropic の **Sparse Autoencoders / Dictionary Learning** で『**特徴**』を抽出する研究が 2024-2025 年で大きく進展。",
+            },
+          ],
+        },
+        {
+          id: "ch10-sec3",
+          number: "10.3",
+          title: "G 検定総まとめと学習継続",
+          blocks: [
+            {
+              type: "p",
+              text: "G 検定教科書 10 章を歩き終えました。総まとめと、合格後の学習継続について。",
+            },
+            { type: "h3", text: "10 章の地図" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "**Ch1**: 人工知能の歴史と概論",
+                "**Ch2**: AI の社会実装と倫理",
+                "**Ch3**: ディープラーニングの基礎",
+                "**Ch4**: 生成 AI と LLM",
+                "**Ch5**: AI 関連法規と知的財産",
+                "**Ch6**: AI の強化と社会実装",
+                "**Ch7**: 生成 AI と LLM ─ 2024 年以降の動向",
+                "**Ch8**: AI エージェントと自律システム",
+                "**Ch9**: AI と業界別ユースケース",
+                "**Ch10**: AI の未来と総まとめ",
+              ],
+            },
+            { type: "h3", text: "学習継続のヒント" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Andrew Ng の AI for Everyone**(Coursera): 経営者向けの優れた入門",
+                "**Stanford CS221 / CS231n**: 公開講義動画",
+                "**JDLA G 検定公式テキスト 2026**: 試験対策の本道",
+                "**OpenAI / Anthropic / DeepMind ブログ**: 最新トピックを追う",
+                "**主要カンファレンス**: NeurIPS / ICML / ICLR / CVPR の論文",
+                "**X(Twitter)**: 各 AI ラボの研究者をフォロー",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "G 検定は『AI を語る共通言語』",
+              body: "G 検定合格は、**経営層・マーケ・法務・営業・エンジニアの共通言語** を持つことを意味します。AI を導入する組織で『何ができて何ができないか』を判断できる人材は、今後 10 年でますます価値が上がります。本書がその礎になれば幸いです。",
+            },
+            {
+              type: "p",
+              text: "AI は社会を急速に変えていますが、**その方向を決めるのは人間** です。本書で得た知識を使い、社会にとって望ましい AI の活用を、ぜひあなた自身の現場で進めてください。",
+            },
+          ],
+        },
+      ],
+    },
   ],
 };
