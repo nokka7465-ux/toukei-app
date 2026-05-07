@@ -15,6 +15,8 @@ import { PrintButton } from "@/components/PrintButton";
 import { BreadcrumbJsonLd, CourseJsonLd } from "@/components/StructuredData";
 import { BookmarkButton } from "@/components/BookmarkButton";
 import { ShareButton } from "@/components/ShareButton";
+import { RecentTracker } from "@/components/RecentTracker";
+import { getTextbookStats } from "@/lib/reading-stats";
 import type { Textbook } from "@/types/content";
 
 const SITE_URL = "https://toukei-app.com";
@@ -138,9 +140,17 @@ export default async function TextbookPage({
   const book = textbookByLevel[level];
   if (!meta || !book) notFound();
   const seo = LEVEL_KEYWORDS[level];
+  const stats = getTextbookStats(book);
 
   return (
     <article>
+      <RecentTracker
+        id={`/textbook/${level}`}
+        title={book.title}
+        href={`/textbook/${level}`}
+        kind="textbook"
+        context={`${meta.title} 教科書`}
+      />
       <BreadcrumbJsonLd
         items={[
           { name: "ホーム", href: "/" },
@@ -179,6 +189,33 @@ export default async function TextbookPage({
         <p className="text-[var(--muted-strong)] leading-loose max-w-3xl">
           {book.intro}
         </p>
+        <ul
+          aria-label="教科書ボリューム"
+          className="mt-4 flex flex-wrap gap-2 text-[11px] ui-sans"
+        >
+          <li className="px-3 py-1 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]">
+            <strong className="text-[var(--accent)]">{stats.chapters}</strong>{" "}
+            章
+          </li>
+          <li className="px-3 py-1 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]">
+            <strong className="text-[var(--accent)]">{stats.sections}</strong>{" "}
+            節
+          </li>
+          <li className="px-3 py-1 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]">
+            ⏱ 約{" "}
+            <strong className="text-[var(--accent)]">
+              {stats.readingMinutes}
+            </strong>{" "}
+            分
+          </li>
+          <li className="px-3 py-1 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]">
+            約{" "}
+            <strong className="text-[var(--accent)]">
+              {stats.characters.toLocaleString()}
+            </strong>{" "}
+            字
+          </li>
+        </ul>
         <div className="mt-4 flex flex-wrap items-center gap-2 print-hide">
           <BookmarkButton
             kind="textbook"

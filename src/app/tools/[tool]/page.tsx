@@ -9,6 +9,7 @@ import { getGlossaryBySlug, termToSlug } from "@/lib/glossary-registry";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import { BookmarkButton } from "@/components/BookmarkButton";
 import { ShareButton } from "@/components/ShareButton";
+import { RecentTracker } from "@/components/RecentTracker";
 
 const SITE_URL = "https://toukei-app.com";
 
@@ -86,6 +87,13 @@ export default async function ToolPage({
 
   return (
     <article className="max-w-3xl mx-auto">
+      <RecentTracker
+        id={url}
+        title={tool.shortName}
+        href={url}
+        kind="tool"
+        context={tool.category}
+      />
       <BreadcrumbJsonLd
         items={[
           { name: "ホーム", href: "/" },

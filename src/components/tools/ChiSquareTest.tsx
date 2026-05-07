@@ -1,7 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Result, chiSqCdf } from "./toolPrimitives";
+import {
+  Result,
+  chiSqCdf,
+  DownloadButtons,
+  toCsv,
+} from "./toolPrimitives";
 
 const INITIAL: number[][] = [
   [30, 20],
@@ -128,6 +133,32 @@ export function ChiSquareTest() {
         value={p < 1e-4 ? p.toExponential(2) : p.toFixed(4)}
         hint={`χ² = Σ(O−E)²/E = ${chi.toFixed(3)} / df = (r−1)(c−1) = ${df} / ${p < 0.05 ? "α=5% で独立性 H₀ を棄却(関連あり)" : "α=5% で独立性 H₀ を棄却できない"}`}
       />
+      <div className="mt-3 flex justify-end">
+        <DownloadButtons
+          baseFilename="chi-square"
+          csv={toCsv(
+            table.flatMap((row, i) =>
+              row.map((cell, j) => ({
+                row: i + 1,
+                col: j + 1,
+                observed: cell,
+                expected: expected[i][j],
+                residual: cell - expected[i][j],
+              })),
+            ),
+          )}
+          json={{
+            table,
+            expected,
+            rowSums,
+            colSums,
+            total,
+            chiSquare: chi,
+            df,
+            pValue: p,
+          }}
+        />
+      </div>
     </article>
   );
 }

@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Field, NumberInput, Result, normInv } from "./toolPrimitives";
+import {
+  Field,
+  NumberInput,
+  Result,
+  normInv,
+  DownloadButtons,
+  toCsv,
+} from "./toolPrimitives";
 
 /**
  * 2x2 contingency table → Odds Ratio (OR), Relative Risk (RR), Risk Difference,
@@ -125,6 +132,27 @@ export function OddsRatioCalc() {
         value={`${or.toFixed(3)}  [${orLo.toFixed(3)}, ${orHi.toFixed(3)}]`}
         hint={`相対リスク RR = ${rr.toFixed(3)} [${rrLo.toFixed(3)}, ${rrHi.toFixed(3)}] / リスク差 RD = ${rd.toFixed(4)} [${rdLo.toFixed(4)}, ${rdHi.toFixed(4)}]${hasZero ? " / 0 セル補正(Haldane-Anscombe +0.5)" : ""}`}
       />
+      <div className="mt-3 flex justify-end">
+        <DownloadButtons
+          baseFilename="odds-ratio"
+          csv={toCsv([
+            { metric: "OR", estimate: or, lower: orLo, upper: orHi },
+            { metric: "RR", estimate: rr, lower: rrLo, upper: rrHi },
+            { metric: "RD", estimate: rd, lower: rdLo, upper: rdHi },
+            { metric: "risk_exposed", estimate: r1 },
+            { metric: "risk_unexposed", estimate: r0 },
+          ])}
+          json={{
+            table: { a, b, c, d },
+            confidenceLevel: level,
+            haldaneAnscombe: hasZero,
+            or: { estimate: or, lower: orLo, upper: orHi, seLog: seLnOr },
+            rr: { estimate: rr, lower: rrLo, upper: rrHi, seLog: seLnRr },
+            rd: { estimate: rd, lower: rdLo, upper: rdHi, se: seRd },
+            risks: { exposed: r1, unexposed: r0 },
+          }}
+        />
+      </div>
     </article>
   );
 }

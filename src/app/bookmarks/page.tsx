@@ -10,6 +10,7 @@ import { gradePre1Formulas } from "@/data/formulas/grade-pre1";
 import { gradeOneFormulas } from "@/data/formulas/grade-1";
 import { BookmarksClient } from "./BookmarksClient";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import { RecentlyViewedList } from "@/components/RecentlyViewedList";
 
 export const metadata: Metadata = {
   title: "ブックマーク",
@@ -88,6 +89,17 @@ export default function BookmarksPage() {
           各問題・公式・用語の右上にある ☆ マークを押すと、ここに集まります。後でじっくり見直したい項目を保存しておきましょう。データはお使いのブラウザにのみ保存されます。
         </p>
       </header>
+
+      <section className="mb-10">
+        <header className="mb-3">
+          <div className="chapter-eyebrow mb-1">Recently Viewed</div>
+          <h2 className="text-xl font-bold">最近見たページ</h2>
+          <p className="text-xs text-[var(--muted)] ui-sans mt-1">
+            ブログ・教科書・ツールの直近の閲覧履歴を最大 20 件まで保存します(端末内)。
+          </p>
+        </header>
+        <RecentlyViewedList limit={10} />
+      </section>
 
       <BookmarksClient
         questions={questionRegistry}

@@ -1,31 +1,54 @@
 "use client";
 
-import { useState } from "react";
-import { Field, NumberInput, Result, normInv } from "./toolPrimitives";
+import {
+  Field,
+  NumberInput,
+  Result,
+  ShareStateButton,
+  normInv,
+} from "./toolPrimitives";
+import { useToolUrlState } from "@/lib/tool-state";
+
+type State = {
+  type: "mean" | "proportion";
+  xbar: number;
+  sigma: number;
+  p: number;
+  n: number;
+  level: number;
+};
+
+const DEFAULT_STATE: State = {
+  type: "mean",
+  xbar: 50,
+  sigma: 10,
+  p: 0.4,
+  n: 100,
+  level: 0.95,
+};
 
 export function ConfidenceIntervalCalc() {
-  const [type, setType] = useState<"mean" | "proportion">("mean");
-  const [xbar, setXbar] = useState(50);
-  const [sigma, setSigma] = useState(10);
-  const [p, setP] = useState(0.4);
-  const [n, setN] = useState(100);
-  const [level, setLevel] = useState(0.95);
+  const { state: s, setState: setS, getShareUrl } =
+    useToolUrlState<State>(DEFAULT_STATE);
 
-  const z = normInv(1 - (1 - level) / 2);
+  const upd = <K extends keyof State>(key: K, value: State[K]) =>
+    setS((prev) => ({ ...prev, [key]: value }));
+
+  const z = normInv(1 - (1 - s.level) / 2);
 
   let lo = 0,
     hi = 0,
     se = 0,
     formula = "";
-  if (type === "mean") {
-    se = sigma / Math.sqrt(n);
-    lo = xbar - z * se;
-    hi = xbar + z * se;
+  if (s.type === "mean") {
+    se = s.sigma / Math.sqrt(s.n);
+    lo = s.xbar - z * se;
+    hi = s.xbar + z * se;
     formula = "x̄ ± z · σ/√n";
   } else {
-    se = Math.sqrt((p * (1 - p)) / n);
-    lo = p - z * se;
-    hi = p + z * se;
+    se = Math.sqrt((s.p * (1 - s.p)) / s.n);
+    lo = s.p - z * se;
+    hi = s.p + z * se;
     formula = "p̂ ± z · √(p̂(1-p̂)/n)";
   }
 
@@ -42,9 +65,9 @@ export function ConfidenceIntervalCalc() {
           <button
             key={t}
             type="button"
-            onClick={() => setType(t)}
+            onClick={() => upd("type", t)}
             className={`px-3 py-1 rounded border transition ${
-              type === t
+              s.type === t
                 ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
                 : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
             }`}
@@ -54,32 +77,57 @@ export function ConfidenceIntervalCalc() {
         ))}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {type === "mean" ? (
+        {s.type === "mean" ? (
           <>
             <Field label="標本平均 x̄">
-              <NumberInput value={xbar} onChange={setXbar} step={0.1} />
+              <NumberInput value={s.xbar} onChange={(v) => upd("xbar", v)} step={0.1} />
             </Field>
             <Field label="標準偏差 σ">
-              <NumberInput value={sigma} onChange={setSigma} step={0.1} min={0.01} />
+              <NumberInput
+                value={s.sigma}
+                onChange={(v) => upd("sigma", v)}
+                step={0.1}
+                min={0.01}
+              />
             </Field>
           </>
         ) : (
           <Field label="標本比率 p̂" unit="0〜1">
-            <NumberInput value={p} onChange={setP} step={0.01} min={0} max={1} />
+            <NumberInput
+              value={s.p}
+              onChange={(v) => upd("p", v)}
+              step={0.01}
+              min={0}
+              max={1}
+            />
           </Field>
         )}
         <Field label="標本サイズ n">
-          <NumberInput value={n} onChange={(v) => setN(Math.max(2, Math.round(v)))} step={1} min={2} />
+          <NumberInput
+            value={s.n}
+            onChange={(v) => upd("n", Math.max(2, Math.round(v)))}
+            step={1}
+            min={2}
+          />
         </Field>
         <Field label="信頼水準" unit="例: 0.95">
-          <NumberInput value={level} onChange={setLevel} step={0.01} min={0.5} max={0.9999} />
+          <NumberInput
+            value={s.level}
+            onChange={(v) => upd("level", v)}
+            step={0.01}
+            min={0.5}
+            max={0.9999}
+          />
         </Field>
       </div>
       <Result
-        label={`${(level * 100).toFixed(0)}% 信頼区間`}
+        label={`${(s.level * 100).toFixed(0)}% 信頼区間`}
         value={`[${lo.toFixed(4)}, ${hi.toFixed(4)}]`}
         hint={`${formula} / z=${z.toFixed(3)} / SE=${se.toFixed(4)}`}
       />
+      <div className="mt-3 flex justify-end">
+        <ShareStateButton getUrl={getShareUrl} />
+      </div>
     </article>
   );
 }

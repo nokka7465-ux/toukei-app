@@ -1,39 +1,55 @@
 "use client";
 
-import { useState } from "react";
 import {
   Field,
   NumberInput,
   Result,
+  ShareStateButton,
   normCdf,
   tCdf,
   chiSqCdf,
 } from "./toolPrimitives";
+import { useToolUrlState } from "@/lib/tool-state";
 
 type DistKind = "z" | "t" | "chi2";
 
+type State = {
+  kind: DistKind;
+  stat: number;
+  df: number;
+  side: "two" | "right" | "left";
+};
+
+const DEFAULT_STATE: State = {
+  kind: "z",
+  stat: 1.7,
+  df: 10,
+  side: "two",
+};
+
 export function PValueCalc() {
-  const [kind, setKind] = useState<DistKind>("z");
-  const [stat, setStat] = useState(1.7);
-  const [df, setDf] = useState(10);
-  const [side, setSide] = useState<"two" | "right" | "left">("two");
+  const { state: s, setState: setS, getShareUrl } =
+    useToolUrlState<State>(DEFAULT_STATE);
+
+  const upd = <K extends keyof State>(key: K, value: State[K]) =>
+    setS((prev) => ({ ...prev, [key]: value }));
 
   let p = NaN;
   let formula = "";
-  if (kind === "z") {
-    if (side === "two") p = 2 * (1 - normCdf(Math.abs(stat)));
-    else if (side === "right") p = 1 - normCdf(stat);
-    else p = normCdf(stat);
+  if (s.kind === "z") {
+    if (s.side === "two") p = 2 * (1 - normCdf(Math.abs(s.stat)));
+    else if (s.side === "right") p = 1 - normCdf(s.stat);
+    else p = normCdf(s.stat);
     formula = "標準正規分布";
-  } else if (kind === "t") {
-    if (side === "two") p = 2 * (1 - tCdf(Math.abs(stat), df));
-    else if (side === "right") p = 1 - tCdf(stat, df);
-    else p = tCdf(stat, df);
-    formula = `t(df=${df})`;
+  } else if (s.kind === "t") {
+    if (s.side === "two") p = 2 * (1 - tCdf(Math.abs(s.stat), s.df));
+    else if (s.side === "right") p = 1 - tCdf(s.stat, s.df);
+    else p = tCdf(s.stat, s.df);
+    formula = `t(df=${s.df})`;
   } else {
     // カイ二乗 = 右片側のみ
-    p = 1 - chiSqCdf(stat, df);
-    formula = `χ²(df=${df})`;
+    p = 1 - chiSqCdf(s.stat, s.df);
+    formula = `χ²(df=${s.df})`;
   }
 
   const isSignif = p < 0.05;
@@ -52,11 +68,14 @@ export function PValueCalc() {
             key={k}
             type="button"
             onClick={() => {
-              setKind(k);
-              if (k === "chi2") setSide("right");
+              setS((prev) => ({
+                ...prev,
+                kind: k,
+                side: k === "chi2" ? "right" : prev.side,
+              }));
             }}
             className={`px-3 py-1 rounded border transition ${
-              kind === k
+              s.kind === k
                 ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
                 : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
             }`}
@@ -66,30 +85,49 @@ export function PValueCalc() {
         ))}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <Field label={kind === "chi2" ? "観測 χ² 値" : kind === "t" ? "観測 t 値" : "観測 z 値"}>
-          <NumberInput value={stat} onChange={setStat} step={0.01} />
+        <Field
+          label={
+            s.kind === "chi2"
+              ? "観測 χ² 値"
+              : s.kind === "t"
+                ? "観測 t 値"
+                : "観測 z 値"
+          }
+        >
+          <NumberInput
+            value={s.stat}
+            onChange={(v) => upd("stat", v)}
+            step={0.01}
+          />
         </Field>
-        {(kind === "t" || kind === "chi2") && (
+        {(s.kind === "t" || s.kind === "chi2") && (
           <Field label="自由度 df">
-            <NumberInput value={df} onChange={(v) => setDf(Math.max(1, Math.round(v)))} step={1} min={1} />
+            <NumberInput
+              value={s.df}
+              onChange={(v) => upd("df", Math.max(1, Math.round(v)))}
+              step={1}
+              min={1}
+            />
           </Field>
         )}
-        {kind !== "chi2" && (
+        {s.kind !== "chi2" && (
           <div className="ui-sans">
-            <span className="text-xs text-[var(--muted-strong)] mb-1 block">検定の方向</span>
+            <span className="text-xs text-[var(--muted-strong)] mb-1 block">
+              検定の方向
+            </span>
             <div className="flex gap-2 mt-1">
-              {(["two", "right", "left"] as const).map((s) => (
+              {(["two", "right", "left"] as const).map((side) => (
                 <button
-                  key={s}
+                  key={side}
                   type="button"
-                  onClick={() => setSide(s)}
+                  onClick={() => upd("side", side)}
                   className={`px-3 py-1 rounded text-xs border transition ${
-                    side === s
+                    s.side === side
                       ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
                       : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
                   }`}
                 >
-                  {s === "two" ? "両側" : s === "right" ? "右側" : "左側"}
+                  {side === "two" ? "両側" : side === "right" ? "右側" : "左側"}
                 </button>
               ))}
             </div>
@@ -103,6 +141,9 @@ export function PValueCalc() {
           isSignif ? "α=0.05 で有意" : "α=0.05 では有意でない"
         }`}
       />
+      <div className="mt-3 flex justify-end">
+        <ShareStateButton getUrl={getShareUrl} />
+      </div>
     </article>
   );
 }

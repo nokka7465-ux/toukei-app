@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Field, NumberInput, Result, fCdf } from "./toolPrimitives";
+import {
+  Field,
+  NumberInput,
+  Result,
+  fCdf,
+  DownloadButtons,
+  toCsv,
+} from "./toolPrimitives";
 
 type Group = { mean: number; sd: number; n: number };
 
@@ -93,8 +100,36 @@ export function AnovaCalc() {
         value={p < 1e-4 ? p.toExponential(2) : p.toFixed(4)}
         hint={`F = MSB/MSW = ${F.toFixed(3)} / df=(${dfB}, ${dfW}) / ${p < 0.05 ? "α=5% で群間差あり(H₀ 棄却)" : "α=5% で群間差は有意でない"}`}
       />
-      <div className="mt-3 text-xs text-[var(--muted)] ui-sans tabular-nums">
-        SSB={ssb.toFixed(2)} / SSW={ssw.toFixed(2)} / 総平均={grandMean.toFixed(2)}
+      <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
+        <div className="text-xs text-[var(--muted)] ui-sans tabular-nums">
+          SSB={ssb.toFixed(2)} / SSW={ssw.toFixed(2)} / 総平均=
+          {grandMean.toFixed(2)}
+        </div>
+        <DownloadButtons
+          baseFilename="anova"
+          csv={toCsv([
+            ...groups.map((g, i) => ({
+              row: `group${i + 1}`,
+              mean: g.mean,
+              sd: g.sd,
+              n: g.n,
+            })),
+            { row: "between", df: dfB, ss: ssb, ms: msB, F: F, p: p },
+            { row: "within", df: dfW, ss: ssw, ms: msW },
+          ])}
+          json={{
+            groups,
+            grandMean,
+            ssb,
+            ssw,
+            dfB,
+            dfW,
+            msB,
+            msW,
+            F,
+            pValue: p,
+          }}
+        />
       </div>
     </article>
   );

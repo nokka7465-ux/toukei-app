@@ -1,7 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Field, NumberInput, Result } from "./toolPrimitives";
+import {
+  Field,
+  NumberInput,
+  Result,
+  DownloadButtons,
+  toCsv,
+} from "./toolPrimitives";
 import {
   BAYES_PRESETS,
   computeBayes,
@@ -190,6 +196,54 @@ export function BayesUpdateCalc() {
               陽性判定 {totalPositive.toLocaleString()} 件のうち真の陽性は {tp.toLocaleString()} 件 ⇒
               事後確率 ≒ {posteriorPct.toFixed(2)}%
             </p>
+          </div>
+          <div className="mt-3 flex justify-end">
+            <DownloadButtons
+              baseFilename="bayes-update"
+              csv={toCsv([
+                {
+                  metric: "prior",
+                  pct: priorPct,
+                  prob: priorPct / 100,
+                },
+                {
+                  metric: "sensitivity",
+                  pct: sensitivityPct,
+                  prob: sensitivityPct / 100,
+                },
+                {
+                  metric: "false_positive_rate",
+                  pct: fprPct,
+                  prob: fprPct / 100,
+                },
+                {
+                  metric: "marginal",
+                  pct: result.marginal * 100,
+                  prob: result.marginal,
+                },
+                {
+                  metric: "posterior",
+                  pct: posteriorPct,
+                  prob: result.posterior,
+                },
+                {
+                  metric: "likelihood_ratio",
+                  pct: "",
+                  prob: result.likelihoodRatio,
+                },
+              ])}
+              json={{
+                input: {
+                  prior: priorPct / 100,
+                  sensitivity: sensitivityPct / 100,
+                  falsePositiveRate: fprPct / 100,
+                },
+                posterior: result.posterior,
+                marginal: result.marginal,
+                likelihoodRatio: result.likelihoodRatio,
+                breakdown: result.breakdown,
+              }}
+            />
           </div>
         </>
       )}

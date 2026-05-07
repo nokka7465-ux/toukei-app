@@ -9,6 +9,7 @@ import { AdUnit } from "@/components/ads/AdUnit";
 import { SchoolPicks } from "@/components/SchoolPicks";
 import { BookmarkButton } from "@/components/BookmarkButton";
 import { ShareButton } from "@/components/ShareButton";
+import { RecentTracker } from "@/components/RecentTracker";
 import type { TextbookBlock, BlogPost } from "@/types/content";
 
 const SITE_URL = "https://toukei-app.com";
@@ -142,6 +143,13 @@ export default async function BlogPostPage({
 
   return (
     <article>
+      <RecentTracker
+        id={`/blog/${post.slug}`}
+        title={post.title}
+        href={`/blog/${post.slug}`}
+        kind="blog"
+        context={post.category}
+      />
       <BreadcrumbJsonLd
         items={[
           { name: "ホーム", href: "/" },
