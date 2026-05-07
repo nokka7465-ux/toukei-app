@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Quiz } from "@/components/Quiz";
+import { TrackStatsDashboard } from "@/components/TrackStatsDashboard";
 import {
   PROGRESS_EVENT,
   getDueQuestionIds,
@@ -142,6 +143,7 @@ export function ReviewPageClient() {
   return (
     <div className="space-y-5">
       {statsStrip}
+      <TrackStatsDashboard />
       {renderTabBar}
       {activeDescription && (
         <p className="text-xs text-[var(--muted)] ui-sans leading-relaxed">

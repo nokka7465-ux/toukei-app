@@ -132,6 +132,9 @@ export function BookmarksClient({
     question: [],
     formula: [],
     glossary: [],
+    blog: [],
+    textbook: [],
+    tool: [],
   };
   for (const it of items) grouped[it.kind].push(it);
 
@@ -197,6 +200,27 @@ export function BookmarksClient({
         lines.push("");
       }
     }
+
+    const writeSelfResolving = (heading: string, list: BookmarkRef[]) => {
+      if (list.length === 0) return;
+      lines.push(`## ${heading} (${list.length} 件)`);
+      lines.push("");
+      for (const b of list) {
+        const title = b.title ?? b.id;
+        const href = b.href ?? "";
+        lines.push(`### ${title}`);
+        if (b.context) lines.push(`- 区分: ${b.context}`);
+        if (href) lines.push(`- リンク: ${href}`);
+        if (b.note) {
+          lines.push("- メモ:");
+          for (const ln of b.note.split("\n")) lines.push(`  > ${ln}`);
+        }
+        lines.push("");
+      }
+    };
+    writeSelfResolving("ブログ記事", grouped.blog);
+    writeSelfResolving("教科書セクション", grouped.textbook);
+    writeSelfResolving("計算ツール", grouped.tool);
 
     return lines.join("\n");
   }
@@ -324,6 +348,22 @@ export function BookmarksClient({
         </section>
       )}
 
+      <SelfResolvingSection
+        heading="ブログ記事"
+        items={grouped.blog}
+        kind="blog"
+      />
+      <SelfResolvingSection
+        heading="教科書セクション"
+        items={grouped.textbook}
+        kind="textbook"
+      />
+      <SelfResolvingSection
+        heading="計算ツール"
+        items={grouped.tool}
+        kind="tool"
+      />
+
       {grouped.glossary.length > 0 && (
         <section>
           <div className="flex items-baseline justify-between mb-3">
@@ -368,6 +408,54 @@ export function BookmarksClient({
         </section>
       )}
     </div>
+  );
+}
+
+function SelfResolvingSection({
+  heading,
+  items,
+  kind,
+}: {
+  heading: string;
+  items: BookmarkRef[];
+  kind: BookmarkKind;
+}) {
+  if (items.length === 0) return null;
+  return (
+    <section>
+      <div className="flex items-baseline justify-between mb-3">
+        <h2 className="text-xl font-bold">
+          {heading} ({items.length})
+        </h2>
+      </div>
+      <ul className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+        {items.map((b) => {
+          const title = b.title ?? b.id;
+          const href = b.href ?? "#";
+          return (
+            <li key={b.id} className="paper rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <div className="flex-1 min-w-0">
+                  {b.context && (
+                    <div className="text-[10px] uppercase tracking-[0.15em] text-[var(--muted)] ui-sans mb-1">
+                      {b.context}
+                    </div>
+                  )}
+                  <Link
+                    href={href}
+                    className="text-sm leading-relaxed hover:underline font-bold"
+                  >
+                    {title}
+                  </Link>
+                </div>
+                <BookmarkRemove kind={kind} id={b.id} />
+              </div>
+              <NoteEditor kind={kind} id={b.id} initialNote={b.note} />
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 }
 

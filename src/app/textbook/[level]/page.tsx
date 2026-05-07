@@ -13,7 +13,11 @@ import { RecommendedBooks } from "@/components/RecommendedBooks";
 import { ReadingTracker } from "@/components/ReadingTracker";
 import { PrintButton } from "@/components/PrintButton";
 import { BreadcrumbJsonLd, CourseJsonLd } from "@/components/StructuredData";
+import { BookmarkButton } from "@/components/BookmarkButton";
+import { ShareButton } from "@/components/ShareButton";
 import type { Textbook } from "@/types/content";
+
+const SITE_URL = "https://toukei-app.com";
 
 const LEVEL_KEYWORDS: Record<string, { title: string; description: string; about: string[] }> = {
   intro: {
@@ -175,6 +179,21 @@ export default async function TextbookPage({
         <p className="text-[var(--muted-strong)] leading-loose max-w-3xl">
           {book.intro}
         </p>
+        <div className="mt-4 flex flex-wrap items-center gap-2 print-hide">
+          <BookmarkButton
+            kind="textbook"
+            id={`/textbook/${level}`}
+            context={`${meta.title} 教科書`}
+            title={book.title}
+            href={`/textbook/${level}`}
+            size="md"
+          />
+          <ShareButton
+            url={`${SITE_URL}/textbook/${level}`}
+            text={`${book.title} | 統計ロードマップ`}
+            hashtags={["統計", "統計検定"]}
+          />
+        </div>
       </header>
 
       <section className="mb-10 paper rounded-lg p-6">

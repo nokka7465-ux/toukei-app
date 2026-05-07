@@ -3,7 +3,13 @@
 const STORAGE_KEY = "toukei-app:bookmarks:v1";
 export const BOOKMARK_EVENT = "toukei-bookmark-update";
 
-export type BookmarkKind = "question" | "formula" | "glossary";
+export type BookmarkKind =
+  | "question"
+  | "formula"
+  | "glossary"
+  | "blog"
+  | "textbook"
+  | "tool";
 
 export type BookmarkRef = {
   kind: BookmarkKind;
@@ -11,6 +17,10 @@ export type BookmarkRef = {
   id: string;
   /** Optional context for display (track key, level, etc.). */
   context?: string;
+  /** Display title — used by self-resolving kinds (blog/textbook/tool). */
+  title?: string;
+  /** Direct link — used by self-resolving kinds (blog/textbook/tool). */
+  href?: string;
   /** Time of bookmark (ms since epoch). */
   ts: number;
   /** Free-form user memo. */
@@ -61,6 +71,7 @@ export function toggleBookmark(
   kind: BookmarkKind,
   id: string,
   context?: string,
+  meta?: { title?: string; href?: string },
 ): boolean {
   const data = read();
   const k = key(kind, id);
@@ -70,7 +81,14 @@ export function toggleBookmark(
     write(data);
     return false;
   }
-  data.items.unshift({ kind, id, context, ts: Date.now() });
+  data.items.unshift({
+    kind,
+    id,
+    context,
+    title: meta?.title,
+    href: meta?.href,
+    ts: Date.now(),
+  });
   // Cap to a reasonable size to avoid runaway growth.
   data.items = data.items.slice(0, 500);
   write(data);

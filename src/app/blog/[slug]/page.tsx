@@ -7,6 +7,8 @@ import { MixedText } from "@/components/MixedText";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import { AdUnit } from "@/components/ads/AdUnit";
 import { SchoolPicks } from "@/components/SchoolPicks";
+import { BookmarkButton } from "@/components/BookmarkButton";
+import { ShareButton } from "@/components/ShareButton";
 import type { TextbookBlock, BlogPost } from "@/types/content";
 
 const SITE_URL = "https://toukei-app.com";
@@ -182,6 +184,21 @@ export default async function BlogPostPage({
         <p className="text-[var(--muted-strong)] leading-loose mt-3 max-w-3xl">
           {post.description}
         </p>
+        <div className="mt-5 flex flex-wrap items-center gap-2 print-hide">
+          <BookmarkButton
+            kind="blog"
+            id={post.slug}
+            context={post.category}
+            title={post.title}
+            href={`/blog/${post.slug}`}
+            size="md"
+          />
+          <ShareButton
+            url={`${SITE_URL}/blog/${post.slug}`}
+            text={`${post.title} | 統計ロードマップ`}
+            hashtags={["統計", "統計検定"]}
+          />
+        </div>
       </header>
 
       {post.tldr && post.tldr.length > 0 && (

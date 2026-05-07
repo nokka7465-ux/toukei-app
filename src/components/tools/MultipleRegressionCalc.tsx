@@ -7,6 +7,7 @@ import {
   SAMPLE_REGRESSION_CSV,
   SAMPLE_REGRESSION_NAMES,
 } from "@/lib/tools/multiple-regression";
+import { DownloadButtons, toCsv } from "./toolPrimitives";
 
 const DEFAULT_NAMES: [string, string, string] = ["x1", "x2", "x3"];
 
@@ -182,9 +183,33 @@ export function MultipleRegressionCalc() {
             </p>
           )}
 
-          <div className="mt-3 text-xs text-[var(--muted)] ui-sans tabular-nums">
-            n = {result.n} / 残差標準誤差 = {fmt(result.residualStdError, 4)} / F
-            ={fmt(result.fStatistic, 3)} (p ≒ {fmtP(result.fPValue)})
+          <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
+            <div className="text-xs text-[var(--muted)] ui-sans tabular-nums">
+              n = {result.n} / 残差標準誤差 = {fmt(result.residualStdError, 4)} / F
+              ={fmt(result.fStatistic, 3)} (p ≒ {fmtP(result.fPValue)})
+            </div>
+            <DownloadButtons
+              baseFilename="regression"
+              csv={toCsv(
+                result.coefficients.map((c) => ({
+                  variable: c.name,
+                  estimate: c.estimate,
+                  stdError: c.stdError,
+                  tValue: c.tValue,
+                  pValue: c.pValue,
+                  vif: c.vif,
+                })),
+              )}
+              json={{
+                rSquared: result.rSquared,
+                adjustedRSquared: result.adjustedRSquared,
+                n: result.n,
+                residualStdError: result.residualStdError,
+                fStatistic: result.fStatistic,
+                fPValue: result.fPValue,
+                coefficients: result.coefficients,
+              }}
+            />
           </div>
         </>
       )}

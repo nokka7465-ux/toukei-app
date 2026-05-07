@@ -1,6 +1,10 @@
 import Link from "next/link";
 import type { Textbook } from "@/types/content";
 import { TextbookBody } from "./TextbookBody";
+import { BookmarkButton } from "./BookmarkButton";
+import { ShareButton } from "./ShareButton";
+
+const SITE_URL = "https://toukei-app.com";
 
 type Crumb = { label: string; href?: string };
 type BottomLink = { label: string; href: string; primary?: boolean };
@@ -10,11 +14,14 @@ export function TextbookView({
   breadcrumb,
   eyebrow = "Textbook",
   bottomLinks = [],
+  path,
 }: {
   book: Textbook;
   breadcrumb: Crumb[];
   eyebrow?: string;
   bottomLinks?: BottomLink[];
+  /** ブックマーク・シェア用の現ページパス。指定時のみボタン表示 */
+  path?: string;
 }) {
   const flatSections = book.chapters.flatMap((ch) => ch.sections);
   const indexOf: Record<string, number> = {};
@@ -48,6 +55,23 @@ export function TextbookView({
         <p className="text-[var(--muted-strong)] leading-loose max-w-3xl">
           {book.intro}
         </p>
+        {path && (
+          <div className="mt-4 flex flex-wrap items-center gap-2 print-hide">
+            <BookmarkButton
+              kind="textbook"
+              id={path}
+              context={eyebrow}
+              title={book.title}
+              href={path}
+              size="md"
+            />
+            <ShareButton
+              url={`${SITE_URL}${path}`}
+              text={`${book.title} | 統計ロードマップ`}
+              hashtags={["統計", "統計検定"]}
+            />
+          </div>
+        )}
       </header>
 
       <section className="mb-10 paper rounded-lg p-6">

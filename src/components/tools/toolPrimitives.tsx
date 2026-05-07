@@ -2,6 +2,155 @@
 
 import { useState } from "react";
 
+/** ブラウザでテキストファイルをダウンロード */
+function triggerDownload(filename: string, text: string, mime: string) {
+  const blob = new Blob([text], { type: `${mime};charset=utf-8` });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/** 配列のオブジェクトを CSV 文字列に変換(セル内のカンマ・改行をエスケープ) */
+export function toCsv(rows: Record<string, unknown>[]): string {
+  if (rows.length === 0) return "";
+  const headers = Array.from(
+    rows.reduce<Set<string>>((acc, r) => {
+      Object.keys(r).forEach((k) => acc.add(k));
+      return acc;
+    }, new Set()),
+  );
+  const escape = (v: unknown): string => {
+    if (v === null || v === undefined) return "";
+    const s = typeof v === "string" ? v : String(v);
+    if (s.includes(",") || s.includes("\n") || s.includes('"')) {
+      return `"${s.replace(/"/g, '""')}"`;
+    }
+    return s;
+  };
+  const lines = [headers.join(",")];
+  for (const r of rows) {
+    lines.push(headers.map((h) => escape(r[h])).join(","));
+  }
+  return lines.join("\n");
+}
+
+/** ツール結果を CSV / JSON でダウンロードするためのボタン群 */
+export function DownloadButtons({
+  baseFilename,
+  csv,
+  json,
+}: {
+  /** 拡張子なしのベース名(例: "regression") */
+  baseFilename: string;
+  /** CSV 文字列。指定時のみ CSV ボタン表示 */
+  csv?: string;
+  /** JSON 化対象の任意オブジェクト。指定時のみ JSON ボタン表示 */
+  json?: unknown;
+}) {
+  const stamp = new Date().toISOString().slice(0, 10);
+
+  const onCsv = () => {
+    if (!csv) return;
+    triggerDownload(`${baseFilename}-${stamp}.csv`, csv, "text/csv");
+  };
+  const onJson = () => {
+    if (json === undefined) return;
+    triggerDownload(
+      `${baseFilename}-${stamp}.json`,
+      JSON.stringify(json, null, 2),
+      "application/json",
+    );
+  };
+
+  if (!csv && json === undefined) return null;
+  return (
+    <div className="flex flex-wrap gap-2 ui-sans">
+      {csv !== undefined && (
+        <button
+          type="button"
+          onClick={onCsv}
+          className="text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded border border-[var(--page-border-strong)] bg-[var(--page)] hover:bg-[var(--background)] hover:text-[var(--link)] transition flex items-center gap-1.5 whitespace-nowrap"
+          aria-label="結果を CSV でダウンロード"
+        >
+          📄 CSV
+        </button>
+      )}
+      {json !== undefined && (
+        <button
+          type="button"
+          onClick={onJson}
+          className="text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded border border-[var(--page-border-strong)] bg-[var(--page)] hover:bg-[var(--background)] hover:text-[var(--link)] transition flex items-center gap-1.5 whitespace-nowrap"
+          aria-label="結果を JSON でダウンロード"
+        >
+          📦 JSON
+        </button>
+      )}
+    </div>
+  );
+}
+
+/** ツールの現在の入力状態を共有 URL として渡すボタン。`useToolUrlState` の getShareUrl と組み合わせる */
+export function ShareStateButton({
+  getUrl,
+}: {
+  getUrl: () => string;
+}) {
+  const [copied, setCopied] = useState(false);
+  const onCopy = async () => {
+    const url = getUrl();
+    if (!url) return;
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(url);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = url;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1600);
+    } catch {
+      /* noop */
+    }
+  };
+  return (
+    <button
+      type="button"
+      onClick={onCopy}
+      aria-label="現在の入力状態を含む共有 URL をコピー"
+      title="この設定で開ける URL をコピー"
+      className="text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded border border-[var(--page-border-strong)] bg-[var(--page)] hover:bg-[var(--background)] hover:text-[var(--link)] transition flex items-center gap-1.5 whitespace-nowrap"
+    >
+      {copied ? (
+        <>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M20 6L9 17l-5-5" />
+          </svg>
+          リンクをコピー済
+        </>
+      ) : (
+        <>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
+            <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
+          </svg>
+          リンクをコピー
+        </>
+      )}
+    </button>
+  );
+}
+
 export function CopyButton({
   text,
   label = "コピー",

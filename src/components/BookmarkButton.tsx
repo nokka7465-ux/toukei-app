@@ -12,12 +12,18 @@ export function BookmarkButton({
   kind,
   id,
   context,
+  title,
+  href,
   size = "sm",
   className,
 }: {
   kind: BookmarkKind;
   id: string;
   context?: string;
+  /** 表示用タイトル(blog/textbook/tool 用)。省略時は kind 既定で /bookmarks 側がフォールバック */
+  title?: string;
+  /** 直リンク先(blog/textbook/tool 用)。省略時は /bookmarks 側がフォールバック */
+  href?: string;
   size?: "sm" | "md";
   className?: string;
 }) {
@@ -39,7 +45,7 @@ export function BookmarkButton({
   function onClick(e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
-    const next = toggleBookmark(kind, id, context);
+    const next = toggleBookmark(kind, id, context, { title, href });
     setActive(next);
   }
 

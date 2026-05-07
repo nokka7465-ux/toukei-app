@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { DownloadButtons, toCsv } from "./toolPrimitives";
 
 const SAMPLE = "12, 14, 14, 15, 17, 18, 18, 19, 20, 22, 23, 24, 26, 28, 31";
 
@@ -95,23 +96,48 @@ export function DescriptiveStats() {
         />
       </label>
       {stats ? (
-        <div className="rounded-lg p-5 mt-4 border-2 border-[var(--accent)] bg-[var(--highlight)] grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2 text-sm tabular-nums ui-sans">
-          <Stat label="N" value={String(stats.n)} />
-          <Stat label="平均" value={stats.mean.toFixed(4)} />
-          <Stat label="中央値" value={stats.median.toFixed(4)} />
-          <Stat label="標準偏差(SD)" value={stats.sd.toFixed(4)} />
-          <Stat label="標準誤差(SE)" value={stats.se.toFixed(4)} />
-          <Stat label="分散" value={stats.variance.toFixed(4)} />
-          <Stat label="最小" value={stats.min.toFixed(4)} />
-          <Stat label="最大" value={stats.max.toFixed(4)} />
-          <Stat label="範囲" value={stats.range.toFixed(4)} />
-          <Stat label="Q1" value={stats.q1.toFixed(4)} />
-          <Stat label="Q3" value={stats.q3.toFixed(4)} />
-          <Stat label="IQR" value={stats.iqr.toFixed(4)} />
-          <Stat label="歪度" value={stats.skew.toFixed(4)} />
-          <Stat label="尖度" value={stats.kurt.toFixed(4)} />
-          <Stat label="合計" value={stats.sum.toFixed(4)} />
-        </div>
+        <>
+          <div className="rounded-lg p-5 mt-4 border-2 border-[var(--accent)] bg-[var(--highlight)] grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2 text-sm tabular-nums ui-sans">
+            <Stat label="N" value={String(stats.n)} />
+            <Stat label="平均" value={stats.mean.toFixed(4)} />
+            <Stat label="中央値" value={stats.median.toFixed(4)} />
+            <Stat label="標準偏差(SD)" value={stats.sd.toFixed(4)} />
+            <Stat label="標準誤差(SE)" value={stats.se.toFixed(4)} />
+            <Stat label="分散" value={stats.variance.toFixed(4)} />
+            <Stat label="最小" value={stats.min.toFixed(4)} />
+            <Stat label="最大" value={stats.max.toFixed(4)} />
+            <Stat label="範囲" value={stats.range.toFixed(4)} />
+            <Stat label="Q1" value={stats.q1.toFixed(4)} />
+            <Stat label="Q3" value={stats.q3.toFixed(4)} />
+            <Stat label="IQR" value={stats.iqr.toFixed(4)} />
+            <Stat label="歪度" value={stats.skew.toFixed(4)} />
+            <Stat label="尖度" value={stats.kurt.toFixed(4)} />
+            <Stat label="合計" value={stats.sum.toFixed(4)} />
+          </div>
+          <div className="mt-3 flex justify-end">
+            <DownloadButtons
+              baseFilename="descriptive-stats"
+              csv={toCsv([
+                { metric: "N", value: stats.n },
+                { metric: "mean", value: stats.mean },
+                { metric: "median", value: stats.median },
+                { metric: "sd", value: stats.sd },
+                { metric: "se", value: stats.se },
+                { metric: "variance", value: stats.variance },
+                { metric: "min", value: stats.min },
+                { metric: "max", value: stats.max },
+                { metric: "range", value: stats.range },
+                { metric: "q1", value: stats.q1 },
+                { metric: "q3", value: stats.q3 },
+                { metric: "iqr", value: stats.iqr },
+                { metric: "skew", value: stats.skew },
+                { metric: "kurt", value: stats.kurt },
+                { metric: "sum", value: stats.sum },
+              ])}
+              json={stats}
+            />
+          </div>
+        </>
       ) : (
         <p className="text-xs text-[var(--muted)] mt-4">
           数値データを入力してください。

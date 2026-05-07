@@ -7,6 +7,10 @@ import {
 } from "@/lib/tools-registry";
 import { getGlossaryBySlug, termToSlug } from "@/lib/glossary-registry";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import { BookmarkButton } from "@/components/BookmarkButton";
+import { ShareButton } from "@/components/ShareButton";
+
+const SITE_URL = "https://toukei-app.com";
 
 export function generateStaticParams() {
   return toolsRegistry.map((t) => ({ tool: t.slug }));
@@ -120,6 +124,21 @@ export default async function ToolPage({
         <p className="text-[10px] text-[var(--muted)] ui-sans mt-3 leading-relaxed">
           ブラウザ内で完結 ・ データ送信なし ・ 登録不要
         </p>
+        <div className="mt-4 flex flex-wrap items-center gap-2 print-hide">
+          <BookmarkButton
+            kind="tool"
+            id={tool.slug}
+            context={tool.category}
+            title={tool.shortName}
+            href={url}
+            size="md"
+          />
+          <ShareButton
+            url={`${SITE_URL}${url}`}
+            text={`${tool.title} | 統計ロードマップ`}
+            hashtags={["統計", "計算ツール"]}
+          />
+        </div>
       </header>
 
       <section className="mb-10">

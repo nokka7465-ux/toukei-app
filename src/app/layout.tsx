@@ -115,6 +115,12 @@ export default function RootLayout({
       className={`${notoSerifJP.variable} ${notoSansJP.variable}`}
     >
       <body className="min-h-screen">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--page)] focus:text-[var(--link)] focus:border-2 focus:border-[var(--accent)] focus:rounded focus:shadow-lg ui-sans text-sm font-bold"
+        >
+          本文へスキップ
+        </a>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script
           dangerouslySetInnerHTML={{
@@ -248,7 +254,7 @@ export default function RootLayout({
             </div>
           </div>
         </header>
-        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">{children}</main>
+        <main id="main" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">{children}</main>
         <BackToTop />
         <footer className="border-t border-[var(--page-border)] mt-16 bg-[var(--page)]/40 print-hide">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">

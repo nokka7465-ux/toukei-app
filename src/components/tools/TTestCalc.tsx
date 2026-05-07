@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { Field, NumberInput, Result } from "./toolPrimitives";
+import { useMemo } from "react";
+import { Field, NumberInput, Result, ShareStateButton } from "./toolPrimitives";
+import { useToolUrlState } from "@/lib/tool-state";
 import {
   runTTest,
   T_TEST_PRESETS,
@@ -53,7 +54,8 @@ const DEFAULT_STATE: State = {
 };
 
 export function TTestCalc() {
-  const [s, setS] = useState<State>(DEFAULT_STATE);
+  const { state: s, setState: setS, getShareUrl } =
+    useToolUrlState<State>(DEFAULT_STATE);
 
   const upd = <K extends keyof State>(key: K, value: State[K]) =>
     setS((prev) => ({ ...prev, [key]: value }));
@@ -315,6 +317,9 @@ export function TTestCalc() {
             value={fmtP(result.pValue)}
             hint={`t = ${fmt(result.t, 3)} / df = ${fmt(result.df, 2)} / ${result.conclusion}`}
           />
+          <div className="mt-3 flex justify-end">
+            <ShareStateButton getUrl={getShareUrl} />
+          </div>
           <div className="mt-3 grid grid-cols-2 gap-3 text-xs ui-sans tabular-nums">
             <div className="paper rounded p-3">
               <div className="text-[10px] uppercase tracking-[0.1em] text-[var(--muted)] font-bold mb-1">
