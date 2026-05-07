@@ -5,13 +5,13 @@ import { TextbookBody } from "@/components/TextbookBody";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "プログラミング入門 ─ Python・NumPy・Pandas・SQL・R・可視化・PyTorch",
+  title: "プログラミング入門 ─ Python・SQL・R・PyTorch・Git まで 10 章",
   description:
-    "AI エンジニア・データサイエンティストに必要な Python・NumPy・Pandas・SQL・scikit-learn・R 言語・可視化(matplotlib/seaborn)・PyTorch を 8 章でコンパクトに学べる無料ミニ教科書。ブラウザ内 Python 実行(Pyodide)で即座に動かせます。",
+    "AI エンジニア・データサイエンティストに必要な Python・NumPy・Pandas・SQL・scikit-learn・R 言語・可視化(matplotlib/seaborn)・PyTorch・Git/GitHub を 10 章でコンパクトに学べる無料ミニ教科書。ブラウザ内 Python 実行(Pyodide)で即座に動かせます。",
   alternates: { canonical: "/programming" },
   openGraph: {
-    title: "プログラミング入門 ─ Python・SQL・R・PyTorch まで",
-    description: "ブラウザ内 Python 実行で即座に動かせる、データ職向け実装ミニ教科書。8 章構成で R / 可視化 / PyTorch も網羅。",
+    title: "プログラミング入門 ─ Python・SQL・R・PyTorch・Git まで 10 章",
+    description: "ブラウザ内 Python 実行で即座に動かせる、データ職向け実装ミニ教科書。10 章構成で R / 可視化 / PyTorch / Git も網羅。",
     type: "article",
   },
 };
@@ -476,6 +476,168 @@ const CHAPTERS: { id: string; number: string; title: string; blocks: TextbookBlo
       },
     ],
   },
+  {
+    id: "ch9",
+    number: "9",
+    title: "Git・GitHub・開発環境 ─ プロの DS の前提",
+    blocks: [
+      {
+        type: "p",
+        text: "**Git** はバージョン管理の世界標準。**GitHub** はチーム開発・ポートフォリオ・OSS 参加の事実上のプラットフォーム。データ職でも『**Git が使えない人**』は卒業して、**プロのワークフロー** に入りましょう。",
+      },
+      { type: "h3", text: "9-1. Git の基本コマンド" },
+      {
+        type: "code",
+        title: "Git の必須 10 コマンド(参考表示)",
+        python:
+          "# 初期化と設定\ngit init                       # 新規リポジトリ\ngit clone <url>                # 既存リポジトリ取得\ngit config --global user.name 'Your Name'\n\n# 日々のサイクル\ngit status                     # 現在の状態確認\ngit add <file>                 # ステージング\ngit commit -m 'メッセージ'      # コミット\ngit log --oneline              # 履歴表示\n\n# 共同作業\ngit push origin main           # リモートに送信\ngit pull origin main           # リモートから取得\ngit branch feature/foo         # ブランチ作成\ngit checkout feature/foo       # ブランチ切替\ngit merge feature/foo          # ブランチ統合",
+      },
+      {
+        type: "intuition",
+        title: "💡 コミットメッセージは未来の自分への手紙",
+        body: "**Conventional Commits** スタイル(`feat:`, `fix:`, `docs:` など)が業界標準。1 ヶ月後の自分・チームメンバが読んで理解できるメッセージを書く。**1 コミット 1 つの変更** が原則。",
+      },
+      { type: "h3", text: "9-2. GitHub の機能" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Pull Request(PR)**: コードレビューと議論の中心",
+          "**Issue**: タスク・バグ・質問のトラッキング",
+          "**Actions**: CI/CD・テスト自動化",
+          "**Pages**: 静的サイトのホスティング(無料)",
+          "**Codespaces**: クラウド開発環境",
+          "**Copilot**: AI ペアプログラマー",
+        ],
+      },
+      { type: "h3", text: "9-3. データプロジェクトの管理" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**.gitignore**: 大容量データ・秘密鍵を除外(`*.csv`, `.env`)",
+          "**Git LFS**: 大容量ファイルの専用ストレージ",
+          "**DVC**: データのバージョン管理(Data Version Control)",
+          "**MLflow**: 実験トラッキング(モデル + ハイパラ + メトリクス)",
+          "**Hydra**: 設定管理(yaml ベース)",
+        ],
+      },
+      { type: "h3", text: "9-4. 開発環境の選択" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**VS Code**: 万能・拡張豊富(Python・Jupyter・GitHub 統合)",
+          "**Cursor**: AI 統合エディタ(VS Code フォーク)",
+          "**JupyterLab**: 探索的データ分析の標準",
+          "**PyCharm Professional**: 重厚長大な Python 開発に",
+          "**RStudio**: R 開発の鉄板",
+          "**Google Colab**: クラウド GPU を無料で(初学者・ML 学習に最適)",
+        ],
+      },
+      { type: "h3", text: "9-5. 仮想環境とパッケージ管理" },
+      {
+        type: "code",
+        title: "Python の主要な仮想環境",
+        python:
+          "# venv(標準)\npython -m venv .venv\nsource .venv/bin/activate         # mac/Linux\n.venv\\Scripts\\activate            # Windows\npip install -r requirements.txt\n\n# Conda(科学計算系で人気)\nconda create -n myenv python=3.11\nconda activate myenv\nconda install numpy pandas matplotlib\n\n# Poetry(モダンな依存管理)\npoetry init\npoetry add pandas scikit-learn\npoetry shell\n\n# uv(2024 年登場の最速、Rust 製)\nuv venv\nuv pip install pandas scikit-learn",
+      },
+      {
+        type: "practical",
+        title: "🛠 2025 年現在の推奨スタック",
+        body: "**初学者**: Google Colab(セットアップ不要)\n**個人開発**: VS Code + uv + Git\n**チーム開発**: VS Code + uv/Poetry + GitHub + GitHub Actions\n**ML プロジェクト**: + MLflow + DVC\n**LLM 開発**: + LangChain / Claude Code / Cursor",
+      },
+    ],
+  },
+  {
+    id: "ch10",
+    number: "10",
+    title: "総まとめと AI エンジニアへのロードマップ",
+    blocks: [
+      {
+        type: "p",
+        text: "プログラミング教科書 9 章を歩いてきました。**Python・NumPy・Pandas・SQL・scikit-learn・R・可視化・PyTorch・Git** ─ 現代のデータ職に必要な道具がすべて揃いました。",
+      },
+      { type: "h3", text: "10-1. 9 章の地図" },
+      {
+        type: "list",
+        style: "number",
+        items: [
+          "**Ch1 Python 基礎**: 変数・関数・制御構造",
+          "**Ch2 NumPy**: ベクトル演算で 100 倍速く",
+          "**Ch3 Pandas**: 表データ処理のデファクト",
+          "**Ch4 SQL**: データベースの共通語",
+          "**Ch5 scikit-learn**: 機械学習デビュー 30 分",
+          "**Ch6 R 言語**: 統計分野の根強い分析方言",
+          "**Ch7 データ可視化**: matplotlib・seaborn・plotly",
+          "**Ch8 PyTorch**: 深層学習を 50 行で動かす",
+          "**Ch9 Git・GitHub・開発環境**: プロの前提",
+        ],
+      },
+      { type: "h3", text: "10-2. AI エンジニアへの 5 段階ロードマップ" },
+      {
+        type: "list",
+        style: "number",
+        items: [
+          "**Lv1 言語スキル(本書 Ch1-4)**: Python・SQL を読み書きできる",
+          "**Lv2 統計と ML(本書 Ch5)**: scikit-learn でモデルを動かせる",
+          "**Lv3 深層学習(本書 Ch8)**: PyTorch で MLP/CNN を実装できる",
+          "**Lv4 実プロジェクト**: Kaggle・自社データで動くものを作る",
+          "**Lv5 専門化**: NLP・CV・推薦・MLOps のいずれかを深掘り",
+        ],
+      },
+      { type: "h3", text: "10-3. ポートフォリオの作り方" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**GitHub**: 3-5 個の質の高いプロジェクトをピン止め",
+          "**README.md**: 各プロジェクトに目的・データ・結果・反省を書く",
+          "**Kaggle**: 1 つでもメダル(Bronze 以上)で大きなアピール",
+          "**ブログ**: 学んだことを Qiita / Zenn / Note で発信",
+          "**Demo**: Streamlit / Gradio で動く Web アプリ",
+          "**OSS 貢献**: scikit-learn や pandas へ小さな PR でも価値大",
+        ],
+      },
+      { type: "h3", text: "10-4. 学習リソース" },
+      {
+        type: "list",
+        style: "bullet",
+        items: [
+          "**Andrew Ng の Coursera**: ML / DL Specialization の決定版",
+          "**fast.ai**: 実践的な深層学習講座(無料)",
+          "**Hugging Face Course**: NLP / LLM の最新",
+          "**MIT 6.S191**: Introduction to Deep Learning(YouTube)",
+          "**3Blue1Brown**: 数学の直感を養う(YouTube)",
+          "**Towards Data Science**: Medium の有力ブログ",
+          "**Kaggle Learn**: 無料の実践コース",
+          "[**E 資格 教科書**](/certs/e-shikaku/textbook): 本サイトの DL 詳細",
+          "[**統計検定 2 級**](/textbook/grade-2): 統計理論の基礎",
+        ],
+      },
+      { type: "h3", text: "10-5. プロとして成長し続ける 5 か条" },
+      {
+        type: "list",
+        style: "number",
+        items: [
+          "**毎日少しずつ**: 1 日 30 分でも継続",
+          "**手を動かす**: 読むだけでなく必ずコードを書く",
+          "**論文を読む**: NeurIPS / ICML / ICLR の話題作 1 つ / 月",
+          "**コミュニティ参加**: Twitter・Discord・勉強会",
+          "**教える側に回る**: 学んだことを記事や発表で共有",
+        ],
+      },
+      {
+        type: "intuition",
+        title: "💡 AI 時代の DS / AI エンジニア像",
+        body: "AI が単純コーディングを自動化する時代、**人間の価値は『何を解くか』『どう解釈するか』『社会にどう還元するか』** という上流の判断にシフトします。**コードが書ける + 統計が分かる + ビジネス課題を整理できる** ─ この 3 つが揃った T 型人材が、これからの 10 年で最も希少で価値ある存在です。",
+      },
+      {
+        type: "p",
+        text: "プログラミング教科書 10 章、お疲れさまでした。**コードを通じてデータと対話し、社会の意思決定の質を高める** 旅にようこそ。本サイトは、あなたのキャリア全体の伴走者でありたいと願っています。",
+      },
+    ],
+  },
 ];
 
 export default function ProgrammingPage() {
@@ -504,8 +666,9 @@ export default function ProgrammingPage() {
           AI エンジニア・データサイエンティストに必要な{" "}
           <strong>Python(基礎・NumPy・Pandas)</strong>・<strong>SQL</strong>・
           <strong>scikit-learn</strong>・<strong>R 言語</strong>・
-          <strong>データ可視化(matplotlib/seaborn)</strong>・<strong>PyTorch</strong>{" "}
-          を 8 章でまとめた実装ミニ教科書。Python のサンプルはすべて{" "}
+          <strong>データ可視化(matplotlib/seaborn)</strong>・<strong>PyTorch</strong>・
+          <strong>Git / GitHub</strong>{" "}
+          を 10 章でまとめた実装ミニ教科書。Python のサンプルはすべて{" "}
           <strong>ブラウザ内で実行可能</strong>(Pyodide)で、書き換えても動きます。
         </p>
         <p className="text-xs text-[var(--muted)] ui-sans mt-4 leading-relaxed">
