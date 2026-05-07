@@ -141,4 +141,52 @@ export const gradeThreeFormulas: Formula[] = [
     description:
       "標本比率 p̂ から母比率 p を推定する。サンプルサイズが十分大きいときに正規近似が使える。",
   },
+  {
+    id: "z-test-mean",
+    name: "母平均の z 検定統計量",
+    category: "仮説検定",
+    tex: "Z = \\frac{\\bar{X} - \\mu_0}{\\sigma / \\sqrt{n}}",
+    description:
+      "$H_0: \\mu = \\mu_0$ のもとで標準正規分布に従う。$\\sigma$ 未知で n≥30 なら標本標準偏差 s で代用。",
+  },
+  {
+    id: "z-test-proportion",
+    name: "母比率の z 検定統計量",
+    category: "仮説検定",
+    tex: "Z = \\frac{\\hat{p} - p_0}{\\sqrt{p_0(1 - p_0)/n}}",
+    description:
+      "$H_0: p = p_0$ のもとで大標本($np_0 \\geq 5,\\ n(1-p_0) \\geq 5$)では標準正規分布に従う。",
+  },
+  {
+    id: "rejection-region-z",
+    name: "z 検定の棄却域(両側 α)",
+    category: "仮説検定",
+    tex: "|Z| \\geq z_{\\alpha/2}",
+    description:
+      "両側 $\\alpha$ の棄却条件。$\\alpha=0.05$ なら $|Z| \\geq 1.96$、$\\alpha=0.01$ なら $|Z| \\geq 2.576$。片側 $\\alpha$ なら $Z \\geq z_\\alpha$($\\alpha=0.05$ で $1.645$)。",
+  },
+  {
+    id: "chi-squared-goodness-of-fit",
+    name: "カイ二乗適合度検定統計量",
+    category: "仮説検定",
+    tex: "\\chi^2 = \\sum_{i=1}^{k} \\frac{(O_i - E_i)^2}{E_i}",
+    description:
+      "観測度数 $O_i$ と理論期待度数 $E_i$ から計算。自由度 $df = k - 1$ のカイ二乗分布に従う(右片側棄却)。期待度数 $\\geq 5$ が前提。",
+  },
+  {
+    id: "chi-squared-independence",
+    name: "クロス表のカイ二乗独立性検定",
+    category: "仮説検定",
+    tex: "\\chi^2 = \\sum_{i, j} \\frac{(O_{ij} - E_{ij})^2}{E_{ij}}, \\quad E_{ij} = \\frac{R_i \\cdot C_j}{N}",
+    description:
+      "$R_i$ 行合計、$C_j$ 列合計、$N$ 総計から期待度数を作る。自由度 $df = (r-1)(c-1)$。Cramér's V $= \\sqrt{\\chi^2/(N \\cdot \\min(r-1, c-1))}$ で関連の強さを評価。",
+  },
+  {
+    id: "type-i-ii-error",
+    name: "第一種・第二種の誤りと検出力",
+    category: "仮説検定",
+    tex: "\\alpha = P(\\text{H}_0\\,\\text{を棄却} \\mid \\text{H}_0\\,\\text{真}), \\quad \\beta = P(\\text{H}_0\\,\\text{採択} \\mid \\text{H}_1\\,\\text{真}), \\quad \\text{検出力} = 1 - \\beta",
+    description:
+      "$\\alpha$ を厳しくすると $\\beta$ は増える(トレードオフ)。両者を同時に下げるには標本サイズ $n$ を増やすしかない ─ 大規模実験が信頼される数学的根拠。",
+  },
 ];

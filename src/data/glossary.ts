@@ -4194,4 +4194,200 @@ export const glossary: GlossaryTerm[] = [
     category: "線形代数",
     link: "/math/textbook#ch7-sec4",
   },
+
+  // === 統計調査士 / 認知応答プロセス・非標本誤差(survey Ch5) ===
+  {
+    term: "CASMフレームワーク",
+    reading: "きゃすむふれーむわーく",
+    english: "Cognitive Aspects of Survey Methodology",
+    definition:
+      "回答者の認知過程を 4 段階(質問の理解 → 関連情報の検索 → 判断の形成 → 回答の表出)で整理した枠組み。Tourangeau らが提唱。各段階で起こる誤差を予測して調査票を設計する。",
+    level: "2",
+    category: "調査統計",
+    link: "/certs/survey/textbook#ch5-sec1",
+  },
+  {
+    term: "非標本誤差",
+    reading: "ひひょうほんごさ",
+    english: "Non-sampling error",
+    definition:
+      "標本誤差以外の誤差全般。カバレッジ誤差(フレーム不備)・無回答誤差・測定誤差・処理誤差の 4 種類が主軸。標本サイズを増やしても減らないので、ビッグデータでも残る。",
+    level: "2",
+    category: "調査統計",
+    link: "/certs/survey/textbook#ch5-sec2",
+  },
+  {
+    term: "カバレッジ誤差",
+    reading: "かばれっじごさ",
+    english: "Coverage error",
+    definition:
+      "標本フレーム(調査台帳)が母集団を正しく反映していない誤差。1936 年米大統領選 Literary Digest 誌の予測失敗が古典的事例。Web 調査・固定電話 RDD でも常に問題になる。",
+    level: "2",
+    category: "調査統計",
+    link: "/certs/survey/textbook#ch5-sec2",
+  },
+  {
+    term: "社会的望ましさバイアス",
+    reading: "しゃかいてきのぞましさばいあす",
+    english: "Social desirability bias",
+    definition:
+      "回答者が社会通念上『望ましい』方向に回答を歪めるバイアス。飲酒量・運動量・収入・学歴・違反行為などで顕著。匿名性の確保や間接質問法で軽減。",
+    level: "2",
+    category: "調査統計",
+    link: "/certs/survey/textbook#ch5-sec2",
+  },
+  {
+    term: "事後層化",
+    reading: "じごそうか",
+    english: "Post-stratification",
+    definition:
+      "取得した標本を年齢×性別等で集計し、母集団の構成比に合わせる重み付け。Web 調査・任意参加調査の偏り矯正に使う標準手法。レイキング(複数変数同時調整)に拡張可能。",
+    level: "2",
+    category: "調査統計",
+    link: "/certs/survey/textbook#ch5-sec3",
+  },
+  {
+    term: "総合的調査誤差",
+    reading: "そうごうてきちょうさごさ",
+    english: "Total Survey Error (TSE)",
+    definition:
+      "標本誤差 + 非標本誤差を統一的に MSE(平均二乗誤差)で評価する枠組み。Eurostat・米センサス局が推進。予算配分(標本拡大 vs 督促強化 vs 認知インタビュー)を感度分析で決める基盤。",
+    level: "準1",
+    category: "調査統計",
+    link: "/certs/survey/textbook#ch5-sec3",
+  },
+
+  // === DS検定 / 機械学習の主要手法(ds-literacy Ch4) ===
+  {
+    term: "Lasso回帰",
+    reading: "らっそかいき",
+    english: "Lasso regression",
+    definition:
+      "L1 正則化付き線形回帰: $\\|y - X\\beta\\|^2 + \\lambda \\|\\beta\\|_1$。係数を完全に 0 にする効果があり、**特徴選択** に使える。多重共線性下での不安定さは ElasticNet で緩和。",
+    level: "2",
+    category: "機械学習",
+    link: "/certs/ds-literacy/textbook#ch4-sec1",
+  },
+  {
+    term: "Ridge回帰",
+    reading: "りっじかいき",
+    english: "Ridge regression",
+    definition:
+      "L2 正則化付き線形回帰: $\\|y - X\\beta\\|^2 + \\lambda \\|\\beta\\|_2^2$。係数を縮小して多重共線性に強い。すべての特徴を残すので解釈はしやすいが、不要特徴の除去はしない。",
+    level: "2",
+    category: "機械学習",
+    link: "/certs/ds-literacy/textbook#ch4-sec1",
+  },
+  {
+    term: "勾配ブースティング",
+    reading: "こうばいぶーすてぃんぐ",
+    english: "Gradient Boosting",
+    definition:
+      "弱学習器(決定木)を順次に学習し、前段の残差を次の木が予測するアンサンブル手法。XGBoost・LightGBM・CatBoost が現代の表形式データ予測のデファクト標準。",
+    level: "2",
+    category: "機械学習",
+    link: "/certs/ds-literacy/textbook#ch4-sec1",
+  },
+  {
+    term: "ランダムフォレスト",
+    reading: "らんだむふぉれすと",
+    english: "Random Forest",
+    definition:
+      "多数の決定木をブートストラップサンプル + 特徴量サンプリングで作り、平均/多数決で予測する **バギング** 系のアンサンブル。過学習に頑健で実務の最初の選択肢。",
+    level: "2",
+    category: "機械学習",
+    link: "/certs/ds-literacy/textbook#ch4-sec1",
+  },
+  {
+    term: "サポートベクターマシン",
+    reading: "さぽーとべくたーましん",
+    english: "Support Vector Machine (SVM)",
+    definition:
+      "クラス境界からのマージン(最近距離)を最大化する分類器。**カーネルトリック** で非線形分離に拡張(RBF カーネルが標準)。少データ・高次元で安定。",
+    level: "2",
+    category: "機械学習",
+    link: "/certs/ds-literacy/textbook#ch4-sec2",
+  },
+  {
+    term: "ロジスティック回帰",
+    reading: "ろじすてぃっくかいき",
+    english: "Logistic regression",
+    definition:
+      "$P(y=1 \\mid \\boldsymbol x) = \\sigma(\\boldsymbol w^\\top \\boldsymbol x + b)$ の線形分類器。確率出力・係数解釈性・高速。実務のベースラインで最頻出。交差エントロピー損失で学習。",
+    level: "2",
+    category: "機械学習",
+    link: "/certs/ds-literacy/textbook#ch4-sec2",
+  },
+  {
+    term: "k-meansクラスタリング",
+    reading: "けーみーんずくらすたりんぐ",
+    english: "k-means clustering",
+    definition:
+      "クラスタ数 $k$ を事前決定し、各点を最寄りの重心に割り当て + 重心更新を反復する教師なし学習。$k$ 決定にエルボー法・シルエットスコアを使う。初期化感度を **k-means++** で軽減。",
+    level: "2",
+    category: "機械学習",
+    link: "/certs/ds-literacy/textbook#ch4-sec3",
+  },
+  {
+    term: "DBSCAN",
+    reading: "でぃーびーすきゃん",
+    english: "DBSCAN",
+    definition:
+      "Density-Based Spatial Clustering of Applications with Noise。密度ベースで $k$ 不要・任意形状のクラスタ発見・外れ値自動検出が利点。`eps`・`min_samples` がハイパラ。",
+    level: "2",
+    category: "機械学習",
+    link: "/certs/ds-literacy/textbook#ch4-sec3",
+  },
+  {
+    term: "t-SNE",
+    reading: "てぃーすにー",
+    english: "t-Distributed Stochastic Neighbor Embedding",
+    definition:
+      "高次元データの局所近傍関係を低次元(通常 2 次元)で保つ非線形次元削減手法。可視化に強いが大域構造は壊れがち。Word Embedding 可視化の定番。後継 UMAP は大域構造もより保つ。",
+    level: "2",
+    category: "機械学習",
+    link: "/certs/ds-literacy/textbook#ch4-sec3",
+  },
+  {
+    term: "協調フィルタリング",
+    reading: "きょうちょうふぃるたりんぐ",
+    english: "Collaborative Filtering",
+    definition:
+      "ユーザー × アイテムの評価行列から、似たユーザー / 似たアイテムを使って好みを予測する推薦手法。**行列分解(SVD・ALS)** が中核数学。Netflix Prize 優勝モデルの基盤。",
+    level: "2",
+    category: "機械学習",
+    link: "/certs/ds-literacy/textbook#ch4-sec4",
+  },
+
+  // === DS基礎 / Excel仮説検定(ds-basic Ch4) ===
+  {
+    term: "Welchのt検定",
+    reading: "うぇるちのてぃーけんてい",
+    english: "Welch's t-test",
+    definition:
+      "等分散を仮定しない 2 標本 t 検定。Excel の T.TEST 関数で `検定の種類=3`、または分析ツール『等分散を仮定しない 2 標本検定』で実行。実務での 2 群比較の標準。",
+    level: "2",
+    category: "仮説検定",
+    link: "/certs/ds-basic/textbook#ch4-sec1",
+  },
+  {
+    term: "対応のあるt検定",
+    reading: "たいおうのあるてぃーけんてい",
+    english: "Paired t-test",
+    definition:
+      "同じ被験者の前後比較で平均差を検定。被験者間のばらつきを相殺できるため検出力が高い。Excel の T.TEST で `検定の種類=1`。投薬前後・施策前後・テスト前後で頻用。",
+    level: "2",
+    category: "仮説検定",
+    link: "/certs/ds-basic/textbook#ch4-sec1",
+  },
+  {
+    term: "多重比較",
+    reading: "たじゅうひかく",
+    english: "Multiple comparisons",
+    definition:
+      "3 群以上の検定で、各ペア検定を繰り返すと第一種の誤りが増殖する問題。**Bonferroni 補正**(α/m)・**Tukey の HSD**・**Dunnett 検定** で全体の α を制御するのが定石。",
+    level: "2",
+    category: "仮説検定",
+    link: "/certs/ds-basic/textbook#ch4-sec3",
+  },
 ];
