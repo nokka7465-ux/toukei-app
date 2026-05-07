@@ -1572,7 +1572,170 @@ acf(y);  pacf(y)`,
             },
             {
               type: "p",
-              text: "これで準1級の主要範囲は終わりです。確率分布の応用、ベイズ統計、多変量解析、時系列解析、GLM、ANOVA、ノンパラ手法、生存時間解析、実験計画法、リサンプリング法、因果推論 ─ 統計学の実務応用の主要分野を一通り歩き終えました。1 級では、これらの背景にある **理論的な道具立て** ─ 十分統計量・最尤推定・漸近理論・確率過程 ─ をより精密に扱っていきます。",
+              text: "ここまでの 12 章で実務応用の主要分野を扱いました。続く 13 章では、現代の統計家・データサイエンティストに必須となっている **空間統計とネットワーク統計** に触れ、準 1 級教科書を完結させます。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch13",
+      number: 13,
+      title: "空間統計とネットワーク統計の入口",
+      overview:
+        "地理的・関係的な構造を持つデータの統計手法。空間相関・モランの I・SAR/CAR モデル・ネットワーク中心性・ERGM の入口を 4 節で。",
+      sections: [
+        {
+          id: "ch13-sec1",
+          number: "13.1",
+          title: "空間データと空間相関",
+          blocks: [
+            {
+              type: "p",
+              text: "**空間統計(spatial statistics)** は、観測データに **地理的位置** が付随する場面で用いる統計手法。疫学(疾病の地理分布)・不動産(地価)・交通(事故発生)・農学(収穫量)・環境(大気汚染)などで欠かせない領域です。",
+            },
+            { type: "h3", text: "Tobler の地理学第一法則" },
+            {
+              type: "intuition",
+              title: "『近いものは似ている』",
+              body: "**Everything is related to everything else, but near things are more related than distant things** ─ 1970 年に Tobler が提示した地理学第一法則。地価・気温・人口・疾患発生率など、**空間的に近い場所ほど値が似ている** ことが多い。これを統計に組み込むのが空間統計の本質です。",
+            },
+            { type: "h3", text: "空間データの 3 タイプ" },
+            {
+              type: "def",
+              title: "用語 ─ 空間データの分類",
+              body: "**点参照データ(Geostatistical data)**: 連続空間の点で観測。気温・地下水位・大気汚染。**クリギング** で補間。\n\n**領域データ(Areal / Lattice data)**: 行政区画など離散領域の集計値。市町村別人口・県別失業率。**SAR / CAR モデル** で扱う。\n\n**点パターンデータ(Point pattern data)**: イベント発生位置そのものが対象。犯罪発生地点・地震震央。**Ripley の K 関数** で集中性を評価。",
+            },
+            { type: "h3", text: "空間相関の検定 ─ モランの I" },
+            {
+              type: "def",
+              title: "公式 ─ モランの I",
+              body: "$\\;I = \\dfrac{n}{\\sum_{i,j} w_{ij}} \\cdot \\dfrac{\\sum_{i,j} w_{ij}(x_i - \\bar x)(x_j - \\bar x)}{\\sum_i (x_i - \\bar x)^2}\\;$\n\n$w_{ij}$ は隣接行列(隣接 = 1, それ以外 = 0、または距離による重み)。$I > 0$ で正の空間相関(似た値が集まる)、$I \\approx 0$ でランダム、$I < 0$ で負の相関(チェッカーボード状)。",
+            },
+            {
+              type: "p",
+              text: "I の検定は、ランダム配置を帰無仮説に **モンテカルロ法** または漸近正規近似で行います。R では `spdep::moran.test()`、Python では `pysal` ライブラリで実行。",
+            },
+          ],
+        },
+        {
+          id: "ch13-sec2",
+          number: "13.2",
+          title: "空間回帰モデル ─ SAR と CAR",
+          blocks: [
+            {
+              type: "p",
+              text: "通常の回帰 $y = X\\beta + \\varepsilon$ は **誤差項が独立** を仮定。しかし空間データでは隣接領域の誤差が相関するので、これを正面から扱うモデルが必要です。",
+            },
+            { type: "h3", text: "空間誤差モデル(SAR error)" },
+            {
+              type: "def",
+              title: "公式 ─ Spatial Autoregressive (SAR) error model",
+              body: "$\\;y = X\\beta + u, \\quad u = \\rho W u + \\varepsilon\\;$\n\n$W$ は空間重み行列、$\\rho$ は空間相関の強さ、$\\varepsilon$ は独立な誤差。誤差項が空間的に伝播する構造を陽に組み込む。",
+            },
+            { type: "h3", text: "空間ラグモデル(SAR lag)" },
+            {
+              type: "def",
+              title: "公式 ─ Spatial Lag Model",
+              body: "$\\;y = \\rho W y + X\\beta + \\varepsilon\\;$\n\n隣接領域の **応答変数自体** が説明変数に入る形。例: 隣の市が活況なら自分の市も活況、という波及効果のモデル化。",
+            },
+            { type: "h3", text: "CAR モデル(Conditional AutoRegressive)" },
+            {
+              type: "p",
+              text: "**CAR モデル** はベイズ階層モデルでよく使われる空間モデルで、各領域の値を **隣接領域の条件付きで** 定義します。**疾病マッピング(Besag-York-Mollié 1991)** が代表例で、各地域の疾患発生率を空間相関 + 非空間ノイズに分解します。RStan / brms / INLA で実装可能。",
+            },
+            {
+              type: "intuition",
+              title: "GIS との接続",
+              body: "空間統計は **GIS(Geographic Information System)** と切り離せません。R の `sf` パッケージや Python の `geopandas` で地理データを扱い、`spdep` / `pysal` で統計分析、`leaflet` / `folium` で可視化、というのが現代のワークフロー。地理空間データはオープンデータが豊富(国土数値情報・OpenStreetMap)で実践しやすい領域です。",
+            },
+          ],
+        },
+        {
+          id: "ch13-sec3",
+          number: "13.3",
+          title: "ネットワーク統計 ─ グラフ構造の解析",
+          blocks: [
+            {
+              type: "p",
+              text: "**ネットワーク統計(network / graph statistics)** は、**個体ではなく関係性** を分析対象とする統計学。SNS のフォロー関係・論文の共著・タンパク質間相互作用・電力網など、データが **グラフ(ノード + エッジ)** で表現される場面に適用されます。",
+            },
+            { type: "h3", text: "中心性(centrality)指標" },
+            {
+              type: "def",
+              title: "用語 ─ 4 つの中心性",
+              body: "**次数中心性(Degree centrality)**: ノードに直接つながるエッジ数。『友達が多い』指標\n\n**近接中心性(Closeness)**: 他の全ノードへの最短経路長の逆数。情報拡散が速いノード\n\n**媒介中心性(Betweenness)**: 他ノード間の最短経路がそのノードを通る割合。情報のハブ\n\n**固有ベクトル中心性(Eigenvector)**: 自分につながるノードの中心性も加味。Google PageRank の原型",
+            },
+            {
+              type: "intuition",
+              title: "PageRank と固有ベクトル",
+              body: "Google の PageRank は『**重要なページからリンクされているページは重要**』という再帰的定義から、**遷移行列の最大固有値に対応する固有ベクトル** として計算されます。math Ch7 の固有値・固有ベクトルが直接の応用例。Web 検索の革命を起こした 1998 年の発明です。",
+            },
+            { type: "h3", text: "コミュニティ検出" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Louvain 法**: モジュラリティ最大化で高速にコミュニティを発見",
+                "**Girvan-Newman**: 媒介中心性の高いエッジを順次削除",
+                "**スペクトラル クラスタリング**: ラプラシアン行列の固有ベクトルでクラスタ抽出",
+                "応用: SNS の友達クラスタ・論文のテーマグループ・遺伝子のモジュール",
+              ],
+            },
+            { type: "h3", text: "スモールワールド・スケールフリー" },
+            {
+              type: "def",
+              title: "用語 ─ 現実ネットワークの 2 つの法則",
+              body: "**スモールワールド(Small-world)**(Watts-Strogatz 1998): クラスタ性が高いのに、任意のノード間が **少ないステップでつながる**(ケビン・ベーコン 6 段階)。\n\n**スケールフリー(Scale-free)**(Barabási-Albert 1999): 次数分布が **べき乗則** に従い、超高次数のハブが少数存在。Web リンク・引用・SNS で観察される。",
+            },
+          ],
+        },
+        {
+          id: "ch13-sec4",
+          number: "13.4",
+          title: "指数ランダムグラフモデル(ERGM)",
+          blocks: [
+            {
+              type: "p",
+              text: "**ERGM(Exponential Random Graph Model)** は、観測されたネットワーク構造を統計的に説明する **回帰の親戚**。各ノード属性・ネットワーク構造の特徴(エッジ数・三角形数・k-star など)を説明変数として、観測ネットワークが現れる確率を最大化するモデル。",
+            },
+            { type: "h3", text: "ERGM の定義" },
+            {
+              type: "def",
+              title: "公式 ─ ERGM",
+              body: "観測ネットワーク $y$ の確率:\n\n$\\;P(Y = y) = \\dfrac{\\exp(\\boldsymbol \\theta^\\top \\boldsymbol s(y))}{\\kappa(\\boldsymbol \\theta)}\\;$\n\n$\\boldsymbol s(y)$ はネットワーク統計量ベクトル(エッジ数・相互性・三角形数など)、$\\boldsymbol \\theta$ はそのパラメータ、$\\kappa$ は正規化定数。**指数族** の一般形で、**MCMC-MLE** で推定。",
+            },
+            { type: "h3", text: "解釈の例" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**エッジ係数**: ネットワーク全体の密度",
+                "**相互性(mutuality)**: 双方向リンクが現れやすいか(SNS のフォロバ)",
+                "**三角形係数**: 共通の友達同士がつながりやすいか(triadic closure)",
+                "**ノード属性同質性(homophily)**: 似た属性同士でリンクしやすいか",
+              ],
+            },
+            { type: "h3", text: "実装ツール" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**R `statnet` / `ergm`**: ERGM の標準実装",
+                "**R `igraph` / Python `networkx`**: 中心性・コミュニティ検出",
+                "**R `spdep` / Python `pysal`**: 空間統計",
+                "**Stan / brms / INLA**: ベイズ的な空間モデル(CAR モデル)",
+              ],
+            },
+            {
+              type: "practical",
+              title: "実務での応用領域",
+              body: "**疫学**: 空間相関を考慮した疾病発生率モデル(BYM)\n**マーケ**: 顧客間の口コミネットワーク・推薦システム\n**社会学**: 友人関係ネットワーク・組織内連携\n**生物学**: タンパク質間相互作用・脳のコネクトーム\n**金融**: 銀行間ネットワークのシステミックリスク評価",
+            },
+            { type: "h3", text: "結びに" },
+            {
+              type: "p",
+              text: "ここまでの 13 章で **準 1 級の主要範囲を完備** しました。確率分布の応用・ベイズ統計・多変量解析・時系列解析・GLM・ANOVA・ノンパラ手法・生存時間解析・実験計画法・リサンプリング・因果推論・空間/ネットワーク統計 ─ 現代統計学の主要応用分野を一通り歩き終えました。1 級では、これらの背景にある **理論的な道具立て**(十分統計量・最尤推定・漸近理論・確率過程)をより精密に扱っていきます。",
             },
           ],
         },

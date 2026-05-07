@@ -393,4 +393,102 @@ export const dsLiteracyQuestions: Question[] = [
     explanation:
       "Netflix Prize(2006-09)優勝モデルは行列分解 + アンサンブル。ユーザー特徴ベクトル × アイテム特徴ベクトルの内積で評価を予測。math Ch7 の SVD・低ランク近似が直接の数学的基盤。",
   },
+
+  // === Ch5 倫理・プライバシー・AI ガバナンス ===
+  {
+    id: "dsl-eth1",
+    difficulty: 2,
+    category: "倫理・プライバシー",
+    question:
+      "個人情報保護法における **要配慮個人情報** に **該当しない** ものはどれか。",
+    choices: [
+      "病歴・治療履歴",
+      "犯罪歴",
+      "氏名・住所",
+      "人種・信条・社会的身分",
+    ],
+    correctIndex: 2,
+    explanation:
+      "氏名・住所は個人情報だが要配慮個人情報ではない。要配慮個人情報は人種・信条・社会的身分・病歴・犯罪歴・障害など、本人同意なしの取得が原則禁止される情報。",
+  },
+  {
+    id: "dsl-eth2",
+    difficulty: 2,
+    category: "倫理・プライバシー",
+    question:
+      "GDPR の **忘れられる権利**(Right to be Forgotten)について正しい記述はどれか。",
+    choices: [
+      "事業者がデータを忘れる権利",
+      "本人がデータの削除を請求でき、事業者は応じる義務がある",
+      "AI モデルがパラメータを忘れる権利",
+      "サーバーログの自動消去機能",
+    ],
+    correctIndex: 1,
+    explanation:
+      "GDPR 第 17 条で規定。EU 域内の個人は事業者にデータ削除を請求でき、事業者は法的根拠がない限り応じる義務がある。違反時の制裁金は最大 2,000 万ユーロまたは全世界売上の 4%。",
+  },
+  {
+    id: "dsl-eth3",
+    difficulty: 3,
+    category: "倫理・プライバシー",
+    question:
+      "**$k$-匿名化** について正しい記述はどれか。",
+    choices: [
+      "$k$ 個のレコードをランダムに削除する",
+      "同じ準識別子(年齢・性別・住所など)を持つ個人が常に $k$ 人以上存在することを保証する",
+      "暗号化アルゴリズムの一種",
+      "サンプルサイズを $k$ 倍にする",
+    ],
+    correctIndex: 1,
+    explanation:
+      "$k$-匿名化は『**他のデータと突合しても $k$ 人未満に絞り込めない**』ことを保証する技法。Sweeney (2002)。$k=5$ なら同じ準識別子を持つ人が必ず 5 人以上いる。Netflix Prize の再識別問題への対応の一つ。",
+  },
+  {
+    id: "dsl-eth4",
+    difficulty: 3,
+    category: "AI 公平性",
+    question:
+      "AI 公平性指標について、Chouldechova / Kleinberg らが示した **不可能性定理** が主張することは何か。",
+    choices: [
+      "公平な AI は技術的に作れない",
+      "群間で陽性率が異なる場合、Demographic Parity・Equal Opportunity・Equalized Odds の 3 指標は数学的に同時には満たせない",
+      "公平性指標は 1 つに統一されている",
+      "公平性は法律で禁止されている",
+    ],
+    correctIndex: 1,
+    explanation:
+      "群間で base rate(真の陽性率)が違う場合、複数の公平性指標は互いに矛盾する。COMPAS 論争はこの構造の現実例で『どの公平性を満たすか』は社会的合意が必要 ─ 技術だけでは決められない。",
+  },
+  {
+    id: "dsl-eth5",
+    difficulty: 2,
+    category: "AI 公平性",
+    question:
+      "AI モデルの個別予測を説明する手法として、ゲーム理論のシャプレイ値に基づくものはどれか。",
+    choices: [
+      "LIME",
+      "SHAP",
+      "PDP",
+      "Permutation Importance",
+    ],
+    correctIndex: 1,
+    explanation:
+      "SHAP (SHapley Additive exPlanations) はシャプレイ値で各特徴量の貢献を計算する Local + Global の説明手法。XGBoost / LightGBM 等で標準的に使われ、与信・医療など説明責任の必要な領域で頻用。",
+  },
+  {
+    id: "dsl-eth6",
+    difficulty: 2,
+    category: "AI ガバナンス",
+    question:
+      "EU AI Act について最も適切な記述はどれか(2024 年施行)。",
+    choices: [
+      "全ての AI 利用を禁止する規制",
+      "リスクレベル別(禁止 / ハイリスク / 限定リスク / 最小リスク)に要求事項を定める世界初の包括的 AI 規制",
+      "EU 域外には適用されない",
+      "違反時に制裁金はない",
+    ],
+    correctIndex: 1,
+    explanation:
+      "EU AI Act は世界初の包括的 AI 規制(2024 施行・段階的適用)。社会信用スコアなど『禁止』、医療・採用など『ハイリスク』、生成 AI など『限定リスク』(透明性義務)、最小リスクの 4 段階。違反は最大全世界売上 7%。",
+  },
 ];

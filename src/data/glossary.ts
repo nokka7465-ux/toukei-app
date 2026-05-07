@@ -4390,4 +4390,232 @@ export const glossary: GlossaryTerm[] = [
     category: "仮説検定",
     link: "/certs/ds-basic/textbook#ch4-sec3",
   },
+
+  // === 2 級 / 分割表とロジスティック回帰(grade-2 Ch5) ===
+  {
+    term: "Cramér's V",
+    reading: "くらめーるぶい",
+    english: "Cramér's V",
+    definition:
+      "$V = \\sqrt{\\chi^2/(N \\cdot \\min(r-1, c-1))}$ で 0〜1 の標準化された関連の強さ指標。p 値とセットで報告し、$V \\approx 0.1$ で弱、$0.3$ で中、$0.5$ で強の目安。",
+    level: "2",
+    category: "分割表分析",
+    link: "/textbook/grade-2#ch5-sec1",
+  },
+  {
+    term: "Fisherの正確検定",
+    reading: "ふぃっしゃーのせいかくけんてい",
+    english: "Fisher's exact test",
+    definition:
+      "$2 \\times 2$ 分割表の独立性を超幾何分布で厳密計算する検定。期待度数 < 5 の小標本でカイ二乗近似が破綻する場面で使う。R: `fisher.test()`、Python: `scipy.stats.fisher_exact()`。",
+    level: "2",
+    category: "分割表分析",
+    link: "/textbook/grade-2#ch5-sec1",
+  },
+  {
+    term: "オッズ比",
+    reading: "おっずひ",
+    english: "Odds Ratio (OR)",
+    definition:
+      "$2 \\times 2$ 表で $\\mathrm{OR} = ad/bc$。ケースコントロール研究で頻用。$\\ln \\mathrm{OR}$ が近似的に正規分布で、SE = $\\sqrt{1/a + 1/b + 1/c + 1/d}$。希少疾患では $\\mathrm{OR} \\approx \\mathrm{RR}$。",
+    level: "2",
+    category: "分割表分析",
+    link: "/textbook/grade-2#ch5-sec2",
+  },
+  {
+    term: "マンテル-ヘンツェル法",
+    reading: "まんてる-へんつぇるほう",
+    english: "Mantel-Haenszel method",
+    definition:
+      "層別された複数の $2 \\times 2$ 表を統合して合同オッズ比を算出する古典的手法。$\\mathrm{OR}_{\\mathrm{MH}} = \\sum a_k d_k/n_k \\,/\\, \\sum b_k c_k/n_k$。シンプソンのパラドックスを回避。",
+    level: "2",
+    category: "分割表分析",
+    link: "/textbook/grade-2#ch5-sec3",
+  },
+  {
+    term: "ロジット関数",
+    reading: "ろじっとかんすう",
+    english: "Logit function",
+    definition:
+      "$\\mathrm{logit}(p) = \\ln(p/(1-p))$。確率 $p$ を $(-\\infty, \\infty)$ にマッピング。逆関数がシグモイド $\\sigma(z) = 1/(1+e^{-z})$。ロジスティック回帰の中核。",
+    level: "2",
+    category: "ロジスティック回帰",
+    link: "/textbook/grade-2#ch5-sec4",
+  },
+  {
+    term: "Hosmer-Lemeshow検定",
+    reading: "ほすまー-れめしょうけんてい",
+    english: "Hosmer-Lemeshow test",
+    definition:
+      "ロジスティック回帰の適合度を見る検定。予測確率を 10 分位に分け、観測 vs 期待のカイ二乗統計量で評価。p > 0.05 で『適合してる』(逆向きの仮説検定)。",
+    level: "2",
+    category: "ロジスティック回帰",
+    link: "/textbook/grade-2#ch5-sec4",
+  },
+
+  // === DS リテラシー / 倫理・ガバナンス(ds-literacy Ch5) ===
+  {
+    term: "GDPR",
+    reading: "じーでぃーぴーあーる",
+    english: "General Data Protection Regulation",
+    definition:
+      "EU の一般データ保護規則(2018 施行)。EU 域内の個人データ処理に適用、忘れられる権利・データポータビリティ・DPO 選任義務など。違反は最大 2,000 万ユーロまたは全世界売上の 4%。",
+    level: "2",
+    category: "プライバシー",
+    link: "/certs/ds-literacy/textbook#ch5-sec1",
+  },
+  {
+    term: "k-匿名化",
+    reading: "けーとくめいか",
+    english: "k-anonymity",
+    definition:
+      "同じ準識別子(年齢・性別・住所など)を持つ個人が常に $k$ 人以上存在することを保証する匿名化技法(Sweeney 2002)。再識別攻撃への基本的な防御。l-多様性・t-近接性に発展。",
+    level: "準1",
+    category: "プライバシー",
+    link: "/certs/ds-literacy/textbook#ch5-sec1",
+  },
+  {
+    term: "EU AI Act",
+    reading: "いーゆーえーあいあくと",
+    english: "EU AI Act",
+    definition:
+      "世界初の包括的 AI 規制(2024 施行)。リスクレベル別(禁止 / ハイリスク / 限定リスク / 最小リスク)に要求事項。違反は最大全世界売上の 7%。EU 域外企業も EU 個人を対象なら適用対象。",
+    level: "2",
+    category: "AIガバナンス",
+    link: "/certs/ds-literacy/textbook#ch5-sec4",
+  },
+  {
+    term: "公平性指標",
+    reading: "こうへいせいしひょう",
+    english: "Fairness metrics",
+    definition:
+      "AI モデルの公平性を測る指標。Demographic Parity・Equal Opportunity・Equalized Odds の 3 軸が代表で、群間で base rate が違う場合 **同時に満たせない**(Chouldechova / Kleinberg の不可能性定理)。",
+    level: "準1",
+    category: "AI公平性",
+    link: "/certs/ds-literacy/textbook#ch5-sec2",
+  },
+  {
+    term: "SHAP",
+    reading: "しゃっぷ",
+    english: "SHapley Additive exPlanations",
+    definition:
+      "ゲーム理論のシャプレイ値で機械学習モデルの予測を説明する手法。Local + Global 両対応で、XGBoost / LightGBM 等で標準的に使われる。XAI(説明可能 AI)の現代の代表手法。",
+    level: "2",
+    category: "AI公平性",
+    link: "/certs/ds-literacy/textbook#ch5-sec3",
+  },
+  {
+    term: "Model Card",
+    reading: "もでるかーど",
+    english: "Model Card",
+    definition:
+      "機械学習モデルの仕様書(Mitchell et al. 2019)。学習データ・性能指標・想定用途・既知の制限・公平性評価を記載。Hugging Face Hub で標準化。AI ガバナンスの基本ドキュメント。",
+    level: "2",
+    category: "AIガバナンス",
+    link: "/certs/ds-literacy/textbook#ch5-sec4",
+  },
+
+  // === grade-4 Ch6 確率分布の入口 ===
+  {
+    term: "確率変数",
+    reading: "かくりつへんすう",
+    english: "Random variable",
+    definition:
+      "ランダムな結果を数値に対応させた変数。サイコロの出目・身長・通勤遅延回数など。離散型(整数値)と連続型(実数値)に分類される。確率分布で振る舞いを記述。",
+    level: "4",
+    category: "確率分布",
+    link: "/textbook/grade-4#ch6-sec1",
+  },
+  {
+    term: "二項分布",
+    reading: "にこうぶんぷ",
+    english: "Binomial distribution",
+    definition:
+      "成功確率 $p$ の試行を独立に $n$ 回繰り返したときの成功回数の分布。$X \\sim B(n, p)$、$E[X] = np$、$V[X] = np(1-p)$。コイン投げ・不良品個数・アンケートの賛成数。$n$ が大きいと正規分布に近づく。",
+    level: "4",
+    category: "確率分布",
+    link: "/textbook/grade-4#ch6-sec2",
+  },
+  {
+    term: "68-95-99.7ルール",
+    reading: "ろくじゅうはちきゅうじゅうごきゅうじゅうきゅうてんなな",
+    english: "68-95-99.7 rule",
+    definition:
+      "正規分布で平均 ±1σ に約 68%、±2σ に約 95%、±3σ に約 99.7% のデータが含まれる経験則。品質管理(±3σ から外れたら異常)・偏差値(平均から ±1σ で偏差値 60-40)で実用される。",
+    level: "4",
+    category: "確率分布",
+    link: "/textbook/grade-4#ch6-sec3",
+  },
+  {
+    term: "中心極限定理",
+    reading: "ちゅうしんきょくげんていり",
+    english: "Central Limit Theorem (CLT)",
+    definition:
+      "独立同分布の確率変数の和(平均)は、母集団の分布形状によらず、サンプルサイズが大きくなると正規分布に近づく定理。統計的推測(信頼区間・仮説検定)の理論的基盤。",
+    level: "4",
+    category: "確率分布",
+    link: "/textbook/grade-4#ch6-sec4",
+  },
+
+  // === grade-pre1 Ch13 空間・ネットワーク統計 ===
+  {
+    term: "モランのI",
+    reading: "もらんのあい",
+    english: "Moran's I",
+    definition:
+      "空間相関を測る統計量。$-1$ 〜 $+1$ の範囲で、$+$ なら似た値が空間的に集まる正の相関、$-$ ならチェッカーボード状の負の相関、0 でランダム。R: `spdep::moran.test()`。",
+    level: "準1",
+    category: "空間統計",
+    link: "/textbook/grade-pre1#ch13-sec1",
+  },
+  {
+    term: "クリギング",
+    reading: "くりぎんぐ",
+    english: "Kriging",
+    definition:
+      "点参照空間データから未観測地点の値を補間するベスト線形不偏予測量(BLUP)。距離に応じた共分散構造(バリオグラム)を仮定。気象・鉱業・大気汚染で標準的な空間補間法。",
+    level: "準1",
+    category: "空間統計",
+    link: "/textbook/grade-pre1#ch13-sec1",
+  },
+  {
+    term: "PageRank",
+    reading: "ぺーじらんく",
+    english: "PageRank",
+    definition:
+      "Google の Web ページ重要度算出アルゴリズム(Brin & Page 1998)。『重要なページからリンクされているページは重要』を再帰的に定義し、遷移行列の最大固有値に対応する固有ベクトルとして計算。",
+    level: "準1",
+    category: "ネットワーク統計",
+    link: "/textbook/grade-pre1#ch13-sec3",
+  },
+  {
+    term: "媒介中心性",
+    reading: "ばいかいちゅうしんせい",
+    english: "Betweenness centrality",
+    definition:
+      "ネットワーク中心性の一つで、他ノード間の最短経路がそのノードを通る割合。情報のハブを特定する指標。$BC(v) = \\sum_{s \\neq v \\neq t} \\sigma_{st}(v) / \\sigma_{st}$。",
+    level: "準1",
+    category: "ネットワーク統計",
+    link: "/textbook/grade-pre1#ch13-sec3",
+  },
+  {
+    term: "スケールフリーネットワーク",
+    reading: "すけーるふりーねっとわーく",
+    english: "Scale-free network",
+    definition:
+      "次数分布がべき乗則 $P(k) \\sim k^{-\\gamma}$ に従うネットワーク(Barabási-Albert 1999)。少数の超高次数ハブが存在する。Web リンク・引用ネットワーク・SNS・タンパク質間相互作用で観察される。",
+    level: "準1",
+    category: "ネットワーク統計",
+    link: "/textbook/grade-pre1#ch13-sec3",
+  },
+  {
+    term: "ERGM",
+    reading: "いーあーるじーえむ",
+    english: "Exponential Random Graph Model",
+    definition:
+      "観測ネットワークが現れる確率を $P(Y=y) \\propto \\exp(\\boldsymbol \\theta^\\top \\boldsymbol s(y))$ で表す指数族モデル。ネットワーク統計量(エッジ・三角形・homophily 等)を説明変数化、MCMC-MLE で推定。",
+    level: "準1",
+    category: "ネットワーク統計",
+    link: "/textbook/grade-pre1#ch13-sec4",
+  },
 ];

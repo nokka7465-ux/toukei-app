@@ -631,4 +631,108 @@ export const gradeTwoQuestions: Question[] = [
     explanation:
       "ANOVA は正規性・等分散性・独立性を仮定する。正規性は Q-Q プロットや Shapiro-Wilk、等分散性は Levene や Brown-Forsythe、独立性は実験計画から判断。仮定が崩れていれば Welch ANOVA や Kruskal-Wallis などへ。",
   },
+
+  // === Ch5 分割表とロジスティック回帰 ===
+  {
+    id: "g2-cont1",
+    difficulty: 2,
+    category: "分割表分析",
+    question:
+      "$2 \\times 3$ 分割表でカイ二乗独立性検定を行うときの自由度として正しいものはどれか。",
+    choices: ["$df = 6$", "$df = 5$", "$df = 2$", "$df = 1$"],
+    correctIndex: 2,
+    explanation:
+      "独立性検定の自由度は $(r-1)(c-1)$。$2 \\times 3$ なら $(2-1)(3-1) = 2$。$r$ は行数・$c$ は列数。",
+  },
+  {
+    id: "g2-cont2",
+    difficulty: 2,
+    category: "分割表分析",
+    question:
+      "$2 \\times 2$ 分割表 $\\begin{pmatrix}30 & 50 \\\\ 40 & 30\\end{pmatrix}$ のオッズ比 OR の値はいくらか(行: 曝露 ±、列: 結果 ±)。",
+    choices: ["$0.45$", "$0.563$", "$1.78$", "$2.50$"],
+    correctIndex: 0,
+    explanation:
+      "$\\mathrm{OR} = ad/bc = (30 \\times 30)/(50 \\times 40) = 900/2000 = 0.45$。OR < 1 なので曝露があると結果 + のオッズが下がる関係。",
+  },
+  {
+    id: "g2-cont3",
+    difficulty: 2,
+    category: "分割表分析",
+    question:
+      "Cramér's V について正しい記述はどれか。",
+    choices: [
+      "値が大きいほど 2 変数が独立",
+      "0〜1 の範囲を取り、値が大きいほど 2 変数の関連が強い",
+      "値が負になることがある",
+      "サンプルサイズに比例する",
+    ],
+    correctIndex: 1,
+    explanation:
+      "$V = \\sqrt{\\chi^2/(N \\cdot \\min(r-1, c-1))}$ で 0〜1 の標準化指標。$V \\approx 0.1$ で弱、$0.3$ で中、$0.5$ で強。p 値とセットで報告するのが推奨。",
+  },
+  {
+    id: "g2-cont4",
+    difficulty: 3,
+    category: "分割表分析",
+    question:
+      "Fisher の正確検定が推奨されるのはどんな状況か。",
+    choices: [
+      "サンプルサイズが極端に大きい場合",
+      "**期待度数 $E_{ij} < 5$** のセルが多くカイ二乗近似が破綻しそうな場合",
+      "連続データの 2 群比較",
+      "回帰分析の係数検定",
+    ],
+    correctIndex: 1,
+    explanation:
+      "Fisher の正確検定は超幾何分布に基づく厳密計算で、**小標本・期待度数 < 5** で標準。R では `fisher.test()`、Python では `scipy.stats.fisher_exact()`。計算コストは大標本で重い。",
+  },
+  {
+    id: "g2-logit1",
+    difficulty: 2,
+    category: "ロジスティック回帰",
+    question:
+      "ロジスティック回帰の係数 $\\beta_i$ の解釈として正しいものはどれか。",
+    choices: [
+      "$\\beta_i$ そのものがオッズ比",
+      "$\\exp(\\beta_i)$ がオッズ比 ─ $x_i$ が 1 単位増えたときのオッズの倍率",
+      "$\\beta_i$ は確率の変化量",
+      "$\\beta_i$ は予測確率そのもの",
+    ],
+    correctIndex: 1,
+    explanation:
+      "ロジット = 対数オッズ。$\\mathrm{logit}(p) = \\beta_0 + \\beta_1 x$ より、$x$ が 1 増えると対数オッズが $\\beta_1$ 増える ⇔ オッズが $\\exp(\\beta_1)$ 倍。これが係数の自然な解釈。",
+  },
+  {
+    id: "g2-logit2",
+    difficulty: 3,
+    category: "ロジスティック回帰",
+    question:
+      "ロジスティック回帰モデルのパラメータ推定で使われる手法はどれか。",
+    choices: [
+      "最小二乗法(OLS)",
+      "最尤推定法(MLE)",
+      "主成分分析",
+      "クラスタリング",
+    ],
+    correctIndex: 1,
+    explanation:
+      "二値結果のロジスティック回帰は誤差項が等分散正規でないため OLS は使えない。**ベルヌーイ分布の尤度** $\\prod p^y(1-p)^{1-y}$ を最大化する MLE で推定。Newton-Raphson 法で反復計算するのが定番。",
+  },
+  {
+    id: "g2-mh1",
+    difficulty: 3,
+    category: "層別分析",
+    question:
+      "マンテル-ヘンツェル法について正しい記述はどれか。",
+    choices: [
+      "標本サイズを増やすだけのテクニック",
+      "層別された複数の $2 \\times 2$ 表を統合して 1 つのオッズ比を出す手法。シンプソンのパラドックス回避に有効",
+      "ベイズ推定の一手法",
+      "回帰係数の検定",
+    ],
+    correctIndex: 1,
+    explanation:
+      "Mantel-Haenszel 法は交絡因子で層別したオッズ比を統合する古典手法。$\\mathrm{OR}_{\\mathrm{MH}} = \\sum a_k d_k/n_k \\,/\\, \\sum b_k c_k/n_k$。各層の OR が共通かは Breslow-Day 検定で確認。現代ではロジスティック回帰の方が柔軟。",
+  },
 ];
