@@ -865,7 +865,414 @@ boot.ci(res, type = c("perc", "bca"))   # 百分位法 + BCa`,
             },
             {
               type: "p",
-              text: "ここまでで 1 級の主要範囲を一通り扱いました。**推定理論・検定理論・計算統計・確率過程・多変量解析の理論・応用統計** ─ これらは数理統計学を実務に接続する道具立てそのものです。1 級の試験では、これらを **自分で式変形して導出する** 力が問われます。本サイトで概念の地図を掴んだあとは、ぜひ正規の教科書(竹村『現代数理統計学』、稲垣『数理統計学』など)で詳細な証明を追ってみてください。それが本物の数理統計学の理解への王道です。",
+              text: "ここまでの 6 章で実務応用との接点を扱いました。続く 7-10 章では、1 級の試験で問われる **理論の最深部** ─ ノンパラ理論・ベイズ理論・情報幾何・現代統計の発展 ─ を扱います。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch7",
+      number: 7,
+      title: "ノンパラメトリック理論",
+      overview:
+        "分布の形を仮定しない統計手法の理論。経験分布関数・カーネル密度推定・順位統計量の漸近理論を 3 節で。",
+      sections: [
+        {
+          id: "ch7-sec1",
+          number: "7.1",
+          title: "経験分布関数とその性質",
+          blocks: [
+            {
+              type: "p",
+              text: "**経験分布関数(Empirical Distribution Function, EDF)** は、観測データから直接構成する **分布関数の推定量**。ノンパラ統計の出発点です。",
+            },
+            { type: "h3", text: "EDF の定義と Glivenko-Cantelli 定理" },
+            {
+              type: "def",
+              title: "公式 ─ 経験分布関数",
+              body: "観測データ $X_1, \\ldots, X_n$ について:\n\n$\\;F_n(x) = \\dfrac{1}{n} \\sum_{i=1}^{n} \\mathbb{1}\\{X_i \\leq x\\}\\;$\n\n$x$ 以下のデータの割合。**Glivenko-Cantelli**: $\\sup_x |F_n(x) - F(x)| \\xrightarrow{a.s.} 0$。経験分布が真の分布に **一様収束**(統計学の基本定理 FTS)。",
+            },
+            { type: "h3", text: "Kolmogorov-Smirnov 検定" },
+            {
+              type: "def",
+              title: "公式 ─ KS 統計量",
+              body: "$\\;D_n = \\sup_x |F_n(x) - F_0(x)|\\;$\n\n$\\sqrt n D_n$ は Kolmogorov 分布に収束。**確率積分変換** $U_i = F_0(X_i) \\sim U[0,1]$ により分布形に依存しない(distribution-free)。**任意の分布に対する適合度検定**。",
+            },
+            {
+              type: "intuition",
+              title: "なぜ KS 統計量がモデル不要か",
+              body: "$\\sqrt n D_n$ の漸近分布は **真の分布 $F_0$ に依存しない**。これは確率積分変換により、検定統計量が一様分布のもとでの量に帰着するから。**分布形に依存しない統計量** という設計思想は、現代の機械学習評価でも応用されています。",
+            },
+          ],
+        },
+        {
+          id: "ch7-sec2",
+          number: "7.2",
+          title: "カーネル密度推定とバンド幅",
+          blocks: [
+            {
+              type: "p",
+              text: "ヒストグラムの **滑らかな代替**。離散的な階段ではなく、連続的な密度を推定する非パラメトリック手法。",
+            },
+            { type: "h3", text: "KDE と AMISE 最適バンド幅" },
+            {
+              type: "def",
+              title: "公式 ─ KDE",
+              body: "$\\;\\hat f(x) = \\dfrac{1}{nh} \\sum_{i=1}^{n} K\\!\\left(\\dfrac{x - X_i}{h}\\right)\\;$\n\n各データ点を中心に小さな山を置き合計。AMISE 最適バンド幅:\n\n$\\;h^* = \\left(\\dfrac{R(K)}{n \\sigma_K^4 R(f'')}\\right)^{1/5}\\;$\n\n**Silverman の rule of thumb** $h \\approx 1.06\\,\\hat\\sigma\\, n^{-1/5}$ が実用的。",
+            },
+            { type: "h3", text: "次元の呪い" },
+            {
+              type: "intuition",
+              title: "高次元で KDE が崩れる",
+              body: "次元 $d$ で必要サンプルサイズは $n \\sim 1/h^d$ で爆発。$d = 10$ で同精度を保つには 1 次元の **数億倍** のサンプルが必要。だから **多次元の密度推定は不可能** に近く、実務では Gaussian Mixture や Normalizing Flows などのモデルベース手法に頼ります。",
+            },
+            { type: "h3", text: "ナダラヤ・ワトソン推定量" },
+            {
+              type: "p",
+              text: "回帰関数の非パラメトリック推定 $\\hat m(x) = \\sum K_h(x - X_i) Y_i \\,/\\, \\sum K_h(x - X_i)$。**局所重み付け平均**。局所多項式回帰・スプライン平滑化への自然な拡張があります。",
+            },
+          ],
+        },
+        {
+          id: "ch7-sec3",
+          number: "7.3",
+          title: "順位統計量と U 統計量",
+          blocks: [
+            {
+              type: "p",
+              text: "**Wilcoxon・Mann-Whitney・Kruskal-Wallis** などのノンパラ検定の **漸近理論的基盤**。",
+            },
+            { type: "h3", text: "順位の不変性" },
+            {
+              type: "def",
+              title: "性質 ─ 順位の分布不変性",
+              body: "連続分布のもとで観測値を順位に変換すると、**順位の同時分布は元の分布に依存しない**(均等分布)。これが順位検定が distribution-free であることの根拠。",
+            },
+            { type: "h3", text: "U 統計量と Hoeffding の定理" },
+            {
+              type: "def",
+              title: "公式 ─ U 統計量",
+              body: "$\\;U_n = \\binom{n}{m}^{-1} \\sum_{i_1 < \\cdots < i_m} h(X_{i_1}, \\ldots, X_{i_m})\\;$\n\n対称な核関数 $h$ について構成。**Hoeffding (1948)** の定理により $\\sqrt n (U_n - \\theta)$ が漸近正規分布。標本分散・Wilcoxon 統計量・Kendall の τ などが U 統計量で表せる。",
+            },
+            { type: "h3", text: "ハジェク射影と漸近正規性" },
+            {
+              type: "p",
+              text: "**ハジェク射影**(Hájek projection)は U 統計量を独立和に近似する手法。$U_n - E[U_n] \\approx \\sum_i E[U_n - E[U_n] \\mid X_i]$ で、中心極限定理を適用可能に。ノンパラ漸近理論の中心道具で、**ブートストラップ・ジャックナイフ** の理論基盤でもあります。",
+            },
+            { type: "h3", text: "Quantile Regression" },
+            {
+              type: "p",
+              text: "**Quantile Regression(Koenker & Bassett 1978)** はピンボール損失 $\\rho_\\tau(u) = u(\\tau - \\mathbb{1}\\{u < 0\\})$ を最小化し、任意の分位点($\\tau$)を回帰する。**裾分位点** を直接推定できるので、リスク管理(VaR・CVaR)・所得分布分析で実務利用、深層学習の不確実性推定にも応用されています。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch8",
+      number: 8,
+      title: "ベイズ理論の発展 ─ 階層モデルと変分推論",
+      overview:
+        "1 級レベルのベイズ統計。階層モデル・MCMC 収束診断・変分推論を 3 節で。",
+      sections: [
+        {
+          id: "ch8-sec1",
+          number: "8.1",
+          title: "階層ベイズと縮約推定",
+          blocks: [
+            {
+              type: "p",
+              text: "**階層ベイズ(hierarchical Bayes)** は、複数のグループ・地域・時点で観測されるデータを、共通のハイパーパラメータで結びつけるモデル群。",
+            },
+            { type: "h3", text: "正規階層モデル" },
+            {
+              type: "def",
+              title: "モデル ─ 二段階正規階層",
+              body: "観測値: $y_{ij} \\mid \\theta_i \\sim N(\\theta_i, \\sigma^2)$\n\n群効果: $\\theta_i \\mid \\mu, \\tau \\sim N(\\mu, \\tau^2)$\n\nハイパー事前分布: $\\mu \\sim N(\\mu_0, \\sigma_0^2)$, $\\tau^2 \\sim \\mathrm{InvGamma}$\n\n各群の推定値が **全体平均に縮約(shrinkage)** される効果が自然に出る。James-Stein 推定量と等価。",
+            },
+            { type: "h3", text: "Stein のパラドックス" },
+            {
+              type: "intuition",
+              title: "Stein のパラドックス(James & Stein 1961)",
+              body: "$d \\geq 3$ 次元の正規平均ベクトルについて、**標本平均より良い推定量が存在する**。$\\hat \\mu_{\\text{JS}} = (1 - (d-2)\\sigma^2/\\|\\bar X\\|^2) \\bar X$。『**個別の推定を全体に向けて縮約すると、平均的な誤差が小さくなる**』という階層ベイズの理論的根拠。",
+            },
+            { type: "h3", text: "経験ベイズ(EB)" },
+            {
+              type: "p",
+              text: "ハイパーパラメータをデータから推定してから事後分布を計算するアプローチ(Robbins 1956)。完全なベイズより軽量で、実務では multinomial-Dirichlet 経験ベイズや Empirical Bayes Lasso が幅広く使われます。",
+            },
+          ],
+        },
+        {
+          id: "ch8-sec2",
+          number: "8.2",
+          title: "MCMC の収束診断と HMC",
+          blocks: [
+            {
+              type: "p",
+              text: "MCMC は無限に走らせれば真の事後分布からサンプリングしますが、有限ステップで止めるため **収束診断** が必須。",
+            },
+            { type: "h3", text: "Gelman-Rubin 統計量と ESS" },
+            {
+              type: "def",
+              title: "公式 ─ R-hat と ESS",
+              body: "**R-hat**: $\\hat R = \\sqrt{((N-1)W/N + B/N) / W}$。チェーン内分散 $W$ とチェーン間分散 $B$ から。**$\\hat R < 1.01$** で収束(現代の基準)。\n\n**Effective Sample Size**: $\\mathrm{ESS} = N / (1 + 2 \\sum_k \\rho_k)$。**ESS ≥ 400** が事後分位点推定の目安。",
+            },
+            { type: "h3", text: "HMC と NUTS" },
+            {
+              type: "p",
+              text: "**Hamiltonian Monte Carlo(HMC)** は物理学のハミルトン力学に基づく MCMC。位置 $\\theta$ と運動量 $r$ を導入し、$U(\\theta) = -\\log p(\\theta)$ をポテンシャルとして leapfrog 積分で軌跡を辿る。**高次元・相関の強い事後** で従来 MH より圧倒的に効率的。",
+            },
+            {
+              type: "intuition",
+              title: "NUTS が現代の標準になった理由",
+              body: "**No-U-Turn Sampler(Hoffman & Gelman 2014)** は HMC のステップ数を **U ターンの瞬間で自動停止** することで、ハイパーパラメータ調整不要に。**Stan・PyMC・NumPyro のデフォルト** で、確率的プログラミングが普及した最大の技術的要因です。",
+            },
+          ],
+        },
+        {
+          id: "ch8-sec3",
+          number: "8.3",
+          title: "変分推論(Variational Inference)",
+          blocks: [
+            {
+              type: "p",
+              text: "MCMC が **正確だが遅い** のに対し、**変分推論(VI)** は **近似だが速い** ベイズ計算。深層学習・大規模ベイズの主役。",
+            },
+            { type: "h3", text: "ELBO と KL 最小化" },
+            {
+              type: "def",
+              title: "公式 ─ Evidence Lower BOund",
+              body: "事後分布 $p(\\theta \\mid y)$ を $q_\\phi(\\theta)$ で近似:\n\n$\\;\\log p(y) = \\mathrm{ELBO}(\\phi) + \\mathrm{KL}(q_\\phi \\Vert p)\\;$\n\n$\\;\\mathrm{ELBO} = E_{q_\\phi}[\\log p(y, \\theta) - \\log q_\\phi(\\theta)]\\;$\n\n**ELBO 最大化 = KL 最小化**。確率的勾配で大規模化(SVI, Hoffman et al. 2013)。",
+            },
+            { type: "h3", text: "Reparameterization Trick" },
+            {
+              type: "p",
+              text: "$z \\sim q_\\phi(z)$ を $z = g_\\phi(\\epsilon),\\ \\epsilon \\sim p(\\epsilon)$ と書き換え、勾配 $\\nabla_\\phi \\mathrm{ELBO}$ を低分散で計算(Kingma & Welling 2013)。**変分オートエンコーダ(VAE)** の中核技術。SGD とベイズの統合を実現。",
+            },
+            { type: "h3", text: "Mean-field と Structured VI" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Mean-field**: $q(\\theta) = \\prod q_i(\\theta_i)$、計算高速だが事後相関を捉えられない",
+                "**Structured VI**: 事後相関の構造を明示的にモデル化",
+                "**Normalizing Flows**: 単純分布から複雑分布への可逆変換で柔軟な近似",
+                "**Amortized VI**: 入力に応じた事後を推論するエンコーダ(VAE が代表例)",
+              ],
+            },
+            {
+              type: "practical",
+              title: "🛠 主要ツール",
+              body: "**Stan / PyMC**: HMC/NUTS の標準\n**Pyro / NumPyro / TFP**: VI と確率的プログラミング\n**Edward2**: TensorFlow ベース\n**brms**(R): Stan を裏で動かす高水準インタフェース",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch9",
+      number: 9,
+      title: "情報幾何と統計的決定理論",
+      overview:
+        "確率分布の集合を多様体として扱う情報幾何、リスク・ミニマックス・許容性の決定理論を 3 節で。",
+      sections: [
+        {
+          id: "ch9-sec1",
+          number: "9.1",
+          title: "Fisher 情報量と情報幾何",
+          blocks: [
+            {
+              type: "p",
+              text: "**情報幾何(information geometry)** は、確率分布族を **微分多様体** として扱い、その上の幾何構造を統計に応用する分野。甘利俊一が体系化。",
+            },
+            { type: "h3", text: "Fisher 情報量と統計多様体" },
+            {
+              type: "def",
+              title: "公式 ─ Fisher 情報量",
+              body: "$\\;I(\\theta) = E\\!\\left[\\dfrac{\\partial \\log p}{\\partial \\theta} \\dfrac{\\partial \\log p}{\\partial \\theta^\\top}\\right]\\;$\n\nMLE の漸近共分散の逆数 $I(\\theta)^{-1}/n$ という Cramér-Rao 下限を与える。これを **リーマン計量** として導入したのが **統計多様体** $ds^2 = d\\theta^\\top I(\\theta) d\\theta$。",
+            },
+            { type: "h3", text: "自然勾配法" },
+            {
+              type: "def",
+              title: "公式 ─ 自然勾配",
+              body: "$\\;\\boldsymbol \\theta_{t+1} = \\boldsymbol \\theta_t - \\eta\\, I(\\boldsymbol \\theta)^{-1} \\nabla L(\\boldsymbol \\theta)\\;$\n\n通常の勾配を Fisher 情報量で『正規化』した方向。**パラメータ化に不変** で収束が速い(Amari 1998)。深層学習では K-FAC として近似実装。",
+            },
+            {
+              type: "intuition",
+              title: "Fisher 情報量の幾何的意味",
+              body: "Fisher 情報量が大きい方向 = 『分布が大きく動く方向』。**自然勾配** はこの違いを補正することで、地形に応じた歩幅で進む。SGD の学習率調整(Adam の二次モーメント)もこの発想の近似と見ることができます。",
+            },
+          ],
+        },
+        {
+          id: "ch9-sec2",
+          number: "9.2",
+          title: "リスクとミニマックス推定",
+          blocks: [
+            {
+              type: "p",
+              text: "**統計的決定理論**(Wald 1939-50)は、推定・検定を『**統計家とサイコロを振る自然との対戦**』というゲーム理論的枠組みで定式化。",
+            },
+            { type: "h3", text: "損失関数とリスク・許容性" },
+            {
+              type: "def",
+              title: "用語 ─ リスクと許容性",
+              body: "**リスク**: $R(\\theta, \\hat\\theta) = E_\\theta[L(\\theta, \\hat\\theta(X))]$\n\n**ミニマックス推定量**: $\\arg\\min_{\\hat\\theta} \\sup_\\theta R(\\theta, \\hat\\theta)$。最悪ケースのリスクを最小化。\n\n**許容的(admissible)**: すべての $\\theta$ で同等以上の性能を持つ別の推定量が存在しない。$\\bar X$ は $d \\geq 3$ で **非許容的**(JS 推定量に支配)。",
+            },
+            { type: "h3", text: "ベイズ・ミニマックスの双対" },
+            {
+              type: "intuition",
+              title: "least favorable prior",
+              body: "**最悪ケースの事前分布**(least favorable prior)に対するベイズ推定量がミニマックス推定量になります。これによりベイズ・頻度主義の橋渡しが理論的に可能。深層学習の **対敵的訓練(adversarial training)** もこの枠組みで理解できます。",
+            },
+          ],
+        },
+        {
+          id: "ch9-sec3",
+          number: "9.3",
+          title: "指数型分布族と十分統計量",
+          blocks: [
+            {
+              type: "p",
+              text: "**指数型分布族(exponential family)** は、ほぼすべての標準分布を統一的に扱う枠組み。1 級の理論的中核。",
+            },
+            { type: "h3", text: "指数型分布族の標準形" },
+            {
+              type: "def",
+              title: "公式 ─ 指数型分布族",
+              body: "$\\;p(x; \\eta) = h(x) \\exp(\\eta^\\top T(x) - A(\\eta))\\;$\n\n$\\eta$: 自然パラメータ、$T(x)$: 十分統計量、$A(\\eta)$: 対数分配関数。**正規・ベルヌーイ・二項・ポアソン・指数・ガンマ・ベータ・ディリクレ** など主要分布のほとんどが指数型。",
+            },
+            { type: "h3", text: "Rao-Blackwell 定理と十分統計量" },
+            {
+              type: "def",
+              title: "公式 ─ Rao-Blackwell",
+              body: "$T$ が $\\theta$ の十分統計量、$\\hat\\theta$ が任意の不偏推定量のとき:\n\n$\\;\\tilde\\theta = E[\\hat\\theta \\mid T]\\;$\n\nは $\\hat\\theta$ より MSE が小さい不偏推定量。**情報を保つ操作で精度が上がる** という基本定理。Lehmann-Scheffé 定理と組合せて UMVUE(一様最小分散不偏推定量)の構成法を与える。",
+            },
+            {
+              type: "intuition",
+              title: "GLM の数学的基盤",
+              body: "**一般化線形モデル(GLM)** は指数型族 + 線形予測子 + リンク関数の三点セット。**ロジスティック回帰**(ベルヌーイ)・**ポアソン回帰**(ポアソン)・**ガンマ回帰** などはすべて指数型族の応用(Nelder & Wedderburn 1972)。共役事前分布の存在もこの族で保証され、Thompson Sampling などのオンライン学習にも繋がります。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch10",
+      number: 10,
+      title: "現代統計学の展望と 1 級総まとめ",
+      overview:
+        "高次元統計・統計的機械学習・double descent。1 級教科書全体の総括と次のステップ。",
+      sections: [
+        {
+          id: "ch10-sec1",
+          number: "10.1",
+          title: "高次元統計と Lasso の理論",
+          blocks: [
+            {
+              type: "p",
+              text: "**$p \\gg n$**(変数数 > 標本サイズ)の世界。古典的な統計理論は破綻し、新しい理論が必要になります。",
+            },
+            { type: "h3", text: "高次元の課題" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**$X^\\top X$ が特異**: 通常の OLS が解けない",
+                "**多重検定**: 数千の仮説で α 補正が必要(FDR・Bonferroni)",
+                "**次元の呪い**: kNN・KDE が機能しない",
+                "**スパース性仮定**: 多くの真の係数 = 0 と仮定して識別",
+              ],
+            },
+            { type: "h3", text: "Lasso の漸近理論" },
+            {
+              type: "def",
+              title: "公式 ─ Restricted Eigenvalue 条件",
+              body: "Lasso がスパース構造を回復する条件下で:\n\n$\\;\\|\\hat\\beta - \\beta^*\\|_2^2 = O_p(s \\log p / n)\\;$\n\n($s$ = 真の非零係数数)。**$\\log p$ への依存** は次元の呪いを大幅に緩和し、$p$ が $n$ より遥かに大きくても回復可能。",
+            },
+            { type: "h3", text: "Knockoff filter と FDR 制御" },
+            {
+              type: "p",
+              text: "**Knockoff filter(Barber & Candès 2015)** は変数選択における **誤発見率(FDR)制御** を有限標本で達成する画期的手法。各変数のノイズレプリカ(knockoff)を構成し、対称性を利用して FDR を保証。",
+            },
+          ],
+        },
+        {
+          id: "ch10-sec2",
+          number: "10.2",
+          title: "統計的機械学習の理論",
+          blocks: [
+            {
+              type: "p",
+              text: "ニューラルネットの **驚くべき汎化** を説明する理論枠組みは、統計学習理論・PAC-Bayes・Neural Tangent Kernel など、複数の方向で発展。",
+            },
+            { type: "h3", text: "VC 次元と Rademacher 複雑度" },
+            {
+              type: "def",
+              title: "公式 ─ Rademacher 複雑度による汎化バウンド",
+              body: "$\\;\\hat{\\mathfrak R}_n(\\mathcal H) = E_\\sigma\\!\\left[\\sup_{h \\in \\mathcal H} \\dfrac{1}{n}\\sum_{i=1}^{n} \\sigma_i h(X_i)\\right]\\;$\n\nランダムノイズ $\\sigma_i \\in \\{\\pm 1\\}$ にどれだけクラスがフィットできるかで複雑度を測る、**データ依存の汎化バウンド** を与える現代理論。",
+            },
+            { type: "h3", text: "Double Descent" },
+            {
+              type: "intuition",
+              title: "古典理論を超える深層学習の振る舞い",
+              body: "古典的な **U 字型バイアス・分散トレードオフ** に反して、深層学習では **モデル容量を増やすと一旦汎化誤差が悪化し、さらに増やすと再び良化する**(double descent, Belkin et al. 2019)。**過パラメータ化領域** での暗黙の正則化が解明されつつあり、現代統計学習理論の主要トピックです。",
+            },
+            { type: "h3", text: "PAC-Bayes と Neural Tangent Kernel" },
+            {
+              type: "p",
+              text: "**PAC-Bayes 境界**(McAllester 1999)は事前・事後分布の KL 距離で汎化誤差を抑える。**Neural Tangent Kernel(Jacot et al. 2018)** は無限幅ニューラルネットがカーネル法と等価になる漸近理論。深層学習の理論的解析の現代的道具です。",
+            },
+          ],
+        },
+        {
+          id: "ch10-sec3",
+          number: "10.3",
+          title: "1 級教科書の総括と次のステップ",
+          blocks: [
+            {
+              type: "p",
+              text: "1 級教科書 10 章を通じて、**数理統計学の主要トピック** を一通り歩きました。",
+            },
+            { type: "h3", text: "10 章の地図" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "**Ch1 推定理論**: 不偏性・有効性・Cramér-Rao 下限・MLE",
+                "**Ch2 検定理論**: Neyman-Pearson 補題・最強力検定",
+                "**Ch3 計算統計**: ブートストラップ・MCMC・EM",
+                "**Ch4 確率過程**: マルコフ連鎖・ブラウン運動・マルチンゲール",
+                "**Ch5 多変量解析の理論**: Wishart 分布・Hotelling T²",
+                "**Ch6 応用統計**: 線形モデル・GLM 理論",
+                "**Ch7 ノンパラ理論**: EDF・KDE・順位統計量・U 統計量",
+                "**Ch8 ベイズ理論**: 階層モデル・MCMC 診断・変分推論",
+                "**Ch9 情報幾何と決定理論**: Fisher 計量・ミニマックス・指数型族",
+                "**Ch10 現代統計学**: 高次元統計・PAC-Bayes・Double Descent",
+              ],
+            },
+            { type: "h3", text: "正規教科書への接続" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**竹村『現代数理統計学』**(学術図書): 1 級の標準テキスト",
+                "**稲垣『数理統計学』**(裳華房): 古典的名著・厳密な証明",
+                "**van der Vaart 『Asymptotic Statistics』**(Cambridge): 漸近理論の世界標準",
+                "**Wasserman 『All of Statistics』**: 機械学習向け統計テキスト",
+                "**Boyd & Vandenberghe 『Convex Optimization』**: 凸最適化のバイブル",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "1 級は到達点ではなく出発点",
+              body: "1 級合格は『数理統計学の基礎が固まった』ことを意味しますが、現代統計学はまだ拡張中。**因果推論の DAG 理論・差分プライバシー・連合学習・神経科学的データ解析** など、新しい応用領域が次々と生まれています。1 級教科書を足場に、**特定の応用領域を深く** 進むのが研究者・実務家の道です。",
+            },
+            {
+              type: "p",
+              text: "1 級合格、そしてその先の研究者・実務家としての歩みを応援します。**統計学は社会の知的インフラ** ─ あなたの 1 つ 1 つの理解が、社会全体の意思決定の質を高めることにつながります。",
             },
           ],
         },
