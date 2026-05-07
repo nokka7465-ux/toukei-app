@@ -547,3 +547,18 @@ button.paper:hover {
     display: block !important;
   }
 }
+
+/* Header "もっと見る" disclosure dropdown.
+   Hide native disclosure markers across browsers and rotate the chevron when open. */
+.header-more > summary {
+  list-style: none;
+}
+.header-more > summary::-webkit-details-marker {
+  display: none;
+}
+.header-more[open] .header-more-chevron {
+  transform: rotate(180deg);
+}
+.header-more-chevron {
+  transition: transform 0.15s ease-out;
+}

@@ -1,35 +1,39 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SampleSizeCalc } from "@/components/tools/SampleSizeCalc";
-import { ConfidenceIntervalCalc } from "@/components/tools/ConfidenceIntervalCalc";
-import { PValueCalc } from "@/components/tools/PValueCalc";
-import { PowerCalc } from "@/components/tools/PowerCalc";
-import { TwoProportionTest } from "@/components/tools/TwoProportionTest";
-import { CorrelationTest } from "@/components/tools/CorrelationTest";
-import { AnovaCalc } from "@/components/tools/AnovaCalc";
-import { ChiSquareTest } from "@/components/tools/ChiSquareTest";
-import { WilcoxonSignedRank } from "@/components/tools/WilcoxonSignedRank";
-import { MannWhitneyU } from "@/components/tools/MannWhitneyU";
-import { McnemarTest } from "@/components/tools/McnemarTest";
-import { EffectSizeCalc } from "@/components/tools/EffectSizeCalc";
-import { DescriptiveStats } from "@/components/tools/DescriptiveStats";
-import { OddsRatioCalc } from "@/components/tools/OddsRatioCalc";
+import {
+  groupToolsByCategory,
+  toolsRegistry,
+  DIFFICULTY_LABEL,
+  type ToolDifficulty,
+} from "@/lib/tools-registry";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
+const TOTAL = toolsRegistry.length;
+
 export const metadata: Metadata = {
-  title: "統計計算ツール ─ 信頼区間・p値・サンプルサイズの無料計算機",
-  description:
-    "信頼区間・p 値・サンプルサイズ・検出力・A/B テスト・相関検定・ANOVA・カイ二乗の 11 つの統計計算機を無料で。学習にも実務にも使える、ブラウザ完結のオンライン計算ツール。データ送信なし。",
+  title: `統計計算ツール ─ ${TOTAL} 種の無料オンライン計算機(信頼区間・t 検定・p 値・回帰)`,
+  description: `信頼区間・p 値・サンプルサイズ・検出力・A/B テスト・t 検定・重回帰・ベイズ更新ほか ${TOTAL} 種の統計計算機を無料で。学習にも実務にも使える、ブラウザ完結のオンラインツール集。`,
   alternates: { canonical: "/tools" },
   openGraph: {
     title: "統計計算ツール集",
     description:
-      "信頼区間・p 値・サンプルサイズ・検出力・A/B テストの計算をブラウザで完結。",
+      "信頼区間・p 値・サンプルサイズ・t 検定の計算をブラウザで完結。",
     type: "article",
   },
 };
 
+const DIFFICULTY_STYLE: Record<ToolDifficulty, string> = {
+  basic:
+    "bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-200 dark:border-emerald-800/60",
+  standard:
+    "bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-900/30 dark:text-amber-200 dark:border-amber-800/60",
+  advanced:
+    "bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-900/30 dark:text-rose-200 dark:border-rose-800/60",
+};
+
 export default function ToolsPage() {
+  const groups = groupToolsByCategory();
+
   return (
     <article>
       <BreadcrumbJsonLd
@@ -55,82 +59,95 @@ export default function ToolsPage() {
           統計計算ツール集
         </h1>
         <p className="text-[var(--muted-strong)] leading-loose max-w-3xl">
-          学習中の確認や実務での意思決定にすぐ使える、14 つの統計計算機。すべて{" "}
+          学習中の確認や実務での意思決定にすぐ使える、{TOTAL} 種の統計計算機。すべて{" "}
           <strong>ブラウザ内で完結</strong>{" "}
           ─ データ送信・ログイン・サーバ計算は一切ありません。
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-4 text-xs ui-sans">
-          {[
-            { id: "sample-size", label: "サンプルサイズ" },
-            { id: "ci", label: "信頼区間" },
-            { id: "p-value", label: "p 値" },
-            { id: "power", label: "検出力" },
-            { id: "ab-test", label: "A/B テスト" },
-            { id: "correlation", label: "相関係数検定" },
-            { id: "anova", label: "ANOVA" },
-            { id: "chi-square", label: "χ² 独立性検定" },
-            { id: "wilcoxon", label: "Wilcoxon 符号順位" },
-            { id: "mann-whitney", label: "Mann-Whitney U" },
-            { id: "mcnemar", label: "McNemar 検定" },
-            { id: "effect-size", label: "効果量(Cohen's d)" },
-            { id: "descriptive", label: "記述統計まとめ" },
-            { id: "odds-ratio", label: "オッズ比/相対リスク" },
-          ].map((item) => (
-            <Link
-              key={item.id}
-              href={`/tools/${item.id}`}
-              className="text-[var(--link)] hover:underline"
+        <ul
+          aria-label="サイト指標"
+          className="flex flex-wrap gap-2 mt-5 text-[11px] ui-sans"
+        >
+          <li className="px-3 py-1 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]">
+            <strong className="text-[var(--accent)]">{TOTAL}</strong> 種の計算機
+          </li>
+          <li className="px-3 py-1 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]">
+            完全無料
+          </li>
+          <li className="px-3 py-1 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]">
+            登録不要
+          </li>
+          <li className="px-3 py-1 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]">
+            データ送信なし
+          </li>
+        </ul>
+
+        {/* カテゴリ目次(ページ内ジャンプ) */}
+        <nav
+          aria-label="カテゴリ目次"
+          className="mt-6 flex flex-wrap gap-2 text-xs ui-sans"
+        >
+          {groups.map((g) => (
+            <a
+              key={g.category}
+              href={`#cat-${encodeURIComponent(g.category)}`}
+              className="px-3 py-1.5 rounded border border-[var(--page-border-strong)] hover:bg-[var(--background)] hover:text-[var(--link)] transition"
             >
-              → {item.label}
-            </Link>
+              {g.category}
+              <span className="ml-1 text-[var(--muted)]">
+                ({g.tools.length})
+              </span>
+            </a>
           ))}
-        </div>
+        </nav>
       </header>
 
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div id="sample-size" className="scroll-mt-20">
-          <SampleSizeCalc />
-        </div>
-        <div id="ci" className="scroll-mt-20">
-          <ConfidenceIntervalCalc />
-        </div>
-        <div id="p-value" className="scroll-mt-20">
-          <PValueCalc />
-        </div>
-        <div id="power" className="scroll-mt-20">
-          <PowerCalc />
-        </div>
-        <div id="ab-test" className="scroll-mt-20 lg:col-span-2 xl:col-span-1">
-          <TwoProportionTest />
-        </div>
-        <div id="correlation" className="scroll-mt-20">
-          <CorrelationTest />
-        </div>
-        <div id="anova" className="scroll-mt-20">
-          <AnovaCalc />
-        </div>
-        <div id="chi-square" className="scroll-mt-20">
-          <ChiSquareTest />
-        </div>
-        <div id="wilcoxon" className="scroll-mt-20">
-          <WilcoxonSignedRank />
-        </div>
-        <div id="mann-whitney" className="scroll-mt-20">
-          <MannWhitneyU />
-        </div>
-        <div id="mcnemar" className="scroll-mt-20">
-          <McnemarTest />
-        </div>
-        <div id="effect-size" className="scroll-mt-20">
-          <EffectSizeCalc />
-        </div>
-        <div id="descriptive" className="scroll-mt-20 lg:col-span-2 xl:col-span-1">
-          <DescriptiveStats />
-        </div>
-        <div id="odds-ratio" className="scroll-mt-20">
-          <OddsRatioCalc />
-        </div>
-      </section>
+      {groups.map((g) => (
+        <section
+          key={g.category}
+          id={`cat-${encodeURIComponent(g.category)}`}
+          className="mb-12 scroll-mt-20"
+        >
+          <header className="mb-4 flex items-baseline gap-3">
+            <h2 className="text-2xl font-bold tracking-wide">{g.category}</h2>
+            <span className="text-xs text-[var(--muted)] ui-sans">
+              {g.tools.length} ツール
+            </span>
+          </header>
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {g.tools.map((tool) => (
+              <li key={tool.slug}>
+                <Link
+                  href={`/tools/${tool.slug}`}
+                  className="paper rounded-xl p-5 h-full flex flex-col hover:-translate-y-0.5 transition group"
+                >
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <span
+                      className="text-3xl leading-none"
+                      aria-hidden="true"
+                    >
+                      {tool.icon}
+                    </span>
+                    <span
+                      className={`px-2 py-0.5 rounded text-[10px] font-bold border tracking-wider ui-sans whitespace-nowrap ${DIFFICULTY_STYLE[tool.difficulty]}`}
+                    >
+                      {DIFFICULTY_LABEL[tool.difficulty]}
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-base mb-1.5 leading-snug group-hover:text-[var(--link)]">
+                    {tool.title}
+                  </h3>
+                  <p className="text-xs text-[var(--muted-strong)] leading-relaxed flex-1">
+                    {tool.description}
+                  </p>
+                  <div className="mt-3 text-xs font-bold text-[var(--link)] ui-sans">
+                    使ってみる →
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
 
       <section className="mt-12 paper rounded-lg p-6 text-sm leading-relaxed">
         <header className="mb-3">
@@ -145,7 +162,7 @@ export default function ToolsPage() {
           </li>
           <li>
             <Link href="/figures" className="text-[var(--link)] hover:underline">
-              図解で学ぶ統計 → 43 種の SVG 図解一覧
+              図解で学ぶ統計 → 33 種の SVG 図解一覧
             </Link>
           </li>
           <li>
@@ -162,7 +179,7 @@ export default function ToolsPage() {
       </section>
 
       <p className="mt-10 text-xs text-[var(--muted)] ui-sans leading-relaxed">
-        ※ 計算は標準的な近似(正規・t・カイ二乗の数値近似)で行っています。学習・予備計算用途を想定しており、医薬品申請等の正式報告には専用ソフト(R, Python の statsmodels など)での再計算をお勧めします。
+        ※ 計算は標準的な近似(正規・t・カイ二乗・F の数値近似)で行っています。学習・予備計算用途を想定しており、医薬品申請等の正式報告には専用ソフト(R, Python の statsmodels など)での再計算をお勧めします。
       </p>
     </article>
   );

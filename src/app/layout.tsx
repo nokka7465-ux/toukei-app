@@ -116,6 +116,11 @@ export default function RootLayout({
     >
       <body className="min-h-screen">
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.addEventListener("click",function(e){var ds=document.querySelectorAll("details.header-more[open]");for(var i=0;i<ds.length;i++){var d=ds[i];var t=e.target;if(t instanceof Node&&d.contains(t)){if(t!==d.querySelector("summary")&&!(t instanceof HTMLElement&&t.closest("summary"))){d.removeAttribute("open");}}else{d.removeAttribute("open");}}});`,
+          }}
+        />
         <StructuredData />
         <GoogleAnalytics />
         <GoogleAdSense />
@@ -141,7 +146,7 @@ export default function RootLayout({
               </span>
             </Link>
             <div className="flex items-center gap-3">
-              <nav className="hidden md:flex gap-0.5 text-sm ui-sans flex-wrap items-center rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]/60 px-1.5 py-1 backdrop-blur-sm shadow-sm">
+              <nav className="hidden md:flex gap-0.5 text-sm ui-sans items-center rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]/60 px-1.5 py-1 backdrop-blur-sm shadow-sm">
                 <Link href="/" className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors">
                   ホーム
                 </Link>
@@ -152,11 +157,11 @@ export default function RootLayout({
                   教科書
                 </Link>
                 <Link
-                  href="/math"
+                  href="/tools"
                   className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors"
-                  title="統計のための数学基礎"
+                  title="統計計算ツール集"
                 >
-                  数学基礎
+                  ツール
                 </Link>
                 <Link
                   href="/certs/ds-basic"
@@ -165,36 +170,57 @@ export default function RootLayout({
                 >
                   関連検定
                 </Link>
-                <Link href="/glossary" className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors">
-                  用語集
-                </Link>
-                <Link href="/blog" className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors">
-                  ブログ
-                </Link>
-                <Link href="/diagnose" className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors">
-                  級診断
-                </Link>
-                <Link
-                  href="/plan"
-                  className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors"
-                  title="目標日までの学習プランを逆算"
-                >
-                  学習プラン
-                </Link>
-                <Link
-                  href="/review"
-                  className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors"
-                  title="間違えた問題だけを集めた復習リスト"
-                >
-                  復習
-                </Link>
-                <Link
-                  href="/flashcards"
-                  className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors"
-                  title="統計用語の暗記カード"
-                >
-                  暗記カード
-                </Link>
+                <details className="header-more relative">
+                  <summary className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors cursor-pointer list-none flex items-center gap-1 select-none">
+                    もっと見る
+                    <svg
+                      width="10"
+                      height="10"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      className="header-more-chevron"
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </summary>
+                  <div className="absolute right-0 top-full mt-2 paper rounded-lg p-2 grid grid-cols-2 gap-1 min-w-[300px] shadow-lg z-20 border border-[var(--page-border-strong)]">
+                    <Link href="/diagnose" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                      級診断
+                    </Link>
+                    <Link href="/plan" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs" title="目標日までの学習プランを逆算">
+                      学習プラン
+                    </Link>
+                    <Link href="/math" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs" title="統計のための数学基礎">
+                      数学基礎
+                    </Link>
+                    <Link href="/figures" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                      図解で学ぶ統計
+                    </Link>
+                    <Link href="/glossary" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                      用語集
+                    </Link>
+                    <Link href="/blog" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                      ブログ
+                    </Link>
+                    <Link href="/review" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs" title="間違えた問題だけを集めた復習リスト">
+                      復習
+                    </Link>
+                    <Link href="/flashcards" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs" title="統計用語の暗記カード">
+                      暗記カード
+                    </Link>
+                    <Link href="/cheatsheet" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                      公式チートシート
+                    </Link>
+                    <Link href="/exam-info" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                      受験情報まとめ
+                    </Link>
+                  </div>
+                </details>
               </nav>
               <Link
                 href="/search"

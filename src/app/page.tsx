@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { levels } from "@/data/levels";
-import { externalLinks } from "@/data/external-links";
 import { blogPosts } from "@/data/blog";
 import { FaqJsonLd } from "@/components/StructuredData";
 import { ProgressDashboard } from "@/components/ProgressDashboard";
@@ -10,6 +9,7 @@ import { ExamCountdown } from "@/components/ExamCountdown";
 import { RecommendedQuestions } from "@/components/RecommendedQuestions";
 import { AchievementsPanel } from "@/components/AchievementsPanel";
 import { AiRoadmap } from "@/components/AiRoadmap";
+import { toolsRegistry } from "@/lib/tools-registry";
 import { blogTheme } from "@/lib/blog-theme";
 
 const availableLevels = new Set<string>([
@@ -113,6 +113,31 @@ export default function Home() {
             まずは級診断 →
           </Link>
         </div>
+        <ul
+          aria-label="サイト指標"
+          className="mt-7 flex flex-wrap justify-center gap-2 text-[11px] ui-sans"
+        >
+          {[
+            { label: "問題", value: "280+" },
+            { label: "用語", value: "320+" },
+            { label: "図解", value: "33" },
+            { label: "計算ツール", value: `${toolsRegistry.length}` },
+            { label: "ブログ", value: `${blogPosts.length}` },
+          ].map((m) => (
+            <li
+              key={m.label}
+              className="px-3 py-1 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]/70 backdrop-blur-sm"
+            >
+              <strong className="text-[var(--accent)]">{m.value}</strong>{" "}
+              <span className="text-[var(--muted-strong)]">{m.label}</span>
+            </li>
+          ))}
+          <li className="px-3 py-1 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]/70 backdrop-blur-sm">
+            <span className="text-[var(--muted-strong)]">
+              完全無料・登録不要
+            </span>
+          </li>
+        </ul>
       </section>
 
       <section className="mb-14 md:mb-20 paper rounded-xl p-7 md:p-8">
@@ -302,125 +327,6 @@ export default function Home() {
 
       <AchievementsPanel />
 
-      <section className="mb-14 md:mb-20 paper rounded-xl p-6 md:p-8">
-        <div className="chapter-eyebrow mb-2 text-center">Quick Search</div>
-        <h2 className="text-lg font-bold mb-3 text-center">
-          用語・公式・トピックを横断検索
-        </h2>
-        <form
-          action="/search"
-          method="get"
-          className="flex flex-col sm:flex-row gap-2 max-w-2xl mx-auto"
-          role="search"
-        >
-          <label htmlFor="home-search" className="sr-only">
-            サイト内検索
-          </label>
-          <div className="relative flex-1">
-            <svg
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--muted)]"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <circle cx="11" cy="11" r="7" />
-              <path d="M20 20l-3.5-3.5" />
-            </svg>
-            <input
-              id="home-search"
-              type="search"
-              name="q"
-              placeholder="例: 正規分布、p 値、ベイズ、回帰係数 ..."
-              className="w-full pl-9 pr-3 py-2.5 border border-[var(--page-border-strong)] rounded text-sm bg-[var(--page)] focus:outline-none focus:border-[var(--link)]"
-            />
-          </div>
-          <button
-            type="submit"
-            className="px-5 py-2.5 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold text-sm hover:bg-[var(--accent-strong)] ui-sans"
-          >
-            検索
-          </button>
-        </form>
-        <p className="mt-3 text-center text-[11px] text-[var(--muted)] ui-sans">
-          教科書本文 · 用語集(意味の候補も提案) · 公式集 · ブログ を横断検索
-        </p>
-      </section>
-
-
-      <section className="mb-14 md:mb-20 paper rounded-xl p-6 md:p-8">
-        <header className="mb-5">
-          <span className="chip-soft">What's New</span>
-          <h2 className="text-2xl font-bold mt-3">最近追加されたコンテンツ</h2>
-          <p className="text-sm text-[var(--muted)] mt-2">
-            ブログ記事 30 本・用語集 約 320 語・図解 33 種・検定別ロードマップ 7 ページが揃っています。直近の追加分は以下から。
-          </p>
-        </header>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm ui-sans">
-          <Link
-            href="/blog"
-            className="paper rounded-lg p-4 hover:-translate-y-0.5 transition group block"
-          >
-            <div className="text-3xl mb-2" aria-hidden="true">
-              📰
-            </div>
-            <div className="font-bold text-[var(--foreground)] group-hover:text-[var(--link)]">
-              新ブログ
-            </div>
-            <div className="text-xs text-[var(--muted)] mt-0.5">
-              全 {blogPosts.length} 本
-            </div>
-          </Link>
-          <Link
-            href="/glossary"
-            className="paper rounded-lg p-4 hover:-translate-y-0.5 transition group block"
-          >
-            <div className="text-3xl mb-2" aria-hidden="true">
-              📚
-            </div>
-            <div className="font-bold text-[var(--foreground)] group-hover:text-[var(--link)]">
-              用語集
-            </div>
-            <div className="text-xs text-[var(--muted)] mt-0.5">
-              約 320 語
-            </div>
-          </Link>
-          <Link
-            href="/figures"
-            className="paper rounded-lg p-4 hover:-translate-y-0.5 transition group block"
-          >
-            <div className="text-3xl mb-2" aria-hidden="true">
-              📊
-            </div>
-            <div className="font-bold text-[var(--foreground)] group-hover:text-[var(--link)]">
-              SVG 図解
-            </div>
-            <div className="text-xs text-[var(--muted)] mt-0.5">
-              33 種
-            </div>
-          </Link>
-          <Link
-            href="/certs/g-test/roadmap"
-            className="paper rounded-lg p-4 hover:-translate-y-0.5 transition group block"
-          >
-            <div className="text-3xl mb-2" aria-hidden="true">
-              🎯
-            </div>
-            <div className="font-bold text-[var(--foreground)] group-hover:text-[var(--link)]">
-              検定別ロードマップ
-            </div>
-            <div className="text-xs text-[var(--muted)] mt-0.5">
-              7 検定
-            </div>
-          </Link>
-        </div>
-      </section>
-
       <section className="mb-14 md:mb-20">
         <div className="mb-5 flex items-baseline justify-between">
           <div>
@@ -434,10 +340,10 @@ export default function Home() {
             すべての記事 →
           </Link>
         </div>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <ul className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {[...blogPosts]
             .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1))
-            .slice(0, 6)
+            .slice(0, 3)
             .map((post) => {
               const cat = post.category;
               const theme = blogTheme(cat);
@@ -477,50 +383,6 @@ export default function Home() {
               );
             })}
         </ul>
-      </section>
-
-      <section className="mb-14 md:mb-20 paper rounded-xl p-7 md:p-8">
-        <div className="chapter-eyebrow mb-2">More</div>
-        <h2 className="text-2xl font-bold mb-3">もっと深く学びたい方へ</h2>
-        <p className="text-[var(--muted-strong)] leading-loose mb-4 text-sm">
-          サイト本編に加え、<strong>note</strong> での詳細解説記事、
-          <strong>BOOTH</strong>{" "}
-          での問題集 PDF など、より深く学べる有料・無料コンテンツを順次公開予定です。
-        </p>
-        <div className="flex flex-wrap gap-3 ui-sans text-sm">
-          {externalLinks.note ? (
-            <a
-              href={externalLinks.note}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--background)] flex items-center gap-2"
-            >
-              <span className="font-bold">note</span>
-              <span className="text-xs text-[var(--muted)]">詳細解説記事</span>
-            </a>
-          ) : (
-            <div className="px-4 py-2 border border-dashed border-[var(--page-border)] rounded text-[var(--muted)] flex items-center gap-2">
-              <span className="font-bold">note</span>
-              <span className="text-xs">準備中</span>
-            </div>
-          )}
-          {externalLinks.booth ? (
-            <a
-              href={externalLinks.booth}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--background)] flex items-center gap-2"
-            >
-              <span className="font-bold">BOOTH</span>
-              <span className="text-xs text-[var(--muted)]">問題集 PDF</span>
-            </a>
-          ) : (
-            <div className="px-4 py-2 border border-dashed border-[var(--page-border)] rounded text-[var(--muted)] flex items-center gap-2">
-              <span className="font-bold">BOOTH</span>
-              <span className="text-xs">準備中</span>
-            </div>
-          )}
-        </div>
       </section>
 
       <section>
@@ -656,32 +518,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Math foundations - learning support */}
-        <div className="mt-6 pt-6 border-t border-dashed border-[var(--page-border-strong)]">
-          <div className="chapter-eyebrow mb-3 text-center">
-            ─ 学習サポート ─
-          </div>
-          <p className="text-xs text-[var(--muted)] text-center mb-5 ui-sans">
-            統計学の式が読めない・前提の数学が不安、というときの補助教材。級の学習中に必要な章だけピンポイントで参照できます。
-          </p>
-          <div className="grid grid-cols-1 gap-5">
-            <Link
-              href="/math"
-              className="paper rounded-lg p-5 hover:-translate-y-0.5 transition group block"
-            >
-              <div className="chapter-eyebrow mb-1">Math Foundations</div>
-              <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--link)]">
-                統計のための数学基礎
-              </h3>
-              <p className="text-xs text-[var(--muted-strong)] leading-relaxed">
-                割合・百分率・総和記号 Σ・指数対数・微分積分・線形代数 ─ 統計学を学ぶうえで前提となる数学を、必要なところだけ抜粋した補助教材。
-              </p>
-              <div className="mt-3 text-xs text-[var(--link)] ui-sans">
-                詳しく見る →
-              </div>
-            </Link>
-          </div>
-        </div>
       </section>
 
       <section className="mt-16 paper rounded-lg p-6 md:p-7">
@@ -702,98 +538,6 @@ export default function Home() {
         </dl>
       </section>
 
-      <section className="mt-12">
-        <header className="mb-5">
-          <span className="chip-soft mb-2">Quick Navigation</span>
-          <h2 className="text-2xl font-bold mt-2">学習目的から探す</h2>
-          <p className="text-sm text-[var(--muted)] mt-2 leading-relaxed">
-            よくある学習目的別に、次に読むページをまとめました。
-          </p>
-        </header>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 ui-sans text-sm">
-          {[
-            {
-              chip: "Exam",
-              icon: "📚",
-              title: "試験合格を目指す",
-              accent: "bg-emerald-500",
-              links: [
-                { href: "/diagnose", label: "3 問の級診断" },
-                { href: "/roadmap", label: "学習ロードマップ(時間目安)" },
-                { href: "/exam-info", label: "受験情報まとめ(日程・受験料)" },
-                { href: "/cheatsheet", label: "公式チートシート(印刷可)" },
-              ],
-            },
-            {
-              chip: "Concepts",
-              icon: "🧠",
-              title: "概念を理解したい",
-              accent: "bg-sky-500",
-              links: [
-                { href: "/figures", label: "図解で学ぶ統計(SVG 43 種)" },
-                { href: "/explore", label: "動かして学ぶ統計(対話的)" },
-                { href: "/glossary", label: "統計用語集" },
-                { href: "/math", label: "統計のための数学基礎" },
-              ],
-            },
-            {
-              chip: "Practice",
-              icon: "🛠",
-              title: "実務で使いたい",
-              accent: "bg-violet-500",
-              links: [
-                { href: "/tools", label: "統計計算ツール集(信頼区間・p 値)" },
-                { href: "/textbook/grade-2", label: "統計検定 2 級 教科書" },
-                { href: "/certs/ds-literacy", label: "DS 検定 対策" },
-                { href: "/certs/ds-basic", label: "DS 基礎 対策(Excel)" },
-              ],
-            },
-            {
-              chip: "AI / DL",
-              icon: "🤖",
-              title: "AI / DL を学ぶ",
-              accent: "bg-amber-500",
-              links: [
-                { href: "/certs/g-test", label: "G 検定 対策(JDLA)" },
-                { href: "/certs/e-shikaku", label: "E 資格 対策(エンジニア向け)" },
-                { href: "/textbook/grade-pre1", label: "準 1 級 教科書(多変量・ベイズ)" },
-                { href: "/blog", label: "学習ブログ" },
-              ],
-            },
-          ].map((card) => (
-            <article
-              key={card.title}
-              className="paper rounded-xl overflow-hidden flex flex-col"
-            >
-              <div className={`h-1 w-full ${card.accent}`} aria-hidden="true" />
-              <div className="p-5 flex-1 flex flex-col">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-2xl" aria-hidden="true">
-                    {card.icon}
-                  </span>
-                  <span className="chip-soft text-[10px]">{card.chip}</span>
-                </div>
-                <h3 className="font-bold text-base mb-3 text-[var(--foreground)]">
-                  {card.title}
-                </h3>
-                <ul className="space-y-2 text-xs flex-1">
-                  {card.links.map((l) => (
-                    <li key={l.href}>
-                      <Link
-                        href={l.href}
-                        className="text-[var(--link)] hover:underline inline-flex items-center gap-1"
-                      >
-                        <span aria-hidden="true">→</span>
-                        <span>{l.label}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
     </div>
   );
 }

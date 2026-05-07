@@ -1,5 +1,85 @@
 "use client";
 
+import { useState } from "react";
+
+export function CopyButton({
+  text,
+  label = "コピー",
+}: {
+  text: string;
+  label?: string;
+}) {
+  const [copied, setCopied] = useState(false);
+
+  const onCopy = async () => {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        // Fallback for non-secure contexts
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1600);
+    } catch {
+      // 失敗時は何もしない(ブラウザが拒否したケース)
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={onCopy}
+      aria-label={`結果をコピー: ${text}`}
+      className="ui-sans text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded border border-[var(--page-border-strong)] bg-[var(--page)] hover:bg-[var(--background)] hover:text-[var(--link)] transition flex items-center gap-1.5 whitespace-nowrap"
+    >
+      {copied ? (
+        <>
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20 6L9 17l-5-5" />
+          </svg>
+          コピー済
+        </>
+      ) : (
+        <>
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+          </svg>
+          {label}
+        </>
+      )}
+    </button>
+  );
+}
+
 export function Field({
   label,
   unit,
@@ -52,15 +132,21 @@ export function Result({
   label,
   value,
   hint,
+  copyText,
 }: {
   label: string;
   value: string;
   hint?: string;
+  /** コピー時のテキスト。省略時は value を使用 */
+  copyText?: string;
 }) {
   return (
     <div className="rounded-lg p-5 mt-4 border-2 border-[var(--accent)] bg-[var(--highlight)]">
-      <div className="text-[11px] uppercase tracking-[0.15em] text-[var(--muted)] ui-sans mb-2 font-bold">
-        {label}
+      <div className="flex items-start justify-between gap-3 mb-2">
+        <div className="text-[11px] uppercase tracking-[0.15em] text-[var(--muted)] ui-sans font-bold">
+          {label}
+        </div>
+        <CopyButton text={copyText ?? value} />
       </div>
       <div className="text-3xl md:text-4xl font-bold tabular-nums text-[var(--foreground)] break-words leading-tight">
         {value}
