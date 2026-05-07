@@ -311,4 +311,86 @@ export const dsLiteracyQuestions: Question[] = [
     explanation:
       "P/D 型色覚異常は赤緑の判別が苦手。ColorBrewer や matplotlib の Viridis は色覚多様性対応として広く使われる。",
   },
+
+  // === Ch4 機械学習の主要手法 ===
+  {
+    id: "dsl-ml1",
+    difficulty: 2,
+    category: "機械学習",
+    question:
+      "**Lasso 回帰**(L1 正則化)が **Ridge 回帰**(L2 正則化)と比べて持つ特徴的な性質はどれか。",
+    choices: [
+      "係数を完全にゼロにできる(=特徴選択効果がある)",
+      "計算が常に Ridge より高速",
+      "多重共線性に強い",
+      "正則化項がない",
+    ],
+    correctIndex: 0,
+    explanation:
+      "L1 ノルムはゼロで角を持つため、最適解が原点付近に張り付き、係数が **完全にゼロ** になる。これが特徴選択効果。L2 は滑らかなのでゼロにはなりにくい。多重共線性には Ridge の方が強い。",
+  },
+  {
+    id: "dsl-ml2",
+    difficulty: 2,
+    category: "機械学習",
+    question:
+      "**勾配ブースティング**(XGBoost / LightGBM)の学習方式として正しい記述はどれか。",
+    choices: [
+      "決定木を独立に並列学習し、平均する",
+      "前段の残差を次の弱学習器が予測する形で順次に学習する",
+      "全データの平均だけで予測する",
+      "ニューラルネットの一種",
+    ],
+    correctIndex: 1,
+    explanation:
+      "GBM は **逐次的(boosting)** に弱学習器(決定木)を積み上げ、前段の予測残差を次の木が補正する。並列のランダムフォレスト(bagging)と対照的。表形式データでは現代のデファクト。",
+  },
+  {
+    id: "dsl-ml3",
+    difficulty: 2,
+    category: "機械学習",
+    question:
+      "クラス比率 99:1 の不均衡データで分類モデルを評価する。最も適切な指標はどれか。",
+    choices: [
+      "正解率(Accuracy)",
+      "PR-AUC・F1・Recall(陽性側)",
+      "RMSE",
+      "決定係数 $R^2$",
+    ],
+    correctIndex: 1,
+    explanation:
+      "Accuracy 99% でも『すべて多数派と予測』で達成できる(陽性 0 検出)。少数派の検出力を見るには Precision・Recall・F1・PR-AUC を使う。RMSE/$R^2$ は回帰用。",
+  },
+  {
+    id: "dsl-ml4",
+    difficulty: 2,
+    category: "機械学習",
+    question:
+      "**k-means クラスタリング** で適切な $k$ を決める一般的な方法はどれか。",
+    choices: [
+      "$k$ は必ず 3 にする",
+      "エルボー法(クラスタ内平方和の屈曲点)やシルエットスコアの最大値を見る",
+      "ランダムに選ぶ",
+      "データ数 $n$ の平方根",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**エルボー法**: $k$ を増やすとクラスタ内分散が減るが、屈曲点(膝)が最適。**シルエットスコア**: 同クラスタの近さ + 別クラスタの遠さで $k$ を評価。両者を併用するのが実務。",
+  },
+  {
+    id: "dsl-ml5",
+    difficulty: 3,
+    category: "機械学習",
+    question:
+      "Netflix Prize で優勝した推薦アルゴリズムの中核となる数学的手法はどれか。",
+    choices: [
+      "ナイーブベイズ",
+      "ユーザー × アイテム評価行列の **行列分解(SVD・ALS)**",
+      "k-NN による単純近傍",
+      "深層強化学習",
+    ],
+    correctIndex: 1,
+    explanation:
+      "Netflix Prize(2006-09)優勝モデルは行列分解 + アンサンブル。ユーザー特徴ベクトル × アイテム特徴ベクトルの内積で評価を予測。math Ch7 の SVD・低ランク近似が直接の数学的基盤。",
+  },
 ];

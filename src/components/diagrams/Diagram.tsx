@@ -37,6 +37,9 @@ import { VaeArchitecture } from "./VaeArchitecture";
 import { DiffusionProcess } from "./DiffusionProcess";
 import { MultiHeadAttention } from "./MultiHeadAttention";
 import { LossLandscape } from "./LossLandscape";
+import { Eigenvectors } from "./Eigenvectors";
+import { SvdDecomposition } from "./SvdDecomposition";
+import { BathtubCurve } from "./BathtubCurve";
 import { Bootstrap } from "./Bootstrap";
 import { GbdtTree } from "./GbdtTree";
 import { Dropout } from "./Dropout";
@@ -86,6 +89,9 @@ const REGISTRY: Record<DiagramKind, () => React.ReactElement> = {
   "diffusion-process": DiffusionProcess,
   "multi-head-attention": MultiHeadAttention,
   "loss-landscape": LossLandscape,
+  eigenvectors: Eigenvectors,
+  "svd-decomposition": SvdDecomposition,
+  "bathtub-curve": BathtubCurve,
   bootstrap: Bootstrap,
   "gbdt-tree": GbdtTree,
   dropout: Dropout,

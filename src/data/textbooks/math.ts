@@ -827,6 +827,12 @@ export const mathBasicsTextbook: Textbook = {
               title: "固有ベクトルは『方向が変わらない特別なベクトル』",
               body: "ふつうのベクトル $\\boldsymbol v$ に行列 $A$ をかけると、回転 + 伸縮で別の方向を向きます。しかし **特別な方向のベクトル**(固有ベクトル)に対しては、$A$ の作用は **ただの伸縮(スケーリング)** だけ ─ 方向は変わらない。これが固有ベクトルの直感です。回転を伴う変換の中で、軸として動かない方向を見つけるイメージ。",
             },
+            {
+              type: "figure",
+              kind: "eigenvectors",
+              caption:
+                "ふつうのベクトル v は Av で方向が変わるが、固有ベクトル w は Aw = λw で方向不変・長さ λ 倍",
+            },
             { type: "h3", text: "固有値の求め方" },
             {
               type: "def",
@@ -915,6 +921,12 @@ export const mathBasicsTextbook: Textbook = {
               type: "intuition",
               title: "SVD は『一般行列の幾何学』",
               body: "正方対称行列の固有分解が『軸方向の伸縮』を表すように、**任意の行列の SVD は『回転 → 伸縮 → 回転』** という幾何変換の分解です。$V^\\top$ で入力を回し直し、$\\Sigma$ で各方向に異なる倍率で伸縮し、$U$ で出力を回す ─ どんな線形変換もこの 3 段階で表せる、というのが SVD の主張。",
+            },
+            {
+              type: "figure",
+              kind: "svd-decomposition",
+              caption:
+                "単位円が V^⊤ で回転 → Σ で軸方向に伸縮 → U で再回転されて楕円に。任意の線形変換はこの 3 段階に分解できる",
             },
             { type: "h3", text: "低ランク近似" },
             {

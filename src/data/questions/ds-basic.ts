@@ -311,4 +311,70 @@ export const dsBasicQuestions: Question[] = [
     explanation:
       "多重共線性は説明変数同士の強い相関で起きる。VIF (Variance Inflation Factor) で診断し、相関の強い変数を削除・統合・PCA で対処する。",
   },
+
+  // === Ch4 Excel での仮説検定とカテゴリ分析 ===
+  {
+    id: "ds-test1",
+    difficulty: 2,
+    category: "仮説検定",
+    question:
+      "Excel の `T.TEST` 関数で **対応のある t 検定** を実行する場合、第 4 引数(検定の種類)に指定する値はどれか。",
+    choices: [
+      "1(対応のある検定)",
+      "2(等分散を仮定)",
+      "3(Welch、等分散を仮定しない)",
+      "0(自動選択)",
+    ],
+    correctIndex: 0,
+    explanation:
+      "`T.TEST(範囲1, 範囲2, 尾の数, 検定の種類)` で 検定の種類 = 1: 対応あり、2: 等分散、3: Welch。投薬前後・施策前後など同じ被験者を比較する場合は 1 を指定。",
+  },
+  {
+    id: "ds-test2",
+    difficulty: 2,
+    category: "仮説検定",
+    question:
+      "$2 \\times 2$ クロス表で観測度数 $\\begin{pmatrix} 30 & 50 \\\\ 40 & 30 \\end{pmatrix}$ について、セル(男・購入)の期待度数として正しい値はどれか(行合計 80, 70 / 列合計 70, 80 / 総計 150)。",
+    choices: [
+      "$30$",
+      "$33.3$",
+      "$37.3$",
+      "$45.0$",
+    ],
+    correctIndex: 2,
+    explanation:
+      "$E_{ij} = R_i \\cdot C_j / N = 80 \\times 70 / 150 = 5600/150 \\approx 37.33$。期待度数を全セル計算後、$\\chi^2 = \\sum (O-E)^2/E$ で検定統計量。Excel の `CHISQ.TEST(観測, 期待)` で p 値が直接出る。",
+  },
+  {
+    id: "ds-test3",
+    difficulty: 2,
+    category: "仮説検定",
+    question:
+      "3 群以上の平均を比較するときに **t 検定の繰り返し** を避け **ANOVA** を使う理由として最も適切なものはどれか。",
+    choices: [
+      "ANOVA の方が計算が高速だから",
+      "3 群を 2 群ずつ繰り返すと第一種の誤りが増殖し、全体の有意水準が制御できなくなるため",
+      "ANOVA は標本サイズが小さくてよいから",
+      "t 検定は正規分布を仮定しないから",
+    ],
+    correctIndex: 1,
+    explanation:
+      "3 群を ABC ペアで 3 回検定すると、各回 α=5% でも全体で $1 - 0.95^3 \\approx 14\\%$ に。**多重比較問題**。ANOVA で全体 α を制御し、その後 Tukey/Bonferroni で個別比較するのが正攻法。",
+  },
+  {
+    id: "ds-test4",
+    difficulty: 3,
+    category: "仮説検定",
+    question:
+      "ANOVA の事後検定として、対照群と各処理群の比較に特化した手法はどれか。",
+    choices: [
+      "Bonferroni 補正",
+      "Tukey の HSD",
+      "Dunnett 検定",
+      "Welch ANOVA",
+    ],
+    correctIndex: 2,
+    explanation:
+      "**Dunnett 検定**: 対照群 vs 各処理群の比較に最適化。臨床試験での標準。**Tukey HSD**: 全ペア比較。**Bonferroni**: 最も保守的(α/m)。**Welch ANOVA**: 等分散仮定を緩めた ANOVA。",
+  },
 ];
