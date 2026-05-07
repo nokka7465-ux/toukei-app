@@ -744,7 +744,698 @@ export const dsBasicTextbook: Textbook = {
             },
             {
               type: "p",
-              text: "ここまでで DS 基礎の試験範囲を一通り扱いました。**Excel 操作 + 可視化 + データ準備 + 仮説検定** ─ 実務で『最初の 1 ヶ月』に必要な統計の道具立ては揃いました。次のステップは **DS 検定リテラシー(より広い知識)** や **統計検定 2 級(理論)** で、本書で身につけた『手を動かす感覚』を理論で裏打ちしていく道です。",
+              text: "ここまで 4 章で DS 基礎の中核を扱いました。続く 5-10 章では **時系列・多変量・ダッシュボード・AI 連携・ケーススタディ** など実務応用を加えて、一段上の Excel データ分析力を養います。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch5",
+      number: 5,
+      title: "時系列データを Excel で扱う",
+      overview:
+        "売上・株価・気温など時系列データの Excel での扱い方。移動平均・トレンド・季節調整を 3 節で。",
+      sections: [
+        {
+          id: "ch5-sec1",
+          number: "5.1",
+          title: "時系列の基本と Excel の関数",
+          blocks: [
+            {
+              type: "p",
+              text: "**時系列データ** は時刻順に並んだデータ。Excel では日付列を **シリアル値** として扱い、関数群で集計・変換します。",
+            },
+            { type: "h3", text: "Excel の日付関数" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "`YEAR(date)` / `MONTH(date)` / `DAY(date)`: 年・月・日を抽出",
+                "`WEEKDAY(date)`: 曜日(1=日曜)",
+                "`EOMONTH(date, 0)`: 月末日",
+                "`EDATE(date, n)`: $n$ ヶ月後の日付",
+                "`DATEDIF(start, end, 'd')`: 日数差",
+              ],
+            },
+            { type: "h3", text: "前月比・前年同月比" },
+            {
+              type: "def",
+              title: "公式 ─ 成長率",
+              body: "**前月比**: $(\\text{今月}/\\text{前月} - 1) \\times 100$\n\n**前年同月比(YoY)**: $(\\text{今月}/\\text{前年同月} - 1) \\times 100$\n\n**季節要因を取り除けるのが YoY の利点**。Excel では 12 行ずらした計算で算出可能。",
+            },
+            {
+              type: "intuition",
+              title: "ピボットテーブルで時系列集計",
+              body: "ピボットテーブルの **行ラベルに日付を入れ、月別・四半期別** にグループ化(右クリック → グループ化)すると、瞬時に月次・四半期集計表が完成。BI ツールに頼らず Excel だけで時系列分析できる強力機能。",
+            },
+          ],
+        },
+        {
+          id: "ch5-sec2",
+          number: "5.2",
+          title: "移動平均とトレンド線",
+          blocks: [
+            {
+              type: "p",
+              text: "**移動平均** は時系列データのノイズを平滑化する古典的手法。Excel では数式で実装するか、グラフのトレンド線機能で表示できます。",
+            },
+            { type: "h3", text: "単純移動平均(SMA)" },
+            {
+              type: "def",
+              title: "公式 ─ 移動平均",
+              body: "$\\;\\mathrm{SMA}_t = \\dfrac{1}{n} \\sum_{i=0}^{n-1} Y_{t-i}\\;$\n\n直近 $n$ 期の単純平均。Excel では `=AVERAGE(B2:B6)` を下方向にコピー。$n$ が大きいほど滑らかだが、変化への反応が遅れる。",
+            },
+            { type: "h3", text: "指数平滑(EWMA)" },
+            {
+              type: "def",
+              title: "公式 ─ 指数加重移動平均",
+              body: "$\\;\\mathrm{EWMA}_t = \\alpha Y_t + (1 - \\alpha) \\mathrm{EWMA}_{t-1}\\;$\n\n直近のデータに重みづけ。$\\alpha = 0.2 \\sim 0.3$ が標準。**反応が速く・SMA より滑らか**。Excel の **データ分析 → 指数平滑** で実行可能。",
+            },
+            { type: "h3", text: "グラフのトレンド線" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "散布図/折れ線グラフを選択 → グラフ要素 → トレンドライン",
+                "**線形・指数・対数・累乗・多項式・移動平均** から選択",
+                "**$R^2$ 値・式を表示** チェックで回帰式と当てはまり",
+                "予測期間を指定すれば将来予測も可能",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch5-sec3",
+          number: "5.3",
+          title: "季節調整と FORECAST 関数",
+          blocks: [
+            {
+              type: "p",
+              text: "**季節パターン** をもつ時系列(月次小売・電力消費など)を Excel で扱う実務的手法。",
+            },
+            { type: "h3", text: "季節指数法" },
+            {
+              type: "def",
+              title: "用語 ─ 季節指数",
+              body: "1. 12 ヶ月中心化移動平均でトレンドを抽出\n2. 観測値 / トレンドで `S × I` 比を計算\n3. 各月で平均して **季節指数 $S_t$** を確定\n4. 季節調整値 = 観測値 / 季節指数",
+            },
+            { type: "h3", text: "FORECAST 関数群" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "`FORECAST.LINEAR(x, y_range, x_range)`: 線形回帰の予測",
+                "`FORECAST.ETS(target_date, values, dates)`: 指数平滑による予測(季節性自動検出)",
+                "`FORECAST.ETS.SEASONALITY`: 季節性の周期推定",
+                "`FORECAST.ETS.CONFINT`: 予測信頼区間",
+                "**Excel 2016+ で利用可能**",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "予測シート機能",
+              body: "Excel の **データ → 予測シート** で、選択範囲から **予測グラフ + 信頼区間** を自動生成。中身は ETS(Error-Trend-Seasonality)モデル。**コードを書かずに予測** ができ、ビジネスの月次予測で実用的です。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch6",
+      number: 6,
+      title: "多変量データとピボット分析",
+      overview:
+        "複数次元のデータを Excel で要約・分析する実務的手法。クロス集計・条件付き書式・スライサーを 3 節で。",
+      sections: [
+        {
+          id: "ch6-sec1",
+          number: "6.1",
+          title: "クロス集計とピボットテーブルの応用",
+          blocks: [
+            {
+              type: "p",
+              text: "**ピボットテーブル** は Excel の最強機能の 1 つ。1 章で基礎を扱いましたが、ここでは **多次元の分析** に応用します。",
+            },
+            { type: "h3", text: "計算フィールドと計算アイテム" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**計算フィールド**: ピボット内で新しい列を作る(粗利率 = 利益/売上 など)",
+                "**計算アイテム**: カテゴリ間の演算(東日本 = 関東 + 東北)",
+                "**集計方法の切替**: 合計・平均・カウント・最大・最小・標本標準偏差",
+                "**値フィールドの設定**: 比率・累積・前期比など",
+              ],
+            },
+            { type: "h3", text: "ピボットグラフ" },
+            {
+              type: "p",
+              text: "ピボットテーブルからワンクリックで **対話的グラフ** を生成。**スライサー**(クリック式フィルタ)・**タイムライン**(日付範囲選択)を組合せると、軽量なダッシュボードが完成します。",
+            },
+          ],
+        },
+        {
+          id: "ch6-sec2",
+          number: "6.2",
+          title: "条件付き書式でパターンを発見",
+          blocks: [
+            {
+              type: "p",
+              text: "**条件付き書式** は Excel の数値を **色で可視化** する機能。多変量データの探索的分析(EDA)で威力を発揮します。",
+            },
+            { type: "h3", text: "主要な書式種類" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**カラースケール**: 値の大小を色のグラデーションで表現(ヒートマップ風)",
+                "**データバー**: セル内に棒グラフを表示",
+                "**アイコンセット**: 信号・矢印などで状態表示",
+                "**上位/下位 N**: 上位 10% や下位 5 件を強調",
+                "**重複値**: 重複する値を強調(データクリーニング)",
+                "**数式ベース**: `=A1>AVG($A$1:$A$100)` のような任意条件",
+              ],
+            },
+            { type: "h3", text: "相関行列のヒートマップ" },
+            {
+              type: "intuition",
+              title: "Excel で簡易相関ヒートマップ",
+              body: "**データ → データ分析 → 相関** で相関行列が出力。これに **カラースケール条件付き書式** を適用すれば、Python/R を使わずとも相関ヒートマップが作れる。多変量データの探索的分析で **最初に見るべき** 図の一つ。",
+            },
+          ],
+        },
+        {
+          id: "ch6-sec3",
+          number: "6.3",
+          title: "Power Query と Power Pivot",
+          blocks: [
+            {
+              type: "p",
+              text: "**Power Query / Power Pivot** は Excel の隠れた高機能機能。100 万行以上のデータも軽快に扱え、複数テーブルの結合(JOIN)もできる。",
+            },
+            { type: "h3", text: "Power Query" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**データの取得と変換** メニューから起動",
+                "**CSV・Web・データベース・Folder** など多様なソース",
+                "**前処理パイプライン** をステップとして記録(再実行可能)",
+                "**列の分割・結合・型変換・行のフィルタ・ピボット解除**",
+                "**M 言語** で複雑な変換も記述可能",
+              ],
+            },
+            { type: "h3", text: "Power Pivot" },
+            {
+              type: "p",
+              text: "**Power Pivot** はデータモデル機能。複数テーブルを **リレーションシップ** で結びつけ、SQL の JOIN を Excel で実現。**DAX(Data Analysis eXpressions)** 言語で高度な計算が可能で、**100 万行を超えるデータ** も扱える。",
+            },
+            {
+              type: "intuition",
+              title: "Excel の限界を超える",
+              body: "Excel の標準機能では 1,048,576 行が上限。Power Pivot のデータモデルなら **数百万〜数億行** を扱え、企業データ分析の現場で実用的。**Power BI** にデータモデルを移行すれば、本格的な BI ダッシュボードへ進化させられます。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch7",
+      number: 7,
+      title: "ダッシュボードと BI 連携",
+      overview:
+        "Excel で意思決定に直結するダッシュボードを作る。Power BI との連携も視野に 3 節で。",
+      sections: [
+        {
+          id: "ch7-sec1",
+          number: "7.1",
+          title: "Excel ダッシュボードの設計",
+          blocks: [
+            {
+              type: "p",
+              text: "**ダッシュボード** は『**重要な指標を 1 画面で俯瞰**』するレポート。経営会議・営業会議で頻用。",
+            },
+            { type: "h3", text: "良いダッシュボードの 5 原則" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "**目的を 1 つに絞る**(『経営状況の月次レビュー』など)",
+                "**KPI は 5-7 個まで** ─ 多すぎると焦点がぼける",
+                "**最重要指標を左上に**(視線の流れに沿う)",
+                "**異常を一目で**(条件付き書式で赤を出す)",
+                "**ドリルダウン可能**(スライサー / タイムラインで深掘り)",
+              ],
+            },
+            { type: "h3", text: "Excel ダッシュボードの構成要素" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**KPI カード**: 大きい数字 + 前期比 + 目標達成率",
+                "**時系列グラフ**: トレンドの推移",
+                "**ピボットグラフ**: カテゴリ別比較",
+                "**ヒートマップ**: 多変量の状態俯瞰",
+                "**スライサー**: フィルタ用ボタン",
+                "**タイムライン**: 期間選択",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch7-sec2",
+          number: "7.2",
+          title: "Power BI への展開",
+          blocks: [
+            {
+              type: "p",
+              text: "**Power BI** はマイクロソフトの BI ツール。Excel の自然な発展形で、Power Query / Power Pivot がそのまま動きます。",
+            },
+            { type: "h3", text: "Power BI の主要機能" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**データ接続**: 100+ のデータソースに対応",
+                "**リレーションシップ**: 複数テーブルのスター・スキーマ",
+                "**DAX**: ピボットを超える集計関数",
+                "**ビジュアル**: 50+ の標準グラフ・3rd party",
+                "**公開**: クラウドで共有(Power BI Service)",
+                "**Mobile**: スマホ用ダッシュボード自動生成",
+              ],
+            },
+            { type: "h3", text: "他の主要 BI ツール" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Tableau**: 老舗・データ可視化に強い",
+                "**Looker**(Google): クラウド統合・LookML",
+                "**Qlik Sense**: データ探索特化",
+                "**Domo**: SaaS 完結",
+                "**Metabase**: オープンソース",
+                "**Redash**: SQL ベース・ダッシュボード",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch7-sec3",
+          number: "7.3",
+          title: "ストーリーテリングと意思決定",
+          blocks: [
+            {
+              type: "p",
+              text: "ダッシュボードは **意思決定の道具**。数字を並べるだけでなく、**ストーリー** を語る設計が重要です。",
+            },
+            { type: "h3", text: "データストーリーテリングの 3 段階" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "**現状把握(What)**: 何が起きているか",
+                "**原因分析(Why)**: なぜ起きているか",
+                "**行動提案(So What / Now What)**: 何をすべきか",
+              ],
+            },
+            { type: "h3", text: "色とレイアウト" },
+            {
+              type: "intuition",
+              title: "色は意味を持たせる",
+              body: "**赤 = 危険・低下、緑 = 良好・上昇、灰 = 中立** は世界共通の感覚。**色覚多様性に配慮**(赤緑色弱の方には Viridis などのカラーパレット)。**3 色以内** に絞ると視認性が上がる。装飾でなく **意味のある色** を使うのが原則。",
+            },
+            { type: "h3", text: "Excel と AI の組合せ" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Copilot in Excel**: Excel のセル内容を ChatGPT 流に解析・要約",
+                "**Power BI Q&A**: 自然言語でクエリを書ける",
+                "**Microsoft Fabric**: Power BI と AI を統合する次世代プラットフォーム",
+                "**ChatGPT + Excel**: 数式やマクロの説明・生成",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch8",
+      number: 8,
+      title: "Excel × プログラミングの連携",
+      overview:
+        "Excel と Python / R / VBA を組合せて、より強力な分析を実現する手法を 3 節で。",
+      sections: [
+        {
+          id: "ch8-sec1",
+          number: "8.1",
+          title: "VBA でルーチン作業を自動化",
+          blocks: [
+            {
+              type: "p",
+              text: "**VBA(Visual Basic for Applications)** は Excel に標準搭載のマクロ言語。**繰り返し作業** を 1 ボタンで自動化できます。",
+            },
+            { type: "h3", text: "マクロ記録から始める" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "**開発タブ → マクロの記録**(初回は『開発タブを表示』を有効化)",
+                "通常通り Excel を操作",
+                "記録停止 → 自動生成された VBA コードを表示",
+                "コードを編集して汎用化(ループ・条件分岐の追加)",
+                "ボタンに割り当てて 1 クリック実行",
+              ],
+            },
+            { type: "h3", text: "VBA の基本構文" },
+            {
+              type: "code",
+              title: "VBA で各シートにヘッダーを追加",
+              python:
+                "' VBA コード(参考表示)\nSub AddHeaderToAllSheets()\n    Dim ws As Worksheet\n    For Each ws In ThisWorkbook.Sheets\n        ws.Range(\"A1\").Value = \"集計表 \" & ws.Name\n        ws.Range(\"A1\").Font.Bold = True\n    Next ws\nEnd Sub",
+            },
+            {
+              type: "intuition",
+              title: "ルーチンの 80% を VBA で",
+              body: "毎月の同じ集計、シートを 30 個コピー、データの形式変換 ─ これらを VBA で自動化すると **1 回の作業時間が数時間 → 数秒** に。最初の学習コストはあるが、**1 ヶ月で元が取れる** 投資です。",
+            },
+          ],
+        },
+        {
+          id: "ch8-sec2",
+          number: "8.2",
+          title: "Excel と Python の連携",
+          blocks: [
+            {
+              type: "p",
+              text: "**Python in Excel**(2023+)で、Excel のセル内に直接 Python コードが書けるようになりました。pandas・numpy・scikit-learn が標準で使えます。",
+            },
+            { type: "h3", text: "Python in Excel の使い方" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "セルに `=PY(...)` で Python コード開始(または `Ctrl + Shift + Enter`)",
+                "**Anaconda 環境** を Microsoft クラウドで実行(ローカル不要)",
+                "**pandas DataFrame** が結果として返る",
+                "**matplotlib プロット** を Excel 内に埋め込み",
+                "他の Excel セルを `xl(\"A1:B10\")` で参照",
+              ],
+            },
+            { type: "h3", text: "openpyxl と xlwings(従来手法)" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**openpyxl**: Python から Excel ファイル(.xlsx)を読み書き",
+                "**xlwings**: Excel と Python の双方向連携(Excel から Python 関数を呼べる)",
+                "**pandas**: `read_excel` / `to_excel` で 1 行で読み書き",
+                "**Excel = データ入力 UI、Python = 分析エンジン** という分業",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch8-sec3",
+          number: "8.3",
+          title: "AI と Excel の最前線",
+          blocks: [
+            {
+              type: "p",
+              text: "2023 年以降、**生成 AI と Excel の統合** が急速に進化。実務で何が可能かを整理します。",
+            },
+            { type: "h3", text: "Microsoft Copilot in Excel" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**自然言語で式生成**: 『このデータを月別に集計して』 → ピボット自動作成",
+                "**データの説明**: シートを選択 → 『要約して』で AI が傾向を解説",
+                "**条件付き書式の生成**: 『売上 100 万円超を緑に』",
+                "**異常検出**: 『この列で異常な値を見つけて』",
+                "**チャート提案**: データに合うグラフを自動推薦",
+              ],
+            },
+            { type: "h3", text: "ChatGPT/Claude × Excel ワークフロー" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "**式の生成**: 『XLOOKUP を使ってこんな検索式を書いて』",
+                "**マクロ生成**: 『この処理の VBA コードを書いて』",
+                "**エラー修復**: 『この #VALUE! エラーの原因を解説』",
+                "**データクレンジング**: 『この列の表記揺れを統一する手順』",
+                "**分析提案**: 『この売上データから何が見えるか』",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "AI 時代の DS 基礎",
+              body: "AI で Excel 操作が劇的に楽になる時代に、**DS 基礎が問うのは『何を分析するか』『結果をどう解釈するか』** という人間ならではの判断力。**ツール操作よりも統計的思考** が一段重要に。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch9",
+      number: 9,
+      title: "実務ケーススタディ",
+      overview:
+        "売上分析・顧客分析・品質管理 ─ Excel での実例を 3 節で。",
+      sections: [
+        {
+          id: "ch9-sec1",
+          number: "9.1",
+          title: "売上分析と異常検知",
+          blocks: [
+            {
+              type: "p",
+              text: "**月次売上データ** から、傾向・異常・要因を読み取る実務的な分析プロセス。",
+            },
+            { type: "h3", text: "売上分析の標準フロー" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "**全体トレンド**: 線形回帰で長期トレンド抽出",
+                "**季節性**: 月別・曜日別パターンを見る",
+                "**前年同月比**: 季節要因を除去した実質成長",
+                "**要因分解**: 商品 × 地域 × チャネル別貢献",
+                "**異常検知**: ±3σ から外れる月を特定",
+                "**インサイト報告**: 経営層への 1 ページサマリ",
+              ],
+            },
+            { type: "h3", text: "パレート分析" },
+            {
+              type: "intuition",
+              title: "20:80 の法則",
+              body: "売上の **80% は商品の上位 20%** から(Pareto 80:20 ルール)。Excel でパレート図(降順棒グラフ + 累積比折れ線)を作り、**重点商品** を特定。新商品開発・在庫管理の優先度決めに使う。条件付き書式で上位 20 商品を赤くするだけでも有効。",
+            },
+          ],
+        },
+        {
+          id: "ch9-sec2",
+          number: "9.2",
+          title: "顧客分析と RFM",
+          blocks: [
+            {
+              type: "p",
+              text: "**RFM 分析** はマーケの古典手法。顧客を Recency(最終購入)・Frequency(頻度)・Monetary(金額)で分類します。",
+            },
+            { type: "h3", text: "RFM スコアリング" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "各顧客の R / F / M を計算(`MAX(購入日) - 今日`、`COUNT(購入)`、`SUM(金額)`)",
+                "各指標を **5 段階に分類**(`PERCENTRANK` 関数で 5 分位)",
+                "RFM スコア(例: 555 = 最重要顧客、111 = 離脱顧客)を算出",
+                "ピボットテーブルで RFM 分類別の顧客数・売上を集計",
+                "**マーケ施策** を分類別に設計(VIP は厚遇・離脱顧客は呼び戻し)",
+              ],
+            },
+            { type: "h3", text: "顧客生涯価値(LTV)" },
+            {
+              type: "def",
+              title: "公式 ─ 簡易 LTV",
+              body: "$\\;\\mathrm{LTV} = \\dfrac{\\text{平均購入金額} \\times \\text{購入頻度} \\times \\text{粗利率}}{\\text{解約率}}\\;$\n\n顧客 1 人あたりの累積価値の概算。**LTV > 顧客獲得コスト(CAC)** が事業健全性の最低条件。",
+            },
+            {
+              type: "intuition",
+              title: "コホート分析",
+              body: "**同月入会の顧客群を時系列追跡** するコホート分析は、Excel のピボットテーブル + 条件付き書式で実装可能。**入会後の月別残存率** を行 = 入会月、列 = 経過月で表示すると、施策効果や季節性が一目に。",
+            },
+          ],
+        },
+        {
+          id: "ch9-sec3",
+          number: "9.3",
+          title: "品質管理データの分析",
+          blocks: [
+            {
+              type: "p",
+              text: "**品質管理(QC)** データへの統計の応用。Excel で管理図・工程能力指数を計算します(QC 検定教科書とも繋がる内容)。",
+            },
+            { type: "h3", text: "X̄-R 管理図を Excel で" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "群サイズ $n = 5$ の測定値を 25 群分準備",
+                "各群の **平均 $\\bar X$** と **範囲 $R$** を計算",
+                "**$\\bar{\\bar X} = AVERAGE(\\bar X 列)$**、$\\bar R = AVERAGE(R 列)$",
+                "**UCL / LCL = $\\bar{\\bar X} \\pm A_2 \\bar R$**($A_2$ は群サイズの係数表値、$n=5$ で $0.577$)",
+                "折れ線グラフで描画 + 管理限界の水平線追加",
+              ],
+            },
+            { type: "h3", text: "工程能力指数" },
+            {
+              type: "def",
+              title: "公式 ─ Cp と Cpk",
+              body: "$\\;C_p = \\dfrac{\\mathrm{USL} - \\mathrm{LSL}}{6\\sigma}, \\quad C_{pk} = \\min\\!\\left(\\dfrac{\\mathrm{USL} - \\mu}{3\\sigma}, \\dfrac{\\mu - \\mathrm{LSL}}{3\\sigma}\\right)\\;$\n\nExcel で `=AVERAGE(...)`・`=STDEV.S(...)`・`=MIN(...)` を組合せて計算。$C_{pk} \\geq 1.33$ で十分・$\\geq 1.67$ でシックスシグマ目標。",
+            },
+            {
+              type: "practical",
+              title: "🛠 QC 検定との接続",
+              body: "DS 基礎 → **QC 検定 2 級・3 級** へ進むと、これらの管理図・工程能力をより深く扱えます。本サイトの [QC 検定教科書](/certs/qc-kentei/textbook) で 10 章にわたり詳細解説。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch10",
+      number: 10,
+      title: "DS 基礎総まとめと次のステップ",
+      overview:
+        "DS 基礎 9 章の総括、合格後の学習ロードマップを 3 節で。",
+      sections: [
+        {
+          id: "ch10-sec1",
+          number: "10.1",
+          title: "9 章の地図と身に付いた力",
+          blocks: [
+            {
+              type: "p",
+              text: "DS 基礎教科書 9 章を歩いてきて、**Excel データ分析の主要技能** が揃いました。",
+            },
+            { type: "h3", text: "9 章の地図" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "**Ch1**: Excel 基礎 - 関数 + ピボットテーブル",
+                "**Ch2**: 可視化と分析 - グラフ + 回帰機能 + 統計推測",
+                "**Ch3**: データ準備とデータ品質",
+                "**Ch4**: 仮説検定とカテゴリ分析",
+                "**Ch5**: 時系列データを Excel で扱う",
+                "**Ch6**: 多変量データとピボット応用",
+                "**Ch7**: ダッシュボードと BI 連携",
+                "**Ch8**: Excel × プログラミングの連携",
+                "**Ch9**: 実務ケーススタディ",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 Excel = データサイエンスの『フォーマル言語』",
+              body: "Python・R は強力ですが、**経営層・営業・他部署への共有は Excel** が共通語。DS 基礎で身に付くのは『**結果を Excel で説明できる力**』 ─ これは現代でも変わらない実務スキルです。",
+            },
+          ],
+        },
+        {
+          id: "ch10-sec2",
+          number: "10.2",
+          title: "次のステップ ─ 進路選択",
+          blocks: [
+            {
+              type: "p",
+              text: "DS 基礎の次は、**目的に応じた専門化** が良いでしょう。",
+            },
+            { type: "h3", text: "進路 A: 統計理論を深める" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "[**統計検定 3 級**](/textbook/grade-3): 推定・検定の基礎理論",
+                "[**統計検定 2 級**](/textbook/grade-2): 大学レベルの応用統計",
+                "**準 1 級・1 級**: 実務応用・数理統計",
+              ],
+            },
+            { type: "h3", text: "進路 B: データサイエンスの全体像" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "[**DS 検定リテラシー**](/certs/ds-literacy/textbook): 3 軸スキルと最新 ML",
+                "[**プログラミング教科書**](/programming): Python・R・SQL・PyTorch",
+                "**Kaggle / SIGNATE**: 実データで腕試し",
+              ],
+            },
+            { type: "h3", text: "進路 C: AI / DL 系" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "[**G 検定**](/certs/g-test/textbook): AI 全般の知識",
+                "[**E 資格**](/certs/e-shikaku/textbook): DL 実装エンジニア向け",
+                "[**因果推論**](/causal-inference): 政策・経営判断",
+              ],
+            },
+            { type: "h3", text: "進路 D: 専門領域" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "[**QC 検定**](/certs/qc-kentei/textbook): 製造業の品質管理",
+                "[**統計調査士**](/certs/survey/textbook): 公的統計・調査設計",
+                "[**専門統計調査士**](/certs/survey-specialist/textbook): 標本設計の理論",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch10-sec3",
+          number: "10.3",
+          title: "学習継続のヒント",
+          blocks: [
+            {
+              type: "p",
+              text: "DS 基礎合格は『データ分析の入口』。**実務で活かしながら学び続ける** のが最も効率的です。",
+            },
+            { type: "h3", text: "実務で使える小さな目標" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "**毎月の業務データ** を Excel ピボットで集計してみる",
+                "**自分の家計簿** を可視化する",
+                "**SNS で公開されているデータ** を 1 つダウンロードして分析",
+                "**Kaggle Learn** の無料コースを 1 つ完走",
+                "**Power BI** か **Tableau Public** で 1 つダッシュボード作成",
+              ],
+            },
+            { type: "h3", text: "学習リソース" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**統計学会の DS 基礎公式テキスト**: 試験対策の本道",
+                "**公式問題集 + 過去問**: 出題パターンに慣れる",
+                "[**統計用語集**](/glossary): 477 語(2026 年現在)",
+                "[**統計図解集**](/figures): 50 種類の SVG 図解",
+                "[**統計計算ツール**](/tools): 17 種のオンライン計算機",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 統計の力は人生の意思決定にも",
+              body: "DS 基礎で学んだ統計の力は、業務だけでなく **人生の意思決定** にも使えます。健康診断結果の読み方・選挙速報の解釈・ニュースの数字の検証 ─ **統計リテラシーは現代の必修教養**。本書がその礎になれば幸いです。",
+            },
+            {
+              type: "p",
+              text: "DS 基礎合格、おめでとうございます。**データの世界の扉** を一緒に開きました。次の領域でもお会いしましょう。",
             },
           ],
         },
