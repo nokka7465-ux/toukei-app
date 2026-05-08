@@ -196,6 +196,26 @@ const CERT_TRACKS: Track[] = [
     emoji: "✨",
     accent: "bg-pink-500",
   },
+  {
+    href: "/certs/ds-expert/textbook",
+    title: "統計検定 DS エキスパート",
+    description:
+      "DS 系統計検定の最高峰。ベイズ・因果推論・MLOps まで含む実務型試験。",
+    audience: "中堅 DS / 分析リード",
+    chip: "DS Expert",
+    emoji: "🧠",
+    accent: "bg-emerald-600",
+  },
+  {
+    href: "/certs/python-data/textbook",
+    title: "Python データ分析試験",
+    description:
+      "PythonED 主催。NumPy / pandas / scikit-learn と機械学習基礎を問う登竜門。",
+    audience: "Python 派の分析初学者",
+    chip: "PyData",
+    emoji: "🐍",
+    accent: "bg-yellow-500",
+  },
 ];
 
 function TrackCard({ track }: { track: Track }) {

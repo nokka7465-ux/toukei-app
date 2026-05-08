@@ -173,6 +173,32 @@ const CERTS: Cert[] = [
     best: "全職種・AI 活用初心者",
     notes: "生成 AI を業務で使うリテラシー",
   },
+  {
+    slug: "/certs/ds-expert",
+    name: "DS エキスパート",
+    organizer: "日本統計学会",
+    fee: "10,000 円",
+    duration: "通年(CBT)",
+    format: "90 分 / 40 問",
+    difficulty: "★★★★★",
+    studyHours: "300〜500h",
+    pass: "約 30〜40%",
+    best: "中堅 DS / リード候補",
+    notes: "ベイズ ・ 因果 ・ MLOps まで",
+  },
+  {
+    slug: "/certs/python-data",
+    name: "Python データ分析試験",
+    organizer: "PythonED",
+    fee: "11,000 円",
+    duration: "通年(CBT)",
+    format: "60 分 / 40 問",
+    difficulty: "★★☆☆☆",
+    studyHours: "60〜100h",
+    pass: "約 80%",
+    best: "Python 派の分析初学者",
+    notes: "NumPy / pandas / sklearn",
+  },
 ];
 
 export default function ComparePage() {

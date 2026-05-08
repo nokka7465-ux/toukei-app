@@ -740,7 +740,7 @@ export default function Home() {
               データ・AI 系資格の代表的なパス。実務志向・調査志向・AI 概念・全方位リテラシー・生成 AI 活用から目的に応じて選べます。
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
               {
                 href: "/certs/ds-basic",
@@ -786,6 +786,24 @@ export default function Home() {
                 title: "生成AIパスポート",
                 description:
                   "GUGA 主催。生成 AI を業務で安全 / 効果的に使うリテラシーを問う、全職種向けの入門検定。30 〜 50 時間で取得可能。",
+              },
+              {
+                href: "/certs/ds-expert",
+                chip: "DS Expert",
+                emoji: "🧠",
+                accent: "bg-emerald-600",
+                title: "統計検定 DS エキスパート",
+                description:
+                  "DS 系統計検定の最高峰(統計学会)。ベイズ・因果推論・MLOps まで網羅する実務型試験。",
+              },
+              {
+                href: "/certs/python-data",
+                chip: "PyData",
+                emoji: "🐍",
+                accent: "bg-yellow-500",
+                title: "Python データ分析",
+                description:
+                  "PythonED 主催。NumPy / pandas / scikit-learn とML 基礎を問う、データ分析エンジニアの登竜門。",
               },
             ].map((cert) => (
               <Link

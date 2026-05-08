@@ -448,6 +448,133 @@ export const certRoadmaps: Record<string, CertRoadmap> = {
     textbookHref: "/certs/genai-passport/textbook",
     quizHref: "/certs/genai-passport/quiz",
   },
+  "ds-expert": {
+    slug: "ds-expert",
+    title: "統計検定 DS エキスパート 学習ロードマップ",
+    organizer: "日本統計学会",
+    hours: "300〜500 時間",
+    months: "6〜10 ヶ月",
+    prerequisites: "統計検定 2 級・準 1 級 + Python(pandas/scikit-learn)操作経験",
+    passCriteria: "おおむね 100 点満点中 60 点(参考)",
+    steps: [
+      {
+        week: "Month 1",
+        title: "統計理論の補強",
+        description:
+          "統計検定 2 級・準 1 級の取りこぼし範囲を補強。GLM ・ 多変量解析 ・ ブートストラップ ・ 多重検定の基礎まで。",
+        links: [
+          { href: "/certs/ds-expert/textbook", label: "DS エキスパート 教科書(章 1-3)" },
+          { href: "/textbook/grade-2", label: "統計検定 2 級 教科書" },
+          { href: "/textbook/grade-pre1", label: "統計検定 準 1 級 教科書" },
+        ],
+      },
+      {
+        week: "Month 2-3",
+        title: "機械学習(scikit-learn)",
+        description:
+          "教師あり / 教師なし ・ 評価指標 ・ ハイパーパラメータ ・ Tree 系 ・ NN 概要。Jupyter で実機演習。",
+        links: [
+          { href: "/certs/ds-expert/textbook", label: "DS エキスパート 教科書(章 4-5)" },
+          { href: "/blog/sklearn-introduction", label: "scikit-learn 入門" },
+        ],
+      },
+      {
+        week: "Month 4",
+        title: "ベイズ + 時系列",
+        description:
+          "MCMC ・ 階層モデル ・ ARIMA ・ 状態空間。Stan / PyMC / statsmodels を一度は触る。",
+        links: [
+          { href: "/certs/ds-expert/textbook", label: "DS エキスパート 教科書(章 6-7)" },
+        ],
+      },
+      {
+        week: "Month 5",
+        title: "因果推論",
+        description:
+          "DAG ・ 潜在結果 ・ DID ・ 傾向スコア ・ IV ・ RDD。設計の判断ができるレベルまで。",
+        links: [
+          { href: "/certs/ds-expert/textbook", label: "DS エキスパート 教科書(章 8)" },
+          { href: "/causal-inference", label: "因果推論ハブ" },
+        ],
+      },
+      {
+        week: "Month 6",
+        title: "DE + MLOps + 演習",
+        description:
+          "SQL 中級 ・ ETL/ELT ・ 特徴量ストア ・ ドリフト検出。仕上げに演習問題を一周。",
+        links: [
+          { href: "/certs/ds-expert/textbook", label: "DS エキスパート 教科書(章 9-10)" },
+          { href: "/certs/ds-expert/quiz", label: "DS エキスパート 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/ds-expert/textbook",
+    quizHref: "/certs/ds-expert/quiz",
+  },
+  "python-data": {
+    slug: "python-data",
+    title: "Python データ分析試験 学習ロードマップ",
+    organizer: "PythonED(Python エンジニア育成推進協会)",
+    hours: "60〜100 時間",
+    months: "1〜2 ヶ月",
+    prerequisites: "Python 文法の基本 ・ 中学〜高校レベルの数学",
+    passCriteria: "正答率 70%(40 問中 28 問以上)",
+    steps: [
+      {
+        week: "Week 1",
+        title: "Python 文法 + 環境",
+        description:
+          "内包表記・lambda・可変デフォルト引数の罠・venv/pip/Jupyter を確認。",
+        links: [
+          { href: "/certs/python-data/textbook", label: "Python データ分析 教科書(章 1-2)" },
+          { href: "/programming", label: "プログラミング入門" },
+        ],
+      },
+      {
+        week: "Week 2-3",
+        title: "NumPy + pandas + Matplotlib",
+        description:
+          "ndarray の shape / axis / ブロードキャスト、loc/iloc、merge、subplot を Jupyter で動かしながら学習。",
+        links: [
+          { href: "/certs/python-data/textbook", label: "Python データ分析 教科書(章 3-5)" },
+          { href: "/blog/pandas-tips-for-ml", label: "Pandas 実務 Tips" },
+        ],
+      },
+      {
+        week: "Week 4",
+        title: "scikit-learn 基礎",
+        description:
+          "fit / predict / transform、Pipeline、GridSearchCV を実装パターンとして覚える。",
+        links: [
+          { href: "/certs/python-data/textbook", label: "Python データ分析 教科書(章 6)" },
+          { href: "/blog/sklearn-introduction", label: "scikit-learn 入門" },
+        ],
+      },
+      {
+        week: "Week 5",
+        title: "ML モデル + 評価",
+        description:
+          "回帰 / 分類 / クラスタリングの主要モデル、評価指標(分類 / 回帰)、CV を整理。",
+        links: [
+          { href: "/certs/python-data/textbook", label: "Python データ分析 教科書(章 7-8)" },
+        ],
+      },
+      {
+        week: "Week 6",
+        title: "数学 + 応用 + 演習",
+        description:
+          "数学の基礎(内積・偏微分・正規分布)+ scikit-image / NLP の入口 + 演習。",
+        links: [
+          { href: "/certs/python-data/textbook", label: "Python データ分析 教科書(章 9-10)" },
+          { href: "/certs/python-data/quiz", label: "Python データ分析 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/python-data/textbook",
+    quizHref: "/certs/python-data/quiz",
+  },
 };
 
 export const certSlugs = Object.keys(certRoadmaps);

@@ -15,6 +15,8 @@ import { eShikakuQuestions } from "@/data/questions/e-shikaku";
 import { qcKenteiQuestions } from "@/data/questions/qc-kentei";
 import { surveySpecialistQuestions } from "@/data/questions/survey-specialist";
 import { genaiPassportQuestions } from "@/data/questions/genai-passport";
+import { dsExpertQuestions } from "@/data/questions/ds-expert";
+import { pythonDataQuestions } from "@/data/questions/python-data";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -59,6 +61,8 @@ const CERT_TRACKS: Track[] = [
   { href: "/certs/ds-literacy/quiz", title: "データサイエンティスト検定", count: dsLiteracyQuestions.length, description: "DS / DE / ビジネス力 3 軸" },
   { href: "/certs/qc-kentei/quiz", title: "QC検定(品質管理検定)", count: qcKenteiQuestions.length, description: "管理図・抜取検査・QC 7 つ道具" },
   { href: "/certs/genai-passport/quiz", title: "生成AIパスポート(GUGA)", count: genaiPassportQuestions.length, description: "LLM・プロンプト・リスク・倫理" },
+  { href: "/certs/ds-expert/quiz", title: "統計検定 DS エキスパート", count: dsExpertQuestions.length, description: "高度統計 ・ ML ・ ベイズ ・ 因果推論 ・ MLOps" },
+  { href: "/certs/python-data/quiz", title: "Python データ分析試験(PythonED)", count: pythonDataQuestions.length, description: "NumPy / pandas / Matplotlib / scikit-learn" },
 ];
 
 function TrackCard({ track }: { track: Track }) {

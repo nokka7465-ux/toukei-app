@@ -249,6 +249,40 @@ const RELATED_EXAMS: Exam[] = [
     highlight:
       "生成 AI を業務で安全 / 効果的に使うリテラシーを問う、全職種向けの入門検定。30 〜 50 時間で取得可能。",
   },
+  {
+    id: "ds-expert",
+    title: "統計検定 DS エキスパート",
+    organizer: "日本統計学会",
+    format: "CBT 方式(全国の試験会場で随時)",
+    schedule: "通年",
+    duration: "90 分 / 約 40 問",
+    fee: "一般 10,000 円 / 学割 6,000 円(税込・参考)",
+    passCriteria: "おおむね 100 点満点中 60 点以上(参考)",
+    passRate: "おおむね 30 〜 40%",
+    takers: "1 回あたり数百名規模",
+    officialUrl: "https://www.toukei-kentei.jp/exam/ds-expert/",
+    studyHref: "/certs/ds-expert",
+    studyLabel: "DS エキスパートの教科書を見る",
+    highlight:
+      "DS 系統計検定の最高峰。ベイズ ・ 因果推論 ・ MLOps まで含む実務型試験。",
+  },
+  {
+    id: "python-data",
+    title: "Python 3 エンジニア認定 データ分析試験",
+    organizer: "PythonED(Python エンジニア育成推進協会)",
+    format: "CBT 方式(全国の試験会場で随時)",
+    schedule: "通年",
+    duration: "60 分 / 40 問(4 択選択式)",
+    fee: "一般 11,000 円 / 学割 5,500 円(税込・参考)",
+    passCriteria: "正答率 70% 以上(28 問以上正解)",
+    passRate: "おおむね 80% 前後",
+    takers: "年間およそ 4,000〜6,000 名",
+    officialUrl: "https://www.pythonic-exam.com/exam/analyst",
+    studyHref: "/certs/python-data",
+    studyLabel: "Python データ分析の教科書を見る",
+    highlight:
+      "NumPy / pandas / Matplotlib / scikit-learn と機械学習の基礎を測る、データ分析の登竜門。",
+  },
 ];
 
 function ExamCard({ exam }: { exam: Exam }) {
