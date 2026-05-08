@@ -28,6 +28,8 @@ import { dxKenteiQuestions } from "@/data/questions/dx-kentei";
 import { awsSaaQuestions } from "@/data/questions/aws-saa";
 import { itPassportQuestions } from "@/data/questions/it-passport";
 import { powerBiQuestions } from "@/data/questions/power-bi";
+import { tableauSpecialistQuestions } from "@/data/questions/tableau-specialist";
+import { azureAi102Questions } from "@/data/questions/azure-ai-102";
 
 export type Track = {
   key: string;
@@ -67,6 +69,8 @@ export const tracks: Track[] = [
   { key: "aws-saa", label: "AWS SAA", href: "/certs/aws-saa/quiz", group: "cert", questions: awsSaaQuestions },
   { key: "it-passport", label: "ITパスポート", href: "/certs/it-passport/quiz", group: "cert", questions: itPassportQuestions },
   { key: "power-bi", label: "Power BI(PL-300)", href: "/certs/power-bi/quiz", group: "cert", questions: powerBiQuestions },
+  { key: "tableau-specialist", label: "Tableau Specialist", href: "/certs/tableau-specialist/quiz", group: "cert", questions: tableauSpecialistQuestions },
+  { key: "azure-ai-102", label: "Azure AI-102", href: "/certs/azure-ai-102/quiz", group: "cert", questions: azureAi102Questions },
 ];
 
 export type EnrichedQuestion = Question & {

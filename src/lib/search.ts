@@ -28,6 +28,8 @@ import { dxKenteiTextbook } from "@/data/textbooks/dx-kentei";
 import { awsSaaTextbook } from "@/data/textbooks/aws-saa";
 import { itPassportTextbook } from "@/data/textbooks/it-passport";
 import { powerBiTextbook } from "@/data/textbooks/power-bi";
+import { tableauSpecialistTextbook } from "@/data/textbooks/tableau-specialist";
+import { azureAi102Textbook } from "@/data/textbooks/azure-ai-102";
 import { glossary } from "@/data/glossary";
 import { blogPosts } from "@/data/blog";
 import { introFormulas } from "@/data/formulas/intro";
@@ -128,6 +130,8 @@ export const searchIndex: SearchItem[] = (() => {
     { book: awsSaaTextbook, urlBase: "/certs/aws-saa/textbook", displayTitle: "AWS SAA" },
     { book: itPassportTextbook, urlBase: "/certs/it-passport/textbook", displayTitle: "ITパスポート" },
     { book: powerBiTextbook, urlBase: "/certs/power-bi/textbook", displayTitle: "Power BI" },
+    { book: tableauSpecialistTextbook, urlBase: "/certs/tableau-specialist/textbook", displayTitle: "Tableau Specialist" },
+    { book: azureAi102Textbook, urlBase: "/certs/azure-ai-102/textbook", displayTitle: "Azure AI-102" },
   ];
   for (const { book, urlBase, displayTitle } of textbookSets) {
     for (const ch of book.chapters) {

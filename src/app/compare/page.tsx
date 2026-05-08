@@ -355,6 +355,32 @@ const CERTS: Cert[] = [
     best: "BI 開発者 ・ アナリスト",
     notes: "Power Query / DAX / Fabric",
   },
+  {
+    slug: "/certs/tableau-specialist",
+    name: "Tableau Desktop Specialist",
+    organizer: "Salesforce(Tableau)",
+    fee: "100 USD",
+    duration: "通年",
+    format: "60 分 / 45 問",
+    difficulty: "★★☆☆☆",
+    studyHours: "40〜80h",
+    pass: "約 75%",
+    best: "BI 入門 ・ 欧米系志向",
+    notes: "有効期限なし(永続)",
+  },
+  {
+    slug: "/certs/azure-ai-102",
+    name: "Azure AI-102",
+    organizer: "Microsoft",
+    fee: "約 21,000 円",
+    duration: "通年(CBT)",
+    format: "100 分 / 40-60 問",
+    difficulty: "★★★★☆",
+    studyHours: "120〜200h",
+    pass: "公開なし",
+    best: "Azure AI 開発者",
+    notes: "Azure OpenAI / AI Search / Foundry",
+  },
 ];
 
 export default function ComparePage() {

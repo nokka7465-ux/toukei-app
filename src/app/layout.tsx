@@ -34,7 +34,7 @@ const SITE_NAME = "統計ロードマップ";
 const SITE_TAGLINE =
   "AIエンジニアになるための統計・数学・Python を一気通貫で学ぶ";
 const SITE_DESCRIPTION =
-  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。統計検定 4 級〜1 級・G検定・E資格・DS検定・QC検定・生成AIパスポート・DS エキスパート・Python データ分析試験・AI 実装検定・画像処理エンジニア検定・ITパスポート/基本情報/応用情報/データベーススペシャリスト・DX 検定・AWS AI Practitioner/SAA・Azure AI Fundamentals・GCP Generative AI Leader・Power BI(PL-300)など関連検定も網羅。インタラクティブ図解・統計計算ツール・Python/R コード併記で、理論から実装までスムーズに繋がる学習ロードマップを提供。";
+  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。統計検定 4 級〜1 級・G検定・E資格・DS検定・QC検定・生成AIパスポート・DS エキスパート・Python データ分析試験・AI 実装検定・画像処理エンジニア検定・ITパスポート/基本情報/応用情報/データベーススペシャリスト・DX 検定・AWS AI Practitioner/SAA・Azure AI Fundamentals/AI-102・GCP Generative AI Leader・Power BI(PL-300)・Tableau Desktop Specialist など関連検定も網羅。インタラクティブ図解・統計計算ツール・Python/R コード併記で、理論から実装までスムーズに繋がる学習ロードマップを提供。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -119,6 +119,12 @@ export const metadata: Metadata = {
     "DAX",
     "Power Query",
     "Microsoft Fabric",
+    "Tableau",
+    "Tableau Desktop Specialist",
+    "LOD",
+    "AI-102",
+    "Azure AI Engineer",
+    "Azure AI Foundry",
   ],
   openGraph: {
     type: "website",
@@ -586,6 +592,16 @@ export default function RootLayout({
                   <li>
                     <Link href="/certs/power-bi" className="hover:underline text-[var(--muted-strong)]">
                       Power BI(PL-300)
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/tableau-specialist" className="hover:underline text-[var(--muted-strong)]">
+                      Tableau Desktop Specialist
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/azure-ai-102" className="hover:underline text-[var(--muted-strong)]">
+                      Azure AI Engineer(AI-102)
                     </Link>
                   </li>
                 </ul>

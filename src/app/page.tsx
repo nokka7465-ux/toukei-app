@@ -913,6 +913,24 @@ export default function Home() {
                 description:
                   "Microsoft の BI 系 Associate 認定。Power Query / DAX / 可視化 / Fabric / Copilot を網羅。",
               },
+              {
+                href: "/certs/tableau-specialist",
+                chip: "Tableau",
+                emoji: "🌊",
+                accent: "bg-blue-700",
+                title: "Tableau Desktop Specialist",
+                description:
+                  "Power BI と並ぶ BI 認定の双璧。LOD ・ ダッシュボード ・ Analytics を網羅。有効期限なし。",
+              },
+              {
+                href: "/certs/azure-ai-102",
+                chip: "AI-102",
+                emoji: "🤖",
+                accent: "bg-indigo-600",
+                title: "Azure AI-102",
+                description:
+                  "Microsoft の AI Engineer Associate。AI-900 の上位、Azure OpenAI / Search / Foundry の実装力を測る。",
+              },
             ].map((cert) => (
               <Link
                 key={cert.href}

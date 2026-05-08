@@ -415,6 +415,50 @@ export const certFaq: Record<string, FaqItem[]> = {
       a: "PL-300 → **DP-600(Microsoft Fabric Analytics Engineer Associate)** または **DP-700(Fabric Data Engineer Associate)** で Microsoft の最新データ統合プラットフォームを深掘りするのが王道。",
     },
   ],
+  "tableau-specialist": [
+    {
+      q: "Tableau Desktop Specialist とは?",
+      a: "**Salesforce(Tableau)** が提供する BI ツール認定の **エントリーレベル**。Tableau Desktop の基本操作 ・ データ接続 ・ 可視化 ・ 計算 ・ 分析 ・ 共有を扱い、**Microsoft Power BI(PL-300)と並ぶ BI 認定の双璧**。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**オンライン監督受験 / 45 問 / 60 分 / 多肢選択 + ハンズオン形式 / 合格 約 75%(参考) / 受験料 100 USD / 有効期限なし(永続)**。スピード勝負で 1 問 80 秒のペース感覚が必要。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "Excel / SQL に慣れている人で **30 〜 50 時間**、未経験者で **40 〜 80 時間**。**Tableau eLearning(無料)+ サンプルデータ Superstore** での実機演習が王道。",
+    },
+    {
+      q: "Power BI(PL-300)との違いは?",
+      a: "**Tableau は汎用 ・ 高度可視化 ・ 欧米系企業で強い**、**Power BI は Microsoft 365 統合に強い**。両者は競合するベンダー認定で、**両方持つと希少な BI スキル証明** に。本サイトの[Power BI](/certs/power-bi)も併用がおすすめ。",
+    },
+    {
+      q: "次のステップは?",
+      a: "Specialist → **Tableau Certified Data Analyst**(中級)が王道。Server 系なら **Server Certified Associate** へ進むキャリアパスも。",
+    },
+  ],
+  "azure-ai-102": [
+    {
+      q: "Microsoft AI-102(Azure AI Engineer Associate)とは?",
+      a: "**Azure AI Fundamentals(AI-900)の上位** に位置する Microsoft 認定の Associate レベル。Azure OpenAI / AI Search / Cognitive Services / AI Foundry を **設計 ・ 実装 ・ デプロイ ・ 運用 ・ 監視** する技術者向け。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**CBT(Pearson VUE)or オンライン監督受験 / 約 40 〜 60 問 / 100 分 / 選択式 + ケーススタディ + コード補完 / 合格 700 / 1000 点**。**Python / C# / REST API / JSON / Git** が前提知識。",
+    },
+    {
+      q: "AI-900 との違いは?",
+      a: "**AI-900 は概念 ・ サービス選択中心**(コードなし)、**AI-102 はコード実装 ・ デプロイ ・ 監視まで**。AI-900 → AI-102 と段階的に取得するのが王道。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "AI-900 合格者で **120 〜 150 時間**、未経験者で **150 〜 250 時間**。**Microsoft Learn の AI-102 ラーニングパス + Azure 無料アカウント**(200 USD クレジット + 12 ヶ月無料)で実機ハンズオンが必須。",
+    },
+    {
+      q: "次のステップは?",
+      a: "AI-102 → **DP-100(Azure Data Scientist Associate)** で ML 寄りに、または **DP-203(Azure Data Engineer Associate)** でデータ基盤側へ。**AZ-305(Solutions Architect Expert)** で全体アーキテクトに進む道もあります。",
+    },
+  ],
   "qc-kentei": [
     {
       q: "QC検定の各級の難易度は?",

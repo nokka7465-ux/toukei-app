@@ -1360,6 +1360,152 @@ export const certRoadmaps: Record<string, CertRoadmap> = {
     textbookHref: "/certs/power-bi/textbook",
     quizHref: "/certs/power-bi/quiz",
   },
+  "tableau-specialist": {
+    slug: "tableau-specialist",
+    title: "Tableau Desktop Specialist 学習ロードマップ",
+    organizer: "Salesforce(Tableau)",
+    hours: "40〜80 時間",
+    months: "1〜2 ヶ月",
+    prerequisites: "Excel / SQL の基本",
+    passCriteria: "約 75%(参考)",
+    steps: [
+      {
+        week: "Week 1",
+        title: "Tableau Desktop インストール + 基本操作",
+        description:
+          "Public 版 or 14 日トライアル。サンプル Superstore で操作。",
+        links: [
+          { href: "/certs/tableau-specialist/textbook", label: "Tableau 教科書(章 2)" },
+        ],
+      },
+      {
+        week: "Week 2",
+        title: "データ接続 + Relationships",
+        description:
+          "Live vs Extract / Joins / Unions / Pivot。",
+        links: [
+          { href: "/certs/tableau-specialist/textbook", label: "Tableau 教科書(章 3)" },
+        ],
+      },
+      {
+        week: "Week 3",
+        title: "Show Me + Marks + ダッシュボード",
+        description:
+          "主要チャート / Dual Axis / Filter Action / Story。",
+        links: [
+          { href: "/certs/tableau-specialist/textbook", label: "Tableau 教科書(章 4-5)" },
+        ],
+      },
+      {
+        week: "Week 4",
+        title: "計算 + LOD + パラメータ",
+        description:
+          "FIXED/INCLUDE/EXCLUDE / Time Intelligence / Quick Table Calc。",
+        links: [
+          { href: "/certs/tableau-specialist/textbook", label: "Tableau 教科書(章 6-7)" },
+        ],
+      },
+      {
+        week: "Week 5",
+        title: "フィルター + Analytics + 共有",
+        description:
+          "フィルタ実行順序 / Set / Forecast / Cluster / Tableau Public。",
+        links: [
+          { href: "/certs/tableau-specialist/textbook", label: "Tableau 教科書(章 8-10)" },
+        ],
+      },
+      {
+        week: "Week 6",
+        title: "模擬試験 + 過去問",
+        description:
+          "Tableau eLearning + 本サイト演習で出題傾向を体感。",
+        links: [
+          { href: "/certs/tableau-specialist/quiz", label: "Tableau 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/tableau-specialist/textbook",
+    quizHref: "/certs/tableau-specialist/quiz",
+  },
+  "azure-ai-102": {
+    slug: "azure-ai-102",
+    title: "Microsoft AI-102 学習ロードマップ",
+    organizer: "Microsoft",
+    hours: "120〜200 時間",
+    months: "2〜4 ヶ月",
+    prerequisites: "AI-900 合格相当 + Python or C# + REST API + JSON + Git",
+    passCriteria: "1000 点満点中 700 点",
+    steps: [
+      {
+        week: "Week 1-2",
+        title: "AI-900 範囲復習 + リソース管理",
+        description:
+          "Cognitive Services リソース / Subscription Key vs Entra ID / Container Deploy。",
+        links: [
+          { href: "/certs/azure-ai-102/textbook", label: "AI-102 教科書(章 2)" },
+          { href: "/certs/azure-ai-900/textbook", label: "AI-900 教科書(復習)" },
+        ],
+      },
+      {
+        week: "Week 3-4",
+        title: "Azure OpenAI + Foundry",
+        description:
+          "GPT-4o デプロイ / SDK / PTU / Function Calling / Prompt Flow / Fine-tuning。",
+        links: [
+          { href: "/certs/azure-ai-102/textbook", label: "AI-102 教科書(章 3, 7)" },
+        ],
+      },
+      {
+        week: "Week 5",
+        title: "RAG + AI Search",
+        description:
+          "ハイブリッド検索 / Semantic Ranker / RAG パイプライン 9 段 / AI Enrichment。",
+        links: [
+          { href: "/certs/azure-ai-102/textbook", label: "AI-102 教科書(章 4)" },
+        ],
+      },
+      {
+        week: "Week 6",
+        title: "Vision + Document Intelligence",
+        description:
+          "AI Vision / Custom Vision / Face / Document Intelligence の実装。",
+        links: [
+          { href: "/certs/azure-ai-102/textbook", label: "AI-102 教科書(章 5)" },
+        ],
+      },
+      {
+        week: "Week 7",
+        title: "Language + Speech + CLU",
+        description:
+          "AI Language / Translator / Speech / CLU / Orchestration Workflow。",
+        links: [
+          { href: "/certs/azure-ai-102/textbook", label: "AI-102 教科書(章 6)" },
+        ],
+      },
+      {
+        week: "Week 8",
+        title: "Agent + Content Safety + デプロイ",
+        description:
+          "AI Agent Service / Content Safety / Prompt Shields / App Service / Functions。",
+        links: [
+          { href: "/certs/azure-ai-102/textbook", label: "AI-102 教科書(章 7-9)" },
+        ],
+      },
+      {
+        week: "Week 9-10",
+        title: "模擬試験 + 過去問",
+        description:
+          "Microsoft Learn の練習問題 + 本サイト演習問題で出題傾向を体感。",
+        links: [
+          { href: "/certs/azure-ai-102/quiz", label: "AI-102 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/azure-ai-102/textbook",
+    quizHref: "/certs/azure-ai-102/quiz",
+  },
 };
 
 export const certSlugs = Object.keys(certRoadmaps);

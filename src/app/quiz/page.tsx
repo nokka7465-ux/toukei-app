@@ -29,6 +29,8 @@ import { dxKenteiQuestions } from "@/data/questions/dx-kentei";
 import { awsSaaQuestions } from "@/data/questions/aws-saa";
 import { itPassportQuestions } from "@/data/questions/it-passport";
 import { powerBiQuestions } from "@/data/questions/power-bi";
+import { tableauSpecialistQuestions } from "@/data/questions/tableau-specialist";
+import { azureAi102Questions } from "@/data/questions/azure-ai-102";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -87,6 +89,8 @@ const CERT_TRACKS: Track[] = [
   { href: "/certs/aws-saa/quiz", title: "AWS Solutions Architect Associate", count: awsSaaQuestions.length, description: "EC2 / S3 / RDS / DynamoDB / VPC / Auto Scaling / DR" },
   { href: "/certs/it-passport/quiz", title: "ITパスポート試験(IPA)", count: itPassportQuestions.length, description: "ストラテジ ・ マネジメント ・ テクノロジ 3 分野" },
   { href: "/certs/power-bi/quiz", title: "Microsoft Power BI(PL-300)", count: powerBiQuestions.length, description: "Power Query ・ DAX ・ ビジュアル ・ Fabric ・ Copilot" },
+  { href: "/certs/tableau-specialist/quiz", title: "Tableau Desktop Specialist", count: tableauSpecialistQuestions.length, description: "ピル ・ LOD ・ Marks ・ ダッシュボード ・ Analytics" },
+  { href: "/certs/azure-ai-102/quiz", title: "Microsoft Azure AI-102", count: azureAi102Questions.length, description: "Azure OpenAI ・ AI Search ・ RAG ・ Foundry ・ Agent" },
 ];
 
 function TrackCard({ track }: { track: Track }) {

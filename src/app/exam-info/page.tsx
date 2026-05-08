@@ -487,6 +487,40 @@ const RELATED_EXAMS: Exam[] = [
     highlight:
       "BI 系 Associate 認定の代表格。Power Query / DAX / Microsoft Fabric / Copilot を測る実機操作型試験。",
   },
+  {
+    id: "tableau-specialist",
+    title: "Tableau Desktop Specialist",
+    organizer: "Salesforce(Tableau)",
+    format: "オンライン監督受験",
+    schedule: "通年(随時)",
+    duration: "60 分 / 45 問",
+    fee: "100 USD(参考)",
+    passCriteria: "約 75%(参考)",
+    passRate: "Tableau 非公開",
+    takers: "全世界で大規模",
+    officialUrl: "https://www.tableau.com/learn/certification/desktop-specialist",
+    studyHref: "/certs/tableau-specialist",
+    studyLabel: "Tableau Desktop Specialist の教科書を見る",
+    highlight:
+      "BI 系認定の双璧。Power BI と並ぶ実機操作型試験で、有効期限なし(永続)が特徴。",
+  },
+  {
+    id: "azure-ai-102",
+    title: "Microsoft Azure AI Engineer Associate(AI-102)",
+    organizer: "Microsoft",
+    format: "CBT(Pearson VUE)or オンライン監督受験",
+    schedule: "通年(随時)",
+    duration: "100 分 / 約 40 〜 60 問",
+    fee: "約 21,000 円(165 USD、参考)",
+    passCriteria: "1000 点満点中 700 点",
+    passRate: "Microsoft 非公開",
+    takers: "全世界で大規模",
+    officialUrl: "https://learn.microsoft.com/ja-jp/credentials/certifications/azure-ai-engineer/",
+    studyHref: "/certs/azure-ai-102",
+    studyLabel: "Azure AI-102 の教科書を見る",
+    highlight:
+      "AI-900 の上位、Azure AI を実装する技術者向け。Python / C# によるコード実装力を測る。",
+  },
 ];
 
 function ExamCard({ exam }: { exam: Exam }) {

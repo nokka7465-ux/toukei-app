@@ -40,6 +40,8 @@ export const CERT_PRESETS: CertPreset[] = [
   { key: "aws-saa", label: "AWS Solutions Architect Associate", href: "/certs/aws-saa", hours: 150 },
   { key: "it-passport", label: "ITパスポート試験", href: "/certs/it-passport", hours: 150 },
   { key: "power-bi", label: "Microsoft Power BI(PL-300)", href: "/certs/power-bi", hours: 90 },
+  { key: "tableau-specialist", label: "Tableau Desktop Specialist", href: "/certs/tableau-specialist", hours: 60 },
+  { key: "azure-ai-102", label: "Microsoft AI-102", href: "/certs/azure-ai-102", hours: 160 },
 ];
 
 export type ExamTarget = {

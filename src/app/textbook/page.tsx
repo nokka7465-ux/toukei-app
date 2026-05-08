@@ -336,6 +336,26 @@ const CERT_TRACKS: Track[] = [
     emoji: "📊",
     accent: "bg-yellow-600",
   },
+  {
+    href: "/certs/tableau-specialist/textbook",
+    title: "Tableau Desktop Specialist",
+    description:
+      "Power BI と並ぶ BI 認定の双璧。Tableau の基本 ・ LOD ・ ダッシュボード ・ Analytics を網羅。",
+    audience: "BI 開発者 ・ 欧米系志向",
+    chip: "Tableau",
+    emoji: "🌊",
+    accent: "bg-blue-700",
+  },
+  {
+    href: "/certs/azure-ai-102/textbook",
+    title: "Microsoft Azure AI-102",
+    description:
+      "Azure AI Engineer Associate。AI-900 の上位、Azure OpenAI / AI Search / Foundry を実装する技術者向け。",
+    audience: "Azure AI 開発者",
+    chip: "AI-102",
+    emoji: "🤖",
+    accent: "bg-indigo-600",
+  },
 ];
 
 function TrackCard({ track }: { track: Track }) {
