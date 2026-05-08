@@ -194,43 +194,109 @@ export default function RootLayout({
                       <polyline points="6 9 12 15 18 9" />
                     </svg>
                   </summary>
-                  <div className="absolute right-0 top-full mt-2 paper rounded-lg p-2 grid grid-cols-2 gap-1 min-w-[300px] shadow-lg z-20 border border-[var(--page-border-strong)]">
-                    <Link href="/about-ai" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs" title="AI とは何か - 5 分で分かる入門">
-                      AI とは
-                    </Link>
-                    <Link href="/score" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs" title="統計偏差値診断 - 15 問で実力測定">
-                      偏差値診断
-                    </Link>
-                    <Link href="/diagnose" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
-                      級診断
-                    </Link>
-                    <Link href="/plan" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs" title="目標日までの学習プランを逆算">
-                      学習プラン
-                    </Link>
-                    <Link href="/math" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs" title="統計のための数学基礎">
-                      数学基礎
-                    </Link>
-                    <Link href="/figures" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
-                      図解で学ぶ統計
-                    </Link>
-                    <Link href="/glossary" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
-                      用語集
-                    </Link>
-                    <Link href="/blog" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
-                      ブログ
-                    </Link>
-                    <Link href="/review" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs" title="間違えた問題だけを集めた復習リスト">
-                      復習
-                    </Link>
-                    <Link href="/flashcards" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs" title="統計用語の暗記カード">
-                      暗記カード
-                    </Link>
-                    <Link href="/cheatsheet" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
-                      公式チートシート
-                    </Link>
-                    <Link href="/exam-info" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
-                      受験情報まとめ
-                    </Link>
+                  <div className="absolute right-0 top-full mt-2 paper rounded-lg p-3 shadow-lg z-20 border border-[var(--page-border-strong)] min-w-[460px] grid grid-cols-2 gap-x-4 gap-y-3">
+                    {/* 列1: 診断 + 入門 */}
+                    <div>
+                      <div className="text-[10px] uppercase tracking-[0.15em] text-[var(--muted)] font-bold mb-1.5 px-2">
+                        診断・入門
+                      </div>
+                      <ul className="space-y-0.5">
+                        <li>
+                          <Link href="/score" className="block px-2 py-1.5 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                            🎯 統計偏差値診断
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/diagnose" className="block px-2 py-1.5 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                            級診断(3 問)
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/about-ai" className="block px-2 py-1.5 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                            AI とは(5 分入門)
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/plan" className="block px-2 py-1.5 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                            学習プラン計算
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                    {/* 列1下段: 学習サポート */}
+                    <div>
+                      <div className="text-[10px] uppercase tracking-[0.15em] text-[var(--muted)] font-bold mb-1.5 px-2">
+                        学習・参照
+                      </div>
+                      <ul className="space-y-0.5">
+                        <li>
+                          <Link href="/math" className="block px-2 py-1.5 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                            数学基礎
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/figures" className="block px-2 py-1.5 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                            図解で学ぶ統計
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/glossary" className="block px-2 py-1.5 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                            用語集
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/cheatsheet" className="block px-2 py-1.5 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                            公式チートシート
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                    {/* 列2: 演習・復習 */}
+                    <div>
+                      <div className="text-[10px] uppercase tracking-[0.15em] text-[var(--muted)] font-bold mb-1.5 px-2">
+                        演習・復習
+                      </div>
+                      <ul className="space-y-0.5">
+                        <li>
+                          <Link href="/review" className="block px-2 py-1.5 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                            苦手復習
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/flashcards" className="block px-2 py-1.5 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                            暗記カード
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/exam-info" className="block px-2 py-1.5 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                            受験情報まとめ
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                    {/* 列2下段: 読み物 */}
+                    <div>
+                      <div className="text-[10px] uppercase tracking-[0.15em] text-[var(--muted)] font-bold mb-1.5 px-2">
+                        読み物
+                      </div>
+                      <ul className="space-y-0.5">
+                        <li>
+                          <Link href="/blog" className="block px-2 py-1.5 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                            ブログ
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/programming" className="block px-2 py-1.5 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                            プログラミング
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/causal-inference" className="block px-2 py-1.5 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
+                            因果推論
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </details>
               </nav>

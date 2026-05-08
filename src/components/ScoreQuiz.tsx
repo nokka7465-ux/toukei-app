@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { MixedText } from "@/components/MixedText";
 
 type ScoreQuestion = {
   id: string;
@@ -526,10 +527,9 @@ export function ScoreQuiz() {
 
         {/* 設問 */}
         <article className="paper rounded-xl p-6">
-          <div
-            className="text-base leading-relaxed mb-4"
-            dangerouslySetInnerHTML={{ __html: q.question.replace(/\$([^$]+)\$/g, "<code>$1</code>") }}
-          />
+          <div className="text-base leading-relaxed mb-4">
+            <MixedText text={q.question} />
+          </div>
           <div className="space-y-2">
             {q.choices.map((c, i) => {
               const isSelected = userAnswer === i;
@@ -557,11 +557,7 @@ export function ScoreQuiz() {
                   >
                     {String.fromCharCode(65 + i)}.
                   </span>
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: c.replace(/\$([^$]+)\$/g, "<code>$1</code>"),
-                    }}
-                  />
+                  <MixedText text={c} />
                 </button>
               );
             })}
@@ -569,11 +565,7 @@ export function ScoreQuiz() {
           {showExplanation && userAnswer !== null && (
             <div className="mt-4 p-4 rounded-lg bg-[var(--background)] border border-[var(--page-border)] text-xs ui-sans leading-relaxed">
               <span className="font-bold text-[var(--link)]">解説: </span>
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: q.explanation.replace(/\$([^$]+)\$/g, "<code>$1</code>"),
-                }}
-              />
+              <MixedText text={q.explanation} />
             </div>
           )}
         </article>
