@@ -199,6 +199,32 @@ const CERTS: Cert[] = [
     best: "Python 派の分析初学者",
     notes: "NumPy / pandas / sklearn",
   },
+  {
+    slug: "/certs/ai-implementation",
+    name: "AI 実装検定 A 級",
+    organizer: "エッジ AI 協会",
+    fee: "14,850 円",
+    duration: "通年(IBT)",
+    format: "60 分 / 60 問",
+    difficulty: "★★★☆☆",
+    studyHours: "100〜150h",
+    pass: "約 60〜70%",
+    best: "AI エンジニア中堅",
+    notes: "PyTorch / Keras / CNN 実装",
+  },
+  {
+    slug: "/certs/image-processing",
+    name: "画像処理エンジニア(エキ)",
+    organizer: "CG-ARTS",
+    fee: "6,800 円",
+    duration: "年 2 回(会場)",
+    format: "80 分",
+    difficulty: "★★★★☆",
+    studyHours: "100〜150h",
+    pass: "約 30〜40%",
+    best: "画像 AI 専門家",
+    notes: "フィルタ ・ 周波数 ・ CNN ・ U-Net",
+  },
 ];
 
 export default function ComparePage() {

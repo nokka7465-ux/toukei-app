@@ -575,6 +575,142 @@ export const certRoadmaps: Record<string, CertRoadmap> = {
     textbookHref: "/certs/python-data/textbook",
     quizHref: "/certs/python-data/quiz",
   },
+  "ai-implementation": {
+    slug: "ai-implementation",
+    title: "AI 実装検定 学習ロードマップ",
+    organizer: "一般社団法人 エッジ AI 協会",
+    hours: "100〜150 時間(A 級)",
+    months: "2〜3 ヶ月",
+    prerequisites: "Python 文法 ・ 高校〜大学初級の数学",
+    passCriteria: "おおむね正答率 70%(A 級)",
+    steps: [
+      {
+        week: "Week 1-2",
+        title: "Python ・ NumPy ・ scikit-learn",
+        description:
+          "ブロードキャスト ・ shape ・ Estimator API。本サイトの[Python データ分析 教科書](/certs/python-data/textbook)で基礎固め。",
+        links: [
+          { href: "/certs/ai-implementation/textbook", label: "AI 実装検定 教科書(章 2-3)" },
+          { href: "/certs/python-data/textbook", label: "Python データ分析 教科書" },
+        ],
+      },
+      {
+        week: "Week 3-4",
+        title: "ML 評価 + ハイパーパラメータ",
+        description:
+          "F1 / ROC / PR-AUC / Optuna。Pipeline + GridSearchCV を実装パターンとして覚える。",
+        links: [
+          { href: "/certs/ai-implementation/textbook", label: "AI 実装検定 教科書(章 4)" },
+        ],
+      },
+      {
+        week: "Week 5-7",
+        title: "ニューラルネット + PyTorch",
+        description:
+          "順伝播 / 逆伝播 / 活性化 / Adam / Batch Norm / 学習ループ 5 行をスラスラ書けるレベルに。",
+        links: [
+          { href: "/certs/ai-implementation/textbook", label: "AI 実装検定 教科書(章 5-6)" },
+        ],
+      },
+      {
+        week: "Week 8",
+        title: "Keras + 主要モデル",
+        description:
+          "Sequential / Functional API、CNN / RNN / Transformer の構造と代表モデル。",
+        links: [
+          { href: "/certs/ai-implementation/textbook", label: "AI 実装検定 教科書(章 7-8)" },
+        ],
+      },
+      {
+        week: "Week 9",
+        title: "エッジ AI + MLOps",
+        description:
+          "量子化 / 蒸留 / ONNX / TFLite / 特徴量ストア / ドリフト検出。",
+        links: [
+          { href: "/certs/ai-implementation/textbook", label: "AI 実装検定 教科書(章 9)" },
+        ],
+      },
+      {
+        week: "Week 10",
+        title: "演習 + 模擬試験",
+        description:
+          "演習問題で範囲を一周。コード片の関数名を見て即座に判断できる感覚を作る。",
+        links: [
+          { href: "/certs/ai-implementation/quiz", label: "AI 実装検定 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/ai-implementation/textbook",
+    quizHref: "/certs/ai-implementation/quiz",
+  },
+  "image-processing": {
+    slug: "image-processing",
+    title: "画像処理エンジニア検定 エキスパート 学習ロードマップ",
+    organizer: "公益財団法人 CG-ARTS 協会",
+    hours: "100〜150 時間",
+    months: "3〜4 ヶ月",
+    prerequisites: "高校〜大学初級の数学(行列 ・ 三角関数 ・ フーリエ)",
+    passCriteria: "おおむね 70 点以上(参考)",
+    steps: [
+      {
+        week: "Month 1 前半",
+        title: "画像処理基礎 + 空間フィルタ",
+        description:
+          "標本化 / 量子化 / 色空間 / ガウシアン・メディアン・Sobel・Canny。",
+        links: [
+          { href: "/certs/image-processing/textbook", label: "画像処理 教科書(章 2-3)" },
+        ],
+      },
+      {
+        week: "Month 1 後半",
+        title: "周波数解析 + 画像復元",
+        description:
+          "フーリエ変換 / DCT(JPEG) / ウェーブレット / Wiener フィルタ。",
+        links: [
+          { href: "/certs/image-processing/textbook", label: "画像処理 教科書(章 4-5)" },
+        ],
+      },
+      {
+        week: "Month 2 前半",
+        title: "領域処理 + 特徴抽出",
+        description:
+          "モルフォロジ / ラベリング / SIFT / HOG / Bag-of-Features / SVM。",
+        links: [
+          { href: "/certs/image-processing/textbook", label: "画像処理 教科書(章 6-7)" },
+        ],
+      },
+      {
+        week: "Month 2 後半",
+        title: "深層学習による画像認識",
+        description:
+          "CNN / ResNet / U-Net / YOLO / Vision Transformer / mAP / IoU。",
+        links: [
+          { href: "/certs/image-processing/textbook", label: "画像処理 教科書(章 8)" },
+        ],
+      },
+      {
+        week: "Month 3 前半",
+        title: "3 次元視覚 + 動画",
+        description:
+          "ピンホール / ステレオ / SfM / オプティカルフロー / NeRF。",
+        links: [
+          { href: "/certs/image-processing/textbook", label: "画像処理 教科書(章 9)" },
+        ],
+      },
+      {
+        week: "Month 3 後半",
+        title: "演習 + 過去問",
+        description:
+          "公式過去問と本サイトの演習問題で出題傾向を体感。",
+        links: [
+          { href: "/certs/image-processing/quiz", label: "画像処理 演習問題" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/image-processing/textbook",
+    quizHref: "/certs/image-processing/quiz",
+  },
 };
 
 export const certSlugs = Object.keys(certRoadmaps);

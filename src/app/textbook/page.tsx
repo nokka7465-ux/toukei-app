@@ -216,6 +216,26 @@ const CERT_TRACKS: Track[] = [
     emoji: "🐍",
     accent: "bg-yellow-500",
   },
+  {
+    href: "/certs/ai-implementation/textbook",
+    title: "AI 実装検定",
+    description:
+      "エッジ AI 協会主催、S/A/B 3 段階。PyTorch / Keras 実装を問う、G 検定と E 資格の中間。",
+    audience: "AI エンジニア中堅",
+    chip: "AIE",
+    emoji: "🛠️",
+    accent: "bg-rose-500",
+  },
+  {
+    href: "/certs/image-processing/textbook",
+    title: "画像処理エンジニア(エキスパート)",
+    description:
+      "CG-ARTS 主催。古典 CV(フィルタ/周波数)から DL(CNN/U-Net/YOLO)まで網羅。",
+    audience: "画像 AI 専門家",
+    chip: "ImageProc",
+    emoji: "🎞️",
+    accent: "bg-orange-600",
+  },
 ];
 
 function TrackCard({ track }: { track: Track }) {

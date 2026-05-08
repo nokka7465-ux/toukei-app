@@ -16,6 +16,8 @@ import { surveySpecialistQuestions } from "@/data/questions/survey-specialist";
 import { genaiPassportQuestions } from "@/data/questions/genai-passport";
 import { dsExpertQuestions } from "@/data/questions/ds-expert";
 import { pythonDataQuestions } from "@/data/questions/python-data";
+import { aiImplementationQuestions } from "@/data/questions/ai-implementation";
+import { imageProcessingQuestions } from "@/data/questions/image-processing";
 
 export type Track = {
   key: string;
@@ -43,6 +45,8 @@ export const tracks: Track[] = [
   { key: "genai-passport", label: "生成AIパスポート", href: "/certs/genai-passport/quiz", group: "cert", questions: genaiPassportQuestions },
   { key: "ds-expert", label: "DS エキスパート", href: "/certs/ds-expert/quiz", group: "cert", questions: dsExpertQuestions },
   { key: "python-data", label: "Python データ分析", href: "/certs/python-data/quiz", group: "cert", questions: pythonDataQuestions },
+  { key: "ai-implementation", label: "AI 実装検定", href: "/certs/ai-implementation/quiz", group: "cert", questions: aiImplementationQuestions },
+  { key: "image-processing", label: "画像処理エンジニア検定", href: "/certs/image-processing/quiz", group: "cert", questions: imageProcessingQuestions },
 ];
 
 export type EnrichedQuestion = Question & {

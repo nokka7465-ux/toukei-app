@@ -28,6 +28,8 @@ export const CERT_PRESETS: CertPreset[] = [
   { key: "genai-passport", label: "生成AIパスポート", href: "/certs/genai-passport", hours: 40 },
   { key: "ds-expert", label: "統計検定 DS エキスパート", href: "/certs/ds-expert", hours: 350 },
   { key: "python-data", label: "Python データ分析試験", href: "/certs/python-data", hours: 80 },
+  { key: "ai-implementation", label: "AI 実装検定 A 級", href: "/certs/ai-implementation", hours: 130 },
+  { key: "image-processing", label: "画像処理エンジニア検定 エキスパート", href: "/certs/image-processing", hours: 130 },
 ];
 
 export type ExamTarget = {

@@ -16,6 +16,8 @@ import { surveySpecialistTextbook } from "@/data/textbooks/survey-specialist";
 import { genaiPassportTextbook } from "@/data/textbooks/genai-passport";
 import { dsExpertTextbook } from "@/data/textbooks/ds-expert";
 import { pythonDataTextbook } from "@/data/textbooks/python-data";
+import { aiImplementationTextbook } from "@/data/textbooks/ai-implementation";
+import { imageProcessingTextbook } from "@/data/textbooks/image-processing";
 import { glossary } from "@/data/glossary";
 import { blogPosts } from "@/data/blog";
 import { introFormulas } from "@/data/formulas/intro";
@@ -104,6 +106,8 @@ export const searchIndex: SearchItem[] = (() => {
     { book: genaiPassportTextbook, urlBase: "/certs/genai-passport/textbook", displayTitle: "生成AIパスポート" },
     { book: dsExpertTextbook, urlBase: "/certs/ds-expert/textbook", displayTitle: "DS エキスパート" },
     { book: pythonDataTextbook, urlBase: "/certs/python-data/textbook", displayTitle: "Python データ分析" },
+    { book: aiImplementationTextbook, urlBase: "/certs/ai-implementation/textbook", displayTitle: "AI 実装検定" },
+    { book: imageProcessingTextbook, urlBase: "/certs/image-processing/textbook", displayTitle: "画像処理エンジニア検定" },
   ];
   for (const { book, urlBase, displayTitle } of textbookSets) {
     for (const ch of book.chapters) {

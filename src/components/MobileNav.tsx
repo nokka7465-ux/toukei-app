@@ -51,6 +51,8 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/certs/genai-passport", label: "生成AIパスポート" },
       { href: "/certs/ds-expert", label: "DS エキスパート" },
       { href: "/certs/python-data", label: "Python データ分析" },
+      { href: "/certs/ai-implementation", label: "AI 実装検定" },
+      { href: "/certs/image-processing", label: "画像処理エンジニア検定" },
     ],
   },
   {

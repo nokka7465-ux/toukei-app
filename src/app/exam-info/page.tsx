@@ -283,6 +283,40 @@ const RELATED_EXAMS: Exam[] = [
     highlight:
       "NumPy / pandas / Matplotlib / scikit-learn と機械学習の基礎を測る、データ分析の登竜門。",
   },
+  {
+    id: "ai-implementation",
+    title: "AI 実装検定",
+    organizer: "一般社団法人 エッジ AI 協会",
+    format: "オンライン IBT 方式",
+    schedule: "通年(複数回 / 年)",
+    duration: "60 分 / 60 問(A 級・参考)",
+    fee: "A 級 14,850 円 / B 級 9,900 円(税込・参考)",
+    passCriteria: "おおむね 70%(A 級・参考)",
+    passRate: "A 級 60〜70% 前後",
+    takers: "1 回あたり数百〜千名規模",
+    officialUrl: "https://kentei.ai/",
+    studyHref: "/certs/ai-implementation",
+    studyLabel: "AI 実装検定の教科書を見る",
+    highlight:
+      "AI のコードを書く現場の力を測る検定。S/A/B 3 段階、認定講座不要で独学可能。G 検定と E 資格の中間に位置。",
+  },
+  {
+    id: "image-processing",
+    title: "画像処理エンジニア検定 エキスパート",
+    organizer: "公益財団法人 CG-ARTS 協会",
+    format: "マークシート方式(会場試験)",
+    schedule: "年 2 回(7 月・11 月頃)",
+    duration: "80 分 / 計算 ・ 記述含む選択式",
+    fee: "6,800 円(税込・参考)",
+    passCriteria: "70 点以上(参考)",
+    passRate: "おおむね 30〜40%",
+    takers: "1 回あたり数百名規模",
+    officialUrl: "https://www.cgarts.or.jp/kentei/",
+    studyHref: "/certs/image-processing",
+    studyLabel: "画像処理エンジニア検定の教科書を見る",
+    highlight:
+      "画像処理 ・ コンピュータビジョンの専門性を測る検定。古典 CV から DL ベース CV まで広範に出題。",
+  },
 ];
 
 function ExamCard({ exam }: { exam: Exam }) {

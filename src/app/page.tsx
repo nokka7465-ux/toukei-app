@@ -740,7 +740,7 @@ export default function Home() {
               データ・AI 系資格の代表的なパス。実務志向・調査志向・AI 概念・全方位リテラシー・生成 AI 活用から目的に応じて選べます。
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
               {
                 href: "/certs/ds-basic",
@@ -804,6 +804,24 @@ export default function Home() {
                 title: "Python データ分析",
                 description:
                   "PythonED 主催。NumPy / pandas / scikit-learn とML 基礎を問う、データ分析エンジニアの登竜門。",
+              },
+              {
+                href: "/certs/ai-implementation",
+                chip: "AIE",
+                emoji: "🛠️",
+                accent: "bg-rose-500",
+                title: "AI 実装検定",
+                description:
+                  "エッジ AI 協会主催、S/A/B 3 段階。PyTorch / Keras 実装を問う、G 検定と E 資格の中間。",
+              },
+              {
+                href: "/certs/image-processing",
+                chip: "ImageProc",
+                emoji: "🎞️",
+                accent: "bg-orange-600",
+                title: "画像処理エンジニア(エキ)",
+                description:
+                  "CG-ARTS 主催。古典 CV(フィルタ ・ 周波数)から DL(CNN ・ U-Net ・ YOLO)まで網羅する画像 AI 専門検定。",
               },
             ].map((cert) => (
               <Link

@@ -17,6 +17,8 @@ import { surveySpecialistQuestions } from "@/data/questions/survey-specialist";
 import { genaiPassportQuestions } from "@/data/questions/genai-passport";
 import { dsExpertQuestions } from "@/data/questions/ds-expert";
 import { pythonDataQuestions } from "@/data/questions/python-data";
+import { aiImplementationQuestions } from "@/data/questions/ai-implementation";
+import { imageProcessingQuestions } from "@/data/questions/image-processing";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -63,6 +65,8 @@ const CERT_TRACKS: Track[] = [
   { href: "/certs/genai-passport/quiz", title: "生成AIパスポート(GUGA)", count: genaiPassportQuestions.length, description: "LLM・プロンプト・リスク・倫理" },
   { href: "/certs/ds-expert/quiz", title: "統計検定 DS エキスパート", count: dsExpertQuestions.length, description: "高度統計 ・ ML ・ ベイズ ・ 因果推論 ・ MLOps" },
   { href: "/certs/python-data/quiz", title: "Python データ分析試験(PythonED)", count: pythonDataQuestions.length, description: "NumPy / pandas / Matplotlib / scikit-learn" },
+  { href: "/certs/ai-implementation/quiz", title: "AI 実装検定(AIE)", count: aiImplementationQuestions.length, description: "PyTorch / Keras / CNN / Transformer / エッジ AI" },
+  { href: "/certs/image-processing/quiz", title: "画像処理エンジニア検定 エキスパート", count: imageProcessingQuestions.length, description: "古典 CV(フィルタ/周波数)+ DL ベース CV" },
 ];
 
 function TrackCard({ track }: { track: Track }) {
