@@ -503,6 +503,50 @@ export const certFaq: Record<string, FaqItem[]> = {
       a: "SnowPro Core → **SnowPro Specialty**(Data Engineer / Data Analyst / Data Scientist / Architect / Administrator)が王道。本サイトの[DB スペシャリスト](/certs/db-specialist)と組み合わせると伝統的 DB + モダン基盤の両軸が揃う。",
     },
   ],
+  "gcp-ml-engineer": [
+    {
+      q: "Google Cloud Professional Machine Learning Engineer とは?",
+      a: "**GCP 認定の Professional レベル** で、ML パイプラインの設計 ・ 構築 ・ デプロイ ・ 運用を行うエンジニアを認定。**AWS MLA-C01 / Azure AI-102** と並ぶ三大クラウド ML 認定の 1 つ。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**オンライン監督受験 or テストセンター / 50 〜 60 問 / 120 分 / 受験料 200 USD / 有効期限 2 年**。実機 Vertex AI 経験 + ML / Python / SQL / Cloud Architecture の実務 3 年以上推奨。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "Generative AI Leader 合格者で **150 〜 200 時間**、未経験者で **200 〜 300 時間**。**Google Cloud Skills Boost(無料)+ 300 USD クレジット付き無料アカウント** で実機ハンズオンが必須。",
+    },
+    {
+      q: "AWS MLA-C01 ・ Azure AI-102 との違いは?",
+      a: "**GCP は Professional レベル**(Associate より 1 段上)で、より高度。**Vertex AI / Gemini / BigQuery ML / TPU** が中核。AWS MLA は SageMaker、Azure AI-102 は Azure OpenAI / AI Foundry が中核。",
+    },
+    {
+      q: "次のステップは?",
+      a: "ML Engineer → **Professional Data Engineer**(データ基盤側)または **Professional Cloud Architect**(全体)が王道。",
+    },
+  ],
+  "databricks-data-engineer": [
+    {
+      q: "Databricks Certified Data Engineer Associate とは?",
+      a: "**Databricks Lakehouse Platform** 上でデータエンジニアリングを行うエンジニア向けの **Associate レベル** 認定。**Snowflake と並ぶモダンデータ基盤の双璧** で、Apache Spark + Delta Lake + Unity Catalog + Workflows + Photon を測る。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**オンライン監督受験(Kryterion / Webassessor) / 45 問 / 90 分 / 多肢選択 + 複数選択 / 合格 70%(参考) / 受験料 200 USD / 有効期限 2 年**。SQL + Python の基礎が前提知識。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "SQL + Python に慣れている人で **40 〜 60 時間**、未経験者で **60 〜 100 時間**。**Databricks Community Edition(無料)** + **Databricks Academy(無料公式)** が標準教材。",
+    },
+    {
+      q: "Snowflake SnowPro Core との違いは?",
+      a: "**Databricks は Lakehouse(Spark + Delta Lake)・ コードベース** が強み、**Snowflake は SQL ベース DWH** が強み。**両方持つとモダンデータ基盤双璧を制覇** で希少な人材になれる。本サイトの[Snowflake SnowPro Core](/certs/snowflake-snowpro)も。",
+    },
+    {
+      q: "次のステップは?",
+      a: "Data Engineer Associate → **Data Engineer Professional**(上位)が王道。ML 寄りなら **ML Practitioner Associate → Machine Learning Professional**、生成 AI なら **Generative AI Engineer Associate** へ。",
+    },
+  ],
   "qc-kentei": [
     {
       q: "QC検定の各級の難易度は?",

@@ -949,6 +949,24 @@ export default function Home() {
                 description:
                   "クラウドデータプラットフォーム認定。Time Travel ・ Cloning ・ Data Sharing などモダン DWH 機能を網羅。",
               },
+              {
+                href: "/certs/gcp-ml-engineer",
+                chip: "GCP MLE",
+                emoji: "🟩",
+                accent: "bg-emerald-700",
+                title: "GCP Professional ML Engineer",
+                description:
+                  "GCP 認定の Professional レベル ML 認定。AWS MLA-C01 / Azure AI-102 と並ぶ三大クラウド ML 認定の 1 つ。",
+              },
+              {
+                href: "/certs/databricks-data-engineer",
+                chip: "Databricks",
+                emoji: "🧱",
+                accent: "bg-red-600",
+                title: "Databricks Data Engineer",
+                description:
+                  "Snowflake と並ぶモダンデータ基盤の双璧。Spark + Delta Lake + DLT + Unity Catalog を網羅。",
+              },
             ].map((cert) => (
               <Link
                 key={cert.href}

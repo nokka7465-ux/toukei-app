@@ -555,6 +555,40 @@ const RELATED_EXAMS: Exam[] = [
     highlight:
       "クラウドデータプラットフォームの基礎認定。Time Travel / Cloning / Data Sharing などモダン DWH 機能を網羅。",
   },
+  {
+    id: "gcp-ml-engineer",
+    title: "Google Cloud Professional Machine Learning Engineer",
+    organizer: "Google Cloud",
+    format: "オンライン監督受験 or テストセンター",
+    schedule: "通年(随時)",
+    duration: "120 分 / 50 〜 60 問",
+    fee: "200 USD(参考)",
+    passCriteria: "公開なし(参考: 70%)",
+    passRate: "Google 非公開",
+    takers: "全世界で大規模",
+    officialUrl: "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    studyHref: "/certs/gcp-ml-engineer",
+    studyLabel: "GCP ML Engineer の教科書を見る",
+    highlight:
+      "GCP 認定の Professional レベル ML 認定。AWS MLA-C01 / Azure AI-102 と並ぶ三大クラウド ML 認定の 1 つ。",
+  },
+  {
+    id: "databricks-data-engineer",
+    title: "Databricks Certified Data Engineer Associate",
+    organizer: "Databricks",
+    format: "オンライン監督受験(Kryterion / Webassessor)",
+    schedule: "通年(随時)",
+    duration: "90 分 / 45 問",
+    fee: "200 USD(参考)",
+    passCriteria: "70%(参考)",
+    passRate: "Databricks 非公開",
+    takers: "全世界で大規模",
+    officialUrl: "https://www.databricks.com/learn/certification/data-engineer-associate",
+    studyHref: "/certs/databricks-data-engineer",
+    studyLabel: "Databricks Data Engineer Associate の教科書を見る",
+    highlight:
+      "Snowflake と並ぶモダンデータ基盤の双璧。Apache Spark + Delta Lake + Unity Catalog + Photon を測る。",
+  },
 ];
 
 function ExamCard({ exam }: { exam: Exam }) {

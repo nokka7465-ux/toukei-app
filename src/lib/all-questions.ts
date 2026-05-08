@@ -32,6 +32,8 @@ import { tableauSpecialistQuestions } from "@/data/questions/tableau-specialist"
 import { azureAi102Questions } from "@/data/questions/azure-ai-102";
 import { awsMlEngineerQuestions } from "@/data/questions/aws-ml-engineer";
 import { snowflakeSnowProQuestions } from "@/data/questions/snowflake-snowpro";
+import { gcpMlEngineerQuestions } from "@/data/questions/gcp-ml-engineer";
+import { databricksDataEngineerQuestions } from "@/data/questions/databricks-data-engineer";
 
 export type Track = {
   key: string;
@@ -75,6 +77,8 @@ export const tracks: Track[] = [
   { key: "azure-ai-102", label: "Azure AI-102", href: "/certs/azure-ai-102/quiz", group: "cert", questions: azureAi102Questions },
   { key: "aws-ml-engineer", label: "AWS MLA-C01", href: "/certs/aws-ml-engineer/quiz", group: "cert", questions: awsMlEngineerQuestions },
   { key: "snowflake-snowpro", label: "Snowflake SnowPro Core", href: "/certs/snowflake-snowpro/quiz", group: "cert", questions: snowflakeSnowProQuestions },
+  { key: "gcp-ml-engineer", label: "GCP Professional ML Engineer", href: "/certs/gcp-ml-engineer/quiz", group: "cert", questions: gcpMlEngineerQuestions },
+  { key: "databricks-data-engineer", label: "Databricks Data Engineer Associate", href: "/certs/databricks-data-engineer/quiz", group: "cert", questions: databricksDataEngineerQuestions },
 ];
 
 export type EnrichedQuestion = Question & {

@@ -1,0 +1,324 @@
+import type { Question } from "@/types/content";
+
+export const gcpMlEngineerQuestions: Question[] = [
+  {
+    id: "gcpml-q1",
+    category: "試験概要",
+    difficulty: 1,
+    question:
+      "Google Cloud Professional Machine Learning Engineer の認定レベルとして最も適切なものを選びなさい。",
+    choices: [
+      "Foundational",
+      "Associate",
+      "Professional",
+      "Specialty",
+    ],
+    correctIndex: 2,
+    explanation:
+      "**Professional ML Engineer** は GCP 認定の **Professional レベル**(高度認定)。Foundational に Cloud Digital Leader / Generative AI Leader、Associate に Associate Cloud Engineer。",
+  },
+  {
+    id: "gcpml-q2",
+    category: "Vertex AI",
+    difficulty: 2,
+    question:
+      "Vertex AI で **Kubeflow ベースの ML パイプライン** を実行するサービスとして最も適切なものを選びなさい。",
+    choices: [
+      "Vertex AI Workbench",
+      "Vertex AI Pipelines",
+      "Vertex AI Feature Store",
+      "Vertex AI Studio",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Vertex AI Pipelines** は Kubeflow Pipelines + TFX をベースとしたサーバレス ML パイプラインサービス。Workbench は Jupyter、Feature Store は特徴量管理、Studio は生成 AI。",
+  },
+  {
+    id: "gcpml-q3",
+    category: "TPU",
+    difficulty: 3,
+    question:
+      "Google 自家製の AI チップ **TPU** に関する記述として最も適切なものを選びなさい。",
+    choices: [
+      "GPU の代替で TensorFlow / PyTorch / JAX で利用可能",
+      "TPU は推論専用、学習には使えない",
+      "オンプレでのみ動作",
+      "BigQuery 内部処理にのみ使用される",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**TPU** は Google 自家製の AI 専用チップ。学習 + 推論の両方で使用可能。TF / PyTorch / JAX 対応で、TPU v5e は推論 / 中規模学習向け、v5p は大規模学習向け。",
+  },
+  {
+    id: "gcpml-q4",
+    category: "BQML",
+    difficulty: 3,
+    question:
+      "BigQuery ML(BQML)から **Gemini を呼出して文章生成** する関数として最も適切なものを選びなさい。",
+    choices: [
+      "ML.PREDICT",
+      "ML.GENERATE_TEXT",
+      "ML.UNDERSTAND_TEXT",
+      "ML.TRANSLATE",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**ML.GENERATE_TEXT** は BigQuery から Gemini を呼出して文章生成する関数。SQL のみで生成 AI を扱える BQML の代表機能。",
+  },
+  {
+    id: "gcpml-q5",
+    category: "BQML",
+    difficulty: 2,
+    question:
+      "BQML がサポートする時系列予測アルゴリズムとして最も適切なものを選びなさい。",
+    choices: [
+      "ARIMA / ARIMA_PLUS",
+      "ResNet",
+      "BERT",
+      "GAN",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**ARIMA / ARIMA_PLUS** が BQML の時系列予測モデル。複数系列 + 季節性 + 休日効果を自動検出。",
+  },
+  {
+    id: "gcpml-q6",
+    category: "ETL",
+    difficulty: 2,
+    question:
+      "Apache Beam ベースの **ストリーム + バッチ ETL** に対応した Google Cloud のマネージドサービスとして最も適切なものを選びなさい。",
+    choices: [
+      "Cloud Dataflow",
+      "Cloud Dataproc",
+      "Cloud Composer",
+      "Cloud Data Fusion",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Cloud Dataflow** は Apache Beam ベースのサーバレス ETL。**Dataproc** は Hadoop/Spark、**Composer** は Airflow、**Data Fusion** は GUI ベース ETL。",
+  },
+  {
+    id: "gcpml-q7",
+    category: "学習",
+    difficulty: 3,
+    question:
+      "TensorFlow で **GPU を持つ複数 VM 間で同期分散学習** を行うストラテジとして最も適切なものを選びなさい。",
+    choices: [
+      "MirroredStrategy",
+      "MultiWorkerMirroredStrategy",
+      "TPUStrategy",
+      "ParameterServerStrategy",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**MultiWorkerMirroredStrategy** は複数 VM(Worker)間の同期分散学習。**MirroredStrategy** は単一 VM 内の複数 GPU、**TPUStrategy** は TPU、**ParameterServerStrategy** はパラメータサーバ型(非同期)。",
+  },
+  {
+    id: "gcpml-q8",
+    category: "コスト",
+    difficulty: 2,
+    question:
+      "中断耐性ある SageMaker / Vertex AI 学習で **60 〜 80% コスト削減** が見込める購入オプションとして最も適切なものを選びなさい。",
+    choices: [
+      "On-Demand VM",
+      "Spot VM",
+      "Committed Use Discount",
+      "Reserved Capacity",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Spot VM** は GCP の余剰キャパシティを活用、最大 60 〜 80% 割引。中断時の再開可能なよう checkpoint 保存が必要。",
+  },
+  {
+    id: "gcpml-q9",
+    category: "HPO",
+    difficulty: 3,
+    question:
+      "Vertex AI で **ベイズ最適化によるハイパーパラメータ探索** を提供するサービスとして最も適切なものを選びなさい。",
+    choices: [
+      "Vertex AI Vizier",
+      "Vertex AI Workbench",
+      "Vertex AI Tensorboard",
+      "Vertex AI Matching Engine",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Vertex AI Vizier** はベイズ最適化のマネージドサービス。Vertex AI Hyperparameter Tuning の裏で動いている。",
+  },
+  {
+    id: "gcpml-q10",
+    category: "Pipelines",
+    difficulty: 3,
+    question:
+      "Vertex AI Pipelines で **同じ入力のステップは再実行をスキップ** する機能として最も適切なものを選びなさい。",
+    choices: [
+      "Caching",
+      "Scheduling",
+      "Artifact Lineage",
+      "DSL Compiler",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Caching** は前回と同じ入力 + 同じコンポーネントなら結果を再利用しスキップ。開発時のサイクル高速化 + コスト削減に有効。",
+  },
+  {
+    id: "gcpml-q11",
+    category: "推論",
+    difficulty: 2,
+    question:
+      "Vertex AI で **大量データの一括推論** を行う場合に最も適切なオプションを選びなさい。",
+    choices: [
+      "Online Prediction",
+      "Batch Prediction",
+      "Edge Inference",
+      "Streaming Prediction",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Batch Prediction** は GCS の CSV / TFRecord に対する一括推論で、大量データ向けに最適。Online Prediction は ms 級リアルタイム。",
+  },
+  {
+    id: "gcpml-q12",
+    category: "推論",
+    difficulty: 3,
+    question:
+      "推論サーバとして **複数フレームワーク(TF / PyTorch / ONNX)を統合的に提供** する NVIDIA の OSS として最も適切なものを選びなさい。",
+    choices: [
+      "TensorFlow Serving",
+      "TorchServe",
+      "NVIDIA Triton",
+      "Optimized TensorFlow Runtime",
+    ],
+    correctIndex: 2,
+    explanation:
+      "**NVIDIA Triton Inference Server** は複数フレームワーク統合推論サーバ。Vertex AI Custom Container でも利用される。",
+  },
+  {
+    id: "gcpml-q13",
+    category: "Monitoring",
+    difficulty: 3,
+    question:
+      "Vertex AI Model Monitoring で **学習データと推論データの分布差** を検出する監視種別として最も適切なものを選びなさい。",
+    choices: [
+      "Training-Serving Skew",
+      "Prediction Drift",
+      "Concept Drift",
+      "Feature Attribution Drift",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Training-Serving Skew** は学習時 vs 推論時の特徴量分布差。**Prediction Drift** は推論データの時間経過での変化。両者は異なる課題に対応する。",
+  },
+  {
+    id: "gcpml-q14",
+    category: "Explanations",
+    difficulty: 3,
+    question:
+      "Vertex AI Explanations で **画像 ・ 動画モデル向け** の説明手法として最も適切なものを選びなさい。",
+    choices: [
+      "XRAI",
+      "Sampled Shapley",
+      "Integrated Gradients",
+      "PCA",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**XRAI** は画像 ・ 動画向けの説明手法(画素グループの寄与度)。**Sampled Shapley** はツリー / 表データ、**Integrated Gradients** は NN ベース全般。",
+  },
+  {
+    id: "gcpml-q15",
+    category: "責任ある AI",
+    difficulty: 3,
+    question:
+      "Google の AI 原則(2018 年公開)に **含まれない** ものを選びなさい。",
+    choices: [
+      "社会に有益であること",
+      "不公平な偏見を生まない / 強化しない",
+      "プライバシー設計の原則を組み込む",
+      "あらゆる商業利用を最大化する",
+    ],
+    correctIndex: 3,
+    explanation:
+      "Google の 7 原則は (1) 社会に有益、(2) 偏見回避、(3) 安全性、(4) 説明責任、(5) プライバシー、(6) 科学的卓越性、(7) 原則に沿う用途。商業利用最大化は含まれない。",
+  },
+  {
+    id: "gcpml-q16",
+    category: "Gemini",
+    difficulty: 2,
+    question:
+      "Vertex AI で **複数ベンダーの基盤モデル** を一覧 ・ デプロイできる機能として最も適切なものを選びなさい。",
+    choices: [
+      "Model Registry",
+      "Model Garden",
+      "Workbench",
+      "Tensorboard",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Vertex AI Model Garden** は Gemini / Imagen / Llama / Mistral / Anthropic などの基盤モデルカタログ。1 クリックでデプロイ可能。",
+  },
+  {
+    id: "gcpml-q17",
+    category: "RAG",
+    difficulty: 3,
+    question:
+      "GCP で **RAG パイプラインのベクトル検索** に使う標準的なサービスとして最も適切なものを選びなさい。",
+    choices: [
+      "Cloud Spanner",
+      "Vertex AI Search / Vertex AI Matching Engine",
+      "Cloud Pub/Sub",
+      "Cloud Bigtable",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Vertex AI Search**(マネージド全文 + ベクトル)・ **Vertex AI Matching Engine**(高性能ベクトル類似検索)が GCP RAG の標準。",
+  },
+  {
+    id: "gcpml-q18",
+    category: "Tuning",
+    difficulty: 3,
+    question:
+      "大モデルから小モデルへ知識を移転する技術の名称として最も適切なものを選びなさい。",
+    choices: [
+      "Distillation(蒸留)",
+      "Quantization(量子化)",
+      "Pruning(剪定)",
+      "Augmentation(拡張)",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Distillation(蒸留)** は大モデル(Teacher)の出力を小モデル(Student)が真似るように学習させる。エッジ / モバイル向け軽量化で頻用。",
+  },
+  {
+    id: "gcpml-q19",
+    category: "セキュリティ",
+    difficulty: 2,
+    question:
+      "GCP で AI サービスを **VPC 内のプライベート接続のみ** で利用するための機能として最も適切なものを選びなさい。",
+    choices: [
+      "VPC Service Controls",
+      "Cloud Armor",
+      "Cloud CDN",
+      "Public IP",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**VPC Service Controls** で AI サービスをパブリックインターネットを通さず VPC 内のみで利用可能。データの社外流出を防ぐ。",
+  },
+  {
+    id: "gcpml-q20",
+    category: "次のステップ",
+    difficulty: 1,
+    question:
+      "GCP Professional ML Engineer 合格後、データ基盤側を強化するのに最も適切な GCP 認定として最も適切なものを選びなさい。",
+    choices: [
+      "Cloud Digital Leader",
+      "Associate Cloud Engineer",
+      "Professional Data Engineer",
+      "Generative AI Leader",
+    ],
+    correctIndex: 2,
+    explanation:
+      "ML Engineer の自然な次のステップは **Professional Data Engineer**(データ基盤側)または **Professional Cloud Architect**(全体)。Foundational(Cloud Digital Leader / Gen AI Leader)は逆方向。",
+  },
+];

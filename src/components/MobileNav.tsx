@@ -67,6 +67,8 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/certs/azure-ai-102", label: "Azure AI Engineer(AI-102)" },
       { href: "/certs/aws-ml-engineer", label: "AWS ML Engineer Associate" },
       { href: "/certs/snowflake-snowpro", label: "Snowflake SnowPro Core" },
+      { href: "/certs/gcp-ml-engineer", label: "GCP Professional ML Engineer" },
+      { href: "/certs/databricks-data-engineer", label: "Databricks Data Engineer Associate" },
     ],
   },
   {

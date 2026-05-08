@@ -407,6 +407,32 @@ const CERTS: Cert[] = [
     best: "データエンジニア",
     notes: "Time Travel / Cloning / Sharing",
   },
+  {
+    slug: "/certs/gcp-ml-engineer",
+    name: "GCP ML Engineer",
+    organizer: "Google Cloud",
+    fee: "200 USD",
+    duration: "通年",
+    format: "120 分 / 50-60 問",
+    difficulty: "★★★★★",
+    studyHours: "200〜300h",
+    pass: "公開なし",
+    best: "ML エンジニア上位",
+    notes: "Vertex AI / Gemini / BQML / Kubeflow",
+  },
+  {
+    slug: "/certs/databricks-data-engineer",
+    name: "Databricks Data Engineer",
+    organizer: "Databricks",
+    fee: "200 USD",
+    duration: "通年",
+    format: "90 分 / 45 問",
+    difficulty: "★★★☆☆",
+    studyHours: "60〜100h",
+    pass: "約 70%",
+    best: "Lakehouse エンジニア",
+    notes: "Spark / Delta Lake / DLT / UC",
+  },
 ];
 
 export default function ComparePage() {

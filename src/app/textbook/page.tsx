@@ -376,6 +376,26 @@ const CERT_TRACKS: Track[] = [
     emoji: "❄️",
     accent: "bg-cyan-600",
   },
+  {
+    href: "/certs/gcp-ml-engineer/textbook",
+    title: "GCP Professional ML Engineer",
+    description:
+      "GCP 認定の Professional レベル ML 認定。Vertex AI / Gemini / BQML / Kubeflow を扱う高度試験。",
+    audience: "ML エンジニア上位",
+    chip: "GCP MLE",
+    emoji: "🟩",
+    accent: "bg-emerald-700",
+  },
+  {
+    href: "/certs/databricks-data-engineer/textbook",
+    title: "Databricks Data Engineer Associate",
+    description:
+      "Snowflake と並ぶモダンデータ基盤の双璧。Spark / Delta Lake / DLT / Unity Catalog を網羅。",
+    audience: "Lakehouse エンジニア",
+    chip: "Databricks",
+    emoji: "🧱",
+    accent: "bg-red-600",
+  },
 ];
 
 function TrackCard({ track }: { track: Track }) {

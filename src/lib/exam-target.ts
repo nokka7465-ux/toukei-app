@@ -44,6 +44,8 @@ export const CERT_PRESETS: CertPreset[] = [
   { key: "azure-ai-102", label: "Microsoft AI-102", href: "/certs/azure-ai-102", hours: 160 },
   { key: "aws-ml-engineer", label: "AWS ML Engineer Associate(MLA-C01)", href: "/certs/aws-ml-engineer", hours: 200 },
   { key: "snowflake-snowpro", label: "Snowflake SnowPro Core", href: "/certs/snowflake-snowpro", hours: 80 },
+  { key: "gcp-ml-engineer", label: "GCP Professional ML Engineer", href: "/certs/gcp-ml-engineer", hours: 250 },
+  { key: "databricks-data-engineer", label: "Databricks Data Engineer Associate", href: "/certs/databricks-data-engineer", hours: 80 },
 ];
 
 export type ExamTarget = {

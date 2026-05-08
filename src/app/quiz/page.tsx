@@ -33,6 +33,8 @@ import { tableauSpecialistQuestions } from "@/data/questions/tableau-specialist"
 import { azureAi102Questions } from "@/data/questions/azure-ai-102";
 import { awsMlEngineerQuestions } from "@/data/questions/aws-ml-engineer";
 import { snowflakeSnowProQuestions } from "@/data/questions/snowflake-snowpro";
+import { gcpMlEngineerQuestions } from "@/data/questions/gcp-ml-engineer";
+import { databricksDataEngineerQuestions } from "@/data/questions/databricks-data-engineer";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -95,6 +97,8 @@ const CERT_TRACKS: Track[] = [
   { href: "/certs/azure-ai-102/quiz", title: "Microsoft Azure AI-102", count: azureAi102Questions.length, description: "Azure OpenAI ・ AI Search ・ RAG ・ Foundry ・ Agent" },
   { href: "/certs/aws-ml-engineer/quiz", title: "AWS ML Engineer Associate(MLA-C01)", count: awsMlEngineerQuestions.length, description: "SageMaker ・ Endpoints ・ Pipelines ・ Model Monitor ・ Bedrock" },
   { href: "/certs/snowflake-snowpro/quiz", title: "Snowflake SnowPro Core", count: snowflakeSnowProQuestions.length, description: "アーキテクチャ ・ COPY/Snowpipe ・ Time Travel ・ Cloning ・ Cortex" },
+  { href: "/certs/gcp-ml-engineer/quiz", title: "GCP Professional ML Engineer", count: gcpMlEngineerQuestions.length, description: "Vertex AI ・ BQML ・ TPU ・ Kubeflow ・ Monitoring" },
+  { href: "/certs/databricks-data-engineer/quiz", title: "Databricks Data Engineer Associate", count: databricksDataEngineerQuestions.length, description: "Lakehouse ・ Delta Lake ・ Auto Loader ・ DLT ・ Unity Catalog" },
 ];
 
 function TrackCard({ track }: { track: Track }) {

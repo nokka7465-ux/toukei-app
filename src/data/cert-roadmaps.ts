@@ -1661,6 +1661,143 @@ export const certRoadmaps: Record<string, CertRoadmap> = {
     textbookHref: "/certs/snowflake-snowpro/textbook",
     quizHref: "/certs/snowflake-snowpro/quiz",
   },
+  "gcp-ml-engineer": {
+    slug: "gcp-ml-engineer",
+    title: "GCP Professional ML Engineer 学習ロードマップ",
+    organizer: "Google Cloud",
+    hours: "200〜300 時間",
+    months: "4〜6 ヶ月",
+    prerequisites: "ML / Python / SQL / Cloud Architecture の実務 3 年以上",
+    passCriteria: "Google 公開なし(参考: 70%)",
+    steps: [
+      {
+        week: "Month 1",
+        title: "GCP 基礎 + ML 基礎",
+        description:
+          "Generative AI Leader 範囲復習 + Vertex AI セットアップ。",
+        links: [
+          { href: "/certs/gcp-ml-engineer/textbook", label: "GCP ML Engineer 教科書(章 2)" },
+          { href: "/certs/gcp-gen-ai-leader/textbook", label: "Generative AI Leader 教科書" },
+        ],
+      },
+      {
+        week: "Month 2",
+        title: "Vertex AI フル機能 + AutoML / Custom Training",
+        description:
+          "Workbench / Studio / Pipelines / Endpoints / Feature Store / TPU / HPO。",
+        links: [
+          { href: "/certs/gcp-ml-engineer/textbook", label: "GCP ML Engineer 教科書(章 2)" },
+        ],
+      },
+      {
+        week: "Month 3",
+        title: "BigQuery ML + データエンジニアリング",
+        description:
+          "BQML 関数 / Dataflow / Composer / Pub/Sub / Dataplex。",
+        links: [
+          { href: "/certs/gcp-ml-engineer/textbook", label: "GCP ML Engineer 教科書(章 3-4)" },
+        ],
+      },
+      {
+        week: "Month 4",
+        title: "TF / PyTorch / JAX on GCP",
+        description:
+          "Distribution Strategies / TPU 対応 / Distributed Training / TFX。",
+        links: [
+          { href: "/certs/gcp-ml-engineer/textbook", label: "GCP ML Engineer 教科書(章 5)" },
+        ],
+      },
+      {
+        week: "Month 5",
+        title: "MLOps + Pipelines + Monitoring",
+        description:
+          "Kubeflow / Caching / Model Registry / Training-Serving Skew / Explanations。",
+        links: [
+          { href: "/certs/gcp-ml-engineer/textbook", label: "GCP ML Engineer 教科書(章 6-8)" },
+        ],
+      },
+      {
+        week: "Month 6",
+        title: "生成 AI + 模擬試験",
+        description:
+          "Gemini / Vertex AI Studio / Model Garden / Vertex AI Search。仕上げに演習問題。",
+        links: [
+          { href: "/certs/gcp-ml-engineer/textbook", label: "GCP ML Engineer 教科書(章 9-10)" },
+          { href: "/certs/gcp-ml-engineer/quiz", label: "GCP ML Engineer 演習問題" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/gcp-ml-engineer/textbook",
+    quizHref: "/certs/gcp-ml-engineer/quiz",
+  },
+  "databricks-data-engineer": {
+    slug: "databricks-data-engineer",
+    title: "Databricks Data Engineer Associate 学習ロードマップ",
+    organizer: "Databricks",
+    hours: "60〜100 時間",
+    months: "1〜2 ヶ月",
+    prerequisites: "SQL + Python の基礎",
+    passCriteria: "70%(参考)",
+    steps: [
+      {
+        week: "Week 1",
+        title: "Lakehouse + Workspace + Cluster",
+        description:
+          "Medallion Architecture / Job Cluster / SQL Warehouse / Photon。",
+        links: [
+          { href: "/certs/databricks-data-engineer/textbook", label: "Databricks 教科書(章 2)" },
+        ],
+      },
+      {
+        week: "Week 2",
+        title: "Delta Lake",
+        description:
+          "ACID / Time Travel / OPTIMIZE / Z-ORDER / VACUUM / MERGE INTO。",
+        links: [
+          { href: "/certs/databricks-data-engineer/textbook", label: "Databricks 教科書(章 3)" },
+        ],
+      },
+      {
+        week: "Week 3",
+        title: "Spark + PySpark",
+        description:
+          "Catalyst / AQE / Broadcast Join / Z-ORDER / Liquid Clustering。",
+        links: [
+          { href: "/certs/databricks-data-engineer/textbook", label: "Databricks 教科書(章 4)" },
+        ],
+      },
+      {
+        week: "Week 4",
+        title: "Auto Loader + Structured Streaming + DLT",
+        description:
+          "ファイル通知モード / Watermark / Apply Changes Into / Expectations。",
+        links: [
+          { href: "/certs/databricks-data-engineer/textbook", label: "Databricks 教科書(章 5)" },
+        ],
+      },
+      {
+        week: "Week 5",
+        title: "Workflows + Unity Catalog",
+        description:
+          "Job Cluster / DAG / 3 階層 / GRANT / Lineage / RLS。",
+        links: [
+          { href: "/certs/databricks-data-engineer/textbook", label: "Databricks 教科書(章 6-7)" },
+        ],
+      },
+      {
+        week: "Week 6",
+        title: "Delta Sharing + ML + 模擬試験",
+        description:
+          "MLflow / DBRX / Mosaic AI。仕上げに演習問題。",
+        links: [
+          { href: "/certs/databricks-data-engineer/textbook", label: "Databricks 教科書(章 8-10)" },
+          { href: "/certs/databricks-data-engineer/quiz", label: "Databricks 演習問題" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/databricks-data-engineer/textbook",
+    quizHref: "/certs/databricks-data-engineer/quiz",
+  },
 };
 
 export const certSlugs = Object.keys(certRoadmaps);
