@@ -931,6 +931,24 @@ export default function Home() {
                 description:
                   "Microsoft の AI Engineer Associate。AI-900 の上位、Azure OpenAI / Search / Foundry の実装力を測る。",
               },
+              {
+                href: "/certs/aws-ml-engineer",
+                chip: "MLA-C01",
+                emoji: "🧪",
+                accent: "bg-orange-700",
+                title: "AWS ML Engineer Associate",
+                description:
+                  "AI Practitioner の上位、SageMaker / Bedrock / MLOps の実装力を測る AWS ML 系 Associate 認定。",
+              },
+              {
+                href: "/certs/snowflake-snowpro",
+                chip: "SnowPro",
+                emoji: "❄️",
+                accent: "bg-cyan-600",
+                title: "Snowflake SnowPro Core",
+                description:
+                  "クラウドデータプラットフォーム認定。Time Travel ・ Cloning ・ Data Sharing などモダン DWH 機能を網羅。",
+              },
             ].map((cert) => (
               <Link
                 key={cert.href}

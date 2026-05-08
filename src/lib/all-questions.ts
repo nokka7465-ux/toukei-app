@@ -30,6 +30,8 @@ import { itPassportQuestions } from "@/data/questions/it-passport";
 import { powerBiQuestions } from "@/data/questions/power-bi";
 import { tableauSpecialistQuestions } from "@/data/questions/tableau-specialist";
 import { azureAi102Questions } from "@/data/questions/azure-ai-102";
+import { awsMlEngineerQuestions } from "@/data/questions/aws-ml-engineer";
+import { snowflakeSnowProQuestions } from "@/data/questions/snowflake-snowpro";
 
 export type Track = {
   key: string;
@@ -71,6 +73,8 @@ export const tracks: Track[] = [
   { key: "power-bi", label: "Power BI(PL-300)", href: "/certs/power-bi/quiz", group: "cert", questions: powerBiQuestions },
   { key: "tableau-specialist", label: "Tableau Specialist", href: "/certs/tableau-specialist/quiz", group: "cert", questions: tableauSpecialistQuestions },
   { key: "azure-ai-102", label: "Azure AI-102", href: "/certs/azure-ai-102/quiz", group: "cert", questions: azureAi102Questions },
+  { key: "aws-ml-engineer", label: "AWS MLA-C01", href: "/certs/aws-ml-engineer/quiz", group: "cert", questions: awsMlEngineerQuestions },
+  { key: "snowflake-snowpro", label: "Snowflake SnowPro Core", href: "/certs/snowflake-snowpro/quiz", group: "cert", questions: snowflakeSnowProQuestions },
 ];
 
 export type EnrichedQuestion = Question & {

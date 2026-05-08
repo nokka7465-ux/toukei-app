@@ -521,6 +521,40 @@ const RELATED_EXAMS: Exam[] = [
     highlight:
       "AI-900 の上位、Azure AI を実装する技術者向け。Python / C# によるコード実装力を測る。",
   },
+  {
+    id: "aws-ml-engineer",
+    title: "AWS Certified Machine Learning Engineer Associate(MLA-C01)",
+    organizer: "Amazon Web Services(AWS)",
+    format: "CBT(Pearson VUE)or オンライン監督受験",
+    schedule: "通年(随時)",
+    duration: "130 分 / 65 問",
+    fee: "150 USD(参考)",
+    passCriteria: "1000 点満点中 720 点",
+    passRate: "AWS 非公開",
+    takers: "全世界で大規模",
+    officialUrl: "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/",
+    studyHref: "/certs/aws-ml-engineer",
+    studyLabel: "AWS MLA-C01 の教科書を見る",
+    highlight:
+      "2024 年正式リリース、AI Practitioner の上位。SageMaker / Bedrock / MLOps の実装力を測る。",
+  },
+  {
+    id: "snowflake-snowpro",
+    title: "Snowflake SnowPro Core(COF-C02)",
+    organizer: "Snowflake",
+    format: "オンライン監督受験(Pearson VUE)or テストセンター",
+    schedule: "通年(随時)",
+    duration: "115 分 / 100 問",
+    fee: "175 USD(参考)",
+    passCriteria: "1000 点満点中 750 点",
+    passRate: "Snowflake 非公開",
+    takers: "全世界で大規模",
+    officialUrl: "https://www.snowflake.com/certifications/",
+    studyHref: "/certs/snowflake-snowpro",
+    studyLabel: "Snowflake SnowPro Core の教科書を見る",
+    highlight:
+      "クラウドデータプラットフォームの基礎認定。Time Travel / Cloning / Data Sharing などモダン DWH 機能を網羅。",
+  },
 ];
 
 function ExamCard({ exam }: { exam: Exam }) {

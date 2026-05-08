@@ -65,6 +65,8 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/certs/power-bi", label: "Power BI(PL-300)" },
       { href: "/certs/tableau-specialist", label: "Tableau Desktop Specialist" },
       { href: "/certs/azure-ai-102", label: "Azure AI Engineer(AI-102)" },
+      { href: "/certs/aws-ml-engineer", label: "AWS ML Engineer Associate" },
+      { href: "/certs/snowflake-snowpro", label: "Snowflake SnowPro Core" },
     ],
   },
   {

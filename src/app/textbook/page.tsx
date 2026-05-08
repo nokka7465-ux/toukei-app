@@ -356,6 +356,26 @@ const CERT_TRACKS: Track[] = [
     emoji: "🤖",
     accent: "bg-indigo-600",
   },
+  {
+    href: "/certs/aws-ml-engineer/textbook",
+    title: "AWS ML Engineer Associate(MLA-C01)",
+    description:
+      "AI Practitioner の上位、SageMaker / Bedrock / MLOps の実装力を測る AWS ML 系 Associate 認定。",
+    audience: "AWS AI/ML 開発者",
+    chip: "MLA-C01",
+    emoji: "🧪",
+    accent: "bg-orange-700",
+  },
+  {
+    href: "/certs/snowflake-snowpro/textbook",
+    title: "Snowflake SnowPro Core",
+    description:
+      "クラウドデータプラットフォーム認定。Time Travel / Cloning / Data Sharing などモダン DWH 機能を網羅。",
+    audience: "データエンジニア",
+    chip: "SnowPro",
+    emoji: "❄️",
+    accent: "bg-cyan-600",
+  },
 ];
 
 function TrackCard({ track }: { track: Track }) {

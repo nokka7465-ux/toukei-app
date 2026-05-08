@@ -1506,6 +1506,161 @@ export const certRoadmaps: Record<string, CertRoadmap> = {
     textbookHref: "/certs/azure-ai-102/textbook",
     quizHref: "/certs/azure-ai-102/quiz",
   },
+  "aws-ml-engineer": {
+    slug: "aws-ml-engineer",
+    title: "AWS Machine Learning Engineer Associate(MLA-C01)学習ロードマップ",
+    organizer: "Amazon Web Services(AWS)",
+    hours: "150〜250 時間",
+    months: "3〜5 ヶ月",
+    prerequisites: "AI Practitioner 合格相当 + SageMaker / Python / SQL / 統計の基礎",
+    passCriteria: "1000 点満点中 720 点",
+    steps: [
+      {
+        week: "Week 1-2",
+        title: "AI Practitioner 復習 + AWS 基礎",
+        description:
+          "IAM / S3 / VPC / KMS / VPC Endpoint。",
+        links: [
+          { href: "/certs/aws-ml-engineer/textbook", label: "MLA-C01 教科書(章 2)" },
+          { href: "/certs/aws-ai-practitioner/textbook", label: "AI Practitioner 教科書(復習)" },
+        ],
+      },
+      {
+        week: "Week 3-4",
+        title: "SageMaker 全体像",
+        description:
+          "Studio / Canvas / Autopilot / Pipelines / Endpoints / Model Registry。",
+        links: [
+          { href: "/certs/aws-ml-engineer/textbook", label: "MLA-C01 教科書(章 3)" },
+        ],
+      },
+      {
+        week: "Week 5",
+        title: "データ準備 + 特徴量",
+        description:
+          "S3 / Glue / Data Wrangler / Feature Store / 不均衡対策。",
+        links: [
+          { href: "/certs/aws-ml-engineer/textbook", label: "MLA-C01 教科書(章 4)" },
+        ],
+      },
+      {
+        week: "Week 6",
+        title: "学習 + HPO",
+        description:
+          "Built-in / BYOC / Bayesian HPO / MLflow / Spot Training。",
+        links: [
+          { href: "/certs/aws-ml-engineer/textbook", label: "MLA-C01 教科書(章 4)" },
+        ],
+      },
+      {
+        week: "Week 7",
+        title: "推論デプロイ 5 種",
+        description:
+          "Real-time / Serverless / Async / Batch / Edge / Multi-Model Endpoint。",
+        links: [
+          { href: "/certs/aws-ml-engineer/textbook", label: "MLA-C01 教科書(章 5)" },
+        ],
+      },
+      {
+        week: "Week 8",
+        title: "MLOps Pipelines + Model Registry",
+        description:
+          "ProcessingStep / TrainingStep / ConditionStep / Model Registry / Step Functions。",
+        links: [
+          { href: "/certs/aws-ml-engineer/textbook", label: "MLA-C01 教科書(章 6)" },
+        ],
+      },
+      {
+        week: "Week 9",
+        title: "モニタリング + Clarify + Bedrock",
+        description:
+          "Model Monitor 4 種 / SHAP / Bedrock / JumpStart / Amazon Q ファミリ。",
+        links: [
+          { href: "/certs/aws-ml-engineer/textbook", label: "MLA-C01 教科書(章 7-9)" },
+        ],
+      },
+      {
+        week: "Week 10",
+        title: "模擬試験 + 過去問",
+        description:
+          "AWS 公式 Practice Exam + 本サイト演習問題。",
+        links: [
+          { href: "/certs/aws-ml-engineer/quiz", label: "MLA-C01 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/aws-ml-engineer/textbook",
+    quizHref: "/certs/aws-ml-engineer/quiz",
+  },
+  "snowflake-snowpro": {
+    slug: "snowflake-snowpro",
+    title: "Snowflake SnowPro Core(COF-C02)学習ロードマップ",
+    organizer: "Snowflake",
+    hours: "60〜100 時間",
+    months: "1〜2 ヶ月",
+    prerequisites: "SQL の基礎 + データベースの基本概念",
+    passCriteria: "1000 点満点中 750 点",
+    steps: [
+      {
+        week: "Week 1",
+        title: "アーキテクチャ + Virtual Warehouse",
+        description:
+          "3 層構造 / マルチクラウド / Auto-suspend / Auto-resume。",
+        links: [
+          { href: "/certs/snowflake-snowpro/textbook", label: "SnowPro Core 教科書(章 2)" },
+        ],
+      },
+      {
+        week: "Week 2",
+        title: "オブジェクト階層 + ロード",
+        description:
+          "テーブル種別 / Stream / Task / COPY / Snowpipe / Stage。",
+        links: [
+          { href: "/certs/snowflake-snowpro/textbook", label: "SnowPro Core 教科書(章 3-4)" },
+        ],
+      },
+      {
+        week: "Week 3",
+        title: "SQL + VARIANT",
+        description:
+          "QUALIFY / FLATTEN / Snowpark / Cortex AI 基礎。",
+        links: [
+          { href: "/certs/snowflake-snowpro/textbook", label: "SnowPro Core 教科書(章 5)" },
+        ],
+      },
+      {
+        week: "Week 4",
+        title: "パフォーマンス",
+        description:
+          "Micro-partition / 3 種キャッシュ / Search Optimization / クラスタリング。",
+        links: [
+          { href: "/certs/snowflake-snowpro/textbook", label: "SnowPro Core 教科書(章 6)" },
+        ],
+      },
+      {
+        week: "Week 5",
+        title: "Time Travel + Cloning + Sharing",
+        description:
+          "Time Travel(1〜90 日)・ Fail-safe(7 日)・ Zero-Copy Cloning ・ Secure Data Sharing。",
+        links: [
+          { href: "/certs/snowflake-snowpro/textbook", label: "SnowPro Core 教科書(章 7)" },
+        ],
+      },
+      {
+        week: "Week 6",
+        title: "セキュリティ + 模擬試験",
+        description:
+          "RBAC / システム定義ロール / Network Policy / RLS。仕上げに演習問題。",
+        links: [
+          { href: "/certs/snowflake-snowpro/textbook", label: "SnowPro Core 教科書(章 8-10)" },
+          { href: "/certs/snowflake-snowpro/quiz", label: "SnowPro Core 演習問題" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/snowflake-snowpro/textbook",
+    quizHref: "/certs/snowflake-snowpro/quiz",
+  },
 };
 
 export const certSlugs = Object.keys(certRoadmaps);

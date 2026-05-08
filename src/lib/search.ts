@@ -30,6 +30,8 @@ import { itPassportTextbook } from "@/data/textbooks/it-passport";
 import { powerBiTextbook } from "@/data/textbooks/power-bi";
 import { tableauSpecialistTextbook } from "@/data/textbooks/tableau-specialist";
 import { azureAi102Textbook } from "@/data/textbooks/azure-ai-102";
+import { awsMlEngineerTextbook } from "@/data/textbooks/aws-ml-engineer";
+import { snowflakeSnowProTextbook } from "@/data/textbooks/snowflake-snowpro";
 import { glossary } from "@/data/glossary";
 import { blogPosts } from "@/data/blog";
 import { introFormulas } from "@/data/formulas/intro";
@@ -132,6 +134,8 @@ export const searchIndex: SearchItem[] = (() => {
     { book: powerBiTextbook, urlBase: "/certs/power-bi/textbook", displayTitle: "Power BI" },
     { book: tableauSpecialistTextbook, urlBase: "/certs/tableau-specialist/textbook", displayTitle: "Tableau Specialist" },
     { book: azureAi102Textbook, urlBase: "/certs/azure-ai-102/textbook", displayTitle: "Azure AI-102" },
+    { book: awsMlEngineerTextbook, urlBase: "/certs/aws-ml-engineer/textbook", displayTitle: "AWS MLA-C01" },
+    { book: snowflakeSnowProTextbook, urlBase: "/certs/snowflake-snowpro/textbook", displayTitle: "Snowflake SnowPro Core" },
   ];
   for (const { book, urlBase, displayTitle } of textbookSets) {
     for (const ch of book.chapters) {

@@ -34,7 +34,7 @@ const SITE_NAME = "統計ロードマップ";
 const SITE_TAGLINE =
   "AIエンジニアになるための統計・数学・Python を一気通貫で学ぶ";
 const SITE_DESCRIPTION =
-  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。統計検定 4 級〜1 級・G検定・E資格・DS検定・QC検定・生成AIパスポート・DS エキスパート・Python データ分析試験・AI 実装検定・画像処理エンジニア検定・ITパスポート/基本情報/応用情報/データベーススペシャリスト・DX 検定・AWS AI Practitioner/SAA・Azure AI Fundamentals/AI-102・GCP Generative AI Leader・Power BI(PL-300)・Tableau Desktop Specialist など関連検定も網羅。インタラクティブ図解・統計計算ツール・Python/R コード併記で、理論から実装までスムーズに繋がる学習ロードマップを提供。";
+  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。統計検定 4 級〜1 級・G検定・E資格・DS検定・QC検定・生成AIパスポート・DS エキスパート・Python データ分析試験・AI 実装検定・画像処理エンジニア検定・ITパスポート/基本情報/応用情報/データベーススペシャリスト・DX 検定・AWS AI Practitioner/SAA/MLA-C01・Azure AI Fundamentals/AI-102・GCP Generative AI Leader・Power BI(PL-300)・Tableau Desktop Specialist・Snowflake SnowPro Core など関連検定も網羅。インタラクティブ図解・統計計算ツール・Python/R コード併記で、理論から実装までスムーズに繋がる学習ロードマップを提供。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -125,6 +125,13 @@ export const metadata: Metadata = {
     "AI-102",
     "Azure AI Engineer",
     "Azure AI Foundry",
+    "MLA-C01",
+    "AWS ML Engineer",
+    "Snowflake",
+    "SnowPro Core",
+    "Time Travel",
+    "Data Sharing",
+    "Cortex AI",
   ],
   openGraph: {
     type: "website",
@@ -602,6 +609,16 @@ export default function RootLayout({
                   <li>
                     <Link href="/certs/azure-ai-102" className="hover:underline text-[var(--muted-strong)]">
                       Azure AI Engineer(AI-102)
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/aws-ml-engineer" className="hover:underline text-[var(--muted-strong)]">
+                      AWS ML Engineer Associate
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/snowflake-snowpro" className="hover:underline text-[var(--muted-strong)]">
+                      Snowflake SnowPro Core
                     </Link>
                   </li>
                 </ul>

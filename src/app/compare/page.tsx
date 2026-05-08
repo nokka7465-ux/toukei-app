@@ -381,6 +381,32 @@ const CERTS: Cert[] = [
     best: "Azure AI 開発者",
     notes: "Azure OpenAI / AI Search / Foundry",
   },
+  {
+    slug: "/certs/aws-ml-engineer",
+    name: "AWS MLA-C01",
+    organizer: "AWS",
+    fee: "150 USD",
+    duration: "通年(CBT)",
+    format: "130 分 / 65 問",
+    difficulty: "★★★★☆",
+    studyHours: "150〜250h",
+    pass: "公開なし",
+    best: "AWS AI/ML 開発者",
+    notes: "SageMaker / Bedrock / MLOps",
+  },
+  {
+    slug: "/certs/snowflake-snowpro",
+    name: "Snowflake SnowPro Core",
+    organizer: "Snowflake",
+    fee: "175 USD",
+    duration: "通年",
+    format: "115 分 / 100 問",
+    difficulty: "★★★☆☆",
+    studyHours: "60〜100h",
+    pass: "公開なし",
+    best: "データエンジニア",
+    notes: "Time Travel / Cloning / Sharing",
+  },
 ];
 
 export default function ComparePage() {

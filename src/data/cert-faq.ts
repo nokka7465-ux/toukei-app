@@ -459,6 +459,50 @@ export const certFaq: Record<string, FaqItem[]> = {
       a: "AI-102 → **DP-100(Azure Data Scientist Associate)** で ML 寄りに、または **DP-203(Azure Data Engineer Associate)** でデータ基盤側へ。**AZ-305(Solutions Architect Expert)** で全体アーキテクトに進む道もあります。",
     },
   ],
+  "aws-ml-engineer": [
+    {
+      q: "AWS Certified Machine Learning Engineer Associate(MLA-C01)とは?",
+      a: "**AWS が 2024 年に正式リリース** した ML Engineer 向けの **Associate レベル** 認定。**AI Practitioner(Foundational)の上位** で、SageMaker / Bedrock / MLOps を実装する技術者向け。**ML Specialty より入門的** な位置付け。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**CBT(Pearson VUE)or オンライン監督受験 / 65 問 / 130 分 / 合格 720 / 1000 点 / 受験料 150 USD / 有効期限 3 年**。SageMaker / Python / SQL / 統計の基礎が前提知識。",
+    },
+    {
+      q: "AI Practitioner と何が違う?",
+      a: "**AI Practitioner は概念中心**(コードなし)、**MLA-C01 は SageMaker 実装 ・ MLOps ・ Pipelines ・ Model Monitor まで** 実装力を測る。AI Practitioner → MLA-C01 が王道パス。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "AI Practitioner 合格者で **120 〜 150 時間**、未経験者で **150 〜 250 時間**。**AWS Skill Builder + AWS Free Tier(SageMaker Studio Lab は完全無料)** で実機ハンズオンが必須。",
+    },
+    {
+      q: "次のステップは?",
+      a: "MLA-C01 → **ML Specialty(MLS-C01)** で深い数学 ・ アルゴリズム理解、または **AWS SAA → SAP** で全体アーキテクトへ。三大クラウド ML を揃えるなら本サイトの[Azure AI-102](/certs/azure-ai-102) ・ [GCP Generative AI Leader](/certs/gcp-gen-ai-leader)も。",
+    },
+  ],
+  "snowflake-snowpro": [
+    {
+      q: "Snowflake SnowPro Core(COF-C02)とは?",
+      a: "**Snowflake** が提供するクラウドデータプラットフォーム認定の **エントリーレベル**。Specialty / Advanced 認定の前提条件で、Snowflake の **アーキテクチャ ・ 基本機能 ・ SQL ・ パフォーマンス ・ セキュリティ** を測る。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**オンライン監督受験(Pearson VUE)or テストセンター / 100 問 / 115 分 / 多肢選択 + 複数選択 / 合格 750 / 1000 点 / 受験料 175 USD / 有効期限 2 年**。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "SQL 経験者で **40 〜 60 時間**、未経験者で **60 〜 100 時間**。**Snowflake 30 日トライアル**(400 USD クレジット)+ **Snowflake University**(無料)が標準教材。",
+    },
+    {
+      q: "なぜ Snowflake が注目されている?",
+      a: "**マルチクラウド対応 ・ ストレージとコンピュートの分離 ・ Time Travel ・ Zero-Copy Cloning ・ Secure Data Sharing** などの独自機能で、**dbt + Snowflake** がモダンデータスタックの標準として急速に拡大中。",
+    },
+    {
+      q: "次のステップは?",
+      a: "SnowPro Core → **SnowPro Specialty**(Data Engineer / Data Analyst / Data Scientist / Architect / Administrator)が王道。本サイトの[DB スペシャリスト](/certs/db-specialist)と組み合わせると伝統的 DB + モダン基盤の両軸が揃う。",
+    },
+  ],
   "qc-kentei": [
     {
       q: "QC検定の各級の難易度は?",
