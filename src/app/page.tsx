@@ -212,6 +212,12 @@ export default function Home() {
             AI とは?(5 分で分かる)
           </Link>
           <Link
+            href="/score"
+            className="px-5 py-2.5 border-2 border-violet-500 text-violet-700 dark:text-violet-300 rounded-lg font-bold hover:bg-violet-50 dark:hover:bg-violet-900/20"
+          >
+            🎯 統計偏差値を測る
+          </Link>
+          <Link
             href="/diagnose"
             className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
           >
@@ -248,6 +254,286 @@ export default function Home() {
             動かして学ぶ統計
           </Link>
         </div>
+      </section>
+
+      {/* 3 層構造: 記事 → 診断 → 学習 */}
+      <section className="mb-14 md:mb-20">
+        <header className="mb-6 text-center">
+          <span className="chip-soft">Learning Flow</span>
+          <h2 className="text-2xl md:text-3xl font-bold mt-3">
+            学習の 3 ステップ
+          </h2>
+          <p className="text-sm text-[var(--muted)] mt-2">
+            <strong>気づく</strong> → <strong>測る</strong> →{" "}
+            <strong>学ぶ</strong> の順で進めるのがおすすめです。
+          </p>
+        </header>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 relative">
+          {[
+            {
+              step: "STEP 1",
+              chip: "Discover",
+              icon: "📰",
+              title: "記事で気づく",
+              description:
+                "ブログ・AI とは・統計入門で、興味のあるトピックから自由に。",
+              href: "/blog",
+              cta: "ブログを読む",
+              gradient: "from-sky-500 to-emerald-500",
+            },
+            {
+              step: "STEP 2",
+              chip: "Measure",
+              icon: "📊",
+              title: "診断で測る",
+              description:
+                "統計偏差値診断で現在地を数値化。15 問で実力を可視化します。",
+              href: "/score",
+              cta: "偏差値を測る",
+              gradient: "from-violet-500 to-sky-500",
+            },
+            {
+              step: "STEP 3",
+              chip: "Master",
+              icon: "📚",
+              title: "教科書で学ぶ",
+              description:
+                "あなたのレベルに合った教科書から体系的に。15 教科書 150+ 章。",
+              href: "/textbook",
+              cta: "教科書一覧へ",
+              gradient: "from-amber-500 to-rose-500",
+            },
+          ].map((p, idx) => (
+            <Link
+              key={p.title}
+              href={p.href}
+              className="paper rounded-xl overflow-hidden flex flex-col group hover:-translate-y-0.5 transition relative"
+            >
+              <div
+                className={`h-1.5 w-full bg-gradient-to-r ${p.gradient}`}
+                aria-hidden="true"
+              />
+              <div className="p-6 flex-1 flex flex-col">
+                <div className="flex items-baseline gap-2 mb-3">
+                  <span
+                    className={`text-[10px] uppercase tracking-[0.2em] font-bold bg-gradient-to-r ${p.gradient} bg-clip-text text-transparent`}
+                  >
+                    {p.step}
+                  </span>
+                  <span className="chip-soft text-[10px]">{p.chip}</span>
+                </div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-3xl" aria-hidden="true">
+                    {p.icon}
+                  </span>
+                  <h3 className="text-xl font-bold group-hover:text-[var(--link)]">
+                    {p.title}
+                  </h3>
+                </div>
+                <p className="text-sm text-[var(--muted-strong)] leading-relaxed flex-1">
+                  {p.description}
+                </p>
+                <div className="mt-4 text-sm font-bold text-[var(--link)] ui-sans">
+                  {p.cta} →
+                </div>
+              </div>
+              {/* 矢印(ステップ間) */}
+              {idx < 2 && (
+                <div
+                  aria-hidden="true"
+                  className="hidden md:block absolute top-1/2 -right-2 transform -translate-y-1/2 z-10 text-[var(--muted)] text-2xl pointer-events-none"
+                >
+                  →
+                </div>
+              )}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* 二軸ナビゲーション: 目的 × 検定 */}
+      <section className="mb-14 md:mb-20">
+        <header className="mb-6 text-center">
+          <span className="chip-soft">Find Your Path</span>
+          <h2 className="text-2xl md:text-3xl font-bold mt-3">
+            目的 × 検定 で探す
+          </h2>
+          <p className="text-sm text-[var(--muted)] mt-2">
+            あなたの目的と進めたい検定の交点から、最適な入口を見つけられます。
+          </p>
+        </header>
+        <div className="paper rounded-xl p-5 overflow-x-auto">
+          <table className="w-full text-xs ui-sans">
+            <thead>
+              <tr className="border-b-2 border-[var(--page-border-strong)]">
+                <th className="text-left py-3 pr-3 font-bold text-[var(--muted)] uppercase tracking-[0.1em] text-[10px]">
+                  目的 ＼ 検定
+                </th>
+                <th className="text-center py-3 px-2 font-bold">統計検定</th>
+                <th className="text-center py-3 px-2 font-bold">DS 検定</th>
+                <th className="text-center py-3 px-2 font-bold">G 検定</th>
+                <th className="text-center py-3 px-2 font-bold">E 資格</th>
+                <th className="text-center py-3 px-2 font-bold">QC 検定</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                {
+                  goal: "🎓 試験合格",
+                  cells: [
+                    { label: "級診断", href: "/diagnose" },
+                    { label: "教科書", href: "/certs/ds-literacy/textbook" },
+                    { label: "教科書", href: "/certs/g-test/textbook" },
+                    { label: "教科書", href: "/certs/e-shikaku/textbook" },
+                    { label: "教科書", href: "/certs/qc-kentei/textbook" },
+                  ],
+                },
+                {
+                  goal: "💼 実務応用",
+                  cells: [
+                    { label: "2 級", href: "/textbook/grade-2" },
+                    { label: "DS 基礎", href: "/certs/ds-basic/textbook" },
+                    { label: "AI 倫理", href: "/about-ai" },
+                    { label: "PyTorch", href: "/programming#ch8" },
+                    { label: "管理図", href: "/certs/qc-kentei/textbook" },
+                  ],
+                },
+                {
+                  goal: "🚀 AI 転職",
+                  cells: [
+                    { label: "ロードマップ", href: "/roadmap" },
+                    { label: "ML 手法", href: "/certs/ds-literacy/textbook" },
+                    { label: "G 検定", href: "/certs/g-test/textbook" },
+                    { label: "E 資格", href: "/certs/e-shikaku/textbook" },
+                    { label: "─", href: "/certs/qc-kentei/textbook" },
+                  ],
+                },
+                {
+                  goal: "📚 学術研究",
+                  cells: [
+                    { label: "1 級", href: "/textbook/grade-1" },
+                    { label: "─", href: "/certs/ds-literacy/textbook" },
+                    { label: "─", href: "/certs/g-test/textbook" },
+                    { label: "深層学習", href: "/deep-learning-basics" },
+                    { label: "─", href: "/certs/qc-kentei/textbook" },
+                  ],
+                },
+                {
+                  goal: "🧠 教養",
+                  cells: [
+                    { label: "入門編", href: "/textbook/intro" },
+                    { label: "DS 基礎", href: "/certs/ds-basic/textbook" },
+                    { label: "AI とは", href: "/about-ai" },
+                    { label: "─", href: "/certs/e-shikaku/textbook" },
+                    { label: "─", href: "/certs/qc-kentei/textbook" },
+                  ],
+                },
+                {
+                  goal: "🏭 製造業",
+                  cells: [
+                    { label: "2 級", href: "/textbook/grade-2" },
+                    { label: "─", href: "/certs/ds-literacy/textbook" },
+                    { label: "─", href: "/certs/g-test/textbook" },
+                    { label: "─", href: "/certs/e-shikaku/textbook" },
+                    { label: "QC 教科書", href: "/certs/qc-kentei/textbook" },
+                  ],
+                },
+              ].map((row) => (
+                <tr
+                  key={row.goal}
+                  className="border-b border-[var(--page-border)] last:border-0"
+                >
+                  <td className="py-2.5 pr-3 font-bold whitespace-nowrap">
+                    {row.goal}
+                  </td>
+                  {row.cells.map((c, i) => (
+                    <td
+                      key={i}
+                      className="py-2.5 px-2 text-center"
+                    >
+                      {c.label === "─" ? (
+                        <span className="text-[var(--muted)]">─</span>
+                      ) : (
+                        <Link
+                          href={c.href}
+                          className="text-[var(--link)] hover:underline whitespace-nowrap"
+                        >
+                          {c.label}
+                        </Link>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* 最新動向 */}
+      <section className="mb-14 md:mb-20 paper rounded-xl p-6">
+        <header className="mb-4 flex items-baseline justify-between gap-3 flex-wrap">
+          <div>
+            <span className="chip-soft mb-2 inline-flex items-center gap-1">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse" />
+              Latest
+            </span>
+            <h2 className="text-xl font-bold mt-2">最新動向 ─ 2026 春</h2>
+          </div>
+          <Link
+            href="/blog"
+            className="text-xs text-[var(--link)] hover:underline ui-sans"
+          >
+            すべての記事 →
+          </Link>
+        </header>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+          {[
+            {
+              tag: "AI",
+              title: "Claude Opus 4.7・GPT-5.5 時代の AI エージェント",
+              text: "MCP 標準化が進み、Claude Code・Devin・Manus が実用域。E 資格 Ch11 で詳解。",
+              href: "/certs/e-shikaku/textbook#ch11",
+            },
+            {
+              tag: "統計",
+              title: "因果推論が 1 級・準 1 級の主要トピックに",
+              text: "Pearl の DAG・do-calculus・反事実推論。1 級 Ch11 で完全網羅。",
+              href: "/textbook/grade-1#ch11",
+            },
+            {
+              tag: "規制",
+              title: "EU AI Act 段階適用 + 日本 AI 事業者ガイドライン",
+              text: "リスクレベル別の規制が本格化。DS 検定リテラシー Ch5・G 検定 Ch5 で。",
+              href: "/certs/ds-literacy/textbook#ch5",
+            },
+            {
+              tag: "数学",
+              title: "GNN とスペクトラルグラフ理論",
+              text: "math Ch11 でグラフラプラシアン・PageRank・GNN を新規追加。",
+              href: "/math/textbook#ch11",
+            },
+          ].map((n) => (
+            <li key={n.title}>
+              <Link
+                href={n.href}
+                className="paper rounded-lg p-4 block hover:-translate-y-0.5 transition group h-full"
+              >
+                <div className="flex items-baseline gap-2 mb-1.5">
+                  <span className="px-1.5 py-0.5 rounded bg-[var(--accent)] text-[var(--accent-fg)] text-[10px] font-bold tracking-wider ui-sans">
+                    {n.tag}
+                  </span>
+                </div>
+                <div className="font-bold text-sm leading-snug group-hover:text-[var(--link)]">
+                  {n.title}
+                </div>
+                <div className="text-xs text-[var(--muted-strong)] mt-1.5 leading-relaxed">
+                  {n.text}
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="mb-14 md:mb-20">

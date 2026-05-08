@@ -198,6 +198,9 @@ export default function RootLayout({
                     <Link href="/about-ai" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs" title="AI とは何か - 5 分で分かる入門">
                       AI とは
                     </Link>
+                    <Link href="/score" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs" title="統計偏差値診断 - 15 問で実力測定">
+                      偏差値診断
+                    </Link>
                     <Link href="/diagnose" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
                       級診断
                     </Link>
@@ -278,6 +281,11 @@ export default function RootLayout({
                   <li>
                     <Link href="/diagnose" className="hover:underline text-[var(--muted-strong)]">
                       級診断
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/score" className="hover:underline text-[var(--muted-strong)]">
+                      統計偏差値診断
                     </Link>
                   </li>
                   <li>
