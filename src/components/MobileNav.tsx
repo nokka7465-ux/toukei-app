@@ -53,6 +53,8 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/certs/python-data", label: "Python データ分析" },
       { href: "/certs/ai-implementation", label: "AI 実装検定" },
       { href: "/certs/image-processing", label: "画像処理エンジニア検定" },
+      { href: "/certs/applied-info", label: "応用情報技術者試験" },
+      { href: "/certs/aws-ai-practitioner", label: "AWS AI Practitioner" },
     ],
   },
   {

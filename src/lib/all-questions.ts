@@ -18,6 +18,8 @@ import { dsExpertQuestions } from "@/data/questions/ds-expert";
 import { pythonDataQuestions } from "@/data/questions/python-data";
 import { aiImplementationQuestions } from "@/data/questions/ai-implementation";
 import { imageProcessingQuestions } from "@/data/questions/image-processing";
+import { appliedInfoQuestions } from "@/data/questions/applied-info";
+import { awsAiPractitionerQuestions } from "@/data/questions/aws-ai-practitioner";
 
 export type Track = {
   key: string;
@@ -47,6 +49,8 @@ export const tracks: Track[] = [
   { key: "python-data", label: "Python データ分析", href: "/certs/python-data/quiz", group: "cert", questions: pythonDataQuestions },
   { key: "ai-implementation", label: "AI 実装検定", href: "/certs/ai-implementation/quiz", group: "cert", questions: aiImplementationQuestions },
   { key: "image-processing", label: "画像処理エンジニア検定", href: "/certs/image-processing/quiz", group: "cert", questions: imageProcessingQuestions },
+  { key: "applied-info", label: "応用情報技術者", href: "/certs/applied-info/quiz", group: "cert", questions: appliedInfoQuestions },
+  { key: "aws-ai-practitioner", label: "AWS AI Practitioner", href: "/certs/aws-ai-practitioner/quiz", group: "cert", questions: awsAiPractitionerQuestions },
 ];
 
 export type EnrichedQuestion = Question & {

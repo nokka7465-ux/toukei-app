@@ -19,6 +19,8 @@ import { dsExpertQuestions } from "@/data/questions/ds-expert";
 import { pythonDataQuestions } from "@/data/questions/python-data";
 import { aiImplementationQuestions } from "@/data/questions/ai-implementation";
 import { imageProcessingQuestions } from "@/data/questions/image-processing";
+import { appliedInfoQuestions } from "@/data/questions/applied-info";
+import { awsAiPractitionerQuestions } from "@/data/questions/aws-ai-practitioner";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -67,6 +69,8 @@ const CERT_TRACKS: Track[] = [
   { href: "/certs/python-data/quiz", title: "Python データ分析試験(PythonED)", count: pythonDataQuestions.length, description: "NumPy / pandas / Matplotlib / scikit-learn" },
   { href: "/certs/ai-implementation/quiz", title: "AI 実装検定(AIE)", count: aiImplementationQuestions.length, description: "PyTorch / Keras / CNN / Transformer / エッジ AI" },
   { href: "/certs/image-processing/quiz", title: "画像処理エンジニア検定 エキスパート", count: imageProcessingQuestions.length, description: "古典 CV(フィルタ/周波数)+ DL ベース CV" },
+  { href: "/certs/applied-info/quiz", title: "応用情報技術者試験(IPA)", count: appliedInfoQuestions.length, description: "アルゴリズム ・ DB ・ AI ・ セキュリティ ・ 経営戦略" },
+  { href: "/certs/aws-ai-practitioner/quiz", title: "AWS Certified AI Practitioner", count: awsAiPractitionerQuestions.length, description: "AWS AI サービス ・ Bedrock ・ SageMaker ・ プロンプト" },
 ];
 
 function TrackCard({ track }: { track: Track }) {

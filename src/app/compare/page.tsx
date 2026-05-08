@@ -225,6 +225,32 @@ const CERTS: Cert[] = [
     best: "画像 AI 専門家",
     notes: "フィルタ ・ 周波数 ・ CNN ・ U-Net",
   },
+  {
+    slug: "/certs/applied-info",
+    name: "応用情報技術者",
+    organizer: "IPA",
+    fee: "7,500 円",
+    duration: "年 2 回",
+    format: "午前 150 分 + 午後 150 分",
+    difficulty: "★★★★☆",
+    studyHours: "200〜500h",
+    pass: "約 23〜26%",
+    best: "IT 中堅エンジニア",
+    notes: "国家試験。レベル 3、高度試験の登竜門",
+  },
+  {
+    slug: "/certs/aws-ai-practitioner",
+    name: "AWS AI Practitioner",
+    organizer: "AWS",
+    fee: "100 USD",
+    duration: "通年(CBT)",
+    format: "90 分 / 65 問",
+    difficulty: "★★☆☆☆",
+    studyHours: "40〜100h",
+    pass: "公開なし",
+    best: "クラウド AI 入門",
+    notes: "Bedrock / SageMaker / 責任ある AI",
+  },
 ];
 
 export default function ComparePage() {

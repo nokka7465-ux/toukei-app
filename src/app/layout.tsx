@@ -34,7 +34,7 @@ const SITE_NAME = "統計ロードマップ";
 const SITE_TAGLINE =
   "AIエンジニアになるための統計・数学・Python を一気通貫で学ぶ";
 const SITE_DESCRIPTION =
-  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。統計検定 4 級〜1 級・G検定・E資格・DS検定・QC検定・生成AIパスポート・DS エキスパート・Python データ分析試験・AI 実装検定・画像処理エンジニア検定など関連検定も網羅。インタラクティブ図解・統計計算ツール・Python/R コード併記で、理論から実装までスムーズに繋がる学習ロードマップを提供。";
+  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。統計検定 4 級〜1 級・G検定・E資格・DS検定・QC検定・生成AIパスポート・DS エキスパート・Python データ分析試験・AI 実装検定・画像処理エンジニア検定・応用情報技術者試験・AWS AI Practitioner など関連検定も網羅。インタラクティブ図解・統計計算ツール・Python/R コード併記で、理論から実装までスムーズに繋がる学習ロードマップを提供。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -84,6 +84,13 @@ export const metadata: Metadata = {
     "コンピュータビジョン",
     "CG-ARTS",
     "OpenCV",
+    "応用情報技術者",
+    "応用情報",
+    "IPA",
+    "AWS AI Practitioner",
+    "AIF-C01",
+    "Bedrock",
+    "SageMaker",
   ],
   openGraph: {
     type: "website",
@@ -501,6 +508,16 @@ export default function RootLayout({
                   <li>
                     <Link href="/certs/image-processing" className="hover:underline text-[var(--muted-strong)]">
                       画像処理エンジニア検定
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/applied-info" className="hover:underline text-[var(--muted-strong)]">
+                      応用情報技術者試験
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/aws-ai-practitioner" className="hover:underline text-[var(--muted-strong)]">
+                      AWS AI Practitioner
                     </Link>
                   </li>
                 </ul>

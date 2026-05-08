@@ -236,6 +236,26 @@ const CERT_TRACKS: Track[] = [
     emoji: "🎞️",
     accent: "bg-orange-600",
   },
+  {
+    href: "/certs/applied-info/textbook",
+    title: "応用情報技術者試験(IPA)",
+    description:
+      "国家試験レベル 3。アルゴリズム/DB/AI/セキュリティ/PM/経営戦略を AI / データ重点で解説。",
+    audience: "IT 中堅エンジニア",
+    chip: "AP",
+    emoji: "🏛️",
+    accent: "bg-slate-600",
+  },
+  {
+    href: "/certs/aws-ai-practitioner/textbook",
+    title: "AWS Certified AI Practitioner",
+    description:
+      "AWS の AI / 生成 AI 認定 Foundational。Bedrock / SageMaker / 責任ある AI を網羅。",
+    audience: "クラウド AI 入門",
+    chip: "AWS AIF",
+    emoji: "☁️",
+    accent: "bg-amber-500",
+  },
 ];
 
 function TrackCard({ track }: { track: Track }) {

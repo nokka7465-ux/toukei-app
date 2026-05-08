@@ -823,6 +823,24 @@ export default function Home() {
                 description:
                   "CG-ARTS 主催。古典 CV(フィルタ ・ 周波数)から DL(CNN ・ U-Net ・ YOLO)まで網羅する画像 AI 専門検定。",
               },
+              {
+                href: "/certs/applied-info",
+                chip: "AP",
+                emoji: "🏛️",
+                accent: "bg-slate-600",
+                title: "応用情報技術者試験",
+                description:
+                  "IPA 主催の国家試験(レベル 3)。アルゴリズム ・ DB ・ AI ・ セキュリティ ・ 経営戦略まで広範に出題。",
+              },
+              {
+                href: "/certs/aws-ai-practitioner",
+                chip: "AWS AIF",
+                emoji: "☁️",
+                accent: "bg-amber-500",
+                title: "AWS AI Practitioner",
+                description:
+                  "AWS の AI / 生成 AI 認定 Foundational レベル。Bedrock ・ SageMaker ・ 責任ある AI を測る。",
+              },
             ].map((cert) => (
               <Link
                 key={cert.href}

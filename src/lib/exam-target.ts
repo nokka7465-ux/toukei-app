@@ -30,6 +30,8 @@ export const CERT_PRESETS: CertPreset[] = [
   { key: "python-data", label: "Python データ分析試験", href: "/certs/python-data", hours: 80 },
   { key: "ai-implementation", label: "AI 実装検定 A 級", href: "/certs/ai-implementation", hours: 130 },
   { key: "image-processing", label: "画像処理エンジニア検定 エキスパート", href: "/certs/image-processing", hours: 130 },
+  { key: "applied-info", label: "応用情報技術者試験", href: "/certs/applied-info", hours: 350 },
+  { key: "aws-ai-practitioner", label: "AWS Certified AI Practitioner", href: "/certs/aws-ai-practitioner", hours: 70 },
 ];
 
 export type ExamTarget = {

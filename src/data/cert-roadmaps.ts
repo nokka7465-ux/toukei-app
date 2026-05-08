@@ -711,6 +711,128 @@ export const certRoadmaps: Record<string, CertRoadmap> = {
     textbookHref: "/certs/image-processing/textbook",
     quizHref: "/certs/image-processing/quiz",
   },
+  "applied-info": {
+    slug: "applied-info",
+    title: "応用情報技術者試験 学習ロードマップ",
+    organizer: "情報処理推進機構(IPA)",
+    hours: "200〜500 時間",
+    months: "4〜8 ヶ月",
+    prerequisites: "基本情報技術者(FE)合格相当の知識があれば短期化",
+    passCriteria: "午前 ・ 午後ともに 60 点以上(100 点満点)",
+    steps: [
+      {
+        week: "Month 1",
+        title: "アルゴリズム + データベース",
+        description:
+          "計算量 ・ ソート ・ 動的計画法 ・ グラフ ・ 正規化 ・ SQL ・ ACID。",
+        links: [
+          { href: "/certs/applied-info/textbook", label: "応用情報 教科書(章 2-3)" },
+        ],
+      },
+      {
+        week: "Month 2",
+        title: "確率統計 + AI + ネットワーク",
+        description:
+          "条件付確率 ・ 正規分布 ・ 評価指標 ・ OSI ・ TCP/IP ・ 暗号化。",
+        links: [
+          { href: "/certs/applied-info/textbook", label: "応用情報 教科書(章 4-5)" },
+          { href: "/certs/g-test/textbook", label: "G 検定 教科書(AI 用語補強)" },
+        ],
+      },
+      {
+        week: "Month 3",
+        title: "システム設計 + ソフトウェア工学",
+        description:
+          "RAID ・ 仮想化 ・ クラウド ・ テスト ・ アジャイル ・ SOLID。",
+        links: [
+          { href: "/certs/applied-info/textbook", label: "応用情報 教科書(章 6-7)" },
+        ],
+      },
+      {
+        week: "Month 4",
+        title: "PM + 経営戦略",
+        description:
+          "WBS ・ EVM ・ クリティカルパス ・ ITIL ・ SWOT ・ 5 forces ・ DX 3 段階。",
+        links: [
+          { href: "/certs/applied-info/textbook", label: "応用情報 教科書(章 8-9)" },
+        ],
+      },
+      {
+        week: "Month 5+",
+        title: "午前 ・ 午後の過去問演習",
+        description:
+          "午前は直近 5 〜 10 年の過去問を 2 周。午後は『得意 4 問』を固定して反復演習。",
+        links: [
+          { href: "/certs/applied-info/quiz", label: "応用情報 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+          { href: "/review", label: "苦手問題の復習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/applied-info/textbook",
+    quizHref: "/certs/applied-info/quiz",
+  },
+  "aws-ai-practitioner": {
+    slug: "aws-ai-practitioner",
+    title: "AWS AI Practitioner 学習ロードマップ",
+    organizer: "Amazon Web Services(AWS)",
+    hours: "40〜100 時間",
+    months: "1〜2 ヶ月",
+    prerequisites: "AWS 基礎(IAM/S3/EC2)+ AI/ML の概要を一通り",
+    passCriteria: "1000 点満点中 700 点(参考)",
+    steps: [
+      {
+        week: "Week 1",
+        title: "AI / ML / 生成 AI の基礎",
+        description:
+          "AI ⊃ ML ⊃ DL ⊃ Gen AI / 教師あり-なし-強化 / 評価指標。本サイトの[G 検定](/certs/g-test)・[生成 AI パスポート](/certs/genai-passport)で土台。",
+        links: [
+          { href: "/certs/aws-ai-practitioner/textbook", label: "AWS AI Practitioner 教科書(章 2)" },
+          { href: "/certs/g-test/textbook", label: "G 検定 教科書" },
+        ],
+      },
+      {
+        week: "Week 2",
+        title: "AWS の AI / ML サービス全体像",
+        description:
+          "Rekognition / Comprehend / Transcribe / Polly / Translate / Textract / Forecast / Personalize / Kendra の守備範囲を整理。",
+        links: [
+          { href: "/certs/aws-ai-practitioner/textbook", label: "AWS AI Practitioner 教科書(章 3)" },
+        ],
+      },
+      {
+        week: "Week 3",
+        title: "Bedrock + 基盤モデル + プロンプト",
+        description:
+          "Claude / Titan / Llama を Bedrock で実機で触る。Knowledge Bases / Agents / Guardrails の役割を整理。",
+        links: [
+          { href: "/certs/aws-ai-practitioner/textbook", label: "AWS AI Practitioner 教科書(章 4-5)" },
+          { href: "/certs/genai-passport/textbook", label: "生成 AI パスポート 教科書" },
+        ],
+      },
+      {
+        week: "Week 4",
+        title: "SageMaker + 責任ある AI",
+        description:
+          "Studio / Canvas / Autopilot / Pipelines / Model Monitor / Clarify。IAM / KMS / VPC エンドポイントの位置付け。",
+        links: [
+          { href: "/certs/aws-ai-practitioner/textbook", label: "AWS AI Practitioner 教科書(章 6-7)" },
+        ],
+      },
+      {
+        week: "Week 5",
+        title: "コスト + ユースケース + 演習",
+        description:
+          "Spot / Inferentia / Bedrock 課金 / Amazon Q ファミリ。ユースケース → サービス選択を即答できるレベルに。",
+        links: [
+          { href: "/certs/aws-ai-practitioner/textbook", label: "AWS AI Practitioner 教科書(章 8-10)" },
+          { href: "/certs/aws-ai-practitioner/quiz", label: "AWS AI Practitioner 演習問題" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/aws-ai-practitioner/textbook",
+    quizHref: "/certs/aws-ai-practitioner/quiz",
+  },
 };
 
 export const certSlugs = Object.keys(certRoadmaps);

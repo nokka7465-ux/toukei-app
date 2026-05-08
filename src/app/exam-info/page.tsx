@@ -317,6 +317,40 @@ const RELATED_EXAMS: Exam[] = [
     highlight:
       "画像処理 ・ コンピュータビジョンの専門性を測る検定。古典 CV から DL ベース CV まで広範に出題。",
   },
+  {
+    id: "applied-info",
+    title: "応用情報技術者試験",
+    organizer: "情報処理推進機構(IPA)",
+    format: "筆記試験(マークシート + 記述)",
+    schedule: "年 2 回(4 月・10 月)",
+    duration: "午前 80 問 / 150 分 + 午後 11 問中 5 問選択 / 150 分",
+    fee: "7,500 円(税込)",
+    passCriteria: "午前 ・ 午後ともに 60 点以上",
+    passRate: "約 23 〜 26%",
+    takers: "1 回あたり 30,000 〜 40,000 名",
+    officialUrl: "https://www.ipa.go.jp/shiken/kubun/ap.html",
+    studyHref: "/certs/applied-info",
+    studyLabel: "応用情報の教科書を見る",
+    highlight:
+      "国家試験レベル 3。高度試験(レベル 4)の登竜門で、SI 系企業 ・ 金融 ・ 公官庁での評価が高い。",
+  },
+  {
+    id: "aws-ai-practitioner",
+    title: "AWS Certified AI Practitioner(AIF-C01)",
+    organizer: "Amazon Web Services(AWS)",
+    format: "CBT(Pearson VUE)or オンライン監督受験",
+    schedule: "通年(随時)",
+    duration: "90 分 / 65 問(選択式)",
+    fee: "100 USD(参考)",
+    passCriteria: "1000 点満点中 700 点(参考)",
+    passRate: "AWS 非公開",
+    takers: "全世界で大規模",
+    officialUrl: "https://aws.amazon.com/certification/certified-ai-practitioner/",
+    studyHref: "/certs/aws-ai-practitioner",
+    studyLabel: "AWS AI Practitioner の教科書を見る",
+    highlight:
+      "AWS の AI / 生成 AI 認定 Foundational レベル。Bedrock / SageMaker / 責任ある AI を測る。",
+  },
 ];
 
 function ExamCard({ exam }: { exam: Exam }) {
