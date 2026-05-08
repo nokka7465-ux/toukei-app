@@ -23,6 +23,8 @@ import { appliedInfoQuestions } from "@/data/questions/applied-info";
 import { awsAiPractitionerQuestions } from "@/data/questions/aws-ai-practitioner";
 import { basicInfoQuestions } from "@/data/questions/basic-info";
 import { azureAi900Questions } from "@/data/questions/azure-ai-900";
+import { gcpGenAiLeaderQuestions } from "@/data/questions/gcp-gen-ai-leader";
+import { dbSpecialistQuestions } from "@/data/questions/db-specialist";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -75,6 +77,8 @@ const CERT_TRACKS: Track[] = [
   { href: "/certs/aws-ai-practitioner/quiz", title: "AWS Certified AI Practitioner", count: awsAiPractitionerQuestions.length, description: "AWS AI サービス ・ Bedrock ・ SageMaker ・ プロンプト" },
   { href: "/certs/basic-info/quiz", title: "基本情報技術者試験(IPA)", count: basicInfoQuestions.length, description: "アルゴリズム ・ 情報セキュリティ ・ DB ・ ネットワーク" },
   { href: "/certs/azure-ai-900/quiz", title: "Azure AI Fundamentals(AI-900)", count: azureAi900Questions.length, description: "Azure ML ・ AI Vision ・ AI Language ・ OpenAI ・ Copilot" },
+  { href: "/certs/gcp-gen-ai-leader/quiz", title: "GCP Generative AI Leader", count: gcpGenAiLeaderQuestions.length, description: "Vertex AI ・ Gemini ・ Imagen ・ Workspace ・ Grounding" },
+  { href: "/certs/db-specialist/quiz", title: "データベーススペシャリスト試験(DB)", count: dbSpecialistQuestions.length, description: "関係代数 ・ 正規化 ・ SQL 上級 ・ ACID ・ NoSQL ・ DWH" },
 ];
 
 function TrackCard({ track }: { track: Track }) {

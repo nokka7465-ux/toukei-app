@@ -22,6 +22,8 @@ import { appliedInfoTextbook } from "@/data/textbooks/applied-info";
 import { awsAiPractitionerTextbook } from "@/data/textbooks/aws-ai-practitioner";
 import { basicInfoTextbook } from "@/data/textbooks/basic-info";
 import { azureAi900Textbook } from "@/data/textbooks/azure-ai-900";
+import { gcpGenAiLeaderTextbook } from "@/data/textbooks/gcp-gen-ai-leader";
+import { dbSpecialistTextbook } from "@/data/textbooks/db-specialist";
 import { glossary } from "@/data/glossary";
 import { blogPosts } from "@/data/blog";
 import { introFormulas } from "@/data/formulas/intro";
@@ -116,6 +118,8 @@ export const searchIndex: SearchItem[] = (() => {
     { book: awsAiPractitionerTextbook, urlBase: "/certs/aws-ai-practitioner/textbook", displayTitle: "AWS AI Practitioner" },
     { book: basicInfoTextbook, urlBase: "/certs/basic-info/textbook", displayTitle: "基本情報技術者" },
     { book: azureAi900Textbook, urlBase: "/certs/azure-ai-900/textbook", displayTitle: "Azure AI-900" },
+    { book: gcpGenAiLeaderTextbook, urlBase: "/certs/gcp-gen-ai-leader/textbook", displayTitle: "GCP Gen AI Leader" },
+    { book: dbSpecialistTextbook, urlBase: "/certs/db-specialist/textbook", displayTitle: "DB スペシャリスト" },
   ];
   for (const { book, urlBase, displayTitle } of textbookSets) {
     for (const ch of book.chapters) {

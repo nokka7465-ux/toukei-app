@@ -963,6 +963,136 @@ export const certRoadmaps: Record<string, CertRoadmap> = {
     textbookHref: "/certs/azure-ai-900/textbook",
     quizHref: "/certs/azure-ai-900/quiz",
   },
+  "gcp-gen-ai-leader": {
+    slug: "gcp-gen-ai-leader",
+    title: "GCP Generative AI Leader 学習ロードマップ",
+    organizer: "Google Cloud",
+    hours: "40〜80 時間",
+    months: "1〜2 ヶ月",
+    prerequisites: "AI / ML の概要 ・ Google Cloud 基礎(Cloud Digital Leader 相当)",
+    passCriteria: "Google Cloud 公開なし(参考: 70%)",
+    steps: [
+      {
+        week: "Week 1",
+        title: "生成 AI / LLM の基礎",
+        description:
+          "AI ⊃ ML ⊃ DL ⊃ Gen AI / Transformer / プロンプト / RAG / ハルシネーション。",
+        links: [
+          { href: "/certs/gcp-gen-ai-leader/textbook", label: "GCP Gen AI Leader 教科書(章 2)" },
+          { href: "/certs/g-test/textbook", label: "G 検定 教科書" },
+          { href: "/certs/genai-passport/textbook", label: "生成 AI パスポート 教科書" },
+        ],
+      },
+      {
+        week: "Week 2",
+        title: "Vertex AI + Gemini ファミリ",
+        description:
+          "Vertex AI Studio / Workbench / Model Garden / Agent Builder / Gemini / Imagen / Veo。",
+        links: [
+          { href: "/certs/gcp-gen-ai-leader/textbook", label: "GCP Gen AI Leader 教科書(章 3)" },
+        ],
+      },
+      {
+        week: "Week 3",
+        title: "Workspace + Code Assist + RAG",
+        description:
+          "Gemini for Workspace / Code Assist / Vertex AI Search の RAG パターン。",
+        links: [
+          { href: "/certs/gcp-gen-ai-leader/textbook", label: "GCP Gen AI Leader 教科書(章 4-6)" },
+        ],
+      },
+      {
+        week: "Week 4",
+        title: "責任ある AI + コスト",
+        description:
+          "Google の 7 つの AI 原則 / Grounding / SynthID / モデル選択 / Context Caching。",
+        links: [
+          { href: "/certs/gcp-gen-ai-leader/textbook", label: "GCP Gen AI Leader 教科書(章 7-8)" },
+        ],
+      },
+      {
+        week: "Week 5",
+        title: "業務変革 + 演習",
+        description:
+          "業界別ユースケース ・ 組織導入 ・ ROI 測定。仕上げに演習問題で出題傾向を体感。",
+        links: [
+          { href: "/certs/gcp-gen-ai-leader/textbook", label: "GCP Gen AI Leader 教科書(章 9-10)" },
+          { href: "/certs/gcp-gen-ai-leader/quiz", label: "GCP Gen AI Leader 演習問題" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/gcp-gen-ai-leader/textbook",
+    quizHref: "/certs/gcp-gen-ai-leader/quiz",
+  },
+  "db-specialist": {
+    slug: "db-specialist",
+    title: "データベーススペシャリスト 学習ロードマップ",
+    organizer: "情報処理推進機構(IPA)",
+    hours: "300〜500 時間",
+    months: "6〜10 ヶ月",
+    prerequisites: "応用情報技術者合格相当 + DB 実務経験 1 年程度",
+    passCriteria: "午前 I・II・午後 I・II すべて 60 点以上",
+    steps: [
+      {
+        week: "Month 1-2",
+        title: "リレーショナルモデル + 関係代数",
+        description:
+          "関係代数 8 演算 / 関係論理 / FD / 候補キー。",
+        links: [
+          { href: "/certs/db-specialist/textbook", label: "DB スペシャリスト 教科書(章 2)" },
+        ],
+      },
+      {
+        week: "Month 3",
+        title: "ER 図 + 正規化",
+        description:
+          "概念 → 論理 → 物理の 3 層 / 1NF 〜 BCNF の実例導出。",
+        links: [
+          { href: "/certs/db-specialist/textbook", label: "DB スペシャリスト 教科書(章 3)" },
+        ],
+      },
+      {
+        week: "Month 4",
+        title: "SQL 上級 + ACID",
+        description:
+          "ウィンドウ関数 / 再帰 CTE / トリガー / 分離レベル / MVCC / WAL。",
+        links: [
+          { href: "/certs/db-specialist/textbook", label: "DB スペシャリスト 教科書(章 4-5)" },
+        ],
+      },
+      {
+        week: "Month 5",
+        title: "索引 + チューニング + セキュリティ",
+        description:
+          "B-tree / EXPLAIN / 結合方式 / パーティション / RLS / TDE。",
+        links: [
+          { href: "/certs/db-specialist/textbook", label: "DB スペシャリスト 教科書(章 6-7)" },
+        ],
+      },
+      {
+        week: "Month 6",
+        title: "NoSQL + DWH + データ基盤",
+        description:
+          "CAP / KVS / ドキュメント / グラフ / Spark / Snowflake / dbt / データメッシュ。",
+        links: [
+          { href: "/certs/db-specialist/textbook", label: "DB スペシャリスト 教科書(章 8-9)" },
+        ],
+      },
+      {
+        week: "Month 7+",
+        title: "午後 I ・ 午後 II 過去問演習",
+        description:
+          "5 〜 10 年分の過去問を 2 周。午後 II は 120 分で論述 + ER 図作成の型を反復で身につける。",
+        links: [
+          { href: "/certs/db-specialist/quiz", label: "DB スペシャリスト 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+          { href: "/review", label: "苦手問題の復習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/db-specialist/textbook",
+    quizHref: "/certs/db-specialist/quiz",
+  },
 };
 
 export const certSlugs = Object.keys(certRoadmaps);

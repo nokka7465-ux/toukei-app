@@ -859,6 +859,24 @@ export default function Home() {
                 description:
                   "Microsoft 認定の AI Fundamentals。Azure ML ・ OpenAI ・ Copilot ファミリを測る。有効期限なし。",
               },
+              {
+                href: "/certs/gcp-gen-ai-leader",
+                chip: "GCP GAI",
+                emoji: "🟢",
+                accent: "bg-green-600",
+                title: "GCP Generative AI Leader",
+                description:
+                  "Google Cloud 認定の生成 AI Foundational。Vertex AI ・ Gemini ・ Workspace ・ Grounding を測る。",
+              },
+              {
+                href: "/certs/db-specialist",
+                chip: "DB",
+                emoji: "🗄️",
+                accent: "bg-zinc-700",
+                title: "データベーススペシャリスト",
+                description:
+                  "IPA レベル 4 高度試験。関係代数・正規化・SQL 上級・チューニング・NoSQL・DWH を網羅する DB 専門家認定。",
+              },
             ].map((cert) => (
               <Link
                 key={cert.href}

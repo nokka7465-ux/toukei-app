@@ -283,6 +283,50 @@ export const certFaq: Record<string, FaqItem[]> = {
       a: "AI-900 → **AI-102(Azure AI Engineer Associate)** が王道。クラウド全般を強化したいなら **AZ-900 → AZ-104** へ進む道もあります。AWS との二刀流にしたい場合は本サイトの[AWS AI Practitioner](/certs/aws-ai-practitioner)も。",
     },
   ],
+  "gcp-gen-ai-leader": [
+    {
+      q: "Google Cloud Generative AI Leader とは?",
+      a: "**Google Cloud が提供する Foundational(基礎)レベル** の生成 AI 認定。**Vertex AI ・ Gemini ・ Imagen ・ Veo ・ Gemini for Workspace** などの生成 AI サービス群と、責任ある AI ・ 組織導入のリーダーシップ知識を測ります。AWS AI Practitioner ・ Azure AI Fundamentals と並ぶ三大クラウドの AI 入門認定の 1 つ。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**オンライン監督受験 or テストセンター / 50 〜 60 問 / 90 分 / 選択式 / 受験料 99 USD / 有効期限 3 年**。コードを書く問題はなく、サービスの選び分けが中心です。",
+    },
+    {
+      q: "AWS AI Practitioner ・ Azure AI-900 との違いは?",
+      a: "**ベンダー専用認定**(GCP / AWS / Azure)である点が違いの本質。3 つは競合せず、すべて Foundational レベルで生成 AI のリテラシーを測ります。**三大クラウドを揃えると AI 戦略担当 ・ コンサルタントとして強いシグナル** になります。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "AI / Google Cloud に触れたことがある人で **40 〜 60 時間**、未経験者で **60 〜 100 時間**。**Google Cloud Skills Boost の専用ラーニングパス**(無料)が事実上の公式教材で、本サイトの教科書と組み合わせると効率的です。",
+    },
+    {
+      q: "次のステップは?",
+      a: "Generative AI Leader → **Associate Cloud Engineer**(クラウド全般)または **Professional ML Engineer**(ML 専門)が王道。AWS / Azure と二刀流にしたい場合は本サイトの[AWS AI Practitioner](/certs/aws-ai-practitioner) ・ [Azure AI-900](/certs/azure-ai-900)も。",
+    },
+  ],
+  "db-specialist": [
+    {
+      q: "データベーススペシャリスト試験(DB)とは?",
+      a: "**情報処理推進機構(IPA)** が主催する国家試験(レベル 4 高度試験)。応用情報技術者(レベル 3)の上位で、**DBA / データエンジニア / データアーキテクト** の専門性証明として位置付けられます。年 1 回(秋)実施。",
+    },
+    {
+      q: "試験形式と合格率は?",
+      a: "**午前 I + 午前 II + 午後 I + 午後 II の 4 段階**。各段階で 60 点以上が合格基準。**合格率は約 17 〜 18%** で、IPA 試験の中でも難関の部類。受験料 7,500 円(税込)。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "**300 〜 500 時間** が中央値。応用情報合格者は午前 I が 2 年免除されます。**午後 II の論述問題**(120 分で 1 問の事例)が最大の壁で、過去問の反復演習が合格率に直結します。",
+    },
+    {
+      q: "応用情報との違いは?",
+      a: "**応用情報は IT 全般** を浅く広く問うのに対し、**DB スペシャリストは DB ・ データ基盤に特化** して深く問います。午後 II の長文論述 + ER 図 ・ 関係スキーマ作成が最大の違い。",
+    },
+    {
+      q: "合格後のキャリアは?",
+      a: "**金融 ・ 公官庁 ・ 大手 SI** で評価が特に高く、**DBA / データエンジニア / データアーキテクト** のシニアポジションへの強いシグナル。同じ IPA 高度試験で **ITストラテジスト ・ システムアーキテクト** に進むキャリアパスも王道です。",
+    },
+  ],
   "qc-kentei": [
     {
       q: "QC検定の各級の難易度は?",

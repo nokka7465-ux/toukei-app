@@ -277,6 +277,32 @@ const CERTS: Cert[] = [
     best: "Azure AI 入門",
     notes: "Azure ML / OpenAI / Copilot、有効期限なし",
   },
+  {
+    slug: "/certs/gcp-gen-ai-leader",
+    name: "GCP Gen AI Leader",
+    organizer: "Google Cloud",
+    fee: "99 USD",
+    duration: "通年",
+    format: "90 分 / 50-60 問",
+    difficulty: "★★☆☆☆",
+    studyHours: "40〜80h",
+    pass: "公開なし",
+    best: "GCP AI 入門",
+    notes: "Vertex AI / Gemini / Workspace",
+  },
+  {
+    slug: "/certs/db-specialist",
+    name: "データベーススペシャリスト",
+    organizer: "IPA",
+    fee: "7,500 円",
+    duration: "年 1 回(秋)",
+    format: "午前 90 分 + 午後 210 分",
+    difficulty: "★★★★★",
+    studyHours: "300〜500h",
+    pass: "約 17〜18%",
+    best: "DBA / データエンジニア",
+    notes: "IPA レベル 4 高度試験",
+  },
 ];
 
 export default function ComparePage() {

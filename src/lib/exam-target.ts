@@ -34,6 +34,8 @@ export const CERT_PRESETS: CertPreset[] = [
   { key: "aws-ai-practitioner", label: "AWS Certified AI Practitioner", href: "/certs/aws-ai-practitioner", hours: 70 },
   { key: "basic-info", label: "基本情報技術者試験", href: "/certs/basic-info", hours: 200 },
   { key: "azure-ai-900", label: "Microsoft Azure AI Fundamentals", href: "/certs/azure-ai-900", hours: 60 },
+  { key: "gcp-gen-ai-leader", label: "GCP Generative AI Leader", href: "/certs/gcp-gen-ai-leader", hours: 60 },
+  { key: "db-specialist", label: "データベーススペシャリスト試験", href: "/certs/db-specialist", hours: 400 },
 ];
 
 export type ExamTarget = {

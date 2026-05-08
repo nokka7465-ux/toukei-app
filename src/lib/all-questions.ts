@@ -22,6 +22,8 @@ import { appliedInfoQuestions } from "@/data/questions/applied-info";
 import { awsAiPractitionerQuestions } from "@/data/questions/aws-ai-practitioner";
 import { basicInfoQuestions } from "@/data/questions/basic-info";
 import { azureAi900Questions } from "@/data/questions/azure-ai-900";
+import { gcpGenAiLeaderQuestions } from "@/data/questions/gcp-gen-ai-leader";
+import { dbSpecialistQuestions } from "@/data/questions/db-specialist";
 
 export type Track = {
   key: string;
@@ -55,6 +57,8 @@ export const tracks: Track[] = [
   { key: "aws-ai-practitioner", label: "AWS AI Practitioner", href: "/certs/aws-ai-practitioner/quiz", group: "cert", questions: awsAiPractitionerQuestions },
   { key: "basic-info", label: "基本情報技術者", href: "/certs/basic-info/quiz", group: "cert", questions: basicInfoQuestions },
   { key: "azure-ai-900", label: "Azure AI-900", href: "/certs/azure-ai-900/quiz", group: "cert", questions: azureAi900Questions },
+  { key: "gcp-gen-ai-leader", label: "GCP Generative AI Leader", href: "/certs/gcp-gen-ai-leader/quiz", group: "cert", questions: gcpGenAiLeaderQuestions },
+  { key: "db-specialist", label: "DB スペシャリスト", href: "/certs/db-specialist/quiz", group: "cert", questions: dbSpecialistQuestions },
 ];
 
 export type EnrichedQuestion = Question & {

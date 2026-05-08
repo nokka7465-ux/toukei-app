@@ -385,6 +385,40 @@ const RELATED_EXAMS: Exam[] = [
     highlight:
       "Microsoft 認定の AI Fundamentals。Azure ML ・ AI Vision ・ AI Language ・ Azure OpenAI ・ Copilot を測る。**有効期限なし**。",
   },
+  {
+    id: "gcp-gen-ai-leader",
+    title: "Google Cloud Generative AI Leader",
+    organizer: "Google Cloud",
+    format: "オンライン監督受験 or テストセンター",
+    schedule: "通年(随時)",
+    duration: "90 分 / 50 〜 60 問",
+    fee: "99 USD(参考)",
+    passCriteria: "公開なし(参考: 70%)",
+    passRate: "Google 非公開",
+    takers: "全世界で大規模",
+    officialUrl: "https://cloud.google.com/learn/certification/generative-ai-leader",
+    studyHref: "/certs/gcp-gen-ai-leader",
+    studyLabel: "GCP Gen AI Leader の教科書を見る",
+    highlight:
+      "Google Cloud 認定の生成 AI Foundational。Vertex AI / Gemini / Workspace / Grounding を測る三大クラウド AI 入門の 1 つ。",
+  },
+  {
+    id: "db-specialist",
+    title: "データベーススペシャリスト試験(DB)",
+    organizer: "情報処理推進機構(IPA)",
+    format: "筆記試験(マークシート + 記述 + 論述)",
+    schedule: "年 1 回(秋、10 月)",
+    duration: "午前 I 50 分 + 午前 II 40 分 + 午後 I 90 分 + 午後 II 120 分",
+    fee: "7,500 円(税込)",
+    passCriteria: "各段階で 60 点以上",
+    passRate: "約 17 〜 18%",
+    takers: "1 回あたり数千名規模",
+    officialUrl: "https://www.ipa.go.jp/shiken/kubun/db.html",
+    studyHref: "/certs/db-specialist",
+    studyLabel: "DB スペシャリストの教科書を見る",
+    highlight:
+      "IPA レベル 4 高度試験。DB ・ データ基盤の専門家認定。金融 ・ 公官庁 ・ 大手 SI で評価が特に高い国家資格。",
+  },
 ];
 
 function ExamCard({ exam }: { exam: Exam }) {

@@ -57,6 +57,8 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/certs/aws-ai-practitioner", label: "AWS AI Practitioner" },
       { href: "/certs/basic-info", label: "基本情報技術者試験" },
       { href: "/certs/azure-ai-900", label: "Azure AI Fundamentals" },
+      { href: "/certs/gcp-gen-ai-leader", label: "GCP Generative AI Leader" },
+      { href: "/certs/db-specialist", label: "データベーススペシャリスト" },
     ],
   },
   {

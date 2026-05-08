@@ -276,6 +276,26 @@ const CERT_TRACKS: Track[] = [
     emoji: "🟦",
     accent: "bg-sky-600",
   },
+  {
+    href: "/certs/gcp-gen-ai-leader/textbook",
+    title: "GCP Generative AI Leader",
+    description:
+      "Google Cloud 認定の生成 AI 入門。Vertex AI / Gemini / Workspace / Grounding / SynthID を網羅。",
+    audience: "GCP AI 入門",
+    chip: "GCP GAI",
+    emoji: "🟢",
+    accent: "bg-green-600",
+  },
+  {
+    href: "/certs/db-specialist/textbook",
+    title: "データベーススペシャリスト(DB)",
+    description:
+      "IPA レベル 4 高度試験。関係代数・正規化・SQL 上級・ACID・チューニング・NoSQL・DWH を網羅。",
+    audience: "DBA / データエンジニア",
+    chip: "DB",
+    emoji: "🗄️",
+    accent: "bg-zinc-700",
+  },
 ];
 
 function TrackCard({ track }: { track: Track }) {
