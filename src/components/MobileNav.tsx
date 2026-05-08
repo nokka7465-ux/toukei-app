@@ -61,6 +61,8 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/certs/db-specialist", label: "データベーススペシャリスト" },
       { href: "/certs/dx-kentei", label: "DX 検定" },
       { href: "/certs/aws-saa", label: "AWS Solutions Architect Associate" },
+      { href: "/certs/it-passport", label: "ITパスポート試験" },
+      { href: "/certs/power-bi", label: "Power BI(PL-300)" },
     ],
   },
   {

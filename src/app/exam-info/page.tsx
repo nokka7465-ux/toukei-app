@@ -453,6 +453,40 @@ const RELATED_EXAMS: Exam[] = [
     highlight:
       "AWS 認定の Associate レベルで最も人気の高いアーキテクト系資格。AWS で仕事をする技術者の標準資格。",
   },
+  {
+    id: "it-passport",
+    title: "ITパスポート試験(iパス)",
+    organizer: "情報処理推進機構(IPA)",
+    format: "オンライン CBT(マウス操作のみ)",
+    schedule: "通年(随時)",
+    duration: "120 分 / 100 問",
+    fee: "7,500 円(税込)",
+    passCriteria: "総合 600 / 1000 + 各分野評価点 300 点以上",
+    passRate: "約 50%",
+    takers: "年間およそ 20 万人超",
+    officialUrl: "https://www3.jitec.ipa.go.jp/JitesCbt/index.html",
+    studyHref: "/certs/it-passport",
+    studyLabel: "ITパスポートの教科書を見る",
+    highlight:
+      "国家試験レベル 1。社会人 ・ 学生の入門認定で、新卒採用 ・ 中途採用 ・ 社内 IT リテラシー研修で広く活用される。",
+  },
+  {
+    id: "power-bi",
+    title: "Microsoft Power BI Data Analyst Associate(PL-300)",
+    organizer: "Microsoft",
+    format: "CBT(Pearson VUE)or オンライン監督受験",
+    schedule: "通年(随時)",
+    duration: "120 分 / 約 40 〜 60 問",
+    fee: "約 21,000 円(165 USD、参考)",
+    passCriteria: "1000 点満点中 700 点",
+    passRate: "Microsoft 非公開",
+    takers: "全世界で大規模",
+    officialUrl: "https://learn.microsoft.com/ja-jp/credentials/certifications/data-analyst-associate/",
+    studyHref: "/certs/power-bi",
+    studyLabel: "Power BI(PL-300)の教科書を見る",
+    highlight:
+      "BI 系 Associate 認定の代表格。Power Query / DAX / Microsoft Fabric / Copilot を測る実機操作型試験。",
+  },
 ];
 
 function ExamCard({ exam }: { exam: Exam }) {

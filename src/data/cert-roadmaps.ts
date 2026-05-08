@@ -1223,6 +1223,143 @@ export const certRoadmaps: Record<string, CertRoadmap> = {
     textbookHref: "/certs/aws-saa/textbook",
     quizHref: "/certs/aws-saa/quiz",
   },
+  "it-passport": {
+    slug: "it-passport",
+    title: "ITパスポート試験 学習ロードマップ",
+    organizer: "情報処理推進機構(IPA)",
+    hours: "100〜200 時間",
+    months: "2〜4 ヶ月",
+    prerequisites: "なし(社会人 ・ 学生の入門レベル)",
+    passCriteria: "総合 600 / 1000 点 + 各分野評価点 300 点以上",
+    steps: [
+      {
+        week: "Week 1-2",
+        title: "コンピュータ基礎 + ネットワーク",
+        description:
+          "ハードウェア / ソフトウェア / OS / 数値表現 / TCP/IP / DNS / HTTPS。",
+        links: [
+          { href: "/certs/it-passport/textbook", label: "ITパスポート 教科書(章 2-3)" },
+        ],
+      },
+      {
+        week: "Week 3",
+        title: "情報セキュリティ",
+        description:
+          "CIA / 暗号 / 認証 / 攻撃と対策。",
+        links: [
+          { href: "/certs/it-passport/textbook", label: "ITパスポート 教科書(章 4)" },
+        ],
+      },
+      {
+        week: "Week 4",
+        title: "マネジメント系",
+        description:
+          "PMBOK / WBS / ITIL / SLA / システム監査。",
+        links: [
+          { href: "/certs/it-passport/textbook", label: "ITパスポート 教科書(章 5)" },
+        ],
+      },
+      {
+        week: "Week 5-6",
+        title: "経営戦略 + 業務 + 法務",
+        description:
+          "SWOT / PEST / 4P / BS-PL-CF / 著作権 / 個人情報。",
+        links: [
+          { href: "/certs/it-passport/textbook", label: "ITパスポート 教科書(章 6-7)" },
+        ],
+      },
+      {
+        week: "Week 7",
+        title: "開発 + AI / DX",
+        description:
+          "ウォーターフォール / アジャイル / AI / 生成 AI / DX 3 段階 / RPA。",
+        links: [
+          { href: "/certs/it-passport/textbook", label: "ITパスポート 教科書(章 8-9)" },
+          { href: "/certs/genai-passport/textbook", label: "生成 AI パスポート 教科書(補強)" },
+        ],
+      },
+      {
+        week: "Week 8",
+        title: "過去問演習",
+        description:
+          "5 〜 10 年分の過去問を 2 周。3 分野バランスよく弱点補強。",
+        links: [
+          { href: "/certs/it-passport/quiz", label: "ITパスポート 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/it-passport/textbook",
+    quizHref: "/certs/it-passport/quiz",
+  },
+  "power-bi": {
+    slug: "power-bi",
+    title: "Microsoft PL-300 学習ロードマップ",
+    organizer: "Microsoft",
+    hours: "60〜120 時間",
+    months: "1〜2 ヶ月",
+    prerequisites: "Excel / SQL の基本 + データ分析の経験があると短期化",
+    passCriteria: "1000 点満点中 700 点",
+    steps: [
+      {
+        week: "Week 1",
+        title: "Power BI Desktop インストール + 基本操作",
+        description:
+          "無料インストール + サンプルデータでレポート作成。アーキテクチャ理解。",
+        links: [
+          { href: "/certs/power-bi/textbook", label: "Power BI 教科書(章 2)" },
+        ],
+      },
+      {
+        week: "Week 2-3",
+        title: "Power Query + データ準備",
+        description:
+          "接続モード / プロファイリング / クレンジング / M 言語の基本。",
+        links: [
+          { href: "/certs/power-bi/textbook", label: "Power BI 教科書(章 3-4)" },
+        ],
+      },
+      {
+        week: "Week 4-5",
+        title: "DAX + データモデリング",
+        description:
+          "スタースキーマ / リレーション / 計算列 vs メジャー / CALCULATE / Time Intelligence。",
+        links: [
+          { href: "/certs/power-bi/textbook", label: "Power BI 教科書(章 5-6)" },
+        ],
+      },
+      {
+        week: "Week 6",
+        title: "ビジュアル + レポート設計",
+        description:
+          "標準 ・ AI ビジュアル / Q&A / Key Influencers / ブックマーク / ドリル。",
+        links: [
+          { href: "/certs/power-bi/textbook", label: "Power BI 教科書(章 7)" },
+        ],
+      },
+      {
+        week: "Week 7",
+        title: "Power BI Service + RLS + Fabric + Copilot",
+        description:
+          "ワークスペース / アプリ / 更新 / Gateway / RLS / Fabric Direct Lake / Copilot。",
+        links: [
+          { href: "/certs/power-bi/textbook", label: "Power BI 教科書(章 8-9)" },
+        ],
+      },
+      {
+        week: "Week 8",
+        title: "模擬試験 + 過去問",
+        description:
+          "Microsoft Learn の練習問題 + 本サイト演習問題で出題傾向を体感。",
+        links: [
+          { href: "/certs/power-bi/quiz", label: "Power BI 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/power-bi/textbook",
+    quizHref: "/certs/power-bi/quiz",
+  },
 };
 
 export const certSlugs = Object.keys(certRoadmaps);

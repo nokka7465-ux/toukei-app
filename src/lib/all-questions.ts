@@ -26,6 +26,8 @@ import { gcpGenAiLeaderQuestions } from "@/data/questions/gcp-gen-ai-leader";
 import { dbSpecialistQuestions } from "@/data/questions/db-specialist";
 import { dxKenteiQuestions } from "@/data/questions/dx-kentei";
 import { awsSaaQuestions } from "@/data/questions/aws-saa";
+import { itPassportQuestions } from "@/data/questions/it-passport";
+import { powerBiQuestions } from "@/data/questions/power-bi";
 
 export type Track = {
   key: string;
@@ -63,6 +65,8 @@ export const tracks: Track[] = [
   { key: "db-specialist", label: "DB スペシャリスト", href: "/certs/db-specialist/quiz", group: "cert", questions: dbSpecialistQuestions },
   { key: "dx-kentei", label: "DX 検定", href: "/certs/dx-kentei/quiz", group: "cert", questions: dxKenteiQuestions },
   { key: "aws-saa", label: "AWS SAA", href: "/certs/aws-saa/quiz", group: "cert", questions: awsSaaQuestions },
+  { key: "it-passport", label: "ITパスポート", href: "/certs/it-passport/quiz", group: "cert", questions: itPassportQuestions },
+  { key: "power-bi", label: "Power BI(PL-300)", href: "/certs/power-bi/quiz", group: "cert", questions: powerBiQuestions },
 ];
 
 export type EnrichedQuestion = Question & {

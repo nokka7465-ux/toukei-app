@@ -371,6 +371,50 @@ export const certFaq: Record<string, FaqItem[]> = {
       a: "**AWS で仕事をするエンジニアの標準資格**。次のステップは **Solutions Architect Professional(SAP-C02)・ ML Engineer Associate ・ Specialty 系** が王道。世界中のクラウドエンジニア採用で広く参照される認定です。",
     },
   ],
+  "it-passport": [
+    {
+      q: "ITパスポート試験(iパス)とは?",
+      a: "**情報処理推進機構(IPA)** が主催する国家試験(レベル 1)。**IT を活用するすべての社会人 ・ 学生** が想定対象で、ストラテジ系 / マネジメント系 / テクノロジ系の 3 分野で IT 全般のリテラシーを測ります。年間受験者数 **20 万人超** で IPA 試験の中で最も裾野が広い入門認定です。",
+    },
+    {
+      q: "試験形式と合格率は?",
+      a: "**マウス操作のみのオンライン CBT / 100 問 / 120 分**。総合 600 / 1000 点 + **各分野評価点 300 点以上の足切り**。合格率は **約 50%** で、IPA 試験の中で最も合格しやすい入門レベル。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "**100 〜 200 時間** が中央値。ITパスポートは出題パターンが安定しているため、**過去問演習を繰り返すだけで合格できる** ケースが多い。1 日 30 分 × 2 ヶ月で対策可能。",
+    },
+    {
+      q: "新卒採用 ・ 就活で評価されますか?",
+      a: "新卒採用 ・ 中途採用 ・ 社内 IT リテラシー研修で **広く活用** されています。技術職以外も含む全社員のベースラインとして位置付ける企業も多く、**IT 業界外でも履歴書に記載できる** 強みがあります。",
+    },
+    {
+      q: "次のステップは?",
+      a: "iパス合格 → **基本情報技術者(FE、レベル 2)** が王道。技術寄りなら[基本情報](/certs/basic-info)、ビジネス寄りなら[DX 検定](/certs/dx-kentei)、AI 寄りなら[生成 AI パスポート](/certs/genai-passport) ・ [G 検定](/certs/g-test)、データ寄りなら[DS 検定](/certs/ds-literacy)が候補。",
+    },
+  ],
+  "power-bi": [
+    {
+      q: "Microsoft PL-300(Power BI Data Analyst Associate)とは?",
+      a: "**Microsoft が提供するデータアナリスト向けの Associate レベル認定**。Power BI Desktop / Service / Power Query / DAX / Microsoft Fabric / Copilot を使ったデータ分析のライフサイクル全体をカバーします。**ビジネスアナリスト ・ BI 開発者 ・ データアナリスト** が想定対象。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**CBT(Pearson VUE)or オンライン監督受験 / 約 40 〜 60 問 / 120 分 / 選択式 + ケーススタディ + ドラッグ&ドロップ / 合格 700 / 1000 点**。受験料 **約 21,000 円(165 USD)**、有効期限 **1 年**(Microsoft Learn での再認定で延長)。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "Excel / SQL に慣れている人で **40 〜 60 時間**、未経験者で **60 〜 120 時間** が目安。**Microsoft Learn の PL-300 ラーニングパス**(無料)が事実上の公式教材で、本サイトの教科書と組み合わせると効率的です。",
+    },
+    {
+      q: "Tableau Desktop Specialist との違いは?",
+      a: "**PL-300 は Power BI 専用、Tableau Desktop Specialist は Tableau 専用**。両者は競合するベンダー認定。**Microsoft 365 / Azure を採用する企業** なら PL-300、**汎用 ・ 高度可視化重視** なら Tableau が選択肢。",
+    },
+    {
+      q: "次のステップは?",
+      a: "PL-300 → **DP-600(Microsoft Fabric Analytics Engineer Associate)** または **DP-700(Fabric Data Engineer Associate)** で Microsoft の最新データ統合プラットフォームを深掘りするのが王道。",
+    },
+  ],
   "qc-kentei": [
     {
       q: "QC検定の各級の難易度は?",

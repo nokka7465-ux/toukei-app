@@ -27,6 +27,8 @@ import { gcpGenAiLeaderQuestions } from "@/data/questions/gcp-gen-ai-leader";
 import { dbSpecialistQuestions } from "@/data/questions/db-specialist";
 import { dxKenteiQuestions } from "@/data/questions/dx-kentei";
 import { awsSaaQuestions } from "@/data/questions/aws-saa";
+import { itPassportQuestions } from "@/data/questions/it-passport";
+import { powerBiQuestions } from "@/data/questions/power-bi";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -83,6 +85,8 @@ const CERT_TRACKS: Track[] = [
   { href: "/certs/db-specialist/quiz", title: "データベーススペシャリスト試験(DB)", count: dbSpecialistQuestions.length, description: "関係代数 ・ 正規化 ・ SQL 上級 ・ ACID ・ NoSQL ・ DWH" },
   { href: "/certs/dx-kentei/quiz", title: "DX 検定", count: dxKenteiQuestions.length, description: "AI ・ クラウド ・ IoT ・ 5G ・ ブロックチェーン ・ RPA ・ DX 経営" },
   { href: "/certs/aws-saa/quiz", title: "AWS Solutions Architect Associate", count: awsSaaQuestions.length, description: "EC2 / S3 / RDS / DynamoDB / VPC / Auto Scaling / DR" },
+  { href: "/certs/it-passport/quiz", title: "ITパスポート試験(IPA)", count: itPassportQuestions.length, description: "ストラテジ ・ マネジメント ・ テクノロジ 3 分野" },
+  { href: "/certs/power-bi/quiz", title: "Microsoft Power BI(PL-300)", count: powerBiQuestions.length, description: "Power Query ・ DAX ・ ビジュアル ・ Fabric ・ Copilot" },
 ];
 
 function TrackCard({ track }: { track: Track }) {

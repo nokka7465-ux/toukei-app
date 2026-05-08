@@ -895,6 +895,24 @@ export default function Home() {
                 description:
                   "AWS Associate の代表認定。EC2 / S3 / VPC / IAM などを Well-Architected に沿って設計する力を測る。",
               },
+              {
+                href: "/certs/it-passport",
+                chip: "iパス",
+                emoji: "🎫",
+                accent: "bg-teal-500",
+                title: "ITパスポート試験",
+                description:
+                  "IPA レベル 1 の国家試験。社会人 ・ 学生の IT 入門。3 分野バランスでリテラシーを測る。",
+              },
+              {
+                href: "/certs/power-bi",
+                chip: "PL-300",
+                emoji: "📊",
+                accent: "bg-yellow-600",
+                title: "Power BI(PL-300)",
+                description:
+                  "Microsoft の BI 系 Associate 認定。Power Query / DAX / 可視化 / Fabric / Copilot を網羅。",
+              },
             ].map((cert) => (
               <Link
                 key={cert.href}

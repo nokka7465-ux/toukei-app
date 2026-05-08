@@ -329,6 +329,32 @@ const CERTS: Cert[] = [
     best: "クラウドエンジニア中堅",
     notes: "AWS Associate の代表認定",
   },
+  {
+    slug: "/certs/it-passport",
+    name: "ITパスポート(iパス)",
+    organizer: "IPA",
+    fee: "7,500 円",
+    duration: "通年(CBT)",
+    format: "120 分 / 100 問",
+    difficulty: "★★☆☆☆",
+    studyHours: "100〜200h",
+    pass: "約 50%",
+    best: "社会人 ・ 学生入門",
+    notes: "国家試験レベル 1、IT 入門",
+  },
+  {
+    slug: "/certs/power-bi",
+    name: "Power BI(PL-300)",
+    organizer: "Microsoft",
+    fee: "約 21,000 円",
+    duration: "通年(CBT)",
+    format: "120 分 / 40-60 問",
+    difficulty: "★★★☆☆",
+    studyHours: "60〜120h",
+    pass: "公開なし",
+    best: "BI 開発者 ・ アナリスト",
+    notes: "Power Query / DAX / Fabric",
+  },
 ];
 
 export default function ComparePage() {

@@ -316,6 +316,26 @@ const CERT_TRACKS: Track[] = [
     emoji: "🏗️",
     accent: "bg-orange-500",
   },
+  {
+    href: "/certs/it-passport/textbook",
+    title: "ITパスポート試験(IPA)",
+    description:
+      "国家試験レベル 1。社会人 ・ 学生の入門認定。3 分野(ストラテジ ・ マネジメント ・ テクノロジ)を網羅。",
+    audience: "社会人 ・ 学生入門",
+    chip: "iパス",
+    emoji: "🎫",
+    accent: "bg-teal-500",
+  },
+  {
+    href: "/certs/power-bi/textbook",
+    title: "Microsoft Power BI(PL-300)",
+    description:
+      "BI 系 Associate 認定。Power Query / DAX / 可視化 / Microsoft Fabric / Copilot を網羅。",
+    audience: "BI 開発者 ・ アナリスト",
+    chip: "PL-300",
+    emoji: "📊",
+    accent: "bg-yellow-600",
+  },
 ];
 
 function TrackCard({ track }: { track: Track }) {

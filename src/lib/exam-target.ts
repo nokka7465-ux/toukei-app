@@ -38,6 +38,8 @@ export const CERT_PRESETS: CertPreset[] = [
   { key: "db-specialist", label: "データベーススペシャリスト試験", href: "/certs/db-specialist", hours: 400 },
   { key: "dx-kentei", label: "DX 検定", href: "/certs/dx-kentei", hours: 60 },
   { key: "aws-saa", label: "AWS Solutions Architect Associate", href: "/certs/aws-saa", hours: 150 },
+  { key: "it-passport", label: "ITパスポート試験", href: "/certs/it-passport", hours: 150 },
+  { key: "power-bi", label: "Microsoft Power BI(PL-300)", href: "/certs/power-bi", hours: 90 },
 ];
 
 export type ExamTarget = {
