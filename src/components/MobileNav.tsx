@@ -48,6 +48,7 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/certs/e-shikaku", label: "E資格" },
       { href: "/certs/ds-literacy", label: "DS検定" },
       { href: "/certs/qc-kentei", label: "QC検定" },
+      { href: "/certs/genai-passport", label: "生成AIパスポート" },
     ],
   },
   {

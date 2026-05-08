@@ -737,10 +737,10 @@ export default function Home() {
             <span className="chip-soft">Related Certs</span>
             <h3 className="text-xl font-bold mt-3">関連検定(別系統)</h3>
             <p className="text-xs text-[var(--muted)] mt-2 ui-sans">
-              データ系資格の 4 つのパス。実務志向・調査志向・AI 概念・データ全方位リテラシーから目的に応じて選べます。
+              データ・AI 系資格の代表的なパス。実務志向・調査志向・AI 概念・全方位リテラシー・生成 AI 活用から目的に応じて選べます。
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
             {[
               {
                 href: "/certs/ds-basic",
@@ -777,6 +777,15 @@ export default function Home() {
                 title: "データサイエンティスト検定",
                 description:
                   "DS 協会主催。DS 力 / DE 力 / ビジネス力 の 3 軸を測るリテラシーレベル検定。データ職入門に最適。",
+              },
+              {
+                href: "/certs/genai-passport",
+                chip: "GenAI",
+                emoji: "✨",
+                accent: "bg-pink-500",
+                title: "生成AIパスポート",
+                description:
+                  "GUGA 主催。生成 AI を業務で安全 / 効果的に使うリテラシーを問う、全職種向けの入門検定。30 〜 50 時間で取得可能。",
               },
             ].map((cert) => (
               <Link

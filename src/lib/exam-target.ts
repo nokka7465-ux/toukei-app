@@ -25,6 +25,7 @@ export const CERT_PRESETS: CertPreset[] = [
   { key: "survey", label: "統計調査士", href: "/certs/survey", hours: 80 },
   { key: "survey-specialist", label: "専門統計調査士", href: "/certs/survey-specialist", hours: 180 },
   { key: "qc-kentei", label: "QC検定", href: "/certs/qc-kentei", hours: 80 },
+  { key: "genai-passport", label: "生成AIパスポート", href: "/certs/genai-passport", hours: 40 },
 ];
 
 export type ExamTarget = {

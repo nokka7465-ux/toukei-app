@@ -14,12 +14,13 @@ import { dsLiteracyQuestions } from "@/data/questions/ds-literacy";
 import { eShikakuQuestions } from "@/data/questions/e-shikaku";
 import { qcKenteiQuestions } from "@/data/questions/qc-kentei";
 import { surveySpecialistQuestions } from "@/data/questions/survey-specialist";
+import { genaiPassportQuestions } from "@/data/questions/genai-passport";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
   title: "統計検定 演習問題集 ─ 4級〜1級・関連検定の無料問題",
   description:
-    "統計検定 入門編〜1 級、関連検定(DS基礎・統計調査士・G検定・E資格・DS検定・QC検定)、数学基礎の無料演習問題を一覧から選択。1 問 1 答モード・タイマー機能・解説付き。",
+    "統計検定 入門編〜1 級、関連検定(DS基礎・統計調査士・G検定・E資格・DS検定・QC検定・生成AIパスポート)、数学基礎の無料演習問題を一覧から選択。1 問 1 答モード・タイマー機能・解説付き。",
   alternates: { canonical: "/quiz" },
   openGraph: {
     title: "演習問題 一覧",
@@ -57,6 +58,7 @@ const CERT_TRACKS: Track[] = [
   { href: "/certs/e-shikaku/quiz", title: "E資格(JDLA Engineer)", count: eShikakuQuestions.length, description: "DL 数理・最適化・主要モデル" },
   { href: "/certs/ds-literacy/quiz", title: "データサイエンティスト検定", count: dsLiteracyQuestions.length, description: "DS / DE / ビジネス力 3 軸" },
   { href: "/certs/qc-kentei/quiz", title: "QC検定(品質管理検定)", count: qcKenteiQuestions.length, description: "管理図・抜取検査・QC 7 つ道具" },
+  { href: "/certs/genai-passport/quiz", title: "生成AIパスポート(GUGA)", count: genaiPassportQuestions.length, description: "LLM・プロンプト・リスク・倫理" },
 ];
 
 function TrackCard({ track }: { track: Track }) {

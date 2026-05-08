@@ -6,7 +6,7 @@ import { SchoolPicks } from "@/components/SchoolPicks";
 export const metadata: Metadata = {
   title: "統計検定 教科書一覧 ─ 4級〜1級・関連検定・数学基礎",
   description:
-    "統計検定の入門編〜1級と、関連検定(DS基礎・統計調査士・G検定・E資格・DS検定・QC検定)、数学基礎まで全教科書を一覧で。すべて無料で読めます。",
+    "統計検定の入門編〜1級と、関連検定(DS基礎・統計調査士・G検定・E資格・DS検定・QC検定・生成AIパスポート)、数学基礎まで全教科書を一覧で。すべて無料で読めます。",
   alternates: { canonical: "/textbook" },
   openGraph: {
     title: "統計検定 教科書一覧 ─ 4級〜1級・関連検定・数学基礎",
@@ -27,7 +27,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "関連検定とはどんな試験ですか?",
-    a: "統計検定本体(4級〜1級)とは別系統の、データサイエンス基礎・統計調査士・専門統計調査士・G検定・E資格・DS検定・QC検定など、データ・AI・調査・品質管理関連の資格試験です。各教科書ページから対策を始められます。",
+    a: "統計検定本体(4級〜1級)とは別系統の、データサイエンス基礎・統計調査士・専門統計調査士・G検定・E資格・DS検定・QC検定・生成AIパスポートなど、データ・AI・調査・品質管理関連の資格試験です。各教科書ページから対策を始められます。",
   },
   {
     q: "数学基礎の教科書は誰向けですか?",
@@ -186,6 +186,16 @@ const CERT_TRACKS: Track[] = [
     emoji: "🏭",
     accent: "bg-amber-600",
   },
+  {
+    href: "/certs/genai-passport/textbook",
+    title: "生成AIパスポート(GUGA)",
+    description:
+      "生成 AI を業務で安全 / 効果的に使うリテラシーを問う。LLM・プロンプト・倫理まで。",
+    audience: "全職種・AI 活用初心者",
+    chip: "GenAI",
+    emoji: "✨",
+    accent: "bg-pink-500",
+  },
 ];
 
 function TrackCard({ track }: { track: Track }) {
@@ -294,7 +304,7 @@ export default function TextbookIndexPage() {
         <header className="mb-5">
           <div className="chapter-eyebrow mb-1">関連検定(別系統)</div>
           <h2 className="text-2xl font-bold">
-            DS基礎 / 統計調査士 / G検定 / E資格 / DS検定 / QC検定
+            DS基礎 / 統計調査士 / G検定 / E資格 / DS検定 / QC検定 / 生成AIパスポート
           </h2>
           <p className="text-sm text-[var(--muted)] mt-2">
             統計検定 4〜1 級とは別系統の、データ・AI・調査・品質管理の各系統の資格。実務志向・調査志向・AI 概念から実装・データ全方位リテラシー・品質工学まで、目的に応じて選択。

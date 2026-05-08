@@ -160,6 +160,19 @@ const CERTS: Cert[] = [
     best: "製造業・改善推進",
     notes: "品質管理 ・ 管理図 ・ QC 7 つ道具",
   },
+  {
+    slug: "/certs/genai-passport",
+    name: "生成AIパスポート",
+    organizer: "GUGA",
+    fee: "11,000 円",
+    duration: "年 3〜4 回",
+    format: "60 分 / 60 問(IBT)",
+    difficulty: "★☆☆☆☆",
+    studyHours: "30〜50h",
+    pass: "約 70〜80%",
+    best: "全職種・AI 活用初心者",
+    notes: "生成 AI を業務で使うリテラシー",
+  },
 ];
 
 export default function ComparePage() {

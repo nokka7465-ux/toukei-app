@@ -385,6 +385,69 @@ export const certRoadmaps: Record<string, CertRoadmap> = {
     textbookHref: "/certs/qc-kentei/textbook",
     quizHref: "/certs/qc-kentei/quiz",
   },
+  "genai-passport": {
+    slug: "genai-passport",
+    title: "生成AIパスポート 学習ロードマップ",
+    organizer: "GUGA(生成AI活用普及協会)",
+    hours: "30〜50 時間",
+    months: "1〜2 ヶ月",
+    prerequisites: "なし(ChatGPT などを触ったことがあれば理解が早い)",
+    passCriteria: "正答率 約 70% 以上(60 問 / 60 分)",
+    steps: [
+      {
+        week: "Week 1",
+        title: "AI / ML / DL の基礎用語",
+        description:
+          "AI ⊃ ML ⊃ DL ⊃ 生成 AI の入れ子構造、3 つの学習スタイル、Transformer の概要を押さえる。",
+        links: [
+          { href: "/certs/genai-passport/textbook", label: "生成AIパスポート 教科書(章 1-2)" },
+          { href: "/about-ai", label: "AIとは" },
+          { href: "/glossary", label: "用語集" },
+        ],
+      },
+      {
+        week: "Week 2",
+        title: "LLM ・ 拡散モデルの仕組み",
+        description:
+          "トークン・Attention・事前学習 → SFT → RLHF の 3 段階、拡散モデルの順方向 / 逆方向プロセスを概念で理解。",
+        links: [
+          { href: "/certs/genai-passport/textbook", label: "生成AIパスポート 教科書(章 4-5)" },
+          { href: "/blog/transformer-math", label: "Transformer の数学" },
+        ],
+      },
+      {
+        week: "Week 3",
+        title: "主要サービス + プロンプト",
+        description:
+          "ChatGPT / Claude / Gemini / Copilot を実際に触る。役割指定・Few-shot・CoT・RAG を演習。",
+        links: [
+          { href: "/certs/genai-passport/textbook", label: "生成AIパスポート 教科書(章 6-7)" },
+        ],
+      },
+      {
+        week: "Week 4",
+        title: "リスク + 法律 + 倫理",
+        description:
+          "ハルシネーション・バイアス・情報漏洩、著作権 30 条の 4・EU AI Act・社内ガイドラインを整理。",
+        links: [
+          { href: "/certs/genai-passport/textbook", label: "生成AIパスポート 教科書(章 8-9)" },
+        ],
+      },
+      {
+        week: "Week 5",
+        title: "演習 + 模擬試験",
+        description:
+          "演習問題で全範囲を一周。1 問 1 分のペース感覚を作り、苦手分野は教科書に戻って復習。",
+        links: [
+          { href: "/certs/genai-passport/quiz", label: "生成AIパスポート 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+          { href: "/review", label: "苦手問題の復習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/genai-passport/textbook",
+    quizHref: "/certs/genai-passport/quiz",
+  },
 };
 
 export const certSlugs = Object.keys(certRoadmaps);

@@ -5,7 +5,7 @@ import { BreadcrumbJsonLd } from "@/components/StructuredData";
 export const metadata: Metadata = {
   title: "統計検定 / G検定 / DS検定 受験情報 ─ 日程・受験料・合格率まとめ",
   description:
-    "統計検定 4 級〜1 級、DS基礎、G検定、E資格、統計調査士、データサイエンティスト検定、QC検定の受験時期・受験料・試験形式・合格率(参考値)・申込先を一覧で。",
+    "統計検定 4 級〜1 級、DS基礎、G検定、E資格、統計調査士、データサイエンティスト検定、QC検定、生成AIパスポートの受験時期・受験料・試験形式・合格率(参考値)・申込先を一覧で。",
   alternates: { canonical: "/exam-info" },
   openGraph: {
     title: "受験情報まとめ",
@@ -231,6 +231,23 @@ const RELATED_EXAMS: Exam[] = [
     studyLabel: "専門統計調査士の教科書を見る",
     highlight:
       "統計調査士の上位資格。標本設計の理論・公的統計の高度利用。",
+  },
+  {
+    id: "genai-passport",
+    title: "生成AIパスポート検定",
+    organizer: "GUGA(一般社団法人 生成AI活用普及協会)",
+    format: "オンライン IBT 方式(自宅 / 会社で受験可)",
+    schedule: "年 3 〜 4 回(2 月・6 月・10 月など)",
+    duration: "60 分 / 60 問(4 択選択式)",
+    fee: "一般 11,000 円 / 学割 5,500 円(税込・参考)",
+    passCriteria: "正答率 70% 程度(参考)",
+    passRate: "おおむね 70 〜 80%",
+    takers: "1 回あたり数千名規模",
+    officialUrl: "https://guga.or.jp/outline/",
+    studyHref: "/certs/genai-passport",
+    studyLabel: "生成AIパスポートの教科書を見る",
+    highlight:
+      "生成 AI を業務で安全 / 効果的に使うリテラシーを問う、全職種向けの入門検定。30 〜 50 時間で取得可能。",
   },
 ];
 

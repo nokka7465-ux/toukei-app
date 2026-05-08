@@ -13,6 +13,7 @@ import { dsLiteracyTextbook } from "@/data/textbooks/ds-literacy";
 import { eShikakuTextbook } from "@/data/textbooks/e-shikaku";
 import { qcKenteiTextbook } from "@/data/textbooks/qc-kentei";
 import { surveySpecialistTextbook } from "@/data/textbooks/survey-specialist";
+import { genaiPassportTextbook } from "@/data/textbooks/genai-passport";
 import { glossary } from "@/data/glossary";
 import { blogPosts } from "@/data/blog";
 import { introFormulas } from "@/data/formulas/intro";
@@ -98,6 +99,7 @@ export const searchIndex: SearchItem[] = (() => {
     { book: eShikakuTextbook, urlBase: "/certs/e-shikaku/textbook", displayTitle: "E資格" },
     { book: qcKenteiTextbook, urlBase: "/certs/qc-kentei/textbook", displayTitle: "QC検定" },
     { book: surveySpecialistTextbook, urlBase: "/certs/survey-specialist/textbook", displayTitle: "専門統計調査士" },
+    { book: genaiPassportTextbook, urlBase: "/certs/genai-passport/textbook", displayTitle: "生成AIパスポート" },
   ];
   for (const { book, urlBase, displayTitle } of textbookSets) {
     for (const ch of book.chapters) {

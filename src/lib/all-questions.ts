@@ -13,6 +13,7 @@ import { gTestQuestions } from "@/data/questions/g-test";
 import { qcKenteiQuestions } from "@/data/questions/qc-kentei";
 import { surveyQuestions } from "@/data/questions/survey";
 import { surveySpecialistQuestions } from "@/data/questions/survey-specialist";
+import { genaiPassportQuestions } from "@/data/questions/genai-passport";
 
 export type Track = {
   key: string;
@@ -37,6 +38,7 @@ export const tracks: Track[] = [
   { key: "e-shikaku", label: "E資格", href: "/certs/e-shikaku/quiz", group: "cert", questions: eShikakuQuestions },
   { key: "ds-literacy", label: "DS検定", href: "/certs/ds-literacy/quiz", group: "cert", questions: dsLiteracyQuestions },
   { key: "qc-kentei", label: "QC検定", href: "/certs/qc-kentei/quiz", group: "cert", questions: qcKenteiQuestions },
+  { key: "genai-passport", label: "生成AIパスポート", href: "/certs/genai-passport/quiz", group: "cert", questions: genaiPassportQuestions },
 ];
 
 export type EnrichedQuestion = Question & {
