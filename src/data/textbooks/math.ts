@@ -1338,5 +1338,128 @@ export const mathBasicsTextbook: Textbook = {
         },
       ],
     },
+    {
+      id: "ch11",
+      number: 11,
+      title: "グラフ理論とスペクトラルグラフ ─ ネットワーク AI の数学",
+      overview:
+        "ノード・エッジ・隣接行列・ラプラシアン行列・スペクトラルクラスタリング・GNN の数学的基盤を 3 節で。",
+      sections: [
+        {
+          id: "ch11-sec1",
+          number: "11.1",
+          title: "グラフの基礎と隣接行列",
+          blocks: [
+            {
+              type: "p",
+              text: "**グラフ(graph)** は『ノード(頂点)+ エッジ(辺)』の構造。SNS のフォロー関係・分子構造・タンパク質間相互作用・知識グラフなど、現代 AI のあらゆる応用分野で登場します。",
+            },
+            { type: "h3", text: "グラフの主要種類" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**無向グラフ**: エッジに方向がない(友達関係)",
+                "**有向グラフ**: エッジに方向がある(フォロー・引用)",
+                "**重み付きグラフ**: エッジに重み(距離・強度)",
+                "**多重グラフ**: 同じノードペアに複数エッジ",
+                "**二部グラフ**: ノードを 2 種類に分けてエッジは異種間のみ(ユーザー-アイテム)",
+              ],
+            },
+            { type: "h3", text: "隣接行列(Adjacency Matrix)" },
+            {
+              type: "def",
+              title: "公式 ─ 隣接行列",
+              body: "$n$ ノードのグラフについて $n \\times n$ の行列 $A$:\n\n$\\;A_{ij} = \\begin{cases} 1 & i \\sim j \\text{(エッジあり)} \\\\ 0 & \\text{それ以外} \\end{cases}\\;$\n\n重み付きなら $A_{ij} = w_{ij}$。**無向グラフ → 対称行列**。$A^k$ の $(i,j)$ 成分は $i$ から $j$ への長さ $k$ の経路数を表す。",
+            },
+            {
+              type: "intuition",
+              title: "次数行列とラプラシアン",
+              body: "**次数行列** $D$ は対角に各ノードの次数(エッジ数)を並べた行列。**ラプラシアン行列** $L = D - A$ がスペクトラルグラフ理論の中核。$L$ は **対称・半正定値**(固有値非負)で、math Ch7 のスペクトル分解が直接応用されます。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec2",
+          number: "11.2",
+          title: "グラフラプラシアンとスペクトラルクラスタリング",
+          blocks: [
+            {
+              type: "p",
+              text: "**グラフラプラシアン** の固有値・固有ベクトルから、グラフの本質的構造を抽出できる ─ これが **スペクトラルグラフ理論** の核心です。",
+            },
+            { type: "h3", text: "正規化ラプラシアン" },
+            {
+              type: "def",
+              title: "公式 ─ 正規化ラプラシアン",
+              body: "**対称正規化**: $\\;L_{\\text{sym}} = D^{-1/2} L D^{-1/2} = I - D^{-1/2} A D^{-1/2}\\;$\n\n**ランダムウォーク正規化**: $\\;L_{\\text{rw}} = D^{-1} L = I - D^{-1} A\\;$\n\n両者とも固有値は $[0, 2]$ の区間に収まる。**0 固有値の重複度 = 連結成分の個数** という重要性質。",
+            },
+            { type: "h3", text: "スペクトラルクラスタリング" },
+            {
+              type: "def",
+              title: "アルゴリズム ─ Spectral Clustering",
+              body: "1. 類似度グラフを構築($k$-NN またはガウスカーネル)\n2. 正規化ラプラシアン $L_{\\text{sym}}$ を計算\n3. **下位 $k$ 個の固有ベクトル** を列に並べた $n \\times k$ 行列 $U$ を構成\n4. $U$ の各行を正規化(球面射影)\n5. $k$-means で各行をクラスタリング\n\nノード数が多くてもクラスタ数 $k$ が小さければ高速。**任意形状のクラスタ** に強い。",
+            },
+            { type: "h3", text: "Cheeger 不等式" },
+            {
+              type: "intuition",
+              title: "固有値とグラフのクラスタ性",
+              body: "**Cheeger 不等式**: $\\lambda_2 / 2 \\leq h(G) \\leq \\sqrt{2 \\lambda_2}$。$\\lambda_2$(2 番目に小さい固有値、Fiedler 値)が **グラフが 2 つに分かれやすいか** を量的に測る。$\\lambda_2 \\to 0$ で『**ほぼ非連結**』 = クラスタ性あり。コミュニティ検出の理論的基盤。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec3",
+          number: "11.3",
+          title: "Graph Neural Network(GNN)の数学的基盤",
+          blocks: [
+            {
+              type: "p",
+              text: "**GNN(Graph Neural Network)** は『グラフ構造を入力として深層学習する』モデル。SNS・推薦・創薬・知識グラフ ─ 現代の関係データ学習の中核です。",
+            },
+            { type: "h3", text: "メッセージ パッシング" },
+            {
+              type: "def",
+              title: "公式 ─ メッセージパッシング更新式",
+              body: "ノード $v$ の埋め込み更新:\n\n$\\;\\boldsymbol h_v^{(l+1)} = \\sigma\\!\\left(W^{(l)} \\sum_{u \\in N(v)} \\dfrac{\\boldsymbol h_u^{(l)}}{|N(v)|} + B^{(l)} \\boldsymbol h_v^{(l)}\\right)\\;$\n\n各層で **隣接ノードからメッセージを集約 → 自分の埋め込みを更新**。$L$ 層で $L$ ホップ先まで情報が伝播。",
+            },
+            { type: "h3", text: "主要な GNN 系" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**GCN(Graph Convolutional Network)**(Kipf & Welling 2016): 半教師あり学習のパイオニア",
+                "**GraphSAGE**(Hamilton et al. 2017): 大規模グラフ向けのサンプリング集約",
+                "**GAT(Graph Attention Network)**(Veličković et al. 2018): Attention で隣接ノードの重みを学習",
+                "**GIN(Graph Isomorphism Network)**(Xu et al. 2019): WL test と同等の表現力",
+                "**Graph Transformer**: フルグラフ Self-Attention",
+              ],
+            },
+            { type: "h3", text: "応用領域" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**推薦システム**: ユーザー-アイテム二部グラフで Pinterest が実用化",
+                "**創薬**: 分子グラフからの活性予測(DeepMind AlphaFold は Transformer ベース)",
+                "**ソーシャル**: Twitter/X のフェイクニュース検出",
+                "**交通**: 地図ネットワークでの経路最適化(Google Maps の到着予測)",
+                "**サイバーセキュリティ**: 通信ネットワークの異常検知",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 グラフ × 行列 × 深層学習の三位一体",
+              body: "**グラフラプラシアン**(行列)を **固有値分解**(線形代数)し、**深層学習**(微分)で更新する ─ math 教科書の **Ch4 線形代数 → Ch6 多変数微分 → Ch7 固有値・SVD → Ch11 グラフ理論** が一つの流れで応用される現代 AI の中核です。",
+            },
+            { type: "h3", text: "結びに" },
+            {
+              type: "p",
+              text: "Ch1-11 で **古典数学から現代 AI までの数学的素養** が一通り揃いました。グラフ理論は math の最終章として、すべての章の道具(線形代数・微分・確率・最適化)が結集する分野です。**統計とネットワーク科学の融合領域** は、今後さらに拡大していくでしょう。",
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

@@ -1278,5 +1278,122 @@ boot.ci(res, type = c("perc", "bca"))   # 百分位法 + BCa`,
         },
       ],
     },
+    {
+      id: "ch11",
+      number: 11,
+      title: "因果推論の理論的基礎",
+      overview:
+        "Pearl の DAG 理論・do-calculus・反事実推論・Identifiability theorem を 3 節で。1 級レベルの厳密な因果推論。",
+      sections: [
+        {
+          id: "ch11-sec1",
+          number: "11.1",
+          title: "因果グラフと d-separation",
+          blocks: [
+            {
+              type: "p",
+              text: "**因果推論(causal inference)** は『**観察と介入の違い**』を扱う統計学の一分野。Pearl の有向非巡回グラフ(DAG)が現代理論の中心です。",
+            },
+            { type: "h3", text: "因果 DAG の基本構造" },
+            {
+              type: "def",
+              title: "用語 ─ DAG の 3 つの基本構造",
+              body: "**Chain**: $X \\to Y \\to Z$。$Y$ が $X$ と $Z$ の関係を媒介\n\n**Fork**: $X \\leftarrow Y \\to Z$。$Y$ が **共通の原因**(交絡因子)\n\n**Collider**: $X \\to Y \\leftarrow Z$。$Y$ は **共通の結果**\n\n各構造で『$X$ と $Z$ の独立性が、$Y$ で条件付けると変わる方向』が違います。",
+            },
+            { type: "h3", text: "d-separation" },
+            {
+              type: "def",
+              title: "用語 ─ d-separation",
+              body: "DAG の 2 ノード $X, Y$ がノード集合 $S$ で **d-separated** とは、$X$ と $Y$ を結ぶすべての経路がブロックされること:\n\n- **Chain / Fork** 上のノードが $S$ に含まれる(ブロック)\n- **Collider** とその子孫が $S$ に **含まれない**(ブロック)\n\n$X \\perp Y \\mid S$(条件付き独立)が **d-separation から導かれる**(マルコフ性)。",
+            },
+            {
+              type: "intuition",
+              title: "Collider バイアス",
+              body: "Collider $Y$(共通の結果)で **条件付け** すると、もとは独立な $X$ と $Z$ が **見かけ上相関** を持つ。例: 大学合格(Y)を条件に学力(X)とコネ(Z)を見ると、本来独立でも合格者の中では負相関が見える(『コネがあれば学力が低くても合格』)。**条件付けるべきでないものを条件付ける誤り** の典型。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec2",
+          number: "11.2",
+          title: "do 演算子と Identifiability",
+          blocks: [
+            {
+              type: "p",
+              text: "**do 演算子** $do(X = x)$ は『**$X$ を強制的に値 $x$ にする介入**』を表す Pearl の独自記法。観察的条件付け $P(Y|X=x)$ と区別されます。",
+            },
+            { type: "h3", text: "do 演算子の意味" },
+            {
+              type: "def",
+              title: "用語 ─ do 演算子",
+              body: "$P(Y \\mid do(X=x))$: $X$ を $x$ に **介入** したときの $Y$ の分布\n\n$P(Y \\mid X=x)$: $X = x$ を **観測** したときの $Y$ の条件付き分布\n\n両者は **一般に異なる**。例: 雨を観察すれば傘が増えるが、強制的に傘を持たせても雨は降らない。",
+            },
+            { type: "h3", text: "バックドア基準" },
+            {
+              type: "def",
+              title: "公式 ─ Backdoor Criterion",
+              body: "ノード集合 $S$ が **バックドア基準** を満たすとは、(1) $S$ は $X$ の子孫を含まず、(2) $X$ から $Y$ への **バックドア経路をすべてブロック** する。\n\nこのとき:\n\n$\\;P(Y \\mid do(X)) = \\sum_S P(Y \\mid X, S) P(S)\\;$\n\n**観察データから因果効果を推定可能**(identifiability)。傾向スコア法が満たすのもこの条件です。",
+            },
+            { type: "h3", text: "Front-door 基準" },
+            {
+              type: "p",
+              text: "**フロントドア基準** はバックドアでカバーできない場合の代替。**$X \\to M \\to Y$** という媒介変数 $M$ を経由する経路をすべて辿れるとき、観察データから $P(Y|do(X))$ を計算可能。**喫煙 → タール → がん** という Pearl の有名な例。",
+            },
+            { type: "h3", text: "do-Calculus の 3 規則" },
+            {
+              type: "intuition",
+              title: "完全性定理",
+              body: "**Pearl の do-calculus**(3 つの代数的規則)は **完全(Complete)**(Shpitser & Pearl 2006): どんな因果効果も、do-calculus で代数的に変換できれば identifiable、できなければ identifiable でない。**観察データだけからどこまで因果が分かるか** を厳密に判定する道具。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec3",
+          number: "11.3",
+          title: "反事実(Counterfactual)と構造方程式モデル",
+          blocks: [
+            {
+              type: "p",
+              text: "**反事実(counterfactual)** は『**もし $X = x'$ だったら、$Y$ はどうなっていたか**』という仮想的な問いを定式化する枠組み。",
+            },
+            { type: "h3", text: "Pearl の階層性" },
+            {
+              type: "def",
+              title: "用語 ─ Causal Hierarchy",
+              body: "**Level 1 観察(Association)**: $P(Y|X)$ 通常の統計\n\n**Level 2 介入(Intervention)**: $P(Y|do(X))$ ─ ランダム化試験\n\n**Level 3 反事実(Counterfactual)**: $P(Y_{X=x'} | X=x, Y=y)$ ─ 個体レベル\n\n上位の量は下位だけからは計算できない。**因果階層性定理**。",
+            },
+            { type: "h3", text: "構造方程式モデル(SEM)" },
+            {
+              type: "def",
+              title: "公式 ─ 構造方程式",
+              body: "各変数 $X_i$ について:\n\n$\\;X_i = f_i(\\boldsymbol{Pa}_i, U_i)\\;$\n\n$\\boldsymbol{Pa}_i$ は親ノード集合、$U_i$ は外生ノイズ。**反事実値の計算** は、$U$ を観測値で固定したまま、$X$ への介入で $Y$ の値を再計算することで定義。",
+            },
+            { type: "h3", text: "潜在結果モデル(POM)" },
+            {
+              type: "intuition",
+              title: "Rubin と Pearl の架け橋",
+              body: "**潜在結果モデル**(Rubin Causal Model)は、各個体に $Y_1, Y_0$(処置/対照下の潜在結果)を仮定し、**個体レベルの因果効果** $Y_1 - Y_0$ を定義。Pearl の DAG と同等の表現力(Pearl 2009 が証明)。**疫学・経済学** は POM、**機械学習・AI** は DAG が主流ですが、現代では両者を併用するのが標準です。",
+            },
+            { type: "h3", text: "因果機械学習(Causal ML)" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Double Machine Learning**(Chernozhukov 2018): 機械学習 + 古典因果推論",
+                "**Causal Forests**(Athey & Imbens 2019): 異質的処置効果推定",
+                "**Meta-Learners**: T-/S-/X-/R-Learner の 4 系統",
+                "**因果表現学習**: 表現空間で因果構造を保つ深層学習",
+                "**LLM × 因果**: GPT-4 で因果グラフを抽出する研究も",
+              ],
+            },
+            { type: "h3", text: "結びに" },
+            {
+              type: "p",
+              text: "1 級教科書 11 章で **観察 → 介入 → 反事実** のすべてを扱いました。**因果推論は『機械学習の次の壁』** とも言われ、政策評価・医療・経営判断のすべてで本質的な役割を果たします。本サイトの [因果推論ミニ教科書](/causal-inference) で実装も学べます。",
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

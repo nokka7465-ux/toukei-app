@@ -1741,7 +1741,147 @@ for epoch in range(epochs):
             { type: "h3", text: "結びに" },
             {
               type: "p",
-              text: "E 資格教科書 10 章を歩き終えました。**数学基礎 → 機械学習 → DL 理論 → アーキテクチャ → 応用 → 実装 → 基盤モデル → 強化学習 → マルチモーダル → MLOps**。2025 年以降の DL エンジニアに必要な道具立てを完備。実戦は **Kaggle・Hugging Face・実プロダクト開発** で磨いてください。",
+              text: "E 資格教科書 10 章を歩き終えました。**数学基礎 → 機械学習 → DL 理論 → アーキテクチャ → 応用 → 実装 → 基盤モデル → 強化学習 → マルチモーダル → MLOps**。続く 11 章では **LLM の Fine-tuning とドメイン適応** を深掘りし、応用力をもう一段上げます。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch11",
+      number: 11,
+      title: "LLM の Fine-tuning とドメイン適応",
+      overview:
+        "Pretrained LLM をドメイン・タスクに合わせる手法群。LoRA・QLoRA・SFT・DPO・GRPO を 3 節で。",
+      sections: [
+        {
+          id: "ch11-sec1",
+          number: "11.1",
+          title: "Fine-tuning の戦略",
+          blocks: [
+            {
+              type: "p",
+              text: "**Pretrained LLM**(Llama・Qwen・Mistral など)を **特定タスクに適応** させる Fine-tuning は、現代 AI 開発の中核スキル。コスト・性能・専門性のトレードオフを設計します。",
+            },
+            { type: "h3", text: "5 つの主要戦略" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Full Fine-tuning**: 全パラメータを更新。最高性能だがコスト膨大",
+                "**LoRA(Low-Rank Adaptation)**: 重み更新を低ランク行列で近似(Hu et al. 2021)",
+                "**QLoRA**: 4-bit 量子化 + LoRA。コンシューマ GPU で 70B 級が動く",
+                "**Prompt Tuning / Prefix Tuning**: 学習可能な仮想トークンを追加",
+                "**Adapter**: 各層に小さな MLP を挿入(LoRA の親戚)",
+              ],
+            },
+            { type: "h3", text: "LoRA の数学" },
+            {
+              type: "def",
+              title: "公式 ─ LoRA",
+              body: "重み行列 $W \\in \\mathbb{R}^{d \\times k}$ の更新を低ランク分解で近似:\n\n$\\;W' = W + \\Delta W = W + BA, \\quad B \\in \\mathbb{R}^{d \\times r}, A \\in \\mathbb{R}^{r \\times k}\\;$\n\n$r \\ll \\min(d, k)$(典型的に $r = 8, 16, 32$)。**学習パラメータが $dk \\to (d+k)r$** に激減。math Ch7 の **低ランク近似** が直接の応用例。",
+            },
+            {
+              type: "intuition",
+              title: "なぜ LoRA でうまくいくか",
+              body: "Hu et al. の知見: **LLM の重み更新は本質的に低ランク**。フルファインチューン時の $\\Delta W$ の特異値を見ると、上位 8-16 個でほぼ説明される。だから LoRA は **本質的構造を捉えながらコストを 1000 倍削減**。Microsoft・Hugging Face PEFT で実装提供。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec2",
+          number: "11.2",
+          title: "Instruction Tuning と RLHF / DPO",
+          blocks: [
+            {
+              type: "p",
+              text: "**Pretrained LLM** はテキスト予測モデル。それを『**指示に従う**』モデルに変えるのが **Instruction Tuning** と **RLHF / DPO**。",
+            },
+            { type: "h3", text: "Instruction Tuning(SFT)" },
+            {
+              type: "def",
+              title: "用語 ─ Supervised Fine-Tuning",
+              body: "(指示, 理想回答)のペアでフルファイチューン or LoRA。**Stanford Alpaca**(2023)で 5.2 万サンプルで GPT-3.5 並みの指示追従性を実現。日本語: **rinna-instruct・Stable LM-2 Japanese・LLM-jp** などが公開。",
+            },
+            { type: "h3", text: "RLHF と DPO の比較" },
+            {
+              type: "def",
+              title: "用語 ─ RLHF vs DPO",
+              body: "**RLHF(Reinforcement Learning from Human Feedback)**: ①SFT → ②報酬モデル → ③PPO で生成方策を最適化。3 段階・実装難・安定性課題\n\n**DPO(Direct Preference Optimization)**(Rafailov et al. 2023): 報酬モデルなしで **選好ペアから直接最適化**。1 段階・安定・PPO と同等性能\n\nDPO 系は急速に普及、現代の標準となりつつあります。",
+            },
+            { type: "h3", text: "GRPO と推論モデル" },
+            {
+              type: "p",
+              text: "**GRPO(Group Relative Policy Optimization)**(DeepSeek 2024)は、**Critic 不要で複数サンプルの相対的優劣** から学習する手法。**DeepSeek-R1**(2025)の推論モデルでブレイクスルー。OpenAI o1・o3 系も類似手法を採用と推測されています。E 資格 2026 シラバスで扱われ始めるトピック。",
+            },
+            {
+              type: "intuition",
+              title: "推論モデルの台頭",
+              body: "GPT-3.5 → GPT-4 までの『**スケーリング**』時代から、**推論時計算**(Thinking Tokens・Chain-of-Thought・Tree of Thoughts)を活用する『**推論モデル**』時代へ。OpenAI o1 / Claude 3.7 Extended Thinking / Gemini 2.0 Flash Thinking など。**訓練時のスケーリング → 推論時のスケーリング** へのシフトが始まっています。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec3",
+          number: "11.3",
+          title: "RAG とドメイン特化 LLM",
+          blocks: [
+            {
+              type: "p",
+              text: "**RAG(Retrieval-Augmented Generation)** は『**外部知識ベースから検索 → LLM に文脈として与える**』手法。Fine-tuning と並ぶ、LLM の知識拡張の二大アプローチ。",
+            },
+            { type: "h3", text: "RAG のパイプライン" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "**インデックス構築**: 文書をチャンク化 → 埋め込み → ベクトル DB に保存",
+                "**検索**: クエリを埋め込み → 類似上位 $k$ 件を取得",
+                "**再ランク**: Cross-Encoder で精度向上(オプション)",
+                "**プロンプト構築**: 検索結果 + ユーザークエリ",
+                "**生成**: LLM で回答を生成",
+                "**評価**: ハルシネーション検出 + 引用確認",
+              ],
+            },
+            { type: "h3", text: "ベクトル DB とハイブリッド検索" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Pinecone / Weaviate / Qdrant / Chroma**: ベクトル DB の主要選択肢",
+                "**FAISS**(Meta): ローカルベクトル検索ライブラリ",
+                "**ハイブリッド検索**: Dense(意味)+ Sparse(BM25)を併用",
+                "**Reranker**: Cohere Rerank・bge-reranker などで精度向上",
+                "**GraphRAG**: 知識グラフを併用(Microsoft 2024)",
+              ],
+            },
+            { type: "h3", text: "Fine-tuning vs RAG の使い分け" },
+            {
+              type: "def",
+              title: "用語 ─ ふさわしい使い分け",
+              body: "**Fine-tuning が向く**: 文体・形式・口調を変えたい、専門タスクの精度向上、推論時間を短くしたい\n\n**RAG が向く**: 知識を最新化する必要、出典を明示したい、頻繁に更新される情報\n\n**両方併用**: 最強のドメイン LLM。Fine-tuning でタスク習熟 + RAG で最新知識補完。",
+            },
+            { type: "h3", text: "ドメイン特化 LLM の事例" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Med-PaLM 2**(Google): 医療 LLM、米医師国家試験(USMLE)で 86%",
+                "**BloombergGPT**: 金融特化",
+                "**Code Llama・DeepSeek Coder**: コーディング特化",
+                "**Claude for Enterprise**: 企業データで Fine-tuning",
+                "**日本語**: ELYZA・rinna・Stockmark などのドメイン LLM",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 LLM 開発の未来",
+              body: "2025 年現在、LLM 開発は『**モデルサイズで殴る**』フェーズから『**専門化と効率化**』へ。**MoE・蒸留・LoRA・推論モデル・RAG・Tool Use** ─ これらすべての組合せで、**より小さくより賢い** LLM を作る競争が激化中。E 資格 11 章として、これらを統合的に理解しておくと、実務で迷わなくなります。",
+            },
+            { type: "h3", text: "結びに" },
+            {
+              type: "p",
+              text: "11 章にわたって、**深層学習の基礎から最新 LLM 応用まで** を駆け抜けました。E 資格はゴールではなく、**AI エンジニアとしての旅路の出発点**。ここで身に付いた数学・実装・運用の総合力を、ぜひ社会に役立つ AI システムとして実装してください。",
             },
           ],
         },
