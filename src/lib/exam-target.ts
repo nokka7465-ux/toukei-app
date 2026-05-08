@@ -32,6 +32,8 @@ export const CERT_PRESETS: CertPreset[] = [
   { key: "image-processing", label: "画像処理エンジニア検定 エキスパート", href: "/certs/image-processing", hours: 130 },
   { key: "applied-info", label: "応用情報技術者試験", href: "/certs/applied-info", hours: 350 },
   { key: "aws-ai-practitioner", label: "AWS Certified AI Practitioner", href: "/certs/aws-ai-practitioner", hours: 70 },
+  { key: "basic-info", label: "基本情報技術者試験", href: "/certs/basic-info", hours: 200 },
+  { key: "azure-ai-900", label: "Microsoft Azure AI Fundamentals", href: "/certs/azure-ai-900", hours: 60 },
 ];
 
 export type ExamTarget = {

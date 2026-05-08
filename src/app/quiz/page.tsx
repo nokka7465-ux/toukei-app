@@ -21,6 +21,8 @@ import { aiImplementationQuestions } from "@/data/questions/ai-implementation";
 import { imageProcessingQuestions } from "@/data/questions/image-processing";
 import { appliedInfoQuestions } from "@/data/questions/applied-info";
 import { awsAiPractitionerQuestions } from "@/data/questions/aws-ai-practitioner";
+import { basicInfoQuestions } from "@/data/questions/basic-info";
+import { azureAi900Questions } from "@/data/questions/azure-ai-900";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -71,6 +73,8 @@ const CERT_TRACKS: Track[] = [
   { href: "/certs/image-processing/quiz", title: "画像処理エンジニア検定 エキスパート", count: imageProcessingQuestions.length, description: "古典 CV(フィルタ/周波数)+ DL ベース CV" },
   { href: "/certs/applied-info/quiz", title: "応用情報技術者試験(IPA)", count: appliedInfoQuestions.length, description: "アルゴリズム ・ DB ・ AI ・ セキュリティ ・ 経営戦略" },
   { href: "/certs/aws-ai-practitioner/quiz", title: "AWS Certified AI Practitioner", count: awsAiPractitionerQuestions.length, description: "AWS AI サービス ・ Bedrock ・ SageMaker ・ プロンプト" },
+  { href: "/certs/basic-info/quiz", title: "基本情報技術者試験(IPA)", count: basicInfoQuestions.length, description: "アルゴリズム ・ 情報セキュリティ ・ DB ・ ネットワーク" },
+  { href: "/certs/azure-ai-900/quiz", title: "Azure AI Fundamentals(AI-900)", count: azureAi900Questions.length, description: "Azure ML ・ AI Vision ・ AI Language ・ OpenAI ・ Copilot" },
 ];
 
 function TrackCard({ track }: { track: Track }) {

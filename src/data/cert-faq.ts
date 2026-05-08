@@ -239,6 +239,50 @@ export const certFaq: Record<string, FaqItem[]> = {
       a: "AIF-C01 → **AWS Certified Machine Learning Engineer Associate(MLA-C01)** または **Machine Learning Specialty(MLS-C01)** が ML 道の正規ステップ。クラウド全般を強化したいなら **Solutions Architect Associate(SAA-C03)** へ進むのも有力です。",
     },
   ],
+  "basic-info": [
+    {
+      q: "基本情報技術者試験(FE)とは?",
+      a: "**情報処理推進機構(IPA)** が主催する国家試験(レベル 2)。**通年 CBT で受験可能** な IT エンジニアの登竜門で、年間 10 万人超が受験。応用情報技術者(AP、レベル 3)の前段に位置付けられます。",
+    },
+    {
+      q: "試験形式と合格率は?",
+      a: "**科目 A 60 問 / 90 分 + 科目 B 20 問 / 100 分**(CBT)。両方で **600 / 1000 点以上** が合格基準。合格率は **約 25 〜 35%**。受験料 7,500 円(税込)。",
+    },
+    {
+      q: "2023 年改訂で何が変わりましたか?",
+      a: "(1) **通年 CBT 化** で随時受験可能に、(2) 旧『午前 80 問』が **科目 A 60 問** に削減、(3) 旧『午後の言語選択』が **科目 B のアルゴリズム + 情報セキュリティ重点** に再編、(4) 疑似言語が **C 系から Python 風** に変更。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "**150 〜 250 時間** が中央値。IT パスポート合格者は短く済みます。**科目 B のアルゴリズム** が最大の壁で、トレース表を書く習慣をつけることが合格の鍵です。",
+    },
+    {
+      q: "応用情報との違いは?",
+      a: "**FE はマークシート + CBT のみ**(全選択式)、**AP は午後に記述問題** あり。FE は基礎技能の証明、AP は『高度試験への登竜門』として位置付けが異なります。詳しくは[応用情報](/certs/applied-info)のページを。",
+    },
+  ],
+  "azure-ai-900": [
+    {
+      q: "Microsoft Azure AI Fundamentals(AI-900)とは?",
+      a: "**Microsoft が提供する Azure 認定の Fundamentals レベル** に位置する AI 入門認定。Azure Machine Learning ・ AI Vision ・ AI Language ・ Speech ・ Document Intelligence ・ Azure OpenAI Service ・ Microsoft Copilot ファミリを総覧します。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**CBT(Pearson VUE)or オンライン監督受験 / 約 40 〜 60 問 / 60 分 / 選択式 / 合格 700 点(1000 点満点)**。受験料 **約 12,500 円(99 USD)**、**有効期限なし(継続有効)**。",
+    },
+    {
+      q: "AWS AI Practitioner との違いは?",
+      a: "**Azure AI-900 は Azure 専用、AWS AI Practitioner は AWS 専用**。両者は競合せず、クラウド AI のリテラシーとして両方持つことに価値があります。AI-900 は **有効期限なし**、AWS AI Practitioner は **3 年**。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "Azure / AI に触れたことがある人で **40 〜 60 時間**、未経験者で **60 〜 100 時間**。**Microsoft Learn の AI-900 ラーニングパス**(無料)が事実上の公式教材で、本サイトの教科書と組み合わせると効率的です。",
+    },
+    {
+      q: "次のステップは?",
+      a: "AI-900 → **AI-102(Azure AI Engineer Associate)** が王道。クラウド全般を強化したいなら **AZ-900 → AZ-104** へ進む道もあります。AWS との二刀流にしたい場合は本サイトの[AWS AI Practitioner](/certs/aws-ai-practitioner)も。",
+    },
+  ],
   "qc-kentei": [
     {
       q: "QC検定の各級の難易度は?",

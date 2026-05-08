@@ -841,6 +841,24 @@ export default function Home() {
                 description:
                   "AWS の AI / 生成 AI 認定 Foundational レベル。Bedrock ・ SageMaker ・ 責任ある AI を測る。",
               },
+              {
+                href: "/certs/basic-info",
+                chip: "FE",
+                emoji: "🪪",
+                accent: "bg-stone-600",
+                title: "基本情報技術者試験",
+                description:
+                  "IPA 主催の国家試験(レベル 2)。通年 CBT で受験可能な IT エンジニアの登竜門。",
+              },
+              {
+                href: "/certs/azure-ai-900",
+                chip: "AI-900",
+                emoji: "🟦",
+                accent: "bg-sky-600",
+                title: "Azure AI Fundamentals",
+                description:
+                  "Microsoft 認定の AI Fundamentals。Azure ML ・ OpenAI ・ Copilot ファミリを測る。有効期限なし。",
+              },
             ].map((cert) => (
               <Link
                 key={cert.href}

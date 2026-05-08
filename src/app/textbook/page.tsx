@@ -256,6 +256,26 @@ const CERT_TRACKS: Track[] = [
     emoji: "☁️",
     accent: "bg-amber-500",
   },
+  {
+    href: "/certs/basic-info/textbook",
+    title: "基本情報技術者試験(IPA)",
+    description:
+      "国家試験レベル 2。通年 CBT で受験可能な IT エンジニアの登竜門。アルゴリズム + 情報セキュリティ重点。",
+    audience: "IT エンジニア入門",
+    chip: "FE",
+    emoji: "🪪",
+    accent: "bg-stone-600",
+  },
+  {
+    href: "/certs/azure-ai-900/textbook",
+    title: "Azure AI Fundamentals(AI-900)",
+    description:
+      "Microsoft 認定の AI 入門。Azure ML / OpenAI / Copilot ファミリ / 責任ある AI を網羅。",
+    audience: "Azure AI 入門",
+    chip: "AI-900",
+    emoji: "🟦",
+    accent: "bg-sky-600",
+  },
 ];
 
 function TrackCard({ track }: { track: Track }) {

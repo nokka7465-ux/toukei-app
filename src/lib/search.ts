@@ -20,6 +20,8 @@ import { aiImplementationTextbook } from "@/data/textbooks/ai-implementation";
 import { imageProcessingTextbook } from "@/data/textbooks/image-processing";
 import { appliedInfoTextbook } from "@/data/textbooks/applied-info";
 import { awsAiPractitionerTextbook } from "@/data/textbooks/aws-ai-practitioner";
+import { basicInfoTextbook } from "@/data/textbooks/basic-info";
+import { azureAi900Textbook } from "@/data/textbooks/azure-ai-900";
 import { glossary } from "@/data/glossary";
 import { blogPosts } from "@/data/blog";
 import { introFormulas } from "@/data/formulas/intro";
@@ -112,6 +114,8 @@ export const searchIndex: SearchItem[] = (() => {
     { book: imageProcessingTextbook, urlBase: "/certs/image-processing/textbook", displayTitle: "画像処理エンジニア検定" },
     { book: appliedInfoTextbook, urlBase: "/certs/applied-info/textbook", displayTitle: "応用情報技術者" },
     { book: awsAiPractitionerTextbook, urlBase: "/certs/aws-ai-practitioner/textbook", displayTitle: "AWS AI Practitioner" },
+    { book: basicInfoTextbook, urlBase: "/certs/basic-info/textbook", displayTitle: "基本情報技術者" },
+    { book: azureAi900Textbook, urlBase: "/certs/azure-ai-900/textbook", displayTitle: "Azure AI-900" },
   ];
   for (const { book, urlBase, displayTitle } of textbookSets) {
     for (const ch of book.chapters) {

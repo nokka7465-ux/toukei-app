@@ -351,6 +351,40 @@ const RELATED_EXAMS: Exam[] = [
     highlight:
       "AWS の AI / 生成 AI 認定 Foundational レベル。Bedrock / SageMaker / 責任ある AI を測る。",
   },
+  {
+    id: "basic-info",
+    title: "基本情報技術者試験(FE)",
+    organizer: "情報処理推進機構(IPA)",
+    format: "CBT(通年)",
+    schedule: "通年(随時)",
+    duration: "科目 A 60 問 / 90 分 + 科目 B 20 問 / 100 分",
+    fee: "7,500 円(税込)",
+    passCriteria: "科目 A ・ B ともに 600 / 1000 点以上",
+    passRate: "約 25 〜 35%",
+    takers: "年間およそ 10 万人超",
+    officialUrl: "https://www.ipa.go.jp/shiken/kubun/fe.html",
+    studyHref: "/certs/basic-info",
+    studyLabel: "基本情報の教科書を見る",
+    highlight:
+      "国家試験レベル 2。IT エンジニアの登竜門で、新卒 IT 採用 ・ 中途エンジニア転職の最低ラインとして広く認知。",
+  },
+  {
+    id: "azure-ai-900",
+    title: "Microsoft Azure AI Fundamentals(AI-900)",
+    organizer: "Microsoft",
+    format: "CBT(Pearson VUE)or オンライン監督受験",
+    schedule: "通年(随時)",
+    duration: "60 分 / 約 40 〜 60 問",
+    fee: "約 12,500 円(99 USD、参考)",
+    passCriteria: "1000 点満点中 700 点(参考)",
+    passRate: "Microsoft 非公開",
+    takers: "全世界で大規模",
+    officialUrl: "https://learn.microsoft.com/ja-jp/credentials/certifications/azure-ai-fundamentals/",
+    studyHref: "/certs/azure-ai-900",
+    studyLabel: "Azure AI-900 の教科書を見る",
+    highlight:
+      "Microsoft 認定の AI Fundamentals。Azure ML ・ AI Vision ・ AI Language ・ Azure OpenAI ・ Copilot を測る。**有効期限なし**。",
+  },
 ];
 
 function ExamCard({ exam }: { exam: Exam }) {

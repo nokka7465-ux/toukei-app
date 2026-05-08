@@ -833,6 +833,136 @@ export const certRoadmaps: Record<string, CertRoadmap> = {
     textbookHref: "/certs/aws-ai-practitioner/textbook",
     quizHref: "/certs/aws-ai-practitioner/quiz",
   },
+  "basic-info": {
+    slug: "basic-info",
+    title: "基本情報技術者試験 学習ロードマップ",
+    organizer: "情報処理推進機構(IPA)",
+    hours: "150〜250 時間",
+    months: "3〜5 ヶ月",
+    prerequisites: "IT パスポート相当の基礎、または IT 実務 1 年程度",
+    passCriteria: "科目 A ・ B ともに 600 / 1000 点以上",
+    steps: [
+      {
+        week: "Week 1-3",
+        title: "コンピュータ基礎 + 数値表現",
+        description:
+          "2 進数 ・ 浮動小数 ・ 論理演算 ・ プロセッサ ・ メモリ階層 ・ RAID。",
+        links: [
+          { href: "/certs/basic-info/textbook", label: "基本情報 教科書(章 2)" },
+        ],
+      },
+      {
+        week: "Week 4-6",
+        title: "アルゴリズム + データ構造",
+        description:
+          "Python 風疑似言語のトレース ・ スタック ・ キュー ・ 木 ・ ソート ・ 探索。",
+        links: [
+          { href: "/certs/basic-info/textbook", label: "基本情報 教科書(章 3)" },
+          { href: "/certs/python-data/textbook", label: "Python データ分析 教科書(基礎)" },
+        ],
+      },
+      {
+        week: "Week 7-8",
+        title: "情報セキュリティ(科目 B 必須)",
+        description:
+          "暗号 ・ 認証 ・ 攻撃と対策 ・ ISMS ・ CIA トライアド。",
+        links: [
+          { href: "/certs/basic-info/textbook", label: "基本情報 教科書(章 4)" },
+        ],
+      },
+      {
+        week: "Week 9-10",
+        title: "ネットワーク + DB",
+        description:
+          "OSI ・ TCP-IP ・ DNS ・ NAT ・ 正規化 ・ JOIN ・ ACID。",
+        links: [
+          { href: "/certs/basic-info/textbook", label: "基本情報 教科書(章 5-6)" },
+        ],
+      },
+      {
+        week: "Week 11",
+        title: "ソフトウェア + PM + 経営",
+        description:
+          "テスト ・ アジャイル ・ WBS ・ ITIL ・ SWOT ・ AI 用語 ・ DX 3 段階。",
+        links: [
+          { href: "/certs/basic-info/textbook", label: "基本情報 教科書(章 7-9)" },
+        ],
+      },
+      {
+        week: "Week 12",
+        title: "過去問演習 + 模擬試験",
+        description:
+          "科目 A は 5 〜 10 年分の過去問を 2 周。科目 B はトレース表を書く練習を反復。",
+        links: [
+          { href: "/certs/basic-info/quiz", label: "基本情報 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/basic-info/textbook",
+    quizHref: "/certs/basic-info/quiz",
+  },
+  "azure-ai-900": {
+    slug: "azure-ai-900",
+    title: "Microsoft Azure AI Fundamentals(AI-900)学習ロードマップ",
+    organizer: "Microsoft",
+    hours: "40〜80 時間",
+    months: "1〜2 ヶ月",
+    prerequisites: "AI / ML の概要 ・ Azure 基礎(AZ-900 相当)があれば短期化",
+    passCriteria: "1000 点満点中 700 点(参考)",
+    steps: [
+      {
+        week: "Week 1",
+        title: "AI / ML / 生成 AI の基礎",
+        description:
+          "AI ⊃ ML ⊃ DL ⊃ Gen AI / 教師あり-なし-強化 / 責任ある AI 6 原則。本サイトの[G 検定](/certs/g-test)・[生成 AI パスポート](/certs/genai-passport)で土台。",
+        links: [
+          { href: "/certs/azure-ai-900/textbook", label: "Azure AI-900 教科書(章 2)" },
+          { href: "/certs/g-test/textbook", label: "G 検定 教科書" },
+        ],
+      },
+      {
+        week: "Week 2",
+        title: "Azure Machine Learning",
+        description:
+          "Azure ML Studio / Designer / Automated ML / Pipelines / Endpoints。",
+        links: [
+          { href: "/certs/azure-ai-900/textbook", label: "Azure AI-900 教科書(章 3)" },
+        ],
+      },
+      {
+        week: "Week 3",
+        title: "AI Vision + AI Language",
+        description:
+          "AI Vision / Custom Vision / Face / Document Intelligence / AI Language / Translator / Speech。",
+        links: [
+          { href: "/certs/azure-ai-900/textbook", label: "Azure AI-900 教科書(章 4-5)" },
+        ],
+      },
+      {
+        week: "Week 4",
+        title: "Azure OpenAI + Azure AI Search",
+        description:
+          "Azure OpenAI Service / AI Foundry / Prompt Flow / Azure AI Search の RAG パターン。",
+        links: [
+          { href: "/certs/azure-ai-900/textbook", label: "Azure AI-900 教科書(章 6-7)" },
+          { href: "/certs/genai-passport/textbook", label: "生成 AI パスポート 教科書" },
+        ],
+      },
+      {
+        week: "Week 5",
+        title: "Microsoft Copilot + 演習",
+        description:
+          "Microsoft 365 Copilot / Copilot Studio / GitHub Copilot。ユースケース → サービス選択を即答できるレベルに。",
+        links: [
+          { href: "/certs/azure-ai-900/textbook", label: "Azure AI-900 教科書(章 8-10)" },
+          { href: "/certs/azure-ai-900/quiz", label: "Azure AI-900 演習問題" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/azure-ai-900/textbook",
+    quizHref: "/certs/azure-ai-900/quiz",
+  },
 };
 
 export const certSlugs = Object.keys(certRoadmaps);

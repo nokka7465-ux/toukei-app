@@ -251,6 +251,32 @@ const CERTS: Cert[] = [
     best: "クラウド AI 入門",
     notes: "Bedrock / SageMaker / 責任ある AI",
   },
+  {
+    slug: "/certs/basic-info",
+    name: "基本情報技術者(FE)",
+    organizer: "IPA",
+    fee: "7,500 円",
+    duration: "通年(CBT)",
+    format: "科目 A 90 分 + B 100 分",
+    difficulty: "★★★☆☆",
+    studyHours: "150〜250h",
+    pass: "約 25〜35%",
+    best: "IT エンジニア入門",
+    notes: "国家試験レベル 2、応用情報の前段",
+  },
+  {
+    slug: "/certs/azure-ai-900",
+    name: "Azure AI Fundamentals",
+    organizer: "Microsoft",
+    fee: "約 12,500 円",
+    duration: "通年(CBT)",
+    format: "60 分 / 40-60 問",
+    difficulty: "★★☆☆☆",
+    studyHours: "40〜80h",
+    pass: "公開なし",
+    best: "Azure AI 入門",
+    notes: "Azure ML / OpenAI / Copilot、有効期限なし",
+  },
 ];
 
 export default function ComparePage() {
