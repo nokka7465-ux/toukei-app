@@ -589,6 +589,40 @@ const RELATED_EXAMS: Exam[] = [
     highlight:
       "Snowflake と並ぶモダンデータ基盤の双璧。Apache Spark + Delta Lake + Unity Catalog + Photon を測る。",
   },
+  {
+    id: "it-strategist",
+    title: "ITストラテジスト試験(ST)",
+    organizer: "IPA(情報処理推進機構)",
+    format: "ペーパー試験(午前 I・午前 II・午後 I・午後 II)",
+    schedule: "年 1 回(春期 4 月)",
+    duration: "計 約 5 時間(午前 I 50分・午前 II 40分・午後 I 90分・午後 II 120分)",
+    fee: "7,500 円(参考)",
+    passCriteria: "各区分 60 点以上(午後 II は論述 A 評価)",
+    passRate: "おおむね 14〜15%(難関)",
+    takers: "年間およそ 6,000〜7,000 名",
+    officialUrl: "https://www.ipa.go.jp/shiken/kubun/st.html",
+    studyHref: "/certs/it-strategist",
+    studyLabel: "ITストラテジスト試験の教科書を見る",
+    highlight:
+      "IPA レベル 4 高度試験。経営戦略・事業戦略・IT 戦略・EA・DX を一気通貫で問う最高峰の戦略系試験。",
+  },
+  {
+    id: "aws-ml-specialty",
+    title: "AWS Certified Machine Learning - Specialty(MLS-C01)",
+    organizer: "Amazon Web Services",
+    format: "オンライン監督 / Pearson VUE テストセンター(英語 / 日本語)",
+    schedule: "通年(随時)",
+    duration: "180 分 / 65 問(複数選択肢式)",
+    fee: "300 USD(参考)",
+    passCriteria: "1000 点中 750 点以上(参考)",
+    passRate: "AWS 非公開(難関)",
+    takers: "全世界で大規模",
+    officialUrl: "https://aws.amazon.com/certification/certified-machine-learning-specialty/",
+    studyHref: "/certs/aws-ml-specialty",
+    studyLabel: "AWS ML Specialty の教科書を見る",
+    highlight:
+      "AWS の ML 系最上位 Specialty 認定。線形代数 / 確率統計から SageMaker Built-in / HPO / Quantization / Clarify / MLOps まで網羅。",
+  },
 ];
 
 function ExamCard({ exam }: { exam: Exam }) {

@@ -967,6 +967,24 @@ export default function Home() {
                 description:
                   "Snowflake と並ぶモダンデータ基盤の双璧。Spark + Delta Lake + DLT + Unity Catalog を網羅。",
               },
+              {
+                href: "/certs/it-strategist",
+                chip: "ST",
+                emoji: "🧭",
+                accent: "bg-slate-700",
+                title: "ITストラテジスト試験",
+                description:
+                  "IPA レベル 4 高度試験。経営戦略 ・ 事業戦略 ・ IT 戦略 ・ EA ・ DX ・ 投資判断を一気通貫で網羅。",
+              },
+              {
+                href: "/certs/aws-ml-specialty",
+                chip: "MLS-C01",
+                emoji: "🔬",
+                accent: "bg-orange-800",
+                title: "AWS ML Specialty",
+                description:
+                  "AWS ML 系の Specialty 認定。Built-in アルゴリズム ・ HPO ・ Quantization ・ Clarify ・ Model Monitor まで網羅。",
+              },
             ].map((cert) => (
               <Link
                 key={cert.href}

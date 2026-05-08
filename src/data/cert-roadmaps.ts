@@ -1798,6 +1798,142 @@ export const certRoadmaps: Record<string, CertRoadmap> = {
     textbookHref: "/certs/databricks-data-engineer/textbook",
     quizHref: "/certs/databricks-data-engineer/quiz",
   },
+  "it-strategist": {
+    slug: "it-strategist",
+    title: "ITストラテジスト試験 学習ロードマップ",
+    organizer: "情報処理推進機構(IPA)",
+    hours: "300〜500 時間",
+    months: "6〜12 ヶ月",
+    prerequisites: "応用情報技術者合格相当 + 実務 5 〜 10 年",
+    passCriteria: "午前 I・II・午後 I・II すべて 60 点以上",
+    steps: [
+      {
+        week: "Month 1-2",
+        title: "経営戦略フレームワーク",
+        description:
+          "SWOT / PEST / 5 forces / バリューチェーン / BSC / PPM。",
+        links: [
+          { href: "/certs/it-strategist/textbook", label: "ITストラテジスト 教科書(章 2-3)" },
+        ],
+      },
+      {
+        week: "Month 3",
+        title: "IT 戦略 + EA + システム企画",
+        description:
+          "TOGAF / COBIT / RFP / 投資判断(ROI / NPV / IRR / TCO)。",
+        links: [
+          { href: "/certs/it-strategist/textbook", label: "ITストラテジスト 教科書(章 4-5)" },
+        ],
+      },
+      {
+        week: "Month 4",
+        title: "DX + 業務改革",
+        description:
+          "経産省 DX / 2025 年の崖 / DX 推進指標 / Process Mining。",
+        links: [
+          { href: "/certs/it-strategist/textbook", label: "ITストラテジスト 教科書(章 6-7)" },
+        ],
+      },
+      {
+        week: "Month 5",
+        title: "投資判断 + リスク + イノベーション",
+        description:
+          "Real Options / EVA / Lean Startup / Design Thinking / 両利きの経営。",
+        links: [
+          { href: "/certs/it-strategist/textbook", label: "ITストラテジスト 教科書(章 8-9)" },
+        ],
+      },
+      {
+        week: "Month 6",
+        title: "午後 I 演習(短文記述)",
+        description:
+          "90 分で 4 問中 2 問選択。事例問題のロジック構築に慣れる。",
+        links: [
+          { href: "/certs/it-strategist/quiz", label: "ITストラテジスト 演習問題" },
+        ],
+      },
+      {
+        week: "Month 7+",
+        title: "午後 II 論述演習",
+        description:
+          "自身の業務経験を 5 〜 10 のテーマに整理 + 章立てパターン 2 〜 3 種を確立。10 編以上の論述演習。",
+        links: [
+          { href: "/certs/it-strategist/textbook", label: "ITストラテジスト 教科書(章 10)" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/it-strategist/textbook",
+    quizHref: "/certs/it-strategist/quiz",
+  },
+  "aws-ml-specialty": {
+    slug: "aws-ml-specialty",
+    title: "AWS ML Specialty(MLS-C01)学習ロードマップ",
+    organizer: "Amazon Web Services(AWS)",
+    hours: "200〜400 時間",
+    months: "4〜6 ヶ月",
+    prerequisites: "MLA-C01 合格相当 + ML 実務 1 〜 2 年 + 統計/線形代数/微積分",
+    passCriteria: "1000 点満点中 750 点",
+    steps: [
+      {
+        week: "Month 1",
+        title: "ML 数学的基礎",
+        description:
+          "線形代数(固有値分解 / SVD)・ 統計(分布 / ベイズ)・ 微積分(偏微分 / 連鎖律)。",
+        links: [
+          { href: "/certs/aws-ml-specialty/textbook", label: "MLS-C01 教科書(章 2)" },
+        ],
+      },
+      {
+        week: "Month 2",
+        title: "アルゴリズム深掘り",
+        description:
+          "Built-in 30+ アルゴリズム / 教師あり-なし-強化学習 / 時系列(DeepAR)/ 異常検知(RCF)。",
+        links: [
+          { href: "/certs/aws-ml-specialty/textbook", label: "MLS-C01 教科書(章 5-7)" },
+        ],
+      },
+      {
+        week: "Month 3",
+        title: "SageMaker フル機能 + Built-in",
+        description:
+          "Linear Learner / XGBoost / FM / DeepAR / LDA / RCF の選び分け + RecordIO。",
+        links: [
+          { href: "/certs/aws-ml-specialty/textbook", label: "MLS-C01 教科書(章 5)" },
+        ],
+      },
+      {
+        week: "Month 4",
+        title: "AWS データサービス + EDA",
+        description:
+          "Kinesis / Glue / Feature Store / SMOTE / 評価指標(PR-AUC / NDCG)。",
+        links: [
+          { href: "/certs/aws-ml-specialty/textbook", label: "MLS-C01 教科書(章 3-4)" },
+        ],
+      },
+      {
+        week: "Month 5",
+        title: "デプロイ + MLOps + セキュリティ",
+        description:
+          "推論 5 種 / Quantization / Distillation / Inferentia / Pipelines / Model Monitor / VPC + Network Isolation。",
+        links: [
+          { href: "/certs/aws-ml-specialty/textbook", label: "MLS-C01 教科書(章 8-9)" },
+        ],
+      },
+      {
+        week: "Month 6",
+        title: "模擬試験 + 過去問",
+        description:
+          "AWS Practice Exam + Coursera / Udemy 講座 + 本サイト演習問題。",
+        links: [
+          { href: "/certs/aws-ml-specialty/quiz", label: "MLS-C01 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/aws-ml-specialty/textbook",
+    quizHref: "/certs/aws-ml-specialty/quiz",
+  },
 };
 
 export const certSlugs = Object.keys(certRoadmaps);

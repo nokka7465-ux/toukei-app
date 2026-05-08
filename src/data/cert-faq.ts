@@ -547,6 +547,50 @@ export const certFaq: Record<string, FaqItem[]> = {
       a: "Data Engineer Associate → **Data Engineer Professional**(上位)が王道。ML 寄りなら **ML Practitioner Associate → Machine Learning Professional**、生成 AI なら **Generative AI Engineer Associate** へ。",
     },
   ],
+  "it-strategist": [
+    {
+      q: "ITストラテジスト試験(ST)とは?",
+      a: "**情報処理推進機構(IPA)** が主催する国家試験(レベル 4 高度試験)で、**経営戦略と IT を統合する最高峰の認定**。CIO ・ CTO ・ IT コンサルタント ・ DX 推進責任者を目指す技術者が想定対象。",
+    },
+    {
+      q: "試験形式と合格率は?",
+      a: "**午前 I + 午前 II + 午後 I(記述)+ 午後 II(論述)の 4 段階**。合格率は **約 14 〜 15%** で IPA 高度試験の中でも最難関の部類。受験料 7,500 円(税込)。年 1 回(春)実施。",
+    },
+    {
+      q: "午後 II 論述試験の対策は?",
+      a: "**120 分で 2,000 〜 3,000 字の論述**。事前に **自身の業務経験を 5 〜 10 のテーマに整理 + 章立てパターン 2 〜 3 種を体に染み込ませる** ことが必須。**模範解答の写経 + 自分の経験で書き直し** を 10 編以上やるのが王道。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "**300 〜 500 時間** が中央値。応用情報合格者は午前 I が 2 年免除されます。本サイトの[ITストラテジスト 教科書](/certs/it-strategist/textbook)で経営戦略 ・ IT 戦略 ・ DX を体系学習できます。",
+    },
+    {
+      q: "合格後のキャリアは?",
+      a: "**CIO ・ CTO ・ IT コンサルタント ・ DX 推進責任者** への登竜門。**官公庁 ・ 大手 SI ・ 金融 ・ コンサル** で特に評価が高い。同じ IPA 高度試験で **DB スペシャリスト ・ PM** と組合せると、戦略 + 実装の両軸で強みになります。",
+    },
+  ],
+  "aws-ml-specialty": [
+    {
+      q: "AWS Certified Machine Learning - Specialty(MLS-C01)とは?",
+      a: "**AWS 認定の Specialty レベル** で **AWS ML 認定の最上位**。**ML Engineer Associate(MLA-C01)の上位** として、深い数学 ・ アルゴリズム理解 + 設計判断が問われる高度試験。シニア ML エンジニア向け。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**CBT(Pearson VUE)or オンライン監督受験 / 65 問 / 180 分(MLA より長い) / 合格 750 / 1000 点 / 受験料 300 USD / 有効期限 3 年**。ML 実務 1 〜 2 年 + 統計 ・ 線形代数 ・ 微積分の基礎が前提知識。",
+    },
+    {
+      q: "MLA-C01 と何が違う?",
+      a: "**MLA-C01 は SageMaker 操作 ・ サービス選択中心** で実装寄り。**MLS-C01 は『なぜそのアルゴリズムが最適か』『なぜそのハイパーパラメータか』『なぜそのデータ前処理か』** が問われ、より深い数学 ・ アルゴリズム理解が必要。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "MLA-C01 合格者で **150 〜 250 時間**、未経験者で **200 〜 400 時間**。**Coursera ・ Udemy の AWS ML Specialty 講座 + Practice Exam** が王道学習教材。",
+    },
+    {
+      q: "次のステップは?",
+      a: "MLS-C01 → **AWS Solutions Architect Professional(SAP-C02)** で全体アーキテクトに進む、または **三大クラウド ML を揃える** 道があります。本サイトの[Azure AI-102](/certs/azure-ai-102) ・ [GCP Pro ML Engineer](/certs/gcp-ml-engineer)も。",
+    },
+  ],
   "qc-kentei": [
     {
       q: "QC検定の各級の難易度は?",

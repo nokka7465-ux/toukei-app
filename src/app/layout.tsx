@@ -34,7 +34,7 @@ const SITE_NAME = "統計ロードマップ";
 const SITE_TAGLINE =
   "AIエンジニアになるための統計・数学・Python を一気通貫で学ぶ";
 const SITE_DESCRIPTION =
-  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。統計検定 4 級〜1 級・G検定・E資格・DS検定・QC検定・生成AIパスポート・DS エキスパート・Python データ分析試験・AI 実装検定・画像処理エンジニア検定・ITパスポート/基本情報/応用情報/データベーススペシャリスト・DX 検定・AWS AI Practitioner/SAA/MLA-C01・Azure AI Fundamentals/AI-102・GCP Generative AI Leader/ML Engineer・Power BI(PL-300)・Tableau Desktop Specialist・Snowflake SnowPro Core・Databricks Data Engineer など関連検定も網羅。インタラクティブ図解・統計計算ツール・Python/R コード併記で、理論から実装までスムーズに繋がる学習ロードマップを提供。";
+  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。統計検定 4 級〜1 級・G検定・E資格・DS検定・QC検定・生成AIパスポート・DS エキスパート・Python データ分析試験・AI 実装検定・画像処理エンジニア検定・ITパスポート/基本情報/応用情報/データベーススペシャリスト/ITストラテジスト・DX 検定・AWS AI Practitioner/SAA/MLA-C01/MLS-C01・Azure AI Fundamentals/AI-102・GCP Generative AI Leader/ML Engineer・Power BI(PL-300)・Tableau Desktop Specialist・Snowflake SnowPro Core・Databricks Data Engineer など関連検定も網羅。インタラクティブ図解・統計計算ツール・Python/R コード併記で、理論から実装までスムーズに繋がる学習ロードマップを提供。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -140,6 +140,16 @@ export const metadata: Metadata = {
     "Delta Lake",
     "Unity Catalog",
     "Apache Spark",
+    "ITストラテジスト",
+    "ST",
+    "IPA レベル4",
+    "経営戦略",
+    "AWS ML Specialty",
+    "MLS-C01",
+    "SageMaker Built-in",
+    "Model Monitor",
+    "SageMaker Clarify",
+    "SageMaker Neo",
   ],
   openGraph: {
     type: "website",
@@ -637,6 +647,16 @@ export default function RootLayout({
                   <li>
                     <Link href="/certs/databricks-data-engineer" className="hover:underline text-[var(--muted-strong)]">
                       Databricks Data Engineer Associate
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/it-strategist" className="hover:underline text-[var(--muted-strong)]">
+                      ITストラテジスト試験
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/aws-ml-specialty" className="hover:underline text-[var(--muted-strong)]">
+                      AWS ML Specialty(MLS-C01)
                     </Link>
                   </li>
                 </ul>

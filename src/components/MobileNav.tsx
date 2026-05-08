@@ -69,6 +69,8 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/certs/snowflake-snowpro", label: "Snowflake SnowPro Core" },
       { href: "/certs/gcp-ml-engineer", label: "GCP Professional ML Engineer" },
       { href: "/certs/databricks-data-engineer", label: "Databricks Data Engineer Associate" },
+      { href: "/certs/it-strategist", label: "ITストラテジスト試験" },
+      { href: "/certs/aws-ml-specialty", label: "AWS ML Specialty(MLS-C01)" },
     ],
   },
   {

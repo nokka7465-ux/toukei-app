@@ -433,6 +433,32 @@ const CERTS: Cert[] = [
     best: "Lakehouse エンジニア",
     notes: "Spark / Delta Lake / DLT / UC",
   },
+  {
+    slug: "/certs/it-strategist",
+    name: "ITストラテジスト試験(ST)",
+    organizer: "IPA",
+    fee: "7,500 円",
+    duration: "年 1 回(春)",
+    format: "午前 I / II + 午後 I / II",
+    difficulty: "★★★★★",
+    studyHours: "300〜500h",
+    pass: "約 14〜15%",
+    best: "経営 ・ IT 戦略",
+    notes: "経営戦略・EA・DX・投資判断・論述",
+  },
+  {
+    slug: "/certs/aws-ml-specialty",
+    name: "AWS ML Specialty(MLS-C01)",
+    organizer: "AWS",
+    fee: "300 USD",
+    duration: "通年",
+    format: "180 分 / 65 問",
+    difficulty: "★★★★★",
+    studyHours: "200〜400h",
+    pass: "約 75%",
+    best: "ML エンジニア最上位",
+    notes: "Built-in / HPO / Quantization / Clarify",
+  },
 ];
 
 export default function ComparePage() {

@@ -396,6 +396,26 @@ const CERT_TRACKS: Track[] = [
     emoji: "🧱",
     accent: "bg-red-600",
   },
+  {
+    href: "/certs/it-strategist/textbook",
+    title: "ITストラテジスト試験(ST)",
+    description:
+      "IPA レベル 4 高度試験。経営戦略・事業戦略・IT 戦略・EA・DX・BPR・投資判断を一気通貫で網羅。",
+    audience: "経営 ・ 企画 ・ IT 戦略",
+    chip: "ST",
+    emoji: "🧭",
+    accent: "bg-slate-700",
+  },
+  {
+    href: "/certs/aws-ml-specialty/textbook",
+    title: "AWS ML Specialty(MLS-C01)",
+    description:
+      "AWS ML 系の Specialty 認定。線形代数 / 確率統計から Built-in アルゴ ・ HPO ・ デプロイ最適化 ・ MLOps まで網羅。",
+    audience: "ML エンジニア上位",
+    chip: "MLS-C01",
+    emoji: "🔬",
+    accent: "bg-orange-800",
+  },
 ];
 
 function TrackCard({ track }: { track: Track }) {

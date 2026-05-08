@@ -46,6 +46,8 @@ export const CERT_PRESETS: CertPreset[] = [
   { key: "snowflake-snowpro", label: "Snowflake SnowPro Core", href: "/certs/snowflake-snowpro", hours: 80 },
   { key: "gcp-ml-engineer", label: "GCP Professional ML Engineer", href: "/certs/gcp-ml-engineer", hours: 250 },
   { key: "databricks-data-engineer", label: "Databricks Data Engineer Associate", href: "/certs/databricks-data-engineer", hours: 80 },
+  { key: "it-strategist", label: "ITストラテジスト試験", href: "/certs/it-strategist", hours: 400 },
+  { key: "aws-ml-specialty", label: "AWS ML Specialty(MLS-C01)", href: "/certs/aws-ml-specialty", hours: 300 },
 ];
 
 export type ExamTarget = {

@@ -34,6 +34,8 @@ import { awsMlEngineerTextbook } from "@/data/textbooks/aws-ml-engineer";
 import { snowflakeSnowProTextbook } from "@/data/textbooks/snowflake-snowpro";
 import { gcpMlEngineerTextbook } from "@/data/textbooks/gcp-ml-engineer";
 import { databricksDataEngineerTextbook } from "@/data/textbooks/databricks-data-engineer";
+import { itStrategistTextbook } from "@/data/textbooks/it-strategist";
+import { awsMlSpecialtyTextbook } from "@/data/textbooks/aws-ml-specialty";
 import { glossary } from "@/data/glossary";
 import { blogPosts } from "@/data/blog";
 import { introFormulas } from "@/data/formulas/intro";
@@ -140,6 +142,8 @@ export const searchIndex: SearchItem[] = (() => {
     { book: snowflakeSnowProTextbook, urlBase: "/certs/snowflake-snowpro/textbook", displayTitle: "Snowflake SnowPro Core" },
     { book: gcpMlEngineerTextbook, urlBase: "/certs/gcp-ml-engineer/textbook", displayTitle: "GCP ML Engineer" },
     { book: databricksDataEngineerTextbook, urlBase: "/certs/databricks-data-engineer/textbook", displayTitle: "Databricks Data Engineer" },
+    { book: itStrategistTextbook, urlBase: "/certs/it-strategist/textbook", displayTitle: "ITストラテジスト" },
+    { book: awsMlSpecialtyTextbook, urlBase: "/certs/aws-ml-specialty/textbook", displayTitle: "AWS ML Specialty" },
   ];
   for (const { book, urlBase, displayTitle } of textbookSets) {
     for (const ch of book.chapters) {

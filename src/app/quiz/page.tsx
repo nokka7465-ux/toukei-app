@@ -35,6 +35,8 @@ import { awsMlEngineerQuestions } from "@/data/questions/aws-ml-engineer";
 import { snowflakeSnowProQuestions } from "@/data/questions/snowflake-snowpro";
 import { gcpMlEngineerQuestions } from "@/data/questions/gcp-ml-engineer";
 import { databricksDataEngineerQuestions } from "@/data/questions/databricks-data-engineer";
+import { itStrategistQuestions } from "@/data/questions/it-strategist";
+import { awsMlSpecialtyQuestions } from "@/data/questions/aws-ml-specialty";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -99,6 +101,8 @@ const CERT_TRACKS: Track[] = [
   { href: "/certs/snowflake-snowpro/quiz", title: "Snowflake SnowPro Core", count: snowflakeSnowProQuestions.length, description: "アーキテクチャ ・ COPY/Snowpipe ・ Time Travel ・ Cloning ・ Cortex" },
   { href: "/certs/gcp-ml-engineer/quiz", title: "GCP Professional ML Engineer", count: gcpMlEngineerQuestions.length, description: "Vertex AI ・ BQML ・ TPU ・ Kubeflow ・ Monitoring" },
   { href: "/certs/databricks-data-engineer/quiz", title: "Databricks Data Engineer Associate", count: databricksDataEngineerQuestions.length, description: "Lakehouse ・ Delta Lake ・ Auto Loader ・ DLT ・ Unity Catalog" },
+  { href: "/certs/it-strategist/quiz", title: "ITストラテジスト試験(ST)", count: itStrategistQuestions.length, description: "経営戦略 ・ 事業戦略 ・ IT 戦略 ・ EA ・ DX ・ 投資判断" },
+  { href: "/certs/aws-ml-specialty/quiz", title: "AWS ML Specialty(MLS-C01)", count: awsMlSpecialtyQuestions.length, description: "Built-in アルゴリズム ・ HPO ・ Quantization ・ Clarify ・ Model Monitor" },
 ];
 
 function TrackCard({ track }: { track: Track }) {
