@@ -195,6 +195,9 @@ export default function RootLayout({
                     </svg>
                   </summary>
                   <div className="absolute right-0 top-full mt-2 paper rounded-lg p-2 grid grid-cols-2 gap-1 min-w-[300px] shadow-lg z-20 border border-[var(--page-border-strong)]">
+                    <Link href="/about-ai" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs" title="AI とは何か - 5 分で分かる入門">
+                      AI とは
+                    </Link>
                     <Link href="/diagnose" className="px-3 py-2 rounded hover:bg-[var(--background)] hover:text-[var(--link)] transition-colors text-xs">
                       級診断
                     </Link>
@@ -420,6 +423,11 @@ export default function RootLayout({
                   <li>
                     <Link href="/cheatsheet" className="hover:underline text-[var(--muted-strong)]">
                       公式チートシート
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/about-ai" className="hover:underline text-[var(--muted-strong)]">
+                      AI とは
                     </Link>
                   </li>
                   <li>

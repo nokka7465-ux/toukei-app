@@ -206,6 +206,12 @@ export default function Home() {
             AIエンジニア・ロードマップを見る →
           </Link>
           <Link
+            href="/about-ai"
+            className="px-5 py-2.5 border-2 border-[var(--accent)] text-[var(--link)] rounded-lg font-bold hover:bg-[var(--highlight)]"
+          >
+            AI とは?(5 分で分かる)
+          </Link>
+          <Link
             href="/diagnose"
             className="px-5 py-2.5 border border-[var(--page-border-strong)] rounded-lg hover:bg-[var(--page)]"
           >
