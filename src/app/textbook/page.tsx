@@ -296,6 +296,26 @@ const CERT_TRACKS: Track[] = [
     emoji: "🗄️",
     accent: "bg-zinc-700",
   },
+  {
+    href: "/certs/dx-kentei/textbook",
+    title: "DX 検定",
+    description:
+      "ビジネス × IT のトレンドを総覧。AI / クラウド / IoT / 5G / RPA / セキュリティを広く問う経営層向けスコア型認定。",
+    audience: "経営 ・ 企画 ・ コンサル",
+    chip: "DX",
+    emoji: "🔄",
+    accent: "bg-fuchsia-600",
+  },
+  {
+    href: "/certs/aws-saa/textbook",
+    title: "AWS Solutions Architect Associate",
+    description:
+      "AWS Associate の代表認定。EC2 / S3 / VPC / IAM などを Well-Architected に沿って設計する力を測る。",
+    audience: "クラウドエンジニア中堅",
+    chip: "AWS SAA",
+    emoji: "🏗️",
+    accent: "bg-orange-500",
+  },
 ];
 
 function TrackCard({ track }: { track: Track }) {

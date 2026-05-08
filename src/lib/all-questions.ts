@@ -24,6 +24,8 @@ import { basicInfoQuestions } from "@/data/questions/basic-info";
 import { azureAi900Questions } from "@/data/questions/azure-ai-900";
 import { gcpGenAiLeaderQuestions } from "@/data/questions/gcp-gen-ai-leader";
 import { dbSpecialistQuestions } from "@/data/questions/db-specialist";
+import { dxKenteiQuestions } from "@/data/questions/dx-kentei";
+import { awsSaaQuestions } from "@/data/questions/aws-saa";
 
 export type Track = {
   key: string;
@@ -59,6 +61,8 @@ export const tracks: Track[] = [
   { key: "azure-ai-900", label: "Azure AI-900", href: "/certs/azure-ai-900/quiz", group: "cert", questions: azureAi900Questions },
   { key: "gcp-gen-ai-leader", label: "GCP Generative AI Leader", href: "/certs/gcp-gen-ai-leader/quiz", group: "cert", questions: gcpGenAiLeaderQuestions },
   { key: "db-specialist", label: "DB スペシャリスト", href: "/certs/db-specialist/quiz", group: "cert", questions: dbSpecialistQuestions },
+  { key: "dx-kentei", label: "DX 検定", href: "/certs/dx-kentei/quiz", group: "cert", questions: dxKenteiQuestions },
+  { key: "aws-saa", label: "AWS SAA", href: "/certs/aws-saa/quiz", group: "cert", questions: awsSaaQuestions },
 ];
 
 export type EnrichedQuestion = Question & {

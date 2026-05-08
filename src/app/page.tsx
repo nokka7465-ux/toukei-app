@@ -877,6 +877,24 @@ export default function Home() {
                 description:
                   "IPA レベル 4 高度試験。関係代数・正規化・SQL 上級・チューニング・NoSQL・DWH を網羅する DB 専門家認定。",
               },
+              {
+                href: "/certs/dx-kentei",
+                chip: "DX",
+                emoji: "🔄",
+                accent: "bg-fuchsia-600",
+                title: "DX 検定",
+                description:
+                  "ビジネス × IT のトレンドを総覧するスコア型認定。AI ・ クラウド ・ IoT ・ 5G ・ ブロックチェーンを網羅。",
+              },
+              {
+                href: "/certs/aws-saa",
+                chip: "AWS SAA",
+                emoji: "🏗️",
+                accent: "bg-orange-500",
+                title: "AWS SAA",
+                description:
+                  "AWS Associate の代表認定。EC2 / S3 / VPC / IAM などを Well-Architected に沿って設計する力を測る。",
+              },
             ].map((cert) => (
               <Link
                 key={cert.href}

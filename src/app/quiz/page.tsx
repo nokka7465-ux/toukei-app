@@ -25,6 +25,8 @@ import { basicInfoQuestions } from "@/data/questions/basic-info";
 import { azureAi900Questions } from "@/data/questions/azure-ai-900";
 import { gcpGenAiLeaderQuestions } from "@/data/questions/gcp-gen-ai-leader";
 import { dbSpecialistQuestions } from "@/data/questions/db-specialist";
+import { dxKenteiQuestions } from "@/data/questions/dx-kentei";
+import { awsSaaQuestions } from "@/data/questions/aws-saa";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -79,6 +81,8 @@ const CERT_TRACKS: Track[] = [
   { href: "/certs/azure-ai-900/quiz", title: "Azure AI Fundamentals(AI-900)", count: azureAi900Questions.length, description: "Azure ML ・ AI Vision ・ AI Language ・ OpenAI ・ Copilot" },
   { href: "/certs/gcp-gen-ai-leader/quiz", title: "GCP Generative AI Leader", count: gcpGenAiLeaderQuestions.length, description: "Vertex AI ・ Gemini ・ Imagen ・ Workspace ・ Grounding" },
   { href: "/certs/db-specialist/quiz", title: "データベーススペシャリスト試験(DB)", count: dbSpecialistQuestions.length, description: "関係代数 ・ 正規化 ・ SQL 上級 ・ ACID ・ NoSQL ・ DWH" },
+  { href: "/certs/dx-kentei/quiz", title: "DX 検定", count: dxKenteiQuestions.length, description: "AI ・ クラウド ・ IoT ・ 5G ・ ブロックチェーン ・ RPA ・ DX 経営" },
+  { href: "/certs/aws-saa/quiz", title: "AWS Solutions Architect Associate", count: awsSaaQuestions.length, description: "EC2 / S3 / RDS / DynamoDB / VPC / Auto Scaling / DR" },
 ];
 
 function TrackCard({ track }: { track: Track }) {

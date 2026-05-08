@@ -34,7 +34,7 @@ const SITE_NAME = "統計ロードマップ";
 const SITE_TAGLINE =
   "AIエンジニアになるための統計・数学・Python を一気通貫で学ぶ";
 const SITE_DESCRIPTION =
-  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。統計検定 4 級〜1 級・G検定・E資格・DS検定・QC検定・生成AIパスポート・DS エキスパート・Python データ分析試験・AI 実装検定・画像処理エンジニア検定・基本情報/応用情報技術者試験・データベーススペシャリスト・AWS AI Practitioner・Azure AI Fundamentals・GCP Generative AI Leader など関連検定も網羅。インタラクティブ図解・統計計算ツール・Python/R コード併記で、理論から実装までスムーズに繋がる学習ロードマップを提供。";
+  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。統計検定 4 級〜1 級・G検定・E資格・DS検定・QC検定・生成AIパスポート・DS エキスパート・Python データ分析試験・AI 実装検定・画像処理エンジニア検定・基本情報/応用情報/データベーススペシャリスト・DX 検定・AWS AI Practitioner/SAA・Azure AI Fundamentals・GCP Generative AI Leader など関連検定も網羅。インタラクティブ図解・統計計算ツール・Python/R コード併記で、理論から実装までスムーズに繋がる学習ロードマップを提供。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -105,6 +105,13 @@ export const metadata: Metadata = {
     "Gemini",
     "データベーススペシャリスト",
     "DB スペシャリスト",
+    "DX 検定",
+    "デジタルトランスフォーメーション",
+    "AWS SAA",
+    "Solutions Architect",
+    "EC2",
+    "S3",
+    "VPC",
   ],
   openGraph: {
     type: "website",
@@ -552,6 +559,16 @@ export default function RootLayout({
                   <li>
                     <Link href="/certs/db-specialist" className="hover:underline text-[var(--muted-strong)]">
                       データベーススペシャリスト
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/dx-kentei" className="hover:underline text-[var(--muted-strong)]">
+                      DX 検定
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/aws-saa" className="hover:underline text-[var(--muted-strong)]">
+                      AWS Solutions Architect Associate
                     </Link>
                   </li>
                 </ul>

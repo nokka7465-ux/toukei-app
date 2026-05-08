@@ -419,6 +419,40 @@ const RELATED_EXAMS: Exam[] = [
     highlight:
       "IPA レベル 4 高度試験。DB ・ データ基盤の専門家認定。金融 ・ 公官庁 ・ 大手 SI で評価が特に高い国家資格。",
   },
+  {
+    id: "dx-kentei",
+    title: "DX 検定",
+    organizer: "一般社団法人 日本イノベーション融合学会",
+    format: "オンライン IBT",
+    schedule: "年 2 回(7 月・1 月)",
+    duration: "60 分 / 120 問(参考)",
+    fee: "11,000 円(税込・参考)",
+    passCriteria: "800 点以上 = エキスパート / 700 点以上 = プロフェッショナル / 600 点以上 = スタンダード",
+    passRate: "公開なし",
+    takers: "1 回あたり数千名規模",
+    officialUrl: "https://www.dx-kentei.com/",
+    studyHref: "/certs/dx-kentei",
+    studyLabel: "DX 検定の教科書を見る",
+    highlight:
+      "ビジネス × IT のトレンドを総覧するスコア型認定。経営 ・ 企画 ・ コンサルタント向け。",
+  },
+  {
+    id: "aws-saa",
+    title: "AWS Certified Solutions Architect ─ Associate(SAA-C03)",
+    organizer: "Amazon Web Services(AWS)",
+    format: "CBT(Pearson VUE)or オンライン監督受験",
+    schedule: "通年(随時)",
+    duration: "130 分 / 65 問",
+    fee: "150 USD(参考)",
+    passCriteria: "1000 点満点中 720 点",
+    passRate: "AWS 非公開",
+    takers: "全世界で大規模",
+    officialUrl: "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
+    studyHref: "/certs/aws-saa",
+    studyLabel: "AWS SAA の教科書を見る",
+    highlight:
+      "AWS 認定の Associate レベルで最も人気の高いアーキテクト系資格。AWS で仕事をする技術者の標準資格。",
+  },
 ];
 
 function ExamCard({ exam }: { exam: Exam }) {

@@ -303,6 +303,32 @@ const CERTS: Cert[] = [
     best: "DBA / データエンジニア",
     notes: "IPA レベル 4 高度試験",
   },
+  {
+    slug: "/certs/dx-kentei",
+    name: "DX 検定",
+    organizer: "日本イノベーション融合学会",
+    fee: "11,000 円",
+    duration: "年 2 回",
+    format: "60 分 / 120 問",
+    difficulty: "★★☆☆☆",
+    studyHours: "40〜80h",
+    pass: "公開なし",
+    best: "経営 ・ 企画 ・ コンサル",
+    notes: "DX エキスパート 800 点認定",
+  },
+  {
+    slug: "/certs/aws-saa",
+    name: "AWS SAA",
+    organizer: "AWS",
+    fee: "150 USD",
+    duration: "通年(CBT)",
+    format: "130 分 / 65 問",
+    difficulty: "★★★★☆",
+    studyHours: "100〜200h",
+    pass: "公開なし",
+    best: "クラウドエンジニア中堅",
+    notes: "AWS Associate の代表認定",
+  },
 ];
 
 export default function ComparePage() {

@@ -1093,6 +1093,136 @@ export const certRoadmaps: Record<string, CertRoadmap> = {
     textbookHref: "/certs/db-specialist/textbook",
     quizHref: "/certs/db-specialist/quiz",
   },
+  "dx-kentei": {
+    slug: "dx-kentei",
+    title: "DX 検定 学習ロードマップ",
+    organizer: "一般社団法人 日本イノベーション融合学会",
+    hours: "40〜80 時間",
+    months: "1〜2 ヶ月",
+    prerequisites: "ビジネス基礎 + IT 全般の入門知識",
+    passCriteria: "800 点以上で DX エキスパート / 700 点で DX プロフェッショナル / 600 点で DX スタンダード",
+    steps: [
+      {
+        week: "Week 1",
+        title: "DX 概念 + 経産省ガイドライン",
+        description:
+          "経産省 DX 定義 / 3 段階 / 2025 年の崖 / DX 推進指標 / DX 認定制度。",
+        links: [
+          { href: "/certs/dx-kentei/textbook", label: "DX 検定 教科書(章 2)" },
+        ],
+      },
+      {
+        week: "Week 2",
+        title: "AI / クラウド / 最新トレンド",
+        description:
+          "ChatGPT 系 / RAG / プロンプト / IaaS-PaaS-SaaS / 3 大クラウド / コンテナ。",
+        links: [
+          { href: "/certs/dx-kentei/textbook", label: "DX 検定 教科書(章 3-4)" },
+          { href: "/certs/genai-passport/textbook", label: "生成 AI パスポート 教科書" },
+        ],
+      },
+      {
+        week: "Week 3",
+        title: "IoT ・ 5G ・ ブロックチェーン",
+        description:
+          "センサー / LPWA / デジタルツイン / 5G の 3 特性 / NFT / Web3 / CBDC。",
+        links: [
+          { href: "/certs/dx-kentei/textbook", label: "DX 検定 教科書(章 5)" },
+        ],
+      },
+      {
+        week: "Week 4",
+        title: "RPA + アジャイル + セキュリティ + BI",
+        description:
+          "RPA / スクラム / DevOps / IaC / ゼロトラスト / SASE / KPI / OKR。",
+        links: [
+          { href: "/certs/dx-kentei/textbook", label: "DX 検定 教科書(章 6-8)" },
+        ],
+      },
+      {
+        week: "Week 5",
+        title: "DX 人材 + 業界事例 + 過去問",
+        description:
+          "リスキリング / マナビ DX / 両利き経営 / 業界別 DX 事例 / 演習問題で 1 問 30 秒のスピード感を作る。",
+        links: [
+          { href: "/certs/dx-kentei/textbook", label: "DX 検定 教科書(章 9-10)" },
+          { href: "/certs/dx-kentei/quiz", label: "DX 検定 演習問題" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/dx-kentei/textbook",
+    quizHref: "/certs/dx-kentei/quiz",
+  },
+  "aws-saa": {
+    slug: "aws-saa",
+    title: "AWS SAA-C03 学習ロードマップ",
+    organizer: "Amazon Web Services(AWS)",
+    hours: "100〜200 時間",
+    months: "2〜4 ヶ月",
+    prerequisites: "Cloud Practitioner / AI Practitioner 合格相当 + AWS 実機操作経験",
+    passCriteria: "1000 点満点中 720 点",
+    steps: [
+      {
+        week: "Week 1-2",
+        title: "Well-Architected + IAM + EC2",
+        description:
+          "6 つの柱 / IAM ロール / KMS / EC2 購入オプション 5 種 / インスタンスタイプ。",
+        links: [
+          { href: "/certs/aws-saa/textbook", label: "AWS SAA 教科書(章 2-3)" },
+          { href: "/certs/aws-ai-practitioner/textbook", label: "AWS AI Practitioner 教科書(基礎)" },
+        ],
+      },
+      {
+        week: "Week 3-4",
+        title: "ストレージ + DB",
+        description:
+          "S3 ストレージクラス 8 種 / EBS タイプ / RDS Multi-AZ / DynamoDB / Aurora / ElastiCache。",
+        links: [
+          { href: "/certs/aws-saa/textbook", label: "AWS SAA 教科書(章 4-5)" },
+        ],
+      },
+      {
+        week: "Week 5",
+        title: "ネットワーク + Route 53 + CloudFront",
+        description:
+          "VPC / SG / NACL / NAT / VPC Endpoint / Route 53 ルーティング 7 種 / CloudFront。",
+        links: [
+          { href: "/certs/aws-saa/textbook", label: "AWS SAA 教科書(章 6)" },
+        ],
+      },
+      {
+        week: "Week 6",
+        title: "ELB + Auto Scaling + DR",
+        description:
+          "ALB / NLB / GWLB / Target Tracking / DR 戦略 4 種(Backup/Pilot Light/Warm Standby/Active-Active)。",
+        links: [
+          { href: "/certs/aws-saa/textbook", label: "AWS SAA 教科書(章 7)" },
+        ],
+      },
+      {
+        week: "Week 7",
+        title: "メッセージング + 監視 + 移行",
+        description:
+          "SQS Standard/FIFO / SNS / EventBridge / Step Functions / CloudWatch / CloudTrail / DMS。",
+        links: [
+          { href: "/certs/aws-saa/textbook", label: "AWS SAA 教科書(章 8-9)" },
+        ],
+      },
+      {
+        week: "Week 8",
+        title: "コスト最適化 + 過去問",
+        description:
+          "Savings Plans / Spot / S3 Lifecycle / Trusted Advisor。仕上げに公式 Practice Exam + 本サイト演習。",
+        links: [
+          { href: "/certs/aws-saa/textbook", label: "AWS SAA 教科書(章 10)" },
+          { href: "/certs/aws-saa/quiz", label: "AWS SAA 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/aws-saa/textbook",
+    quizHref: "/certs/aws-saa/quiz",
+  },
 };
 
 export const certSlugs = Object.keys(certRoadmaps);
