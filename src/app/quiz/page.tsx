@@ -39,6 +39,8 @@ import { itStrategistQuestions } from "@/data/questions/it-strategist";
 import { awsMlSpecialtyQuestions } from "@/data/questions/aws-ml-specialty";
 import { azureDp100Questions } from "@/data/questions/azure-dp-100";
 import { awsDataEngineerQuestions } from "@/data/questions/aws-data-engineer";
+import { azureDp203Questions } from "@/data/questions/azure-dp-203";
+import { gcpDataEngineerQuestions } from "@/data/questions/gcp-data-engineer";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -107,6 +109,8 @@ const CERT_TRACKS: Track[] = [
   { href: "/certs/aws-ml-specialty/quiz", title: "AWS ML Specialty(MLS-C01)", count: awsMlSpecialtyQuestions.length, description: "Built-in アルゴリズム ・ HPO ・ Quantization ・ Clarify ・ Model Monitor" },
   { href: "/certs/azure-dp-100/quiz", title: "Azure Data Scientist(DP-100)", count: azureDp100Questions.length, description: "Workspace ・ AutoML ・ Sweep ・ Endpoint ・ RAI ・ MLOps" },
   { href: "/certs/aws-data-engineer/quiz", title: "AWS Data Engineer Associate(DEA-C01)", count: awsDataEngineerQuestions.length, description: "Glue ・ Athena ・ Redshift ・ Kinesis ・ Iceberg ・ Lake Formation" },
+  { href: "/certs/azure-dp-203/quiz", title: "Azure Data Engineer(DP-203)", count: azureDp203Questions.length, description: "Synapse 3 プール ・ ADF ・ Stream Analytics ・ Databricks ・ Purview" },
+  { href: "/certs/gcp-data-engineer/quiz", title: "GCP Professional Data Engineer", count: gcpDataEngineerQuestions.length, description: "BigQuery ・ Dataflow ・ Pub/Sub ・ Composer ・ Looker ・ Dataplex" },
 ];
 
 function TrackCard({ track }: { track: Track }) {

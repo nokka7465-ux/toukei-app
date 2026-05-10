@@ -2052,6 +2052,124 @@ export const certRoadmaps: Record<string, CertRoadmap> = {
     textbookHref: "/certs/aws-data-engineer/textbook",
     quizHref: "/certs/aws-data-engineer/quiz",
   },
+  "azure-dp-203": {
+    slug: "azure-dp-203",
+    title: "Azure DP-203 学習ロードマップ",
+    organizer: "Microsoft",
+    hours: "100〜200 時間",
+    months: "2〜3 ヶ月",
+    prerequisites: "SQL ・ Python / Scala ・ Azure 基本",
+    passCriteria: "1000 点満点中 700 点",
+    steps: [
+      {
+        week: "Week 1〜2",
+        title: "Azure 基本 + ADLS Gen2 + Cosmos DB",
+        description:
+          "Hierarchical Namespace ・ POSIX ACL ・ アクセス階層 ・ Cosmos DB の整合性レベル ・ パーティションキー設計。",
+        links: [
+          { href: "/certs/azure-dp-203/textbook", label: "DP-203 教科書(章 1-2)" },
+        ],
+      },
+      {
+        week: "Week 3〜4",
+        title: "Synapse Analytics(3 プール)",
+        description:
+          "Dedicated SQL Pool ・ Serverless SQL Pool ・ Spark Pool ・ Lake Database。Hash/Round-Robin/Replicated 分散方式。",
+        links: [
+          { href: "/certs/azure-dp-203/textbook", label: "DP-203 教科書(章 3)" },
+        ],
+      },
+      {
+        week: "Week 5〜6",
+        title: "Data Factory + Mapping Data Flow",
+        description:
+          "Linked Service ・ Pipeline ・ Activity ・ Trigger ・ Mapping Data Flow ・ Integration Runtime。",
+        links: [
+          { href: "/certs/azure-dp-203/textbook", label: "DP-203 教科書(章 4)" },
+        ],
+      },
+      {
+        week: "Week 7〜8",
+        title: "Stream Analytics + Event Hubs + Databricks",
+        description:
+          "Tumbling/Hopping/Sliding/Session Window ・ Event Hubs ・ Delta Lake ・ Auto Loader ・ Delta Live Tables。",
+        links: [
+          { href: "/certs/azure-dp-203/textbook", label: "DP-203 教科書(章 5-7)" },
+        ],
+      },
+      {
+        week: "Week 9〜10",
+        title: "Power BI + Purview + 監視 + 模擬試験",
+        description:
+          "DirectQuery ・ Composite Model ・ Synapse Link ・ Microsoft Purview ・ Azure Monitor ・ Workload Management ・ Microsoft Learn 仕上げ。",
+        links: [
+          { href: "/certs/azure-dp-203/quiz", label: "DP-203 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/azure-dp-203/textbook",
+    quizHref: "/certs/azure-dp-203/quiz",
+  },
+  "gcp-data-engineer": {
+    slug: "gcp-data-engineer",
+    title: "GCP Professional Data Engineer 学習ロードマップ",
+    organizer: "Google Cloud",
+    hours: "150〜250 時間",
+    months: "3〜4 ヶ月",
+    prerequisites: "SQL ・ Python / Java ・ GCP 基本(Cloud Engineer 相当)",
+    passCriteria: "非公開(70% 程度が目安)",
+    steps: [
+      {
+        week: "Week 1〜2",
+        title: "GCP 基本 + Cloud Storage + IAM",
+        description:
+          "GCS ストレージクラス ・ Lifecycle ・ IAM / Uniform bucket-level access ・ Signed URL ・ VPC SC。",
+        links: [
+          { href: "/certs/gcp-data-engineer/textbook", label: "GCP DE 教科書(章 4)" },
+        ],
+      },
+      {
+        week: "Week 3〜5",
+        title: "BigQuery 完全マスター",
+        description:
+          "アーキテクチャ ・ 課金モデル ・ 分割/クラスタリング ・ Materialized View ・ BI Engine ・ BQML ・ Object Tables。",
+        links: [
+          { href: "/certs/gcp-data-engineer/textbook", label: "GCP DE 教科書(章 2-3)" },
+        ],
+      },
+      {
+        week: "Week 6〜7",
+        title: "Dataflow + Dataproc + Pub/Sub",
+        description:
+          "Apache Beam モデル ・ Window/Trigger/Watermark ・ Streaming Engine ・ Pub/Sub 配信保証 ・ BigQuery Subscription。",
+        links: [
+          { href: "/certs/gcp-data-engineer/textbook", label: "GCP DE 教科書(章 5-7)" },
+        ],
+      },
+      {
+        week: "Week 8〜9",
+        title: "Composer + Bigtable/Spanner + Looker",
+        description:
+          "Cloud Composer(Airflow)・ Workflows ・ Bigtable 行キー設計 ・ Spanner Interleaved Tables ・ Looker LookML。",
+        links: [
+          { href: "/certs/gcp-data-engineer/textbook", label: "GCP DE 教科書(章 4, 8-9)" },
+        ],
+      },
+      {
+        week: "Week 10〜12",
+        title: "Dataplex + DLP + 模擬試験",
+        description:
+          "Dataplex Lake/Zone/Asset ・ DLP infoType ・ VPC Service Controls ・ CMEK / CSEK ・ Skill Boost 仕上げ。",
+        links: [
+          { href: "/certs/gcp-data-engineer/quiz", label: "GCP DE 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/gcp-data-engineer/textbook",
+    quizHref: "/certs/gcp-data-engineer/quiz",
+  },
 };
 
 export const certSlugs = Object.keys(certRoadmaps);

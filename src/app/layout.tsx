@@ -34,7 +34,7 @@ const SITE_NAME = "統計ロードマップ";
 const SITE_TAGLINE =
   "AIエンジニアになるための統計・数学・Python を一気通貫で学ぶ";
 const SITE_DESCRIPTION =
-  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。統計検定 4 級〜1 級・G検定・E資格・DS検定・QC検定・生成AIパスポート・DS エキスパート・Python データ分析試験・AI 実装検定・画像処理エンジニア検定・ITパスポート/基本情報/応用情報/データベーススペシャリスト/ITストラテジスト・DX 検定・AWS AI Practitioner/SAA/MLA-C01/MLS-C01/DEA-C01・Azure AI Fundamentals/AI-102/DP-100・GCP Generative AI Leader/ML Engineer・Power BI(PL-300)・Tableau Desktop Specialist・Snowflake SnowPro Core・Databricks Data Engineer など関連検定も網羅。インタラクティブ図解・統計計算ツール・Python/R コード併記で、理論から実装までスムーズに繋がる学習ロードマップを提供。";
+  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。統計検定 4 級〜1 級・G検定・E資格・DS検定・QC検定・生成AIパスポート・DS エキスパート・Python データ分析試験・AI 実装検定・画像処理エンジニア検定・ITパスポート/基本情報/応用情報/データベーススペシャリスト/ITストラテジスト・DX 検定・AWS AI Practitioner/SAA/MLA-C01/MLS-C01/DEA-C01・Azure AI Fundamentals/AI-102/DP-100/DP-203・GCP Generative AI Leader/ML Engineer/Data Engineer・Power BI(PL-300)・Tableau Desktop Specialist・Snowflake SnowPro Core・Databricks Data Engineer など関連検定も網羅。インタラクティブ図解・統計計算ツール・Python/R コード併記で、理論から実装までスムーズに繋がる学習ロードマップを提供。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -164,6 +164,20 @@ export const metadata: Metadata = {
     "Kinesis",
     "Apache Iceberg",
     "Lake Formation",
+    "DP-203",
+    "Azure Data Engineer",
+    "Synapse Analytics",
+    "Data Factory",
+    "Stream Analytics",
+    "Microsoft Purview",
+    "GCP Data Engineer",
+    "BigQuery",
+    "Dataflow",
+    "Dataproc",
+    "Pub/Sub",
+    "Cloud Composer",
+    "Looker",
+    "Dataplex",
   ],
   openGraph: {
     type: "website",
@@ -681,6 +695,16 @@ export default function RootLayout({
                   <li>
                     <Link href="/certs/aws-data-engineer" className="hover:underline text-[var(--muted-strong)]">
                       AWS Data Engineer Associate
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/azure-dp-203" className="hover:underline text-[var(--muted-strong)]">
+                      Azure Data Engineer(DP-203)
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/gcp-data-engineer" className="hover:underline text-[var(--muted-strong)]">
+                      GCP Pro Data Engineer
                     </Link>
                   </li>
                 </ul>

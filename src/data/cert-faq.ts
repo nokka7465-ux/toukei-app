@@ -635,6 +635,50 @@ export const certFaq: Record<string, FaqItem[]> = {
       a: "DEA-C01 → **AWS Solutions Architect Professional(SAP-C02)** で設計の上位へ、または **MLA-C01 / MLS-C01** で ML 系へ展開。本サイトの[AWS MLA-C01](/certs/aws-ml-engineer) ・ [AWS MLS-C01](/certs/aws-ml-specialty)も併せて検討を。",
     },
   ],
+  "azure-dp-203": [
+    {
+      q: "Microsoft Azure Data Engineer Associate(DP-203)とは?",
+      a: "**Azure 上のデータエンジニアリングを設計 ・ 実装 ・ 運用** する Associate 認定。Synapse Analytics ・ Data Factory ・ Databricks ・ Stream Analytics ・ Event Hubs ・ ADLS Gen2 ・ Cosmos DB ・ Purview など Azure データプラットフォームの中核を取込 ・ 変換 ・ 保管 ・ 配信 ・ 監視 ・ ガバナンスで問う。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**CBT(Pearson VUE)or オンライン監督受験 / 40〜60 問 / 100 分(参考) / 合格 700 / 1000 点 / 受験料 165 USD / 有効期限 1 年(無料更新試験あり)**。SQL ・ Python / Scala ・ Azure 基本が前提知識。",
+    },
+    {
+      q: "AWS DEA-C01 / GCP Pro Data Engineer との違いは?",
+      a: "**Azure は Synapse + ADF + Databricks** が中心、**AWS は Glue + Athena + Redshift**、**GCP は BigQuery + Dataflow** が中心。**サービス選び分けの哲学** がクラウドごとに異なるため、本サイトの[AWS DEA-C01](/certs/aws-data-engineer) ・ [GCP Pro Data Engineer](/certs/gcp-data-engineer) と併読でクラウド横断理解を。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "Azure 経験者で **80 〜 150 時間**、未経験者で **150 〜 250 時間**。**Microsoft Learn の DP-203 ラーニングパス + Synapse Workspace ハンズオン** が王道学習教材。",
+    },
+    {
+      q: "次のステップは?",
+      a: "DP-203 → **Azure Solutions Architect Expert(AZ-305)** で全体設計へ展開、または **DP-100(Data Scientist)** や **AI-102(AI Engineer)** で ML / AI 系へ。",
+    },
+  ],
+  "gcp-data-engineer": [
+    {
+      q: "GCP Professional Data Engineer とは?",
+      a: "**GCP 上のデータエンジニアリング Professional レベル認定**。BigQuery ・ Dataflow ・ Dataproc ・ Pub/Sub ・ Cloud Composer ・ Bigtable ・ Spanner ・ Looker ・ Dataplex を設計 ・ 取込 ・ 保管 ・ 分析 / ML 統合 ・ 信頼性 / 自動化 / 監視 ・ セキュリティ / コンプライアンスの 5 ドメインで問う。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**CBT(Kryterion)or オンライン監督受験 / 50〜60 問 / 120 分 / 合格スコア非公開(70% 程度が目安) / 受験料 200 USD / 有効期限 2 年**。SQL ・ Python / Java ・ GCP 基本(Cloud Engineer 相当)が前提知識。",
+    },
+    {
+      q: "AWS DEA-C01 / Azure DP-203 との違いは?",
+      a: "**GCP は BigQuery 中心 + サーバレス志向**、**AWS は Glue + Athena + Redshift**、**Azure は Synapse + ADF + Databricks**。**GCP は Professional レベル**(他は Associate)で受験料 200 USD / 学習時間も多めです。本サイトの[AWS DEA-C01](/certs/aws-data-engineer) ・ [Azure DP-203](/certs/azure-dp-203) と併読を推奨。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "GCP 経験者で **100 〜 200 時間**、未経験者で **150 〜 250 時間**。**Skill Boost の Data Engineer Learning Path** が公式の王道学習教材。BigQuery のハンズオンが必須。",
+    },
+    {
+      q: "次のステップは?",
+      a: "GCP Pro DE → **Professional ML Engineer** で ML 特化、または **Professional Cloud Architect** で全体設計へ展開。本サイトの[GCP Pro ML Engineer](/certs/gcp-ml-engineer)も併せて検討を。",
+    },
+  ],
   "qc-kentei": [
     {
       q: "QC検定の各級の難易度は?",

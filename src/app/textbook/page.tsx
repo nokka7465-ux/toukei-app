@@ -436,6 +436,26 @@ const CERT_TRACKS: Track[] = [
     emoji: "🪣",
     accent: "bg-amber-700",
   },
+  {
+    href: "/certs/azure-dp-203/textbook",
+    title: "Azure Data Engineer(DP-203)",
+    description:
+      "Azure DE Associate 認定。Synapse 3 プール ・ Data Factory ・ Stream Analytics ・ Databricks ・ Lakehouse ・ Purview を網羅。",
+    audience: "データエンジニア",
+    chip: "DP-203",
+    emoji: "🛢️",
+    accent: "bg-blue-800",
+  },
+  {
+    href: "/certs/gcp-data-engineer/textbook",
+    title: "GCP Professional Data Engineer",
+    description:
+      "GCP DE Professional 認定。BigQuery ・ Dataflow ・ Pub/Sub ・ Composer ・ Bigtable / Spanner ・ Looker ・ Dataplex を網羅。",
+    audience: "データエンジニア上位",
+    chip: "GCP DE",
+    emoji: "🌐",
+    accent: "bg-emerald-800",
+  },
 ];
 
 function TrackCard({ track }: { track: Track }) {

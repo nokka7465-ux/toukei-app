@@ -50,6 +50,8 @@ export const CERT_PRESETS: CertPreset[] = [
   { key: "aws-ml-specialty", label: "AWS ML Specialty(MLS-C01)", href: "/certs/aws-ml-specialty", hours: 300 },
   { key: "azure-dp-100", label: "Azure DP-100", href: "/certs/azure-dp-100", hours: 150 },
   { key: "aws-data-engineer", label: "AWS DEA-C01", href: "/certs/aws-data-engineer", hours: 150 },
+  { key: "azure-dp-203", label: "Azure DP-203", href: "/certs/azure-dp-203", hours: 150 },
+  { key: "gcp-data-engineer", label: "GCP Professional Data Engineer", href: "/certs/gcp-data-engineer", hours: 200 },
 ];
 
 export type ExamTarget = {

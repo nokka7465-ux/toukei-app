@@ -657,6 +657,40 @@ const RELATED_EXAMS: Exam[] = [
     highlight:
       "2024 GA の AWS 新 Associate 認定。Glue / Athena / Redshift / Kinesis / Step Functions / Iceberg / Lake Formation を 4 ドメインで体系的に問う。",
   },
+  {
+    id: "azure-dp-203",
+    title: "Microsoft Azure Data Engineer Associate(DP-203)",
+    organizer: "Microsoft",
+    format: "オンライン監督受験 / Pearson VUE テストセンター(英語 / 日本語)",
+    schedule: "通年(随時)",
+    duration: "100 分 / 40〜60 問(参考)",
+    fee: "165 USD(参考)",
+    passCriteria: "1000 点中 700 点以上(参考)",
+    passRate: "Microsoft 非公開",
+    takers: "全世界で大規模",
+    officialUrl: "https://learn.microsoft.com/ja-jp/credentials/certifications/azure-data-engineer/",
+    studyHref: "/certs/azure-dp-203",
+    studyLabel: "Azure DP-203 の教科書を見る",
+    highlight:
+      "Azure データエンジニアリング Associate 認定。Synapse(Dedicated/Serverless/Spark)・ ADF ・ Stream Analytics ・ Databricks ・ Purview を網羅。",
+  },
+  {
+    id: "gcp-data-engineer",
+    title: "GCP Professional Data Engineer",
+    organizer: "Google Cloud",
+    format: "オンライン監督受験 / Kryterion テストセンター(英語 / 日本語)",
+    schedule: "通年(随時)",
+    duration: "120 分 / 50〜60 問",
+    fee: "200 USD(参考)",
+    passCriteria: "非公開(70% 程度が目安)",
+    passRate: "Google 非公開",
+    takers: "全世界で大規模",
+    officialUrl: "https://cloud.google.com/certification/data-engineer",
+    studyHref: "/certs/gcp-data-engineer",
+    studyLabel: "GCP Pro Data Engineer の教科書を見る",
+    highlight:
+      "GCP データエンジニアリング Professional 認定。BigQuery ・ Dataflow ・ Pub/Sub ・ Composer ・ Bigtable / Spanner ・ Looker ・ Dataplex を 5 ドメインで問う。",
+  },
 ];
 
 function ExamCard({ exam }: { exam: Exam }) {

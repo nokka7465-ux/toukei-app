@@ -1003,6 +1003,24 @@ export default function Home() {
                 description:
                   "2024 GA の AWS 新 Associate 認定。Glue / Athena / Redshift / Kinesis / Step Functions / Iceberg / Lake Formation を網羅。",
               },
+              {
+                href: "/certs/azure-dp-203",
+                chip: "DP-203",
+                emoji: "🛢️",
+                accent: "bg-blue-800",
+                title: "Azure Data Engineer",
+                description:
+                  "Azure DE Associate 認定。Synapse 3 プール ・ Data Factory ・ Stream Analytics ・ Databricks ・ Lakehouse ・ Purview を網羅。",
+              },
+              {
+                href: "/certs/gcp-data-engineer",
+                chip: "GCP DE",
+                emoji: "🌐",
+                accent: "bg-emerald-800",
+                title: "GCP Pro Data Engineer",
+                description:
+                  "GCP DE Professional 認定。BigQuery ・ Dataflow ・ Pub/Sub ・ Composer ・ Bigtable / Spanner ・ Looker ・ Dataplex を網羅。",
+              },
             ].map((cert) => (
               <Link
                 key={cert.href}

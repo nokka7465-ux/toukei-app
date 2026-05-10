@@ -485,6 +485,32 @@ const CERTS: Cert[] = [
     best: "データエンジニア",
     notes: "Glue / Athena / Redshift / Kinesis / Iceberg",
   },
+  {
+    slug: "/certs/azure-dp-203",
+    name: "Azure Data Engineer(DP-203)",
+    organizer: "Microsoft",
+    fee: "165 USD",
+    duration: "通年",
+    format: "100 分 / 40〜60 問",
+    difficulty: "★★★☆☆",
+    studyHours: "100〜200h",
+    pass: "約 70%",
+    best: "データエンジニア",
+    notes: "Synapse / ADF / Databricks / Stream Analytics",
+  },
+  {
+    slug: "/certs/gcp-data-engineer",
+    name: "GCP Pro Data Engineer",
+    organizer: "Google Cloud",
+    fee: "200 USD",
+    duration: "通年",
+    format: "120 分 / 50〜60 問",
+    difficulty: "★★★★☆",
+    studyHours: "150〜250h",
+    pass: "約 70%",
+    best: "データエンジニア上位",
+    notes: "BigQuery / Dataflow / Pub/Sub / Looker",
+  },
 ];
 
 export default function ComparePage() {
