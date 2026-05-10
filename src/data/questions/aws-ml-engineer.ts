@@ -321,4 +321,164 @@ export const awsMlEngineerQuestions: Question[] = [
     explanation:
       "MLA-C01 → **ML Specialty(MLS-C01)** が ML 系の上位認定。深い数学 ・ アルゴリズム ・ 実装ニュアンスが問われる。Cloud Practitioner は基礎で逆方向。",
   },
+  {
+    id: "mla-q21",
+    category: "Bedrock",
+    difficulty: 3,
+    question:
+      "AWS Bedrock の **Knowledge Bases** が提供する機能として最も適切なものを選びなさい。",
+    choices: [
+      "AWS マネージドの RAG(Retrieval-Augmented Generation)",
+      "ファインチューニング専用エンジン",
+      "Lambda の置き換え",
+      "S3 ストレージクラス管理",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Bedrock Knowledge Bases** は **マネージド RAG**(S3 → 自動チャンク + 埋め込み + ベクトル DB + Bedrock LLM 連携)。**OpenSearch / Aurora pgvector / Pinecone** をベクトルストアに選択。",
+  },
+  {
+    id: "mla-q22",
+    category: "Bedrock",
+    difficulty: 3,
+    question:
+      "Bedrock **Guardrails** の機能として **誤っているもの** を選びなさい。",
+    choices: [
+      "PII / 機微情報のマスキング",
+      "プロンプト ・ 応答内のトピックフィルタ(deny topics)",
+      "ハルシネーション検知 + 文脈接地検証",
+      "モデルの再学習を自動実行",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**Guardrails は出力フィルタリング**(PII / トピック / ハルシネーション / 単語ブロック)。**モデル再学習は行わない**(再学習は SageMaker Training など別系統)。",
+  },
+  {
+    id: "mla-q23",
+    category: "JumpStart",
+    difficulty: 2,
+    question:
+      "SageMaker JumpStart の特徴として最も適切なものを選びなさい。",
+    choices: [
+      "事前学習済 OSS モデル(Llama / Stable Diffusion など)を 1 クリックでデプロイ",
+      "ノートブックを高速起動するツール",
+      "S3 上のデータをスキャンする機能",
+      "DynamoDB の代替",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**SageMaker JumpStart** は **事前学習済 OSS モデル(Hugging Face / Llama / Stable Diffusion / Cohere 等)** + **ソリューションテンプレート(需要予測 / 不正検知 等)** を 1 クリックでデプロイ ・ ファインチューニング可能に。",
+  },
+  {
+    id: "mla-q24",
+    category: "Pipelines",
+    difficulty: 3,
+    question:
+      "SageMaker Pipelines で **A/B テスト用にトラフィック分散** を実現する方法を選びなさい。",
+    choices: [
+      "Production Variant(複数バリアント + 重み)",
+      "Multi-Model Endpoint",
+      "JumpStart",
+      "Feature Store",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Production Variant** は **1 Endpoint 配下に複数バリアント(各モデル + Compute)** を作成し、**重みでトラフィック分散**。Blue/Green / Canary / A/B テストに利用。",
+  },
+  {
+    id: "mla-q25",
+    category: "Inference Pipeline",
+    difficulty: 3,
+    question:
+      "SageMaker **Inference Pipeline** の説明として最も適切なものを選びなさい。",
+    choices: [
+      "前処理 → 推論 → 後処理 を直列にチェインする 1 エンドポイント構成",
+      "複数モデルを並列に呼ぶ",
+      "Feature Store との連携専用機能",
+      "リアルタイム推論を批処理に変換する機能",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Inference Pipeline** は **2〜15 個の Container を直列チェイン**(前処理 → 推論 → 後処理)。各コンテナの間でデータが流れ、レイテンシを最小化。",
+  },
+  {
+    id: "mla-q26",
+    category: "Endpoint Auto Scaling",
+    difficulty: 3,
+    question:
+      "Real-time Endpoint の **Auto Scaling** で **モデル単位ではなく バリアント単位の `InvocationsPerInstance`** をターゲットメトリクスとして使う理由を選びなさい。",
+    choices: [
+      "AWS が他のメトリクスを提供していないため",
+      "1 インスタンスあたりの推論処理量を均一にし、レイテンシ ・ コストを安定化するため",
+      "CloudWatch コストを下げるため",
+      "GPU 使用率は信頼性が低いため",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**`InvocationsPerInstance`** は **1 インスタンスあたりの 1 分間の呼出数**。これをターゲット値で維持することで **レイテンシ ・ コストを安定化**。`CPUUtilization` 等とも併用可能。",
+  },
+  {
+    id: "mla-q27",
+    category: "SageMaker Studio",
+    difficulty: 2,
+    question:
+      "SageMaker Studio が提供する **統合 IDE** の特徴として **誤っているもの** を選びなさい。",
+    choices: [
+      "Notebook ・ Pipelines ・ Experiments ・ Model Registry を統合",
+      "Training Job / Endpoint の実行状況を可視化",
+      "Data Wrangler でノーコード前処理",
+      "EC2 インスタンスを直接 SSH ログインする機能",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**Studio は SageMaker サービスを統合する Web IDE**。EC2 SSH 機能はない。Studio Notebook ・ Pipelines ・ Experiments ・ Model Registry ・ Data Wrangler ・ JumpStart ・ Canvas を統合。",
+  },
+  {
+    id: "mla-q28",
+    category: "Canvas",
+    difficulty: 2,
+    question:
+      "SageMaker Canvas の特徴として最も適切なものを選びなさい。",
+    choices: [
+      "ノーコード ML(ビジネスアナリスト向け)",
+      "GPU クラスタ管理",
+      "Lambda 拡張",
+      "Bedrock の代替",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**SageMaker Canvas** は **ノーコード ML プラットフォーム**(ビジネスアナリスト ・ 非エンジニア向け)。データ取込 → モデル学習 → 推論を GUI で完結。バックエンドは AutoML。",
+  },
+  {
+    id: "mla-q29",
+    category: "Cost",
+    difficulty: 2,
+    question:
+      "Real-time Endpoint のコスト最適化として **誤っているもの** を選びなさい。",
+    choices: [
+      "Inferentia / Graviton インスタンスタイプを検討",
+      "Multi-Model Endpoint で多モデルを集約",
+      "Auto Scaling を無効化して常時最大インスタンス数で運用",
+      "Quantization / Distillation で軽量化",
+    ],
+    correctIndex: 2,
+    explanation:
+      "**常時最大インスタンスはコスト爆発**。Auto Scaling を有効化し負荷に応じて伸縮。Inferentia / Graviton は専用低コスト ・ MME は集約 ・ Quantization は軽量化、すべて有効な最適化策。",
+  },
+  {
+    id: "mla-q30",
+    category: "MLOps",
+    difficulty: 3,
+    question:
+      "SageMaker Model Cards の役割として最も適切なものを選びなさい。",
+    choices: [
+      "モデルの目的 ・ データ ・ 評価 ・ 制約 ・ リスクを文書化(ガバナンス用)",
+      "GPU メモリプロファイリング",
+      "Endpoint のリアルタイム監視",
+      "学習データを暗号化する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**SageMaker Model Cards** は **モデル仕様書**(目的 / データ / 性能 / 制約 / 倫理リスク / 承認者)。**EU AI Act / NIST AI RMF などの監査要件に対応** するためのガバナンスドキュメント。",
+  },
 ];

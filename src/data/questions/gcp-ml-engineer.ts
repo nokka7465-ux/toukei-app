@@ -321,4 +321,164 @@ export const gcpMlEngineerQuestions: Question[] = [
     explanation:
       "ML Engineer の自然な次のステップは **Professional Data Engineer**(データ基盤側)または **Professional Cloud Architect**(全体)。Foundational(Cloud Digital Leader / Gen AI Leader)は逆方向。",
   },
+  {
+    id: "gcpml-q21",
+    category: "Vertex AI",
+    difficulty: 3,
+    question:
+      "Vertex AI Pipelines が **基盤として採用** している OSS フレームワークを選びなさい。",
+    choices: [
+      "Apache Airflow",
+      "Kubeflow Pipelines / TFX",
+      "Argo Workflows のみ",
+      "Apache Beam",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Vertex AI Pipelines は Kubeflow Pipelines(KFP)v2 / TFX をマネージドで実行**。Python SDK で `@dsl.pipeline` を定義すると Vertex AI 上で DAG 実行。Composer は Airflow ベースで別物。",
+  },
+  {
+    id: "gcpml-q22",
+    category: "Vertex AI",
+    difficulty: 3,
+    question:
+      "Vertex AI **Model Registry** で **本番モデルにエイリアスを付けロールバックを管理** する標準機能として最も適切なものを選びなさい。",
+    choices: [
+      "Model Version + Alias(`production` / `staging` 等)",
+      "Cloud Storage バージョニング",
+      "BigQuery History",
+      "Cloud Build 通知",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Model Version + Alias**(MLflow Registry 風)で **`production` / `staging` などのラベル** を Version に付与。古い Version へのロールバックや A/B テストでの参照に利用。",
+  },
+  {
+    id: "gcpml-q23",
+    category: "Vertex AI",
+    difficulty: 3,
+    question:
+      "Vertex AI Endpoint で **トラフィック分散による Canary デプロイ** を実現する機能を選びなさい。",
+    choices: [
+      "Traffic Split(Endpoint 配下の各 Deployed Model に重み)",
+      "Multi-Region Endpoint",
+      "Cloud Load Balancing",
+      "Traffic Director",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Vertex AI Endpoint の Traffic Split** で **複数 Deployed Model に重み(%)を割り当て**、Canary / A/B / Blue-Green を実現。Cloud Load Balancing は L7 LB で別レイヤー。",
+  },
+  {
+    id: "gcpml-q24",
+    category: "Vertex AI Feature Store",
+    difficulty: 3,
+    question:
+      "Vertex AI Feature Store の **新世代(2024〜)** で導入された **オンライン Feature 取得の基盤** として最も適切なものを選びなさい。",
+    choices: [
+      "BigQuery を Online Source として直接読込(オプティマイズドオンラインサービング)",
+      "Bigtable のみ",
+      "Memorystore Redis のみ",
+      "Cloud SQL",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Vertex AI Feature Store の新世代(2024 GA)** は **BigQuery を直接 Online Source とし、Optimized Online Serving** で低レイテンシ取得。Train/Serve スキューを排除。旧世代は Bigtable 内蔵。",
+  },
+  {
+    id: "gcpml-q25",
+    category: "Generative AI",
+    difficulty: 3,
+    question:
+      "**Vertex AI で RAG(Retrieval-Augmented Generation)を構築** する標準的な構成として最も適切なものを選びなさい。",
+    choices: [
+      "Vertex AI Search(旧 Enterprise Search)+ Gemini モデル",
+      "BigQuery + Cloud Functions",
+      "Bigtable + Pub/Sub",
+      "AutoML Vision",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Vertex AI Search**(マネージド検索 + Vector + Semantic Reranker)+ **Gemini / Gemini Nano** で RAG を構築。**Vector Search を直接使う構成** も可(より柔軟、Search を使わない)。",
+  },
+  {
+    id: "gcpml-q26",
+    category: "Vertex AI Workbench",
+    difficulty: 2,
+    question:
+      "Vertex AI Workbench(Notebooks)の **Managed Notebooks** が **User-Managed Notebooks** より優れる点として最も適切なものを選びなさい。",
+    choices: [
+      "Idle シャットダウン ・ 自動アップグレード ・ 統合認証 ・ Spark カーネル",
+      "より高い GPU 性能",
+      "より低価格",
+      "オンプレ実行可能",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Managed Notebooks** は **idle 自動シャットダウン ・ 自動アップグレード ・ Vertex AI 統合 ・ Spark / BQ カーネル** などマネージド機能が豊富。User-Managed は Compute Engine VM ベースで自由度が高いが運用負荷も大。",
+  },
+  {
+    id: "gcpml-q27",
+    category: "TPU",
+    difficulty: 3,
+    question:
+      "**TPU(Tensor Processing Unit)** の特徴として **誤っているもの** を選びなさい。",
+    choices: [
+      "Google が設計した行列演算特化型 ASIC",
+      "TensorFlow / JAX / PyTorch XLA で利用可能",
+      "GPU と完全互換で CUDA がそのまま動く",
+      "v5e / v5p / Trillium(v6e)など世代がある",
+    ],
+    correctIndex: 2,
+    explanation:
+      "**TPU は CUDA 非互換**。TensorFlow / JAX / PyTorch XLA(via PJRT)経由で利用。**XLA コンパイラを通したコードのみ動作**。世代は v2 → v3 → v4 → v5e/v5p → Trillium と進化。",
+  },
+  {
+    id: "gcpml-q28",
+    category: "Vertex AI Monitoring",
+    difficulty: 3,
+    question:
+      "Vertex AI Model Monitoring の **検出対象** として **誤っているもの** を選びなさい。",
+    choices: [
+      "Feature Skew(学習 vs 本番の分布差)",
+      "Feature Drift(本番分布の経時変化)",
+      "Prediction Drift(予測値の分布変化)",
+      "GPU 故障率",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**Vertex AI Monitoring 対象**: Feature Skew / Drift / Prediction Drift / Output Drift / Attribution Drift。**ハードウェア(GPU)監視は Cloud Monitoring の管轄**。",
+  },
+  {
+    id: "gcpml-q29",
+    category: "Explainable AI",
+    difficulty: 3,
+    question:
+      "Vertex AI Explainable AI が **TabNet / Tree モデル / DNN** に対して提供する代表的な解釈手法として最も適切なものを選びなさい。",
+    choices: [
+      "Sampled Shapley / Integrated Gradients / XRAI",
+      "PCA",
+      "Bayesian Inference",
+      "K-Means",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Vertex AI Explainable AI**: **Sampled Shapley(汎用)・ Integrated Gradients(NN)・ XRAI(画像 NN)** の 3 手法。テーブル / 画像 / NN それぞれに最適な手法を提供。",
+  },
+  {
+    id: "gcpml-q30",
+    category: "Cost",
+    difficulty: 2,
+    question:
+      "Vertex AI Training の **コスト最適化** として **誤っているもの** を選びなさい。",
+    choices: [
+      "Spot VM(Preemptible)を利用",
+      "Custom Container でフレームワーク最新化",
+      "max_running_time を設定して暴走防止",
+      "GPU を常時固定で割り当てる",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**GPU 常時割り当ては不要時もコスト発生**。Vertex AI Training は **ジョブ実行中のみ課金**(終了で停止)。Spot VM ・ Custom Container ・ Timeout はすべて有効な最適化策。",
+  },
 ];

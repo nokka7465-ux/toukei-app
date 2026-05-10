@@ -321,4 +321,159 @@ export const azureAi102Questions: Question[] = [
     explanation:
       "AI-102(AI Engineer Associate)の自然な次のステップは **DP-100(Azure Data Scientist Associate)** で ML 寄りに進むか、**DP-203(Azure Data Engineer Associate)** でデータ基盤側に進む。",
   },
+  {
+    id: "az102-q21",
+    category: "Azure OpenAI",
+    difficulty: 3,
+    question:
+      "Azure OpenAI の **On Your Data**(旧称 Bring Your Own Data)機能の説明として最も適切なものを選びなさい。",
+    choices: [
+      "Azure OpenAI を社内データを参照する RAG として動かすマネージド機能(AI Search 統合)",
+      "OpenAI のモデルをファインチューニングする機能",
+      "OpenAI の API を完全オンプレで動かす機能",
+      "プロンプトを暗号化する機能",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Azure OpenAI On Your Data** は **Azure AI Search を retrieval として GPT モデルに渡すマネージド RAG**。Studio から数クリックで設定可能。Bedrock Knowledge Bases に相当。",
+  },
+  {
+    id: "az102-q22",
+    category: "Azure AI Search",
+    difficulty: 3,
+    question:
+      "Azure AI Search(旧 Cognitive Search)で **テキスト ・ ベクトル ・ ハイブリッド検索を 1 クエリで実行** する機能を選びなさい。",
+    choices: [
+      "Hybrid Search(BM25 + Vector + Semantic Reranking)",
+      "Faceted Navigation",
+      "Semantic Search のみ",
+      "BM25 のみ",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Hybrid Search** は **キーワード(BM25)+ ベクトル類似度 + Semantic Reranker(L2 ランキング)** を組合せ、RAG の retrieval 品質を最大化。RAG の標準構成。",
+  },
+  {
+    id: "az102-q23",
+    category: "AI Foundry",
+    difficulty: 3,
+    question:
+      "Azure AI Foundry(旧 Azure AI Studio)が **Azure ML Studio と異なる主眼** として最も適切なものを選びなさい。",
+    choices: [
+      "ジェネレーティブ AI ・ Agent ・ プロンプトフロー ・ モデルカタログを統合",
+      "古典的 ML の AutoML 専用",
+      "DBA 専用ツール",
+      "Power BI の置き換え",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Azure AI Foundry** は **生成 AI ・ Agent ・ Prompt Flow ・ 1700+ モデルカタログ ・ Evaluation ・ Content Safety** を統合した AI Engineer 向けの新スタジオ。**Azure ML Studio は古典 ML 中心**。",
+  },
+  {
+    id: "az102-q24",
+    category: "Prompt Flow",
+    difficulty: 3,
+    question:
+      "Azure AI Foundry の **Prompt Flow** が解決する課題として最も適切なものを選びなさい。",
+    choices: [
+      "プロンプト ・ Tool 呼出 ・ 評価のオーケストレーションを GUI + コードで構築 ・ 評価 ・ デプロイ",
+      "GPU の自動プロビジョニング",
+      "ファインチューニングの自動化",
+      "音声合成専用パイプライン",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Prompt Flow** は **LLM アプリケーションの DAG**(プロンプト + Tool 呼出 + 後処理 + 評価)を構築し、**バージョン管理 ・ バッチ評価 ・ デプロイ** を一気通貫で行う。LangChain と類似だが GUI 込み。",
+  },
+  {
+    id: "az102-q25",
+    category: "Content Safety",
+    difficulty: 3,
+    question:
+      "Azure AI Content Safety の **検出カテゴリ** として **誤っているもの** を選びなさい。",
+    choices: ["Hate", "Self-harm", "Sexual", "Politics(政治的中立性検査)"],
+    correctIndex: 3,
+    explanation:
+      "**Content Safety の標準カテゴリは 4 つ**: **Hate / Self-harm / Sexual / Violence**。各カテゴリ severity 0-7 でスコアリング + Prompt Shield(脱獄)+ Groundedness(接地)+ Protected Material(著作権)。",
+  },
+  {
+    id: "az102-q26",
+    category: "AI Vision",
+    difficulty: 2,
+    question:
+      "**画像内のテキスト(印字 + 手書き)を抽出** する Azure AI サービスとして最も適切なものを選びなさい。",
+    choices: [
+      "Azure AI Vision Image Analysis(Read API)",
+      "Form Recognizer / Document Intelligence",
+      "Custom Vision",
+      "Computer Vision の Spatial Analysis",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Azure AI Vision の Read API**(旧 OCR)は **印字 + 手書き混在の画像 ・ PDF からテキスト抽出**。**Document Intelligence は表 ・ レシート ・ 請求書などの構造化文書** を解析する上位サービス。",
+  },
+  {
+    id: "az102-q27",
+    category: "Document Intelligence",
+    difficulty: 3,
+    question:
+      "Azure Document Intelligence(旧 Form Recognizer)の **Custom モデル** で **少量データから請求書フォーマットを学習** する手法を選びなさい。",
+    choices: [
+      "Custom Template Model(構造固定の文書、5 サンプルから)",
+      "Custom Neural Model(構造可変、ラベル付き 5 サンプル以上)",
+      "上記の両方が用途に応じて選択可能",
+      "Document Intelligence では Custom 学習はできない",
+    ],
+    correctIndex: 2,
+    explanation:
+      "**Custom Template = 構造固定**(レイアウトが同じ書式向け、5+ サンプル)、**Custom Neural = 構造可変**(様々なフォーマットを統一スキーマで抽出、ラベル付き 5+ サンプル)。両者を用途に応じて選択。",
+  },
+  {
+    id: "az102-q28",
+    category: "Speech",
+    difficulty: 2,
+    question:
+      "Azure AI Speech の **Custom Speech**(STT カスタム)で **業界用語の認識精度を上げる** ために用意するデータとして最も適切なものを選びなさい。",
+    choices: [
+      "音声 + 文字起こし ペアの学習データ + ドメイン用語リスト",
+      "ノイズデータのみ",
+      "GPU 仮想マシン",
+      "REST API キーのみ",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Custom Speech** は **音声 + 文字起こし(.wav + .txt)+ Pronunciation データ + ドメイン Phrase List** で精度向上。固有名詞 ・ 業界用語の認識率改善が主用途。",
+  },
+  {
+    id: "az102-q29",
+    category: "Translator",
+    difficulty: 2,
+    question:
+      "**Custom Translator** で **業界用語を含むカスタム翻訳モデル** を作る場合、**最低限必要なデータ** を選びなさい。",
+    choices: [
+      "対訳の Translation Memory(TMX / Excel)10,000 文以上推奨",
+      "音声サンプル",
+      "画像とキャプション",
+      "OCR 出力のみ",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Custom Translator** は **対訳コーパス(TMX / XLIFF / Excel / Aligned)** で学習。**並行コーパス 10,000 文以上推奨**。専門用語辞書(Dictionary)と組合せでさらに精度向上。",
+  },
+  {
+    id: "az102-q30",
+    category: "Cost",
+    difficulty: 2,
+    question:
+      "Azure OpenAI の **Provisioned Throughput Units(PTU)** モデルの説明として最も適切なものを選びなさい。",
+    choices: [
+      "予約 ・ 専有スループット課金、レイテンシ安定 ・ 大規模ワークロード向け",
+      "従量課金で 1 リクエスト単位の料金",
+      "完全無料の研究用枠",
+      "GPU を直接借りる課金",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Provisioned Throughput Units(PTU)** は **GPT-4 等を予約 ・ 専有スループットで利用**(月額)。**レイテンシ安定 ・ 大規模一定ワークロード** 向け。**従量(Pay-as-you-go)** は変動的トラフィック向き。",
+  },
 ];

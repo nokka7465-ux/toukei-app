@@ -321,4 +321,164 @@ export const awsMlSpecialtyQuestions: Question[] = [
     explanation:
       "MLS-C01 → **AWS Solutions Architect Professional(SAP-C02)** で全体アーキテクトに進むのが王道。三大クラウド ML を揃えるなら **Azure AI-102 / GCP Pro ML Engineer** も視野に。",
   },
+  {
+    id: "mls-q21",
+    category: "Built-in",
+    difficulty: 3,
+    question:
+      "SageMaker Built-in **BlazingText** が **特化するタスク** を選びなさい。",
+    choices: [
+      "画像分類",
+      "Word2Vec ・ テキスト分類(高速 GPU 実装)",
+      "時系列予測",
+      "強化学習",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**BlazingText** は **Word2Vec(skip-gram / cbow)とテキスト分類の高速 GPU 実装**。fastText 互換 + 大規模コーパス学習が高速。時系列は DeepAR、画像は IC、強化学習は RL Estimator。",
+  },
+  {
+    id: "mls-q22",
+    category: "推論",
+    difficulty: 3,
+    question:
+      "SageMaker の **5 つの推論パターン** のうち、**長時間推論(数十秒〜15 分) ・ 大ペイロード** に最適なものを選びなさい。",
+    choices: [
+      "Real-time Inference",
+      "Serverless Inference",
+      "Asynchronous Inference",
+      "Batch Transform",
+    ],
+    correctIndex: 2,
+    explanation:
+      "**Asynchronous Inference** は **長時間推論(最大 15 分) ・ 大ペイロード(最大 1GB)** 向け。S3 経由でリクエスト / 結果を授受。Real-time は短時間 ・ 低レイテンシ、Batch Transform は静止データの一括推論。",
+  },
+  {
+    id: "mls-q23",
+    category: "推論",
+    difficulty: 2,
+    question:
+      "SageMaker **Serverless Inference** の特徴として **誤っているもの** を選びなさい。",
+    choices: [
+      "コールドスタートあり",
+      "アイドル時 0 円(リクエストがない時間は課金なし)",
+      "GPU エンドポイントを 0 から自動スケール可能",
+      "間欠的トラフィックに最適",
+    ],
+    correctIndex: 2,
+    explanation:
+      "**Serverless Inference は CPU のみ**(2024 時点)。GPU は Real-time / Asynchronous で利用。コールドスタート ・ アイドル時 0 円 ・ 間欠的トラフィック向きが正しい特徴。",
+  },
+  {
+    id: "mls-q24",
+    category: "Bias / Fairness",
+    difficulty: 3,
+    question:
+      "SageMaker Clarify が **学習前のデータバイアス** を検出するために計算する指標として **代表的なもの** を選びなさい。",
+    choices: [
+      "Class Imbalance(CI)・ Difference in Proportions of Labels(DPL)",
+      "Mean Squared Error",
+      "Cross-Entropy Loss",
+      "AUC-ROC",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Clarify Pre-training Bias 指標**: **Class Imbalance(CI)・ Difference in Proportions of Labels(DPL)・ KL Divergence ・ Total Variation Distance** など。Post-training は予測差分系。",
+  },
+  {
+    id: "mls-q25",
+    category: "Pipelines",
+    difficulty: 3,
+    question:
+      "SageMaker **Pipelines** の特徴として **誤っているもの** を選びなさい。",
+    choices: [
+      "Python SDK で DAG を定義",
+      "Step Type(Processing / Training / Tuning / Model / Transform 等)を組合せ",
+      "Lineage 自動追跡(Step / Artifact / Metadata)",
+      "Apache Airflow と完全互換でそのまま DAG をインポートできる",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**SageMaker Pipelines は SageMaker 専用 DAG**(Step Functions ベース)。Airflow 互換性はない。**MWAA や Step Functions から SageMaker Pipelines を呼ぶ** のが連携パターン。",
+  },
+  {
+    id: "mls-q26",
+    category: "Feature Store",
+    difficulty: 3,
+    question:
+      "SageMaker Feature Store の **Online / Offline Store** の使い分けとして最も適切なものを選びなさい。",
+    choices: [
+      "Online は推論時の低レイテンシ取得、Offline は学習 ・ バッチ推論用に S3 / Iceberg 形式で保管",
+      "Online は学習用、Offline はリアルタイム推論用",
+      "両者は完全同一で名前だけ異なる",
+      "Online は Glacier 階層、Offline は Standard 階層",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Online Store**(DynamoDB ベース)= **推論時の低レイテンシ Feature 取得**。**Offline Store**(S3 + Iceberg / Parquet)= **学習 ・ バッチ ・ Time-travel** 用。Train/Serve スキュー回避が最大の利点。",
+  },
+  {
+    id: "mls-q27",
+    category: "Multi-Model Endpoint",
+    difficulty: 3,
+    question:
+      "**多数の小型モデル(顧客ごとなど)を 1 つのエンドポイントでホストしコスト削減** したい。最適な機能を選びなさい。",
+    choices: [
+      "Multi-Model Endpoint(MME)",
+      "Multi-Container Endpoint",
+      "Inference Pipeline",
+      "Production Variant",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Multi-Model Endpoint(MME)** は **同一フレームワークの多数モデルを 1 エンドポイントに集約** + 動的ロード。**Multi-Container は異種フレームワーク併用、Inference Pipeline は前処理→推論→後処理の連結**。",
+  },
+  {
+    id: "mls-q28",
+    category: "Distillation",
+    difficulty: 3,
+    question:
+      "**Knowledge Distillation(知識蒸留)** の説明として最も適切なものを選びなさい。",
+    choices: [
+      "大モデル(Teacher)の出力を使って小モデル(Student)を学習し、軽量化と精度を両立",
+      "モデル重みを int8 / int4 に量子化する",
+      "学習データから不要列を削除する",
+      "GPU メモリを最適化する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Distillation** は **Teacher の Soft Label(確率分布)で Student を学習**、Student は小型ながら Teacher 並みの精度を獲得。**Quantization は重みのビット数削減** で異なる手法(両者併用可)。",
+  },
+  {
+    id: "mls-q29",
+    category: "RecordIO",
+    difficulty: 3,
+    question:
+      "SageMaker Built-in アルゴリズム の **多くで推奨される** バイナリ入力形式を選びなさい。",
+    choices: [
+      "RecordIO-protobuf",
+      "Apache Parquet",
+      "TFRecord",
+      "ORC",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**RecordIO-protobuf** は SageMaker Built-in(Linear Learner / FM / KNN / NTM など)で推奨されるバイナリ形式。S3 → SageMaker への高速読込 + Pipe Mode 対応。",
+  },
+  {
+    id: "mls-q30",
+    category: "監視",
+    difficulty: 3,
+    question:
+      "SageMaker Model Monitor の **4 種類の監視** として **誤っているもの** を選びなさい。",
+    choices: [
+      "Data Quality(欠損 ・ 範囲外 ・ 型不一致)",
+      "Model Quality(精度劣化、ラベル必要)",
+      "Bias Drift(属性別バイアスの変化)",
+      "Hardware Drift(GPU 故障率の追跡)",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**Model Monitor の 4 種**: Data Quality / Model Quality / Bias Drift / Feature Attribution Drift。**Hardware は CloudWatch の管轄** で Model Monitor の対象外。",
+  },
 ];
