@@ -985,6 +985,24 @@ export default function Home() {
                 description:
                   "AWS ML 系の Specialty 認定。Built-in アルゴリズム ・ HPO ・ Quantization ・ Clarify ・ Model Monitor まで網羅。",
               },
+              {
+                href: "/certs/azure-dp-100",
+                chip: "DP-100",
+                emoji: "🧬",
+                accent: "bg-sky-700",
+                title: "Azure Data Scientist",
+                description:
+                  "AI-900 / AI-102 と並ぶ Azure AI/ML 三本柱。Azure ML SDK/CLI v2 ・ AutoML ・ Sweep ・ Endpoint ・ RAI ・ MLOps を網羅。",
+              },
+              {
+                href: "/certs/aws-data-engineer",
+                chip: "DEA-C01",
+                emoji: "🪣",
+                accent: "bg-amber-700",
+                title: "AWS Data Engineer Associate",
+                description:
+                  "2024 GA の AWS 新 Associate 認定。Glue / Athena / Redshift / Kinesis / Step Functions / Iceberg / Lake Formation を網羅。",
+              },
             ].map((cert) => (
               <Link
                 key={cert.href}

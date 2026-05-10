@@ -36,6 +36,8 @@ import { gcpMlEngineerQuestions } from "@/data/questions/gcp-ml-engineer";
 import { databricksDataEngineerQuestions } from "@/data/questions/databricks-data-engineer";
 import { itStrategistQuestions } from "@/data/questions/it-strategist";
 import { awsMlSpecialtyQuestions } from "@/data/questions/aws-ml-specialty";
+import { azureDp100Questions } from "@/data/questions/azure-dp-100";
+import { awsDataEngineerQuestions } from "@/data/questions/aws-data-engineer";
 
 export type Track = {
   key: string;
@@ -83,6 +85,8 @@ export const tracks: Track[] = [
   { key: "databricks-data-engineer", label: "Databricks Data Engineer Associate", href: "/certs/databricks-data-engineer/quiz", group: "cert", questions: databricksDataEngineerQuestions },
   { key: "it-strategist", label: "ITストラテジスト試験", href: "/certs/it-strategist/quiz", group: "cert", questions: itStrategistQuestions },
   { key: "aws-ml-specialty", label: "AWS ML Specialty(MLS-C01)", href: "/certs/aws-ml-specialty/quiz", group: "cert", questions: awsMlSpecialtyQuestions },
+  { key: "azure-dp-100", label: "Azure DP-100", href: "/certs/azure-dp-100/quiz", group: "cert", questions: azureDp100Questions },
+  { key: "aws-data-engineer", label: "AWS DEA-C01", href: "/certs/aws-data-engineer/quiz", group: "cert", questions: awsDataEngineerQuestions },
 ];
 
 export type EnrichedQuestion = Question & {

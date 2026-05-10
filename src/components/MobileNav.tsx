@@ -71,6 +71,8 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/certs/databricks-data-engineer", label: "Databricks Data Engineer Associate" },
       { href: "/certs/it-strategist", label: "ITストラテジスト試験" },
       { href: "/certs/aws-ml-specialty", label: "AWS ML Specialty(MLS-C01)" },
+      { href: "/certs/azure-dp-100", label: "Azure Data Scientist(DP-100)" },
+      { href: "/certs/aws-data-engineer", label: "AWS Data Engineer Associate(DEA-C01)" },
     ],
   },
   {

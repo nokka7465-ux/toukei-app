@@ -416,6 +416,26 @@ const CERT_TRACKS: Track[] = [
     emoji: "🔬",
     accent: "bg-orange-800",
   },
+  {
+    href: "/certs/azure-dp-100/textbook",
+    title: "Azure Data Scientist(DP-100)",
+    description:
+      "AI-900 / AI-102 に並ぶ Azure AI/ML 三本柱。Azure ML SDK/CLI v2 ・ AutoML ・ Sweep ・ Endpoint ・ RAI ・ MLOps を網羅。",
+    audience: "Data Scientist / ML エンジニア",
+    chip: "DP-100",
+    emoji: "🧬",
+    accent: "bg-sky-700",
+  },
+  {
+    href: "/certs/aws-data-engineer/textbook",
+    title: "AWS Data Engineer Associate",
+    description:
+      "2024 GA の AWS 新 Associate。Glue / Athena / Redshift / Kinesis / Step Functions / Iceberg / Lake Formation を網羅。",
+    audience: "データエンジニア",
+    chip: "DEA-C01",
+    emoji: "🪣",
+    accent: "bg-amber-700",
+  },
 ];
 
 function TrackCard({ track }: { track: Track }) {

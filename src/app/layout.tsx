@@ -34,7 +34,7 @@ const SITE_NAME = "統計ロードマップ";
 const SITE_TAGLINE =
   "AIエンジニアになるための統計・数学・Python を一気通貫で学ぶ";
 const SITE_DESCRIPTION =
-  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。統計検定 4 級〜1 級・G検定・E資格・DS検定・QC検定・生成AIパスポート・DS エキスパート・Python データ分析試験・AI 実装検定・画像処理エンジニア検定・ITパスポート/基本情報/応用情報/データベーススペシャリスト/ITストラテジスト・DX 検定・AWS AI Practitioner/SAA/MLA-C01/MLS-C01・Azure AI Fundamentals/AI-102・GCP Generative AI Leader/ML Engineer・Power BI(PL-300)・Tableau Desktop Specialist・Snowflake SnowPro Core・Databricks Data Engineer など関連検定も網羅。インタラクティブ図解・統計計算ツール・Python/R コード併記で、理論から実装までスムーズに繋がる学習ロードマップを提供。";
+  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。統計検定 4 級〜1 級・G検定・E資格・DS検定・QC検定・生成AIパスポート・DS エキスパート・Python データ分析試験・AI 実装検定・画像処理エンジニア検定・ITパスポート/基本情報/応用情報/データベーススペシャリスト/ITストラテジスト・DX 検定・AWS AI Practitioner/SAA/MLA-C01/MLS-C01/DEA-C01・Azure AI Fundamentals/AI-102/DP-100・GCP Generative AI Leader/ML Engineer・Power BI(PL-300)・Tableau Desktop Specialist・Snowflake SnowPro Core・Databricks Data Engineer など関連検定も網羅。インタラクティブ図解・統計計算ツール・Python/R コード併記で、理論から実装までスムーズに繋がる学習ロードマップを提供。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -150,6 +150,20 @@ export const metadata: Metadata = {
     "Model Monitor",
     "SageMaker Clarify",
     "SageMaker Neo",
+    "DP-100",
+    "Azure Data Scientist",
+    "Azure ML",
+    "MLflow",
+    "Sweep Job",
+    "Responsible AI Dashboard",
+    "DEA-C01",
+    "AWS Data Engineer",
+    "Glue",
+    "Athena",
+    "Redshift",
+    "Kinesis",
+    "Apache Iceberg",
+    "Lake Formation",
   ],
   openGraph: {
     type: "website",
@@ -657,6 +671,16 @@ export default function RootLayout({
                   <li>
                     <Link href="/certs/aws-ml-specialty" className="hover:underline text-[var(--muted-strong)]">
                       AWS ML Specialty(MLS-C01)
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/azure-dp-100" className="hover:underline text-[var(--muted-strong)]">
+                      Azure Data Scientist(DP-100)
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/certs/aws-data-engineer" className="hover:underline text-[var(--muted-strong)]">
+                      AWS Data Engineer Associate
                     </Link>
                   </li>
                 </ul>

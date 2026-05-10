@@ -623,6 +623,40 @@ const RELATED_EXAMS: Exam[] = [
     highlight:
       "AWS の ML 系最上位 Specialty 認定。線形代数 / 確率統計から SageMaker Built-in / HPO / Quantization / Clarify / MLOps まで網羅。",
   },
+  {
+    id: "azure-dp-100",
+    title: "Microsoft Azure Data Scientist Associate(DP-100)",
+    organizer: "Microsoft",
+    format: "オンライン監督受験 / Pearson VUE テストセンター(英語 / 日本語)",
+    schedule: "通年(随時)",
+    duration: "100 分 / 40〜60 問(参考)",
+    fee: "165 USD(参考)",
+    passCriteria: "1000 点中 700 点以上(参考)",
+    passRate: "Microsoft 非公開",
+    takers: "全世界で大規模",
+    officialUrl: "https://learn.microsoft.com/ja-jp/credentials/certifications/azure-data-scientist/",
+    studyHref: "/certs/azure-dp-100",
+    studyLabel: "Azure DP-100 の教科書を見る",
+    highlight:
+      "Azure ML を用いた ML ワークロード設計 ・ 実装 ・ 運用を問う Associate 認定。AI-900 / AI-102 と並ぶ Azure AI/ML 三本柱。",
+  },
+  {
+    id: "aws-data-engineer",
+    title: "AWS Certified Data Engineer - Associate(DEA-C01)",
+    organizer: "Amazon Web Services",
+    format: "オンライン監督受験 / Pearson VUE テストセンター(英語 / 日本語)",
+    schedule: "通年(随時)",
+    duration: "130 分 / 65 問",
+    fee: "150 USD(参考)",
+    passCriteria: "1000 点中 720 点以上(参考)",
+    passRate: "AWS 非公開",
+    takers: "2024 年 GA、急速に受験者拡大中",
+    officialUrl: "https://aws.amazon.com/certification/certified-data-engineer-associate/",
+    studyHref: "/certs/aws-data-engineer",
+    studyLabel: "AWS DEA-C01 の教科書を見る",
+    highlight:
+      "2024 GA の AWS 新 Associate 認定。Glue / Athena / Redshift / Kinesis / Step Functions / Iceberg / Lake Formation を 4 ドメインで体系的に問う。",
+  },
 ];
 
 function ExamCard({ exam }: { exam: Exam }) {

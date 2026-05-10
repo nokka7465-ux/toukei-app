@@ -591,6 +591,50 @@ export const certFaq: Record<string, FaqItem[]> = {
       a: "MLS-C01 → **AWS Solutions Architect Professional(SAP-C02)** で全体アーキテクトに進む、または **三大クラウド ML を揃える** 道があります。本サイトの[Azure AI-102](/certs/azure-ai-102) ・ [GCP Pro ML Engineer](/certs/gcp-ml-engineer)も。",
     },
   ],
+  "azure-dp-100": [
+    {
+      q: "Microsoft Azure Data Scientist Associate(DP-100)とは?",
+      a: "**Azure Machine Learning(Azure ML)を用いた ML ワークロードの設計 ・ 実装 ・ 運用** を問う **Associate レベル** の Microsoft 認定。AI-900(Fundamentals)・ AI-102(AI Engineer)と並ぶ Azure AI/ML 三本柱の 1 つで、データサイエンティスト ・ ML エンジニアにとって Azure における最重要認定。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**CBT(Pearson VUE)or オンライン監督受験 / 40〜60 問 / 100 分(参考) / 合格 700 / 1000 点 / 受験料 165 USD / 有効期限 1 年(無料更新試験あり)**。Python ・ scikit-learn ・ MLflow ・ Azure 基本が前提知識。",
+    },
+    {
+      q: "AI-102 / AI-900 と何が違う?",
+      a: "**AI-900 は概念中心**(Fundamentals)、**AI-102 は AI サービス API 統合**(Azure OpenAI / AI Search / Foundry)、**DP-100 は Azure ML で ML プロジェクトを実装**。データサイエンティスト ・ ML エンジニアは DP-100 が直球、AI Engineer は AI-102。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "**100 〜 200 時間**。**Microsoft Learn の DP-100 ラーニングパス + GitHub の azureml-examples** が王道学習教材。SDK / CLI v2 を実際に動かすハンズオンが最重要。",
+    },
+    {
+      q: "次のステップは?",
+      a: "DP-100 → **AI-102(AI Engineer Associate)** で AI サービス API 統合へ展開、または **DP-203(Azure Data Engineer)** で データエンジニアリングへ。本サイトの[Azure AI-102](/certs/azure-ai-102)も併せて検討を。",
+    },
+  ],
+  "aws-data-engineer": [
+    {
+      q: "AWS Certified Data Engineer - Associate(DEA-C01)とは?",
+      a: "**2024 年 3 月に GA された AWS の新 Associate 認定**。Glue ・ EMR ・ Athena ・ Redshift ・ Kinesis ・ MSK ・ Step Functions ・ Lake Formation など AWS のデータエンジニアリングサービスを取込 ・ 変換 ・ 保管 ・ 分析 ・ ガバナンスの 4 ドメインで体系的に問う。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**CBT(Pearson VUE)or オンライン監督受験 / 65 問 / 130 分 / 合格 720 / 1000 点 / 受験料 150 USD / 有効期限 3 年**。SQL ・ Python ・ AWS 基本(CLF レベル以上)が前提知識。",
+    },
+    {
+      q: "旧 DAS-C01(Data Analytics Specialty)との違いは?",
+      a: "**DEA-C01 は Associate レベル** で **DAS-C01(Specialty、廃止予定)の事実上の後継**。Lake Formation ・ DataZone ・ Iceberg などモダンなデータレイクハウス領域が強化されています。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "AWS 経験者で **80 〜 150 時間**、未経験者で **150 〜 250 時間**。**AWS Skill Builder の DEA-C01 公式問題集 + ハンズオン**(無料利用枠で Glue + Athena + S3 を組む)が王道学習。",
+    },
+    {
+      q: "次のステップは?",
+      a: "DEA-C01 → **AWS Solutions Architect Professional(SAP-C02)** で設計の上位へ、または **MLA-C01 / MLS-C01** で ML 系へ展開。本サイトの[AWS MLA-C01](/certs/aws-ml-engineer) ・ [AWS MLS-C01](/certs/aws-ml-specialty)も併せて検討を。",
+    },
+  ],
   "qc-kentei": [
     {
       q: "QC検定の各級の難易度は?",

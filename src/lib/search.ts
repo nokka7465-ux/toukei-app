@@ -36,6 +36,8 @@ import { gcpMlEngineerTextbook } from "@/data/textbooks/gcp-ml-engineer";
 import { databricksDataEngineerTextbook } from "@/data/textbooks/databricks-data-engineer";
 import { itStrategistTextbook } from "@/data/textbooks/it-strategist";
 import { awsMlSpecialtyTextbook } from "@/data/textbooks/aws-ml-specialty";
+import { azureDp100Textbook } from "@/data/textbooks/azure-dp-100";
+import { awsDataEngineerTextbook } from "@/data/textbooks/aws-data-engineer";
 import { glossary } from "@/data/glossary";
 import { blogPosts } from "@/data/blog";
 import { introFormulas } from "@/data/formulas/intro";
@@ -144,6 +146,8 @@ export const searchIndex: SearchItem[] = (() => {
     { book: databricksDataEngineerTextbook, urlBase: "/certs/databricks-data-engineer/textbook", displayTitle: "Databricks Data Engineer" },
     { book: itStrategistTextbook, urlBase: "/certs/it-strategist/textbook", displayTitle: "ITストラテジスト" },
     { book: awsMlSpecialtyTextbook, urlBase: "/certs/aws-ml-specialty/textbook", displayTitle: "AWS ML Specialty" },
+    { book: azureDp100Textbook, urlBase: "/certs/azure-dp-100/textbook", displayTitle: "Azure DP-100" },
+    { book: awsDataEngineerTextbook, urlBase: "/certs/aws-data-engineer/textbook", displayTitle: "AWS DEA-C01" },
   ];
   for (const { book, urlBase, displayTitle } of textbookSets) {
     for (const ch of book.chapters) {

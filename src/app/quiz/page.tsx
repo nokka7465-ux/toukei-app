@@ -37,6 +37,8 @@ import { gcpMlEngineerQuestions } from "@/data/questions/gcp-ml-engineer";
 import { databricksDataEngineerQuestions } from "@/data/questions/databricks-data-engineer";
 import { itStrategistQuestions } from "@/data/questions/it-strategist";
 import { awsMlSpecialtyQuestions } from "@/data/questions/aws-ml-specialty";
+import { azureDp100Questions } from "@/data/questions/azure-dp-100";
+import { awsDataEngineerQuestions } from "@/data/questions/aws-data-engineer";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
@@ -103,6 +105,8 @@ const CERT_TRACKS: Track[] = [
   { href: "/certs/databricks-data-engineer/quiz", title: "Databricks Data Engineer Associate", count: databricksDataEngineerQuestions.length, description: "Lakehouse ・ Delta Lake ・ Auto Loader ・ DLT ・ Unity Catalog" },
   { href: "/certs/it-strategist/quiz", title: "ITストラテジスト試験(ST)", count: itStrategistQuestions.length, description: "経営戦略 ・ 事業戦略 ・ IT 戦略 ・ EA ・ DX ・ 投資判断" },
   { href: "/certs/aws-ml-specialty/quiz", title: "AWS ML Specialty(MLS-C01)", count: awsMlSpecialtyQuestions.length, description: "Built-in アルゴリズム ・ HPO ・ Quantization ・ Clarify ・ Model Monitor" },
+  { href: "/certs/azure-dp-100/quiz", title: "Azure Data Scientist(DP-100)", count: azureDp100Questions.length, description: "Workspace ・ AutoML ・ Sweep ・ Endpoint ・ RAI ・ MLOps" },
+  { href: "/certs/aws-data-engineer/quiz", title: "AWS Data Engineer Associate(DEA-C01)", count: awsDataEngineerQuestions.length, description: "Glue ・ Athena ・ Redshift ・ Kinesis ・ Iceberg ・ Lake Formation" },
 ];
 
 function TrackCard({ track }: { track: Track }) {

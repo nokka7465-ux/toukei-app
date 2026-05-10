@@ -48,6 +48,8 @@ export const CERT_PRESETS: CertPreset[] = [
   { key: "databricks-data-engineer", label: "Databricks Data Engineer Associate", href: "/certs/databricks-data-engineer", hours: 80 },
   { key: "it-strategist", label: "ITストラテジスト試験", href: "/certs/it-strategist", hours: 400 },
   { key: "aws-ml-specialty", label: "AWS ML Specialty(MLS-C01)", href: "/certs/aws-ml-specialty", hours: 300 },
+  { key: "azure-dp-100", label: "Azure DP-100", href: "/certs/azure-dp-100", hours: 150 },
+  { key: "aws-data-engineer", label: "AWS DEA-C01", href: "/certs/aws-data-engineer", hours: 150 },
 ];
 
 export type ExamTarget = {

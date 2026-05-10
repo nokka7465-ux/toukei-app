@@ -1934,6 +1934,124 @@ export const certRoadmaps: Record<string, CertRoadmap> = {
     textbookHref: "/certs/aws-ml-specialty/textbook",
     quizHref: "/certs/aws-ml-specialty/quiz",
   },
+  "azure-dp-100": {
+    slug: "azure-dp-100",
+    title: "Azure DP-100 学習ロードマップ",
+    organizer: "Microsoft",
+    hours: "100〜200 時間",
+    months: "2〜3 ヶ月",
+    prerequisites: "Python ・ scikit-learn ・ MLflow ・ Azure 基本",
+    passCriteria: "1000 点満点中 700 点",
+    steps: [
+      {
+        week: "Week 1〜2",
+        title: "Azure 基本 + Workspace 構築",
+        description:
+          "Azure ポータル ・ Resource Group ・ Azure ML Workspace の作成と関連リソース理解。",
+        links: [
+          { href: "/certs/azure-dp-100/textbook", label: "DP-100 教科書(章 1-2)" },
+        ],
+      },
+      {
+        week: "Week 3〜4",
+        title: "SDK / CLI v2 でジョブ実行",
+        description:
+          "Command Job / Pipeline Job / Environment / Compute / Data Asset の YAML ・ Python での実装。",
+        links: [
+          { href: "/certs/azure-dp-100/textbook", label: "DP-100 教科書(章 3-4)" },
+        ],
+      },
+      {
+        week: "Week 5〜6",
+        title: "AutoML + Sweep + Designer",
+        description:
+          "AutoML 設定 / Sweep サンプリング(Bayesian / Grid / Random)/ Bandit ポリシー / Designer の使い分け。",
+        links: [
+          { href: "/certs/azure-dp-100/textbook", label: "DP-100 教科書(章 5-6)" },
+        ],
+      },
+      {
+        week: "Week 7〜8",
+        title: "Endpoint + Model Registry + RAI",
+        description:
+          "Online / Batch Endpoint / Blue-Green / Mirror traffic / MLflow / Responsible AI Dashboard / Model Monitoring。",
+        links: [
+          { href: "/certs/azure-dp-100/textbook", label: "DP-100 教科書(章 7-8)" },
+        ],
+      },
+      {
+        week: "Week 9〜10",
+        title: "MLOps + セキュリティ + 模擬試験",
+        description:
+          "Pipeline / Component / GitHub Actions / Managed Identity / 模擬試験 + 公式 Microsoft Learn。",
+        links: [
+          { href: "/certs/azure-dp-100/quiz", label: "DP-100 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/azure-dp-100/textbook",
+    quizHref: "/certs/azure-dp-100/quiz",
+  },
+  "aws-data-engineer": {
+    slug: "aws-data-engineer",
+    title: "AWS DEA-C01 学習ロードマップ",
+    organizer: "Amazon Web Services(AWS)",
+    hours: "100〜200 時間",
+    months: "2〜3 ヶ月",
+    prerequisites: "SQL ・ Python ・ AWS 基本(CLF レベル以上)",
+    passCriteria: "1000 点満点中 720 点",
+    steps: [
+      {
+        week: "Week 1〜2",
+        title: "AWS 基本 + S3 + IAM 復習",
+        description:
+          "S3 ストレージクラス ・ Lifecycle ・ Bucket Policy ・ KMS / IAM Role の整理。",
+        links: [
+          { href: "/certs/aws-data-engineer/textbook", label: "DEA-C01 教科書(章 1-2)" },
+        ],
+      },
+      {
+        week: "Week 3〜4",
+        title: "Glue + Athena + Redshift",
+        description:
+          "Glue Catalog / Crawler / ETL Job(Spark / Python Shell)・ Athena Workgroup / Partition Projection ・ Redshift 分散方式。",
+        links: [
+          { href: "/certs/aws-data-engineer/textbook", label: "DEA-C01 教科書(章 3-4)" },
+        ],
+      },
+      {
+        week: "Week 5〜6",
+        title: "EMR + Kinesis + MSK",
+        description:
+          "EMR クラスタ構成 / Kinesis Streams / Firehose / Flink ・ MSK の選び分け / Enhanced Fan-Out。",
+        links: [
+          { href: "/certs/aws-data-engineer/textbook", label: "DEA-C01 教科書(章 5-6)" },
+        ],
+      },
+      {
+        week: "Week 7〜8",
+        title: "Step Functions + MWAA + Iceberg",
+        description:
+          "Step Functions Standard/Express / MWAA / EventBridge ・ Apache Iceberg のスキーマ進化と Time Travel ・ Lakehouse 概念。",
+        links: [
+          { href: "/certs/aws-data-engineer/textbook", label: "DEA-C01 教科書(章 7-8)" },
+        ],
+      },
+      {
+        week: "Week 9〜10",
+        title: "セキュリティ + 模擬試験",
+        description:
+          "Lake Formation LF-Tag / Macie / VPC Endpoint / Redshift Dynamic Masking ・ AWS Skill Builder + 本サイト演習問題で仕上げ。",
+        links: [
+          { href: "/certs/aws-data-engineer/quiz", label: "DEA-C01 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/aws-data-engineer/textbook",
+    quizHref: "/certs/aws-data-engineer/quiz",
+  },
 };
 
 export const certSlugs = Object.keys(certRoadmaps);

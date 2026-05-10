@@ -459,6 +459,32 @@ const CERTS: Cert[] = [
     best: "ML エンジニア最上位",
     notes: "Built-in / HPO / Quantization / Clarify",
   },
+  {
+    slug: "/certs/azure-dp-100",
+    name: "Azure Data Scientist(DP-100)",
+    organizer: "Microsoft",
+    fee: "165 USD",
+    duration: "通年",
+    format: "100 分 / 40〜60 問",
+    difficulty: "★★★☆☆",
+    studyHours: "100〜200h",
+    pass: "約 70%",
+    best: "Data Scientist / ML エンジニア",
+    notes: "Azure ML SDK/CLI v2 / AutoML / Sweep / RAI",
+  },
+  {
+    slug: "/certs/aws-data-engineer",
+    name: "AWS Data Engineer Associate(DEA-C01)",
+    organizer: "AWS",
+    fee: "150 USD",
+    duration: "通年",
+    format: "130 分 / 65 問",
+    difficulty: "★★★☆☆",
+    studyHours: "100〜200h",
+    pass: "約 72%",
+    best: "データエンジニア",
+    notes: "Glue / Athena / Redshift / Kinesis / Iceberg",
+  },
 ];
 
 export default function ComparePage() {
