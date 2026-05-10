@@ -286,4 +286,164 @@ export const gcpDataEngineerQuestions: Question[] = [
     explanation:
       "**VPC Service Controls** は **サービス境界(perimeter)で API 呼び出しを保護**(BigQuery / GCS / Pub/Sub など)。境界外からのアクセス遮断 + Access Levels で例外設定。**データ exfiltration 対策の中核**。",
   },
+  {
+    id: "gde-q21",
+    category: "BigQuery Reservations",
+    difficulty: 3,
+    question:
+      "BigQuery の **継続的な大規模ワークロードでコストを予測可能にする** 課金モデルを選びなさい。",
+    choices: [
+      "On-demand クエリ(スキャン量課金)",
+      "BigQuery Editions / Reservations(Slot 単位の月額)",
+      "Streaming Insert",
+      "Storage Write API",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**BigQuery Editions(Standard / Enterprise / Enterprise Plus)** で **Slot を予約購入** し継続コストを予測可能に。**On-demand は従量課金で予測不可だが小規模に最適**。",
+  },
+  {
+    id: "gde-q22",
+    category: "BigQuery Security",
+    difficulty: 3,
+    question:
+      "BigQuery で **ロールごとに行を絞り込む(例: 自部署のレコードのみ)** 機能を選びなさい。",
+    choices: [
+      "Authorized View",
+      "Row-Level Security(RLS)",
+      "Column-Level Security",
+      "Data Masking",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Row-Level Security(RLS)** は **`CREATE ROW ACCESS POLICY`** で行単位アクセス制御。Column-Level Security は列単位、Data Masking は値マスク、Authorized View は別データセット経由の制限ビュー。",
+  },
+  {
+    id: "gde-q23",
+    category: "BigLake",
+    difficulty: 3,
+    question:
+      "**GCS / S3 / Azure Blob 上の Parquet / Iceberg を BigQuery / Spark などから統一的にクエリ** したい。最適な機能を選びなさい。",
+    choices: [
+      "Object Tables",
+      "BigLake Tables(External / Iceberg)",
+      "Federated Query",
+      "Data Transfer Service",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**BigLake Tables** は **GCS / S3 / Azure Blob 上のオープンフォーマット(Parquet / Iceberg / Hudi / Delta)を BigQuery + Spark から統一的にアクセス** + 細粒度アクセス制御。マルチクラウド Lakehouse の中核。",
+  },
+  {
+    id: "gde-q24",
+    category: "Dataflow Templates",
+    difficulty: 2,
+    question:
+      "**Pub/Sub から BigQuery への定型ストリーム ETL** を最小工数で実装したい。最適な選択肢を選びなさい。",
+    choices: [
+      "Dataflow Flex Template(Google 提供 PubSub_to_BigQuery)",
+      "Dataproc Cluster で Spark を書く",
+      "Cloud Functions を 60 秒トリガで起動",
+      "Cloud Run Jobs に独自実装",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Google 提供 Dataflow Templates(PubSub to BigQuery など多数)** は **コードゼロでパラメータ起動可能**。Pub/Sub BigQuery Subscription はさらにシンプルな選択肢。Spark/Functions は柔軟性 ・ 実装コスト高。",
+  },
+  {
+    id: "gde-q25",
+    category: "Datastream",
+    difficulty: 3,
+    question:
+      "**Cloud SQL / Oracle / SQL Server から BigQuery へリアルタイム CDC レプリケーション** を行う GCP サービスを選びなさい。",
+    choices: [
+      "Datastream",
+      "Database Migration Service",
+      "Storage Transfer Service",
+      "Dataflow",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Datastream** は **Cloud SQL / Oracle / SQL Server / MySQL / PostgreSQL から BigQuery / GCS に CDC レプリケーション**。マネージド ・ サーバレス ・ 低レイテンシ。Database Migration Service はワンタイム移行用。",
+  },
+  {
+    id: "gde-q26",
+    category: "Dataform",
+    difficulty: 3,
+    question:
+      "BigQuery の **SQL ベース ELT を Git 管理 + DAG 化 + テスト + ドキュメント生成** したい。最適な GCP サービスを選びなさい。",
+    choices: [
+      "Cloud Dataform",
+      "Cloud Composer",
+      "Cloud Data Fusion",
+      "Workflows",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Cloud Dataform** は **dbt 風の SQL ベース ELT フレームワーク**(Google 買収後 GCP 統合)。BigQuery への ELT パイプラインを Git 管理 + アサーション(テスト)+ Doc 生成。",
+  },
+  {
+    id: "gde-q27",
+    category: "Dataproc Metastore",
+    difficulty: 3,
+    question:
+      "**複数 Dataproc クラスタ ・ BigQuery ・ Spark で同じ Hive メタストアを共有** したい。最適な機能を選びなさい。",
+    choices: [
+      "Dataproc Metastore(Apache Hive / Iceberg対応のマネージドメタストア)",
+      "BigQuery Data Catalog",
+      "Cloud Spanner",
+      "Memorystore for Redis",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Dataproc Metastore** は **マネージド Hive Metastore + Iceberg REST Catalog**。複数 Dataproc / BigQuery / Spark / Trino で共通メタデータを共有。クラスタ削除してもメタデータが残る。",
+  },
+  {
+    id: "gde-q28",
+    category: "Storage Transfer",
+    difficulty: 2,
+    question:
+      "**S3 / Azure Blob / オンプレからの大規模データを定期的に GCS に転送** したい。最適な GCP サービスを選びなさい。",
+    choices: [
+      "Storage Transfer Service",
+      "gsutil cp(コマンドラインで実行)",
+      "Cloud Functions",
+      "Datastream",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Storage Transfer Service** は **S3 / Azure Blob / HTTP / オンプレ NFS / 別 GCS 間** のスケジュール ・ ワンタイム転送をマネージドで実行。並列 ・ レジューム ・ 整合性チェック。",
+  },
+  {
+    id: "gde-q29",
+    category: "BigQuery Streaming",
+    difficulty: 3,
+    question:
+      "BigQuery への **新しい推奨ストリーミング書込 API**(従来の Streaming Insert より高機能)を選びなさい。",
+    choices: [
+      "Storage Write API",
+      "Streaming Insert API(tabledata.insertAll)",
+      "Load Job",
+      "Federated Query",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**BigQuery Storage Write API**(2022 GA)は **Exactly-once 配信 ・ ストリーム + バッチ統合 ・ 高スループット ・ 低コスト** を実現。**従来の Streaming Insert(tabledata.insertAll)を置き換える推奨 API**。",
+  },
+  {
+    id: "gde-q30",
+    category: "Architect 選び分け",
+    difficulty: 3,
+    question:
+      "**ペタバイト級の単一行 ACID + 低レイテンシ書込(時系列 IoT)** に最適なのは Bigtable と Spanner のどちらか、その理由として最も適切なものを選びなさい。",
+    choices: [
+      "Spanner: グローバル強整合 + 高スループット書込が必要",
+      "Bigtable: 単一行 ACID で十分かつ Spanner より大幅に低コスト ・ 高スループット",
+      "BigQuery: ストリーミング Insert が最適",
+      "Firestore: ドキュメント DB が時系列に最適",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**時系列 IoT は単一行 ACID で十分** + **PB 級 + 低レイテンシ + 高スループット書込** が必要 → **Bigtable が圧倒的最適**。Spanner は **多行 ACID + グローバル分散 RDB** が必要な金融取引などに最適。",
+  },
 ];

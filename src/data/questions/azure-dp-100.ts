@@ -296,4 +296,159 @@ export const azureDp100Questions: Question[] = [
     explanation:
       "**max_instances を高く設定** すると **過剰スケールで逆にコスト増**。コスト最適化には **min=0、低優先度 VM、idle シャットダウン** が定石。max は需要に応じた適切値が良い。",
   },
+  {
+    id: "dp100-q21",
+    category: "Feature Store",
+    difficulty: 3,
+    question:
+      "Azure ML の Feature Store(マネージド)で実現できる機能として **誤っているもの** を選びなさい。",
+    choices: [
+      "オンライン推論用の低レイテンシ Feature 取得",
+      "学習 ・ 推論で同一の Feature 計算ロジックを共有(Train/Serve スキュー回避)",
+      "Time-travel(過去時点の Feature を再現)",
+      "GPU を直接管理し DL モデルを学習する",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**GPU 管理 ・ DL 学習は Feature Store の役割ではない**(Compute Cluster の責務)。**Feature Store は Feature の定義 ・ 共有 ・ Train/Serve スキュー回避 ・ Time-travel ・ 低レイテンシオンライン取得** が役割。",
+  },
+  {
+    id: "dp100-q22",
+    category: "Sweep",
+    difficulty: 3,
+    question:
+      "Sweep Job のサンプリング手法と Early Termination Policy の組み合わせとして **動作しないもの** を選びなさい。",
+    choices: [
+      "Random Sampling + Bandit Policy",
+      "Grid Sampling + Median Stopping",
+      "Bayesian Sampling + Bandit Policy",
+      "Random Sampling + Truncation Selection",
+    ],
+    correctIndex: 2,
+    explanation:
+      "**Bayesian Sampling は早期終了ポリシーと併用不可**(過去の試行結果から確率モデルを構築するため、途中打ち切りで学習が偏る)。Random / Grid は任意の Termination Policy と併用可能。",
+  },
+  {
+    id: "dp100-q23",
+    category: "Endpoint",
+    difficulty: 3,
+    question:
+      "Online Endpoint の認証方式として **デフォルトで利用できる** ものを選びなさい。",
+    choices: [
+      "Key-based(プライマリ / セカンダリキー)",
+      "Aaa Token(短命の OAuth)",
+      "Microsoft Entra ID(旧 AAD)Token",
+      "上記すべて(用途に応じて選択)",
+    ],
+    correctIndex: 3,
+    explanation:
+      "Online Endpoint は **Key 認証 / AML Token / Microsoft Entra ID Token** の **3 方式** をサポート。Key は固定共有キー、AML Token は短命、Entra Token は AAD 統合(RBAC 推奨)。",
+  },
+  {
+    id: "dp100-q24",
+    category: "Endpoint",
+    difficulty: 2,
+    question:
+      "Managed Online Endpoint の **オートスケール** に使う Azure サービスを選びなさい。",
+    choices: [
+      "Azure Monitor Autoscale",
+      "Application Gateway",
+      "Service Fabric",
+      "Logic Apps",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Managed Online Endpoint のオートスケールは Azure Monitor Autoscale** で実装。CPU 使用率 ・ リクエスト数などのメトリクスをトリガに、最小 / 最大インスタンス数を動的調整。",
+  },
+  {
+    id: "dp100-q25",
+    category: "MLflow",
+    difficulty: 3,
+    question:
+      "Azure ML SDK v2 でジョブ実行時の **メトリクス ・ パラメータ ・ アーティファクトを自動的にログ** したい。最も適切な機能を選びなさい。",
+    choices: [
+      "MLflow Autologging",
+      "Application Insights Sampling",
+      "Azure Monitor Custom Metrics",
+      "Log Analytics Workspace",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**MLflow Autologging**(`mlflow.autolog()`)で **scikit-learn / PyTorch / TensorFlow / LightGBM 等の学習中のメトリクス ・ パラメータ ・ モデル ・ アーティファクト** を自動ログ。Azure ML は MLflow ネイティブサポート。",
+  },
+  {
+    id: "dp100-q26",
+    category: "Distributed Training",
+    difficulty: 3,
+    question:
+      "PyTorch の DDP(Distributed Data Parallel)を Azure ML 上で動かす際、Job YAML で指定するパラメータとして最も適切なものを選びなさい。",
+    choices: [
+      "`distribution.type: PyTorch` + `process_count_per_instance` + `instance_count`",
+      "`distribution.type: MPI` + `gpu_count`",
+      "`compute.gpu_count`",
+      "`environment.distribution: DDP`",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Job YAML の `distribution.type: PyTorch` + `process_count_per_instance`(GPU 数 / ノード)+ `instance_count`(ノード数)** で PyTorch DDP 分散学習を実行。**MPI / TensorFlow distribution type** も別途用意。",
+  },
+  {
+    id: "dp100-q27",
+    category: "Interpretability",
+    difficulty: 3,
+    question:
+      "Responsible AI Dashboard の Feature Importance を **個別予測のローカル解釈** で見たい場合、内部的に使われる代表的な手法を選びなさい。",
+    choices: ["Permutation Importance", "SHAP", "Pearson 相関", "PCA"],
+    correctIndex: 1,
+    explanation:
+      "**ローカル(個別予測)解釈は SHAP**(KernelExplainer / TreeExplainer)、**グローバル解釈は Permutation Importance** が一般的。RAI Dashboard は両方を提供。",
+  },
+  {
+    id: "dp100-q28",
+    category: "Designer",
+    difficulty: 2,
+    question:
+      "Designer と SDK v2 の使い分けとして **最も適切な** ものを選びなさい。",
+    choices: [
+      "本番運用 ・ CI/CD ・ 大規模 Pipeline は SDK v2、PoC ・ 学習用は Designer",
+      "Designer は本番運用専用、SDK v2 は試験用",
+      "Designer は SDK v2 より新しく上位互換",
+      "両者は完全に同一機能",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Designer は ノーコード ・ ローコード GUI で PoC ・ 学習用に最適**。**本番運用 ・ CI/CD ・ 複雑な Pipeline は SDK v2 / CLI v2** が推奨(コードレビュー ・ Git 管理 ・ 再現性)。",
+  },
+  {
+    id: "dp100-q29",
+    category: "Compute",
+    difficulty: 2,
+    question:
+      "Compute Instance(単独 VM)と Compute Cluster の主な違いとして **誤っているもの** を選びなさい。",
+    choices: [
+      "Compute Instance は 1 ユーザーに紐付くが、Compute Cluster は共有",
+      "Compute Cluster は min_instances=0 で完全停止できるが、Compute Instance は手動停止が必要",
+      "Compute Instance は GPU を使えないが、Compute Cluster は使える",
+      "Compute Instance は Notebook 開発、Compute Cluster はジョブ並列実行向け",
+    ],
+    correctIndex: 2,
+    explanation:
+      "**両者とも GPU VM サイズを選択可能**。違いは **個人帰属 / 共有スケール ・ 自動停止可否 ・ 用途(Notebook vs ジョブ)**。Compute Instance は手動 Stop でコスト削減。",
+  },
+  {
+    id: "dp100-q30",
+    category: "Cost",
+    difficulty: 3,
+    question:
+      "**バッチ推論を月数回 ・ 1 回数時間で大量データに実行** する場合、最もコスト効率が良い構成を選びなさい。",
+    choices: [
+      "Managed Online Endpoint を Always-on で運用",
+      "Managed Batch Endpoint + Compute Cluster(min=0 / Spot)",
+      "AKS Endpoint を 24/7 起動",
+      "Compute Instance を起動して手動推論",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Managed Batch Endpoint + Compute Cluster(min=0 ・ Spot)** が最適。**待機時 0 円 ・ Spot で更にコスト削減 ・ ジョブ完了後に自動シャットダウン**。Online Endpoint は Always-on でリアルタイム向け、コスト高。",
+  },
 ];

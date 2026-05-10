@@ -306,4 +306,164 @@ export const azureDp203Questions: Question[] = [
     explanation:
       "**Dynamic Data Masking** は **クエリ時にロールベースで列の値をマスク**(クレジットカード番号の下 4 桁のみ表示など)。Column-Level Security は GRANT で列単位、RLS は行単位、Always Encrypted は暗号化。",
   },
+  {
+    id: "dp203-q21",
+    category: "PolyBase",
+    difficulty: 3,
+    question:
+      "Synapse Dedicated SQL Pool で **ADLS Gen2 上の大量 Parquet を高速にロードする** 標準的な方法として最も適切なものを選びなさい。",
+    choices: [
+      "INSERT INTO 一行ずつ",
+      "COPY INTO statement(または CTAS via PolyBase)",
+      "BCP コマンド",
+      "Azure Data Studio の GUI インポート",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**`COPY INTO` ステートメント** は **PolyBase の後継 ・ 推奨**(2020 GA)。**ADLS / Blob 上の CSV/Parquet/ORC を MPP 並列ロード**。BCP / INSERT は遅く小規模向け。",
+  },
+  {
+    id: "dp203-q22",
+    category: "CTAS / CETAS",
+    difficulty: 3,
+    question:
+      "Synapse の **CETAS(CREATE EXTERNAL TABLE AS SELECT)** が実行する処理を選びなさい。",
+    choices: [
+      "クエリ結果を Parquet ファイルとして ADLS にエクスポートし、外部テーブルとして登録",
+      "外部テーブルを内部テーブルに変換",
+      "外部テーブルにデータを INSERT する",
+      "Linked Server を作成する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**CETAS** は **クエリ結果を Parquet で ADLS にエクスポート + 外部テーブル登録** を 1 ステップで行う(Serverless / Dedicated 両対応)。**バッチ ETL の出力 ・ Lake へのデータ書出に頻用**。",
+  },
+  {
+    id: "dp203-q23",
+    category: "Synapse Pipelines",
+    difficulty: 2,
+    question:
+      "Synapse Pipelines と Azure Data Factory(ADF)の関係として最も適切なものを選びなさい。",
+    choices: [
+      "完全に別のサービスで互換性がない",
+      "Synapse Pipelines は ADF と同じエンジンを Synapse Workspace 内に統合したもの",
+      "Synapse Pipelines は ADF の上位サービスで全機能を内包する",
+      "Synapse Pipelines は Spark Pool 上でのみ動作する",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Synapse Pipelines は ADF と同一エンジン** を Synapse Workspace に統合。**90%+ の機能が共通**。一部 ADF 専用機能(SSIS 統合等)があるが、新規プロジェクトは Synapse Pipelines 推奨。",
+  },
+  {
+    id: "dp203-q24",
+    category: "Cosmos DB",
+    difficulty: 3,
+    question:
+      "**Cosmos DB の Analytical Store** に関する説明として **誤っているもの** を選びなさい。",
+    choices: [
+      "トランザクション Store とは別の列指向ストア",
+      "Synapse Link 経由で ETL なしに Synapse から SQL アクセス可能",
+      "OLTP のクエリ性能を低下させない",
+      "Analytical Store からトランザクションが書き戻される",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**Analytical Store は読み取り専用の列指向ミラー**(分析用)。**トランザクション側からの自動同期は一方向のみ**(Analytical → Transactional は無し)。Synapse Link 経由でのみアクセス。",
+  },
+  {
+    id: "dp203-q25",
+    category: "IoT Hub",
+    difficulty: 3,
+    question:
+      "IoT Hub の **メッセージルーティング** 機能で **デバイスメッセージを Event Hubs に振り分ける** 構成を選びなさい。",
+    choices: [
+      "Built-in endpoint だけを使う",
+      "Routes + Custom endpoint(Event Hubs)を構成",
+      "Storage Account に直接書込",
+      "Stream Analytics で受信",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Routes + Custom endpoint(Event Hubs / Storage / Service Bus)** で **メッセージ ・ デバイスツイン変更 ・ デバイスライフサイクル** を SQL 風クエリで振り分け。Built-in endpoint はデフォルト宛先のみ。",
+  },
+  {
+    id: "dp203-q26",
+    category: "Event Hubs",
+    difficulty: 2,
+    question:
+      "**Event Hubs に流れるメッセージを ADLS Gen2 / Blob に自動キャプチャ** したい。最適な機能を選びなさい。",
+    choices: [
+      "Event Hubs Capture",
+      "Event Hubs Geo-DR",
+      "Event Hubs Mirror",
+      "Stream Analytics",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Event Hubs Capture** は **メッセージを Avro 形式で ADLS / Blob に自動書き出し**(ウィンドウ秒/MB 設定)。**コードレスでアーカイブ + バッチ分析の入口** に。Stream Analytics でも可能だがコスト高。",
+  },
+  {
+    id: "dp203-q27",
+    category: "Stream Analytics",
+    difficulty: 3,
+    question:
+      "Stream Analytics で **静的なマスタデータ(国コード一覧など)を JOIN したい**。最適な機能を選びなさい。",
+    choices: [
+      "Reference Data Input",
+      "Window JOIN",
+      "Streaming Input",
+      "Cross Apply",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Reference Data Input** は **静的(または低頻度更新)のマスタデータを Blob / SQL DB から読み込み**、ストリームと JOIN。`JOIN ReferenceData ON ...` で利用。",
+  },
+  {
+    id: "dp203-q28",
+    category: "Power BI",
+    difficulty: 2,
+    question:
+      "**Power BI でセルフサービス ETL(Power Query)を Service 上で再利用したい**。最適な機能を選びなさい。",
+    choices: [
+      "Power BI Dataset",
+      "Power BI Dataflows",
+      "Power BI Datamarts",
+      "Power BI Paginated Reports",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Power BI Dataflows** は **Power Query を Service 上で動かし ADLS Gen2 に出力する ETL レイヤー**。複数 Dataset から再利用 ・ スケジュール実行 ・ 増分更新可能。Datamart は DB レイヤー。",
+  },
+  {
+    id: "dp203-q29",
+    category: "選び分け",
+    difficulty: 3,
+    question:
+      "**OLTP(秒単位の小さな書込が多い)用途** で Azure SQL Database と Synapse Dedicated SQL Pool を比較した場合、**正しい記述** を選びなさい。",
+    choices: [
+      "Synapse の方が OLTP に向く",
+      "Azure SQL Database が OLTP 向き、Synapse は OLAP 向き",
+      "両者は同等で目的の差はない",
+      "OLTP は Cosmos DB のみが対応",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Azure SQL Database は OLTP**(行指向 ・ 細かい行更新)、**Synapse Dedicated SQL Pool は OLAP / DWH**(列指向 ・ 大量集計)。**用途が完全に異なる**。Cosmos DB は NoSQL OLTP の選択肢。",
+  },
+  {
+    id: "dp203-q30",
+    category: "監視",
+    difficulty: 2,
+    question:
+      "**Synapse Dedicated SQL Pool のクエリ実行履歴 ・ 実行プラン ・ DMV を見たい**。最適な機能を選びなさい。",
+    choices: [
+      "Azure Monitor Metrics",
+      "Synapse Studio Monitor Hub + DMV(sys.dm_pdw_*)",
+      "Azure Activity Log",
+      "Azure Advisor",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Synapse Studio の Monitor Hub** + **`sys.dm_pdw_*` DMV クエリ** で **実行履歴 ・ Distributed Plan ・ Worker メトリクス** を確認。Azure Monitor Metrics は時系列メトリクス、Activity Log は API 呼び出し監査。",
+  },
 ];

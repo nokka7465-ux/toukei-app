@@ -291,4 +291,164 @@ export const awsDataEngineerQuestions: Question[] = [
     explanation:
       "**S3 Storage Lens** は **組織横断 ・ アカウント横断 ・ Bucket 単位** のストレージメトリクス可視化。コスト ・ 使用率 ・ ベストプラクティス遵守を一覧化。",
   },
+  {
+    id: "dea-q21",
+    category: "Glue",
+    difficulty: 3,
+    question:
+      "**Glue Job で Kafka(MSK)から取り込んだストリームを 1 分ごとに Parquet で書き込みたい**。最適な Job 種別を選びなさい。",
+    choices: [
+      "Spark Job(Batch)",
+      "Python Shell Job",
+      "Streaming Job",
+      "Ray Job",
+    ],
+    correctIndex: 2,
+    explanation:
+      "**Glue Streaming Job** は **Kinesis / MSK からのストリーム ETL** 専用。Spark Structured Streaming ベースでマイクロバッチ間隔(`window`)を秒/分単位で指定。Spark Job(Batch)は静止データ用。",
+  },
+  {
+    id: "dea-q22",
+    category: "Redshift",
+    difficulty: 3,
+    question:
+      "Redshift で **同時クエリ数の急増に対応してクラスタを一時的に複製スケールアウト** する機能を選びなさい。",
+    choices: [
+      "Workload Management(WLM)",
+      "Concurrency Scaling",
+      "Result Cache",
+      "Data Sharing",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Concurrency Scaling** は **読込クエリのキューが溜まると自動で別クラスタを起動して並列処理**。1 時間/日まで無料(超過分は秒単位課金)。WLM は優先度 ・ メモリ割当の管理。",
+  },
+  {
+    id: "dea-q23",
+    category: "Redshift",
+    difficulty: 3,
+    question:
+      "Redshift Spectrum と Athena の違いとして **誤っているもの** を選びなさい。",
+    choices: [
+      "Spectrum は Redshift クラスタの計算リソースを利用するが、Athena は完全サーバレス",
+      "Spectrum は Redshift から S3 上の外部テーブルを読むが、Athena は単独で S3 を読む",
+      "両者とも内部エンジンは同じ Presto / Trino 系である",
+      "Spectrum は無料で使えるが、Athena は有料である",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**両者ともスキャン量に応じた従量課金**。Spectrum は **Redshift クラスタからの S3 外部テーブル読込**、Athena は **完全サーバレスの S3 SQL**。エンジンは Presto / Trino 系で類似。",
+  },
+  {
+    id: "dea-q24",
+    category: "Migration",
+    difficulty: 3,
+    question:
+      "**オンプレ Oracle から AWS RDS PostgreSQL への CDC(変更データキャプチャ)を含めた移行** に最適な AWS サービスを選びなさい。",
+    choices: [
+      "AWS DMS(Database Migration Service)",
+      "AWS DataSync",
+      "AWS Snowball",
+      "AWS Backup",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**AWS DMS** は **異種 DB 間の移行(Oracle → PostgreSQL 等)+ CDC** を提供。**SCT(Schema Conversion Tool)で DDL 変換 → DMS でデータ移行 + 継続的 CDC**。DataSync はファイル、Snowball は大容量物理転送。",
+  },
+  {
+    id: "dea-q25",
+    category: "Zero-ETL",
+    difficulty: 3,
+    question:
+      "**Aurora MySQL のトランザクションデータを ETL なしで Redshift から分析する** AWS の機能を選びなさい。",
+    choices: [
+      "Aurora-Redshift Zero-ETL Integration",
+      "DMS Continuous Replication",
+      "Glue Crawler",
+      "Redshift Federated Query",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Aurora-Redshift Zero-ETL Integration**(2023 GA)は **Aurora MySQL/PostgreSQL のトランザクションを Redshift に自動レプリケーション**(秒単位)。**DMS のような ETL 構築不要**。HTAP の AWS 実装。",
+  },
+  {
+    id: "dea-q26",
+    category: "Governance",
+    difficulty: 3,
+    question:
+      "AWS の **データメッシュ ・ データプロデューサー / コンシューマーのセルフサービス** 統合プラットフォームを選びなさい。",
+    choices: [
+      "Lake Formation",
+      "DataZone",
+      "Glue Data Catalog",
+      "Macie",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Amazon DataZone** は **Data Mesh 統合プラットフォーム**。ドメイン ・ プロジェクト ・ Asset 単位でカタログ ・ ガバナンス ・ Producer/Consumer ワークフローを提供。Lake Formation はテーブル単位の権限制御。",
+  },
+  {
+    id: "dea-q27",
+    category: "Glue",
+    difficulty: 2,
+    question:
+      "**Kafka / Kinesis のメッセージスキーマを集中管理し、互換性をチェック** する機能として最も適切なものを選びなさい。",
+    choices: [
+      "Glue Data Catalog",
+      "Glue Schema Registry",
+      "MSK Connect",
+      "EventBridge Schema Registry",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Glue Schema Registry** は **Kafka(MSK)/ Kinesis 用のスキーマ管理**(Avro / JSON / Protobuf)。Producer/Consumer 間の互換性チェック ・ バージョニング。EventBridge Schema Registry は EventBridge 専用。",
+  },
+  {
+    id: "dea-q28",
+    category: "Athena",
+    difficulty: 3,
+    question:
+      "**Athena から Iceberg テーブルに対して `MERGE INTO` で upsert を実行** したい。最低限必要な要件として **誤っているもの** を選びなさい。",
+    choices: [
+      "Athena Engine v3 を使うこと",
+      "テーブル形式を ICEBERG にすること",
+      "Glue Data Catalog で Iceberg 形式として登録",
+      "Redshift クラスタを別途プロビジョニングすること",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**Redshift は不要**。**Athena Engine v3 + Iceberg テーブル + Glue Catalog** だけで MERGE / UPDATE / DELETE / Time Travel が可能。**サーバレスで ACID DML** を実現。",
+  },
+  {
+    id: "dea-q29",
+    category: "BI",
+    difficulty: 2,
+    question:
+      "**AWS ネイティブ BI サービス** で SPICE インメモリエンジン ・ Q(自然言語クエリ)・ 埋め込み分析を提供するものを選びなさい。",
+    choices: [
+      "QuickSight",
+      "Athena",
+      "Redshift",
+      "OpenSearch Dashboards",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Amazon QuickSight** は AWS ネイティブ BI(Tableau / Power BI / Looker に相当)。**SPICE インメモリ ・ Q(自然言語)・ 埋め込み分析 ・ ML Insights**。Athena / Redshift / S3 と統合。",
+  },
+  {
+    id: "dea-q30",
+    category: "CDC",
+    difficulty: 3,
+    question:
+      "**RDS / Aurora の変更を S3 / Redshift にリアルタイム配信** したい。**フルマネージド** な選択肢を選びなさい。",
+    choices: [
+      "Database Migration Service(DMS)",
+      "AWS DataSync",
+      "Storage Gateway",
+      "Redshift Spectrum",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**DMS の CDC モード** で **RDS / Aurora の binlog 変更を S3 / Redshift / Kinesis に継続レプリケーション**。Aurora-Redshift Zero-ETL がより新しいシンプル選択肢、DMS は柔軟性が高い汎用選択肢。",
+  },
 ];
