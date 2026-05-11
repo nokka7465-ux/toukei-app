@@ -121,7 +121,7 @@ export function AiRoadmap() {
                   href={l.href}
                   className={`px-3 py-1.5 rounded-md ${
                     i === 0
-                      ? "bg-[var(--accent)] text-[var(--accent-fg)] font-bold hover:bg-[var(--accent-strong)]"
+                      ? "bg-[var(--highlight)] text-[var(--link)] font-bold border border-[var(--page-border-strong)] hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
                       : "border border-[var(--page-border-strong)] hover:bg-[var(--background)]"
                   }`}
                 >
