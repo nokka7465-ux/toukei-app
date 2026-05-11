@@ -742,317 +742,144 @@ export default function Home() {
               データ・AI 系資格の代表的なパス。実務志向・調査志向・AI 概念・全方位リテラシー・生成 AI 活用から目的に応じて選べます。
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
+          {(() => {
+            type Cert = {
+              href: string;
+              chip: string;
+              emoji: string;
+              accent: string;
+              title: string;
+              description: string;
+            };
+            const CATEGORIES: { name: string; emoji: string; certs: Cert[] }[] = [
               {
-                href: "/certs/ds-basic",
-                chip: "DS Base",
+                name: "統計検定 系列(統計学会)",
                 emoji: "📊",
-                accent: "bg-cyan-500",
-                title: "統計検定 DS基礎",
-                description:
-                  "Excel を使った実データ分析を中心に問う、データリテラシー入口の検定(統計学会主催)。理論より実務操作を重視。",
+                certs: [
+                  { href: "/certs/ds-basic", chip: "DS Base", emoji: "📊", accent: "bg-cyan-500", title: "統計検定 DS基礎", description: "Excel を使った実データ分析を中心に問う、データリテラシー入口の検定。理論より実務操作を重視。" },
+                  { href: "/certs/survey", chip: "Survey", emoji: "📋", accent: "bg-indigo-500", title: "統計調査士", description: "社会調査の設計・実施、公的統計の知識を問う検定。行政・調査会社・公務員に実務直結。" },
+                  { href: "/certs/ds-literacy", chip: "DS Cert", emoji: "📈", accent: "bg-purple-500", title: "データサイエンティスト検定", description: "DS 協会主催。DS 力 / DE 力 / ビジネス力 の 3 軸を測るリテラシーレベル検定。データ職入門に最適。" },
+                  { href: "/certs/ds-expert", chip: "DS Expert", emoji: "🧠", accent: "bg-emerald-600", title: "統計検定 DS エキスパート", description: "DS 系統計検定の最高峰。ベイズ・因果推論・MLOps まで網羅する実務型試験。" },
+                ],
               },
               {
-                href: "/certs/survey",
-                chip: "Survey",
-                emoji: "📋",
-                accent: "bg-indigo-500",
-                title: "統計調査士",
-                description:
-                  "社会調査の設計・実施、公的統計の知識を問う検定(統計学会主催)。行政・調査会社・公務員に実務直結。",
-              },
-              {
-                href: "/certs/g-test",
-                chip: "G Test",
+                name: "AI / ディープラーニング",
                 emoji: "🤖",
-                accent: "bg-blue-500",
-                title: "G検定(JDLA)",
-                description:
-                  "AI / ディープラーニングを事業に活かすための広範な知識を問う検定(日本ディープラーニング協会主催)。",
+                certs: [
+                  { href: "/certs/g-test", chip: "G Test", emoji: "🤖", accent: "bg-blue-500", title: "G検定(JDLA)", description: "AI / ディープラーニングを事業に活かすための広範な知識を問う検定(JDLA 主催)。" },
+                  { href: "/certs/genai-passport", chip: "GenAI", emoji: "✨", accent: "bg-pink-500", title: "生成AIパスポート", description: "GUGA 主催。生成 AI を業務で安全 / 効果的に使うリテラシーを問う、全職種向けの入門検定。" },
+                  { href: "/certs/ai-implementation", chip: "AIE", emoji: "🛠️", accent: "bg-rose-500", title: "AI 実装検定", description: "エッジ AI 協会主催、S/A/B 3 段階。PyTorch / Keras 実装を問う、G 検定と E 資格の中間。" },
+                  { href: "/certs/image-processing", chip: "ImageProc", emoji: "🎞️", accent: "bg-orange-600", title: "画像処理エンジニア(エキ)", description: "CG-ARTS 主催。古典 CV から DL(CNN ・ U-Net ・ YOLO)まで網羅する画像 AI 専門検定。" },
+                ],
               },
               {
-                href: "/certs/ds-literacy",
-                chip: "DS Cert",
-                emoji: "📈",
-                accent: "bg-purple-500",
-                title: "データサイエンティスト検定",
-                description:
-                  "DS 協会主催。DS 力 / DE 力 / ビジネス力 の 3 軸を測るリテラシーレベル検定。データ職入門に最適。",
-              },
-              {
-                href: "/certs/genai-passport",
-                chip: "GenAI",
-                emoji: "✨",
-                accent: "bg-pink-500",
-                title: "生成AIパスポート",
-                description:
-                  "GUGA 主催。生成 AI を業務で安全 / 効果的に使うリテラシーを問う、全職種向けの入門検定。30 〜 50 時間で取得可能。",
-              },
-              {
-                href: "/certs/ds-expert",
-                chip: "DS Expert",
-                emoji: "🧠",
-                accent: "bg-emerald-600",
-                title: "統計検定 DS エキスパート",
-                description:
-                  "DS 系統計検定の最高峰(統計学会)。ベイズ・因果推論・MLOps まで網羅する実務型試験。",
-              },
-              {
-                href: "/certs/python-data",
-                chip: "PyData",
+                name: "Python ・ 品質工学",
                 emoji: "🐍",
-                accent: "bg-yellow-500",
-                title: "Python データ分析",
-                description:
-                  "PythonED 主催。NumPy / pandas / scikit-learn とML 基礎を問う、データ分析エンジニアの登竜門。",
+                certs: [
+                  { href: "/certs/python-data", chip: "PyData", emoji: "🐍", accent: "bg-yellow-500", title: "Python データ分析", description: "PythonED 主催。NumPy / pandas / scikit-learn と ML 基礎を問う、データ分析エンジニアの登竜門。" },
+                ],
               },
               {
-                href: "/certs/ai-implementation",
-                chip: "AIE",
-                emoji: "🛠️",
-                accent: "bg-rose-500",
-                title: "AI 実装検定",
-                description:
-                  "エッジ AI 協会主催、S/A/B 3 段階。PyTorch / Keras 実装を問う、G 検定と E 資格の中間。",
-              },
-              {
-                href: "/certs/image-processing",
-                chip: "ImageProc",
-                emoji: "🎞️",
-                accent: "bg-orange-600",
-                title: "画像処理エンジニア(エキ)",
-                description:
-                  "CG-ARTS 主催。古典 CV(フィルタ ・ 周波数)から DL(CNN ・ U-Net ・ YOLO)まで網羅する画像 AI 専門検定。",
-              },
-              {
-                href: "/certs/applied-info",
-                chip: "AP",
+                name: "IPA 国家試験",
                 emoji: "🏛️",
-                accent: "bg-slate-600",
-                title: "応用情報技術者試験",
-                description:
-                  "IPA 主催の国家試験(レベル 3)。アルゴリズム ・ DB ・ AI ・ セキュリティ ・ 経営戦略まで広範に出題。",
+                certs: [
+                  { href: "/certs/it-passport", chip: "iパス", emoji: "🎫", accent: "bg-teal-500", title: "ITパスポート試験", description: "IPA レベル 1 の国家試験。社会人 ・ 学生の IT 入門。3 分野バランスでリテラシーを測る。" },
+                  { href: "/certs/basic-info", chip: "FE", emoji: "🪪", accent: "bg-stone-600", title: "基本情報技術者試験", description: "IPA レベル 2 の国家試験。通年 CBT で受験可能な IT エンジニアの登竜門。" },
+                  { href: "/certs/applied-info", chip: "AP", emoji: "🏛️", accent: "bg-slate-600", title: "応用情報技術者試験", description: "IPA レベル 3 の国家試験。アルゴリズム ・ DB ・ AI ・ セキュリティ ・ 経営戦略まで広範に出題。" },
+                  { href: "/certs/db-specialist", chip: "DB", emoji: "🗄️", accent: "bg-zinc-700", title: "データベーススペシャリスト", description: "IPA レベル 4 高度試験。関係代数・正規化・SQL 上級・チューニング・NoSQL・DWH を網羅する DB 専門家認定。" },
+                  { href: "/certs/it-strategist", chip: "ST", emoji: "🧭", accent: "bg-slate-700", title: "ITストラテジスト試験", description: "IPA レベル 4 高度試験。経営戦略 ・ 事業戦略 ・ IT 戦略 ・ EA ・ DX ・ 投資判断を一気通貫で網羅。" },
+                ],
               },
               {
-                href: "/certs/aws-ai-practitioner",
-                chip: "AWS AIF",
-                emoji: "☁️",
-                accent: "bg-amber-500",
-                title: "AWS AI Practitioner",
-                description:
-                  "AWS の AI / 生成 AI 認定 Foundational レベル。Bedrock ・ SageMaker ・ 責任ある AI を測る。",
-              },
-              {
-                href: "/certs/basic-info",
-                chip: "FE",
-                emoji: "🪪",
-                accent: "bg-stone-600",
-                title: "基本情報技術者試験",
-                description:
-                  "IPA 主催の国家試験(レベル 2)。通年 CBT で受験可能な IT エンジニアの登竜門。",
-              },
-              {
-                href: "/certs/azure-ai-900",
-                chip: "AI-900",
-                emoji: "🟦",
-                accent: "bg-sky-600",
-                title: "Azure AI Fundamentals",
-                description:
-                  "Microsoft 認定の AI Fundamentals。Azure ML ・ OpenAI ・ Copilot ファミリを測る。有効期限なし。",
-              },
-              {
-                href: "/certs/gcp-gen-ai-leader",
-                chip: "GCP GAI",
-                emoji: "🟢",
-                accent: "bg-green-600",
-                title: "GCP Generative AI Leader",
-                description:
-                  "Google Cloud 認定の生成 AI Foundational。Vertex AI ・ Gemini ・ Workspace ・ Grounding を測る。",
-              },
-              {
-                href: "/certs/db-specialist",
-                chip: "DB",
-                emoji: "🗄️",
-                accent: "bg-zinc-700",
-                title: "データベーススペシャリスト",
-                description:
-                  "IPA レベル 4 高度試験。関係代数・正規化・SQL 上級・チューニング・NoSQL・DWH を網羅する DB 専門家認定。",
-              },
-              {
-                href: "/certs/dx-kentei",
-                chip: "DX",
+                name: "ビジネス ・ DX",
                 emoji: "🔄",
-                accent: "bg-fuchsia-600",
-                title: "DX 検定",
-                description:
-                  "ビジネス × IT のトレンドを総覧するスコア型認定。AI ・ クラウド ・ IoT ・ 5G ・ ブロックチェーンを網羅。",
+                certs: [
+                  { href: "/certs/dx-kentei", chip: "DX", emoji: "🔄", accent: "bg-fuchsia-600", title: "DX 検定", description: "ビジネス × IT のトレンドを総覧するスコア型認定。AI ・ クラウド ・ IoT ・ 5G ・ ブロックチェーンを網羅。" },
+                ],
               },
               {
-                href: "/certs/aws-saa",
-                chip: "AWS SAA",
-                emoji: "🏗️",
-                accent: "bg-orange-500",
-                title: "AWS SAA",
-                description:
-                  "AWS Associate の代表認定。EC2 / S3 / VPC / IAM などを Well-Architected に沿って設計する力を測る。",
+                name: "AWS",
+                emoji: "☁️",
+                certs: [
+                  { href: "/certs/aws-ai-practitioner", chip: "AWS AIF", emoji: "☁️", accent: "bg-amber-500", title: "AWS AI Practitioner", description: "AWS の AI / 生成 AI 認定 Foundational レベル。Bedrock ・ SageMaker ・ 責任ある AI を測る。" },
+                  { href: "/certs/aws-saa", chip: "AWS SAA", emoji: "🏗️", accent: "bg-orange-500", title: "AWS SAA", description: "AWS Associate の代表認定。EC2 / S3 / VPC / IAM などを Well-Architected に沿って設計する力を測る。" },
+                  { href: "/certs/aws-ml-engineer", chip: "MLA-C01", emoji: "🧪", accent: "bg-orange-700", title: "AWS ML Engineer Associate", description: "AI Practitioner の上位、SageMaker / Bedrock / MLOps の実装力を測る AWS ML 系 Associate 認定。" },
+                  { href: "/certs/aws-data-engineer", chip: "DEA-C01", emoji: "🪣", accent: "bg-amber-700", title: "AWS Data Engineer Associate", description: "2024 GA の AWS 新 Associate 認定。Glue / Athena / Redshift / Kinesis / Step Functions / Iceberg / Lake Formation を網羅。" },
+                  { href: "/certs/aws-ml-specialty", chip: "MLS-C01", emoji: "🔬", accent: "bg-orange-800", title: "AWS ML Specialty", description: "AWS ML 系の Specialty 認定。Built-in アルゴリズム ・ HPO ・ Quantization ・ Clarify ・ Model Monitor まで網羅。" },
+                ],
               },
               {
-                href: "/certs/it-passport",
-                chip: "iパス",
-                emoji: "🎫",
-                accent: "bg-teal-500",
-                title: "ITパスポート試験",
-                description:
-                  "IPA レベル 1 の国家試験。社会人 ・ 学生の IT 入門。3 分野バランスでリテラシーを測る。",
+                name: "Microsoft Azure",
+                emoji: "🟦",
+                certs: [
+                  { href: "/certs/azure-ai-900", chip: "AI-900", emoji: "🟦", accent: "bg-sky-600", title: "Azure AI Fundamentals", description: "Microsoft 認定の AI Fundamentals。Azure ML ・ OpenAI ・ Copilot ファミリを測る。有効期限なし。" },
+                  { href: "/certs/azure-ai-102", chip: "AI-102", emoji: "🤖", accent: "bg-indigo-600", title: "Azure AI-102", description: "Microsoft の AI Engineer Associate。AI-900 の上位、Azure OpenAI / Search / Foundry の実装力を測る。" },
+                  { href: "/certs/azure-dp-100", chip: "DP-100", emoji: "🧬", accent: "bg-sky-700", title: "Azure Data Scientist", description: "AI-900 / AI-102 と並ぶ Azure AI/ML 三本柱。Azure ML SDK/CLI v2 ・ AutoML ・ Sweep ・ Endpoint ・ RAI ・ MLOps を網羅。" },
+                  { href: "/certs/azure-dp-203", chip: "DP-203", emoji: "🛢️", accent: "bg-blue-800", title: "Azure Data Engineer", description: "Azure DE Associate 認定。Synapse 3 プール ・ Data Factory ・ Stream Analytics ・ Databricks ・ Lakehouse ・ Purview を網羅。" },
+                ],
               },
               {
-                href: "/certs/power-bi",
-                chip: "PL-300",
-                emoji: "📊",
-                accent: "bg-yellow-600",
-                title: "Power BI(PL-300)",
-                description:
-                  "Microsoft の BI 系 Associate 認定。Power Query / DAX / 可視化 / Fabric / Copilot を網羅。",
+                name: "Google Cloud",
+                emoji: "🟢",
+                certs: [
+                  { href: "/certs/gcp-gen-ai-leader", chip: "GCP GAI", emoji: "🟢", accent: "bg-green-600", title: "GCP Generative AI Leader", description: "Google Cloud 認定の生成 AI Foundational。Vertex AI ・ Gemini ・ Workspace ・ Grounding を測る。" },
+                  { href: "/certs/gcp-ml-engineer", chip: "GCP MLE", emoji: "🟩", accent: "bg-emerald-700", title: "GCP Professional ML Engineer", description: "GCP 認定の Professional レベル ML 認定。AWS MLA-C01 / Azure AI-102 と並ぶ三大クラウド ML 認定の 1 つ。" },
+                  { href: "/certs/gcp-data-engineer", chip: "GCP DE", emoji: "🌐", accent: "bg-emerald-800", title: "GCP Pro Data Engineer", description: "GCP DE Professional 認定。BigQuery ・ Dataflow ・ Pub/Sub ・ Composer ・ Bigtable / Spanner ・ Looker ・ Dataplex を網羅。" },
+                ],
               },
               {
-                href: "/certs/tableau-specialist",
-                chip: "Tableau",
-                emoji: "🌊",
-                accent: "bg-blue-700",
-                title: "Tableau Desktop Specialist",
-                description:
-                  "Power BI と並ぶ BI 認定の双璧。LOD ・ ダッシュボード ・ Analytics を網羅。有効期限なし。",
+                name: "データ基盤 ・ BI",
+                emoji: "🗄️",
+                certs: [
+                  { href: "/certs/snowflake-snowpro", chip: "SnowPro", emoji: "❄️", accent: "bg-cyan-600", title: "Snowflake SnowPro Core", description: "クラウドデータプラットフォーム認定。Time Travel ・ Cloning ・ Data Sharing などモダン DWH 機能を網羅。" },
+                  { href: "/certs/databricks-data-engineer", chip: "Databricks", emoji: "🧱", accent: "bg-red-600", title: "Databricks Data Engineer", description: "Snowflake と並ぶモダンデータ基盤の双璧。Spark + Delta Lake + DLT + Unity Catalog を網羅。" },
+                  { href: "/certs/power-bi", chip: "PL-300", emoji: "📊", accent: "bg-yellow-600", title: "Power BI(PL-300)", description: "Microsoft の BI 系 Associate 認定。Power Query / DAX / 可視化 / Fabric / Copilot を網羅。" },
+                  { href: "/certs/tableau-specialist", chip: "Tableau", emoji: "🌊", accent: "bg-blue-700", title: "Tableau Desktop Specialist", description: "Power BI と並ぶ BI 認定の双璧。LOD ・ ダッシュボード ・ Analytics を網羅。有効期限なし。" },
+                ],
               },
-              {
-                href: "/certs/azure-ai-102",
-                chip: "AI-102",
-                emoji: "🤖",
-                accent: "bg-indigo-600",
-                title: "Azure AI-102",
-                description:
-                  "Microsoft の AI Engineer Associate。AI-900 の上位、Azure OpenAI / Search / Foundry の実装力を測る。",
-              },
-              {
-                href: "/certs/aws-ml-engineer",
-                chip: "MLA-C01",
-                emoji: "🧪",
-                accent: "bg-orange-700",
-                title: "AWS ML Engineer Associate",
-                description:
-                  "AI Practitioner の上位、SageMaker / Bedrock / MLOps の実装力を測る AWS ML 系 Associate 認定。",
-              },
-              {
-                href: "/certs/snowflake-snowpro",
-                chip: "SnowPro",
-                emoji: "❄️",
-                accent: "bg-cyan-600",
-                title: "Snowflake SnowPro Core",
-                description:
-                  "クラウドデータプラットフォーム認定。Time Travel ・ Cloning ・ Data Sharing などモダン DWH 機能を網羅。",
-              },
-              {
-                href: "/certs/gcp-ml-engineer",
-                chip: "GCP MLE",
-                emoji: "🟩",
-                accent: "bg-emerald-700",
-                title: "GCP Professional ML Engineer",
-                description:
-                  "GCP 認定の Professional レベル ML 認定。AWS MLA-C01 / Azure AI-102 と並ぶ三大クラウド ML 認定の 1 つ。",
-              },
-              {
-                href: "/certs/databricks-data-engineer",
-                chip: "Databricks",
-                emoji: "🧱",
-                accent: "bg-red-600",
-                title: "Databricks Data Engineer",
-                description:
-                  "Snowflake と並ぶモダンデータ基盤の双璧。Spark + Delta Lake + DLT + Unity Catalog を網羅。",
-              },
-              {
-                href: "/certs/it-strategist",
-                chip: "ST",
-                emoji: "🧭",
-                accent: "bg-slate-700",
-                title: "ITストラテジスト試験",
-                description:
-                  "IPA レベル 4 高度試験。経営戦略 ・ 事業戦略 ・ IT 戦略 ・ EA ・ DX ・ 投資判断を一気通貫で網羅。",
-              },
-              {
-                href: "/certs/aws-ml-specialty",
-                chip: "MLS-C01",
-                emoji: "🔬",
-                accent: "bg-orange-800",
-                title: "AWS ML Specialty",
-                description:
-                  "AWS ML 系の Specialty 認定。Built-in アルゴリズム ・ HPO ・ Quantization ・ Clarify ・ Model Monitor まで網羅。",
-              },
-              {
-                href: "/certs/azure-dp-100",
-                chip: "DP-100",
-                emoji: "🧬",
-                accent: "bg-sky-700",
-                title: "Azure Data Scientist",
-                description:
-                  "AI-900 / AI-102 と並ぶ Azure AI/ML 三本柱。Azure ML SDK/CLI v2 ・ AutoML ・ Sweep ・ Endpoint ・ RAI ・ MLOps を網羅。",
-              },
-              {
-                href: "/certs/aws-data-engineer",
-                chip: "DEA-C01",
-                emoji: "🪣",
-                accent: "bg-amber-700",
-                title: "AWS Data Engineer Associate",
-                description:
-                  "2024 GA の AWS 新 Associate 認定。Glue / Athena / Redshift / Kinesis / Step Functions / Iceberg / Lake Formation を網羅。",
-              },
-              {
-                href: "/certs/azure-dp-203",
-                chip: "DP-203",
-                emoji: "🛢️",
-                accent: "bg-blue-800",
-                title: "Azure Data Engineer",
-                description:
-                  "Azure DE Associate 認定。Synapse 3 プール ・ Data Factory ・ Stream Analytics ・ Databricks ・ Lakehouse ・ Purview を網羅。",
-              },
-              {
-                href: "/certs/gcp-data-engineer",
-                chip: "GCP DE",
-                emoji: "🌐",
-                accent: "bg-emerald-800",
-                title: "GCP Pro Data Engineer",
-                description:
-                  "GCP DE Professional 認定。BigQuery ・ Dataflow ・ Pub/Sub ・ Composer ・ Bigtable / Spanner ・ Looker ・ Dataplex を網羅。",
-              },
-            ].map((cert) => (
-              <Link
-                key={cert.href}
-                href={cert.href}
-                className="paper rounded-xl overflow-hidden hover:-translate-y-0.5 transition group block flex flex-col"
-              >
-                <div
-                  className={`h-1.5 w-full ${cert.accent}`}
-                  aria-hidden="true"
-                />
-                <div className="p-5 flex-1 flex flex-col">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-2xl" aria-hidden="true">
-                      {cert.emoji}
-                    </span>
-                    <span className="chip-soft text-[10px]">{cert.chip}</span>
+            ];
+            return (
+              <div className="space-y-10">
+                {CATEGORIES.map((cat) => (
+                  <div key={cat.name}>
+                    <h4 className="flex items-baseline gap-2 mb-4 pb-2 border-b border-[var(--page-border-strong)]">
+                      <span className="text-xl" aria-hidden="true">{cat.emoji}</span>
+                      <span className="text-base font-bold tracking-wide">{cat.name}</span>
+                      <span className="text-xs text-[var(--muted)] ui-sans ml-auto">
+                        {cat.certs.length} 検定
+                      </span>
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {cat.certs.map((cert) => (
+                        <Link
+                          key={cert.href}
+                          href={cert.href}
+                          className="paper rounded-xl overflow-hidden hover:-translate-y-0.5 transition group block flex flex-col"
+                        >
+                          <div className={`h-1.5 w-full ${cert.accent}`} aria-hidden="true" />
+                          <div className="p-5 flex-1 flex flex-col">
+                            <div className="flex items-center gap-2 mb-3">
+                              <span className="text-2xl" aria-hidden="true">{cert.emoji}</span>
+                              <span className="chip-soft text-[10px]">{cert.chip}</span>
+                            </div>
+                            <h3 className="text-base font-bold mb-2 group-hover:text-[var(--link)] leading-snug">
+                              {cert.title}
+                            </h3>
+                            <p className="text-xs text-[var(--muted-strong)] leading-relaxed flex-1">
+                              {cert.description}
+                            </p>
+                            <div className="mt-3 text-xs font-bold text-[var(--link)] ui-sans">
+                              詳しく見る →
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                  <h3 className="text-base font-bold mb-2 group-hover:text-[var(--link)] leading-snug">
-                    {cert.title}
-                  </h3>
-                  <p className="text-xs text-[var(--muted-strong)] leading-relaxed flex-1">
-                    {cert.description}
-                  </p>
-                  <div className="mt-3 text-xs font-bold text-[var(--link)] ui-sans">
-                    詳しく見る →
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+                ))}
+              </div>
+            );
+          })()}
         </div>
 
       </section>
