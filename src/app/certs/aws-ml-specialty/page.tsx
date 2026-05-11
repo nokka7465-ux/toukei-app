@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import { SchoolPicks } from "@/components/SchoolPicks";
+import { StudyFlow } from "@/components/StudyFlow";
 import { certFaq } from "@/data/cert-faq";
 
 export const metadata: Metadata = {
@@ -64,6 +65,12 @@ export default function AwsMlSpecialtyPage() {
           **AWS 認定の Specialty レベル** で **AWS ML 認定の最上位**。**ML Engineer Associate(MLA-C01)の上位** として、**深い数学 ・ アルゴリズム理解 + 設計判断 + 実装ニュアンス** が問われる高度試験。**シニア ML エンジニア ・ ML 専門コンサルタント ・ 研究開発者** を対象とします。
         </p>
       </header>
+
+      <StudyFlow
+        textbookHref="/certs/aws-ml-specialty/textbook"
+        quizHref="/certs/aws-ml-specialty/quiz"
+        examLabel="MLS-C01 本番"
+      />
 
       <section className="mb-10 paper rounded-lg p-7">
         <div className="chapter-eyebrow mb-2">Overview</div>

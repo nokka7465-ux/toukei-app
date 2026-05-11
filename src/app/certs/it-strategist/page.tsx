@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import { SchoolPicks } from "@/components/SchoolPicks";
+import { StudyFlow } from "@/components/StudyFlow";
 import { certFaq } from "@/data/cert-faq";
 
 export const metadata: Metadata = {
@@ -64,6 +65,12 @@ export default function ItStrategistPage() {
           **情報処理推進機構(IPA)** が主催する国家試験(レベル 4 高度試験)で、**経営戦略と IT を統合する最高峰の認定**。**CIO ・ CTO ・ IT コンサルタント ・ DX 推進責任者** を目指す技術者が想定対象で、合格率 14 〜 15% の難関。
         </p>
       </header>
+
+      <StudyFlow
+        textbookHref="/certs/it-strategist/textbook"
+        quizHref="/certs/it-strategist/quiz"
+        examLabel="ST 本番"
+      />
 
       <section className="mb-10 paper rounded-lg p-7">
         <div className="chapter-eyebrow mb-2">Overview</div>

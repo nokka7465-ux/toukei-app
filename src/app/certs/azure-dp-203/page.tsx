@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import { SchoolPicks } from "@/components/SchoolPicks";
+import { StudyFlow } from "@/components/StudyFlow";
 import { certFaq } from "@/data/cert-faq";
 
 export const metadata: Metadata = {
@@ -64,6 +65,12 @@ export default function AzureDp203Page() {
           **Azure 上のデータエンジニアリングを設計 ・ 実装 ・ 運用** する Associate 認定。**Synapse Analytics ・ Data Factory ・ Databricks ・ Stream Analytics ・ Event Hubs ・ ADLS Gen2 ・ Cosmos DB ・ Purview** など Azure データプラットフォームの中核を **取込 ・ 変換 ・ 保管 ・ 配信 ・ 監視 ・ ガバナンス** で問います。**AWS DEA-C01 ・ GCP Professional Data Engineer** と並ぶ三大クラウド Data Engineer 認定の 1 つ。
         </p>
       </header>
+
+      <StudyFlow
+        textbookHref="/certs/azure-dp-203/textbook"
+        quizHref="/certs/azure-dp-203/quiz"
+        examLabel="DP-203 本番"
+      />
 
       <section className="mb-10 paper rounded-lg p-7">
         <div className="chapter-eyebrow mb-2">Overview</div>

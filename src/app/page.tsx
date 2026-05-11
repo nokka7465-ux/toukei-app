@@ -9,6 +9,7 @@ import { ExamCountdown } from "@/components/ExamCountdown";
 import { RecommendedQuestions } from "@/components/RecommendedQuestions";
 import { AchievementsPanel } from "@/components/AchievementsPanel";
 import { AiRoadmap } from "@/components/AiRoadmap";
+import { HeroRoadmap } from "@/components/HeroRoadmap";
 import { toolsRegistry } from "@/lib/tools-registry";
 import { blogTheme } from "@/lib/blog-theme";
 
@@ -99,6 +100,7 @@ export default function Home() {
         <p className="text-sm text-[var(--muted)] leading-loose max-w-xl mx-auto mt-3 ui-sans">
           数学基礎 → 統計学 → 機械学習 → AI 検定 ─ 4 ステップで迷わず進める学習ロードマップ。
         </p>
+        <HeroRoadmap />
         <div className="flex flex-wrap gap-3 justify-center mt-8 ui-sans text-sm">
           <Link
             href="#roadmap"

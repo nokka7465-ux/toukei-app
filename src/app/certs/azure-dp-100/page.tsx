@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import { SchoolPicks } from "@/components/SchoolPicks";
+import { StudyFlow } from "@/components/StudyFlow";
 import { certFaq } from "@/data/cert-faq";
 
 export const metadata: Metadata = {
@@ -64,6 +65,12 @@ export default function AzureDp100Page() {
           **Azure Machine Learning(Azure ML)を用いた ML ワークロードの設計 ・ 実装 ・ 運用** を問う **Associate レベル** の Microsoft 認定。**AI-900(Fundamentals)・ AI-102(AI Engineer)と並ぶ Azure AI/ML 三本柱** の 1 つで、**データサイエンティスト ・ ML エンジニア** にとって Azure における最重要認定。**SDK / CLI v2 ・ AutoML ・ Sweep ・ Endpoints ・ Responsible AI Dashboard** までを実装力で問います。
         </p>
       </header>
+
+      <StudyFlow
+        textbookHref="/certs/azure-dp-100/textbook"
+        quizHref="/certs/azure-dp-100/quiz"
+        examLabel="DP-100 本番"
+      />
 
       <section className="mb-10 paper rounded-lg p-7">
         <div className="chapter-eyebrow mb-2">Overview</div>

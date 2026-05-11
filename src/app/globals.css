@@ -98,9 +98,11 @@ html {
 body {
   background-color: var(--background);
   background-image:
-    linear-gradient(to right, rgba(150, 170, 200, 0.022) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(150, 170, 200, 0.022) 1px, transparent 1px);
-  background-size: 28px 28px;
+    linear-gradient(to right, rgba(80, 110, 165, 0.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(80, 110, 165, 0.14) 1px, transparent 1px),
+    linear-gradient(to right, rgba(80, 110, 165, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(80, 110, 165, 0.05) 1px, transparent 1px);
+  background-size: 112px 112px, 112px 112px, 28px 28px, 28px 28px;
   background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-noto-serif-jp), "Hiragino Mincho ProN",
@@ -136,19 +138,32 @@ body {
 }
 
 @media (prefers-color-scheme: dark) {
-  body {
+  :root:not([data-theme="light"]):not([data-theme="sepia"]) body {
     background-image:
-      linear-gradient(
-        to right,
-        rgba(150, 190, 255, 0.04) 1px,
-        transparent 1px
-      ),
-      linear-gradient(
-        to bottom,
-        rgba(150, 190, 255, 0.04) 1px,
-        transparent 1px
-      );
+      linear-gradient(to right, rgba(150, 190, 255, 0.12) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(150, 190, 255, 0.12) 1px, transparent 1px),
+      linear-gradient(to right, rgba(150, 190, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(150, 190, 255, 0.045) 1px, transparent 1px);
+    background-size: 112px 112px, 112px 112px, 28px 28px, 28px 28px;
   }
+}
+
+:root[data-theme="dark"] body {
+  background-image:
+    linear-gradient(to right, rgba(150, 190, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(150, 190, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(to right, rgba(150, 190, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(150, 190, 255, 0.045) 1px, transparent 1px);
+  background-size: 112px 112px, 112px 112px, 28px 28px, 28px 28px;
+}
+
+:root[data-theme="sepia"] body {
+  background-image:
+    linear-gradient(to right, rgba(150, 100, 40, 0.16) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(150, 100, 40, 0.16) 1px, transparent 1px),
+    linear-gradient(to right, rgba(150, 100, 40, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(150, 100, 40, 0.06) 1px, transparent 1px);
+  background-size: 112px 112px, 112px 112px, 28px 28px, 28px 28px;
 }
 
 h1,

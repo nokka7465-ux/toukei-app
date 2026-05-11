@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import { SchoolPicks } from "@/components/SchoolPicks";
+import { StudyFlow } from "@/components/StudyFlow";
 import { certFaq } from "@/data/cert-faq";
 
 export const metadata: Metadata = {
@@ -64,6 +65,12 @@ export default function AwsDataEngineerPage() {
           **2024 年 3 月に GA された AWS の新 Associate 認定**。**Glue ・ EMR ・ Athena ・ Redshift ・ Kinesis ・ MSK ・ Lambda ・ Step Functions ・ Lake Formation** など AWS のデータエンジニアリングサービスを **データパイプライン設計 ・ データレイク / DWH 構築 ・ ストリーム処理 ・ オペレーション** の 4 ドメインで体系的に問います。**SAA(設計)・ MLA-C01 / MLS-C01(ML)** と並ぶ AWS 認定の重要 Associate で、**データエンジニアの登竜門**。
         </p>
       </header>
+
+      <StudyFlow
+        textbookHref="/certs/aws-data-engineer/textbook"
+        quizHref="/certs/aws-data-engineer/quiz"
+        examLabel="DEA-C01 本番"
+      />
 
       <section className="mb-10 paper rounded-lg p-7">
         <div className="chapter-eyebrow mb-2">Overview</div>

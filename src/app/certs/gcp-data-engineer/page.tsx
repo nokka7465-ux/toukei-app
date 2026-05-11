@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbJsonLd } from "@/components/StructuredData";
 import { SchoolPicks } from "@/components/SchoolPicks";
+import { StudyFlow } from "@/components/StudyFlow";
 import { certFaq } from "@/data/cert-faq";
 
 export const metadata: Metadata = {
@@ -64,6 +65,12 @@ export default function GcpDataEngineerPage() {
           **Google Cloud(GCP)上のデータエンジニアリング Professional レベル認定**。**BigQuery ・ Dataflow ・ Dataproc ・ Pub/Sub ・ Cloud Composer ・ Cloud Storage ・ Bigtable ・ Spanner ・ Looker ・ Dataplex** を **データシステムの設計 ・ 取込 / 変換 ・ 保管 ・ 分析 / ML 統合 ・ 信頼性 / 自動化 / 監視 ・ セキュリティ / コンプライアンス** で問います。**AWS DEA-C01 ・ Azure DP-203** と並ぶ三大クラウド Data Engineer 認定の 1 つ。
         </p>
       </header>
+
+      <StudyFlow
+        textbookHref="/certs/gcp-data-engineer/textbook"
+        quizHref="/certs/gcp-data-engineer/quiz"
+        examLabel="GCP Pro DE 本番"
+      />
 
       <section className="mb-10 paper rounded-lg p-7">
         <div className="chapter-eyebrow mb-2">Overview</div>
