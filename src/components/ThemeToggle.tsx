@@ -143,17 +143,12 @@ export function ThemeToggle() {
   );
 }
 
+/* Site is fixed to sepia — force the attribute and clear any stored preference. */
 export const themeInitScript = `
 (function(){
   try {
-    var stored = localStorage.getItem('theme');
-    var theme;
-    if (stored === 'light' || stored === 'dark' || stored === 'sepia') {
-      theme = stored;
-    } else {
-      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-theme', 'sepia');
+    localStorage.removeItem('theme');
   } catch(e) {}
 })();
 `;

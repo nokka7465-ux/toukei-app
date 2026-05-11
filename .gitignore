@@ -18,3 +18,4 @@ next-env.d.ts
 # Generated at build time by scripts/generate-sitemap.mjs
 public/sitemap.xml
 .env*.local
+.claude/

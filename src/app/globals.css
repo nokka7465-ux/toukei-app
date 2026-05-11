@@ -12,47 +12,11 @@
   --radius-2xl: 1.375rem; /* 22px */
 }
 
-/* Calm pale blue palette — quiet, soft, paper-textbook friendly.
-   Accent stays just saturated enough for legible white text on buttons,
-   everything else leans toward warm-light grey-blues. */
-:root {
-  --background: #fbfcfe;
-  --foreground: #2a3445;
-  --page: #ffffff;
-  --page-border: #e7ecf3;
-  --page-border-strong: #c0cad8;
-  --muted: #5d6b81;
-  --muted-strong: #2a3445;
-  --accent: #6f93c4;
-  --accent-strong: #587ab0;
-  --accent-fg: #ffffff;
-  --link: #4f73a8;
-  --rule: #c8d0dc;
-  --highlight: #eef3fa;
-  --section-bg: #f5f8fc;
-  --section-border: #b9cce4;
-}
-
-/* Dark theme — quiet navy with soft accents. */
-:root[data-theme="dark"] {
-  --background: #101826;
-  --foreground: #d8dee8;
-  --page: #18223a;
-  --page-border: #263451;
-  --page-border-strong: #3d4d6c;
-  --muted: #a1afc6;
-  --muted-strong: #cdd5e1;
-  --accent: #7fa1d4;
-  --accent-strong: #6789c0;
-  --accent-fg: #101826;
-  --link: #a8c1e2;
-  --rule: #3d4d6c;
-  --highlight: #1d2c4a;
-  --section-bg: #1a253f;
-  --section-border: #5c7eb5;
-}
-
-/* Sepia theme — warm reading-friendly palette for long study sessions. */
+/* Sepia-only palette — warm reading-friendly textbook tone.
+   Light/Dark variants are intentionally removed: site is fixed to sepia. */
+:root,
+:root[data-theme="light"],
+:root[data-theme="dark"],
 :root[data-theme="sepia"] {
   --background: #f4ecd8;
   --foreground: #4a3a2a;
@@ -71,26 +35,6 @@
   --section-border: #c4ae7a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]):not([data-theme="sepia"]) {
-    --background: #101826;
-    --foreground: #d8dee8;
-    --page: #18223a;
-    --page-border: #263451;
-    --page-border-strong: #3d4d6c;
-    --muted: #a1afc6;
-    --muted-strong: #cdd5e1;
-    --accent: #7fa1d4;
-    --accent-strong: #6789c0;
-    --accent-fg: #101826;
-    --link: #a8c1e2;
-    --rule: #3d4d6c;
-    --highlight: #1d2c4a;
-    --section-bg: #1a253f;
-    --section-border: #5c7eb5;
-  }
-}
-
 html {
   scroll-behavior: smooth;
 }
@@ -98,10 +42,10 @@ html {
 body {
   background-color: var(--background);
   background-image:
-    linear-gradient(to right, rgba(80, 110, 165, 0.14) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(80, 110, 165, 0.14) 1px, transparent 1px),
-    linear-gradient(to right, rgba(80, 110, 165, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(80, 110, 165, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(150, 100, 40, 0.16) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(150, 100, 40, 0.16) 1px, transparent 1px),
+    linear-gradient(to right, rgba(150, 100, 40, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(150, 100, 40, 0.06) 1px, transparent 1px);
   background-size: 112px 112px, 112px 112px, 28px 28px, 28px 28px;
   background-attachment: fixed;
   color: var(--foreground);
@@ -137,34 +81,7 @@ body {
   border-radius: 4px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]):not([data-theme="sepia"]) body {
-    background-image:
-      linear-gradient(to right, rgba(150, 190, 255, 0.12) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(150, 190, 255, 0.12) 1px, transparent 1px),
-      linear-gradient(to right, rgba(150, 190, 255, 0.045) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(150, 190, 255, 0.045) 1px, transparent 1px);
-    background-size: 112px 112px, 112px 112px, 28px 28px, 28px 28px;
-  }
-}
-
-:root[data-theme="dark"] body {
-  background-image:
-    linear-gradient(to right, rgba(150, 190, 255, 0.12) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(150, 190, 255, 0.12) 1px, transparent 1px),
-    linear-gradient(to right, rgba(150, 190, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(150, 190, 255, 0.045) 1px, transparent 1px);
-  background-size: 112px 112px, 112px 112px, 28px 28px, 28px 28px;
-}
-
-:root[data-theme="sepia"] body {
-  background-image:
-    linear-gradient(to right, rgba(150, 100, 40, 0.16) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(150, 100, 40, 0.16) 1px, transparent 1px),
-    linear-gradient(to right, rgba(150, 100, 40, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(150, 100, 40, 0.06) 1px, transparent 1px);
-  background-size: 112px 112px, 112px 112px, 28px 28px, 28px 28px;
-}
+/* Site is sepia-only — no theme overrides needed. */
 
 h1,
 h2,
@@ -208,13 +125,7 @@ button.paper:hover {
     0 14px 28px -14px rgba(111, 147, 196, 0.16);
 }
 
-@media (prefers-color-scheme: dark) {
-  .paper {
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.45),
-      0 8px 24px -12px rgba(0, 0, 0, 0.65);
-  }
-}
+/* Sepia-only: no dark-mode paper shadow override */
 
 /* Chapter number small caps label */
 .chapter-eyebrow {
@@ -325,11 +236,6 @@ button.paper:hover {
   margin: 1rem 0;
 }
 
-:root[data-theme="dark"] .intuition-box {
-  background: color-mix(in oklab, #422006 60%, var(--page) 40%);
-  border-left-color: #d97706;
-}
-
 .intuition-box-title {
   font-weight: 700;
   color: #b45309;
@@ -337,10 +243,6 @@ button.paper:hover {
   letter-spacing: 0.08em;
   margin-bottom: 0.25rem;
   font-family: var(--font-noto-sans-jp), system-ui, sans-serif;
-}
-
-:root[data-theme="dark"] .intuition-box-title {
-  color: #fbbf24;
 }
 
 .intuition-box-title::before {
@@ -356,11 +258,6 @@ button.paper:hover {
   margin: 1rem 0;
 }
 
-:root[data-theme="dark"] .practical-box {
-  background: color-mix(in oklab, #1e3a8a 50%, var(--page) 50%);
-  border-left-color: #60a5fa;
-}
-
 .practical-box-title {
   font-weight: 700;
   color: #1e40af;
@@ -368,10 +265,6 @@ button.paper:hover {
   letter-spacing: 0.08em;
   margin-bottom: 0.25rem;
   font-family: var(--font-noto-sans-jp), system-ui, sans-serif;
-}
-
-:root[data-theme="dark"] .practical-box-title {
-  color: #93c5fd;
 }
 
 .practical-box-title::before {

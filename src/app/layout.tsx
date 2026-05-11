@@ -5,7 +5,7 @@ import { isAffiliateEnabled } from "@/data/books";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { GoogleAdSense } from "@/components/ads/GoogleAdSense";
 import { StructuredData } from "@/components/StructuredData";
-import { ThemeToggle, themeInitScript } from "@/components/ThemeToggle";
+import { themeInitScript } from "@/components/ThemeToggle";
 import { MobileNav } from "@/components/MobileNav";
 import { BackToTop } from "@/components/BackToTop";
 import { ReadingProgress } from "@/components/ReadingProgress";
@@ -211,10 +211,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fbfcfe" },
-    { media: "(prefers-color-scheme: dark)", color: "#101826" },
-  ],
+  themeColor: "#f4ecd8",
 };
 
 export default function RootLayout({
@@ -434,7 +431,7 @@ export default function RootLayout({
                   <path d="M20 20l-3.5-3.5" />
                 </svg>
               </Link>
-              <ThemeToggle />
+              {/* Theme toggle removed: site is fixed to sepia */}
               <MobileNav />
             </div>
           </div>
