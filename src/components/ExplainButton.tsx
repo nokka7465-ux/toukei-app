@@ -193,7 +193,7 @@ function ExplainButtonImpl({ questionId }: { questionId: string }) {
             disabled={running}
             className={`px-2.5 py-1 rounded border ${
               mode === m.key && (running || text)
-                ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] border-[var(--accent)] font-bold"
                 : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
             } disabled:opacity-50`}
           >

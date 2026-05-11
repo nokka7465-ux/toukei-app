@@ -113,7 +113,7 @@ export function BookmarksClient({
         <div className="flex flex-wrap gap-2 justify-center ui-sans text-sm">
           <Link
             href="/quiz"
-            className="px-4 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)]"
+            className="px-4 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
           >
             演習問題を見る →
           </Link>
@@ -536,7 +536,7 @@ export function NoteEditor({
           type="button"
           onClick={handleSave}
           disabled={!dirty}
-          className="px-2.5 py-1 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600"
+          className="px-2.5 py-1 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600"
         >
           保存
         </button>

@@ -154,7 +154,7 @@ export function SearchUI({ initialQuery = "" }: { initialQuery?: string }) {
                     onClick={() => setFilter(f.key)}
                     className={`px-3 py-1 rounded border transition ${
                       isActive
-                        ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                        ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] border-[var(--accent)] font-bold"
                         : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
                     }`}
                   >
@@ -170,7 +170,7 @@ export function SearchUI({ initialQuery = "" }: { initialQuery?: string }) {
                 onClick={() => setPhaseFilter("all")}
                 className={`px-2.5 py-1 rounded border transition ${
                   phaseFilter === "all"
-                    ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                    ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] border-[var(--accent)] font-bold"
                     : "border-[var(--page-border)] hover:bg-[var(--background)]"
                 }`}
               >
@@ -186,7 +186,7 @@ export function SearchUI({ initialQuery = "" }: { initialQuery?: string }) {
                     onClick={() => setPhaseFilter(p)}
                     className={`px-2.5 py-1 rounded border transition ${
                       isActive
-                        ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                        ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] border-[var(--accent)] font-bold"
                         : "border-[var(--page-border)] hover:bg-[var(--background)]"
                     }`}
                   >

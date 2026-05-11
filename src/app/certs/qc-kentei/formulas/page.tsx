@@ -125,7 +125,7 @@ export default function QcKenteiFormulasPage() {
         </Link>
         <Link
           href="/certs/qc-kentei/quiz"
-          className="px-4 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded hover:bg-[var(--accent-strong)]"
+          className="px-4 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
         >
           QC 検定の問題を解く →
         </Link>

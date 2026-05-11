@@ -67,7 +67,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/search"
-          className="inline-block px-5 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold text-sm hover:bg-[var(--accent-strong)] ui-sans"
+          className="inline-block px-5 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold text-sm hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] ui-sans"
         >
           サイト内検索を開く →
         </Link>

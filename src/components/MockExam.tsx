@@ -167,7 +167,7 @@ export function MockExam({
             <button
               type="button"
               onClick={startExam}
-              className="px-6 py-2.5 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)]"
+              className="px-6 py-2.5 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
             >
               模試を開始する →
             </button>
@@ -280,7 +280,7 @@ export function MockExam({
               setStartedAt(null);
               setElapsed(0);
             }}
-            className="px-6 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)]"
+            className="px-6 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
           >
             もう一度受験する
           </button>
@@ -375,7 +375,7 @@ export function MockExam({
         <button
           type="button"
           onClick={finalize}
-          className="px-6 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)]"
+          className="px-6 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
         >
           採点する
         </button>

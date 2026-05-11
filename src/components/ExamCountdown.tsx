@@ -40,7 +40,7 @@ export function ExamCountdown() {
           </div>
           <Link
             href="/plan"
-            className="text-xs px-3 py-1.5 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)] ui-sans whitespace-nowrap"
+            className="text-xs px-3 py-1.5 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] ui-sans whitespace-nowrap"
           >
             目標を設定 →
           </Link>

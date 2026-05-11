@@ -251,7 +251,7 @@ export function FlashcardsClient() {
               onClick={() => setLevel(lv)}
               className={`px-2.5 py-1 rounded mr-1 mb-1 border ${
                 level === lv
-                  ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                  ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] border-[var(--accent)] font-bold"
                   : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
               }`}
             >
@@ -274,7 +274,7 @@ export function FlashcardsClient() {
               onClick={() => setProgressFilter(p.key)}
               className={`px-2.5 py-1 rounded mr-1 mb-1 border ${
                 progressFilter === p.key
-                  ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                  ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] border-[var(--accent)] font-bold"
                   : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
               }`}
             >

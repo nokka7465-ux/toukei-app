@@ -150,7 +150,7 @@ export function InteractiveCI() {
                 onClick={() => setLevel(l)}
                 className={`px-3 py-1 rounded text-xs border transition ${
                   level === l
-                    ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                    ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] border-[var(--accent)] font-bold"
                     : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
                 }`}
               >

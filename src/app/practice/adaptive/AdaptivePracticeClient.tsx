@@ -230,7 +230,7 @@ export function AdaptivePracticeClient() {
               onClick={() => setCount(c)}
               className={`px-4 py-1.5 rounded border ${
                 count === c
-                  ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                  ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] border-[var(--accent)] font-bold"
                   : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
               }`}
             >
@@ -248,7 +248,7 @@ export function AdaptivePracticeClient() {
             onClick={() => setTrackFilter("all")}
             className={`px-3 py-1.5 rounded border ${
               trackFilter === "all"
-                ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] border-[var(--accent)] font-bold"
                 : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
             }`}
           >
@@ -261,7 +261,7 @@ export function AdaptivePracticeClient() {
               onClick={() => setTrackFilter(t.key)}
               className={`px-3 py-1.5 rounded border ${
                 trackFilter === t.key
-                  ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                  ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] border-[var(--accent)] font-bold"
                   : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
               }`}
             >
@@ -280,7 +280,7 @@ export function AdaptivePracticeClient() {
           type="button"
           onClick={() => setStarted(true)}
           disabled={queue.length === 0}
-          className="px-6 py-2.5 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600"
+          className="px-6 py-2.5 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600"
         >
           スタート →
         </button>

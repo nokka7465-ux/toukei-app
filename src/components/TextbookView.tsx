@@ -168,7 +168,7 @@ export function TextbookView({
               href={link.href}
               className={
                 link.primary
-                  ? "px-4 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded hover:bg-[var(--accent-strong)]"
+                  ? "px-4 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
                   : "px-4 py-2 border border-[var(--page-border-strong)] rounded hover:bg-[var(--page)]"
               }
             >

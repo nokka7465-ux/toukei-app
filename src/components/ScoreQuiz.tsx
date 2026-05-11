@@ -457,7 +457,7 @@ export function ScoreQuiz() {
           <button
             type="button"
             onClick={() => setStage("quiz")}
-            className="px-7 py-3 bg-[var(--accent)] text-[var(--accent-fg)] rounded-xl font-bold hover:bg-[var(--accent-strong)] shadow-sm transition ui-sans text-sm"
+            className="px-7 py-3 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded-xl font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] shadow-sm transition ui-sans text-sm"
           >
             診断を開始する({QUESTIONS.length} 問・約 5 分) →
           </button>
@@ -585,7 +585,7 @@ export function ScoreQuiz() {
               type="button"
               onClick={goNext}
               disabled={!allAnswered}
-              className="px-6 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded-lg font-bold text-sm hover:bg-[var(--accent-strong)] disabled:opacity-40 disabled:cursor-not-allowed ui-sans"
+              className="px-6 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded-lg font-bold text-sm hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] disabled:opacity-40 disabled:cursor-not-allowed ui-sans"
             >
               結果を見る →
             </button>
@@ -594,7 +594,7 @@ export function ScoreQuiz() {
               type="button"
               onClick={goNext}
               disabled={userAnswer === null}
-              className="px-6 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded-lg font-bold text-sm hover:bg-[var(--accent-strong)] disabled:opacity-40 disabled:cursor-not-allowed ui-sans"
+              className="px-6 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded-lg font-bold text-sm hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] disabled:opacity-40 disabled:cursor-not-allowed ui-sans"
             >
               次の問題 →
             </button>
@@ -641,7 +641,7 @@ export function ScoreQuiz() {
         <div className="flex flex-wrap gap-2 ui-sans text-sm">
           <Link
             href={`/textbook/${result.recommendedLevel}`}
-            className="px-5 py-2.5 bg-[var(--accent)] text-[var(--accent-fg)] rounded-lg font-bold hover:bg-[var(--accent-strong)]"
+            className="px-5 py-2.5 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded-lg font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
           >
             推奨教科書を読む →
           </Link>

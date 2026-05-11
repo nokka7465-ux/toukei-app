@@ -164,7 +164,7 @@ export function InteractiveBootstrap() {
                 key={s}
                 type="button"
                 onClick={() => setStatistic(s)}
-                className={`px-2.5 py-1 ${statistic === s ? "bg-[var(--accent)] text-[var(--accent-fg)] font-bold" : "hover:bg-[var(--background)]"}`}
+                className={`px-2.5 py-1 ${statistic === s ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] font-bold" : "hover:bg-[var(--background)]"}`}
               >
                 {s === "mean" ? "平均" : "中央値"}
               </button>

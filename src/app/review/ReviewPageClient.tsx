@@ -113,7 +113,7 @@ export function ReviewPageClient() {
             onClick={() => setTab(t.key)}
             className={`px-3 py-1.5 rounded transition ${
               active
-                ? "bg-[var(--accent)] text-[var(--accent-fg)] font-bold"
+                ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] font-bold"
                 : "hover:bg-[var(--background)] text-[var(--muted-strong)]"
             }`}
           >
@@ -220,7 +220,7 @@ function EmptyState({ variant }: { variant: Tab }) {
       <div className="flex flex-wrap gap-2 justify-center ui-sans text-sm">
         <Link
           href="/quiz"
-          className="px-4 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)]"
+          className="px-4 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
         >
           演習問題一覧へ →
         </Link>

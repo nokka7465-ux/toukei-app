@@ -256,7 +256,7 @@ export function Quiz({
           <button
             type="button"
             onClick={handleReset}
-            className="px-6 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)]"
+            className="px-6 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
           >
             もう一度チャレンジ
           </button>
@@ -313,14 +313,14 @@ export function Quiz({
           <button
             type="button"
             onClick={() => setMode("single")}
-            className={`px-2.5 py-1 ${mode === "single" ? "bg-[var(--accent)] text-[var(--accent-fg)] font-bold" : "hover:bg-[var(--background)]"}`}
+            className={`px-2.5 py-1 ${mode === "single" ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] font-bold" : "hover:bg-[var(--background)]"}`}
           >
             1 問 1 答
           </button>
           <button
             type="button"
             onClick={() => setMode("list")}
-            className={`px-2.5 py-1 border-l border-[var(--page-border-strong)] ${mode === "list" ? "bg-[var(--accent)] text-[var(--accent-fg)] font-bold" : "hover:bg-[var(--background)]"}`}
+            className={`px-2.5 py-1 border-l border-[var(--page-border-strong)] ${mode === "list" ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] font-bold" : "hover:bg-[var(--background)]"}`}
           >
             一覧で表示
           </button>
@@ -448,7 +448,7 @@ export function Quiz({
               type="button"
               onClick={() => handleReveal(qIdx)}
               disabled={selected === null}
-              className="px-6 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600"
+              className="px-6 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600"
             >
               解答する
             </button>
@@ -508,7 +508,7 @@ export function Quiz({
             const correct = r && answers[i] === qq.correctIndex;
             const cls = !r
               ? i === currentIdx
-                ? "bg-[var(--accent)] text-[var(--accent-fg)] font-bold"
+                ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] font-bold"
                 : "border border-[var(--page-border-strong)] text-[var(--muted)] hover:bg-[var(--background)]"
               : correct
                 ? "bg-green-200 text-green-900 dark:bg-green-900/60 dark:text-green-200"
@@ -545,7 +545,7 @@ export function Quiz({
             <button
               type="button"
               onClick={finishQuiz}
-              className="px-5 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)] text-sm"
+              className="px-5 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] text-sm"
             >
               結果を見る →
             </button>
@@ -554,7 +554,7 @@ export function Quiz({
               type="button"
               onClick={finishQuiz}
               disabled={!revealed[currentIdx]}
-              className="px-5 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600 text-sm"
+              className="px-5 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600 text-sm"
               title={!revealed[currentIdx] ? "解答してから次へ" : ""}
             >
               結果を見る →
@@ -564,7 +564,7 @@ export function Quiz({
               type="button"
               onClick={handleNext}
               disabled={!isRevealed}
-              className="px-5 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600 text-sm"
+              className="px-5 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600 text-sm"
               title={!isRevealed ? "解答してから次へ" : ""}
             >
               次の問題 →
@@ -600,7 +600,7 @@ export function Quiz({
           type="button"
           onClick={handleSubmitListMode}
           disabled={!answers.every((a) => a !== null)}
-          className="px-6 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600"
+          className="px-6 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600"
         >
           採点する
         </button>

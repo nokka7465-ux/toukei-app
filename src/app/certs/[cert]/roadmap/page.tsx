@@ -122,7 +122,7 @@ export default async function CertRoadmapPage({
                     href={l.href}
                     className={`px-3 py-1.5 rounded-md ${
                       j === 0
-                        ? "bg-[var(--accent)] text-[var(--accent-fg)] font-bold hover:bg-[var(--accent-strong)]"
+                        ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
                         : "border border-[var(--page-border-strong)] hover:bg-[var(--background)]"
                     }`}
                   >
@@ -138,7 +138,7 @@ export default async function CertRoadmapPage({
       <nav className="mt-12 pt-6 border-t border-[var(--page-border)] flex flex-wrap gap-3 ui-sans text-sm">
         <Link
           href={data.textbookHref}
-          className="px-4 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded-lg font-bold hover:bg-[var(--accent-strong)]"
+          className="px-4 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded-lg font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
         >
           教科書を読む →
         </Link>

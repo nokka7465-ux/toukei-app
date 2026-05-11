@@ -114,7 +114,7 @@ export function PythonRunner({ code, onChangeCode }: Props) {
           type="button"
           onClick={run}
           disabled={status === "loading" || status === "running"}
-          className="px-3 py-1 rounded bg-[var(--accent)] text-[var(--accent-fg)] font-bold disabled:opacity-60"
+          className="px-3 py-1 rounded bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] font-bold disabled:opacity-60"
         >
           {status === "loading" ? "Pyodide 読込中..." : status === "running" ? "実行中..." : "▶ 実行"}
         </button>

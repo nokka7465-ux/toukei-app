@@ -65,7 +65,7 @@ export function SampleSizeCalc() {
             onClick={() => upd("type", t)}
             className={`px-3 py-1 rounded border transition ${
               s.type === t
-                ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] border-[var(--accent)] font-bold"
                 : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
             }`}
           >

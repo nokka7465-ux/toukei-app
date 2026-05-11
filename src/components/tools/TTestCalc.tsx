@@ -146,7 +146,7 @@ export function TTestCalc() {
             onClick={() => upd("kind", k)}
             className={`px-3 py-1 rounded border transition ${
               s.kind === k
-                ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] border-[var(--accent)] font-bold"
                 : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
             }`}
           >
@@ -297,7 +297,7 @@ export function TTestCalc() {
                 onClick={() => upd("side", d)}
                 className={`px-3 py-1 rounded text-xs border transition ${
                   s.side === d
-                    ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                    ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] border-[var(--accent)] font-bold"
                     : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
                 }`}
               >

@@ -321,7 +321,7 @@ export function RandomPracticeClient({ tracks }: { tracks: TrackInfo[] }) {
               onClick={() => setCount(n)}
               className={`px-4 py-2 rounded border ${
                 count === n
-                  ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                  ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] border-[var(--accent)] font-bold"
                   : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
               }`}
             >
@@ -335,7 +335,7 @@ export function RandomPracticeClient({ tracks }: { tracks: TrackInfo[] }) {
         <button
           type="button"
           onClick={start}
-          className="px-6 py-3 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)] ui-sans"
+          className="px-6 py-3 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] ui-sans"
         >
           開始する →
         </button>

@@ -38,7 +38,7 @@ export function RecommendedBooks({
             className="paper block p-5 rounded-lg hover:-translate-y-0.5 transition group"
           >
             {b.tag && (
-              <div className="inline-block px-2 py-0.5 mb-2 text-[10px] font-bold tracking-wider rounded bg-[var(--accent)] text-[var(--accent-fg)] ui-sans">
+              <div className="inline-block px-2 py-0.5 mb-2 text-[10px] font-bold tracking-wider rounded bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] ui-sans">
                 {b.tag}
               </div>
             )}

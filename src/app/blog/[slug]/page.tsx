@@ -180,7 +180,7 @@ export default async function BlogPostPage({
         <div className="ui-sans text-xs text-[var(--muted)] mb-2 flex items-center gap-2 flex-wrap">
           <span>{post.publishedAt}</span>
           <span>·</span>
-          <span className="px-1.5 py-0.5 bg-[var(--accent)] text-[var(--accent-fg)] rounded text-[10px] font-bold tracking-wider">
+          <span className="px-1.5 py-0.5 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded text-[10px] font-bold tracking-wider">
             {post.category}
           </span>
           <span>·</span>
@@ -267,7 +267,7 @@ export default async function BlogPostPage({
                 >
                   <div className="ui-sans text-[10px] text-[var(--muted)] mb-2 flex items-center gap-2">
                     <span>{p.publishedAt}</span>
-                    <span className="px-1.5 py-0.5 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold tracking-wider">
+                    <span className="px-1.5 py-0.5 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold tracking-wider">
                       {p.category}
                     </span>
                   </div>

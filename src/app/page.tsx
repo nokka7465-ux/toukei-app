@@ -104,7 +104,7 @@ export default function Home() {
         <div className="flex flex-wrap gap-3 justify-center mt-8 ui-sans text-sm">
           <Link
             href="#roadmap"
-            className="px-7 py-3 bg-[var(--accent)] text-[var(--accent-fg)] rounded-xl font-bold hover:bg-[var(--accent-strong)] shadow-sm transition"
+            className="px-7 py-3 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded-xl font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] shadow-sm transition"
           >
             ロードマップを見る ↓
           </Link>
@@ -203,7 +203,7 @@ export default function Home() {
         <div className="flex flex-wrap gap-2 ui-sans text-sm">
           <Link
             href="/roadmap"
-            className="px-5 py-2.5 bg-[var(--accent)] text-[var(--accent-fg)] rounded-lg font-bold hover:bg-[var(--accent-strong)]"
+            className="px-5 py-2.5 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded-lg font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
           >
             AIエンジニア・ロードマップを見る →
           </Link>
@@ -522,7 +522,7 @@ export default function Home() {
                 className="paper rounded-lg p-4 block hover:-translate-y-0.5 transition group h-full"
               >
                 <div className="flex items-baseline gap-2 mb-1.5">
-                  <span className="px-1.5 py-0.5 rounded bg-[var(--accent)] text-[var(--accent-fg)] text-[10px] font-bold tracking-wider ui-sans">
+                  <span className="px-1.5 py-0.5 rounded bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] text-[10px] font-bold tracking-wider ui-sans">
                     {n.tag}
                   </span>
                 </div>
@@ -708,7 +708,7 @@ export default function Home() {
                   <div className="flex flex-wrap gap-2 ui-sans text-sm">
                     <Link
                       href={`/textbook/${level.slug}`}
-                      className="px-3 py-1.5 bg-[var(--accent)] text-[var(--accent-fg)] rounded hover:bg-[var(--accent-strong)]"
+                      className="px-3 py-1.5 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
                     >
                       教科書
                     </Link>

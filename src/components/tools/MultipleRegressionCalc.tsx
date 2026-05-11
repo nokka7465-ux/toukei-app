@@ -62,7 +62,7 @@ export function MultipleRegressionCalc() {
               onClick={() => setNumVars(k)}
               className={`px-3 py-1 rounded border transition ${
                 numVars === k
-                  ? "bg-[var(--accent)] text-[var(--accent-fg)] border-[var(--accent)] font-bold"
+                  ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] border-[var(--accent)] font-bold"
                   : "border-[var(--page-border-strong)] hover:bg-[var(--background)]"
               }`}
             >

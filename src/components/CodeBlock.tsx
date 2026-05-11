@@ -46,7 +46,7 @@ export function CodeBlock({ title, python, r, caption, runnable }: Props) {
                   onClick={() => setActive(l)}
                   className={`px-2 py-0.5 rounded text-[11px] transition ${
                     active === l
-                      ? "bg-[var(--accent)] text-[var(--accent-fg)] font-bold"
+                      ? "bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] font-bold"
                       : "border border-[var(--page-border-strong)] hover:bg-[var(--page)]"
                   }`}
                 >

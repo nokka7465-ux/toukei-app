@@ -139,7 +139,7 @@ export function Diagnose() {
         <div className="flex flex-wrap gap-2 ui-sans text-sm mb-6">
           <Link
             href={`/textbook/${rec.level}`}
-            className="px-4 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded font-bold hover:bg-[var(--accent-strong)]"
+            className="px-4 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)]"
           >
             {rec.title} の教科書を読む →
           </Link>
@@ -199,7 +199,7 @@ export function Diagnose() {
           type="button"
           onClick={() => setSubmitted(true)}
           disabled={!allAnswered}
-          className="px-6 py-2 bg-[var(--accent)] text-[var(--accent-fg)] rounded hover:bg-[var(--accent-strong)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600 font-bold"
+          className="px-6 py-2 bg-[var(--highlight)] text-[var(--link)] border border-[var(--page-border-strong)] rounded hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-600 font-bold"
         >
           診断結果を見る
         </button>
