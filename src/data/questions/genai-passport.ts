@@ -296,4 +296,164 @@ export const genaiPassportQuestions: Question[] = [
     explanation:
       "学習データの偏りは生成物にそのまま反映されるため、性別・人種・年齢などのバイアスが残りやすい。プロンプトでの多様性指示・RLHF・組織的レビューが対策の柱。",
   },
+  {
+    id: "gap-q21",
+    category: "プロンプト",
+    difficulty: 2,
+    question:
+      "Few-shot プロンプティングの説明として最も適切なものを選びなさい。",
+    choices: [
+      "プロンプトに数件の入出力例を含めて、モデルにタスクを実演する",
+      "プロンプトを暗号化する",
+      "モデルを再学習する",
+      "プロンプトを 1 単語に短縮する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Few-shot prompting** は **質問例 + 答え例を数組プロンプトに含める** ことで、暗黙にタスクを定義しモデル性能を向上させる手法。**zero-shot(例なし)・ one-shot(1 例)・ few-shot(数例)** という階層。",
+  },
+  {
+    id: "gap-q22",
+    category: "プロンプト",
+    difficulty: 3,
+    question:
+      "Chain-of-Thought(CoT)プロンプティングの本質として最も適切なものを選びなさい。",
+    choices: [
+      "答えを出す前に推論ステップを段階的に書かせる",
+      "答えを短く 1 単語に絞る",
+      "プロンプトを 1 行にまとめる",
+      "別の AI に答えを書かせる",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**CoT(Chain-of-Thought)** は **『ステップごとに考えて』** のように促し、推論過程を段階的に書かせる手法。数学 ・ 論理 ・ 多段推論で精度が大幅に向上(Wei et al., 2022)。",
+  },
+  {
+    id: "gap-q23",
+    category: "RAG",
+    difficulty: 3,
+    question:
+      "ハルシネーション(幻覚)を抑制するため、社内文書を参照させる仕組みとして最も適切なものを選びなさい。",
+    choices: [
+      "RAG(Retrieval-Augmented Generation)",
+      "Few-shot Learning",
+      "Fine-tuning",
+      "Knowledge Distillation",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**RAG** はベクトル検索で社内文書を引き、回答生成時の context として LLM に渡す仕組み。**最新情報 ・ 機密情報 ・ ドメイン知識への対応** とハルシネーション抑制が主な利点。Fine-tuning は重みを更新する別系統。",
+  },
+  {
+    id: "gap-q24",
+    category: "RAG",
+    difficulty: 3,
+    question:
+      "RAG の典型的な処理フローの **正しい順序** を選びなさい。",
+    choices: [
+      "文書を埋め込み化 → ベクトル DB に保存 → 質問を埋め込み化 → 類似文書を検索 → LLM に渡す",
+      "LLM をファインチューン → デプロイ → 質問 → 回答",
+      "Web 検索 → 結果を要約 → 返す",
+      "プロンプトを暗号化 → LLM に渡す",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**RAG の流れ**: ① 文書を chunk + 埋め込み → ベクトル DB(Pinecone / Azure AI Search / Vertex AI Search)に保存、② 質問の埋め込みで類似検索、③ 関連文書を context に LLM 投入、④ 回答。",
+  },
+  {
+    id: "gap-q25",
+    category: "マルチモーダル",
+    difficulty: 2,
+    question:
+      "テキスト + 画像 + 音声など複数モダリティを扱える代表的なモデルを選びなさい。",
+    choices: [
+      "GPT-4o / Gemini / Claude(マルチモーダル LLM)",
+      "BERT",
+      "ResNet",
+      "Word2Vec",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**GPT-4o(OpenAI)・ Gemini(Google)・ Claude(Anthropic)** などの最新 LLM は **テキスト + 画像 + 音声**(モデルにより動画 ・ 3D 等)を扱うマルチモーダル設計。BERT / ResNet / Word2Vec は単一モダリティ。",
+  },
+  {
+    id: "gap-q26",
+    category: "ガバナンス",
+    difficulty: 3,
+    question:
+      "**Microsoft Responsible AI Standard** の主要な 6 原則として **誤っているもの** を選びなさい。",
+    choices: [
+      "Fairness(公平性)",
+      "Reliability & Safety",
+      "Privacy & Security",
+      "Maximum Profit(利益最大化)",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**Microsoft Responsible AI Standard 6 原則**: **Fairness / Reliability & Safety / Privacy & Security / Inclusiveness / Transparency / Accountability**。利益最大化は AI 倫理原則ではない。",
+  },
+  {
+    id: "gap-q27",
+    category: "Agent",
+    difficulty: 3,
+    question:
+      "生成 AI の **Agent / Tool 呼び出し** で実現できる機能として最も適切なものを選びなさい。",
+    choices: [
+      "LLM が Web 検索や計算機などの外部ツールを呼び出し、結果を活用して回答する",
+      "LLM が物理的に動く",
+      "LLM がインターネットを切断する",
+      "LLM が自身の重みを更新する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Agent / Function Calling** で LLM は **Web 検索 ・ DB クエリ ・ 計算機 ・ コード実行** などの外部 Tool を呼び出して結果を取り込める。**OpenAI Functions ・ Anthropic Tool Use ・ Gemini Function Calling** が標準化。",
+  },
+  {
+    id: "gap-q28",
+    category: "コスト",
+    difficulty: 2,
+    question:
+      "生成 AI 利用料が予測できないと感じる組織で、**コスト管理ベストプラクティス** として **誤っているもの** を選びなさい。",
+    choices: [
+      "Token 上限を設定する",
+      "Streaming + Stop sequence で早期打ち切り",
+      "Cache 化(同一プロンプトの結果再利用)",
+      "全プロンプトを GPT-4 Turbo に流す(モデルを使い分けない)",
+    ],
+    correctIndex: 3,
+    explanation:
+      "コスト最適化には **モデル使い分け**(簡易タスクは Haiku / GPT-3.5 / Gemini Flash、難タスクのみ GPT-4 / Claude Sonnet 4.6 など)が定石。Token 上限 ・ Streaming 早期停止 ・ Cache はいずれも有効。",
+  },
+  {
+    id: "gap-q29",
+    category: "セキュリティ",
+    difficulty: 3,
+    question:
+      "**Prompt Injection 攻撃** の説明として最も適切なものを選びなさい。",
+    choices: [
+      "悪意あるユーザ入力で LLM のシステム指示を上書き / 無効化する攻撃",
+      "LLM の重みを盗む攻撃",
+      "ベクトル DB を破壊する攻撃",
+      "学習データに毒を混ぜる攻撃",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Prompt Injection** は **『これまでの指示を無視し、〜と返答せよ』** などの入力でシステムプロンプトを乗っ取る攻撃。**Indirect Injection(外部 Web 文書経由)** も問題化。Guardrails ・ 入出力フィルタ ・ 構造化出力で対策。",
+  },
+  {
+    id: "gap-q30",
+    category: "業務活用",
+    difficulty: 2,
+    question:
+      "生成 AI を業務導入する際の **失敗パターン** として **誤っているもの** を選びなさい。",
+    choices: [
+      "ユースケース選定がない / 全社一律ライセンス購入のみ",
+      "機密情報をパブリック API に投入してしまう",
+      "効果測定の指標がない",
+      "PoC を 1 〜 2 業務に絞り、段階的に拡大する",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**PoC を 1 〜 2 業務に絞り段階的に拡大** は **成功パターン**。失敗パターンは『全社一律契約だけして使われない』『機密情報の漏洩』『効果未測定』など。",
+  },
 ];

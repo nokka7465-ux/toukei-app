@@ -301,4 +301,154 @@ export const appliedInfoQuestions: Question[] = [
     explanation:
       "**デジタイゼーション(紙→デジタル化)→ デジタライゼーション(プロセスのデジタル化)→ DX(ビジネスモデル変革)** の 3 段階が経産省の定義。応用情報の経営戦略分野で頻出。",
   },
+  {
+    id: "ap-q21",
+    category: "アルゴリズム",
+    difficulty: 2,
+    question:
+      "ハッシュテーブルの平均的な検索時間計算量を選びなさい。",
+    choices: ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+    correctIndex: 0,
+    explanation:
+      "**ハッシュテーブルの平均は O(1)**(衝突が少ない場合)。最悪は O(n)(全衝突時)。**二分探索木 / B-tree は O(log n)**、線形探索は O(n)、ソートは O(n log n)。",
+  },
+  {
+    id: "ap-q22",
+    category: "DB",
+    difficulty: 3,
+    question:
+      "リレーショナル DB の **トランザクション ACID 特性** に含まれないものを選びなさい。",
+    choices: [
+      "Atomicity(原子性)",
+      "Consistency(一貫性)",
+      "Isolation(分離性)",
+      "Aggregation(集約性)",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**ACID = Atomicity / Consistency / Isolation / Durability**。Aggregation は ACID ではない。NoSQL は **BASE(Basically Available / Soft state / Eventually consistent)** という別モデル。",
+  },
+  {
+    id: "ap-q23",
+    category: "セキュリティ",
+    difficulty: 3,
+    question:
+      "**SQL インジェクション** 対策として最も適切なものを選びなさい。",
+    choices: [
+      "プレースホルダ(プリペアドステートメント / バインド変数)を使う",
+      "ユーザ入力を全部 trim する",
+      "DB を読み取り専用にする",
+      "DROP TABLE 文を禁止する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**プレースホルダ + バインド変数(prepared statement)** で SQL とデータを分離するのが本質的対策。エスケープも有効だが取りこぼしが起こりやすく、プレースホルダが王道。",
+  },
+  {
+    id: "ap-q24",
+    category: "ネットワーク",
+    difficulty: 2,
+    question:
+      "OSI 参照モデルの 7 層で、**TCP / UDP** が動作する層を選びなさい。",
+    choices: ["物理層", "データリンク層", "ネットワーク層", "トランスポート層"],
+    correctIndex: 3,
+    explanation:
+      "**TCP / UDP はトランスポート層(第 4 層)**。物理層(L1)→ データリンク(L2、Ethernet)→ ネットワーク(L3、IP)→ トランスポート(L4、TCP/UDP)→ セッション(L5)→ プレゼン(L6)→ アプリ(L7)。",
+  },
+  {
+    id: "ap-q25",
+    category: "AI / 機械学習",
+    difficulty: 3,
+    question:
+      "教師あり学習 ・ 教師なし学習 ・ 強化学習の分類で、**クラスタリング(K-Means / DBSCAN)** に該当するものを選びなさい。",
+    choices: [
+      "教師あり学習(分類)",
+      "教師あり学習(回帰)",
+      "教師なし学習",
+      "強化学習",
+    ],
+    correctIndex: 2,
+    explanation:
+      "**クラスタリングは教師なし学習**(ラベルなしデータをグループ化)。教師あり学習は分類 / 回帰(ラベル必須)、強化学習は報酬を最大化する行動学習。",
+  },
+  {
+    id: "ap-q26",
+    category: "プロジェクトマネジメント",
+    difficulty: 3,
+    question:
+      "PMBOK のスコープ管理プロセスで **誤っているもの** を選びなさい。",
+    choices: [
+      "要求事項の収集",
+      "スコープの定義",
+      "WBS の作成",
+      "ステークホルダーの解雇",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**スコープ管理 6 プロセス**: スコープマネジメント計画 / 要求事項の収集 / スコープの定義 / WBS の作成 / スコープの妥当性確認 / スコープのコントロール。ステークホルダーの解雇は無関係。",
+  },
+  {
+    id: "ap-q27",
+    category: "経営戦略",
+    difficulty: 2,
+    question:
+      "**5 フォース分析(Porter)** の 5 つの力として **誤っているもの** を選びなさい。",
+    choices: [
+      "既存業者間の競争",
+      "新規参入の脅威",
+      "代替品の脅威",
+      "為替変動の脅威",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**5 フォース**: 既存競合 / 新規参入 / 代替品 / 売り手の交渉力 / 買い手の交渉力。為替変動は **PEST(マクロ環境)** の経済要因で別フレームワーク。",
+  },
+  {
+    id: "ap-q28",
+    category: "システム監査",
+    difficulty: 3,
+    question:
+      "システム監査人の独立性として **正しいもの** を選びなさい。",
+    choices: [
+      "外観上 + 精神上の独立を確保",
+      "経営層に従属する",
+      "監査対象部門の業務を兼務する",
+      "監査対象部門の上司である",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**システム監査人は外観上(組織的)+ 精神上(意識的)の独立を確保** する必要がある。監査対象との兼務 ・ 上下関係は独立性を損なうため不可。",
+  },
+  {
+    id: "ap-q29",
+    category: "暗号",
+    difficulty: 3,
+    question:
+      "**TLS 1.3** の特徴として **誤っているもの** を選びなさい。",
+    choices: [
+      "0-RTT(再接続時のハンドシェイク高速化)",
+      "Forward Secrecy が必須(DHE / ECDHE)",
+      "古い暗号スイート(RC4 / 3DES など)を削除",
+      "セッションは平文で送信",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**TLS 1.3** は **常に暗号化**(セッションは暗号化)・ 古い暗号スイート削除 ・ Forward Secrecy 必須 ・ 0-RTT で高速化、と従来より大幅に安全 + 高速。平文送信は誤り。",
+  },
+  {
+    id: "ap-q30",
+    category: "クラウド",
+    difficulty: 2,
+    question:
+      "**IaaS / PaaS / SaaS** の境界で **PaaS** が担う範囲として最も適切なものを選びなさい。",
+    choices: [
+      "OS + ミドルウェア + ランタイムをマネージド、アプリは利用者",
+      "ハードウェア + 仮想化のみマネージド",
+      "全てマネージド(アプリも利用者は触らない)",
+      "ハードウェアの設計のみ提供",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**IaaS = HW + 仮想化、PaaS = + OS + Runtime + ミドルウェア、SaaS = + アプリも全部**。PaaS の代表は App Engine / App Service / Heroku / Beanstalk。",
+  },
 ];

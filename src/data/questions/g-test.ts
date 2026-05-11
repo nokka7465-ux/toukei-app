@@ -306,4 +306,154 @@ export const gTestQuestions: Question[] = [
     explanation:
       "シャドーデプロイは新モデルを並列実行し、出力差異やレイテンシなどを観測する段階。問題なければカナリアリリース(1% → 5% → 25% → 100%)に進む段階リリースが現代 MLOps の標準。",
   },
+  {
+    id: "gt-q30",
+    difficulty: 3,
+    category: "LLM 評価",
+    question:
+      "大規模言語モデル(LLM)の **総合知識ベンチマーク** として最も代表的なものを選びなさい。",
+    choices: [
+      "MMLU(Massive Multitask Language Understanding)",
+      "BLEU",
+      "ROUGE",
+      "Perplexity",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**MMLU** は 57 タスク横断の知識評価ベンチマーク。**BLEU は機械翻訳、ROUGE は要約、Perplexity は言語モデルの当てやすさ**(低いほど良い)。LLM 比較では MMLU / HellaSwag / GPQA / HumanEval などが頻用。",
+  },
+  {
+    id: "gt-q31",
+    difficulty: 3,
+    category: "マルチモーダル",
+    question:
+      "画像とテキストを **同一の埋め込み空間** に射影し、ゼロショット画像分類を可能にしたモデルを選びなさい。",
+    choices: ["CLIP(OpenAI)", "BERT", "GPT-2", "ResNet"],
+    correctIndex: 0,
+    explanation:
+      "**CLIP**(2021、OpenAI)は **画像エンコーダ + テキストエンコーダの対照学習(InfoNCE)** で同一埋め込み空間を獲得。ゼロショット画像分類 ・ 画像検索 ・ Stable Diffusion のテキスト条件付けにも利用。",
+  },
+  {
+    id: "gt-q32",
+    difficulty: 3,
+    category: "Diffusion",
+    question:
+      "Diffusion モデル(Stable Diffusion など)の学習で **モデルが予測するもの** として最も適切なものを選びなさい。",
+    choices: [
+      "ノイズが加えられた画像から、加えられたノイズを予測する",
+      "画像の RGB 値を直接生成する",
+      "画像のクラスラベルを予測する",
+      "次のピクセルを 1 つずつ予測する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "Diffusion モデルは **拡散過程(forward)で加えたノイズを逆過程(reverse)で予測する** ようパラメータ化。**`L = ||ε - ε_θ(x_t, t)||²`** という単純な MSE 損失で学習する。サンプリング時は純ノイズから少しずつ復元。",
+  },
+  {
+    id: "gt-q33",
+    difficulty: 3,
+    category: "Agent",
+    question:
+      "**LLM Agent における Tool Use(関数呼び出し)** の典型的な流れとして最も適切なものを選びなさい。",
+    choices: [
+      "ユーザ入力 → LLM が Tool 呼び出し JSON を生成 → 実行 → 結果を LLM に戻す → 最終回答",
+      "ユーザ入力 → LLM が即座に最終回答",
+      "ユーザ入力 → 検索エンジンに直接転送",
+      "LLM の重みを毎回更新",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Tool Use / Function Calling** は LLM が **構造化 JSON で Tool 呼び出しを発行** → ホストアプリが実行 → 結果を LLM に再投入 → 最終回答、というループ。OpenAI Functions / Anthropic Tool Use / Gemini Function Calling などが標準化。",
+  },
+  {
+    id: "gt-q34",
+    difficulty: 3,
+    category: "自己教師あり学習",
+    question:
+      "自己教師あり学習(Self-Supervised Learning)の代表例として **誤っているもの** を選びなさい。",
+    choices: [
+      "BERT の Masked Language Modeling",
+      "SimCLR の対照学習",
+      "MAE(Masked Autoencoder)の画像復元",
+      "ImageNet のラベル付き分類学習",
+    ],
+    correctIndex: 3,
+    explanation:
+      "ImageNet 分類は **教師あり学習(ラベル必須)**。自己教師あり学習はラベルなしデータから **代理タスク(マスク復元 / 対照)で表現学習** する手法群。基盤モデル(Foundation Models)の中核。",
+  },
+  {
+    id: "gt-q35",
+    difficulty: 3,
+    category: "RLHF",
+    question:
+      "RLHF(Reinforcement Learning from Human Feedback)の **典型的な 3 段階** として最も適切なものを選びなさい。",
+    choices: [
+      "1. SFT(教師ありファインチューン)→ 2. 報酬モデル学習 → 3. PPO で方策最適化",
+      "1. ゼロショット推論 → 2. プロンプト調整 → 3. 評価",
+      "1. データ収集 → 2. ファインチューン → 3. デプロイ",
+      "1. 蒸留 → 2. 量子化 → 3. プルーニング",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**RLHF 3 段階**: ① **SFT** で人間の好む応答を模倣、② **報酬モデル** が応答ペアの優劣を学習、③ **PPO**(Proximal Policy Optimization)で報酬を最大化するよう方策を最適化。DPO は ②③ を 1 段階で行う改良版。",
+  },
+  {
+    id: "gt-q36",
+    difficulty: 3,
+    category: "Catastrophic Forgetting",
+    question:
+      "**継続学習(Continual Learning)** で旧タスクの性能が急激に劣化する現象の名称を選びなさい。",
+    choices: [
+      "Catastrophic Forgetting(破壊的忘却)",
+      "Mode Collapse",
+      "Vanishing Gradient",
+      "Curse of Dimensionality",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Catastrophic Forgetting(破壊的忘却)** は新タスクの学習で旧タスクの重みが上書きされる現象。**EWC(Elastic Weight Consolidation)・ Replay Buffer ・ LoRA** などで緩和する。Mode Collapse は GAN、Vanishing Gradient は RNN の問題。",
+  },
+  {
+    id: "gt-q37",
+    difficulty: 2,
+    category: "AI 倫理",
+    question:
+      "EU AI Act が定める **AI のリスクカテゴリ** として **誤っているもの** を選びなさい。",
+    choices: [
+      "Unacceptable Risk(禁止)",
+      "High Risk(規制対象)",
+      "Limited Risk(透明性義務)",
+      "Quantum Risk(量子規制)",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**EU AI Act の 4 リスクカテゴリ**: **Unacceptable / High / Limited / Minimal Risk**。Quantum Risk は存在しない。Unacceptable には社会的スコアリング ・ サブリミナル操作などが該当し、禁止される。",
+  },
+  {
+    id: "gt-q38",
+    difficulty: 3,
+    category: "音声",
+    question:
+      "OpenAI が公開した **多言語対応の音声認識(ASR)モデル** として最も適切なものを選びなさい。",
+    choices: ["Whisper", "WaveNet", "Tacotron", "DALL-E"],
+    correctIndex: 0,
+    explanation:
+      "**Whisper**(2022、OpenAI)は 68 万時間の多言語音声で学習した ASR モデル。99 言語サポート + 翻訳機能。WaveNet / Tacotron は TTS(音声合成)、DALL-E は画像生成。",
+  },
+  {
+    id: "gt-q39",
+    difficulty: 3,
+    category: "RAG",
+    question:
+      "**Retrieval-Augmented Generation(RAG)** の典型的な構成として最も適切なものを選びなさい。",
+    choices: [
+      "ユーザ質問 → 埋め込み + ベクトル検索 → 関連文書を LLM に投入 → 回答生成",
+      "ユーザ質問 → LLM の内部知識のみで回答",
+      "ユーザ質問 → LLM ファインチューン → 回答",
+      "ユーザ質問 → 検索エンジン結果をそのまま返す",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**RAG** は **質問を埋め込み化 → ベクトル検索(Pinecone / Vertex AI Search / Azure AI Search)→ 関連文書を context として LLM に投入 → 回答生成**。ハルシネーション抑制と最新情報対応の標準パターン。",
+  },
 ];

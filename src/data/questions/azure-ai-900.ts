@@ -321,4 +321,164 @@ export const azureAi900Questions: Question[] = [
     explanation:
       "AI-900 は Fundamentals。次の **Associate レベル** が **AI-102(Azure AI Engineer Associate)** で、Azure AI / OpenAI / Cognitive Search を実装する力を測る。",
   },
+  {
+    id: "az900-q21",
+    category: "責任ある AI",
+    difficulty: 2,
+    question:
+      "Microsoft の責任ある AI 6 原則として **誤っているもの** を選びなさい。",
+    choices: [
+      "Fairness(公平性)",
+      "Reliability & Safety",
+      "Privacy & Security",
+      "Maximum Throughput(最大スループット)",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**Microsoft Responsible AI 6 原則**: Fairness / Reliability & Safety / Privacy & Security / Inclusiveness / Transparency / Accountability。スループットは性能指標で原則ではない。",
+  },
+  {
+    id: "az900-q22",
+    category: "Azure ML",
+    difficulty: 2,
+    question:
+      "**Azure Machine Learning** の役割として最も適切なものを選びなさい。",
+    choices: [
+      "ML モデルの学習 ・ デプロイ ・ 運用を統合管理する Azure サービス",
+      "Power BI のレポート作成専用ツール",
+      "Excel の代替",
+      "リレーショナル DB",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Azure Machine Learning(Azure ML)** は ML の **データ ・ 学習 ・ デプロイ ・ MLOps** を統合管理するプラットフォーム。AutoML / Designer(ノーコード)/ SDK / CLI v2 を提供。",
+  },
+  {
+    id: "az900-q23",
+    category: "Azure OpenAI",
+    difficulty: 2,
+    question:
+      "**Azure OpenAI Service** で利用できるモデルファミリとして **誤っているもの** を選びなさい。",
+    choices: [
+      "GPT-4 / GPT-4o",
+      "DALL-E(画像生成)",
+      "Whisper(音声認識)",
+      "Llama 3(Meta)",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**Azure OpenAI は OpenAI モデルのみ**(GPT-4 / GPT-4o / DALL-E / Whisper / text-embedding-3 等)。**Llama 3 は Azure AI Foundry / Model Catalog 経由** で別途利用可能。",
+  },
+  {
+    id: "az900-q24",
+    category: "Vision",
+    difficulty: 2,
+    question:
+      "画像内のテキスト(印字 + 手書き混在)を抽出したい。最適な Azure AI サービスを選びなさい。",
+    choices: [
+      "Azure AI Vision(Read API)",
+      "Azure AI Speech",
+      "Azure AI Language",
+      "Azure AI Translator",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Azure AI Vision の Read API**(旧 OCR)は印字 + 手書きを含むテキスト抽出を提供。Document Intelligence(旧 Form Recognizer)は構造化文書解析の上位サービス。",
+  },
+  {
+    id: "az900-q25",
+    category: "Language",
+    difficulty: 2,
+    question:
+      "顧客サポートのチャットボットを実装したい。**意図(Intent)・ エンティティ抽出** に最適な Azure AI サービスを選びなさい。",
+    choices: [
+      "Azure AI Language - CLU(Conversational Language Understanding)",
+      "Azure AI Speech",
+      "Azure AI Vision",
+      "Azure AI Translator",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**CLU(Conversational Language Understanding)** は **Intent + Entity 抽出** で自然言語理解を提供(旧 LUIS の後継)。Bot Service + CLU + QnA(Custom Question Answering)が定番構成。",
+  },
+  {
+    id: "az900-q26",
+    category: "Speech",
+    difficulty: 2,
+    question:
+      "Azure AI Speech が提供する機能として **誤っているもの** を選びなさい。",
+    choices: [
+      "Speech to Text(音声認識)",
+      "Text to Speech(音声合成)",
+      "Speech Translation(音声翻訳)",
+      "OCR(画像から文字抽出)",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**Azure AI Speech** は STT / TTS / Speech Translation / Speaker Recognition / Custom Speech を提供。**OCR は Azure AI Vision の Read API** の機能。",
+  },
+  {
+    id: "az900-q27",
+    category: "Document Intelligence",
+    difficulty: 3,
+    question:
+      "請求書 ・ レシート ・ ID カードなど **構造化文書から表 ・ Key-Value を抽出** する Azure AI サービスを選びなさい。",
+    choices: [
+      "Document Intelligence(旧 Form Recognizer)",
+      "Azure AI Search",
+      "Azure AI Vision Image Analysis",
+      "Azure AI Translator",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Document Intelligence(旧 Form Recognizer)** は **請求書 / レシート / ID / 名刺 / 契約書 / 表 / Key-Value 抽出** の構造化文書解析。Custom Model でテンプレ学習も可能。",
+  },
+  {
+    id: "az900-q28",
+    category: "AutoML",
+    difficulty: 2,
+    question:
+      "Azure ML の **AutoML** に関する説明として **誤っているもの** を選びなさい。",
+    choices: [
+      "アルゴリズム選択 ・ ハイパーパラメータ探索 ・ 特徴量エンジニアリングを自動化",
+      "Classification / Regression / Forecasting / NLP / Computer Vision タスクをサポート",
+      "primary_metric を指定して最適化目標を選べる",
+      "GPU を直接 SSH で操作する機能",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**AutoML は GUI / SDK で完結** し SSH 操作は不要。Classification / Regression / Forecasting / NLP / CV / Many Models をサポート。",
+  },
+  {
+    id: "az900-q29",
+    category: "Copilot",
+    difficulty: 2,
+    question:
+      "**Microsoft 365 Copilot** の特徴として最も適切なものを選びなさい。",
+    choices: [
+      "Word / Excel / PowerPoint / Outlook / Teams 内で文章生成 ・ 要約 ・ Q&A を提供",
+      "GPU クラスタを直接借りる",
+      "Azure 仮想マシンを起動する",
+      "DNS 設定を自動化する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Microsoft 365 Copilot** は Office アプリ内で **GPT-4 + Microsoft Graph(社内データ)** を統合した業務 AI。**Copilot Studio** で独自 Copilot を作れる。",
+  },
+  {
+    id: "az900-q30",
+    category: "AI Foundry",
+    difficulty: 2,
+    question:
+      "**Azure AI Foundry**(旧 Azure AI Studio)の主眼として最も適切なものを選びなさい。",
+    choices: [
+      "生成 AI / Agent / Prompt Flow / 1700+ モデルカタログ / 評価 / Content Safety を統合",
+      "DBA 専用ツール",
+      "古典 ML 専用",
+      "Power Platform の代替",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Azure AI Foundry** は **生成 AI 時代の Azure AI 統合スタジオ**。Model Catalog / Prompt Flow / Agent / Evaluation / Content Safety / 1700+ モデルを統合。AI-102 の中核。",
+  },
 ];

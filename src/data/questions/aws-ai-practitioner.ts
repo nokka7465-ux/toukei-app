@@ -321,4 +321,164 @@ export const awsAiPractitionerQuestions: Question[] = [
     explanation:
       "AIF-C01 は基礎レベル。次は **Machine Learning Engineer Associate(MLA-C01)** または **Machine Learning Specialty(MLS-C01)** が ML 道の正規ステップ。",
   },
+  {
+    id: "awsai-q21",
+    category: "Bedrock",
+    difficulty: 2,
+    question:
+      "Amazon Bedrock の基本的な性質として最も適切なものを選びなさい。",
+    choices: [
+      "サーバレスで複数の Foundation Model(Claude / Llama / Titan など)に統一 API でアクセスできる",
+      "AWS が独自開発した単一の LLM のみを提供する",
+      "GPU クラスタを直接借りるサービス",
+      "ファインチューン専用ツール",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Bedrock** は **複数ベンダー(Anthropic / Meta / Cohere / Mistral / Amazon Titan / Stability AI)の Foundation Model を統一 API で利用** できるサーバレスサービス。",
+  },
+  {
+    id: "awsai-q22",
+    category: "Bedrock",
+    difficulty: 3,
+    question:
+      "**Bedrock Knowledge Bases** で RAG を構築する際、ベクトルストアとして使えないものを選びなさい。",
+    choices: [
+      "OpenSearch Serverless",
+      "Aurora PostgreSQL with pgvector",
+      "Pinecone",
+      "DynamoDB",
+    ],
+    correctIndex: 3,
+    explanation:
+      "Bedrock Knowledge Bases 対応ベクトルストア: **OpenSearch Serverless ・ Aurora pgvector ・ Pinecone ・ Redis Enterprise Cloud ・ MongoDB Atlas**。DynamoDB は対応外。",
+  },
+  {
+    id: "awsai-q23",
+    category: "Bedrock",
+    difficulty: 3,
+    question:
+      "Bedrock **Guardrails** が提供しないフィルタリング機能を選びなさい。",
+    choices: [
+      "拒否トピック(Denied topics)",
+      "PII / 機微情報マスキング",
+      "ハルシネーション検知(Contextual grounding check)",
+      "GPU メモリ最適化",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**Guardrails の機能**: Denied topics ・ Content filters(性的/暴力/憎悪等)・ PII redaction ・ Word filters ・ Contextual grounding(ハルシネーション検知)・ Prompt attack 検知。GPU 最適化は無関係。",
+  },
+  {
+    id: "awsai-q24",
+    category: "SageMaker",
+    difficulty: 2,
+    question:
+      "SageMaker JumpStart の最も適切な説明を選びなさい。",
+    choices: [
+      "事前学習済の Foundation Model(Llama / Stable Diffusion など)を 1 クリックでデプロイ ・ ファインチューン",
+      "SageMaker Notebook の起動を高速化する",
+      "S3 ストレージを高速化する",
+      "DynamoDB の代替",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**JumpStart** は **OSS / 商用の事前学習済モデルカタログ + ソリューションテンプレート**。Llama / Falcon / Stable Diffusion / Hugging Face のモデルを GUI から即デプロイ可。",
+  },
+  {
+    id: "awsai-q25",
+    category: "プロンプト",
+    difficulty: 2,
+    question:
+      "Bedrock で Claude モデルへの **System Prompt** の役割として最も適切なものを選びなさい。",
+    choices: [
+      "アシスタントの役割 ・ 制約 ・ 出力形式などを指示する",
+      "ユーザのプロファイル情報を暗号化する",
+      "モデルの重みを変更する",
+      "出力 token 数を増やす",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**System Prompt** は **モデルの役割 ・ 振る舞い ・ 制約 ・ 出力スタイル** を定義。ユーザメッセージとは別の channel で渡され、優先度が高い扱い。",
+  },
+  {
+    id: "awsai-q26",
+    category: "Embedding",
+    difficulty: 3,
+    question:
+      "Bedrock の **Titan Embeddings G1 - Text** で生成されるベクトルの一般的な用途として **誤っているもの** を選びなさい。",
+    choices: [
+      "RAG の文書類似度検索",
+      "テキスト分類用の特徴量",
+      "クラスタリング",
+      "画像のピクセル復元",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**埋め込み(Embedding)** は **意味類似度 ・ 検索 ・ クラスタリング ・ 分類特徴量** に使う。画像ピクセル復元は別タスク(Stable Diffusion 等の Diffusion モデル)。",
+  },
+  {
+    id: "awsai-q27",
+    category: "ファインチューン",
+    difficulty: 3,
+    question:
+      "Bedrock の Custom Model(継続事前学習 / ファインチューン)に関する説明として **誤っているもの** を選びなさい。",
+    choices: [
+      "Provisioned Throughput を購入すれば実行可能",
+      "学習データは S3 に JSONL 形式で配置",
+      "出力モデルは自動的にすべての AWS アカウントと共有される",
+      "ベースモデルにより継続事前学習 / ファインチューンの可否が決まる",
+    ],
+    correctIndex: 2,
+    explanation:
+      "**Custom Model は学習元アカウントだけで利用可能**(共有は明示的 Cross-account のみ)。学習データは S3 JSONL、Provisioned Throughput 購入で利用、対応モデルは Titan / Llama / Cohere など限定。",
+  },
+  {
+    id: "awsai-q28",
+    category: "責任ある AI",
+    difficulty: 2,
+    question:
+      "AWS が提唱する **責任ある AI の 8 次元** に含まれないものを選びなさい。",
+    choices: [
+      "Fairness(公平性)",
+      "Explainability(説明可能性)",
+      "Privacy & Security",
+      "Maximum Throughput(最大スループット)",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**AWS 責任ある AI 8 次元**: Fairness / Explainability / Privacy & Security / Robustness / Governance / Transparency / Veracity & Robustness / Controllability。スループットは性能指標で倫理原則ではない。",
+  },
+  {
+    id: "awsai-q29",
+    category: "コスト",
+    difficulty: 3,
+    question:
+      "Bedrock の **On-demand と Provisioned Throughput** の使い分けとして最も適切なものを選びなさい。",
+    choices: [
+      "変動的 / 軽量トラフィックは On-demand、安定的 / 大規模は Provisioned",
+      "On-demand が常にコスト安",
+      "Provisioned は無料",
+      "両者は完全同等",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**On-demand**(従量課金)= 変動的 ・ PoC ・ 軽量。**Provisioned Throughput**(時間/月課金)= 安定的 ・ 大規模 ・ レイテンシ保証必須。Custom Model の利用には Provisioned が必須。",
+  },
+  {
+    id: "awsai-q30",
+    category: "Q ファミリ",
+    difficulty: 2,
+    question:
+      "**Amazon Q Developer**(旧 CodeWhisperer)の主な用途として最も適切なものを選びなさい。",
+    choices: [
+      "IDE 内で AI コーディング補助 ・ コードレビュー ・ セキュリティスキャン",
+      "S3 のコスト最適化",
+      "DynamoDB のレイテンシ計測",
+      "Lambda の冷起動を防ぐ",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Amazon Q Developer** は AWS の AI コーディングアシスタント(GitHub Copilot の AWS 版)。**Q Business / Q in QuickSight / Q in Connect** など Q ファミリは業務領域別に展開。",
+  },
 ];
