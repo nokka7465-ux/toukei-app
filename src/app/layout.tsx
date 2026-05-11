@@ -262,32 +262,32 @@ export default function RootLayout({
               </span>
             </Link>
             <div className="flex items-center gap-3">
-              <nav className="hidden md:flex gap-0.5 text-sm ui-sans items-center rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]/60 px-1.5 py-1 backdrop-blur-sm shadow-sm">
-                <Link href="/" className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors">
+              <nav className="hidden md:flex gap-2 text-sm ui-sans items-center">
+                <Link href="/" className="px-3 py-1.5 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]/70 backdrop-blur-sm shadow-sm hover:bg-[var(--background)] hover:text-[var(--accent-strong)] hover:border-[var(--accent)] transition-colors">
                   ホーム
                 </Link>
-                <Link href="/roadmap" className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors">
+                <Link href="/roadmap" className="px-3 py-1.5 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]/70 backdrop-blur-sm shadow-sm hover:bg-[var(--background)] hover:text-[var(--accent-strong)] hover:border-[var(--accent)] transition-colors">
                   ロードマップ
                 </Link>
-                <Link href="/textbook" className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors">
+                <Link href="/textbook" className="px-3 py-1.5 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]/70 backdrop-blur-sm shadow-sm hover:bg-[var(--background)] hover:text-[var(--accent-strong)] hover:border-[var(--accent)] transition-colors">
                   教科書
                 </Link>
                 <Link
                   href="/tools"
-                  className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors"
+                  className="px-3 py-1.5 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]/70 backdrop-blur-sm shadow-sm hover:bg-[var(--background)] hover:text-[var(--accent-strong)] hover:border-[var(--accent)] transition-colors"
                   title="統計計算ツール集"
                 >
                   ツール
                 </Link>
                 <Link
                   href="/certs/ds-basic"
-                  className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors"
+                  className="px-3 py-1.5 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]/70 backdrop-blur-sm shadow-sm hover:bg-[var(--background)] hover:text-[var(--accent-strong)] hover:border-[var(--accent)] transition-colors"
                   title="統計検定の関連検定"
                 >
                   関連検定
                 </Link>
                 <details className="header-more relative">
-                  <summary className="px-2.5 py-1 rounded-full hover:bg-[var(--background)] hover:text-[var(--accent)] transition-colors cursor-pointer list-none flex items-center gap-1 select-none">
+                  <summary className="px-3 py-1.5 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]/70 backdrop-blur-sm shadow-sm hover:bg-[var(--background)] hover:text-[var(--accent-strong)] hover:border-[var(--accent)] transition-colors cursor-pointer list-none flex items-center gap-1 select-none">
                     もっと見る
                     <svg
                       width="10"
