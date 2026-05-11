@@ -533,178 +533,123 @@ export default function RootLayout({
               </div>
               <div>
                 <div className="chapter-eyebrow mb-2">関連検定</div>
-                <ul className="space-y-1.5 ui-sans">
-                  <li>
-                    <Link href="/certs/ds-basic" className="hover:underline text-[var(--muted-strong)]">
-                      DS基礎
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/survey" className="hover:underline text-[var(--muted-strong)]">
-                      統計調査士
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/survey-specialist" className="hover:underline text-[var(--muted-strong)]">
-                      専門統計調査士
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/g-test" className="hover:underline text-[var(--muted-strong)]">
-                      G検定
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/e-shikaku" className="hover:underline text-[var(--muted-strong)]">
-                      E資格
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/ds-literacy" className="hover:underline text-[var(--muted-strong)]">
-                      DS検定
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/qc-kentei" className="hover:underline text-[var(--muted-strong)]">
-                      QC検定
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/genai-passport" className="hover:underline text-[var(--muted-strong)]">
-                      生成AIパスポート
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/ds-expert" className="hover:underline text-[var(--muted-strong)]">
-                      DS エキスパート
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/python-data" className="hover:underline text-[var(--muted-strong)]">
-                      Python データ分析
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/ai-implementation" className="hover:underline text-[var(--muted-strong)]">
-                      AI 実装検定
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/image-processing" className="hover:underline text-[var(--muted-strong)]">
-                      画像処理エンジニア検定
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/applied-info" className="hover:underline text-[var(--muted-strong)]">
-                      応用情報技術者試験
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/aws-ai-practitioner" className="hover:underline text-[var(--muted-strong)]">
-                      AWS AI Practitioner
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/basic-info" className="hover:underline text-[var(--muted-strong)]">
-                      基本情報技術者試験
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/azure-ai-900" className="hover:underline text-[var(--muted-strong)]">
-                      Azure AI Fundamentals
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/gcp-gen-ai-leader" className="hover:underline text-[var(--muted-strong)]">
-                      GCP Generative AI Leader
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/db-specialist" className="hover:underline text-[var(--muted-strong)]">
-                      データベーススペシャリスト
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/dx-kentei" className="hover:underline text-[var(--muted-strong)]">
-                      DX 検定
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/aws-saa" className="hover:underline text-[var(--muted-strong)]">
-                      AWS Solutions Architect Associate
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/it-passport" className="hover:underline text-[var(--muted-strong)]">
-                      ITパスポート試験
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/power-bi" className="hover:underline text-[var(--muted-strong)]">
-                      Power BI(PL-300)
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/tableau-specialist" className="hover:underline text-[var(--muted-strong)]">
-                      Tableau Desktop Specialist
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/azure-ai-102" className="hover:underline text-[var(--muted-strong)]">
-                      Azure AI Engineer(AI-102)
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/aws-ml-engineer" className="hover:underline text-[var(--muted-strong)]">
-                      AWS ML Engineer Associate
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/snowflake-snowpro" className="hover:underline text-[var(--muted-strong)]">
-                      Snowflake SnowPro Core
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/gcp-ml-engineer" className="hover:underline text-[var(--muted-strong)]">
-                      GCP Professional ML Engineer
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/databricks-data-engineer" className="hover:underline text-[var(--muted-strong)]">
-                      Databricks Data Engineer Associate
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/it-strategist" className="hover:underline text-[var(--muted-strong)]">
-                      ITストラテジスト試験
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/aws-ml-specialty" className="hover:underline text-[var(--muted-strong)]">
-                      AWS ML Specialty(MLS-C01)
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/azure-dp-100" className="hover:underline text-[var(--muted-strong)]">
-                      Azure Data Scientist(DP-100)
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/aws-data-engineer" className="hover:underline text-[var(--muted-strong)]">
-                      AWS Data Engineer Associate
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/azure-dp-203" className="hover:underline text-[var(--muted-strong)]">
-                      Azure Data Engineer(DP-203)
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/certs/gcp-data-engineer" className="hover:underline text-[var(--muted-strong)]">
-                      GCP Pro Data Engineer
-                    </Link>
-                  </li>
-                </ul>
+                {(() => {
+                  const FOOTER_CATEGORIES: { name: string; emoji: string; items: { href: string; label: string }[] }[] = [
+                    {
+                      name: "統計検定 系列", emoji: "📊", items: [
+                        { href: "/certs/ds-basic", label: "DS基礎" },
+                        { href: "/certs/survey", label: "統計調査士" },
+                        { href: "/certs/survey-specialist", label: "専門統計調査士" },
+                        { href: "/certs/ds-literacy", label: "DS検定" },
+                        { href: "/certs/ds-expert", label: "DS エキスパート" },
+                      ],
+                    },
+                    {
+                      name: "AI / ディープラーニング", emoji: "🤖", items: [
+                        { href: "/certs/g-test", label: "G検定" },
+                        { href: "/certs/e-shikaku", label: "E資格" },
+                        { href: "/certs/genai-passport", label: "生成AIパスポート" },
+                        { href: "/certs/ai-implementation", label: "AI 実装検定" },
+                        { href: "/certs/image-processing", label: "画像処理エンジニア検定" },
+                      ],
+                    },
+                    {
+                      name: "Python ・ 品質工学", emoji: "🐍", items: [
+                        { href: "/certs/python-data", label: "Python データ分析" },
+                        { href: "/certs/qc-kentei", label: "QC検定" },
+                      ],
+                    },
+                    {
+                      name: "IPA 国家試験", emoji: "🏛️", items: [
+                        { href: "/certs/it-passport", label: "ITパスポート試験" },
+                        { href: "/certs/basic-info", label: "基本情報技術者試験" },
+                        { href: "/certs/applied-info", label: "応用情報技術者試験" },
+                        { href: "/certs/db-specialist", label: "データベーススペシャリスト" },
+                        { href: "/certs/it-strategist", label: "ITストラテジスト試験" },
+                      ],
+                    },
+                    {
+                      name: "ビジネス ・ DX", emoji: "🔄", items: [
+                        { href: "/certs/dx-kentei", label: "DX 検定" },
+                      ],
+                    },
+                    {
+                      name: "AWS", emoji: "☁️", items: [
+                        { href: "/certs/aws-ai-practitioner", label: "AWS AI Practitioner" },
+                        { href: "/certs/aws-saa", label: "AWS Solutions Architect Associate" },
+                        { href: "/certs/aws-ml-engineer", label: "AWS ML Engineer Associate" },
+                        { href: "/certs/aws-data-engineer", label: "AWS Data Engineer Associate" },
+                        { href: "/certs/aws-ml-specialty", label: "AWS ML Specialty(MLS-C01)" },
+                      ],
+                    },
+                    {
+                      name: "Microsoft Azure", emoji: "🟦", items: [
+                        { href: "/certs/azure-ai-900", label: "Azure AI Fundamentals" },
+                        { href: "/certs/azure-ai-102", label: "Azure AI Engineer(AI-102)" },
+                        { href: "/certs/azure-dp-100", label: "Azure Data Scientist(DP-100)" },
+                        { href: "/certs/azure-dp-203", label: "Azure Data Engineer(DP-203)" },
+                      ],
+                    },
+                    {
+                      name: "Google Cloud", emoji: "🟢", items: [
+                        { href: "/certs/gcp-gen-ai-leader", label: "GCP Generative AI Leader" },
+                        { href: "/certs/gcp-ml-engineer", label: "GCP Professional ML Engineer" },
+                        { href: "/certs/gcp-data-engineer", label: "GCP Pro Data Engineer" },
+                      ],
+                    },
+                    {
+                      name: "データ基盤 ・ BI", emoji: "🗄️", items: [
+                        { href: "/certs/snowflake-snowpro", label: "Snowflake SnowPro Core" },
+                        { href: "/certs/databricks-data-engineer", label: "Databricks Data Engineer Associate" },
+                        { href: "/certs/power-bi", label: "Power BI(PL-300)" },
+                        { href: "/certs/tableau-specialist", label: "Tableau Desktop Specialist" },
+                      ],
+                    },
+                  ];
+                  return (
+                    <ul className="space-y-1 ui-sans">
+                      {FOOTER_CATEGORIES.map((cat) => (
+                        <li key={cat.name}>
+                          <details className="group">
+                            <summary className="cursor-pointer list-none flex items-center gap-1.5 py-1 text-[var(--muted-strong)] hover:text-[var(--link)] select-none">
+                              <span aria-hidden="true">{cat.emoji}</span>
+                              <span className="font-bold">{cat.name}</span>
+                              <span className="text-[10px] text-[var(--muted)] ml-auto">
+                                {cat.items.length}
+                              </span>
+                              <svg
+                                width="10"
+                                height="10"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                aria-hidden="true"
+                                className="transition-transform group-open:rotate-180"
+                              >
+                                <polyline points="6 9 12 15 18 9" />
+                              </svg>
+                            </summary>
+                            <ul className="mt-1 ml-5 space-y-1 border-l border-[var(--page-border-strong)] pl-3">
+                              {cat.items.map((it) => (
+                                <li key={it.href}>
+                                  <Link
+                                    href={it.href}
+                                    className="block py-0.5 text-xs text-[var(--muted-strong)] hover:underline hover:text-[var(--link)]"
+                                  >
+                                    {it.label}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </details>
+                        </li>
+                      ))}
+                    </ul>
+                  );
+                })()}
               </div>
               <div>
                 <div className="chapter-eyebrow mb-2">学習サポート</div>
