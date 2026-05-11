@@ -607,37 +607,33 @@ export default function RootLayout({
                     },
                   ];
                   return (
-                    <ul className="space-y-1 ui-sans">
+                    <ul className="space-y-1.5 ui-sans">
                       {FOOTER_CATEGORIES.map((cat) => (
                         <li key={cat.name}>
                           <details className="group">
-                            <summary className="cursor-pointer list-none flex items-center gap-1.5 py-1 text-[var(--muted-strong)] hover:text-[var(--link)] select-none">
-                              <span aria-hidden="true">{cat.emoji}</span>
-                              <span className="font-bold">{cat.name}</span>
-                              <span className="text-[10px] text-[var(--muted)] ml-auto">
-                                {cat.items.length}
-                              </span>
+                            <summary className="cursor-pointer list-none flex items-center gap-1.5 py-0.5 text-[var(--muted-strong)] hover:underline select-none">
+                              <span>{cat.name}</span>
                               <svg
                                 width="10"
                                 height="10"
                                 viewBox="0 0 24 24"
                                 fill="none"
                                 stroke="currentColor"
-                                strokeWidth="2.5"
+                                strokeWidth="2"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 aria-hidden="true"
-                                className="transition-transform group-open:rotate-180"
+                                className="transition-transform group-open:rotate-180 opacity-60"
                               >
                                 <polyline points="6 9 12 15 18 9" />
                               </svg>
                             </summary>
-                            <ul className="mt-1 ml-5 space-y-1 border-l border-[var(--page-border-strong)] pl-3">
+                            <ul className="mt-1 ml-3 space-y-1.5 border-l border-[var(--page-border-strong)] pl-3">
                               {cat.items.map((it) => (
                                 <li key={it.href}>
                                   <Link
                                     href={it.href}
-                                    className="block py-0.5 text-xs text-[var(--muted-strong)] hover:underline hover:text-[var(--link)]"
+                                    className="hover:underline text-[var(--muted-strong)]"
                                   >
                                     {it.label}
                                   </Link>
