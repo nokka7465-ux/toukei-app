@@ -510,4 +510,15 @@ export const gradeFourQuestions: Question[] = [
     explanation:
       "中央値は外れ値の影響を受けにくい。年収・住宅価格・労働時間など、極端に大きな値が混ざるデータでは、平均より中央値の方が『典型的な値』を表す。",
   },
+  { id: "g4-q40", category: "確率", difficulty: 1, question: "1〜6 の目があるサイコロで **偶数の目** が出る確率を選びなさい。", choices: ["1/6", "2/6", "3/6", "5/6"], correctIndex: 2, explanation: "**偶数: 2, 4, 6 の 3 通り**。3/6 = 1/2。確率の基本: 該当数 / 全体数。" },
+  { id: "g4-q41", category: "確率", difficulty: 2, question: "**コインを 2 回投げて少なくとも 1 回表** が出る確率を選びなさい。", choices: ["1/4", "1/2", "3/4", "1"], correctIndex: 2, explanation: "**余事象**: 1 - P(2 回連続裏)= 1 - 1/4 = 3/4。**『少なくとも』は余事象で考えるのがコツ**。" },
+  { id: "g4-q42", category: "順列", difficulty: 2, question: "**3 人を 1 列に並べる方法** の数を選びなさい。", choices: ["3", "6", "9", "27"], correctIndex: 1, explanation: "**3! = 3 × 2 × 1 = 6 通り**。順列の基本。" },
+  { id: "g4-q43", category: "組合せ", difficulty: 2, question: "**5 個から 2 個を選ぶ組合せ** の数を選びなさい。", choices: ["5", "10", "20", "120"], correctIndex: 1, explanation: "**$_5C_2 = \\frac{5!}{2!3!} = 10$ 通り**。組合せは順序を考慮しない。" },
+  { id: "g4-q44", category: "平均", difficulty: 1, question: "データ {10, 20, 30, 40, 50} の **平均** を選びなさい。", choices: ["20", "30", "40", "50"], correctIndex: 1, explanation: "$(10+20+30+40+50)/5 = 150/5 = 30$。等差数列の平均は中央値と一致(30)。" },
+  { id: "g4-q45", category: "ばらつき", difficulty: 2, question: "**範囲(Range)** の定義として正しいものを選びなさい。", choices: ["最大値 - 最小値", "平均", "中央値", "個数"], correctIndex: 0, explanation: "**範囲 = 最大 - 最小**。最も単純なばらつき指標。**外れ値に弱い** → 標準偏差や IQR を併用。" },
+  { id: "g4-q46", category: "グラフ", difficulty: 1, question: "**全体に占める割合** を視覚的に示すのに最も適したグラフを選びなさい。", choices: ["円グラフ", "折れ線グラフ", "散布図", "箱ひげ図"], correctIndex: 0, explanation: "**円グラフ**: 全体に占める割合(構成比)。**棒**: 比較、**折れ線**: 時系列、**散布図**: 2 変数関係。目的別に使い分け。" },
+  { id: "g4-q47", category: "グラフ", difficulty: 1, question: "**時間の経過とともに変化する量** を示すのに適したグラフを選びなさい。", choices: ["円グラフ", "棒グラフ", "折れ線グラフ", "Boxplot"], correctIndex: 2, explanation: "**折れ線グラフ**: 時系列の変化に最適。複数系列を重ねて比較も可能。" },
+  { id: "g4-q48", category: "標本", difficulty: 2, question: "**母集団** と **標本** の関係として正しいものを選びなさい。", choices: ["母集団は調査対象全体、標本はその一部", "完全同じ", "母集団は少数、標本は多数", "両者は無関係"], correctIndex: 0, explanation: "**母集団**: 関心対象全体(例: 全 18 歳)。**標本**: 母集団から選んだ一部(例: 1000 人)。**標本から母集団を推測**するのが統計学の核心。" },
+  { id: "g4-q49", category: "応用", difficulty: 1, question: "**統計が活用される現代の場面** として **誤っているもの** を選びなさい。", choices: ["天気予報", "選挙調査", "スポーツ分析", "魔法の呪文"], correctIndex: 3, explanation: "**統計は現代社会の至る所で活用**: 天気 / 選挙 / スポーツ / 医療 / マーケティング / AI など。" },
+  { id: "g4-q50", category: "次のステップ", difficulty: 1, question: "統計検定 4 級合格後の次のステップとして最も適切なものを選びなさい。", choices: ["3 級 → 2 級 と段階的に上位を", "ITパスポート", "簿記", "再受験"], correctIndex: 0, explanation: "**4 級(中高生 ・ 算数)→ 3 級(大学初年度)→ 2 級(実務)→ 準 1 級 → 1 級**。一気に 1 級を狙うのではなく **段階的に学習** が王道。" },
 ];
