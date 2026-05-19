@@ -25,7 +25,7 @@ const availableLevels = new Set<string>([
 const HOME_TITLE =
   "統計ロードマップ ─ AIエンジニアになるための統計・数学・Python";
 const HOME_DESCRIPTION =
-  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。数学基礎 → 統計学 → 機械学習 → AI 検定対策まで、4 ステップのロードマップで迷わず進めます。統計検定 4 級〜1 級・G 検定・E 資格・DS 検定にも完全対応。";
+  "AIエンジニアになるための統計・数学・Python を一気通貫で学べる無料サイト。演習問題 2,100+ 問・41 検定対応・40+ 教科書。数学基礎 → 統計学 → 機械学習 → AI 検定対策まで、4 ステップのロードマップで迷わず進めます。統計検定 4 級〜1 級・G 検定・E 資格・DS 検定にも完全対応。";
 
 const HOME_FAQ = [
   {
@@ -120,7 +120,7 @@ export default function Home() {
           className="mt-7 flex flex-wrap justify-center gap-2 text-[11px] ui-sans"
         >
           {[
-            { label: "演習問題", value: "2,050+" },
+            { label: "演習問題", value: "2,100+" },
             { label: "検定 ・ 級", value: "41" },
             { label: "教科書", value: "40+" },
             { label: "用語", value: "320+" },
