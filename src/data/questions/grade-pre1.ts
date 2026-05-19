@@ -714,4 +714,6 @@ export const gradePre1Questions: Question[] = [
     explanation:
       "Wilcoxon 符号順位検定は対応のある t 検定のノンパラ版。差 $D_i$ の **正規性** の仮定を不要にする代わりに「差の分布が中央値まわりに対称」を仮定。順位ベースなので外れ値に強い。",
   },
+  { id: "pre1-q49", category: "多変量", difficulty: 3, question: "**主成分分析(PCA)** で第 1 主成分が **データ分散の 80%** を説明するとき、必要次元数として **最小** と判定できるものを選びなさい。", choices: ["1 次元", "2 次元", "3 次元", "全次元"], correctIndex: 0, explanation: "**累積寄与率 80% 以上** が一般的な目安。第 1 主成分だけで 80% なら 1 次元でデータの大半を説明可能。実務では **85-95% 目安**。" },
+  { id: "pre1-q50", category: "次のステップ", difficulty: 1, question: "統計検定準 1 級合格後の発展ステップとして最も適切なものを選びなさい。", choices: ["統計検定 1 級 / DS エキスパート / 三大クラウド ML", "ITパスポート", "簿記", "再受験"], correctIndex: 0, explanation: "**準 1 級 → 1 級(数理深掘り)・ DS Expert(因果 / Bayes / MLOps)・ AWS MLA / Azure DP-100 / GCP Pro MLE** で実務 ML 拡張。" },
 ];
