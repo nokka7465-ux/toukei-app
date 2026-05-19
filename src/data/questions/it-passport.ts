@@ -311,4 +311,144 @@ export const itPassportQuestions: Question[] = [
     explanation:
       "ビッグデータの **3V = Volume / Variety / Velocity**。Veracity(正確性)を加えた 4V、Value(価値)を加えた 5V もある。",
   },
+  {
+    id: "ip-q21",
+    category: "経営戦略",
+    difficulty: 2,
+    question:
+      "**SWOT 分析** の 4 要素として正しいものを選びなさい。",
+    choices: [
+      "Strengths / Weaknesses / Opportunities / Threats",
+      "Sales / Workflow / Outcomes / Targets",
+      "Strategy / Workforce / Operations / Tools",
+      "Speed / Workflow / Output / Time",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**SWOT = 強み / 弱み(内部)+ 機会 / 脅威(外部)** の 4 象限。内外と正負の組合せで自社環境を整理する経営戦略フレームワーク。",
+  },
+  {
+    id: "ip-q22",
+    category: "マネジメント",
+    difficulty: 2,
+    question:
+      "**アジャイル開発** の代表的な手法として **誤っているもの** を選びなさい。",
+    choices: ["スクラム", "XP(Extreme Programming)", "カンバン", "ウォーターフォール"],
+    correctIndex: 3,
+    explanation:
+      "**ウォーターフォールは伝統的な逐次型開発** でアジャイルではない。アジャイルは **スクラム / XP / カンバン / Lean / Crystal** などの軽量反復型手法群。",
+  },
+  {
+    id: "ip-q23",
+    category: "AI",
+    difficulty: 2,
+    question:
+      "AI の **教師あり学習** に該当するものを選びなさい。",
+    choices: [
+      "ラベル付きデータから入力 → 出力の関係を学習する",
+      "ラベルなしデータから自動でグループ化する",
+      "報酬を最大化する行動を学習する",
+      "ランダムにデータを選ぶ",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**教師あり学習 = ラベル付きデータで学習**(分類 / 回帰)。教師なし学習 = ラベルなし(クラスタリング / 次元削減)、強化学習 = 報酬最大化。",
+  },
+  {
+    id: "ip-q24",
+    category: "AI",
+    difficulty: 2,
+    question:
+      "**生成 AI(Generative AI)** が **直接生成できない** ものを選びなさい。",
+    choices: ["テキスト", "画像", "音声", "実物の商品"],
+    correctIndex: 3,
+    explanation:
+      "生成 AI は **デジタルコンテンツ(テキスト / 画像 / 音声 / 動画 / コード / 3D)** を生成。**実物の商品は 3D プリンタや工場が必要**。AI は『設計図』までは作れる。",
+  },
+  {
+    id: "ip-q25",
+    category: "セキュリティ",
+    difficulty: 2,
+    question:
+      "**フィッシング詐欺** の典型的な手口を選びなさい。",
+    choices: [
+      "本物そっくりのメール / サイトで認証情報を盗む",
+      "DDoS 攻撃でサーバを止める",
+      "Web カメラを物理的に盗む",
+      "プリンタの紙詰まりを起こす",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**フィッシング** は **正規企業を装ったメール / SMS / Web サイト** で ID / パスワード / カード番号を入力させる詐欺。多要素認証 ・ パスワードマネージャ ・ URL 確認が対策。",
+  },
+  {
+    id: "ip-q26",
+    category: "ネットワーク",
+    difficulty: 2,
+    question:
+      "**Wi-Fi(無線 LAN)の暗号化方式** で最も新しく安全な規格を選びなさい。",
+    choices: ["WEP", "WPA", "WPA2", "WPA3"],
+    correctIndex: 3,
+    explanation:
+      "**WPA3(2018〜)** が最新 ・ 最も安全。WEP / WPA / WPA2 と進化。**WEP は既に脆弱で実用不可**、WPA2 は WPS 脆弱性 ・ KRACK 攻撃あり、WPA3 推奨。",
+  },
+  {
+    id: "ip-q27",
+    category: "DB",
+    difficulty: 2,
+    question:
+      "リレーショナル DB の **正規化の目的** として最も適切なものを選びなさい。",
+    choices: [
+      "データの重複を減らし更新異常を防ぐ",
+      "テーブル数を最小化する",
+      "SQL を高速化する",
+      "ストレージを増やす",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**正規化はデータ重複と更新異常を防ぐ**(第 1 → 第 2 → 第 3 → BCNF と段階化)。**ただし JOIN が増えるためパフォーマンス的には逆に遅くなることも**(DWH では非正規化が定石)。",
+  },
+  {
+    id: "ip-q28",
+    category: "クラウド",
+    difficulty: 2,
+    question:
+      "**SaaS の代表例** として最も適切なものを選びなさい。",
+    choices: [
+      "Microsoft 365 / Salesforce / Google Workspace",
+      "AWS EC2",
+      "Azure Virtual Machines",
+      "Linux Kernel",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**SaaS = アプリケーションそのものをクラウドで利用**(Office / CRM / Slack / Salesforce 等)。EC2 / Azure VM は **IaaS**、Linux Kernel は OS。",
+  },
+  {
+    id: "ip-q29",
+    category: "法令",
+    difficulty: 3,
+    question:
+      "**個人情報保護法** で『要配慮個人情報』に該当するものを選びなさい。",
+    choices: ["人種 ・ 信条 ・ 病歴 ・ 犯罪歴", "氏名", "電話番号", "メールアドレス"],
+    correctIndex: 0,
+    explanation:
+      "**要配慮個人情報 = 不当な差別 ・ 偏見が生じる恐れがある情報**(人種 / 信条 / 病歴 / 犯罪歴 / 障害 / 遺伝子等)。原則として **取得には本人の同意が必要**。氏名等は通常の個人情報。",
+  },
+  {
+    id: "ip-q30",
+    category: "DX",
+    difficulty: 2,
+    question:
+      "**RPA(Robotic Process Automation)** の典型的な用途を選びなさい。",
+    choices: [
+      "定型的なパソコン業務(データ入力 ・ 帳票作成)の自動化",
+      "工場の物理ロボットアームの制御",
+      "ペッパー君のような対人サービス",
+      "自動運転の制御",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**RPA はソフトウェアロボット**(UiPath / Power Automate / BizRobo!)が **定型 PC 業務を自動化**。物理ロボットや AI とは異なる位置付け。経理 / 人事 / 営業事務で多用。",
+  },
 ];

@@ -311,4 +311,144 @@ export const basicInfoQuestions: Question[] = [
     explanation:
       "**デジタイゼーション(紙→デジタル化)→ デジタライゼーション(プロセスのデジタル化)→ DX(ビジネスモデル変革)** の 3 段階が経産省の定義。FE / AP の経営戦略分野で頻出。",
   },
+  {
+    id: "fe-q21",
+    category: "アルゴリズム",
+    difficulty: 2,
+    question:
+      "2 分探索木の **平均的な探索時間計算量** を選びなさい。",
+    choices: ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    correctIndex: 1,
+    explanation:
+      "**2 分探索木はバランスが取れていれば O(log n)**(平均)。最悪 O(n)(片側に偏った場合)。AVL 木 ・ Red-Black 木は常に O(log n) を保証する自己平衡木。",
+  },
+  {
+    id: "fe-q22",
+    category: "アルゴリズム",
+    difficulty: 3,
+    question:
+      "ソートアルゴリズムの中で **平均 O(n log n) ・ 最悪 O(n²)** の特性を持つものを選びなさい。",
+    choices: ["バブルソート", "クイックソート", "マージソート", "ヒープソート"],
+    correctIndex: 1,
+    explanation:
+      "**クイックソートは平均 O(n log n) ・ 最悪 O(n²)**(ピボット選択次第)。マージソート ・ ヒープソートは常に O(n log n)、バブルソートは O(n²)。",
+  },
+  {
+    id: "fe-q23",
+    category: "DB",
+    difficulty: 2,
+    question:
+      "SQL の **GROUP BY 句** と一緒に集計結果を絞り込むのに使う句として最も適切なものを選びなさい。",
+    choices: ["WHERE", "HAVING", "ORDER BY", "LIMIT"],
+    correctIndex: 1,
+    explanation:
+      "**HAVING は GROUP BY 後の集計結果を絞り込む**(WHERE は GROUP BY 前の行を絞る)。例: `GROUP BY 部署 HAVING COUNT(*) > 10`。",
+  },
+  {
+    id: "fe-q24",
+    category: "ネットワーク",
+    difficulty: 2,
+    question:
+      "**HTTPS** が使う標準ポート番号を選びなさい。",
+    choices: ["21", "80", "443", "8080"],
+    correctIndex: 2,
+    explanation:
+      "**HTTPS = 443**、HTTP = 80、FTP = 21、SSH = 22、SMTP = 25、DNS = 53、POP3 = 110。FE で頻出のポート番号は暗記必須。",
+  },
+  {
+    id: "fe-q25",
+    category: "セキュリティ",
+    difficulty: 2,
+    question:
+      "**多要素認証(MFA)** で組合せる要素として最も適切なものを選びなさい。",
+    choices: [
+      "知識要素(パスワード)+ 所持要素(スマホ)+ 生体要素(指紋)",
+      "パスワード + パスワード + パスワード",
+      "ID + パスワード + メアド",
+      "ID + ユーザ名 + ニックネーム",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**MFA は『知識要素 / 所持要素 / 生体要素』の異なる種類** を組合せる(同じ種類を複数使っても多要素にはならない)。SMS 認証コード + パスワードは『所持 + 知識』の 2 要素認証。",
+  },
+  {
+    id: "fe-q26",
+    category: "セキュリティ",
+    difficulty: 3,
+    question:
+      "**公開鍵暗号方式** の説明として **誤っているもの** を選びなさい。",
+    choices: [
+      "公開鍵で暗号化、秘密鍵で復号する",
+      "代表アルゴリズムは RSA ・ ECDSA",
+      "鍵共有問題を解決する",
+      "共通鍵暗号より高速",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**公開鍵暗号は共通鍵より遅い**。実運用では **公開鍵で共通鍵を交換 → 以降は共通鍵で高速通信** というハイブリッド方式(TLS 等)。RSA / ECDSA が代表、楕円曲線(ECDSA / Ed25519)は鍵長が短くて高速。",
+  },
+  {
+    id: "fe-q27",
+    category: "コンピュータ構成",
+    difficulty: 3,
+    question:
+      "CPU のキャッシュ階層で **L1 / L2 / L3 の正しい関係** を選びなさい。",
+    choices: [
+      "L1 が最速 ・ 最小、L3 が最遅 ・ 最大",
+      "L3 が最速、L1 が最遅",
+      "全て同じ速度",
+      "L1 と L3 は容量が同じ",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**L1(最速、KB 級)→ L2(中速、数百 KB)→ L3(最遅、MB 級)**。CPU コアに近いほど高速 ・ 小容量。階層的キャッシュで主記憶アクセスを減らす。",
+  },
+  {
+    id: "fe-q28",
+    category: "プロジェクトマネジメント",
+    difficulty: 2,
+    question:
+      "**WBS(Work Breakdown Structure)** の役割として最も適切なものを選びなさい。",
+    choices: [
+      "プロジェクトの作業を階層的に分解 ・ 可視化する",
+      "従業員の人事評価をする",
+      "予算を自動配分する",
+      "顧客満足度を計測する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**WBS** はプロジェクト全体を **大 → 中 → 小タスクへ階層分解** し、見積もり ・ 工数管理 ・ 進捗管理の基盤にする。PMBOK のスコープ管理プロセス。",
+  },
+  {
+    id: "fe-q29",
+    category: "AI / ML",
+    difficulty: 3,
+    question:
+      "機械学習の **過学習(Overfitting)** の典型的な兆候として最も適切なものを選びなさい。",
+    choices: [
+      "学習データで高精度、テストデータで低精度",
+      "学習データで低精度、テストデータで高精度",
+      "両方とも低精度",
+      "両方とも高精度",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**過学習 = 学習データに適合しすぎて汎化性能が落ちる**。対策は **正則化(L1/L2)・ Dropout ・ Early Stopping ・ データ拡張 ・ 単純なモデル化** など。テストデータの精度を必ず確認。",
+  },
+  {
+    id: "fe-q30",
+    category: "クラウド",
+    difficulty: 2,
+    question:
+      "**サーバレスアーキテクチャ** の特徴として **誤っているもの** を選びなさい。",
+    choices: [
+      "リクエスト数 ・ 実行時間に応じた従量課金",
+      "サーバの OS パッチ ・ プロビジョニング不要",
+      "アイドル時もサーバを常時起動",
+      "AWS Lambda / Google Cloud Functions / Azure Functions が代表",
+    ],
+    correctIndex: 2,
+    explanation:
+      "**サーバレスは『アイドル時 0 円 ・ リクエスト時のみ課金 ・ 自動スケール』** が本質。常時起動はサーバレスではない(従来の VM / コンテナ)。コールドスタートが弱点。",
+  },
 ];

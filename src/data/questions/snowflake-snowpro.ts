@@ -321,4 +321,154 @@ export const snowflakeSnowProQuestions: Question[] = [
     explanation:
       "SnowPro Core 合格後は **SnowPro Specialty**(Data Engineer / Data Analyst / Data Scientist / Architect / Administrator)が王道。さらに上位の Advanced 系へも進める。",
   },
+  {
+    id: "snow-q21",
+    category: "アーキテクチャ",
+    difficulty: 3,
+    question:
+      "Snowflake の **マルチクラスタウェアハウス** の主目的として最も適切なものを選びなさい。",
+    choices: [
+      "同時実行クエリ数の増加に応じて自動的にクラスタを起動",
+      "クエリ自体を高速化する",
+      "ストレージを圧縮する",
+      "Time Travel の保持期間を延長",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Multi-cluster Warehouse** は **同時実行クエリ数の増加(キュー発生)に応じて追加クラスタを自動起動**(Auto Scaling)。1 クエリ自体は高速化しない(それは Warehouse サイズの問題)。",
+  },
+  {
+    id: "snow-q22",
+    category: "ロード",
+    difficulty: 3,
+    question:
+      "**継続的なクラウドストレージ → Snowflake への自動取込** に最適な機能を選びなさい。",
+    choices: [
+      "Snowpipe",
+      "COPY INTO",
+      "PUT コマンド",
+      "Internal Stage",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Snowpipe** は **クラウドストレージのイベント通知(S3 / GCS / Azure)を契機にバッチを即時取込**。マイクロバッチ(数秒〜分)で継続ストリーミングを実現。COPY INTO は一括コマンド。",
+  },
+  {
+    id: "snow-q23",
+    category: "Time Travel",
+    difficulty: 3,
+    question:
+      "Standard Edition での **Time Travel 最大保持期間** を選びなさい。",
+    choices: ["1 日", "7 日", "30 日", "90 日"],
+    correctIndex: 0,
+    explanation:
+      "**Standard Edition は最大 1 日**。**Enterprise Edition 以上で最大 90 日** に拡張可能。Time Travel は誤削除復旧 ・ 過去スナップショットクエリ。Fail-safe は Time Travel 終了後の追加 7 日。",
+  },
+  {
+    id: "snow-q24",
+    category: "Cloning",
+    difficulty: 3,
+    question:
+      "Zero-Copy Cloning の特徴として **誤っているもの** を選びなさい。",
+    choices: [
+      "瞬時にデータベース / スキーマ / テーブルを複製",
+      "クローン時点でストレージ容量はほぼゼロ",
+      "クローン後に変更された部分のみ追加ストレージを消費",
+      "メタデータは独立しないため元テーブルへの変更がクローンにも即反映",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**Zero-Copy Cloning** はメタデータポインタ複製 + Copy-on-Write。**元とクローンは独立**(片方の変更は他方に反映されない)。dev / test 環境構築に最適。",
+  },
+  {
+    id: "snow-q25",
+    category: "Data Sharing",
+    difficulty: 3,
+    question:
+      "Snowflake **Secure Data Sharing** に関する説明として **誤っているもの** を選びなさい。",
+    choices: [
+      "データを物理コピーせずに別アカウントへ共有",
+      "共有先は読み取り専用",
+      "Reader Account で Snowflake 未契約の組織にも共有可能",
+      "共有時にデータ複製が発生し追加ストレージ課金",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**Data Sharing は物理コピーなし(ポインタ共有)**。共有元のストレージ ・ コンピュートのみ課金。Reader Account で **Snowflake 未契約の組織へも共有可**。Marketplace の基盤。",
+  },
+  {
+    id: "snow-q26",
+    category: "ストアド",
+    difficulty: 3,
+    question:
+      "Snowflake のストアドプロシージャで **使えない言語** を選びなさい。",
+    choices: ["JavaScript", "Python", "Java / Scala", "C++"],
+    correctIndex: 3,
+    explanation:
+      "Snowflake Stored Procedure 対応言語: **JavaScript ・ Python ・ Java ・ Scala ・ SQL Scripting**。**C++ は対応外**。Snowpark で Python / Java / Scala の DataFrame API も利用可。",
+  },
+  {
+    id: "snow-q27",
+    category: "Cortex AI",
+    difficulty: 3,
+    question:
+      "Snowflake **Cortex AI** の機能として **誤っているもの** を選びなさい。",
+    choices: [
+      "SQL から LLM(Llama / Mistral 等)を呼び出す",
+      "ベクトル埋め込み生成と類似検索",
+      "Cortex Search(マネージド検索)",
+      "Snowflake のテーブル設計を自動生成",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**Cortex AI**: COMPLETE / TRANSLATE / SUMMARIZE / SENTIMENT などの LLM 関数、Cortex Search(マネージド検索 + ベクトル)、EMBED_TEXT。**テーブル設計自動生成は提供されない**。",
+  },
+  {
+    id: "snow-q28",
+    category: "セキュリティ",
+    difficulty: 3,
+    question:
+      "Snowflake の **動的データマスキング** の特徴として最も適切なものを選びなさい。",
+    choices: [
+      "クエリ実行時にロールに応じて列の値をマスクする",
+      "テーブルの行を物理削除する",
+      "テーブルを暗号化する",
+      "クラスタリングキーを最適化する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Dynamic Data Masking** は **`CREATE MASKING POLICY`** で列ごとにロール条件を定義し、クエリ実行時にマスク。**Row Access Policy** で行単位制御も併用可。両者で列 ・ 行レベルの細粒度アクセス制御。",
+  },
+  {
+    id: "snow-q29",
+    category: "コスト",
+    difficulty: 3,
+    question:
+      "Snowflake の **コスト最適化** として **誤っているもの** を選びなさい。",
+    choices: [
+      "Auto Suspend / Resume を有効化",
+      "Warehouse サイズを適切に調整(over-provisioning を避ける)",
+      "結果キャッシュ / Metadata キャッシュを活用",
+      "Always-on で常時最大サイズの Warehouse を起動",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**Always-on + 最大サイズ Warehouse はコスト爆発**。**Auto Suspend(60s〜)・ サイズ適正化 ・ キャッシュ活用** が定石。Multi-cluster は同時実行多い時のみ。",
+  },
+  {
+    id: "snow-q30",
+    category: "Iceberg",
+    difficulty: 3,
+    question:
+      "Snowflake の **Iceberg Tables** に関する説明として最も適切なものを選びなさい。",
+    choices: [
+      "外部クラウドストレージ上の Apache Iceberg 形式テーブルを Snowflake 管理 or 外部 Catalog で利用",
+      "Snowflake 内部のみで動作",
+      "Iceberg は読み取り専用",
+      "Time Travel は使えない",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Snowflake Iceberg Tables**(2024 GA)は **外部ストレージ(S3 / GCS / Azure)+ Iceberg 形式**を Snowflake 管理 or 外部 Catalog で扱う。**マルチエンジン**(Spark / Trino / Athena)からも同じテーブルを利用可。",
+  },
 ];

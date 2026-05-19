@@ -301,4 +301,164 @@ export const dsExpertQuestions: Question[] = [
     explanation:
       "**特徴量ストア(Feast / Tecton など)** は訓練 / 推論で同じ特徴量を再利用するための基盤。これがないと **訓練 / サービング歪み(Training-Serving Skew)** が発生し、モデル精度が劣化する。",
   },
+  {
+    id: "dsx-q21",
+    category: "ベイズ統計",
+    difficulty: 3,
+    question:
+      "MCMC 法のうち **Gibbs Sampling** の特徴として最も適切なものを選びなさい。",
+    choices: [
+      "条件付き分布から各変数を 1 つずつサンプリングする",
+      "提案分布から候補をサンプル → 採択 / 棄却で更新する",
+      "勾配を使ってサンプル軌道を生成する",
+      "ニュートン法で MAP 推定する",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Gibbs Sampling は各変数の『条件付き分布 p(xᵢ|x_-i)』から順次サンプル**。Metropolis-Hastings は提案 / 採択型、Hamiltonian Monte Carlo(HMC)は勾配ベース、Newton 法はサンプリングではない。",
+  },
+  {
+    id: "dsx-q22",
+    category: "因果推論",
+    difficulty: 3,
+    question:
+      "**操作変数法(Instrumental Variable)** が必要となる状況として最も適切なものを選びなさい。",
+    choices: [
+      "未観測の交絡(隠れた交絡因子)が存在する",
+      "サンプルサイズが小さい",
+      "従属変数が多い",
+      "線形性が成り立たない",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**操作変数法**: 未観測交絡因子 U が処置 T と結果 Y の両方に影響する場合、**処置 T には影響するが Y に直接影響しない変数 Z(操作変数)** で因果効果を識別。教育の収益率推定などで頻用。",
+  },
+  {
+    id: "dsx-q23",
+    category: "因果推論",
+    difficulty: 3,
+    question:
+      "ランダム化比較試験(RCT)が **倫理的 ・ 実務的に不可能** なときに、**観察データから処置効果を推定** する代表的手法として **誤っているもの** を選びなさい。",
+    choices: [
+      "傾向スコアマッチング(PSM)",
+      "差の差(Difference-in-Differences、DiD)",
+      "回帰不連続デザイン(RDD)",
+      "単純な相関係数",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**観察データの因果推論手法**: PSM ・ DiD ・ RDD ・ Synthetic Control ・ IV など。**単純な相関は因果ではない**(相関 ≠ 因果)。",
+  },
+  {
+    id: "dsx-q24",
+    category: "時系列",
+    difficulty: 3,
+    question:
+      "ARIMA(p, d, q)モデルの **d** が表すものとして最も適切なものを選びなさい。",
+    choices: [
+      "差分の階数(定常化に必要な階差)",
+      "自己回帰の次数",
+      "移動平均の次数",
+      "季節周期",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**ARIMA(p, d, q)**: p = AR 次数、d = 差分階数(階差で定常化)、q = MA 次数。季節性は SARIMA(p,d,q)(P,D,Q)_s の (P,D,Q,s)で表す。",
+  },
+  {
+    id: "dsx-q25",
+    category: "ベイズ",
+    difficulty: 3,
+    question:
+      "**変分推論(Variational Inference)** の特徴として最も適切なものを選びなさい。",
+    choices: [
+      "事後分布を近似する分布族の中で KL ダイバージェンスを最小化する",
+      "MCMC より遅いが正確",
+      "事後分布を厳密に計算する",
+      "勾配計算を不要にする",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**変分推論** は事後分布 p(θ|D) を扱える分布族 q(θ) で近似し、**KL(q || p) を最小化** する最適化問題に帰着。MCMC より高速 ・ スケーラブルだが近似。VAE の理論的基盤。",
+  },
+  {
+    id: "dsx-q26",
+    category: "DL",
+    difficulty: 3,
+    question:
+      "**Transformer** の Multi-Head Attention で、**Head 数を増やす主目的** として最も適切なものを選びなさい。",
+    choices: [
+      "異なる表現空間で並列に Attention を計算し多様な関係を捉える",
+      "学習データを増やす",
+      "GPU メモリを節約する",
+      "ハイパーパラメータを減らす",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Multi-Head Attention** は **異なる射影行列で並列に Attention を計算**(各 Head が異なる関係を学習)し結果を結合。Head ごとに『構文的依存』『長距離関係』などを分担する効果。",
+  },
+  {
+    id: "dsx-q27",
+    category: "DL",
+    difficulty: 3,
+    question:
+      "**Batch Normalization** が学習を安定化させる主な理由として最も適切なものを選びなさい。",
+    choices: [
+      "Internal Covariate Shift を抑制し、勾配スケールを安定化",
+      "パラメータ数を減らす",
+      "GPU メモリを節約する",
+      "活性化関数を不要にする",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**BatchNorm** はミニバッチ単位で平均 0 ・ 分散 1 に正規化 + スケール / シフト学習。**Internal Covariate Shift 抑制 ・ 勾配スケール安定化 ・ 高学習率許容**。Layer Norm は Transformer で標準。",
+  },
+  {
+    id: "dsx-q28",
+    category: "評価",
+    difficulty: 3,
+    question:
+      "**Stratified K-Fold Cross Validation** を使う最も適切な場面を選びなさい。",
+    choices: [
+      "クラス不均衡データの分類問題",
+      "時系列データの予測",
+      "回帰タスク全般",
+      "サンプルサイズが大きすぎる場合",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Stratified K-Fold** は **各 Fold のクラス比率を元データと同じに保つ** ため不均衡データに必須。**時系列は TimeSeriesSplit**(リーク回避)、回帰は通常 K-Fold で OK。",
+  },
+  {
+    id: "dsx-q29",
+    category: "次元削減",
+    difficulty: 3,
+    question:
+      "**UMAP(Uniform Manifold Approximation and Projection)** の特徴として最も適切なものを選びなさい。",
+    choices: [
+      "局所構造と大域構造を両立し、t-SNE より高速",
+      "PCA より遅いが線形",
+      "ラベル必須の教師あり",
+      "勾配計算不要",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**UMAP** は **位相幾何ベースの非線形次元削減**。**局所構造保存(t-SNE 同等)+ 大域構造保存(t-SNE より良い)+ 高速**(t-SNE より 10× 速い)。可視化 ・ 前処理で標準化。",
+  },
+  {
+    id: "dsx-q30",
+    category: "監視",
+    difficulty: 3,
+    question:
+      "**コンセプトドリフト(Concept Drift)** の説明として最も適切なものを選びなさい。",
+    choices: [
+      "入力 X と出力 Y の関係 P(Y|X) が時間と共に変化する",
+      "入力 X の分布のみが変化する(共変量シフト)",
+      "学習データの量が増える",
+      "モデルの重みが乱数に近づく",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Concept Drift = P(Y|X) の変化**(顧客嗜好の変化 ・ 不正パターンの進化など)。**Covariate Shift(共変量シフト)= P(X) の変化**。両者を区別して監視 ・ 再学習トリガを設計する。",
+  },
 ];

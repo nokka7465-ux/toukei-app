@@ -321,4 +321,159 @@ export const awsSaaQuestions: Question[] = [
     explanation:
       "**Compute Savings Plans** は EC2 / Fargate / Lambda のいずれにも適用できる柔軟な予約割引(1 / 3 年コミット)。RI は EC2 のインスタンスタイプ ・ リージョン固定で柔軟性が低い。",
   },
+  {
+    id: "saa-q21",
+    category: "VPC",
+    difficulty: 3,
+    question:
+      "VPC のサブネット設計で **インターネット直接アクセスが不要なデータベース** を配置する場所として最も適切なものを選びなさい。",
+    choices: [
+      "Public Subnet",
+      "Private Subnet + NAT Gateway 経由でアウトバウンドのみ",
+      "Internet Gateway 直接接続",
+      "VPC Peering",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**Private Subnet + NAT Gateway** で **インバウンド遮断 ・ アウトバウンド許可**(セキュリティパッチ取得など)。Public Subnet は Web Server 用。VPC Peering はネットワーク接続で別概念。",
+  },
+  {
+    id: "saa-q22",
+    category: "S3",
+    difficulty: 3,
+    question:
+      "**S3 オブジェクトを誤って削除した際の復旧** に最も役立つ機能を選びなさい。",
+    choices: [
+      "S3 Versioning + MFA Delete",
+      "S3 Replication",
+      "S3 Inventory",
+      "S3 Access Logging",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**S3 Versioning** でオブジェクトの過去バージョンを保持 → 削除しても復旧可能。**MFA Delete** で完全削除時に MFA 必須化、誤操作 ・ 内部脅威対策。Replication は災害対策、Inventory はメタデータレポート。",
+  },
+  {
+    id: "saa-q23",
+    category: "高可用性",
+    difficulty: 3,
+    question:
+      "RDS の **Multi-AZ Deployment** の主目的として最も適切なものを選びなさい。",
+    choices: [
+      "高可用性 ・ 自動フェイルオーバー(同期レプリケーション)",
+      "読み取り性能向上(非同期レプリケーション)",
+      "コスト削減",
+      "バックアップ自動取得",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Multi-AZ = 別 AZ にスタンバイ + 同期レプリケーション + 自動フェイルオーバー**。読み取り性能向上は **Read Replica**(非同期、複数 AZ / リージョン可)。両者は併用可能。",
+  },
+  {
+    id: "saa-q24",
+    category: "IAM",
+    difficulty: 3,
+    question:
+      "EC2 から S3 にアクセスする際の **ベストプラクティス** として最も適切なものを選びなさい。",
+    choices: [
+      "アクセスキーを EC2 内に保存",
+      "IAM Role を EC2 にアタッチ",
+      "Root アカウントの認証情報を使う",
+      "IAM User のパスワードを使う",
+    ],
+    correctIndex: 1,
+    explanation:
+      "**IAM Role を EC2 インスタンスにアタッチ** + EC2 メタデータ経由で一時クレデンシャル取得が標準。**アクセスキーをコードに埋め込まない** が原則。Root は使用厳禁。",
+  },
+  {
+    id: "saa-q25",
+    category: "災害対策",
+    difficulty: 3,
+    question:
+      "**RPO(Recovery Point Objective)** の定義として最も適切なものを選びなさい。",
+    choices: [
+      "災害時に許容できるデータ損失時間",
+      "災害時に許容できるシステム停止時間",
+      "復旧コストの上限",
+      "復旧チームの人数",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**RPO = 許容データ損失時間**(『何分前まで戻れるか』)。**RTO = 許容停止時間**(『何分で復旧するか』)。両者の組合せで DR 戦略(Backup&Restore / Pilot Light / Warm Standby / Multi-Site)を選定。",
+  },
+  {
+    id: "saa-q26",
+    category: "Auto Scaling",
+    difficulty: 3,
+    question:
+      "EC2 Auto Scaling Group の **正常性チェック** で組合せ可能なものとして **誤っているもの** を選びなさい。",
+    choices: ["EC2 Status Check", "ELB Health Check", "Custom Health Check", "RDS Backup Check"],
+    correctIndex: 3,
+    explanation:
+      "**ASG のヘルスチェック対象**: EC2 Status Check(デフォルト)・ ELB Health Check ・ Custom(API 経由)。RDS Backup は ASG とは無関係。複数を組合せて誤判定を防ぐ。",
+  },
+  {
+    id: "saa-q27",
+    category: "サーバレス",
+    difficulty: 2,
+    question:
+      "**Lambda の冷起動(Cold Start)を緩和する** 設定として最も適切なものを選びなさい。",
+    choices: [
+      "Provisioned Concurrency",
+      "Reserved Concurrency",
+      "Dead Letter Queue",
+      "Lambda Layer",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Provisioned Concurrency** で **指定数の関数インスタンスを常時ウォーム** に保ち冷起動を回避。Reserved Concurrency は上限制御。Lambda Layer は依存共有、DLQ は失敗時の退避。",
+  },
+  {
+    id: "saa-q28",
+    category: "CloudFront",
+    difficulty: 3,
+    question:
+      "**動的コンテンツ + 静的コンテンツ混在の Web サイト** で CloudFront のオリジン設定として最も適切なものを選びなさい。",
+    choices: [
+      "S3(静的)+ ALB(動的)を Behavior でパス分割",
+      "全部 S3 にアップロード",
+      "全部 EC2 のみ",
+      "CloudFront は静的専用なので使えない",
+      ],
+    correctIndex: 0,
+    explanation:
+      "**CloudFront は Behavior でパス別に異なるオリジン**(S3 ・ ALB ・ EC2 ・ カスタム HTTP)に振り分け可能。`/static/*` → S3、`/api/*` → ALB のように設定。動的にも対応。",
+  },
+  {
+    id: "saa-q29",
+    category: "セキュリティ",
+    difficulty: 3,
+    question:
+      "**KMS(Key Management Service)で管理する CMK の種類** として **誤っているもの** を選びなさい。",
+    choices: [
+      "AWS Managed Key(AWS が管理)",
+      "Customer Managed Key(顧客が管理)",
+      "AWS Owned Key(AWS が完全所有、顧客不可視)",
+      "Public Internet Key(誰でも利用可)",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**CMK の 3 種類**: AWS Managed(AWS が自動管理)・ Customer Managed(顧客がローテーション ・ ポリシー制御)・ AWS Owned(完全 AWS 所有 ・ 顧客不可視)。Public Key は KMS の概念ではない。",
+  },
+  {
+    id: "saa-q30",
+    category: "ネットワーク",
+    difficulty: 3,
+    question:
+      "**オンプレミス → AWS 専用ネットワーク** を構築したい。最も適切なサービスを選びなさい。",
+    choices: [
+      "Direct Connect",
+      "Site-to-Site VPN",
+      "Transit Gateway",
+      "PrivateLink",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Direct Connect** は **専用線**(MPLS / 光ファイバ)で安定した高帯域接続。**Site-to-Site VPN** は **インターネット経由の暗号化トンネル**(低コスト、帯域変動)。Transit Gateway は VPC ハブ、PrivateLink はサービス間。",
+  },
 ];
