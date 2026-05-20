@@ -619,5 +619,206 @@ export const basicInfoTextbook: Textbook = {
         },
       ],
     },
+    {
+      id: "ch11",
+      number: 11,
+      title: "FE 2024 改訂と現代エンジニア基礎",
+      overview:
+        "基本情報技術者試験(FE)は 2023 年 4 月から **通年 CBT 化 + 試験範囲改訂**(科目 B のアルゴリズム + 情報セキュリティ重視)。本章は改訂後の出題傾向と、現代エンジニアに必須の補足知識(Git / クラウド / セキュリティ / AI)を整理します。",
+      sections: [
+        {
+          id: "ch11-sec1",
+          number: "11.1",
+          title: "2023 改訂後の試験構成",
+          blocks: [
+            { type: "h3", text: "新試験形式" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**通年 CBT**(随時受験 ・ 結果即時)",
+                "**科目 A**: 60 問 / 90 分 ・ テクノロジ + マネジメント + ストラテジ",
+                "**科目 B**: 20 問 / 100 分 ・ **アルゴリズム + 情報セキュリティ** 中心",
+                "**合格基準**: 各科目 600/1000 点以上",
+              ],
+            },
+            { type: "h3", text: "科目 B の特徴" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**アルゴリズム**: 擬似言語で 1 問あたり 5-10 分の精読が必要",
+                "**情報セキュリティ**: 攻撃手法 ・ 対策 ・ 認証 ・ 暗号化を実践的に",
+                "**ケース問題化**: 単純知識より文脈理解 + 解決策選択",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 科目 B 対策の本質",
+              body: "**擬似言語アルゴリズム** は紙とペンで 1 行ずつトレースする習慣が大事。**配列 / Stack / Queue / 再帰 / 計算量** を反復演習で体に染み込ませる。**情報セキュリティ** は **CIA 三要素 ・ 認証 3 要素 ・ 共通鍵 / 公開鍵 ・ TLS / HTTPS / DKIM / SPF / DMARC** を語れるレベルが目標。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec2",
+          number: "11.2",
+          title: "アルゴリズムと計算量の総まとめ",
+          blocks: [
+            { type: "h3", text: "頻出アルゴリズムの計算量" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**線形探索**: $O(n)$ / **二分探索**: $O(\\log n)$(ソート済必須)",
+                "**バブルソート / 選択ソート / 挿入ソート**: $O(n^2)$",
+                "**マージソート**: $O(n \\log n)$ ・ 安定 ・ 追加メモリ",
+                "**クイックソート**: 平均 $O(n \\log n)$ / 最悪 $O(n^2)$ ・ in-place ・ 不安定",
+                "**ヒープソート**: $O(n \\log n)$ ・ in-place ・ 不安定",
+                "**BFS / DFS**: $O(V + E)$ ・ グラフ探索",
+                "**Dijkstra**(Priority Queue): $O((V+E)\\log V)$",
+                "**動的計画法**: 部分問題のメモ化 ・ Knapsack / LCS / 最短経路",
+              ],
+            },
+            { type: "h3", text: "データ構造の使い分け" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**配列**: 連続メモリ ・ O(1) ランダムアクセス / O(n) 挿入",
+                "**連結リスト**: O(n) アクセス / O(1) 先頭挿入",
+                "**スタック**(LIFO): 関数呼出履歴 / Undo",
+                "**キュー**(FIFO): タスクキュー / BFS",
+                "**ハッシュテーブル**: 平均 O(1) 検索 / 衝突解決(チェイン or オープンアドレス)",
+                "**ヒープ**(Priority Queue): O(log n) 挿入削除 / 最大 ・ 最小取出 O(log n)",
+                "**B+ Tree**: O(log n) ・ 範囲スキャン ・ DB Index で活躍",
+                "**Trie**: 文字列検索 ・ 辞書 / 検索エンジン",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch11-sec3",
+          number: "11.3",
+          title: "現代開発の必須スキル ─ Git / CI/CD / コンテナ",
+          blocks: [
+            {
+              type: "p",
+              text: "FE 改訂で **DevOps / アジャイル / Git / CI/CD / コンテナ** の出題比重が増加。現代エンジニアの実務基礎として押さえます。",
+            },
+            { type: "h3", text: "Git の主要コマンド" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**clone / init / add / commit / push / pull**",
+                "**branch / checkout / merge / rebase / cherry-pick**",
+                "**stash / reset / revert / log / blame / diff**",
+                "**Pull Request / Code Review / GitHub Flow / Trunk-Based Development**",
+              ],
+            },
+            { type: "h3", text: "CI/CD パイプライン" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**CI**(Continuous Integration): コミット毎にビルド + テスト自動実行",
+                "**CD**(Continuous Delivery / Deployment): 自動デプロイ",
+                "**ツール**: GitHub Actions / GitLab CI / Jenkins / CircleCI / Azure DevOps",
+                "**GitOps**: Argo CD / Flux ・ Git を Source of Truth に",
+              ],
+            },
+            { type: "h3", text: "コンテナと Kubernetes" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Docker**: アプリ + 依存を Image にパッケージ → どこでも同じ動作",
+                "**Image / Container / Registry**: ECR / GCR / Docker Hub / Harbor",
+                "**Kubernetes(K8s)**: Pod / Deployment / Service / Ingress / ConfigMap / Secret",
+                "**Managed K8s**: EKS / AKS / GKE",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch11-sec4",
+          number: "11.4",
+          title: "クラウド基礎(IaaS / PaaS / SaaS / FaaS)",
+          blocks: [
+            {
+              type: "p",
+              text: "FE 改訂でクラウドの出題増。3 大クラウド(AWS / Azure / GCP)の代表サービス + 課金モデル + 責任共有を押さえます。",
+            },
+            { type: "h3", text: "サービスモデルと責任範囲" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**IaaS**(VM / Storage / Network): 顧客 = OS + ミドルウェア + アプリ + データ",
+                "**PaaS**: 顧客 = アプリ + データ ・ クラウド = OS + ランタイム + DB",
+                "**SaaS**: 顧客 = 設定 + データのみ ・ クラウド = 全インフラ + アプリ",
+                "**FaaS / Serverless**: 顧客 = コード + Config のみ ・ Auto Scaling + 従量課金",
+              ],
+            },
+            { type: "h3", text: "3 大クラウドの代表サービス対応表" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**VM**: EC2 / Azure VM / Compute Engine",
+                "**Object Storage**: S3 / Blob Storage / Cloud Storage",
+                "**Managed DB**: RDS / Azure SQL / Cloud SQL",
+                "**Serverless**: Lambda / Functions / Cloud Functions",
+                "**Container**: ECS-EKS / AKS / GKE",
+                "**DWH**: Redshift / Synapse / BigQuery",
+                "**LLM API**: Bedrock / Azure OpenAI / Vertex AI Gemini",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch11-sec5",
+          number: "11.5",
+          title: "AI / セキュリティの現代トピック",
+          blocks: [
+            {
+              type: "p",
+              text: "FE 改訂で **AI 全般(生成 AI / 機械学習)+ ゼロトラスト + ランサムウェア** の出題が増加。社会人 IT リテラシとして押さえます。",
+            },
+            { type: "h3", text: "AI / 生成 AI トピック" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**機械学習 3 種**: 教師あり / 教師なし / 強化学習",
+                "**ディープラーニング**: NN / CNN(画像) / RNN-LSTM(系列) / Transformer(LLM)",
+                "**生成 AI / LLM**: ChatGPT / Claude / Gemini / Copilot",
+                "**RAG**: 社内文書を AI に組合せ ・ ハルシネーション抑制",
+                "**プロンプトエンジニアリング**: Zero-shot / Few-shot / CoT",
+                "**AI 倫理 / 規制**: EU AI Act / AI 事業者ガイドライン",
+              ],
+            },
+            { type: "h3", text: "現代セキュリティトピック" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**ゼロトラスト**: 境界防御から都度認証 / 認可 / Context 評価へ",
+                "**ランサムウェア**: 3-2-1 バックアップ + Air-Gap + EDR + 教育",
+                "**サプライチェーン攻撃**: SolarWinds / Log4Shell / xz utils など",
+                "**多要素認証(MFA)**: Passkey / FIDO2 / TOTP",
+                "**SOC / SIEM / XDR**: ログ集約 + 異常検知 + 統合対応",
+                "**OWASP Top 10**: Web アプリ脆弱性の標準",
+              ],
+            },
+            { type: "h3", text: "結びに ─ FE 11 章の完結" },
+            {
+              type: "p",
+              text: "10 章で従来の FE 範囲、本章で 2023 改訂 + 現代エンジニアスキル(Git / CI/CD / Container / Cloud / AI / セキュリティ)まで広げました。**FE 合格は IT エンジニアの出発点**。実務で手を動かしながら、応用情報 ・ クラウド認定 ・ G 検定など段階的に伸ばしてください。",
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

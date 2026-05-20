@@ -623,5 +623,165 @@ export const azureDp203Textbook: Textbook = {
         },
       ],
     },
+    {
+      id: "ch11",
+      number: 11,
+      title: "Microsoft Fabric 時代の Azure Data Engineering",
+      overview:
+        "2023-2024 で登場した **Microsoft Fabric** は Synapse / Power BI / Data Factory / OneLake を統合した次世代分析プラットフォーム。DP-203 後継の **DP-600 / DP-700** にもつながる重要トピックです。",
+      sections: [
+        {
+          id: "ch11-sec1",
+          number: "11.1",
+          title: "Microsoft Fabric の全体像",
+          blocks: [
+            {
+              type: "p",
+              text: "**Microsoft Fabric**(2023 GA)は **Data Factory + Synapse + Power BI + Data Activator + AI** を 1 つの SaaS に統合した次世代分析プラットフォーム。**SaaS + OneLake + Capacity Unit(CU)** モデルが特徴です。",
+            },
+            { type: "h3", text: "Fabric の構成 7 ワークロード" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Data Engineering**(Spark + Notebook + Lakehouse)",
+                "**Data Factory**(Pipeline + Dataflow Gen2 + Connectors)",
+                "**Data Warehouse**(T-SQL ベース ・ Full ACID Tx)",
+                "**Real-Time Intelligence**(Eventstream + KQL Database + Reflex)",
+                "**Data Science**(Notebook + AutoML + MLflow)",
+                "**Power BI**(Semantic Model + Report + Dashboard)",
+                "**Data Activator**(イベント駆動アラート + アクション)",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 Fabric vs Synapse",
+              body: "**Fabric**: SaaS / CU 単位 / OneLake / Power BI 統合。**Synapse**: PaaS / Pool 単位 / ADLS Gen2 中心 / Power BI 連携。**現状は併存** だが、**新規プロジェクトは Fabric 推奨**(Microsoft 戦略)。DP-203 後継の **DP-600 / DP-700** は Fabric 中心です。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec2",
+          number: "11.2",
+          title: "OneLake と Lakehouse",
+          blocks: [
+            {
+              type: "p",
+              text: "**OneLake** は **テナント全体の単一論理データレイク**。「Data の OneDrive」と Microsoft が呼ぶように、組織で 1 つだけ存在し、全 Fabric ワークロードが共有します。物理的には Azure ADLS Gen2 上に構築されています。",
+            },
+            { type: "h3", text: "OneLake の主要機能" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**OneLake Shortcut**: 物理コピーなしで ADLS / S3 / GCS / Workspace を参照",
+                "**Mirroring**(2024): Cosmos DB / Snowflake / SQL DB を OneLake に自動同期",
+                "**Delta-Parquet ネイティブ**: 全 Workload が Delta Lake 形式を共有",
+                "**Iceberg Shortcut**(2024): Open Table Format 対応",
+              ],
+            },
+            { type: "h3", text: "Lakehouse vs Warehouse" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Lakehouse**: Spark / Notebook / 半構造化対応 / Bronze-Silver-Gold(Medallion)",
+                "**Warehouse**: T-SQL 完全互換 / Multi-Table ACID Tx / Stored Procedure",
+                "**両者とも OneLake 上の Delta** で **SQL Endpoint 経由で相互参照可能**",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch11-sec3",
+          number: "11.3",
+          title: "Direct Lake モードと Power BI 統合",
+          blocks: [
+            {
+              type: "p",
+              text: "**Direct Lake** は Fabric Semantic Model 専用のストレージモード。OneLake Delta を **Import なしで Vertipaq 速度** でクエリし、**Import 並の速度 + DirectQuery 並の鮮度** を実現します。",
+            },
+            { type: "h3", text: "3 つの Storage Mode の使い分け" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Import**: Vertipaq に全データロード ・ 最速 ・ 鮮度低(Refresh 必要)",
+                "**DirectQuery**: クエリ毎にデータソースにクエリ ・ 鮮度高 ・ 遅い",
+                "**Direct Lake**: OneLake から必要時のみ列読込 ・ 速度 + 鮮度両立 ・ Fabric 専用",
+                "**Composite Model**: 上記を混在(Hybrid Tables)",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch11-sec4",
+          number: "11.4",
+          title: "Real-Time Intelligence(Eventstream + KQL DB)",
+          blocks: [
+            {
+              type: "p",
+              text: "**Real-Time Intelligence**(2024 GA)は **Eventstream + Eventhouse(KQL DB) + Real-Time Dashboard + Reflex** で構成される Fabric のストリーミング統合です。",
+            },
+            { type: "h3", text: "コンポーネント" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Eventstream**: Event Hubs / Kafka / IoT / Custom App 等を取込 → KQL DB / Lakehouse / Reflex に配信",
+                "**Eventhouse / KQL Database**: Azure Data Explorer の Fabric 統合版 ・ KQL クエリ",
+                "**Real-Time Dashboard**: KQL ベースのリアルタイム可視化",
+                "**Reflex / Data Activator**: 条件発火(閾値超過で Teams / Power Automate / Function 起動)",
+              ],
+            },
+            {
+              type: "practical",
+              title: "Stream Analytics との関係",
+              body: "**Azure Stream Analytics**(従来の SaaS)は今後も存続するが、**Fabric では Eventstream + KQL が標準**。**Synapse 統合よりも Fabric 内完結**で構築するのが新規プロジェクトの第一選択になりつつあります。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec5",
+          number: "11.5",
+          title: "Copilot in Fabric と DP-203 → DP-600/700 のキャリアパス",
+          blocks: [
+            {
+              type: "p",
+              text: "**Copilot in Fabric**(F64+ Capacity / Premium で利用可)は、自然言語からノートブック / Data Pipeline / SQL クエリ / Semantic Model / レポート / DAX を自動生成します。アナリスト / DE の生産性を大幅向上させる機能です。",
+            },
+            { type: "h3", text: "Copilot 利用例" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Notebook**: PySpark / SQL コード生成 ・ Markdown 説明追加",
+                "**Data Factory**: 「Salesforce から Sales 全件を Bronze に取込」と指示 → Pipeline 生成",
+                "**Data Warehouse**: T-SQL 自動生成 + クエリ最適化提案",
+                "**Power BI**: Visual + DAX + Story 自動生成",
+                "**Real-Time**: KQL クエリ + Dashboard 自動生成",
+              ],
+            },
+            { type: "h3", text: "DP-203 後継のキャリアパス" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**DP-600**: Fabric Analytics Engineer Associate(2024 リリース)",
+                "**DP-700**: Fabric Data Engineer Associate(2024 リリース)",
+                "**DP-100**: Azure Data Scientist Associate(ML 方向)",
+                "**AZ-305**: Azure Solutions Architect Expert(全体設計)",
+                "**AI-102**: Azure AI Engineer Associate(AI 統合)",
+              ],
+            },
+            { type: "h3", text: "結びに ─ DP-203 11 章の完結" },
+            {
+              type: "p",
+              text: "10 章で従来の Synapse / ADF / Stream Analytics、本章で Fabric / OneLake / Real-Time / Copilot を扱いました。**Azure Data Engineering は SaaS + AI + Open Format の方向へ進化** しています。DP-203 を起点に、DP-600 / DP-700 の取得や Fabric 実プロジェクトでスキルを更新してください。",
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

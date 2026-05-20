@@ -611,5 +611,167 @@ export const azureDp100Textbook: Textbook = {
         },
       ],
     },
+    {
+      id: "ch11",
+      number: 11,
+      title: "Azure AI Foundry と Azure ML の統合",
+      overview:
+        "Azure ML は 2024-2025 で Azure AI Foundry(旧 AI Studio)と統合進行中。Hub + Project 階層、Model Catalog、Prompt Flow、Fine-tuning など、DP-100 受験者が押さえるべき新動向を整理します。",
+      sections: [
+        {
+          id: "ch11-sec1",
+          number: "11.1",
+          title: "Azure AI Foundry とは",
+          blocks: [
+            {
+              type: "p",
+              text: "**Azure AI Foundry**(2024 末リブランド ・ 旧 Azure AI Studio)は、生成 AI + 古典 ML + Agent + RAG + Fine-tune を統合した Microsoft の AI 開発 SaaS です。**Hub(管理)+ Project(開発)** の 2 階層で、Azure ML Workspace と相互運用可能です。",
+            },
+            { type: "h3", text: "Foundry と Azure ML の役割分担" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Foundry**: Generative AI / Agent / Foundation Model / Prompt Flow / Eval が中心",
+                "**Azure ML**: Classical ML / AutoML / Custom Training / 大規模分散学習 / Inference が中心",
+                "**Hub レベル**で Azure ML Workspace を Connection として登録 → Foundry Project から参照可",
+                "**Prompt Flow** は Azure ML Studio / Foundry / VS Code 拡張のすべてで利用可能(統一)",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 試験での問われ方",
+              body: "DP-100 は 2024 末からの改訂で **Foundry / 生成 AI / RAG / Fine-tuning** の比重が増加。**「Generative AI が絡む課題 → Foundry / Azure OpenAI」「Classical ML / カスタム学習 → Azure ML」** の判断が頻出。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec2",
+          number: "11.2",
+          title: "Prompt Flow による LLM ワークフロー開発",
+          blocks: [
+            {
+              type: "p",
+              text: "**Prompt Flow** は LLM ワークフロー(DAG)を GUI / Code で開発するツール。LangChain / LangGraph の Microsoft 公式版に相当します。",
+            },
+            { type: "h3", text: "Prompt Flow の主要機能" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Flow DAG**: Python / LLM / Tool ノードを Graph 接続",
+                "**Variant**: 同 Node の Prompt バリエーション比較(A/B テスト風)",
+                "**Bulk Test**: テストデータセットで一括評価",
+                "**Evaluation Flow**: LLM-as-Judge + Built-in Metric 自動採点",
+                "**Endpoint Deploy**: REST API として 1-Click デプロイ",
+                "**Tracing**(OpenTelemetry 互換): Token / Cost / Latency / I/O を Trace",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch11-sec3",
+          number: "11.3",
+          title: "Azure OpenAI と Foundation Models",
+          blocks: [
+            {
+              type: "p",
+              text: "**Azure OpenAI Service** は GPT-4o / o1 / o3 / DALL-E / Whisper を Azure 経由で提供し、**顧客データは Foundation Model 再学習に使用されない**保証 + Region 選択 + Compliance(HIPAA / GDPR / FedRAMP)対応です。",
+            },
+            { type: "h3", text: "Foundry Model Catalog" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Azure OpenAI**(GPT-4o / 4o-mini / o1 / o3-mini / DALL-E 3 / Embeddings)",
+                "**Microsoft Phi**(Phi-3 / 3.5 / 4 ・ 小規模 ・ OSS)",
+                "**Meta Llama**(Llama 3 / 3.1 / 3.2 / 3.3 ・ MaaS)",
+                "**Mistral**(Mistral Large / Codestral)",
+                "**DeepSeek-V3 / R1**(2024-2025 追加)",
+                "**Hugging Face Open Models**(数千)",
+              ],
+            },
+            { type: "h3", text: "デプロイ形態" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Pay-as-you-go(Standard)**: Token 単価",
+                "**Provisioned Throughput(PTU)**: 容量予約 + 一定 RPM 保証 + Reserved 割引",
+                "**Serverless API(MaaS)**: Pay-per-token + マネージド SLA",
+                "**Managed Compute**: 専用 VM へデプロイ ・ Custom Container 可能",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch11-sec4",
+          number: "11.4",
+          title: "Fine-tuning と Distillation",
+          blocks: [
+            {
+              type: "p",
+              text: "Foundry / Azure ML は **GPT-3.5 / 4o / 4o-mini / Llama / Phi / Mistral** など多くのモデルで Fine-tuning に対応。SFT / DPO / RFT が選択可能で、Azure ML Pipelines と連携できます。",
+            },
+            { type: "h3", text: "Fine-tuning 方式" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Supervised Fine-Tuning(SFT)**: 教師あり(プロンプト + 完了の JSONL)",
+                "**DPO**(Direct Preference Optimization): 嗜好データで RLHF 風最適化",
+                "**RFT**(Reinforcement Fine-Tuning, o1/o3 系): 検証可能タスクで強化学習",
+                "**LoRA Adapter**: マネージドで実行",
+              ],
+            },
+            { type: "h3", text: "Distillation(2024+ Preview)" },
+            {
+              type: "p",
+              text: "**Teacher Model**(GPT-4o 等)の出力で **Student Model**(GPT-4o-mini 等)を Fine-tune し、**精度を保ったまま 10x 安価 / 高速** にする手法。Azure ML Pipelines で実装パターンが提供されています。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec5",
+          number: "11.5",
+          title: "Responsible AI と Content Safety",
+          blocks: [
+            {
+              type: "p",
+              text: "Microsoft Responsible AI 6 原則(Fairness / Reliability & Safety / Privacy & Security / Inclusiveness / Transparency / Accountability)を実装するために、Azure ML / Foundry には複数のツールが用意されています。",
+            },
+            { type: "h3", text: "Azure AI Content Safety" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Text / Image Harm Detection**: Hate / Sexual / Violence / Self-Harm × 4 段階",
+                "**Prompt Shields**: Direct / Indirect Prompt Injection 検出",
+                "**Groundedness Detection**: RAG での乖離検出 → ハルシネーション抑制",
+                "**Protected Material Detection**: 著作権付きコード / テキストの出力検出",
+                "**Custom Categories**: 自社固有の禁止トピックを学習",
+              ],
+            },
+            { type: "h3", text: "Responsible AI Dashboard と Model Monitor" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Error Analysis**: 誤分類クラスタを可視化",
+                "**Interpretability**: SHAP / Counterfactual / Feature Importance",
+                "**Fairness**: Demographic Parity / Equalized Odds(Fairlearn 統合)",
+                "**Causal Analysis**: 介入効果の推定",
+                "**Model Monitor**: Data Drift / Prediction Drift / Feature Attribution Drift",
+              ],
+            },
+            { type: "h3", text: "結びに ─ DP-100 11 章の完結" },
+            {
+              type: "p",
+              text: "10 章で Azure ML の基本、本章で Foundry / 生成 AI / Responsible AI まで広げました。DP-100 は **古典 ML + 生成 AI + MLOps + Responsible AI** の総合試験へ進化中。本書を起点に Azure 公式ドキュメントの最新化を継続してください。",
+            },
+          ],
+        },
+      ],
+    },
   ],
 };
