@@ -120,7 +120,7 @@ export default function Home() {
           className="mt-7 flex flex-wrap justify-center gap-2 text-[11px] ui-sans"
         >
           {[
-            { label: "演習問題", value: "2,700+" },
+            { label: "演習問題", value: "2,700+", emphasis: true },
             { label: "検定 ・ 級", value: "41" },
             { label: "教科書", value: "40+" },
             { label: "用語", value: "320+" },
@@ -130,7 +130,11 @@ export default function Home() {
           ].map((m) => (
             <li
               key={m.label}
-              className="px-3 py-1 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]/70 backdrop-blur-sm"
+              className={
+                m.emphasis
+                  ? "px-3 py-1 rounded-full border border-[var(--accent)]/60 bg-[var(--highlight)]/80 backdrop-blur-sm shadow-[0_1px_0_rgba(0,0,0,0.04)]"
+                  : "px-3 py-1 rounded-full border border-[var(--page-border-strong)] bg-[var(--page)]/70 backdrop-blur-sm"
+              }
             >
               <strong className="text-[var(--accent)]">{m.value}</strong>{" "}
               <span className="text-[var(--muted-strong)]">{m.label}</span>
