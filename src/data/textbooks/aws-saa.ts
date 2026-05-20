@@ -740,5 +740,87 @@ export const awsSaaTextbook: Textbook = {
         },
       ],
     },
+    {
+      id: "ch11",
+      number: 11,
+      title: "2024-2025 AWS 最新動向(SAA-C03 改訂対応)",
+      overview:
+        "SAA-C03 改訂後の出題傾向と、AWS の 2024-2025 最新サービス(Bedrock / Q / Nova / Aurora DSQL / Glue 5 / VPC Lattice 等)を整理します。",
+      sections: [
+        {
+          id: "ch11-sec1",
+          number: "11.1",
+          title: "Generative AI 系の新出題",
+          blocks: [
+            { type: "p", text: "SAA-C03 は GenAI 関連の比重が増加しています(Bedrock / Q / Nova 系)。" },
+            { type: "list", style: "bullet", items: [
+              "**Amazon Bedrock**: Foundation Model マネージド API(Claude / Llama / Nova / Mistral / Cohere)",
+              "**Bedrock Knowledge Bases**: マネージド RAG(2024+ Hierarchical / GraphRAG / Reranking)",
+              "**Bedrock Agents**: Action Group + Guardrails + Multi-Agent Collaboration",
+              "**Amazon Q ファミリ**: Q Developer / Q Business / Q in QuickSight / Q in Connect / Q for Migration",
+              "**Amazon Nova**: Micro / Lite / Pro / Premier / Canvas / Reel(2024 re:Invent)",
+            ] },
+          ],
+        },
+        {
+          id: "ch11-sec2",
+          number: "11.2",
+          title: "Database / Storage の新サービス",
+          blocks: [
+            { type: "list", style: "bullet", items: [
+              "**Aurora DSQL**(2024 re:Invent Preview): Serverless 分散 SQL / 99.999% Multi-Region SLA",
+              "**Aurora Limitless**: 自動 Sharding で水平スケール",
+              "**S3 Tables**(2024 re:Invent): Iceberg-native Managed Bucket",
+              "**S3 Metadata**: S3 Object Metadata を自動的に Iceberg Table 化",
+              "**Glue 5.0**(2024+): Apache Spark 3.5 + Python 3.11 + Real-time Streaming",
+              "**Redshift Zero-ETL**: Aurora / DynamoDB / RDS / Salesforce から自動同期",
+            ] },
+          ],
+        },
+        {
+          id: "ch11-sec3",
+          number: "11.3",
+          title: "Networking + Security の新動向",
+          blocks: [
+            { type: "list", style: "bullet", items: [
+              "**VPC Lattice**(2023+ GA): Application Networking(L7 + L4 Service Mesh 風)",
+              "**AWS Verified Access**: ZTNA(VPN 代替)・ Identity-aware Access",
+              "**WAF + Shield Advanced + Network Firewall**(Defense in Depth)",
+              "**AWS PrivateLink**: Private Endpoint(他 VPC / オンプレ Service)",
+              "**Resource Access Manager(RAM)**: Cross-Account リソース共有",
+            ] },
+          ],
+        },
+        {
+          id: "ch11-sec4",
+          number: "11.4",
+          title: "Compute / Container / Serverless 拡張",
+          blocks: [
+            { type: "list", style: "bullet", items: [
+              "**EKS Auto Mode**(2024 re:Invent): Karpenter 統合 ・ K8s Node 完全マネージド",
+              "**EKS Hybrid Nodes**: オンプレ Node を EKS に統合",
+              "**Graviton4**(2024): ARM64 Cloud-Native CPU",
+              "**Lambda SnapStart**(Java / Python / .NET): Cold Start 削減",
+              "**App Runner / AWS Copilot**: Container PaaS(GKE Autopilot / Cloud Run 競合)",
+            ] },
+          ],
+        },
+        {
+          id: "ch11-sec5",
+          number: "11.5",
+          title: "Sustainability + Well-Architected v6",
+          blocks: [
+            { type: "list", style: "bullet", items: [
+              "**Well-Architected 6 Pillars**(2021 Sustainability 追加 → 2024 強化)",
+              "**Sustainability Pillar**: Carbon Footprint 削減(Spot / Graviton / Right-sizing / Cool Region)",
+              "**AWS Customer Carbon Footprint Tool**: 公式可視化",
+              "**Energy Consumption / Operational Excellence** との両立",
+            ] },
+            { type: "h3", text: "結びに ─ SAA 11 章の完結" },
+            { type: "p", text: "10 章で SAA の基礎、本章で 2024-2025 最新動向(GenAI / Aurora DSQL / S3 Tables / Lattice / EKS Auto Mode / Graviton4 / Sustainability)を概観しました。**AWS は四半期ごとに大型機能追加が続く**ため、合格後も re:Invent / AWS What's New / AWS Builders を継続キャッチアップしてください。" },
+          ],
+        },
+      ],
+    },
   ],
 };

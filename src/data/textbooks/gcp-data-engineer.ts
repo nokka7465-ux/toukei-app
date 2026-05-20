@@ -638,5 +638,79 @@ export const gcpDataEngineerTextbook: Textbook = {
         },
       ],
     },
+    {
+      id: "ch11",
+      number: 11,
+      title: "2024-2025 GCP Data 最新動向",
+      overview: "BigQuery Continuous Queries / Gemini for BigQuery / Dataform / Dataplex Universal Catalog / Pub/Sub 新機能。",
+      sections: [
+        {
+          id: "ch11-sec1",
+          number: "11.1",
+          title: "BigQuery の革新(2024-2025)",
+          blocks: [
+            { type: "list", style: "bullet", items: [
+              "**BigQuery Continuous Queries**(2024 GA): リアルタイム ストリーミング SQL ・ Pub/Sub / Bigtable / Spanner へ Sink",
+              "**Gemini in BigQuery**: NL2SQL / Data Insights / Code 補完 ・ Studio で対話的分析",
+              "**BigQuery Studio**(統合 IDE): Notebook + SQL + Pipeline + ML を 1 画面",
+              "**BigQuery DataFrames**(Python pandas 互換 + BigQuery 計算)",
+              "**BigQuery ML for GenAI**: `ML.GENERATE_TEXT` / `ML.GENERATE_EMBEDDING`(Gemini 統合)",
+              "**Iceberg Tables**(2024+): Open Format で BigLake 統合",
+            ] },
+          ],
+        },
+        {
+          id: "ch11-sec2",
+          number: "11.2",
+          title: "Dataform + Dataplex の進化",
+          blocks: [
+            { type: "list", style: "bullet", items: [
+              "**Dataform**(SQLX): BigQuery 用 ELT FW(dbt 風)・ Git 統合 ・ Assertion ・ Workflow",
+              "**Dataplex Universal Catalog**(2024 GA): Data Map / Lineage / Quality / Profile / Catalog を統合",
+              "**Dataplex Data Quality**(2024 GA): GUI で Rule 定義 + 自動評価",
+              "**Dataplex AI Integration**: Gemini で Data Discovery + Documentation 自動化",
+            ] },
+          ],
+        },
+        {
+          id: "ch11-sec3",
+          number: "11.3",
+          title: "Streaming + Pub/Sub の新機能",
+          blocks: [
+            { type: "list", style: "bullet", items: [
+              "**Pub/Sub Single Message Transforms(SMT)**: Subscribe / Publish 時に Transformation 適用",
+              "**Pub/Sub Import Topics**: Kafka / AWS Kinesis から Pub/Sub に取込",
+              "**Pub/Sub BigQuery Subscription**: Subscriber コードなしで BigQuery に直書込",
+              "**Pub/Sub Cloud Storage Subscription**: GCS に Avro / Text で直書込",
+              "**Dataflow Streaming Engine**: 状態を分離 → Worker 削減 + Auto Scaling",
+            ] },
+          ],
+        },
+        {
+          id: "ch11-sec4",
+          number: "11.4",
+          title: "Datastream + Mirroring の拡張",
+          blocks: [
+            { type: "p", text: "**Datastream**: Oracle / MySQL / PostgreSQL CDC を BigQuery / GCS / Spanner に Real-time 配信。**Auto Merge**(2024+)で BigQuery 側の Upsert 自動化。**Spanner Migration Tool**(SMT)・ **Database Migration Service**(DMS)も DE 担当範囲。" },
+          ],
+        },
+        {
+          id: "ch11-sec5",
+          number: "11.5",
+          title: "Gemini / Vertex AI 連携",
+          blocks: [
+            { type: "list", style: "bullet", items: [
+              "**Gemini in BigQuery / Looker / Studio**: GenAI でデータエンジニアの生産性向上",
+              "**Vertex AI Search + Conversation**(Agent Builder): RAG / Agent 開発",
+              "**BigQuery ML.GENERATE_TEXT / EMBED_TEXT**: SQL から Gemini 呼出",
+              "**Object Tables**(BigQuery): GCS の非構造化データを SQL クエリ",
+              "**Model Garden**: Llama / Mistral / Claude / Gemini を Vertex AI から統一利用",
+            ] },
+            { type: "h3", text: "結びに ─ Pro DE 11 章の完結" },
+            { type: "p", text: "10 章で Pro DE の基礎、本章で 2024-2025 最新動向(Continuous Queries / Gemini in BigQuery / Dataform / Dataplex / Pub/Sub SMT / Mirroring / Vertex AI 連携)を網羅しました。**GCP は四半期ごとに大型機能追加**(re:Invent 級は Google Cloud Next)が続くため、合格後も Release Notes + Cloud Skills Boost を継続キャッチアップしてください。" },
+          ],
+        },
+      ],
+    },
   ],
 };

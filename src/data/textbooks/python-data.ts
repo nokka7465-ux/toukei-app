@@ -710,5 +710,84 @@ export const pythonDataTextbook: Textbook = {
         },
       ],
     },
+    {
+      id: "ch11",
+      number: 11,
+      title: "2024-2025 Python データ分析の最新エコシステム",
+      overview: "Polars / DuckDB / uv / Ruff / Pydantic v2 / Pandas 2.x / Marimo など 2024-2025 Python データ分析の新トレンド。",
+      sections: [
+        {
+          id: "ch11-sec1",
+          number: "11.1",
+          title: "Polars と DuckDB(Pandas 代替)",
+          blocks: [
+            { type: "list", style: "bullet", items: [
+              "**Polars**(Rust + Arrow ベース): Lazy Evaluation + 並列処理で **Pandas 比 5-10x 高速**",
+              "**DuckDB**: 軽量 OLAP DB(SQLite for Analytics)・ Pandas DF / Polars DF / Parquet を SQL クエリ",
+              "**Pandas 2.x**: Arrow Backend(`dtype_backend='pyarrow'`)で性能向上",
+              "**Modin / cuDF(NVIDIA RAPIDS)**: Pandas API 互換の並列 / GPU 版",
+              "**移行戦略**: 小データは Pandas、大データは Polars / DuckDB、GPU 必要なら cuDF",
+            ] },
+          ],
+        },
+        {
+          id: "ch11-sec2",
+          number: "11.2",
+          title: "Python 環境管理(2024+)",
+          blocks: [
+            { type: "list", style: "bullet", items: [
+              "**uv**(Astral 2024): Rust 製の超高速 Python パッケージマネージャ ・ `pip` / `pip-tools` 代替",
+              "**Ruff**(Astral): Rust 製の超高速 Linter + Formatter ・ Black / isort / flake8 代替",
+              "**Poetry / PDM**: 依存解決 + Lock File(pyproject.toml)",
+              "**Conda / Mamba**: 科学計算系(NumPy / SciPy / GPU)が依然強い",
+              "**pip-tools**: requirements.txt 系の lock 戦略(レガシー)",
+            ] },
+          ],
+        },
+        {
+          id: "ch11-sec3",
+          number: "11.3",
+          title: "型システムと Pydantic v2",
+          blocks: [
+            { type: "list", style: "bullet", items: [
+              "**Type Hint**: Python 3.10+ の Match / | Union / typing.Self / typing.TypeAlias",
+              "**Pydantic v2**(2023+ ・ Rust core): 5-50x 高速化 ・ FastAPI / LangChain の中核",
+              "**mypy / pyright / Pylance**: 静的型チェッカー",
+              "**dataclasses / attrs / msgspec**: 軽量データクラス",
+            ] },
+          ],
+        },
+        {
+          id: "ch11-sec4",
+          number: "11.4",
+          title: "Notebook の進化と Marimo / Quarto",
+          blocks: [
+            { type: "list", style: "bullet", items: [
+              "**Jupyter**(古典): ipynb 形式 ・ Cell ベース",
+              "**JupyterLab**: VS Code 風 IDE",
+              "**Marimo**(2024+): Reactive Notebook(Cell 依存自動解決 + Python ファイル形式)→ Git 統合容易",
+              "**Quarto**: Markdown ベース ・ Multi-format(PDF / HTML / Word)出力 ・ Notebook to Publication",
+              "**Hex / Deepnote / Observable**: クラウド型 Notebook",
+            ] },
+          ],
+        },
+        {
+          id: "ch11-sec5",
+          number: "11.5",
+          title: "GenAI 統合 + Pandas Copilot",
+          blocks: [
+            { type: "list", style: "bullet", items: [
+              "**pandas-ai**: 自然言語 → Pandas クエリ自動生成",
+              "**Jupyter AI**: Jupyter に LLM 統合 ・ Generate / Explain / Fix",
+              "**GitHub Copilot**: コード補完(Python データ分析 ・ Pandas / NumPy 文脈に強い)",
+              "**Cursor / Continue / Aider**: AI 強化 IDE",
+              "**LlamaIndex / LangChain**: RAG + Agent FW(Python が中心)",
+            ] },
+            { type: "h3", text: "結びに ─ Python データ分析 11 章の完結" },
+            { type: "p", text: "10 章で Python データ分析の基礎、本章で 2024-2025 最新エコシステム(Polars / DuckDB / uv / Ruff / Pydantic v2 / Marimo / pandas-ai)を網羅しました。**Python データ分析は Rust 製ツール(Polars / Ruff / uv / Pydantic core)で性能革命**が進行中。試験合格後も継続キャッチアップを。" },
+          ],
+        },
+      ],
+    },
   ],
 };
