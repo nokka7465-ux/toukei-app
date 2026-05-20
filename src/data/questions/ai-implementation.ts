@@ -771,4 +771,244 @@ export const aiImplementationQuestions: Question[] = [
     explanation:
       "**AI 実装検定 → E 資格(JDLA)** が王道。E 資格は **DL の数理的基礎 + 実装力** を測る。AWS MLA-C01 / GCP Pro ML Engineer など三大クラウド ML 認定にも展開可能。",
   },
+  {
+    id: "aie-q51",
+    category: "PyTorch",
+    difficulty: 3,
+    question:
+      "**PyTorch nn.Module** を継承するクラスで **forward()** をオーバーライドする目的として最も適切なものを選びなさい。",
+    choices: [
+      "順伝播計算を定義 ・ Autograd が自動で逆伝播グラフを構築",
+      "学習率を設定",
+      "GPU を初期化",
+      "認証を行う",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**forward()** で順伝播を定義 → `model(x)` で呼出すと内部的に `__call__` 経由で hooks 込みで実行 ・ Autograd が動的計算グラフ構築。**backward()** は自動生成。",
+  },
+  {
+    id: "aie-q52",
+    category: "PyTorch",
+    difficulty: 3,
+    question:
+      "**torch.optim.Adam** のパラメータ更新を実行する正しい順序として最も適切なものを選びなさい。",
+    choices: [
+      "optimizer.zero_grad() → loss.backward() → optimizer.step()",
+      "step → backward → zero_grad",
+      "backward → step → zero_grad",
+      "zero_grad → step → backward",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**学習ループ標準**: ① `zero_grad()`(勾配リセット)② `loss.backward()`(勾配計算)③ `step()`(パラメータ更新)。**勾配リセット忘れで累積エラー** が典型バグ。",
+  },
+  {
+    id: "aie-q53",
+    category: "PyTorch",
+    difficulty: 3,
+    question:
+      "**model.eval() + torch.no_grad()** を **推論時** に必ず実行する理由として最も適切なものを選びなさい。",
+    choices: [
+      "Dropout / BatchNorm を推論モードに + 勾配計算停止でメモリ削減 ・ 高速化",
+      "学習率を 0 に",
+      "GPU 強制",
+      "認証スキップ",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**eval()**: Dropout は OFF、BatchNorm は学習時統計を使用。**no_grad()**: Autograd OFF → メモリ削減 + 高速化。**推論時の必須セット**。逆に**train()** で学習モードへ戻す。",
+  },
+  {
+    id: "aie-q54",
+    category: "DataLoader",
+    difficulty: 3,
+    question:
+      "**DataLoader** の `num_workers > 0` の効果として最も適切なものを選びなさい。",
+    choices: [
+      "データ読込を別プロセスで並列化 → I/O ボトルネック解消",
+      "GPU 高速化",
+      "認証",
+      "Cost 削減",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**num_workers**: マルチプロセスでバッチ準備並列化。**CPU 数の半分〜全部** が目安。**pin_memory=True** で GPU 転送高速化 ・ **persistent_workers=True** で起動コスト削減。",
+  },
+  {
+    id: "aie-q55",
+    category: "TensorFlow",
+    difficulty: 3,
+    question:
+      "**TensorFlow Keras** で `model.compile(optimizer, loss, metrics)` の **metrics** の役割として最も適切なものを選びなさい。",
+    choices: [
+      "学習中 ・ 評価時に追跡する評価指標(損失とは別)",
+      "学習率",
+      "GPU 設定",
+      "認証",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**metrics**: accuracy / AUC / Precision / Recall 等を学習中表示 + History 記録。**loss は勾配計算に使用**(必ず微分可能)。**metrics は勾配計算不要 ・ 評価のみ**。",
+  },
+  {
+    id: "aie-q56",
+    category: "TensorFlow",
+    difficulty: 3,
+    question:
+      "**tf.data.Dataset.prefetch(tf.data.AUTOTUNE)** の効果として最も適切なものを選びなさい。",
+    choices: [
+      "CPU データ準備と GPU 計算を **重ね合わせ** → スループット向上",
+      "全データオンメモリ",
+      "GPU 専用化",
+      "認証",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**prefetch**: 次バッチを GPU 計算中に CPU で準備。**AUTOTUNE** で動的最適化。**`cache → shuffle → batch → prefetch`** が tf.data の標準パイプライン順序。",
+  },
+  {
+    id: "aie-q57",
+    category: "Mixed Precision",
+    difficulty: 3,
+    question:
+      "**Mixed Precision Training**(FP16 / BF16)の利点として最も適切なものを選びなさい。",
+    choices: [
+      "メモリ半減 + GPU Tensor Core で 2-3x 高速 + 精度維持(Loss Scaling 併用)",
+      "FP32 より精度向上",
+      "GPU 不要",
+      "認証",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Mixed Precision**: FP16(範囲狭・Loss Scaling 必須)/ BF16(範囲広・スケール不要)。PyTorch `torch.cuda.amp.autocast`、TF `mixed_precision.set_global_policy('mixed_float16')`。A100/H100 で爆速。",
+  },
+  {
+    id: "aie-q58",
+    category: "Distributed",
+    difficulty: 3,
+    question:
+      "**PyTorch DDP(DistributedDataParallel)** が **DataParallel** より好まれる理由として最も適切なものを選びなさい。",
+    choices: [
+      "プロセス分離 + AllReduce で複数 GPU/ノードで高速 ・ DataParallel(単プロセス)より効率",
+      "GUI 改善",
+      "認証",
+      "Cost 削減",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**DDP**: プロセス毎に GPU 1 枚 + AllReduce で勾配同期 → 線形スケール ・ マルチノード対応。**DataParallel**: 単プロセス + GIL → スケールせず。**FSDP / DeepSpeed ZeRO** で更に省メモリ。",
+  },
+  {
+    id: "aie-q59",
+    category: "Hugging Face",
+    difficulty: 3,
+    question:
+      "**Hugging Face Transformers** で `AutoModelForSequenceClassification.from_pretrained(\"bert-base-uncased\")` の意味として最も適切なものを選びなさい。",
+    choices: [
+      "事前学習 BERT + 分類ヘッドを Hub からロード → Fine-tuning ベース",
+      "新規学習",
+      "GUI ロード",
+      "認証",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**from_pretrained**: Hub から重み + 設定 + Tokenizer をダウンロード(Cache 化)。**AutoModelFor***Classification/QA/TokenClassification 等タスク別ヘッド付きクラス**。Trainer API で簡単に Fine-tune。",
+  },
+  {
+    id: "aie-q60",
+    category: "LangChain",
+    difficulty: 3,
+    question:
+      "**LangChain** の **Chain** と **Agent** の違いとして最も適切なものを選びなさい。",
+    choices: [
+      "Chain=静的なシーケンス、Agent=LLM がツール選択して動的に行動",
+      "両者同じ",
+      "Chain=GUI、Agent=CLI",
+      "Chain=GPU、Agent=CPU",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Chain**: 事前定義の処理順(LLM → Output Parser 等)。**Agent**: LLM が ReAct パターンで **Tool 呼び出しを動的判断** → 検索 / API / 計算機。**LangGraph** で Stateful Agent。",
+  },
+  {
+    id: "aie-q61",
+    category: "ONNX",
+    difficulty: 3,
+    question:
+      "**ONNX(Open Neural Network Exchange)** の役割として最も適切なものを選びなさい。",
+    choices: [
+      "FW 共通モデル形式 → PyTorch ↔ TF ↔ ONNX Runtime / TensorRT 等で相互運用",
+      "学習専用 FW",
+      "GUI",
+      "認証",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**ONNX**: モデル交換フォーマット。**ONNX Runtime**(CPU / GPU / Mobile)・ **TensorRT**(NVIDIA 最適化)・ **OpenVINO**(Intel)で本番推論加速。**torch.onnx.export** で書出し。",
+  },
+  {
+    id: "aie-q62",
+    category: "Quantization",
+    difficulty: 3,
+    question:
+      "**Post-Training Quantization(PTQ)** と **Quantization-Aware Training(QAT)** の違いとして最も適切なものを選びなさい。",
+    choices: [
+      "PTQ=学習後に変換(速い ・ 精度劣化リスク)、QAT=学習中に量子化シミュレート(精度高 ・ コスト高)",
+      "両者同じ",
+      "PTQ は GPU 専用",
+      "QAT は CPU 専用",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**PTQ**: 学習済モデルを INT8 / FP16 化(キャリブレーション小データ)。**QAT**: 学習時 Fake Quant Layer 挿入 → 量子化耐性。**精度重視なら QAT、簡便なら PTQ**。**LLM では GPTQ / AWQ / Bitsandbytes** が主流。",
+  },
+  {
+    id: "aie-q63",
+    category: "Serving",
+    difficulty: 3,
+    question:
+      "**TorchServe / TensorFlow Serving** の役割として最も適切なものを選びなさい。",
+    choices: [
+      "学習済モデルを REST/gRPC API として高性能サーブ ・ Versioning / Batch / Metrics",
+      "学習用",
+      "GUI",
+      "認証専用",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Serving FW**: モデルを HTTP/gRPC で公開 + Dynamic Batching + A/B Routing + Prometheus Metrics + Model Versioning。**vLLM / TGI / Triton Inference Server** は LLM 系で主流。",
+  },
+  {
+    id: "aie-q64",
+    category: "MLOps",
+    difficulty: 3,
+    question:
+      "**MLflow** の **4 つの主要モジュール** として **誤っているもの** を選びなさい。",
+    choices: [
+      "Tracking(実験記録)",
+      "Projects(再現可能パッケージ)",
+      "Models(モデル形式 / Flavor)",
+      "GPU-Manager",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**MLflow 4 モジュール**: Tracking / Projects / Models / **Model Registry**。**Tracking** で metric / param / artifact 記録 ・ **Registry** で本番デプロイ管理。Databricks / Azure ML / SageMaker が MLflow 互換。",
+  },
+  {
+    id: "aie-q65",
+    category: "実務",
+    difficulty: 3,
+    question:
+      "AI 実装検定で重視される **実装スキル + MLOps 知識の統合** として最も適切なものを選びなさい。",
+    choices: [
+      "PyTorch / TF 実装 + DataLoader 設計 + 評価 + Serving + Monitoring + Versioning の総合",
+      "数学のみ",
+      "GUI のみ",
+      "Excel のみ",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**AI 実装検定の総合領域**: FW 操作(PyTorch / TF / HF)+ データパイプライン + 学習ループ + 評価 + 量子化 ・ 蒸留 + Serving + Monitoring + Drift 検知 + Versioning。**E 資格との橋渡し**となる実装試験。",
+  },
 ];
