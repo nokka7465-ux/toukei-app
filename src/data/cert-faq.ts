@@ -654,7 +654,29 @@ export const certFaq: Record<string, FaqItem[]> = {
     },
     {
       q: "次のステップは?",
-      a: "DP-203 → **Azure Solutions Architect Expert(AZ-305)** で全体設計へ展開、または **DP-100(Data Scientist)** や **AI-102(AI Engineer)** で ML / AI 系へ。",
+      a: "DP-203 → **Azure Solutions Architect Expert(AZ-305)** で全体設計へ展開、または **DP-100(Data Scientist)** や **AI-102(AI Engineer)** で ML / AI 系へ。**Fabric 時代の後継認定として DP-600(Fabric Analytics Engineer)・ DP-700(Fabric Data Engineer)** も注目。",
+    },
+  ],
+  "azure-dp-600": [
+    {
+      q: "Microsoft Fabric Analytics Engineer Associate(DP-600)とは?",
+      a: "**Microsoft Fabric 上で Data + Analytics + BI を設計 ・ 実装** する Analytics Engineer 認定(2024 リリース)。OneLake ・ Lakehouse ・ Warehouse ・ Semantic Model ・ Direct Lake ・ DAX ・ Power BI ・ Pipeline / Dataflow Gen2 ・ Spark / Notebook ・ Real-Time Intelligence を計画 ・ 準備 ・ 実装 ・ 探索 ・ ガバナンスで問う。**dbt 系 Analytics Engineer の Microsoft 版** ポジション。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**CBT(Pearson VUE)or オンライン監督受験 / 40〜60 問 / 100 分前後 / 合格 700 / 1000 点 / 受験料 165 USD / 有効期限 1 年(無料更新試験あり)**。SQL(中級)・ Python / PySpark(基本)・ Power BI / DAX が前提知識。",
+    },
+    {
+      q: "PL-300 / DP-203 とどう違うの?",
+      a: "**PL-300**(Power BI Analyst)は BI 専門、**DP-203**(Azure DE)は ETL / Synapse 専門。**DP-600 は Fabric SaaS 上でこの 2 つを統合**する役割。**Direct Lake モード ・ OneLake ・ Lakehouse + Warehouse + Semantic Model の連携** が DP-600 ならではの中心トピックです。",
+    },
+    {
+      q: "学習時間の目安は?",
+      a: "Power BI / Azure DE 経験者で **100 〜 150 時間**、未経験者で **150 〜 250 時間**。**Microsoft Learn の DP-600 ラーニングパス + Fabric Trial(60 日 ・ F64 相当)** での実機ハンズオンが王道。",
+    },
+    {
+      q: "次のステップは?",
+      a: "DP-600 → **DP-700(Fabric Data Engineer Associate)** で DE 専門化、**DP-100(Data Scientist)** で ML 方向、**AZ-305(Solutions Architect Expert)** で全体設計、**AI-102(AI Engineer Associate)** で AI 統合へ。",
     },
   ],
   "gcp-data-engineer": [

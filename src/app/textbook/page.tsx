@@ -447,6 +447,16 @@ const CERT_TRACKS: Track[] = [
     accent: "bg-blue-800",
   },
   {
+    href: "/certs/azure-dp-600/textbook",
+    title: "Microsoft Fabric Analytics Engineer(DP-600)",
+    description:
+      "Fabric SaaS 上で BI + DE を統合する Analytics Engineer Associate 認定。OneLake ・ Direct Lake ・ Lakehouse ・ Warehouse ・ DAX ・ Power BI ・ Real-Time を網羅。",
+    audience: "Analytics Engineer",
+    chip: "DP-600",
+    emoji: "🧵",
+    accent: "bg-indigo-700",
+  },
+  {
     href: "/certs/gcp-data-engineer/textbook",
     title: "GCP Professional Data Engineer",
     description:

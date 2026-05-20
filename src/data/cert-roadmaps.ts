@@ -2111,6 +2111,74 @@ export const certRoadmaps: Record<string, CertRoadmap> = {
     textbookHref: "/certs/azure-dp-203/textbook",
     quizHref: "/certs/azure-dp-203/quiz",
   },
+  "azure-dp-600": {
+    slug: "azure-dp-600",
+    title: "Microsoft Fabric DP-600 学習ロードマップ",
+    organizer: "Microsoft",
+    hours: "100〜200 時間",
+    months: "2〜3 ヶ月",
+    prerequisites: "SQL(中級)・ Python / PySpark(基本)・ Power BI / DAX",
+    passCriteria: "1000 点満点中 700 点",
+    steps: [
+      {
+        week: "Week 1",
+        title: "Fabric 全体像 + Trial 起動",
+        description:
+          "7 ワークロード ・ Capacity Unit(CU)・ Tenant / Workspace / Domain ・ Fabric Trial(60 日 ・ F64 相当)。Microsoft Learn DP-600 ラーニングパス開始。",
+        links: [
+          { href: "/certs/azure-dp-600/textbook", label: "DP-600 教科書(章 1-2)" },
+        ],
+      },
+      {
+        week: "Week 2〜3",
+        title: "OneLake + Lakehouse + Warehouse",
+        description:
+          "OneLake Shortcut / Mirroring ・ Lakehouse の Files / Tables ・ Warehouse の T-SQL ・ Bronze/Silver/Gold パターン。",
+        links: [
+          { href: "/certs/azure-dp-600/textbook", label: "DP-600 教科書(章 3, 6)" },
+        ],
+      },
+      {
+        week: "Week 4〜5",
+        title: "Data Factory + Notebook + Spark",
+        description:
+          "Pipeline / Dataflow Gen2 ・ Notebook(PySpark / Spark SQL)・ Spark NEE ・ Spark Job Definition ・ V-Order。",
+        links: [
+          { href: "/certs/azure-dp-600/textbook", label: "DP-600 教科書(章 4-5)" },
+        ],
+      },
+      {
+        week: "Week 6〜7",
+        title: "Semantic Model + Direct Lake + DAX",
+        description:
+          "Direct Lake / Import / DirectQuery の使い分け ・ Star Schema ・ DAX(CALCULATE / Iterator / Time Intelligence)・ TMDL ・ Tabular Editor。",
+        links: [
+          { href: "/certs/azure-dp-600/textbook", label: "DP-600 教科書(章 7-8)" },
+        ],
+      },
+      {
+        week: "Week 8〜9",
+        title: "Real-Time + Data Science + ガバナンス",
+        description:
+          "Eventstream / KQL DB / Reflex ・ Fabric Data Science + MLflow ・ Workspace Identity / Private Link / Sensitivity Label / Purview ・ Git Integration / Deployment Pipeline。",
+        links: [
+          { href: "/certs/azure-dp-600/textbook", label: "DP-600 教科書(章 9-10)" },
+        ],
+      },
+      {
+        week: "Week 10",
+        title: "演習 + 模擬試験 + Microsoft Learn 仕上げ",
+        description:
+          "本サイト演習問題反復 ・ Microsoft Learn DP-600 評価 ・ Skills Measured 5 ドメインの再確認。",
+        links: [
+          { href: "/certs/azure-dp-600/quiz", label: "DP-600 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/azure-dp-600/textbook",
+    quizHref: "/certs/azure-dp-600/quiz",
+  },
   "gcp-data-engineer": {
     slug: "gcp-data-engineer",
     title: "GCP Professional Data Engineer 学習ロードマップ",
