@@ -40,6 +40,7 @@ import { azureDp100Questions } from "@/data/questions/azure-dp-100";
 import { awsDataEngineerQuestions } from "@/data/questions/aws-data-engineer";
 import { azureDp203Questions } from "@/data/questions/azure-dp-203";
 import { gcpDataEngineerQuestions } from "@/data/questions/gcp-data-engineer";
+import { webAnalyticsQuestions } from "@/data/questions/web-analytics";
 
 export type Track = {
   key: string;
@@ -91,6 +92,7 @@ export const tracks: Track[] = [
   { key: "aws-data-engineer", label: "AWS DEA-C01", href: "/certs/aws-data-engineer/quiz", group: "cert", questions: awsDataEngineerQuestions },
   { key: "azure-dp-203", label: "Azure DP-203", href: "/certs/azure-dp-203/quiz", group: "cert", questions: azureDp203Questions },
   { key: "gcp-data-engineer", label: "GCP Professional Data Engineer", href: "/certs/gcp-data-engineer/quiz", group: "cert", questions: gcpDataEngineerQuestions },
+  { key: "web-analytics", label: "ウェブ解析士(初級)", href: "/certs/web-analytics/quiz", group: "cert", questions: webAnalyticsQuestions },
 ];
 
 export type EnrichedQuestion = Question & {
