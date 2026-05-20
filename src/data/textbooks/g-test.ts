@@ -1736,5 +1736,216 @@ export const gTestTextbook: Textbook = {
         },
       ],
     },
+    {
+      id: "ch12",
+      number: 12,
+      title: "2024-2025 最新動向 ─ Reasoning / Agent / Embodied AI",
+      overview:
+        "G 検定の出題範囲は毎年改訂されます。2024-2025 で大きく変わった **Reasoning Models / Agentic AI / Multimodal Native / Embodied AI / 世界モデル / EU AI Act 施行** など最新トピックを総ざらいします。",
+      sections: [
+        {
+          id: "ch12-sec1",
+          number: "12.1",
+          title: "Reasoning Models 革命(o1 / o3 / DeepSeek-R1 / Gemini Thinking)",
+          blocks: [
+            {
+              type: "p",
+              text: "2024 年 9 月、OpenAI が **o1**(プレビュー)を発表。LLM のスケーリングが新しい次元 = **Test-Time Compute Scaling**(推論時計算量の拡大)に入りました。続いて DeepSeek-R1 / o3 / Claude Extended Thinking / Gemini 2.5 Thinking が登場し、AIME / MATH / GPQA / Codeforces で人間専門家を超える性能を達成しています。",
+            },
+            { type: "h3", text: "Reasoning Model の仕組み" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Chain-of-Thought を内部で延長**: 数千〜数万 Token の思考過程を生成し、最終回答だけ出力",
+                "**Self-Reflection / Self-Correction**: 中間結論を批判し誤りを修正",
+                "**Process Reward Model**: 思考の各ステップに報酬を割り当て、正しい推論経路を強化学習",
+                "**RLHF + Self-Play with Verifier**: 検証可能な領域(数学・コード)から始めて、検証困難な領域に拡張",
+              ],
+            },
+            { type: "h3", text: "Pre-training vs Test-Time の二重スケーリング法則" },
+            {
+              type: "p",
+              text: "**Chinchilla の法則**(2022): 計算量 ≒ パラメータ × データ。**Reasoning モデルの新法則**(2024-): **計算量 = 事前学習 + 推論時の思考量**。同じパラメータでも、推論時に長く考えさせると AIME スコアが線形〜対数で向上することが観察されています。",
+            },
+            {
+              type: "intuition",
+              title: "💡 Reasoning Model が向くタスク・向かないタスク",
+              body: "**向く**: 数学 / 物理 / コード / 法律解釈 / 戦略立案 / 鑑別診断 など 多段推論が必要なタスク。**向かない**: チャット / 要約 / 翻訳 / 単純抽出 など。**コスト ・ レイテンシが高い**ため、タスクで使い分け。**Hybrid Routing**(複雑なら o3 / 単純なら GPT-4o)が実用パターン。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec2",
+          number: "12.2",
+          title: "Agentic AI の主流化",
+          blocks: [
+            {
+              type: "p",
+              text: "2024 年は **Agentic AI 元年**。LLM が単に質問に答えるだけでなく、**自律的に Tool を選び ・ 行動し ・ 反省し ・ 多段で目標達成する** Agent が主役となりました。",
+            },
+            { type: "h3", text: "主要 Agent 製品 / フレームワーク" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Anthropic Computer Use**(2024 末): Claude がスクリーンショットを見てマウス / キーボード操作 → PC 全般を Agent 化",
+                "**OpenAI Operator**(2025): ブラウザ自動操作 Agent(Anthropic Computer Use の OpenAI 版)",
+                "**Google Project Mariner**(2024 末): Chrome 拡張で Browser Agent",
+                "**Devin**(Cognition Labs): 自律ソフトウェアエンジニア Agent",
+                "**LangChain / LangGraph**: Agent 構築 OSS のデファクト",
+                "**AutoGen**(Microsoft Research): Multi-Agent 会話フレームワーク",
+                "**CrewAI**: ロール特化 Multi-Agent OSS",
+                "**Claude Code / Cursor / Cline / Roo**: コード特化 Agent IDE",
+              ],
+            },
+            { type: "h3", text: "Agentic AI の評価指標" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**SWE-bench / SWE-bench Verified**: 実 GitHub Issue を Agent が解決できるか",
+                "**WebArena / VisualWebArena**: ブラウザ Agent の Web タスク完遂率",
+                "**OSWorld**: PC 全般 Agent 操作",
+                "**GAIA**: 多段推論+ Tool 利用の総合ベンチマーク",
+                "**Tau-bench**: カスタマーサービス Agent シミュレーション",
+              ],
+            },
+            {
+              type: "practical",
+              title: "Agent を業務に組込む際の留意点",
+              body: "**①** 失敗時の Fallback(誤発注 ・ 誤送信を Undo できるか)**②** Human-in-the-Loop(重要判断は人間承認)**③** Audit Log(操作履歴の完全記録)**④** Sandbox(本番環境への影響を制限)**⑤** Cost 監視(Token 暴走の防止)**⑥** Prompt Injection 対策(Untrusted データ流入の検証)。**Agent は便利だが、設計を誤ると企業に深刻な被害**を与えます。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec3",
+          number: "12.3",
+          title: "Native Multimodal と Omni-modal Model",
+          blocks: [
+            {
+              type: "p",
+              text: "2024 年、**GPT-4o / Gemini 2.0 / Claude 3.5 Sonnet** が登場し、テキスト・画像・音声・動画を **単一モデルで Native 処理** する Omni-modal が主流に。従来の「テキスト LLM + 別途 Vision モデル」を統合した次世代設計です。",
+            },
+            { type: "h3", text: "Native Multimodal の代表モデル" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**GPT-4o**(2024 春): リアルタイム音声 + Vision + テキスト統合 ・ 200ms 応答",
+                "**Gemini 1.5 / 2.0 / 2.5**: Native Multimodal + 200 万 Token Context",
+                "**Claude 3.5 / 3.7 / 4 Sonnet**: テキスト + 画像 ・ 高度推論",
+                "**Llama 3.2 Vision** / **Pixtral**(Mistral): OSS マルチモーダル",
+                "**Phi-3.5 Vision / Phi-4 Multimodal**: 小規模 ・ オンデバイス対応",
+                "**Sora**(OpenAI): テキスト → 60 秒高品質動画",
+                "**Veo 2 / 3**(Google): Sora 競合 ・ 物理的に正確な動画生成",
+              ],
+            },
+            { type: "h3", text: "音声生成 / 音声理解の進化" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Eleven Labs**: 商用音声合成のデファクト",
+                "**OpenAI Voice Engine**: 15 秒サンプルから声複製(倫理問題で限定公開)",
+                "**Suno / Udio**: テキスト → 音楽生成",
+                "**Whisper Large v3**: 多言語音声認識のオープン基準",
+                "**Riffusion / MusicGen**: OSS 音楽生成",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch12-sec4",
+          number: "12.4",
+          title: "Embodied AI / 世界モデル",
+          blocks: [
+            {
+              type: "p",
+              text: "**Embodied AI**(身体性 AI)= 物理世界と相互作用する AI。**Vision-Language-Action(VLA)** モデルにより、ヒューマノイドロボットが急速に商用化に近づいています。",
+            },
+            { type: "h3", text: "VLA モデルとロボティクス" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**RT-2 / RT-X**(Google DeepMind 2023): Vision + Language → Robot Action の大規模学習",
+                "**OpenVLA**(2024 OSS): VLA モデルのオープン基準",
+                "**Helix**(Figure 2024): Figure 02 ヒューマノイドの内部 VLA",
+                "**Apptronik Apollo + Gemini Robotics**(2025): Google 連携",
+                "**Tesla Optimus**: BMW 工場で実証実験 ・ 量産計画",
+                "**1X Neo / Unitree H1 / Sanctuary Phoenix**: 各社ヒューマノイド",
+              ],
+            },
+            { type: "h3", text: "World Models(世界モデル)" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Sora**(OpenAI): 動画を生成 + 物理的整合性を学習",
+                "**Genie 1 / 2**(DeepMind): 1 枚の画像から **インタラクティブ 3D 環境**を生成",
+                "**Cosmos**(NVIDIA 2025): ロボット学習用 World Foundation Model",
+                "**JEPA / V-JEPA**(LeCun, Meta): 予測ベース表現学習で 世界モデル構築",
+                "**MuZero / DreamerV3**: 強化学習向け World Model",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 LLM の次のフロンティア",
+              body: "**LLM(言語)→ VLM(言語+視覚)→ VLA(行動)→ World Models(因果 + 物理)** が AI の進化方向。LeCun は **「LLM は知能の到達点ではなく、より大きな知能の一部品」**と主張。Gen AI Leader / G 検定でも世界モデルの考え方を押さえることが重要です。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec5",
+          number: "12.5",
+          title: "EU AI Act 施行と AI ガバナンス",
+          blocks: [
+            {
+              type: "p",
+              text: "**EU AI Act**(2024 年 8 月正式施行 ・ 2025-2027 段階適用)は、世界初の包括的 AI 規制法。違反金は **全世界売上の最大 7%(または 3,500 万ユーロ)** と極めて厳しく、企業の AI 戦略に直接影響します。",
+            },
+            { type: "h3", text: "EU AI Act の 4 階層" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Unacceptable Risk(禁止)**: 社会信用スコア / サブリミナル操作 / リアルタイム生体識別(法執行除く)/ 感情認識(職場 ・ 学校)",
+                "**High Risk**: 医療診断 / 採用 / 信用評価 / 法執行 / 重要インフラ → リスク管理 / Audit / 透明性 / Human Oversight 義務",
+                "**Limited Risk**: チャットボット → 「AI と対話している」開示義務",
+                "**Minimal Risk**: ゲーム NPC / Spam Filter → 規制なし",
+              ],
+            },
+            { type: "h3", text: "GPAI(General Purpose AI Models)規制" },
+            {
+              type: "p",
+              text: "**GPAI**(基盤モデル)には別途義務:① 技術文書 ② 著作権ポリシー ③ Training Data Summary 公開。**Systemic Risk GPAI**(>10^25 FLOPs ≒ GPT-4 級以上): モデル評価 / インシデント報告 / Cybersecurity 追加義務。**段階適用**: 禁止 = 2025 年 2 月 / GPAI = 2025 年 8 月 / High Risk = 2026 年 8 月。",
+            },
+            { type: "h3", text: "日本の AI 規制動向" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**AI 事業者ガイドライン**(総務省+経産省、2024.4 統合): 開発 / 提供 / 利用の 3 主体別の責務",
+                "**広島 AI プロセス**(G7 主導 2023-): 国際協調の枠組",
+                "**著作権法 30 条の 4**: AI 学習目的の著作物利用に寛容 ・ 但し「享受目的」併存時は要許諾",
+                "**個人情報保護法**: 2024 改正で AI 関連の規律強化検討中",
+                "**AI 制度研究会**(内閣府 2024-): 日本版 AI 規制法の議論進行",
+              ],
+            },
+            {
+              type: "practical",
+              title: "企業の AI ガバナンス実装",
+              body: "**①** AI Inventory(社内利用 AI の棚卸し)**②** Risk Classification(EU AI Act 4 階層で分類)**③** AI Use Policy(従業員向けガイドライン)**④** Model Documentation(Model Card / DataSheet)**⑤** Audit Log(モデル更新 ・ 推論ログ)**⑥** Human Oversight(重要判断のレビュー)**⑦** Vendor Due Diligence(LLM プロバイダの選定基準)。**Gartner / NIST AI RMF / ISO 42001(2024 発行)** が参考フレームワーク。",
+            },
+            { type: "h3", text: "結びに ─ G 検定 12 章の完結" },
+            {
+              type: "p",
+              text: "11 章で技術 → 社会 → 哲学の旅を終え、本章で 2024-2025 の最前線を取り込みました。**Reasoning / Agent / Multimodal / Embodied / 規制** は今後 5 年の AI 戦略を語る共通語彙です。**G 検定の出題範囲は毎年改訂**されるので、本書を起点に最新動向を継続キャッチアップしてください。",
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

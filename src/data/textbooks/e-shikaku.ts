@@ -1887,5 +1887,186 @@ for epoch in range(epochs):
         },
       ],
     },
+    {
+      id: "ch12",
+      number: 12,
+      title: "2024-2025 最新研究 ─ Mamba / FlashAttention / MoE / Reasoning",
+      overview:
+        "E 資格の出題範囲も毎年改訂されます。本章は 2024-2025 で深層学習研究の風景を変えた **Mamba(SSM) / FlashAttention / MoE / PEFT 進化 / Test-Time Compute Scaling** を整理します。",
+      sections: [
+        {
+          id: "ch12-sec1",
+          number: "12.1",
+          title: "State Space Models(Mamba)─ Transformer の対抗馬",
+          blocks: [
+            {
+              type: "p",
+              text: "**Mamba**(Albert Gu, Tri Dao 2023)は **State Space Model(SSM)** ベースの新アーキテクチャ。Transformer の Self-Attention が $O(N^2)$ なのに対し、SSM は **$O(N)$ で長系列を処理**でき、推論時に KV Cache が不要 = メモリ効率が劇的に向上します。",
+            },
+            { type: "h3", text: "SSM の数学的基礎" },
+            {
+              type: "p",
+              text: "**Continuous SSM**: $h'(t) = A h(t) + B x(t)$、$y(t) = C h(t)$。これを離散化(Zero-order Hold)して **Discrete SSM**: $h_t = \\bar{A} h_{t-1} + \\bar{B} x_t$、$y_t = C h_t$。**$\\bar{A}, \\bar{B}, C$ を入力依存にした Selective SSM** が Mamba の核心です(S4 → S6 → Mamba)。",
+            },
+            { type: "h3", text: "Mamba の派生" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Mamba-2**(2024): SSD(Structured State Space Duality)で Transformer との理論的橋渡し",
+                "**Jamba**(AI21 2024): Mamba + Transformer Hybrid LLM",
+                "**Falcon Mamba**(TII 2024): 7B Pure-Mamba OSS",
+                "**Hymba**(NVIDIA 2024): 並列 Attention + Mamba 層",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 Mamba は Transformer を置き換えるのか?",
+              body: "2024 時点では **Hybrid(Transformer + Mamba)が現実解**。Mamba は **長系列**(>32K Token)で計算 / メモリ優位だが、**短文 ・ In-Context Learning は Transformer の方が強い**ことが分かってきました。E 資格でも「選択肢の 1 つ」として位置づければ十分。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec2",
+          number: "12.2",
+          title: "FlashAttention 系列",
+          blocks: [
+            {
+              type: "p",
+              text: "**FlashAttention**(Tri Dao 2022, v2:2023, v3:2024)は GPU の SRAM / HBM 階層を意識した **IO-aware Attention** 実装。**Tiling + Recomputation + Online Softmax** で 2-4 倍高速化 + メモリ削減を実現します。",
+            },
+            { type: "h3", text: "派生 ・ 関連技術" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**FlashAttention-3**(2024): H100 向けに 70% 高速化",
+                "**Ring Attention**(2023): 複数 GPU で Attention 分散 → 巨大コンテキスト",
+                "**GQA / MQA**(Grouped/Multi-Query Attention): KV Head 共有で KV Cache 削減",
+                "**Sliding Window Attention**(Mistral)",
+                "**Native Sparse Attention**(DeepSeek-V3 2024)",
+                "**Longformer / BigBird**: 古典的 Sparse Attention",
+                "**Linear / Performer**: 線形時間 Attention",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch12-sec3",
+          number: "12.3",
+          title: "Mixture of Experts(MoE)の主流化",
+          blocks: [
+            {
+              type: "p",
+              text: "**MoE** は **疎な活性化**(各 Token で一部 Expert のみ)で、総パラメータを増やしつつ推論コストを抑える設計。2024 年は **GPT-4 / Mixtral / DBRX / DeepSeek-V3** など主流モデルが MoE 採用です。",
+            },
+            { type: "h3", text: "MoE の構成要素" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Experts**: FFN 層を並列に複数保持(8-256+)",
+                "**Router(Gating Network)**: 各 Token を Top-K Expert に振り分け(通常 K=2)",
+                "**Load Balancing Loss**: Expert 利用偏りの抑制",
+                "**Sparse Activation**: 計算量は K/N に圧縮(N=Expert 総数)",
+              ],
+            },
+            { type: "h3", text: "代表モデル" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Mixtral 8x7B / 8x22B**: 8 Experts ・ Top-2",
+                "**DBRX**: 132B 総 / 36B Active",
+                "**DeepSeek-V3**: 671B 総 / 37B Active ・ 256 Experts ・ 革新的 Load Balancing(Auxiliary-Loss-Free)",
+                "**Switch Transformer**(Google 2021): MoE オリジナル研究",
+              ],
+            },
+            {
+              type: "practical",
+              title: "MoE の課題",
+              body: "**学習**: Routing の安定化 / Load Imbalance / All-to-All 通信。**推論**: Expert Parallelism / バッチサイズと Expert 利用率のトレードオフ。**E 資格レベル**では「MoE の概念 + Top-K Routing + Load Balancing」を押さえれば十分です。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec4",
+          number: "12.4",
+          title: "PEFT の進化 ─ LoRA / DoRA / QLoRA",
+          blocks: [
+            {
+              type: "p",
+              text: "**PEFT(Parameter-Efficient Fine-Tuning)** は LLM Fine-tune のデファクト。LoRA(2021)を起点に、2024-2025 で多くの派生が登場しました。",
+            },
+            { type: "h3", text: "LoRA とその派生" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**LoRA**: $W' = W + \\alpha B A$ で $A \\in \\mathbb{R}^{r \\times d}, B \\in \\mathbb{R}^{d \\times r}$($r$ 小) → 学習パラメータ 0.1-1%",
+                "**QLoRA**(2023): 4bit 量子化 base + LoRA で 70B 級も 24GB GPU で学習可能",
+                "**DoRA**(2024): Direction + Magnitude 分解(Weight = Magnitude × Direction)",
+                "**LoRA+**: $A, B$ で異なる学習率",
+                "**X-LoRA**(2024): 複数 LoRA を MoE 的に統合",
+              ],
+            },
+            { type: "h3", text: "他の PEFT 手法" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Prefix Tuning / Prompt Tuning / P-Tuning v2**",
+                "**Adapter**(Houlsby 2019)",
+                "**(IA)³**(中間活性化 Scaling Vector のみ)",
+                "**BitFit**(Bias 項のみ)",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch12-sec5",
+          number: "12.5",
+          title: "Reasoning Model と Test-Time Compute Scaling",
+          blocks: [
+            {
+              type: "p",
+              text: "**o1 / o3 / DeepSeek-R1 / Gemini 2.5 Thinking** は E 資格 2025 以降の重要トピック。**推論時の思考量を増やすと精度がスケール**する新しい計算法則です。",
+            },
+            { type: "h3", text: "Test-Time Scaling の数式直観" },
+            {
+              type: "p",
+              text: "従来: $\\text{Performance} \\propto f(\\text{Params}, \\text{Data}, \\text{Compute})$(Chinchilla)。**新法則**: $\\text{Performance} \\propto f(\\text{Train Compute}, \\text{Test-time Compute})$。Self-Consistency(サンプル数)や CoT 延長で AIME / MATH スコアが対数 / 線形でスケール(OpenAI o1 技術ブログ 2024)。",
+            },
+            { type: "h3", text: "学習手法 ─ Process Reward Model" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Outcome Reward Model(ORM)**: 最終回答の正誤のみで報酬",
+                "**Process Reward Model(PRM)**: 思考の各ステップに報酬 → 正しい推論経路を強化",
+                "**Self-Play with Verifier**: 数学 / コードは検証可能 → 自動報酬生成",
+                "**GRPO**(Group Relative Policy Optimization, DeepSeek-R1): 集団内相対報酬",
+                "**STaR / Quiet-STaR**: 思考生成 + 自己学習",
+              ],
+            },
+            { type: "h3", text: "DeepSeek-R1 のオープン化インパクト" },
+            {
+              type: "p",
+              text: "**DeepSeek-R1**(2025.1): 中国 DeepSeek 社が o1 級 Reasoning Model を **オープンウェイト + 論文公開**。GRPO + Self-Play + Cold Start SFT の手法を完全公開し、Llama / Qwen に蒸留版が次々登場。**Reasoning Model 民主化** の起点となりました。",
+            },
+            {
+              type: "intuition",
+              title: "💡 Reasoning Model のトレードオフ",
+              body: "**精度**: AIME 83% / GPQA Diamond 87% で人間専門家超え。**コスト**: o1 は GPT-4o の 10-30 倍。**レイテンシ**: 数秒〜数十秒。**説明可能性**: 思考過程 Trace 可。**E 資格レベル**では「Test-Time Compute Scaling / PRM / Self-Play with Verifier」のキーワードで把握すれば十分。",
+            },
+            { type: "h3", text: "結びに ─ E 資格 12 章の完結" },
+            {
+              type: "p",
+              text: "11 章までで深層学習の基礎〜LLM 応用、本章で 2024-2025 の最前線まで網羅しました。**深層学習は数学 ・ 実装 ・ 運用の三位一体**で、毎年新研究が常識を更新します。E 資格は通過点。**論文を読む ・ 実装する ・ 議論する習慣** を継続することが、AI エンジニアとしての本当の力になります。",
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

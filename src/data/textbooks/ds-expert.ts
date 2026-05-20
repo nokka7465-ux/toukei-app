@@ -861,5 +861,206 @@ export const dsExpertTextbook: Textbook = {
         },
       ],
     },
+    {
+      id: "ch11",
+      number: 11,
+      title: "Foundation Models と LLMOps(2024-2025)",
+      overview:
+        "DS エキスパート対象範囲も 2024-2025 で **Foundation Models / RAG / Agent / LLMOps / 評価フレームワーク** に大きく拡張。古典 ML + 統計に LLM 知識を組合せた **総合データサイエンティスト** が求められます。",
+      sections: [
+        {
+          id: "ch11-sec1",
+          number: "11.1",
+          title: "Foundation Models の概観",
+          blocks: [
+            {
+              type: "p",
+              text: "**Foundation Models**(基盤モデル)= 大規模事前学習で多様な下流タスクに転用できる汎用モデル。**Stanford CRFM**(2021)が命名し、LLM / VLM / VLA / 音声基盤モデルなどを包括的に指します。",
+            },
+            { type: "h3", text: "主要 LLM 系統(2024-2025)" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**OpenAI**: GPT-4o / o1 / o3 / o4-mini / GPT-5(2025)・ Reasoning + Multimodal",
+                "**Anthropic**: Claude 3.5 / 3.7 / 4 / 4.5 Sonnet / Opus / Haiku ・ Constitutional AI + Extended Thinking",
+                "**Google DeepMind**: Gemini 1.5 / 2.0 / 2.5 + Thinking ・ Native Multimodal",
+                "**Meta**: Llama 3 / 3.1 / 3.2 Vision / 3.3 / 4(2025) ・ OSS の旗艦",
+                "**Mistral**: Mistral Large / Small / Codestral / Pixtral / Mathstral",
+                "**DeepSeek**: V3 / R1 ・ 革新的 MoE + 廉価 + OSS",
+                "**Alibaba Qwen**: Qwen 2.5 / 3 / VL / Audio / Coder",
+                "**xAI Grok**: Grok 3 / 4(2025)",
+                "**国産**: Sarashina / PLaMo / Tsuzumi(NTT)/ Karakuri / Calm3 等",
+              ],
+            },
+            { type: "h3", text: "Open vs Closed の戦略選択" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Closed(API)**: 最高精度 / マネージド / Compliance(SOC 2 / HIPAA / FedRAMP)",
+                "**Open Weights**: Self-host 可 / カスタマイズ可 / コスト管理しやすい",
+                "**Hybrid**: 重要度別に Closed + Open を使い分け",
+                "**On-Premise / Air-gapped**: 金融 / 防衛 / 医療で重要 ・ Llama / Mistral / Phi / Gemma 等",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch11-sec2",
+          number: "11.2",
+          title: "RAG パターンの設計判断",
+          blocks: [
+            {
+              type: "p",
+              text: "RAG(Retrieval-Augmented Generation)は LLM のハルシネーション抑制 + 知識更新の主流手法。DS エキスパートとして RAG 設計の判断軸を整理します。",
+            },
+            { type: "h3", text: "RAG のバリエーション" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Naive RAG**: Embed → Vector Search → LLM",
+                "**Hierarchical RAG**: 親子 Chunk(小で検索 ・ 大で生成)",
+                "**HyDE**(Hypothetical Document Embeddings): 仮想回答を生成 → それで検索",
+                "**Multi-query RAG**: 質問を複数バリエーションに展開",
+                "**Self-RAG**: LLM が自己評価しながら検索 / 不要なら検索しない",
+                "**GraphRAG**(Microsoft 2024): 知識グラフ + LLM で Multi-hop に強い",
+                "**Agentic RAG**: Agent が動的に検索戦略を選ぶ",
+                "**Long Context vs RAG**: 200 万 Token 時代の新トレードオフ",
+              ],
+            },
+            { type: "h3", text: "RAG 評価指標" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Retrieval**: Precision@K / Recall@K / MRR / NDCG",
+                "**Generation**: Faithfulness(出典忠実度)/ Answer Relevance / Context Recall / Context Precision",
+                "**Frameworks**: RAGAS / TruLens / DeepEval / Phoenix",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 RAG vs Fine-tuning",
+              body: "**RAG**: 知識追加 / 出典明示 / 頻繁更新 OK。**Fine-tuning**: スタイル / 形式 / ドメイン語彙 / 効率(短 Prompt)。**両者は補完的**で、現代の本番 LLM は **Fine-tuned base + RAG + Function Calling** の 3 層が標準的。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec3",
+          number: "11.3",
+          title: "LLM 評価のフレームワーク",
+          blocks: [
+            {
+              type: "p",
+              text: "DS エキスパートとして LLM 評価の体系を理解することは必須。**HELM / BigBench / MMLU / GPQA / AIME / Codeforces / SWE-bench** など多軸ベンチマークを目的別に使い分けます。",
+            },
+            { type: "h3", text: "知能評価ベンチマーク(General)" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**MMLU / MMLU-Pro**: 57 / 14 分野多肢選択 ・ 知識+推論",
+                "**GPQA / GPQA Diamond**: 大学院レベル科学(Google-proof)",
+                "**AIME / MATH / GSM8K**: 数学",
+                "**HumanEval / MBPP / Codeforces**: コード生成",
+                "**SWE-bench / SWE-bench Verified**: 実 GitHub Issue 解決",
+                "**ARC-AGI**: 抽象推論(まだ人間越え難)",
+                "**BigBench Hard**: 言語/論理の多様タスク",
+                "**HELM**(Stanford): 7+ 指標(精度 / 公平性 / 安全性 / 効率)で多軸評価",
+              ],
+            },
+            { type: "h3", text: "Agentic 評価" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**GAIA**: 多段推論 + Tool 利用",
+                "**WebArena / VisualWebArena / OSWorld**: ブラウザ / PC 操作",
+                "**Tau-bench**: カスタマーサービス Agent",
+                "**MLE-bench**(OpenAI 2024): Kaggle コンペ Agent",
+              ],
+            },
+            { type: "h3", text: "LLM-as-a-Judge と Pairwise 評価" },
+            {
+              type: "p",
+              text: "強力 LLM(GPT-4 / Claude / Gemini)で他 LLM の出力を Score / Pairwise 比較する方法。**Chatbot Arena**(LMSYS)が代表的ヒューマン評価プラットフォーム。**Bias / Position Bias / Verbosity Bias** に注意。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec4",
+          number: "11.4",
+          title: "LLMOps と Production Monitoring",
+          blocks: [
+            {
+              type: "p",
+              text: "**LLMOps** は MLOps の LLM 特化版。**プロンプト管理 / 評価 / Drift / コスト / Hallucination / Safety** を継続監視します。",
+            },
+            { type: "h3", text: "LLMOps のキーコンポーネント" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Prompt Management**: PromptLayer / Langfuse / LangSmith / Pezzo / Helicone",
+                "**Tracing**: OpenTelemetry 準拠 ・ Token / Cost / Latency / Tool Call 可視化",
+                "**Evaluation**: RAGAS / DeepEval / Confident AI / Patronus",
+                "**Drift Monitoring**: Input Distribution / Output Distribution / User Feedback",
+                "**Guardrails**: NeMo Guardrails / Guardrails AI / Lakera / Robust Intelligence",
+                "**A/B Testing**: Prompt / モデル / RAG の A/B",
+                "**Fine-tuning ・ Eval Pipeline**: HuggingFace + Weights & Biases / MLflow / ClearML",
+              ],
+            },
+            {
+              type: "practical",
+              title: "本番 LLM システムの監視必須項目",
+              body: "**①** Token 使用量 + コスト推移 **②** レイテンシ(p50/p95/p99)**③** Quality Metrics(LLM-as-Judge / 人間評価)**④** Hallucination 率 / Grounding スコア **⑤** Safety 違反 / Prompt Injection 検出 **⑥** User Feedback(👍👎 / NPS)**⑦** Drift Detection(Embedding 分布変化)**⑧** Compliance Audit Log。**Datadog / New Relic / Arize Phoenix / Fiddler** などの専用ツール+カスタム実装で対応。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec5",
+          number: "11.5",
+          title: "AI Safety と Responsible AI",
+          blocks: [
+            {
+              type: "p",
+              text: "DS エキスパートは技術だけでなく **AI Safety / Responsible AI / Governance** を理解し、組織での実装をリードする責任があります。",
+            },
+            { type: "h3", text: "AI Safety の主要テーマ" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Alignment**: AI が人間意図に整合(RLHF / DPO / Constitutional AI / RLAIF)",
+                "**Mechanistic Interpretability**: NN 内部回路の解析(Anthropic / OpenAI 研究)",
+                "**Adversarial Robustness**: Prompt Injection / Jailbreak / Adversarial Examples 対策",
+                "**Catastrophic / Existential Risk**: AGI 安全性(Anthropic Core Views / OpenAI Preparedness)",
+                "**Sandbagging / Deception 検知**: 高能力モデルが意図を隠す可能性",
+              ],
+            },
+            { type: "h3", text: "Responsible AI フレームワーク" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**NIST AI RMF**(Risk Management Framework)",
+                "**ISO/IEC 42001:2023**: AI マネジメントシステム規格",
+                "**EU AI Act**: 法的拘束力ある初の包括規制",
+                "**Microsoft Responsible AI Standard v2**",
+                "**Google AI Principles + Responsible AI Practices**",
+                "**Anthropic Acceptable Use Policy + Responsible Scaling Policy**",
+              ],
+            },
+            { type: "h3", text: "結びに ─ DS Expert 11 章の完結" },
+            {
+              type: "p",
+              text: "古典 ML + 統計 + 因果 + LLM + Safety を統合する **総合データサイエンティスト** が現代の DS Expert です。技術トレンドは速いが、**統計的思考 ・ 因果推論 ・ 設計判断** という普遍スキルが土台。本書がその土台と最前線の両方を提供できれば幸いです。",
+            },
+          ],
+        },
+      ],
+    },
   ],
 };
