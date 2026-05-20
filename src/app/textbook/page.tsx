@@ -477,6 +477,16 @@ const CERT_TRACKS: Track[] = [
     accent: "bg-sky-800",
   },
   {
+    href: "/certs/sc-100/textbook",
+    title: "Microsoft Cybersecurity Architect Expert(SC-100)",
+    description:
+      "Zero Trust + Microsoft Security Stack(Defender XDR / Sentinel / Entra / Purview / Intune)+ Compliance + AI Security + Resilience を統合設計で問う Expert 認定。",
+    audience: "Security Architect",
+    chip: "SC-100",
+    emoji: "🛡️",
+    accent: "bg-rose-800",
+  },
+  {
     href: "/certs/gcp-data-engineer/textbook",
     title: "GCP Professional Data Engineer",
     description:

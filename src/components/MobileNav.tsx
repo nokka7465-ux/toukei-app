@@ -77,6 +77,7 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/certs/azure-dp-600", label: "Microsoft Fabric Analytics Engineer(DP-600)" },
       { href: "/certs/azure-dp-700", label: "Microsoft Fabric Data Engineer(DP-700)" },
       { href: "/certs/azure-az-305", label: "Azure Solutions Architect Expert(AZ-305)" },
+      { href: "/certs/sc-100", label: "Microsoft Cybersecurity Architect Expert(SC-100)" },
       { href: "/certs/gcp-data-engineer", label: "GCP Professional Data Engineer" },
     ],
   },

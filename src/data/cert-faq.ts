@@ -723,6 +723,13 @@ export const certFaq: Record<string, FaqItem[]> = {
       a: "AZ-305 → **AZ-400(DevOps Engineer Expert)**・ **SC-100(Cybersecurity Architect Expert)**・ **AI-102 / DP-100 / DP-203 / DP-600 / DP-700** で領域専門化、**AWS SAP-C02 / GCP Pro Architect** でマルチクラウド。",
     },
   ],
+  "sc-100": [
+    { q: "Microsoft Cybersecurity Architect Expert(SC-100)とは?", a: "**Zero Trust + Microsoft Security Stack(Defender XDR / Sentinel / Entra / Purview / Intune)+ Compliance + AI Security + Resilience** の統合設計を担う Cybersecurity Architect Expert 認定(2022 リリース)。" },
+    { q: "試験形式と合格基準は?", a: "**CBT or オンライン監督 / 40〜60 問 / 120 分前後 / 700 / 1000 点 / 165 USD / 有効期限 1 年(無料更新あり)**。**ケーススタディ重視**。" },
+    { q: "前提となる認定・経験は?", a: "**AZ-500 / SC-200 / SC-300 / MS-500** 等のセキュリティ Associate 取得 + Cybersecurity Architect 実務経験が前提の Expert レベル試験。" },
+    { q: "AZ-305 との関係は?", a: "**AZ-305 = Azure 全般の Architect Expert**、**SC-100 = セキュリティ専門 Architect Expert**。**両方取得で Azure Architect + Security Architect の Expert 級** が完成し、CISO 候補 / Senior Security Consultant に。" },
+    { q: "次のステップは?", a: "SC-100 → **SC-200(SOC Analyst)**・ **SC-300(Identity Admin)**・ **SC-400(Information Protection)** で領域専門化、**CISSP / CCSP / CISM / OSCP** で業界横断、**AWS Security Specialty / GCP PCSE** でマルチクラウド。" },
+  ],
   "gcp-data-engineer": [
     {
       q: "GCP Professional Data Engineer とは?",
