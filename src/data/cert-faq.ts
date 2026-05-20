@@ -679,6 +679,28 @@ export const certFaq: Record<string, FaqItem[]> = {
       a: "DP-600 → **DP-700(Fabric Data Engineer Associate)** で DE 専門化、**DP-100(Data Scientist)** で ML 方向、**AZ-305(Solutions Architect Expert)** で全体設計、**AI-102(AI Engineer Associate)** で AI 統合へ。",
     },
   ],
+  "azure-dp-700": [
+    {
+      q: "Microsoft Fabric Data Engineer Associate(DP-700)とは?",
+      a: "**Microsoft Fabric 上でデータ取込 ・ 変換 ・ ストリーミング ・ オーケストレーション ・ 監視を実装** する Data Engineer Associate 認定(2024 リリース)。Lakehouse ・ Notebook ・ Spark ・ Pipeline ・ Dataflow Gen2 ・ Eventstream ・ KQL Database ・ Real-Time Dashboard ・ Reflex ・ Git Integration ・ Deployment Pipeline を実装 ・ 取込 / 変換 ・ 監視 / 最適化の 3 ドメインで問う。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**CBT(Pearson VUE)or オンライン監督受験 / 40〜60 問 / 100 分前後 / 合格 700 / 1000 点 / 受験料 165 USD / 有効期限 1 年(無料更新試験あり)**。SQL(中級)・ Python/PySpark(中級)・ KQL(基礎)・ Power Query M が前提知識。",
+    },
+    {
+      q: "DP-600 とどう違うの?",
+      a: "**DP-700 は Data Engineer**(Lakehouse / Pipeline / Spark / Real-Time 取込変換オーケストレーション)。**DP-600 は Analytics Engineer**(Semantic Model / Direct Lake / DAX / BI)。**両方取得で Fabric 全領域カバー**となり、Microsoft Data エコシステムでのキャリア価値が最大化する。",
+    },
+    {
+      q: "DP-203 との関係は?",
+      a: "**DP-203 は Azure Synapse + ADF + Databricks** 時代の Azure DE Associate。**DP-700 は Fabric SaaS 時代の DE Associate**。Synapse → Fabric への業界シフトに伴い、新規プロジェクトでは DP-700 が中心となる見込み。両方取得で**Synapse + Fabric の Azure データ基盤全領域**をカバーできる。",
+    },
+    {
+      q: "次のステップは?",
+      a: "DP-700 → **DP-600(Fabric Analytics Engineer)** で BI 寄り、**DP-100(Data Scientist)** で ML、**AZ-305(Solutions Architect Expert)** で全体設計、**AI-102(AI Engineer Associate)** で AI 統合へ。",
+    },
+  ],
   "gcp-data-engineer": [
     {
       q: "GCP Professional Data Engineer とは?",

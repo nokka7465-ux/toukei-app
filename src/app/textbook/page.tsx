@@ -457,6 +457,16 @@ const CERT_TRACKS: Track[] = [
     accent: "bg-indigo-700",
   },
   {
+    href: "/certs/azure-dp-700/textbook",
+    title: "Microsoft Fabric Data Engineer(DP-700)",
+    description:
+      "Fabric Data Engineer Associate 認定。Lakehouse ・ Notebook ・ Spark ・ Pipeline ・ Eventstream ・ KQL Database ・ Real-Time Dashboard ・ Reflex ・ Git Integration を網羅。",
+    audience: "データエンジニア",
+    chip: "DP-700",
+    emoji: "🛠️",
+    accent: "bg-indigo-800",
+  },
+  {
     href: "/certs/gcp-data-engineer/textbook",
     title: "GCP Professional Data Engineer",
     description:

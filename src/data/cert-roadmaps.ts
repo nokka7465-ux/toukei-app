@@ -2179,6 +2179,74 @@ export const certRoadmaps: Record<string, CertRoadmap> = {
     textbookHref: "/certs/azure-dp-600/textbook",
     quizHref: "/certs/azure-dp-600/quiz",
   },
+  "azure-dp-700": {
+    slug: "azure-dp-700",
+    title: "Microsoft Fabric DP-700 学習ロードマップ",
+    organizer: "Microsoft",
+    hours: "100〜200 時間",
+    months: "2〜3 ヶ月",
+    prerequisites: "SQL(中級)・ Python/PySpark(中級)・ KQL(基礎)・ Power Query M",
+    passCriteria: "1000 点満点中 700 点",
+    steps: [
+      {
+        week: "Week 1",
+        title: "Fabric 全体像 + Trial 起動",
+        description:
+          "7 ワークロード ・ Capacity Unit(CU)・ Workspace / Domain / Role ・ Fabric Trial(60 日 ・ F64 相当)。DP-700 ラーニングパス開始。",
+        links: [
+          { href: "/certs/azure-dp-700/textbook", label: "DP-700 教科書(章 1-2)" },
+        ],
+      },
+      {
+        week: "Week 2〜3",
+        title: "OneLake + Lakehouse + Delta",
+        description:
+          "OneLake Shortcut / Mirroring ・ Lakehouse の Files / Tables / Schema ・ Delta MERGE / Schema Evolution / Time Travel / Medallion(Bronze-Silver-Gold)。",
+        links: [
+          { href: "/certs/azure-dp-700/textbook", label: "DP-700 教科書(章 3, 6)" },
+        ],
+      },
+      {
+        week: "Week 4〜5",
+        title: "Pipeline + Dataflow Gen2 + Notebook + Spark",
+        description:
+          "Pipeline Activity + Trigger ・ Dataflow Gen2 Fast Copy / Query Folding ・ Notebook + Spark Pool / NEE / AQE / Performance Tuning。",
+        links: [
+          { href: "/certs/azure-dp-700/textbook", label: "DP-700 教科書(章 4-5)" },
+        ],
+      },
+      {
+        week: "Week 6〜7",
+        title: "Real-Time Intelligence + KQL",
+        description:
+          "Eventstream(Source / 変換 / Destination)・ KQL Database / Materialized View / Update Policy ・ Real-Time Dashboard ・ Reflex。",
+        links: [
+          { href: "/certs/azure-dp-700/textbook", label: "DP-700 教科書(章 7)" },
+        ],
+      },
+      {
+        week: "Week 8〜9",
+        title: "セキュリティ + ガバナンス + CI/CD",
+        description:
+          "Workspace Identity / Managed Private Endpoint / Tenant Private Link ・ RLS / OLS / Sensitivity Label / Purview ・ Git Integration / Deployment Pipeline / REST API。",
+        links: [
+          { href: "/certs/azure-dp-700/textbook", label: "DP-700 教科書(章 8-9)" },
+        ],
+      },
+      {
+        week: "Week 10",
+        title: "Monitoring + Maintenance + 模擬試験",
+        description:
+          "Monitoring Hub / Capacity Metrics App / Table Maintenance(OPTIMIZE / Z-ORDER / VACUUM / V-Order)・ 本サイト演習問題反復 ・ Microsoft Learn 仕上げ。",
+        links: [
+          { href: "/certs/azure-dp-700/quiz", label: "DP-700 演習問題" },
+          { href: "/practice", label: "ランダム練習" },
+        ],
+      },
+    ],
+    textbookHref: "/certs/azure-dp-700/textbook",
+    quizHref: "/certs/azure-dp-700/quiz",
+  },
   "gcp-data-engineer": {
     slug: "gcp-data-engineer",
     title: "GCP Professional Data Engineer 学習ロードマップ",
