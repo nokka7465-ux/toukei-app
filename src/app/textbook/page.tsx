@@ -497,6 +497,26 @@ const CERT_TRACKS: Track[] = [
     accent: "bg-orange-700",
   },
   {
+    href: "/certs/snowflake-dea/textbook",
+    title: "SnowPro Advanced: Data Engineer(DEA)",
+    description:
+      "Snowflake 上の DE 実装 Advanced 認定。Snowpipe ・ Streams ・ Tasks ・ Snowpark ・ Cortex AI ・ Iceberg ・ Polaris ・ Native Apps ・ Performance ・ Cost を網羅。",
+    audience: "データエンジニア",
+    chip: "SnowPro DEA",
+    emoji: "❄️",
+    accent: "bg-cyan-700",
+  },
+  {
+    href: "/certs/databricks-ml-engineer/textbook",
+    title: "Databricks Certified ML Engineer Professional",
+    description:
+      "Databricks 上の ML 実装 + Production Professional 認定。MLflow ・ Feature Store ・ AutoML ・ Model Serving ・ Lakehouse Monitoring ・ Mosaic AI(Vector + FM API + Agent)・ MLOps を網羅。",
+    audience: "ML Engineer",
+    chip: "Databricks ML",
+    emoji: "🔥",
+    accent: "bg-red-700",
+  },
+  {
     href: "/certs/gcp-data-engineer/textbook",
     title: "GCP Professional Data Engineer",
     description:

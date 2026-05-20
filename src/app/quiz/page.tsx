@@ -45,6 +45,8 @@ import { azureDp700Questions } from "@/data/questions/azure-dp-700";
 import { azureAz305Questions } from "@/data/questions/azure-az-305";
 import { sc100Questions } from "@/data/questions/sc-100";
 import { tableauDataAnalystQuestions } from "@/data/questions/tableau-data-analyst";
+import { snowflakeDeaQuestions } from "@/data/questions/snowflake-dea";
+import { databricksMlEngineerQuestions } from "@/data/questions/databricks-ml-engineer";
 import { gcpDataEngineerQuestions } from "@/data/questions/gcp-data-engineer";
 import {
   BreadcrumbJsonLd,
@@ -124,6 +126,8 @@ const CERT_TRACKS: Track[] = [
   { href: "/certs/azure-az-305/quiz", title: "Azure Solutions Architect Expert(AZ-305)", count: azureAz305Questions.length, description: "Identity ・ Compute ・ Storage ・ Network ・ Security ・ BCP ・ Well-Architected" },
   { href: "/certs/sc-100/quiz", title: "Microsoft Cybersecurity Architect Expert(SC-100)", count: sc100Questions.length, description: "Zero Trust ・ Defender XDR ・ Sentinel ・ Entra ・ Purview ・ Compliance ・ AI Security" },
   { href: "/certs/tableau-data-analyst/quiz", title: "Tableau Certified Data Analyst", count: tableauDataAnalystQuestions.length, description: "LOD ・ Calc ・ Dashboard ・ Story ・ Server ・ Pulse(Specialist の上位)" },
+  { href: "/certs/snowflake-dea/quiz", title: "SnowPro Advanced: Data Engineer(DEA)", count: snowflakeDeaQuestions.length, description: "Snowpipe ・ Streams ・ Tasks ・ Snowpark ・ Cortex AI ・ Iceberg ・ Polaris ・ Performance" },
+  { href: "/certs/databricks-ml-engineer/quiz", title: "Databricks Certified ML Engineer Professional", count: databricksMlEngineerQuestions.length, description: "MLflow ・ Feature Store ・ Model Serving ・ Lakehouse Monitoring ・ Mosaic AI ・ MLOps" },
   { href: "/certs/gcp-data-engineer/quiz", title: "GCP Professional Data Engineer", count: gcpDataEngineerQuestions.length, description: "BigQuery ・ Dataflow ・ Pub/Sub ・ Composer ・ Looker ・ Dataplex" },
 ];
 

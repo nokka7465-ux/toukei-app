@@ -737,6 +737,20 @@ export const certFaq: Record<string, FaqItem[]> = {
     { q: "前提となる経験は?", a: "**実務 3-6 ヶ月推奨**(Specialist 取得済 + 実プロジェクトで Dashboard 構築経験)。**Tableau Trail**(無料公式 LMS)+ **Tableau Public** で学習可能。" },
     { q: "次のステップは?", a: "Data Analyst → **Tableau Server Certified Associate**(Server 管理)・ **Salesforce Tableau Architect**(2024 新設)・ **Power BI PL-300 / Looker / Fabric DP-600** でマルチ BI。" },
   ],
+  "snowflake-dea": [
+    { q: "SnowPro Advanced: Data Engineer(DEA)とは?", a: "**Snowflake 上でデータ取込 ・ 変換 ・ 最適化を担う Data Engineer の Advanced 認定**。SnowPro Core の上位 ・ Snowpipe / Streams / Tasks / Snowpark / Cortex AI / Iceberg / Polaris / Performance / Cost を実装で問う。" },
+    { q: "試験形式と合格基準は?", a: "**65 問 / 115 分 / 750 / 1000 / 375 USD / 有効期限 2 年**。前提: SnowPro Core + Snowflake 実務 1-2 年。Scenario 問題が多い。" },
+    { q: "SnowPro Core との違いは?", a: "**Core**: Foundational ・ Architecture / 基本機能。**DEA**: Advanced ・ 実装パターン / Cortex AI / Iceberg / Native Apps / Performance 深掘り。Core 取得が DEA の前提。" },
+    { q: "次のステップは?", a: "DEA → **SnowPro Advanced: Architect / Analyst / Administrator / Data Scientist** で領域専門化、**Databricks DE Pro / Microsoft DP-700 / GCP Pro DE / AWS DEA-C01** でマルチクラウド、**dbt Snowflake** で Analytics Engineer。" },
+    { q: "学習リソースは?", a: "Snowflake University(公式 LMS)・ **Free Trial 30 日**($400 クレジット)・ **Hands-on Quickstart**(snowflake.com/quickstarts)・ SnowPro Core 復習。" },
+  ],
+  "databricks-ml-engineer": [
+    { q: "Databricks Certified ML Engineer Professional とは?", a: "**Databricks 上で ML を実装 ・ デプロイ ・ 監視する ML Engineer の Professional 認定**。MLflow / Feature Store / AutoML / Model Serving / Lakehouse Monitoring / Mosaic AI(Vector Search + FM API + Agent Framework)/ MLOps の総合実装力。" },
+    { q: "試験形式と合格基準は?", a: "**60 問 / 120 分 / 70-75% / 200 USD / 有効期限 2 年**。前提: ML Associate + Databricks 実務 6 ヶ月-1 年。**MLOps + Mosaic AI(GenAI)が大きなウェイト**。" },
+    { q: "ML Associate との違いは?", a: "**Associate**: 古典 ML + Spark MLlib / MLflow / Feature Store の基本。**Professional**: Mosaic AI + Model Serving + Lakehouse Monitoring + Asset Bundle + Distributed Training など Production 運用が中心。" },
+    { q: "次のステップは?", a: "ML Engineer Pro → **Databricks Data Engineer Professional**(DE 専門)・ **Generative AI Engineer Associate**(2024 新設 ・ GenAI 専門)・ **Solutions Architect Professional**・ **マルチクラウド**: AWS MLS-C01 / Azure DP-100 / GCP Pro MLE。" },
+    { q: "学習リソースは?", a: "Databricks Academy(公式 LMS)・ Hands-on Workshop / Quickstart ・ GitHub databricks-industry-solutions ・ **ML Associate を先に取得**(前提)。" },
+  ],
   "gcp-data-engineer": [
     {
       q: "GCP Professional Data Engineer とは?",
