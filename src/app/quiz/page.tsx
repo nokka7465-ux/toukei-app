@@ -47,6 +47,7 @@ import { sc100Questions } from "@/data/questions/sc-100";
 import { tableauDataAnalystQuestions } from "@/data/questions/tableau-data-analyst";
 import { snowflakeDeaQuestions } from "@/data/questions/snowflake-dea";
 import { databricksMlEngineerQuestions } from "@/data/questions/databricks-ml-engineer";
+import { gcpDevopsEngineerQuestions } from "@/data/questions/gcp-devops-engineer";
 import { gcpDataEngineerQuestions } from "@/data/questions/gcp-data-engineer";
 import {
   BreadcrumbJsonLd,
@@ -128,6 +129,7 @@ const CERT_TRACKS: Track[] = [
   { href: "/certs/tableau-data-analyst/quiz", title: "Tableau Certified Data Analyst", count: tableauDataAnalystQuestions.length, description: "LOD ・ Calc ・ Dashboard ・ Story ・ Server ・ Pulse(Specialist の上位)" },
   { href: "/certs/snowflake-dea/quiz", title: "SnowPro Advanced: Data Engineer(DEA)", count: snowflakeDeaQuestions.length, description: "Snowpipe ・ Streams ・ Tasks ・ Snowpark ・ Cortex AI ・ Iceberg ・ Polaris ・ Performance" },
   { href: "/certs/databricks-ml-engineer/quiz", title: "Databricks Certified ML Engineer Professional", count: databricksMlEngineerQuestions.length, description: "MLflow ・ Feature Store ・ Model Serving ・ Lakehouse Monitoring ・ Mosaic AI ・ MLOps" },
+  { href: "/certs/gcp-devops-engineer/quiz", title: "GCP Professional Cloud DevOps Engineer", count: gcpDevopsEngineerQuestions.length, description: "SRE 5 原則 ・ SLI-SLO-Error Budget ・ Observability ・ CI-CD ・ Incident ・ DataOps(本サイト初の SRE カテゴリ)" },
   { href: "/certs/gcp-data-engineer/quiz", title: "GCP Professional Data Engineer", count: gcpDataEngineerQuestions.length, description: "BigQuery ・ Dataflow ・ Pub/Sub ・ Composer ・ Looker ・ Dataplex" },
 ];
 

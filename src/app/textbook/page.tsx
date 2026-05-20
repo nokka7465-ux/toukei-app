@@ -517,6 +517,16 @@ const CERT_TRACKS: Track[] = [
     accent: "bg-red-700",
   },
   {
+    href: "/certs/gcp-devops-engineer/textbook",
+    title: "GCP Professional Cloud DevOps Engineer",
+    description:
+      "SRE / DevOps / CI-CD / Observability / Incident Response / DataOps を統合する Google Cloud の Professional 認定。本サイト初の SRE / Observability / DataOps カテゴリの中核。",
+    audience: "DevOps / SRE",
+    chip: "GCP DevOps",
+    emoji: "⚙️",
+    accent: "bg-emerald-700",
+  },
+  {
     href: "/certs/gcp-data-engineer/textbook",
     title: "GCP Professional Data Engineer",
     description:

@@ -751,6 +751,13 @@ export const certFaq: Record<string, FaqItem[]> = {
     { q: "次のステップは?", a: "ML Engineer Pro → **Databricks Data Engineer Professional**(DE 専門)・ **Generative AI Engineer Associate**(2024 新設 ・ GenAI 専門)・ **Solutions Architect Professional**・ **マルチクラウド**: AWS MLS-C01 / Azure DP-100 / GCP Pro MLE。" },
     { q: "学習リソースは?", a: "Databricks Academy(公式 LMS)・ Hands-on Workshop / Quickstart ・ GitHub databricks-industry-solutions ・ **ML Associate を先に取得**(前提)。" },
   ],
+  "gcp-devops-engineer": [
+    { q: "GCP Professional Cloud DevOps Engineer とは?", a: "**SRE / DevOps / CI-CD / Observability / Incident Response / DataOps を統合する Google Cloud の Professional 認定**。Google は SRE 発祥企業として **SLI / SLO / Error Budget / Toil / Blameless Postmortem** の概念を試験範囲に含む。" },
+    { q: "試験形式と合格基準は?", a: "**50-60 問 / 120 分 / 200 USD / 有効期限 2 年**。前提: GCP 実務 3 年(うち DevOps 1 年)推奨。**Google SRE Book / SRE Workbook が必読**。" },
+    { q: "本サイトでの位置づけは?", a: "**本サイト初の SRE / Observability / DataOps カテゴリ**の中核認定。今後 AWS DevOps Pro / Azure AZ-400 / CNCF CKA / CKAD / CKS / Terraform Associate / FinOps Practitioner 等を段階的に追加予定。" },
+    { q: "SRE 5 原則とは?", a: "**Embrace Risk / Set SLOs / Eliminate Toil / Monitor / Blameless Postmortem**。Google SRE Book で体系化された、信頼性を運用する 5 つの原則。**業界標準**として広く採用。" },
+    { q: "次のステップは?", a: "Pro DevOps → **Pro Cloud Architect**(全体設計)・ **Pro Cloud Security Engineer**(セキュリティ専門)・ **Pro ML Engineer / Data Engineer**(領域)・ **マルチクラウド SRE**: AWS DOP-C02 / Azure AZ-400 ・ **CNCF**: CKA / CKAD / CKS / FinOps Practitioner。" },
+  ],
   "gcp-data-engineer": [
     {
       q: "GCP Professional Data Engineer とは?",

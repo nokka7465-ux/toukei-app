@@ -85,6 +85,12 @@ const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
+    label: "SRE / Observability / DataOps",
+    items: [
+      { href: "/certs/gcp-devops-engineer", label: "GCP Professional Cloud DevOps Engineer" },
+    ],
+  },
+  {
     label: "学習サポート",
     items: [
       { href: "/math", label: "数学基礎" },
