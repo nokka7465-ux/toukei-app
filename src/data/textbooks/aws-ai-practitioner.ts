@@ -652,5 +652,341 @@ export const awsAiPractitionerTextbook: Textbook = {
         },
       ],
     },
+    {
+      id: "ch11",
+      number: 11,
+      title: "Amazon Bedrock 2024-2025 の進化",
+      overview:
+        "Bedrock は 2024-2025 で Multi-Agent Collaboration / Distillation / Cross-Region Inference / Prompt Caching など大幅進化。試験範囲も改定されています。",
+      sections: [
+        {
+          id: "ch11-sec1",
+          number: "11.1",
+          title: "Knowledge Bases の進化(GraphRAG / Hierarchical / Reranking)",
+          blocks: [
+            {
+              type: "p",
+              text: "Bedrock Knowledge Bases(KB)は **マネージド RAG** の中核。2024 年に複数の重要機能が追加されました。",
+            },
+            { type: "h3", text: "新機能(2024+)" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Hierarchical Chunking**: 親子 Chunk 構造で **小 Chunk で検索 + 大 Chunk で生成** → 精度向上",
+                "**Metadata Filter**: タグ / 属性で検索結果を絞り込み(ユーザー権限別 ・ 日付範囲等)",
+                "**GraphRAG**(2024 末 Preview): Neptune Graph で **エンティティ関係を活用した複雑質問**(Multi-Hop)に対応",
+                "**Reranking**(2024 GA): Cohere Rerank 3.5 等で Top-K を再順位 → 関連性大幅向上",
+                "**Structured Data Retrieval**(Preview): Redshift / Athena 等の構造化データも KB 経由でクエリ",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 KB の使い分け",
+              body: "**シンプル QA**: 標準 Chunking + Vector のみ。**複雑 / Multi-Hop**: Hierarchical + Reranking + GraphRAG。**SaaS 横断**: Metadata Filter で Tenant 分離。**社内文書 + DB 横断**: Structured Data Retrieval。**まず標準で始めて精度不足なら段階的に強化** が王道。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec2",
+          number: "11.2",
+          title: "Bedrock Agents と Multi-Agent Collaboration",
+          blocks: [
+            { type: "h3", text: "Bedrock Agents の構成要素" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Foundation Model**: Agent の頭脳(Claude / Llama 等)",
+                "**Action Groups**: Lambda + OpenAPI Schema で外部 API 呼出",
+                "**Knowledge Base**: RAG で社内情報参照",
+                "**Guardrails**: 入出力フィルタリング(同じ Guardrail を複数 Agent で共有可)",
+                "**Memory**: 会話履歴を保持(Session 跨ぎ Memory も 2024+)",
+                "**Trace**: 思考過程を可視化(デバッグ ・ 監査)",
+              ],
+            },
+            { type: "h3", text: "Multi-Agent Collaboration(2024 GA)" },
+            {
+              type: "p",
+              text: "**Supervisor Agent** が複雑タスクを **Sub-agents** に分解委譲する階層構造。例: 旅行プランナー Supervisor → 航空券 Agent + ホテル Agent + アクティビティ Agent。各 Sub は特化した Action / KB を持ち、Supervisor が統合して最終回答。",
+            },
+            {
+              type: "practical",
+              title: "Multi-Agent vs 単一 Agent の選び方",
+              body: "**単一 Agent**: タスクが特定ドメインに限定。**Multi-Agent**: ① ドメインが分かれる(技術サポート + 営業 + 経理 等)② Tool 数が膨大(20+)③ 並列処理で速度向上したい。**Agent 1 つあたり 5-10 Action / 1-3 KB に絞る** のが Anthropic の推奨。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec3",
+          number: "11.3",
+          title: "Guardrails の進化と Content Filtering",
+          blocks: [
+            { type: "h3", text: "Guardrails の機能" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Content Filters**: Hate / Insults / Sexual / Violence / Misconduct / Prompt Attack の 6 カテゴリ x 4 段階(NONE / LOW / MED / HIGH)",
+                "**Denied Topics**: 自由記述で禁止トピック定義(例: 競合製品の推薦)",
+                "**Sensitive Information Filter**: PII / Custom Regex Pattern を Mask / Block",
+                "**Word Filter**: 特定キーワード(製品名 / 不適切表現)Block",
+                "**Contextual Grounding Check**: RAG での Grounding スコア低い回答を Block → ハルシネーション抑制",
+                "**Automated Reasoning Checks**(2024 末 Preview): 論理的整合性を Formal Verification で検証",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 Guardrails の独立性が強み",
+              body: "**1 つの Guardrail を複数 Foundation Model 横断で共有** できる(Claude / Llama / Titan 等)。**Independent API**(`ApplyGuardrail`)で Pre/Post Inference 制御も。**Bedrock を使わない自社 LLM 推論** にも Guardrails を適用できる(2024 拡張)。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec4",
+          number: "11.4",
+          title: "Model Distillation と Cross-Region Inference",
+          blocks: [
+            { type: "h3", text: "Model Distillation(2024 GA)" },
+            {
+              type: "p",
+              text: "**Teacher Model**(Claude 3.5 Sonnet など)の出力で **Student Model**(Claude 3 Haiku など)を Fine-tune し、特定タスクで **精度を保ったまま 75% コスト削減 + 500% 高速化** を実現します。",
+            },
+            { type: "h3", text: "Distillation ワークフロー" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "Training Prompts を準備(プロダクション履歴 or 専用データセット)",
+                "Bedrock が Teacher を呼出して回答生成(Synthetic Data)",
+                "Student を Fine-tune(LoRA ベース)",
+                "Distilled Student を Provisioned Throughput でデプロイ",
+              ],
+            },
+            { type: "h3", text: "Cross-Region Inference(2024 GA)" },
+            {
+              type: "p",
+              text: "**複数リージョンに Inference を自動分散**することで、① 単一リージョンの容量制約回避 ② 低レイテンシ ③ 高可用性 を実現。**追加コストなし**で「Inference Profile」を選ぶだけ。",
+            },
+            {
+              type: "practical",
+              title: "コスト最適化の組合せ",
+              body: "**① モデル選定**(Haiku / Nova Micro 等の軽量モデル)+ **② Prompt Caching**(Anthropic Claude 3.5+ で 90% コスト減 ・ 入力 Token のみ)+ **③ Cross-Region Inference**(容量問題回避)+ **④ Distillation**(特定タスクの恒久的高速化)+ **⑤ Batch API**(50% off / 非同期 OK な場合)。これらを **重ねて使う**ことが本番運用の鍵。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec5",
+          number: "11.5",
+          title: "Bedrock Marketplace と Nova ファミリ",
+          blocks: [
+            { type: "h3", text: "Bedrock Marketplace(2024 GA)" },
+            {
+              type: "p",
+              text: "Hugging Face / Databricks / NVIDIA / IBM など **100+ の追加モデル**を Bedrock 経由で利用可能に。**統一 API / 統一課金 / VPC エンドポイント / IAM** を Marketplace モデルにも適用できるのが強みです。",
+            },
+            { type: "h3", text: "Amazon Nova ファミリ(2024 re:Invent)" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Nova Micro**: テキストのみ ・ 超低コスト / 超高速(Haiku / Gemini Flash 競合)",
+                "**Nova Lite**: マルチモーダル(画像 + 動画 + テキスト)・ 低コスト",
+                "**Nova Pro**: 主力モデル ・ 高精度 + マルチモーダル",
+                "**Nova Premier**(2025): フラッグシップ(GPT-4o / Claude Opus 競合)",
+                "**Nova Canvas**: 画像生成(Stable Diffusion / DALL-E 競合)",
+                "**Nova Reel**: 動画生成(Sora / Veo 競合)",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 Nova vs 他モデル",
+              body: "**Nova の強み**: ① **AWS ネイティブ**(課金 ・ IAM 統合)② **マルチモーダルが標準**(Lite/Pro)③ **コストパフォーマンス重視**。**Anthropic Claude が依然として最高精度** ・ **Nova はコスト効率 + Amazon 統合** で使い分けが現実的。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch12",
+      number: 12,
+      title: "SageMaker と Amazon Q ファミリの最新進化",
+      overview:
+        "SageMaker は 2024 年に大きな再ブランディング(Unified Studio)が行われ、Amazon Q はビジネス / 開発者 / アナリスト向けに細分化しました。",
+      sections: [
+        {
+          id: "ch12-sec1",
+          number: "12.1",
+          title: "SageMaker Unified Studio(2024)",
+          blocks: [
+            {
+              type: "p",
+              text: "**SageMaker Unified Studio**(2024 re:Invent 発表)は、従来の SageMaker Studio + Glue Studio + EMR Studio + Athena + Redshift Query Editor + Bedrock IDE を **1 つの UI に統合**した次世代環境です。",
+            },
+            { type: "h3", text: "統合された機能" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Data Catalog 統合**: Lake Formation / Glue Catalog をネイティブ参照",
+                "**SageMaker Lakehouse**: S3 + Redshift + Iceberg を統一クエリ(Iceberg REST Catalog 互換)",
+                "**Generative AI Development**: Bedrock IDE 統合 ・ Prompt 開発 ・ Agent 構築",
+                "**ML Development**: 従来の Notebook / Training / Endpoint / Pipelines",
+                "**SQL Analytics**: Athena / Redshift / EMR 互換クエリ",
+                "**Project + Domain**: Workspace 階層 ・ IAM Identity Center 統合",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 旧 SageMaker Studio との関係",
+              body: "**旧 Studio はサポート継続** だが、**新規プロジェクトは Unified Studio が推奨**。**Unified Studio = SageMaker + 多データソース + GenAI の包括的 IDE**。**AWS DataZone(2023 GA)の発展形**として位置付けられます。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec2",
+          number: "12.2",
+          title: "SageMaker AI(2024 リブランド)",
+          blocks: [
+            {
+              type: "p",
+              text: "**従来の SageMaker は \"SageMaker AI\" にリブランド**(2024 末)。これにより SageMaker は **Data + Analytics + AI の包括プラットフォーム** に拡張し、SageMaker AI はその AI 部分を指す呼称になりました。",
+            },
+            { type: "h3", text: "SageMaker AI の構成要素" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**SageMaker AI Studio**(旧 SageMaker Studio): IDE + Notebook + Code Editor",
+                "**SageMaker Canvas**: No-Code ML + Generative AI 統合",
+                "**SageMaker Autopilot**: AutoML(コード生成型)",
+                "**SageMaker JumpStart**: Foundation Model + Solution Templates",
+                "**SageMaker HyperPod**(2023 GA + 2024 拡張): 大規模分散学習(数千 GPU)",
+                "**SageMaker Inference**: Real-time / Serverless / Async / Batch / Multi-Model / Inference Recommender",
+              ],
+            },
+            { type: "h3", text: "HyperPod の意義" },
+            {
+              type: "p",
+              text: "**HyperPod** は数百〜数千 GPU の長期間学習(LLM 事前学習等)向け。**ノード障害時の自動復旧 / Checkpoint / Cluster Resilience** が組込まれており、数週間にわたる学習を中断なく実行可能。**Meta Llama / Stability AI / Perplexity** も AWS HyperPod 利用。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec3",
+          number: "12.3",
+          title: "Amazon Q ファミリ全体像",
+          blocks: [
+            {
+              type: "p",
+              text: "**Amazon Q** は AWS の汎用生成 AI アシスタント。役割別に細分化されています。AIF-C01 でも Q ファミリの使い分けが頻出問題。",
+            },
+            { type: "h3", text: "Amazon Q Developer(旧 CodeWhisperer)" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**コード補完 / 生成 / リファクタリング / 単体テスト生成**",
+                "**Amazon Q Developer Agents**: 機能追加 / コード変換(Java 8 → 17)/ AWS Best Practices Review",
+                "**IDE 統合**: VS Code / JetBrains / AWS Toolkit / CLI",
+                "**Free Tier あり**(個人 ・ 5 月コード補完上限)",
+                "**GitHub Copilot 競合** ・ AWS リソース文脈に強い",
+              ],
+            },
+            { type: "h3", text: "Amazon Q Business" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**社内ナレッジ統合**: Slack / Teams / Confluence / SharePoint / Salesforce / Google Drive 40+ コネクタ",
+                "**社員向け QA + 業務代行**: 会議要約 / メール下書き / ドキュメント検索 + Citation",
+                "**Q Apps**: 自然言語で社内ミニアプリ作成",
+                "**Q Actions**: ServiceNow / Zendesk 等への自動アクション",
+              ],
+            },
+            { type: "h3", text: "Q in QuickSight / Connect / Glue / その他" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Q in QuickSight**: 自然言語 → ダッシュボード ・ Story 自動生成",
+                "**Q in Connect**: コンタクトセンター(コール対応中の Real-time 提案)",
+                "**Q in Glue**: ETL ジョブを自然言語で生成",
+                "**Q in Chime**: 会議要約 / Action Item 抽出",
+                "**Q for Migration**(Mainframe / VMware / .NET → AWS の自動変換)",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch12-sec4",
+          number: "12.4",
+          title: "AWS Generative AI Stack 全体像",
+          blocks: [
+            {
+              type: "p",
+              text: "AIF-C01 でよく問われる **「ユースケースに最も適した AWS サービスは?」** 問題は、以下の 3 層モデルで整理すると即答できます。",
+            },
+            { type: "h3", text: "AWS Generative AI 3 層" },
+            {
+              type: "list",
+              style: "number",
+              items: [
+                "**Top Layer(エンドユーザー向けアプリ)**: Amazon Q ファミリ(Developer / Business / QuickSight / Connect 等)・ 即時利用 ・ ノーコード",
+                "**Middle Layer(API でモデルを利用)**: Amazon Bedrock(マネージド Foundation Model API)・ Knowledge Bases / Agents / Guardrails",
+                "**Bottom Layer(自前で構築 / カスタマイズ)**: SageMaker AI(Custom Training / HyperPod / JumpStart / Inference)",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 即答パターン",
+              body: "**「業務効率化したい」→ Amazon Q**(Business / Developer)・ **「自社アプリに LLM 組込」→ Bedrock**(KB + Agents + Guardrails)・ **「独自モデル学習 / Fine-tune」→ SageMaker JumpStart / HyperPod**。**「画像 / 動画 / 音声を簡単に」→ Rekognition / Polly / Transcribe**(AI Services 直行)。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec5",
+          number: "12.5",
+          title: "AIF-C01 v2(2024 改訂)の出題変化",
+          blocks: [
+            {
+              type: "p",
+              text: "AIF-C01 は 2024 末 - 2025 にかけて出題範囲が **生成 AI 寄りに大幅シフト**しました。学習比重も以下のように調整が必要です。",
+            },
+            { type: "h3", text: "改訂後の出題ウェイト目安" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Fundamentals of AI / ML**: 約 20%(古典 ML / 評価指標 / バイアス)",
+                "**Fundamentals of Generative AI**: 約 24%(LLM / プロンプト / RAG / Fine-tuning)",
+                "**Applications of Foundation Models**: 約 28%(**Bedrock + Q ファミリが大きな比重**)",
+                "**Guidelines for Responsible AI**: 約 14%(公平性 / 説明可能性 / Guardrails)",
+                "**Security, Compliance, Governance**: 約 14%(IAM / KMS / Macie / プライバシ)",
+              ],
+            },
+            { type: "h3", text: "新出題トピック(2024-2025)" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Prompt Caching**(Claude 3.5+)による課金最適化",
+                "**Multi-Agent Collaboration**(Bedrock Agents)",
+                "**Cross-Region Inference**",
+                "**Model Distillation**",
+                "**Amazon Nova ファミリ**(Micro / Lite / Pro / Premier / Canvas / Reel)",
+                "**SageMaker HyperPod**",
+                "**Amazon Q Developer Agents**(機能追加 / Java 8→17 等)",
+              ],
+            },
+            {
+              type: "practical",
+              title: "学習リソース",
+              body: "**AWS Skill Builder の無料ラーニングパス**(AWS Certified AI Practitioner Plan)+ **AWS Cloud Quest: Generative AI**(ゲーム式)+ **AWS Builder Labs**(実機 Bedrock)+ **公式問題集 20 問** が王道セット。**Anthropic Console / Bedrock Playground** で実際に Claude / Nova を触ることで Tier 1 - 3 の区別が体感的に分かります。",
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

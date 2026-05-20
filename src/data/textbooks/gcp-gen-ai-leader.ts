@@ -638,5 +638,337 @@ export const gcpGenAiLeaderTextbook: Textbook = {
         },
       ],
     },
+    {
+      id: "ch11",
+      number: 11,
+      title: "Gemini 2.0 / 2.5 と Reasoning Models(2024-2025)",
+      overview:
+        "Gemini は 2024 末 - 2025 で **Native Multimodal / Thinking Mode / Agent / Veo / Imagen 3 統合** へ大進化。Gen AI Leader 試験も同等の最新トピックを反映しています。",
+      sections: [
+        {
+          id: "ch11-sec1",
+          number: "11.1",
+          title: "Gemini ファミリと選択基準",
+          blocks: [
+            {
+              type: "p",
+              text: "Gemini ファミリは性能 ・ コスト ・ 用途別に階層化されています。Gen AI Leader 試験ではタスク → モデル選定の判断力が問われます。",
+            },
+            { type: "h3", text: "Gemini 2.x ファミリ(2024-2025)" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Gemini 2.0 Pro** / **2.5 Pro**: 主力 ・ 高精度 ・ 200 万 Token Context",
+                "**Gemini 2.0 Flash** / **2.5 Flash**: 高速 ・ 低コスト ・ マルチモーダル",
+                "**Gemini 2.0 Flash-Lite** / **2.5 Flash-Lite**: さらに軽量 ・ 安価",
+                "**Gemini 2.0 Flash Thinking** / **2.5 Thinking**: o1 系 Reasoning Model(数学 / コード / 論理に強い)",
+                "**Gemini Nano**: オンデバイス(Android / Chrome 内蔵)",
+                "**Imagen 3**: 画像生成(DALL-E 3 / Midjourney 競合)",
+                "**Veo 2 / Veo 3**: 動画生成(Sora 競合)・ 60 秒+ の高品質",
+                "**Chirp / Lyria**: 音声合成 / 音楽生成",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 即答フローチャート",
+              body: "**高頻度 / 大量**: Flash-Lite / Flash。**精度重視**: Pro / Thinking。**数学 ・ コード ・ 多段推論**: Thinking 系。**マルチモーダル(画像 + 動画 + 音声)**: 2.x 系どれでも Native 対応。**オンデバイス(Android 端末内)**: Nano。**画像生成**: Imagen 3。**動画生成**: Veo 2/3。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec2",
+          number: "11.2",
+          title: "Native Multimodal の意義",
+          blocks: [
+            {
+              type: "p",
+              text: "Gemini は **設計当初からマルチモーダル(Text / Image / Audio / Video)を Native に処理**する初の大規模モデル。GPT-4 等の「テキスト中心 + Vision 拡張」とは設計思想が異なります。",
+            },
+            { type: "h3", text: "Native Multimodal の特徴" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Tokenizer がマルチモーダル**: 画像 / 音声 / 動画を直接トークン化(ピクセル / 音声波形 / フレーム)",
+                "**Cross-modal Reasoning**: 「動画の 10:23 で女性が言った内容を要約 + 画像で示せ」が 1 回の推論で可能",
+                "**Real-time Audio + Video**(Project Astra): カメラ + マイク Live ストリームでチャット",
+                "**Long Video Understanding**: 1-2 時間の動画を 1 回の Context で理解(200 万 Token = 約 11 時間音声 / 約 1 時間映像相当)",
+              ],
+            },
+            {
+              type: "practical",
+              title: "ユースケース例",
+              body: "**製造業**: 設備カメラ映像 → 故障兆候の自動検知 + 整備マニュアル参照 + 作業指示生成。**医療**: 内視鏡動画 → 病変箇所マーキング + カルテ自動入力 + 過去症例比較。**教育**: 授業動画 → 章ごとの要約 + 練習問題自動生成 + 個別化解説。**Native Multimodal でないと困難な複合タスク**こそ Gemini の独壇場。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec3",
+          number: "11.3",
+          title: "Thinking Mode と Reasoning Models",
+          blocks: [
+            {
+              type: "p",
+              text: "**Gemini 2.0 Flash Thinking**(2024 末)・ **Gemini 2.5 Pro Thinking**(2025)は OpenAI o1 / o3 と同様の **Test-Time Compute Scaling** モデル。推論時に内部で長い思考過程を生成して回答精度を高めます。",
+            },
+            { type: "h3", text: "Reasoning Model の仕組み" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Chain-of-Thought を内部で延長**: 数千トークンの思考過程を生成(出力には表示しない / Trace で見られる)",
+                "**Self-Reflection**: 中間結論を批判 ・ 修正",
+                "**RLHF / Self-Play with Verifier** で訓練(数学 ・ コードは検証可能なため強化学習が効きやすい)",
+                "**AIME / MATH / GPQA / Codeforces で人間専門家超え**",
+              ],
+            },
+            { type: "h3", text: "Reasoning Model を選ぶ場面" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**数学 / 物理 / 化学の難問**(競技数学レベル)",
+                "**複雑なコード生成 / バグ修正 / 設計レビュー**",
+                "**法律 / 医療の多段推論**(条文解釈 / 鑑別診断)",
+                "**戦略立案 / 投資判断 の論理検証**",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 Reasoning Model のトレードオフ",
+              body: "**精度 ↑ / レイテンシ ↑(数秒-数十秒)/ Token コスト ↑**。**チャットや要約には過剰スペック**。**深い分析 / 専門的回答** で価値を発揮。**Gen AI Leader 試験**では「Reasoning Model を選ぶべき / 通常モデルで十分」の判断が問われる。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec4",
+          number: "11.4",
+          title: "Context Caching と Long Context 活用",
+          blocks: [
+            {
+              type: "p",
+              text: "**Context Caching**(Gemini 1.5+)は、長文 Prompt の前半を Cache 化して再利用時のコストを **75% 削減** + レイテンシ短縮する機能。Gen AI 経済の核心技術です。",
+            },
+            { type: "h3", text: "Context Caching の使い所" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**マルチターンチャット**: System Prompt + 過去履歴を Cache",
+                "**長大ドキュメント QA**: 1 冊の本 / 大型契約書を Cache → ユーザーが繰返し質問",
+                "**Multi-Query Agent**: 同一 Context に対して複数 Sub-task",
+                "**RAG の代替**: 中規模文書(100K-1M Token)なら RAG なしで Cache に丸ごと入れるほうがシンプル",
+              ],
+            },
+            { type: "h3", text: "Long Context の活用パターン" },
+            {
+              type: "p",
+              text: "Gemini の **200 万 Token Context** は、**1 つの企業の全社内文書 ・ 数百本の論文 ・ 大規模コードベース** を一度に読込める容量。**Single-shot Long Context** vs **Retrieval(RAG)** のトレードオフを理解することが重要です。",
+            },
+            {
+              type: "practical",
+              title: "Long Context vs RAG",
+              body: "**Long Context が有利**: ① 文書数百 - 数千 Token 規模 ② 全体俯瞰が必要 ③ 1-shot で完結。**RAG が有利**: ① 文書数十万 + ② 頻繁更新 ③ Citation 必須 ④ コスト最重視。**ハイブリッド**: RAG で Top-K → Long Context で精読、が現代の主流。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec5",
+          number: "11.5",
+          title: "Gemini 周辺サービスと Google 統合",
+          blocks: [
+            { type: "h3", text: "Gemini for Workspace(統合 AI)" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Gemini in Gmail / Docs / Sheets / Slides / Meet**: M365 Copilot 競合",
+                "**Help me write / organize / visualize**: 各アプリ内の自然言語操作",
+                "**Gemini Code Assist**: GitHub Copilot 競合 ・ IDE 統合",
+                "**Gemini in Chrome**(Tab Compare / Page Summary 等)",
+                "**Gemini App**(無料 / Advanced $19.99/月)",
+              ],
+            },
+            { type: "h3", text: "NotebookLM" },
+            {
+              type: "p",
+              text: "**NotebookLM**(Google Labs → 一般公開): アップロードしたソース(PDF / Doc / Web / 音声 / 動画)を **Grounded で QA / Summary / Mind Map / Audio Overview**(2 人 AI による Podcast 風音声解説)生成。学習 / リサーチ用途で爆発的人気。",
+            },
+            { type: "h3", text: "Deep Research" },
+            {
+              type: "p",
+              text: "**Gemini Deep Research**(2024 末 Gemini Advanced 機能): ユーザー質問に対し **多段 Web 検索 + 文書統合 + Citation 付きレポート**(数十ページ)を自動生成。**OpenAI Deep Research(2025)・ Perplexity Pro Search** と同等の AI Research Agent。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch12",
+      number: 12,
+      title: "Project Astra / Agent Builder と Embodied AI",
+      overview:
+        "Google の Agent ・ Embodied AI 戦略(Astra / Mariner / SIMA / Genie 2 / RT-2)を、Gen AI Leader 試験に必要な範囲で整理します。",
+      sections: [
+        {
+          id: "ch12-sec1",
+          number: "12.1",
+          title: "Project Astra(Multimodal Real-time Agent)",
+          blocks: [
+            {
+              type: "p",
+              text: "**Project Astra**(Google I/O 2024 発表 ・ 2025 順次展開)は、**カメラ + マイク + 画面共有 で Real-time にユーザーを支援する Universal AI Agent** です。",
+            },
+            { type: "h3", text: "Astra の特徴" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Real-time Multimodal**: ビデオ + 音声 + 画面を **常時 Stream 処理**(レイテンシ <1 秒)",
+                "**Persistent Memory**: 過去 10 分以上の出来事を覚えている",
+                "**Multimodal Reasoning**: 「机の上の眼鏡どこに置いた?」「画面のコードを修正して」など世界モデル + 行動指示",
+                "**Cross-device**: スマホ ・ Chrome ・ スマートグラス(Android XR)で同一 Agent",
+                "**Comparison**: OpenAI Realtime API + GPT-4o Voice Mode と同等概念",
+              ],
+            },
+            {
+              type: "practical",
+              title: "Astra のビジネス活用",
+              body: "**コールセンター**: オペレータ画面と顧客状況を Astra が見て Real-time 提案。**現場作業**: スマートグラスで作業者を Astra が誘導(整備 / 検査)。**教育**: 個別チューター(問題を見せると解説 ・ 弱点指摘)。**バリアフリー**: 視覚障害者の生活支援。**Astra は単独製品ではなく Gemini 2.x の応用形** として理解。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec2",
+          number: "12.2",
+          title: "Project Mariner(Browser Agent)",
+          blocks: [
+            {
+              type: "p",
+              text: "**Project Mariner**(2024 末発表)は、**ブラウザを Agent が自動操作**する技術。**Anthropic Computer Use / OpenAI Operator** と並ぶ AI による Web Task 自動化です。",
+            },
+            { type: "h3", text: "Mariner の機能" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**ブラウザ画面を Vision で理解** → クリック ・ 入力 ・ スクロール",
+                "**自然言語タスク** → 例: 「Amazon で送料無料の有機コーヒー豆を見つけてカートに入れて」",
+                "**Chrome 拡張機能 として提供**(Trusted Tester から段階展開)",
+                "**Multi-step Plan**: タスクを分解 → 順次実行 → エラー時の自動リカバリ",
+              ],
+            },
+            { type: "h3", text: "Browser Agent の社会的論点" },
+            {
+              type: "p",
+              text: "Browser Agent は **Web エコノミー全体に大きな影響**(自動購買 / 自動申込 / Bot 流入の急増)。**EU AI Act / 著作権 / robots.txt 拡張 / Bot 課金モデル** など、Gen AI Leader として把握すべき新たな論点です。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec3",
+          number: "12.3",
+          title: "Vertex AI Agent Builder",
+          blocks: [
+            {
+              type: "p",
+              text: "**Vertex AI Agent Builder**(旧 Gen App Builder, 2024 リブランド)は、**Low-Code で生成 AI アプリ ・ Agent を構築**できる Google Cloud の SaaS です。",
+            },
+            { type: "h3", text: "Agent Builder の主要機能" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Vertex AI Search**(マネージド RAG): 取込 + Embed + 検索 + Reranker + Citation",
+                "**Vertex AI Conversation**(旧 Dialogflow CX): GUI で会話フロー設計",
+                "**Agent Garden**: Pre-built Agent テンプレート(契約書レビュー / 商品レコメンド 等)",
+                "**Agent Engine**(2024+): 任意の Agent FW(LangChain / LangGraph / CrewAI / AutoGen)を Vertex AI でホスト",
+                "**Connectors**: BigQuery / Looker / Cloud Storage / GitHub 等のデータソース",
+                "**Grounding + Guardrails**: Safety Filter + Grounding Score 出力",
+              ],
+            },
+            { type: "h3", text: "AgentSpace(2024 末)" },
+            {
+              type: "p",
+              text: "**Google AgentSpace** は **企業向け Agent 統合 SaaS**。Salesforce / Workday / Confluence / Box / OneDrive / Slack 等を横断検索 + Agent タスク実行。M365 Copilot + Foundry Agent Service / Amazon Q Business に対応する Google の答え。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec4",
+          number: "12.4",
+          title: "Embodied AI と Robotics",
+          blocks: [
+            {
+              type: "p",
+              text: "**Embodied AI**(身体性 AI)= 物理世界と相互作用する AI。Google DeepMind は **Vision-Language-Action(VLA)モデル** で世界をリードしています。",
+            },
+            { type: "h3", text: "Google DeepMind の Embodied AI" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**RT-2 / RT-X**(2023): 大規模 VLA モデル ・ 67 種のロボット ・ 多タスク",
+                "**Gemini Robotics**(2025): Gemini 2.0 ベースの VLA ・ Apptronik Apollo / 他ヒューマノイドに展開",
+                "**SIMA**(Scalable Instructable Multiworld Agent): ゲーム環境(No Man's Sky 等)で自然言語指示通り行動",
+                "**Genie 1 / Genie 2**(2023-2024): 1 枚の画像 / テキストから **インタラクティブ 3D 環境を生成**(World Model + 物理シミュレータ)",
+              ],
+            },
+            { type: "h3", text: "Embodied AI のビジネスインパクト" },
+            {
+              type: "p",
+              text: "**製造業 / 物流 / 介護 / 家事 ロボット**で 2025-2030 に大規模商用化見込み。**Figure 02 / Tesla Optimus / Boston Dynamics Atlas / Apptronik Apollo / 1X Neo / Unitree H1 / Sanctuary Phoenix** が代表ヒューマノイド。Gen AI Leader として、**事業機会 ・ 雇用への影響 ・ 倫理 / 安全規制** を理解しておくべきです。",
+            },
+            {
+              type: "practical",
+              title: "World Models の戦略的意義",
+              body: "**World Models**(LeCun JEPA / DeepMind Genie / OpenAI Sora 等)= **環境の物理 / 因果を学習し未来予測 + 計画**できるモデル。**ロボット / 自動運転 / シミュレーション学習** の基盤。**Gemini 2.x の Native Video 理解** は World Model 路線の出発点。**LLM の次のフロンティア**として Gen AI Leader が押さえるべきトピック。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec5",
+          number: "12.5",
+          title: "Google AI 戦略と業界変革",
+          blocks: [
+            {
+              type: "p",
+              text: "Gen AI Leader 試験の最終トピックは、**経営者 ・ 戦略担当として Google AI を活用する戦略思考**です。",
+            },
+            { type: "h3", text: "Google AI の差別化要因" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**TPU(Tensor Processing Unit)**: NVIDIA GPU と並ぶ AI 専用チップ ・ Trillium(v6)/ v7 で更に進化",
+                "**統合スタック**: Search / YouTube / Maps / Workspace / Cloud / Android / Pixel を AI で横断",
+                "**長期 R&D**: DeepMind(AlphaGo / AlphaFold / Genie / Astra)・ Google Research の論文数",
+                "**マルチモーダル先行**: Native Multimodal ・ World Models ・ Embodied AI の進度",
+                "**Open Models**: Gemma(オープン Gemini 派生)・ コミュニティ参加",
+              ],
+            },
+            { type: "h3", text: "業界変革の主要シナリオ" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Search 変革**: 従来 10 本リンク → AI Overviews(回答型)→ Gemini Deep Research(レポート型)",
+                "**Workspace × Copilot 戦争**: M365 Copilot vs Gemini for Workspace の覇権争い",
+                "**Cloud × AI**: AWS / Azure / GCP の差別化軸は AI 機能 + TPU / GPU 確保力",
+                "**Hardware × AI**: Pixel 9 + Gemini Nano / Android XR(スマートグラス)",
+                "**Robotics × AI**: Apptronik 等との提携 ・ Embodied AI 商用化",
+                "**Quantum × AI**(Willow 2024): 量子コンピューティングが AI 加速器化する未来",
+              ],
+            },
+            {
+              type: "practical",
+              title: "Gen AI Leader として持つべき問い",
+              body: "**①** 自社業務のうち AI 介入で最大 ROI が出るのは? **②** Workspace / Cloud / 独自 LLM のどれを選ぶか(コスト / Lock-in / Compliance)**③** 競合が先に AI 化した場合の Disruption リスクは? **④** 倫理 / 雇用 / 規制(EU AI Act / 個情法)対応は十分か? **⑤** 3-5 年の **Agent / Embodied AI / Quantum AI** ロードマップを どう描くか? **これらを経営アジェンダ化** することが Gen AI Leader の役割。",
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

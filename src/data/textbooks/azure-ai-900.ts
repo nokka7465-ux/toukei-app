@@ -679,5 +679,332 @@ export const azureAi900Textbook: Textbook = {
         },
       ],
     },
+    {
+      id: "ch11",
+      number: 11,
+      title: "Azure AI Foundry の全体像(2024-2025)",
+      overview:
+        "2024 年に Azure AI Studio から **Azure AI Foundry** へ大幅リブランド。Hub + Project 階層 + Agent Service + Model Catalog 1,800+ モデル統合の **Microsoft AI 開発の中核プラットフォーム**になりました。",
+      sections: [
+        {
+          id: "ch11-sec1",
+          number: "11.1",
+          title: "Azure AI Foundry とは",
+          blocks: [
+            {
+              type: "p",
+              text: "**Azure AI Foundry**(2024 末リブランド ・ 旧 Azure AI Studio)は、**生成 AI / 古典 ML / Agent / RAG / Fine-tune / Evaluation** を統合した Microsoft の AI 開発 SaaS です。**Hub(管理 / セキュリティ)+ Project(個別開発)** の 2 階層構造で、エンタープライズ規模の AI 開発に対応します。",
+            },
+            { type: "h3", text: "Hub と Project の役割" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Hub**: 組織共通の設定 ・ 接続 ・ Compute ・ Storage ・ Key Vault ・ Container Registry を管理(IT 部門 / Admin が作成)",
+                "**Project**: 開発者 / チーム単位のワークスペース(Hub 内に複数作成可)・ Model / Endpoint / Evaluation / Tracing",
+                "**Resource 共有**: Hub レベルで Connection(Azure OpenAI / AI Search / Storage 等)を定義 → Project に継承",
+                "**Identity-based Access**: Microsoft Entra ID(旧 Azure AD)で Role-based Access Control",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 旧 Azure ML との関係",
+              body: "**Azure AI Foundry と Azure ML は 2024-2025 で統合進行中**。**Generative AI / Agent / Foundation Model** は Foundry 推奨 ・ **Classical ML / AutoML / 大規模 Custom Training** は Azure ML が引き続き強い。両方の Workspace は相互参照可能(Hub レベルで Azure ML 統合)。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec2",
+          number: "11.2",
+          title: "Model Catalog と Foundation Models",
+          blocks: [
+            {
+              type: "p",
+              text: "**Foundry Model Catalog** は **1,800+ モデル**(2025 時点)を統一インタフェースで提供します。AI-900 でも各モデル種別の使い分けが問われます。",
+            },
+            { type: "h3", text: "モデルカテゴリ" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Azure OpenAI**: GPT-4o / 4o-mini / o1 / o3-mini / DALL-E 3 / Whisper / Embeddings(Provisioned PTU 対応)",
+                "**Microsoft Phi**: Phi-3 / Phi-3.5 / Phi-4(小規模 ・ オープンウェイト ・ オンデバイス可能)",
+                "**Meta Llama**: Llama 3 / 3.1 / 3.2(Vision) / 3.3(MaaS で利用)",
+                "**Mistral**: Mistral Large / Small / Codestral(MaaS)",
+                "**Cohere**: Command R / R+ / Embed / Rerank(MaaS)",
+                "**DeepSeek**: DeepSeek-V3 / R1(2025 追加)",
+                "**NVIDIA NIM**: Nemotron / 等(専用ホスト)",
+                "**Hugging Face Open**: 数千の OSS モデルを Direct Deploy",
+              ],
+            },
+            { type: "h3", text: "デプロイ形態" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Pay-as-you-go(Standard)**: Token 単価従量(OpenAI / Llama / Mistral / Cohere)",
+                "**Provisioned Throughput(PTU)**: 容量予約 ・ 一定 RPM 保証 ・ 月 / 年契約で割引",
+                "**Serverless API(MaaS)**: Pay-per-token + マネージド SLA(OSS モデルもこの形態)",
+                "**Managed Compute**: 専用 VM へデプロイ ・ カスタム Container / Fine-tuned Model",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch11-sec3",
+          number: "11.3",
+          title: "Prompt Flow と Tracing",
+          blocks: [
+            {
+              type: "p",
+              text: "**Prompt Flow** は LLM ワークフロー(DAG)を **GUI / Code / VS Code 拡張** で開発できる機能。LangChain / LangGraph の Microsoft 公式版です。",
+            },
+            { type: "h3", text: "Prompt Flow の主要機能" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Flow DAG**: Python Node + LLM Node + Tool Node を Graph 接続",
+                "**Variant**: 同 Node の Prompt バリエーション比較(A/B Test 風)",
+                "**Bulk Test**: テストデータセットで一括評価",
+                "**Evaluation Flow**: LLM-as-Judge / Built-in Metric で自動採点",
+                "**Endpoint Deploy**: Flow を REST API として 1-Click デプロイ",
+                "**Tracing**(OpenTelemetry 互換): 各 LLM 呼出のレイテンシ ・ Token / Cost / Input / Output を Trace",
+              ],
+            },
+            {
+              type: "practical",
+              title: "Prompt Flow vs Direct OpenAI",
+              body: "**簡単なチャット**: Azure OpenAI SDK で直接 OK。**RAG / Multi-step / 評価 / 監査が必要**: Prompt Flow。**Foundry Agent Service** は Prompt Flow より一段抽象化された Agent 開発 API。**段階的に複雑になる場合は Direct → Flow → Agent** と進化させるのが王道。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec4",
+          number: "11.4",
+          title: "Foundry Agent Service",
+          blocks: [
+            {
+              type: "p",
+              text: "**Foundry Agent Service**(2024 末 - 2025 GA)は、**OpenAI Assistants API 互換**の Azure ホスティング Agent プラットフォーム。Multi-turn + Tool 呼出 + Memory + File Search を統合します。",
+            },
+            { type: "h3", text: "Agent Service の構成要素" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Assistant**: 役割 + Tools + Model 定義",
+                "**Thread**: 会話履歴を保持(Multi-turn の Context)",
+                "**Run**: Thread に対する 1 ステップ実行",
+                "**Tools**: File Search(RAG)・ Code Interpreter(Python 実行)・ Function Calling(自社 API)・ Azure AI Search / Logic Apps / Functions / Bing Grounding 等の統合",
+                "**Built-in Tools**(2024+): Azure Functions / Logic Apps / AI Search / Bing Search を Tool として直接利用",
+              ],
+            },
+            { type: "h3", text: "Multi-Agent / Agent Orchestration" },
+            {
+              type: "p",
+              text: "**Semantic Kernel**(Microsoft の AI Orchestration FW)+ **AutoGen**(Microsoft Research の Multi-Agent FW)+ **Foundry Agent Service** の組合せで、**Supervisor + Sub-agents** の階層構造が構築可能。**Project Astra**(Google)や **Bedrock Multi-Agent**(AWS)と同等の Multi-Agent 戦略を Azure でも実現します。",
+            },
+          ],
+        },
+        {
+          id: "ch11-sec5",
+          number: "11.5",
+          title: "Content Safety と Responsible AI",
+          blocks: [
+            {
+              type: "p",
+              text: "**Azure AI Content Safety** は Microsoft の **Responsible AI** の柱で、Foundry / Azure OpenAI に標準統合されています。",
+            },
+            { type: "h3", text: "Content Safety の機能" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Text / Image Harm Detection**: Hate / Sexual / Violence / Self-Harm の 4 カテゴリ × 0-7 Severity",
+                "**Prompt Shields**: Direct Prompt Injection(ユーザー入力)+ Indirect(文書埋込)検出",
+                "**Groundedness Detection**: RAG での回答が Source と乖離していないか検証(ハルシネーション抑制)",
+                "**Protected Material Detection**: 著作権付きコード / テキストの出力を検出",
+                "**Custom Categories**: 自社固有の禁止トピックを学習",
+                "**Filter Configurations**: Severity / Annotation / Block 等の設定 ・ 各モデル毎にカスタマイズ可",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 Content Safety は独立 API でも使える",
+              body: "Foundry 外の自社 LLM 推論にも **`/contentsafety` API** で Content Safety を適用できます(Azure OpenAI 経由でなくても OK)。**Open AI 互換 LLM / Self-hosted Llama / Other Cloud** にも統一的に Safety 層を被せられる柔軟性が強み。",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "ch12",
+      number: 12,
+      title: "Microsoft Copilot / Copilot Studio エコシステム",
+      overview:
+        "Microsoft 365 Copilot を中心とした Copilot ファミリの全体像、Copilot Studio による Low-Code Agent 構築、企業導入の実践を整理します。",
+      sections: [
+        {
+          id: "ch12-sec1",
+          number: "12.1",
+          title: "Microsoft 365 Copilot ファミリ",
+          blocks: [
+            {
+              type: "p",
+              text: "**Microsoft 365 Copilot** は Microsoft が提供する企業向け汎用 AI アシスタント。AI-900 でも Copilot ファミリの使い分けが頻出問題です。",
+            },
+            { type: "h3", text: "Copilot 製品マトリックス(2024-2025)" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Microsoft 365 Copilot**: $30 / user / month(M365 E3/E5 等の追加)・ Word / Excel / PowerPoint / Outlook / Teams / OneNote 統合 ・ Graph API 経由で社内データ活用",
+                "**Microsoft 365 Copilot Chat**(旧 Bing Chat Enterprise / Free): 無料 ・ Web Grounding ・ Enterprise Data Protection",
+                "**Copilot Pro**($20 / month): 個人向け Web / Mobile + M365 個人版統合",
+                "**GitHub Copilot**: $10/user/m(Individual)/ $19(Business)/ $39(Enterprise)・ コード補完 + Chat + Agents",
+                "**Copilot in Power BI**: Premium / Fabric F64+ ・ NL → Visual / DAX 補完",
+                "**Copilot in Dynamics 365**: Sales / Service / Marketing / Finance 各モジュール内 AI",
+                "**Security Copilot**: SOC 向け ・ Threat Hunting + Incident Response 補助",
+                "**Copilot for Microsoft Edge**: ブラウザ統合 ・ ページ要約 / 比較",
+                "**Copilot+ PC**(2024): NPU 40+ TOPS 搭載 PC 専用 ・ Recall / Cocreator 等のオンデバイス機能",
+              ],
+            },
+            {
+              type: "intuition",
+              title: "💡 Copilot を選ぶ基本フロー",
+              body: "**個人で文書 / コード作業**: Copilot Pro / GitHub Copilot。**チーム / 社内文書統合**: M365 Copilot。**業界アプリ統合**: Dynamics Copilot。**社内独自業務**: **Copilot Studio で Custom Copilot 開発**。**セキュリティチーム**: Security Copilot。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec2",
+          number: "12.2",
+          title: "Copilot Studio による Custom Copilot 開発",
+          blocks: [
+            {
+              type: "p",
+              text: "**Microsoft Copilot Studio**(旧 Power Virtual Agents)は **Low-Code で Custom Copilot ・ Agent ・ Plugin を構築**できる SaaS。M365 Copilot を社内業務に拡張する公式手段です。",
+            },
+            { type: "h3", text: "Copilot Studio の主要機能" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Topic / Trigger**: ユーザー発話の意図に応じた会話フロー(GUI)",
+                "**Generative Actions**: LLM が動的に行動を選択(Procedural な Topic と組合せ)",
+                "**Knowledge Sources**: SharePoint / OneDrive / Web URL / Dataverse / Public Web を RAG ソースに",
+                "**Connectors**: 1,400+ の Power Platform Connector(Salesforce / Jira / ServiceNow 等)",
+                "**Plugins**: M365 Copilot に Plugin として公開可 → ユーザーが Copilot 内で利用",
+                "**Channel Deployment**: Teams / M365 Copilot / Web / Slack / Facebook 等にデプロイ",
+                "**Authentication**: Entra ID / OAuth で社内データ安全アクセス",
+                "**Autonomous Agents**(2024+ GA): Trigger ベースで人間操作なしに動く Agent(例: メール監視 → 自動分類 / 返信)",
+              ],
+            },
+            { type: "h3", text: "Copilot Studio vs Foundry Agent Service" },
+            {
+              type: "p",
+              text: "**Copilot Studio**: Low-Code / Business User 向け / M365 統合が強い。**Foundry Agent Service**: Pro-Code / Developer 向け / 高度なカスタマイズ + Multi-Agent。**両方を併用** することも一般的(Studio で UI / Foundry で複雑ロジック)。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec3",
+          number: "12.3",
+          title: "Microsoft Graph と Copilot 連携",
+          blocks: [
+            {
+              type: "p",
+              text: "**Microsoft Graph** は M365 / Azure / Dynamics のメタデータ + コンテンツへの統一 API。M365 Copilot が **社内文書 / メール / カレンダー / 連絡先 / Teams メッセージ** を文脈として活用する基盤です。",
+            },
+            { type: "h3", text: "Graph と Copilot の関係" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Semantic Index**: Graph のコンテンツを **Vector + Text** で Index 化 → Copilot の RAG ソース",
+                "**Graph Connectors**: 外部システム(Salesforce / ServiceNow / Confluence 等)を Graph に取込み → Copilot で横断検索可能に",
+                "**Permission Trimming**: Entra ID の権限を尊重 → ユーザーがアクセスできない文書は Copilot からも見えない",
+                "**Sensitivity Labels**: Microsoft Purview の機密ラベルが Copilot 出力にも適用",
+              ],
+            },
+            {
+              type: "practical",
+              title: "Copilot 導入の前提整理",
+              body: "**M365 Copilot 導入前のチェック**: ① **データガバナンス**(Sensitivity Label / Purview DLP / Conditional Access)② **権限の整理**(SharePoint / OneDrive の Over-share を Purview で洗い出し)③ **教育**(プロンプト / 出力検証 / ハルシネーション理解)④ **パイロット部門選定**(50-100 名 ・ 3 ヶ月で ROI 測定)。**社内ガバナンスが整っていないと Copilot が機密データを横断引用してしまう** リスクがあります。",
+            },
+          ],
+        },
+        {
+          id: "ch12-sec4",
+          number: "12.4",
+          title: "Copilot for Microsoft 365 の業務効果と ROI",
+          blocks: [
+            {
+              type: "p",
+              text: "Microsoft の公式調査(WorkLab / Forrester)によれば、Copilot 導入で以下の業務効率向上が報告されています。",
+            },
+            { type: "h3", text: "代表的な業務改善指標" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**会議要約**: Teams Meeting Notes 自動生成で会議後タスク作成 30-50% 時短",
+                "**メール処理**: Outlook Summarize + Draft で受信メール処理時間 20-30% 削減",
+                "**文書作成**: Word Copilot で初稿生成 → 編集に集中 → ライティング時間 40-60% 削減",
+                "**プレゼン**: PowerPoint Copilot で構造化されたドラフト ・ デザイン提案",
+                "**データ分析**: Excel Copilot で Pivot / Chart / 数式提案 ・ アナリスト民主化",
+                "**コード**: GitHub Copilot で開発者の生産性 55%+ 向上(Microsoft / GitHub 調査)",
+              ],
+            },
+            { type: "h3", text: "ROI 測定の指標" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Time Saved**: 業務当たり時間削減 × 平均時給で金額換算",
+                "**Quality**: 文書 / コードの Review 通過率 / バグ密度",
+                "**Adoption**: アクティブユーザー率 / 機能別利用率(Power BI Adoption Insights / Microsoft Viva Insights で計測)",
+                "**Sentiment**: 従業員満足度 ・ 離職率の変化",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ch12-sec5",
+          number: "12.5",
+          title: "Azure AI セキュリティとガバナンス",
+          blocks: [
+            {
+              type: "p",
+              text: "AI-900 はセキュリティ / ガバナンスも問われます。Azure AI / Foundry / Copilot のセキュリティ機能を整理します。",
+            },
+            { type: "h3", text: "セキュリティ機能の階層" },
+            {
+              type: "list",
+              style: "bullet",
+              items: [
+                "**Identity**: Microsoft Entra ID(MFA / Conditional Access / Privileged Identity Management)",
+                "**Network**: Private Endpoint + VNet + Network Security Group + Private Link",
+                "**Data Encryption**: Customer-Managed Key(CMK)+ Always Encrypted + Confidential Computing(TEE)",
+                "**Data Loss Prevention(DLP)**: Microsoft Purview で機密データの Copilot 出力制御",
+                "**Audit**: Azure Monitor + Log Analytics + Microsoft Purview Audit",
+                "**Compliance**: GDPR / HIPAA / SOC 2 / ISO 27001 / FedRAMP / 個人情報保護法対応",
+              ],
+            },
+            { type: "h3", text: "Customer Copyright Commitment(CCC)" },
+            {
+              type: "p",
+              text: "**Microsoft の Copilot Copyright Commitment**: 商用顧客が Copilot の出力で第三者に著作権侵害訴訟を提起された場合、Microsoft が法的責任を負う(2023 発表)。**Azure OpenAI / GitHub Copilot Business+ / M365 Copilot** が対象。Content Filter を無効化していないこと等の条件あり。",
+            },
+            {
+              type: "practical",
+              title: "Microsoft の責任ある AI 原則",
+              body: "**6 原則**: ① Fairness(公平性)② Reliability & Safety(信頼性 ・ 安全性)③ Privacy & Security ④ Inclusiveness(包括性)⑤ Transparency ⑥ Accountability。**Responsible AI Standard v2**(2022 公開)で具体的な開発プロセスを定義 ・ **Responsible AI Dashboard** ・ **Responsible AI Toolbox**(OSS)で実装支援。",
+            },
+          ],
+        },
+      ],
+    },
   ],
 };
