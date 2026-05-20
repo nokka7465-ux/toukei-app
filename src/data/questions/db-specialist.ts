@@ -796,4 +796,244 @@ export const dbSpecialistQuestions: Question[] = [
     explanation:
       "**DB SP は IPA レベル 4 高度試験**。横展開で **システムアーキテクト ・ ネットワーク SP ・ 情報処理安全確保支援士 ・ ITストラテジスト ・ プロジェクトマネージャ** など他高度試験へ。**クラウド系**(AWS DEA-C01 / Azure DP-203)併用もキャリア面で強い。",
   },
+  {
+    id: "db-q51",
+    category: "正規化",
+    difficulty: 3,
+    question:
+      "**BCNF(Boyce-Codd 正規形)** と **第 3 正規形(3NF)** の違いとして最も適切なものを選びなさい。",
+    choices: [
+      "BCNF=全ての非自明な関数従属が候補キー → 3NF より厳しい",
+      "BCNF=3NF と完全に同じ",
+      "BCNF=第 2 正規形と同じ",
+      "BCNF=非正規化",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**3NF**: 推移的従属の除去。**BCNF**: 全ての非自明な FD `X→Y` で X が候補キーであること。**3NF を満たすが BCNF を満たさない例**(複合候補キー + 重複)が頻出。",
+  },
+  {
+    id: "db-q52",
+    category: "正規化",
+    difficulty: 3,
+    question:
+      "**第 4 正規形(4NF)** の特徴として最も適切なものを選びなさい。",
+    choices: [
+      "多値従属性(MVD)を除去 → 複数独立な多値属性を分割",
+      "関数従属性のみ扱う",
+      "BCNF と同じ",
+      "重複削除のみ",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**4NF**: BCNF + **多値従属性 MVD の除去**。例: (社員, スキル, 趣味)で スキル / 趣味が独立 → 2 つのテーブルに分割。**5NF**(PJ/NF)は結合従属性まで除去。",
+  },
+  {
+    id: "db-q53",
+    category: "ER",
+    difficulty: 3,
+    question:
+      "**ER 図** の **多対多(M:N)** リレーションシップを RDB で実装する際の典型手法として最も適切なものを選びなさい。",
+    choices: [
+      "中間(関連)テーブルを作成し 1:N + N:1 に分解",
+      "片方に NULL 許容外部キー",
+      "同一テーブルに統合",
+      "正規化不要",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**M:N**: 関連エンティティ(関連テーブル)を導入し 2 つの 1:N に分解。例: 学生×履修科目 → 履修テーブル(学生 ID + 科目 ID + 成績)。**関連属性**(成績等)も格納可能。",
+  },
+  {
+    id: "db-q54",
+    category: "SQL",
+    difficulty: 3,
+    question:
+      "**ウィンドウ関数** `ROW_NUMBER() OVER (PARTITION BY col1 ORDER BY col2)` の用途として最も適切なものを選びなさい。",
+    choices: [
+      "col1 グループ内で col2 順に連番付与 → 重複排除 / TOP-N に活用",
+      "GROUP BY と同じ",
+      "全行削除",
+      "テーブル作成",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**ROW_NUMBER / RANK / DENSE_RANK / NTILE / LAG / LEAD**。**最新レコード抽出 / TOP N per group / 累積計算** に必須。SQL DBSP 試験で頻出。",
+  },
+  {
+    id: "db-q55",
+    category: "トランザクション",
+    difficulty: 3,
+    question:
+      "**ACID** の **Isolation** で **Phantom Read** を防ぐ Isolation Level として最も適切なものを選びなさい。",
+    choices: [
+      "SERIALIZABLE(完全直列化)",
+      "READ UNCOMMITTED",
+      "READ COMMITTED",
+      "REPEATABLE READ(一部 RDBMS では防げない)",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**異常 vs Isolation**: Dirty Read(R-U で発生)/ Non-Repeatable Read(R-C で発生)/ **Phantom Read**(R-R で発生可、SERIALIZABLE のみ防止)。**PostgreSQL REPEATABLE READ** は Phantom も防げる(MVCC 実装)。",
+  },
+  {
+    id: "db-q56",
+    category: "トランザクション",
+    difficulty: 3,
+    question:
+      "**2 相ロック(2PL)** プロトコルの特徴として最も適切なものを選びなさい。",
+    choices: [
+      "成長相(ロック取得のみ)→ 縮退相(解放のみ)→ 直列化可能性を保証",
+      "ロック不要",
+      "Optimistic 制御",
+      "MVCC",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**2PL**: ロック取得 → 全ロック取得後に解放開始。**Strict 2PL**(Commit/Abort まで解放しない)= ACID + Recoverability。**MVCC** は別アプローチ(PostgreSQL / Oracle)。",
+  },
+  {
+    id: "db-q57",
+    category: "障害",
+    difficulty: 3,
+    question:
+      "**WAL(Write-Ahead Logging)** の原則として最も適切なものを選びなさい。",
+    choices: [
+      "データブロック書込前にログを永続化 → クラッシュ後の Redo / Undo 復旧可",
+      "ログは書かない",
+      "ログ後にデータ書込なし",
+      "全データオンメモリ",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**WAL**: ログを先に Disk Sync → データブロックは後で OK。**ARIES**(Redo / Undo / Compensation Log Record / Fuzzy Checkpoint)が代表アルゴリズム。**PostgreSQL WAL / Oracle Redo** の基礎。",
+  },
+  {
+    id: "db-q58",
+    category: "Index",
+    difficulty: 3,
+    question:
+      "**B+ Tree Index** の特徴として最も適切なものを選びなさい。",
+    choices: [
+      "葉ノードのみデータ ・ 葉間連結リスト → 範囲検索 ・ ソート高速",
+      "ハッシュテーブル",
+      "GPU 専用",
+      "全件 Scan",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**B+ Tree**: B-Tree の改良 ・ Leaf にのみデータ + Leaf 間ポインタ → 範囲スキャン(`BETWEEN`)・ ORDER BY 効率化。**Clustered Index**(物理順)/ **Non-Clustered Index**(別領域)。",
+  },
+  {
+    id: "db-q59",
+    category: "Index",
+    difficulty: 3,
+    question:
+      "**B+ Tree** と **Hash Index** の使い分けとして最も適切なものを選びなさい。",
+    choices: [
+      "Hash=等価検索のみ高速 / Range NG、B+ Tree=範囲 / ソート可",
+      "両者同じ",
+      "Hash は範囲も可",
+      "B+ は等価不可",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Hash Index**: O(1) 等価検索のみ ・ 範囲 / ORDER BY 不可 ・ 衝突あり。**B+ Tree**: O(log n) で範囲 / Sort 可。**PostgreSQL Hash Index** は WAL 対応(v10+)。",
+  },
+  {
+    id: "db-q60",
+    category: "Optimizer",
+    difficulty: 3,
+    question:
+      "**コストベース最適化(CBO)** が用いる統計情報として **誤っているもの** を選びなさい。",
+    choices: [
+      "列のカーディナリティ(distinct 数)",
+      "ヒストグラム(分布)",
+      "テーブルサイズ / Block 数",
+      "GPU 使用率",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**CBO 統計**: カーディナリティ / Histogram / Block 数 / NULL 比率 / Cluster Factor。**ANALYZE / DBMS_STATS** で更新。Cost = CPU + I/O コストモデル。実行計画選択の根拠。",
+  },
+  {
+    id: "db-q61",
+    category: "JOIN",
+    difficulty: 3,
+    question:
+      "**Hash Join** が **Nested Loop Join** より有利な場面として最も適切なものを選びなさい。",
+    choices: [
+      "大規模 vs 大規模 ・ 等価 JOIN ・ Index がない場合",
+      "小規模 vs 小規模",
+      "Range JOIN",
+      "GPU 学習",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Hash Join**: 小さい方を Hash テーブル化 → もう一方を Probe。大規模 ・ 等価 JOIN ・ Index 無し に最適。**Nested Loop**: 小規模 + Index 利用に最適。**Sort-Merge** はソート済 / 大規模 Range に。",
+  },
+  {
+    id: "db-q62",
+    category: "分散",
+    difficulty: 3,
+    question:
+      "**CAP 定理** の **CP** タイプの典型例として最も適切なものを選びなさい。",
+    choices: [
+      "Zookeeper / MongoDB(設定次第)・ HBase",
+      "DNS / Cassandra",
+      "全てのクラウド DB",
+      "RDB 全般",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**CAP**: Consistency / Availability / Partition Tolerance のうち 2 つ。**CP**: HBase / Zookeeper / etcd / Spanner(TrueTime で実質 CA 寄り)。**AP**: Cassandra / DynamoDB(Eventual)/ DNS。",
+  },
+  {
+    id: "db-q63",
+    category: "NoSQL",
+    difficulty: 3,
+    question:
+      "**Document DB(MongoDB)** と **RDB** の違いとして最も適切なものを選びなさい。",
+    choices: [
+      "Document=Schema-less / JSON ・ Embed/Reference 設計、RDB=Schema 厳格 / 正規化",
+      "両者同じ",
+      "RDB は Schema-less",
+      "Document は ACID 不可",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Document(MongoDB)**: BSON ・ Schema-less ・ Embed / Reference 設計 ・ ACID(v4+)。**RDB**: 正規化 ・ JOIN ・ Strict Schema。**Multi-Document Transaction** で ACID も MongoDB 可。",
+  },
+  {
+    id: "db-q64",
+    category: "Replication",
+    difficulty: 3,
+    question:
+      "**同期レプリケーション** と **非同期レプリケーション** のトレードオフとして最も適切なものを選びなさい。",
+    choices: [
+      "同期=データ損失なし / 性能低、非同期=性能高 / レプリカ遅延",
+      "両者同じ",
+      "同期は性能高",
+      "非同期はデータ損失なし",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**同期**: Primary がレプリカ Commit を待つ → RPO=0 / Latency 増。**非同期**: Primary は即返却 / レプリカ遅延 → RPO>0 / 性能高。**Semi-Sync**(MySQL)で中間 ・ **Quorum**(Cassandra / Spanner)で多数決。",
+  },
+  {
+    id: "db-q65",
+    category: "実務",
+    difficulty: 3,
+    question:
+      "DB スペシャリスト試験 午後 II で頻出の **典型設計問題** のアプローチとして最も適切なものを選びなさい。",
+    choices: [
+      "業務分析 → 概念設計(ER 図)→ 論理設計(正規化 + 性能トレードオフ)→ 物理設計(Index / Partition)",
+      "いきなり物理設計",
+      "正規化スキップ",
+      "GUI のみ",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**設計ステップ**: 業務分析 → 概念(ER)→ 論理(正規化 → BCNF or 適度に脱正規化)→ 物理(Index / Partition / 容量見積)。**午後 II 大問**で 1.5 時間。普段の設計力が直接出る。",
+  },
 ];

@@ -801,4 +801,244 @@ export const databricksDataEngineerQuestions: Question[] = [
     explanation:
       "**Databricks Data Engineer Professional**(中級)が直接の上位。**Generative AI Engineer Associate**(2024 新設)も注目。三大クラウドの DE 認定併用もキャリア面で強い。",
   },
+  {
+    id: "dbx-q51",
+    category: "Delta Lake",
+    difficulty: 3,
+    question:
+      "**Delta Lake** の **OPTIMIZE + ZORDER BY** の効果として最も適切なものを選びなさい。",
+    choices: [
+      "ファイル統合 + ZORDER 列で Data Skipping → クエリ高速化",
+      "全データバックアップ",
+      "GPU 高速化",
+      "GUI 改善",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**OPTIMIZE**: 小ファイル統合(Compaction)・ 1GB ターゲット。**ZORDER BY**: 多次元 Locality(Z-Order Curve)で高 Cardinality 列の Skipping 改善。**Liquid Clustering** で次世代化。",
+  },
+  {
+    id: "dbx-q52",
+    category: "Delta Lake",
+    difficulty: 3,
+    question:
+      "**Liquid Clustering** の特徴として最も適切なものを選びなさい。",
+    choices: [
+      "Partition なしで Clustering Key を動的調整 ・ ZORDER の進化版",
+      "Partition 必須",
+      "GPU 必須",
+      "GUI のみ",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Liquid Clustering**(2024+): Partition Skew 問題を解消 ・ Clustering Key を後から変更可 ・ Incremental Clustering。**ZORDER の置き換え**として Databricks 推奨。",
+  },
+  {
+    id: "dbx-q53",
+    category: "Streaming",
+    difficulty: 3,
+    question:
+      "**Structured Streaming** の **Trigger Modes** として **誤っているもの** を選びなさい。",
+    choices: [
+      "Continuous(低レイテンシ)",
+      "ProcessingTime(固定間隔)",
+      "AvailableNow(全データ処理後停止)",
+      "GPU-Schedule",
+    ],
+    correctIndex: 3,
+    explanation:
+      "**Trigger**: Default(連続マイクロバッチ)・ ProcessingTime(`5 seconds`)・ Once(1 回のみ)・ **AvailableNow**(全データ処理後停止 ・ サーバレスバッチ向き)・ Continuous(<1ms、実験的)。",
+  },
+  {
+    id: "dbx-q54",
+    category: "DLT",
+    difficulty: 3,
+    question:
+      "**Delta Live Tables(DLT)** の特徴として最も適切なものを選びなさい。",
+    choices: [
+      "宣言的 ETL Framework ・ Expectations(品質)・ Auto Scaling ・ Lineage 自動",
+      "Notebook 専用",
+      "GUI のみ",
+      "学習用",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**DLT**: 宣言的 ETL(`@dlt.table`)+ **Expectations**(`@dlt.expect`)で品質チェック + Auto Scaling + Lineage UI。**Medallion(Bronze/Silver/Gold)** を DLT で構築が標準。",
+  },
+  {
+    id: "dbx-q55",
+    category: "Unity Catalog",
+    difficulty: 3,
+    question:
+      "**Unity Catalog** の 3 階層モデルとして最も適切なものを選びなさい。",
+    choices: [
+      "Catalog > Schema(Database)> Table / View / Volume / Function / Model",
+      "Workspace > Folder > File",
+      "Cluster > Job > Run",
+      "Region > Zone > VM",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**UC 3 階層**: catalog(環境 / ドメイン)→ schema → object(Table / View / **Volume**(非構造化)/ Function / Model)。**Cross-Workspace 統合** + Lineage + Audit Log。",
+  },
+  {
+    id: "dbx-q56",
+    category: "Auto Loader",
+    difficulty: 3,
+    question:
+      "**Auto Loader** の利点として最も適切なものを選びなさい。",
+    choices: [
+      "Cloud Storage の新規ファイルを増分検出 ・ Schema Evolution / Inference",
+      "全データ再処理",
+      "GPU 学習",
+      "GUI",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Auto Loader**(`cloudFiles`): S3 / ADLS / GCS の新規ファイル増分検出(Notification / Directory Listing)。**Schema Inference + Hints + Evolution**(rescued / addNewColumns)対応。",
+  },
+  {
+    id: "dbx-q57",
+    category: "Photon",
+    difficulty: 3,
+    question:
+      "**Photon Engine** の特徴として最も適切なものを選びなさい。",
+    choices: [
+      "C++ ベクトル化エンジン ・ Spark SQL を 2-3x 高速化 ・ Delta Lake 最適化",
+      "Spark の代替 OS",
+      "GUI",
+      "GPU 専用",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Photon**: C++ で書かれた vectorized execution engine ・ Spark SQL/DataFrame の演算を 2-3x 高速化。**SQL Warehouse / DLT で標準有効**。CSV / JSON 解析 ・ 集計に特に効く。",
+  },
+  {
+    id: "dbx-q58",
+    category: "SQL Warehouse",
+    difficulty: 3,
+    question:
+      "**Databricks SQL Warehouse** の Serverless モードの利点として最も適切なものを選びなさい。",
+    choices: [
+      "起動秒 ・ Auto Scale ・ Photon 標準有効 ・ BI 接続最適",
+      "GUI 専用",
+      "GPU 専用",
+      "ETL 専用",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Serverless SQL Warehouse**: Databricks 管理 VPC で即起動(秒) ・ Cluster 管理不要 ・ BI / Tableau / Power BI 接続 ・ Photon 標準。**Classic / Pro** は顧客 VPC ・ 起動遅い。",
+  },
+  {
+    id: "dbx-q59",
+    category: "ML",
+    difficulty: 3,
+    question:
+      "**Databricks Model Serving** の特徴として最も適切なものを選びなさい。",
+    choices: [
+      "MLflow Model を REST Endpoint 化 ・ Unity Catalog 統合 ・ A/B Routing",
+      "学習専用",
+      "GUI のみ",
+      "GPU 不可",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Databricks Model Serving**: MLflow Registry → REST API(GPU/CPU)+ **AI Gateway**(レート制限 / 監査)+ **External Model**(OpenAI/Bedrock プロキシ)+ **AI Functions**(SQL から推論)。",
+  },
+  {
+    id: "dbx-q60",
+    category: "Genie",
+    difficulty: 3,
+    question:
+      "**Databricks Genie**(AI/BI Genie)の用途として最も適切なものを選びなさい。",
+    choices: [
+      "NL2SQL: 自然言語からデータ質問 → Unity Catalog 内テーブル横断回答",
+      "学習データ生成",
+      "GPU 監視",
+      "認証",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Genie**(2024 GA): 自然言語データ Q&A。**Unity Catalog Lineage / Lakehouse Sample / Instructions / Trusted Asset** を活用。**AI/BI Dashboards** とも統合。",
+  },
+  {
+    id: "dbx-q61",
+    category: "Workflows",
+    difficulty: 3,
+    question:
+      "**Databricks Workflows(Jobs)** の特徴として最も適切なものを選びなさい。",
+    choices: [
+      "DAG タスク(Notebook / Python / SQL / DLT / dbt)・ Trigger / Schedule / Repair Run",
+      "Airflow の劣化版",
+      "GUI のみ",
+      "GPU 必須",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Workflows**: Notebook / Python wheel / SQL / DLT / dbt / Spark Submit を DAG で接続 ・ Schedule / File Arrival / Continuous Trigger ・ Repair Run(失敗 Task のみ再実行)。",
+  },
+  {
+    id: "dbx-q62",
+    category: "Lakeflow",
+    difficulty: 3,
+    question:
+      "**Lakeflow Connect** の役割として最も適切なものを選びなさい。",
+    choices: [
+      "SaaS(Salesforce / Workday 等)/ DB(MySQL/PG)を Unity Catalog にマネージド取込",
+      "ETL コード手動",
+      "学習データ作成",
+      "GPU 監視",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Lakeflow Connect**(2024 GA): SaaS / DB のマネージドコネクタ ・ Unity Catalog 直接取込 ・ CDC 対応。**Data Engineering の Fivetran 風機能**を Databricks 内に統合。",
+  },
+  {
+    id: "dbx-q63",
+    category: "GenAI",
+    difficulty: 3,
+    question:
+      "**Databricks Mosaic AI Vector Search** の用途として最も適切なものを選びなさい。",
+    choices: [
+      "Delta Table から自動 Embedding 更新 + ベクトル検索(RAG 基盤)",
+      "RDB",
+      "GUI",
+      "学習用",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Mosaic AI Vector Search**: Delta テーブルを Source に **Auto Embedding + Sync**(Delta Sync Index)・ HNSW ・ Filter ・ Unity Catalog 統合。RAG / 推薦の基盤。",
+  },
+  {
+    id: "dbx-q64",
+    category: "GenAI",
+    difficulty: 3,
+    question:
+      "**DBRX**(Databricks の OSS 基盤モデル)の特徴として最も適切なものを選びなさい。",
+    choices: [
+      "Mixture of Experts(MoE)132B 総パラメータ(36B Active)・ OSS で商用利用可",
+      "100M Dense",
+      "GUI",
+      "Embedding 専用",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**DBRX**(MosaicML / Databricks): 132B 総 / 36B Active MoE ・ オープンウェイト ・ コード/数学/RAG に強い。**Mosaic AI Foundation Model APIs** で Databricks Endpoint 提供。",
+  },
+  {
+    id: "dbx-q65",
+    category: "実務",
+    difficulty: 3,
+    question:
+      "Databricks Data Engineer Associate で頻出の **典型 Medallion アーキテクチャ** として最も適切なものを選びなさい。",
+    choices: [
+      "Auto Loader → Bronze → Silver(Clean)→ Gold(Aggregate)→ DLT + Unity Catalog + Workflows",
+      "全データ Bronze のみ",
+      "ETL 手動",
+      "GUI のみ",
+    ],
+    correctIndex: 0,
+    explanation:
+      "**Medallion(Lakehouse 標準)**: Bronze(Raw)→ Silver(Cleansed / Conformed)→ Gold(Aggregated / Business)。**DLT で宣言、Unity Catalog で統治、Workflows で運用**が試験の中核パターン。",
+  },
 ];
