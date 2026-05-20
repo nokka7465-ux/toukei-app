@@ -125,7 +125,7 @@ export default async function OGImage() {
                 background: "rgba(247,238,212,0.65)",
               }}
             >
-              演習 2,800+ 問
+              演習 3,000+ 問
             </span>
             <span
               style={{
