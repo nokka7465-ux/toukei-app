@@ -9,7 +9,7 @@ import { gradeTwoQuestions } from "@/data/questions/grade-2";
 import { gradePre1Questions } from "@/data/questions/grade-pre1";
 import { gradeOneQuestions } from "@/data/questions/grade-1";
 import { Quiz } from "@/components/Quiz";
-import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import { BreadcrumbJsonLd, QuizJsonLd } from "@/components/StructuredData";
 import type { Question } from "@/types/content";
 
 const questionsByLevel: Record<string, Question[]> = {
@@ -63,6 +63,14 @@ export default async function QuizPage({
           { name: "演習問題", href: "/quiz" },
           { name: `${meta.title} 演習問題`, href: `/quiz/${level}` },
         ]}
+      />
+      <QuizJsonLd
+        name={`統計検定 ${meta.title} 演習問題集`}
+        description={`統計検定 ${meta.title} のオリジナル類題 ${questions.length} 問。難易度バッジ + 解説 + 自動採点で実力チェック。`}
+        url={`/quiz/${level}`}
+        numberOfQuestions={questions.length}
+        educationalLevel={meta.title}
+        about={["統計検定", meta.title, "演習問題", "推定", "検定"]}
       />
       <nav
         aria-label="breadcrumb"

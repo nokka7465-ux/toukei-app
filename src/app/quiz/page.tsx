@@ -41,7 +41,11 @@ import { azureDp100Questions } from "@/data/questions/azure-dp-100";
 import { awsDataEngineerQuestions } from "@/data/questions/aws-data-engineer";
 import { azureDp203Questions } from "@/data/questions/azure-dp-203";
 import { gcpDataEngineerQuestions } from "@/data/questions/gcp-data-engineer";
-import { BreadcrumbJsonLd } from "@/components/StructuredData";
+import {
+  BreadcrumbJsonLd,
+  ItemListJsonLd,
+  LearningResourceJsonLd,
+} from "@/components/StructuredData";
 
 export const metadata: Metadata = {
   title: "統計検定 演習問題集 ─ 4級〜1級・関連検定の無料問題",
@@ -151,6 +155,29 @@ export default function QuizIndexPage() {
           { name: "ホーム", href: "/" },
           { name: "演習問題", href: "/quiz" },
         ]}
+      />
+      <LearningResourceJsonLd
+        name="統計検定 演習問題集 ─ 4 級〜1 級・AI / クラウド 41 検定対応"
+        description={`統計検定 入門編〜1 級、AI 系(G 検定 / E 資格 / DS 検定 / 生成 AI パスポート)、三大クラウド ML / Data 認定など 41 検定 計 ${total} 問の無料演習問題集。解説 ・ タイマー ・ 1 問 1 答モード対応。`}
+        url="/quiz"
+        numberOfQuestions={total}
+        learningResourceType="PracticeProblemSet"
+        about={[
+          "統計検定",
+          "G 検定",
+          "E 資格",
+          "DS 検定",
+          "QC 検定",
+          "AWS / Azure / GCP ML / Data 認定",
+        ]}
+      />
+      <ItemListJsonLd
+        name="演習問題トラック一覧"
+        items={[...MAIN_TRACKS, ...SUPPORT_TRACKS, ...CERT_TRACKS].map((t) => ({
+          name: t.title,
+          url: t.href,
+          description: `${t.description}(${t.count} 問)`,
+        }))}
       />
       <nav
         aria-label="breadcrumb"

@@ -12,7 +12,11 @@ import { TextbookBody } from "@/components/TextbookBody";
 import { RecommendedBooks } from "@/components/RecommendedBooks";
 import { ReadingTracker } from "@/components/ReadingTracker";
 import { PrintButton } from "@/components/PrintButton";
-import { BreadcrumbJsonLd, CourseJsonLd } from "@/components/StructuredData";
+import {
+  BreadcrumbJsonLd,
+  CourseJsonLd,
+  LearningResourceJsonLd,
+} from "@/components/StructuredData";
 import { BookmarkButton } from "@/components/BookmarkButton";
 import { ShareButton } from "@/components/ShareButton";
 import { RecentTracker } from "@/components/RecentTracker";
@@ -164,6 +168,17 @@ export default async function TextbookPage({
         url={`/textbook/${level}`}
         educationalLevel={meta.title}
         about={seo?.about}
+      />
+      <LearningResourceJsonLd
+        name={seo?.title ?? `統計検定 ${meta.title} 教科書`}
+        description={
+          seo?.description ??
+          `統計検定 ${meta.title} の出題範囲を、章立てで読める教科書形式で無料解説。`
+        }
+        url={`/textbook/${level}`}
+        educationalLevel={meta.title}
+        about={seo?.about}
+        learningResourceType="Textbook"
       />
       <nav
         aria-label="breadcrumb"
