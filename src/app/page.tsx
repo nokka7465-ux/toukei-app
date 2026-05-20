@@ -120,8 +120,8 @@ export default function Home() {
           className="mt-7 flex flex-wrap justify-center gap-2 text-[11px] ui-sans"
         >
           {[
-            { label: "演習問題", value: "3,500+", emphasis: true },
-            { label: "検定 ・ 級", value: "43" },
+            { label: "演習問題", value: "3,560+", emphasis: true },
+            { label: "検定 ・ 級", value: "44" },
             { label: "教科書", value: "40+" },
             { label: "用語", value: "320+" },
             { label: "図解", value: "33" },

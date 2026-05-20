@@ -467,6 +467,16 @@ const CERT_TRACKS: Track[] = [
     accent: "bg-indigo-800",
   },
   {
+    href: "/certs/azure-az-305/textbook",
+    title: "Azure Solutions Architect Expert(AZ-305)",
+    description:
+      "Azure Architect Expert 認定。Identity ・ Governance ・ Compute ・ Storage ・ DB ・ Network ・ Security ・ Business Continuity ・ Migration ・ Cost ・ Well-Architected ・ Cloud Adoption Framework を統合設計で問う。",
+    audience: "Architect",
+    chip: "AZ-305",
+    emoji: "🏛️",
+    accent: "bg-sky-800",
+  },
+  {
     href: "/certs/gcp-data-engineer/textbook",
     title: "GCP Professional Data Engineer",
     description:

@@ -42,6 +42,7 @@ import { awsDataEngineerQuestions } from "@/data/questions/aws-data-engineer";
 import { azureDp203Questions } from "@/data/questions/azure-dp-203";
 import { azureDp600Questions } from "@/data/questions/azure-dp-600";
 import { azureDp700Questions } from "@/data/questions/azure-dp-700";
+import { azureAz305Questions } from "@/data/questions/azure-az-305";
 import { gcpDataEngineerQuestions } from "@/data/questions/gcp-data-engineer";
 import {
   BreadcrumbJsonLd,
@@ -118,6 +119,7 @@ const CERT_TRACKS: Track[] = [
   { href: "/certs/azure-dp-203/quiz", title: "Azure Data Engineer(DP-203)", count: azureDp203Questions.length, description: "Synapse 3 プール ・ ADF ・ Stream Analytics ・ Databricks ・ Purview" },
   { href: "/certs/azure-dp-600/quiz", title: "Microsoft Fabric Analytics Engineer(DP-600)", count: azureDp600Questions.length, description: "OneLake ・ Lakehouse ・ Direct Lake ・ DAX ・ Power BI ・ Real-Time" },
   { href: "/certs/azure-dp-700/quiz", title: "Microsoft Fabric Data Engineer(DP-700)", count: azureDp700Questions.length, description: "Lakehouse ・ Spark ・ Pipeline ・ Eventstream ・ KQL ・ Git Integration" },
+  { href: "/certs/azure-az-305/quiz", title: "Azure Solutions Architect Expert(AZ-305)", count: azureAz305Questions.length, description: "Identity ・ Compute ・ Storage ・ Network ・ Security ・ BCP ・ Well-Architected" },
   { href: "/certs/gcp-data-engineer/quiz", title: "GCP Professional Data Engineer", count: gcpDataEngineerQuestions.length, description: "BigQuery ・ Dataflow ・ Pub/Sub ・ Composer ・ Looker ・ Dataplex" },
 ];
 

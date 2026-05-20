@@ -701,6 +701,28 @@ export const certFaq: Record<string, FaqItem[]> = {
       a: "DP-700 → **DP-600(Fabric Analytics Engineer)** で BI 寄り、**DP-100(Data Scientist)** で ML、**AZ-305(Solutions Architect Expert)** で全体設計、**AI-102(AI Engineer Associate)** で AI 統合へ。",
     },
   ],
+  "azure-az-305": [
+    {
+      q: "Azure Solutions Architect Expert(AZ-305)とは?",
+      a: "**Azure 上のソリューション設計を担う Architect 認定**(Expert レベル)。Identity / Governance / Compute / Storage / DB / Network / Security / BCP / Migration / Cost / Monitor を統合設計で問う。**AZ-303 + AZ-304 の統合後継**(2022 以降)。",
+    },
+    {
+      q: "試験形式と合格基準は?",
+      a: "**CBT(Pearson VUE)or オンライン監督受験 / 40〜60 問 / 120 分 / 合格 700 / 1000 点 / 受験料 165 USD / 有効期限 1 年(無料更新試験あり)**。**ケーススタディが重く**、顧客状況 → サービス選定 → トレードオフ判断が中心。",
+    },
+    {
+      q: "前提となる認定 ・ 経験は?",
+      a: "**AZ-104(Administrator)合格 + Azure 実務経験 1-2 年以上**が事実上の前提。AZ-204(Developer)経験者も受験可能。Expert 認定なので **Architect 実務感** が求められる。",
+    },
+    {
+      q: "AWS SAA-Pro / GCP Pro Architect との関係は?",
+      a: "**3 大クラウドの Expert / Professional Architect 認定**として並立。**マルチクラウド Architect** を目指すなら 3 つすべて取得が理想。AZ-305 + SAP-C02(AWS) + Pro Cloud Architect(GCP)で他に類を見ない希少性。",
+    },
+    {
+      q: "次のステップは?",
+      a: "AZ-305 → **AZ-400(DevOps Engineer Expert)**・ **SC-100(Cybersecurity Architect Expert)**・ **AI-102 / DP-100 / DP-203 / DP-600 / DP-700** で領域専門化、**AWS SAP-C02 / GCP Pro Architect** でマルチクラウド。",
+    },
+  ],
   "gcp-data-engineer": [
     {
       q: "GCP Professional Data Engineer とは?",
