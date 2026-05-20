@@ -730,6 +730,13 @@ export const certFaq: Record<string, FaqItem[]> = {
     { q: "AZ-305 との関係は?", a: "**AZ-305 = Azure 全般の Architect Expert**、**SC-100 = セキュリティ専門 Architect Expert**。**両方取得で Azure Architect + Security Architect の Expert 級** が完成し、CISO 候補 / Senior Security Consultant に。" },
     { q: "次のステップは?", a: "SC-100 → **SC-200(SOC Analyst)**・ **SC-300(Identity Admin)**・ **SC-400(Information Protection)** で領域専門化、**CISSP / CCSP / CISM / OSCP** で業界横断、**AWS Security Specialty / GCP PCSE** でマルチクラウド。" },
   ],
+  "tableau-data-analyst": [
+    { q: "Tableau Certified Data Analyst とは?", a: "**Tableau Specialist の上位 ・ 中級 BI Analyst 認定**(2022+ 新体系)。Connect / Prep / LOD / Calc / Dashboard / Story / Server-Cloud / Pulse の総合実務力を問う。" },
+    { q: "試験形式と合格基準は?", a: "**38 問 / 120 分(うち 6-8 問 Performance Task ハンズオン)/ 750 / 1000 / 250 USD / 有効期限 2 年**。実機 Tableau 操作が試される。" },
+    { q: "Tableau Specialist との違いは?", a: "**Specialist**: 入門 ・ 経験不問 ・ 有効期限なし ・ 100 USD。**Data Analyst**: 中級 ・ 実務 3-6 ヶ月推奨 ・ 250 USD ・ 2 年 ・ ハンズオン含。" },
+    { q: "前提となる経験は?", a: "**実務 3-6 ヶ月推奨**(Specialist 取得済 + 実プロジェクトで Dashboard 構築経験)。**Tableau Trail**(無料公式 LMS)+ **Tableau Public** で学習可能。" },
+    { q: "次のステップは?", a: "Data Analyst → **Tableau Server Certified Associate**(Server 管理)・ **Salesforce Tableau Architect**(2024 新設)・ **Power BI PL-300 / Looker / Fabric DP-600** でマルチ BI。" },
+  ],
   "gcp-data-engineer": [
     {
       q: "GCP Professional Data Engineer とは?",

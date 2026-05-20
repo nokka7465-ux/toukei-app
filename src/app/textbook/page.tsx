@@ -487,6 +487,16 @@ const CERT_TRACKS: Track[] = [
     accent: "bg-rose-800",
   },
   {
+    href: "/certs/tableau-data-analyst/textbook",
+    title: "Tableau Certified Data Analyst",
+    description:
+      "Tableau Specialist の上位 ・ 中級 BI Analyst 認定。LOD ・ Calc ・ Dashboard ・ Story ・ Server-Cloud ・ Pulse ・ Einstein Copilot ・ Performance までを実務 + ハンズオン Performance Task で問う。",
+    audience: "BI Analyst",
+    chip: "Tableau DA",
+    emoji: "📊",
+    accent: "bg-orange-700",
+  },
+  {
     href: "/certs/gcp-data-engineer/textbook",
     title: "GCP Professional Data Engineer",
     description:
